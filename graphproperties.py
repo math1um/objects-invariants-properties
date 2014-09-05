@@ -14,8 +14,8 @@ def is_ore(g):
     D = g.degree()
     n = g.order()
     for i in range(n):
-        for j in range(n):
-            if i>j and A[i][j]==0:
+        for j in range(i):
+            if A[i][j]==0:
                 if D[i] + D[j] < n:
                     return False
     return True
