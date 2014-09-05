@@ -37,19 +37,13 @@ def is_fan(g):
         return False
     D = g.degree()
     Dist = g.distance_matrix()
-    L = []
     V = g.vertices()
     n = g.order()
     for i in range(n):
-        for j in range (n):
-            if i>j and Dist[V[i]][V[j]]==2:
-                L.append(max(D[i],D[j]))
-    if len(L) == 0:
-        return True
-    if min(L) >= n/2.0:
-        return True
-    else:
-        return False
+        for j in range (i):
+            if Dist[V[i]][V[j]]==2 and max(D[i],D[j]) < n/2.0:
+                return False
+    return True
 
 #sufficient condition for hamiltonicity
 def is_planar_transitive(g):
