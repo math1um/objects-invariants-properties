@@ -42,7 +42,7 @@ def is_fan(g):
     n = g.order()
     for i in range(n):
         for j in range (n):
-            if i>j and Dist[i][j]==2:
+            if i>j and Dist[V[i]][V[j]]==2:
                 L.append(max(D[i],D[j]))
     if len(L) == 0:
         return True
