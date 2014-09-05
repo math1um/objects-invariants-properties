@@ -97,7 +97,7 @@ def is_van_den_heuvel(g):
             for i in range(A.nrows()):
                 D[i,i] += row_sums[i]
 
-        return D + M
+        return D + A
 
     qc = sorted(Q(graphs.CycleGraph(n)).eigenvalues())
     qg = sorted(Q(g).eigenvalues())
