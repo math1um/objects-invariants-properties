@@ -30,3 +30,9 @@ regular_non_trans = K4a.disjoint_union(K4b)
 regular_non_trans.add_edge((0,0),(1,1))
 regular_non_trans.add_edge((0,1),(1,0))
 
+c6ee = graphs.CycleGraph(6)
+c6ee.add_edges([(1,5), (2,4)])
+
+#c5 plus a chord
+c5chord = graphs.CycleGraph(5)
+c5chord.add_edge(0,3)

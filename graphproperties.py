@@ -78,7 +78,7 @@ def is_generalized_dirac(g):
     return True
 
 #necessary condition for hamiltonicity
-def is_van_den_Heuvel(g):
+def is_van_den_heuvel(g):
     n = g.order()
     lc = sorted(graphs.CycleGraph(n).laplacian_matrix().eigenvalues())
     lg = sorted(g.laplacian_matrix().eigenvalues())
@@ -150,8 +150,40 @@ def is_complete(g):
                 return False
     return True
 
+def has_claw(g):
+    V = g.vertices()
+    for v in V:
+        S = g.neighbors(v)
+        nn = len(S)
+        S = S + [v]
+        sub = g.subgraph(S)
+        ee = sub.size()
+        if nn == ee:
+            return True
+    return False
 
-properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_transitively_reduced, Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal,Graph.is_odd_hole_free, is_dirac, is_ore, is_haggkvist_nicoghossian, is_fan, is_planar_transitive, is_generalized_dirac, is_van_den_Heuvel, is_two_connected, is_lindquester]
+def is_claw_free(g):
+    return not has_claw(g)
+
+def has_perfect_matching(g):
+    n = g.order()
+    if n%2 == 1:
+        return False
+    nu = g.matching(value_only=True)
+    if 2*nu == n:
+        return True
+    else:
+        return False
+
+#true if radius equals diameter
+def has_radius_equal_diameter(g):
+    if g.radius() == g.diameter():
+        return True
+    else:
+        return False
+
+
+properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_transitively_reduced, Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal,Graph.is_odd_hole_free, is_dirac, is_ore, is_haggkvist_nicoghossian, is_fan, is_planar_transitive, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter]
 
 # Graph.is_prime removed as faulty 9/2014
 
