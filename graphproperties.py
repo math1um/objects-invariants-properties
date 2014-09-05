@@ -59,10 +59,10 @@ def is_planar_transitive(g):
         return False
 
 def neighbors_set(g,S):
-    N = Set([])
+    N = set()
     for v in S:
-        T = Set(g.neighbors(v))
-        N = N.union(T)
+        for n in g.neighbors(v):
+            N.add(n)
     return list(N)
 
 #sufficient condition for hamiltonicity
