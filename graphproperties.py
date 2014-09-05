@@ -151,16 +151,7 @@ def is_complete(g):
     return True
 
 def has_claw(g):
-    V = g.vertices()
-    for v in V:
-        S = g.neighbors(v)
-        nn = len(S)
-        S = S + [v]
-        sub = g.subgraph(S)
-        ee = sub.size()
-        if nn == ee:
-            return True
-    return False
+    return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
 
 def is_claw_free(g):
     return not has_claw(g)
