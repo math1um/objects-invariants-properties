@@ -36,3 +36,64 @@ c6ee.add_edges([(1,5), (2,4)])
 #c5 plus a chord
 c5chord = graphs.CycleGraph(5)
 c5chord.add_edge(0,3)
+
+#c6ee plus another chord: hamiltonian, regular, vertex transitive
+c6eee = copy(c6ee)
+c6eee.add_edge(0,3)
+
+#c8 plus one long vertical chord and 3 parallel horizontal chords
+c8chorded = graphs.CycleGraph(8)
+c8chorded.add_edge(0,4)
+c8chorded.add_edge(1,7)
+c8chorded.add_edge(2,6)
+c8chorded.add_edge(3,5)
+
+#c8 plus 2 parallel chords: hamiltonian, tri-free, not vertex-transitive
+c8chords = graphs.CycleGraph(8)
+c8chords.add_edge(1,6)
+c8chords.add_edge(2,5)
+
+
+#c6ee plus another chord: hamiltonian, regular, vertex transitive
+c6eee = copy(c6ee)
+c6eee.add_edge(0,3)
+
+#c8 plus one long vertical chord and 3 parallel horizontal chords
+c8chorded = graphs.CycleGraph(8)
+c8chorded.add_edge(0,4)
+c8chorded.add_edge(1,7)
+c8chorded.add_edge(2,6)
+c8chorded.add_edge(3,5)
+
+#c8 plus 2 parallel chords: hamiltonian, tri-free, not vertex-transitive
+c8chords = graphs.CycleGraph(8)
+c8chords.add_edge(1,6)
+c8chords.add_edge(2,5)
+
+prism = graphs.CycleGraph(6)
+prism.add_edge(0,2)
+prism.add_edge(3,5)
+prism.add_edge(1,4)
+
+prismsub = copy(prism)
+prismsub.subdivide_edge(1,4,1)
+
+# ham, not vertex trans, tri-free, not cartesian product
+prismy = graphs.CycleGraph(8)
+prismy.add_edge(2,5)
+prismy.add_edge(0,3)
+prismy.add_edge(4,7)
+
+#c10 with chords, ham, tri-free, regular, planar, vertex transitive
+sixfour = graphs.CycleGraph(10)
+sixfour.add_edge(1,9)
+sixfour.add_edge(0,2)
+sixfour.add_edge(3,8)
+sixfour.add_edge(4,6)
+sixfour.add_edge(5,7)
+
+#unique 24-vertex fullerene: hamiltonian, planar, not vertex transitive
+c24 = Graph('WsP@H?PC?O`?@@?_?GG@??CC?G??GG?E???o??B???E???F')
+
+#unique 26-atom fullerene: hamiltonian, planar, not vertex trans, radius=5, diam=6
+c26 = Graph('YsP@H?PC?O`?@@?_?G?@??CC?G??GG?E??@_??K???W???W???H???E_')

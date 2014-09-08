@@ -1,3 +1,4 @@
+
 def dominationNumber(g):
     return len(g.dominating_set())
 
@@ -89,4 +90,42 @@ def cvetkovic(g):
 
     return zero + min([positive, negative])
 
-invariants = [dominationNumber, Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic]
+def cycle_space_dimension(g):
+    return g.size()-g.order()+g.connected_components_number()
+
+def card_center(g):
+    return len(g.center())
+
+def cycle_space_dimension(g):
+    return g.size()-g.order()+g.connected_components_number()
+
+def card_periphery(g):
+    return len(g.periphery())
+
+def max_eigenvalue(g):
+    return max(g.spectrum())
+
+def resistance_distance_matrix(g):
+    L = g.laplacian_matrix()
+    n = g.order()
+    J = ones_matrix(n,n)
+    temp = L+(1/n)*J
+    X = temp.inverse()
+    R = (1.0)*ones_matrix(n,n)
+    for i in range(n):
+        for j in range(n):
+            R[i,j] = X[i,i] + X[j,j] - 2*X[i,j]
+    return R
+
+def kirchhoff_index(g):
+    R = resistance_distance_matrix(g)
+    return (1/2)*sum(sum(R))
+
+def largest_singular_value(g):
+    A = matrix(RDF,g.adjacency_matrix())
+    svd = A.SVD()
+    sigma = svd[1]
+    return sigma[0,0]
+
+
+invariants = [dominationNumber, Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, cycle_space_dimension, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value]

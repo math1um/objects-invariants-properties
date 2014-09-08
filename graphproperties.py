@@ -167,8 +167,40 @@ def has_radius_equal_diameter(g):
     else:
         return False
 
+def is_not_forest(g):
+    if g.is_forest() == True:
+        return False
+    else:
+        return True
 
-properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_transitively_reduced, Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal,Graph.is_odd_hole_free, is_dirac, is_ore, is_haggkvist_nicoghossian, is_fan, is_planar_transitive, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter]
+
+def bipartite_double_cover(g):
+    return g.tensor_product(graphs.CompleteGraph(2))
+
+def closed_neighborhood(g, verts):
+        if isinstance(verts, list):
+            neighborhood = []
+            for v in verts:
+                neighborhood += [v] + g.neighbors(v)
+            return list(set(neighborhood))
+        else:
+            return [verts] + g.neighbors(verts)
+
+#has no non-empty critical independent set (<=> the only solution to the LP independence number relaxation is all 1/2's)
+def has_empty_KE_part(g):
+    b = bipartite_double_cover(g)
+    alpha = b.order() - b.matching(value_only=True)
+    for v in g.vertices():
+        test = b.copy()
+        test.delete_vertices(closed_neighborhood(b,[(v,0), (v,1)]))
+        alpha_test = test.order() - test.matching(value_only=True) + 2
+        if alpha_test == alpha:
+            return False
+    return True
+
+
+properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal,Graph.is_odd_hole_free, is_dirac, is_ore, is_haggkvist_nicoghossian, is_fan, is_planar_transitive, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part]
 
 # Graph.is_prime removed as faulty 9/2014
+#built in Graph.is_transitively_reduced removed 9/2014
 
