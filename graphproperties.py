@@ -36,7 +36,7 @@ def is_fan(g):
     if k < 2:
         return False
     D = g.degree()
-    Dist = g.distance_matrix()
+    Dist = g.distance_all_pairs()
     V = g.vertices()
     n = g.order()
     for i in range(n):
@@ -121,7 +121,7 @@ def is_lindquester(g):
     k = g.vertex_connectivity()
     if k < 2:
         return False
-    D = g.distance_matrix()
+    D = g.distance_all_pairs()
     n = g.order()
     V = g.vertices()
     for i in range(n):
@@ -132,7 +132,7 @@ def is_lindquester(g):
     return True
 
 def is_complete(g):
-    D = g.distance_matrix()
+    D = g.distance_all_pairs()
     n = g.order()
     e = g.size()
     if not g.has_multiple_edges():
