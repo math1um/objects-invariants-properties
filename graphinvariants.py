@@ -127,5 +127,15 @@ def largest_singular_value(g):
     sigma = svd[1]
     return sigma[0,0]
 
+def independence_number(g):
+    return g.independent_set(value_only=True)
 
-invariants = [dominationNumber, Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, cycle_space_dimension, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value]
+def chromatic_index(g):
+    L = g.line_graph()
+    return L.chromatic_number()
+
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth, Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value]
+
+intractable_invariants = [independence_number, dominationNumber, chromatic_index]
+
+invariants = efficiently_computable_invariants + intractable_invariants

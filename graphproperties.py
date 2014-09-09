@@ -196,13 +196,28 @@ def has_empty_KE_part(g):
             return False
     return True
 
+# Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
+def is_class1(g):
+    if chromatic_index(g) == max(g.degree()):
+        return True
+    else:
+        return False
+
+def is_class2(g):
+    if chromatic_index(g) == max(g.degree()):
+        return False
+    else:
+        return True
+
 
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan]
 
-intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, is_planar_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free]
+intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2 ]
 
 properties = efficiently_computable_properties + intractable_properties
 
 # Graph.is_prime removed as faulty 9/2014
-#built in Graph.is_transitively_reduced removed 9/2014
+# built in Graph.is_transitively_reduced removed 9/2014
+# is_line_graph is theoretically efficient - but Sage's implementation is not 9/2014
 
+# weakly_chordal = weakly chordal, i.e., the graph and its complement have no induced cycle of length at least 5
