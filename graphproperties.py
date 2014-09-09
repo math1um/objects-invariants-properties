@@ -168,7 +168,7 @@ def has_radius_equal_diameter(g):
         return False
 
 def is_not_forest(g):
-    if g.is_forest() == True:
+    if g.is_forest():
         return False
     else:
         return True
