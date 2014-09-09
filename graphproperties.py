@@ -139,8 +139,8 @@ def is_complete(g):
 
     D = g.distance_all_pairs()
     for i in range(n):
-        for j in range(n):
-            if i>j and D[i][j] == 0:
+        for j in range(i):
+            if D[i][j] == 0:
                 return False
     return True
 
