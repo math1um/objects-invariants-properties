@@ -166,10 +166,7 @@ def has_radius_equal_diameter(g):
 
 #true if residue equals independence number
 def has_residue_equals_alpha(g):
-    if residue(g) == independence_number(g):
-        return True
-    else:
-        return False
+    return residue(g) == independence_number(g)
 
 def is_not_forest(g):
     return not g.is_forest()
