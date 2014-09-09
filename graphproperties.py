@@ -132,12 +132,12 @@ def is_lindquester(g):
     return True
 
 def is_complete(g):
-    D = g.distance_all_pairs()
     n = g.order()
     e = g.size()
     if not g.has_multiple_edges():
         return e == n*(n-1)/2
 
+    D = g.distance_all_pairs()
     for i in range(n):
         for j in range(n):
             if i>j and D[i][j] == 0:
