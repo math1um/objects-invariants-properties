@@ -162,16 +162,10 @@ def has_perfect_matching(g):
 
 #true if radius equals diameter
 def has_radius_equal_diameter(g):
-    if g.radius() == g.diameter():
-        return True
-    else:
-        return False
+    return g.radius() == g.diameter()
 
 def is_not_forest(g):
-    if g.is_forest():
-        return False
-    else:
-        return True
+    return not g.is_forest()
 
 
 def bipartite_double_cover(g):
