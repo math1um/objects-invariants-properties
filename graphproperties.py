@@ -198,41 +198,26 @@ def has_empty_KE_part(g):
 
 # Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
-    if chromatic_index(g) == max(g.degree()):
-        return True
-    else:
-        return False
+    return chromatic_index(g) == max(g.degree())
 
 def is_class2(g):
-    if chromatic_index(g) == max(g.degree()):
-        return False
-    else:
-        return True
+    return not(chromatic_index(g) == max(g.degree()))
 
 def is_cubic(g):
     D = g.degree()
-    if min(D) == 3 and max(D) == 3:
-        return True
-    else:
-        return False
+    return min(D) == 3 and max(D) == 3
 
 #a property that applied to all entered hamiltonian graphs but not the tuttle graph, false for tutte graph
 def is_anti_tutte(g):
     if not g.is_connected():
         return False
-    if independence_number(g) <= g.diameter() + g.girth():
-        return True
-    else:
-        return False
+    return independence_number(g) <= g.diameter() + g.girth()
 
 #for any graph diam <= 2*radius. this property is true in the extremal case
 def diameter_equals_twice_radius(g):
     if not g.is_connected():
         return False
-    if g.diameter() == 2*g.radius():
-        return True
-    else:
-        return False
+    return g.diameter() == 2*g.radius()
 
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic, diameter_equals_twice_radius]
 
