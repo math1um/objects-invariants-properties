@@ -68,6 +68,9 @@ def lovasz_theta(g):
     if n == 1:
         return 1.0
 
+    #the definition of Xrow assumes that the vertices are integers from 0 to n-1, so we relabel the graph
+    gc.relabel()
+    
     d = m + n
     c = -1 * cvxopt.base.matrix([0.0]*(n-1) + [2.0]*(d-n))
     Xrow = [i*(1+n) for i in xrange(n-1)] + [b+a*n for (a, b) in gc.edge_iterator(labels=False)]
