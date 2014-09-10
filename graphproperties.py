@@ -218,7 +218,7 @@ def is_cubic(g):
 
 #a property that applied to all entered hamiltonian graphs but not the tuttle graph, false for tutte graph
 def is_anti_tutte(g):
-    if g.is_connected() == False:
+    if not g.is_connected():
         return False
     if independence_number(g) <= g.diameter() + g.girth():
         return True
@@ -227,7 +227,7 @@ def is_anti_tutte(g):
 
 #for any graph diam <= 2*radius. this property is true in the extremal case
 def diameter_equals_twice_radius(g):
-    if g.is_connected() == False:
+    if not g.is_connected():
         return False
     if g.diameter() == 2*g.radius():
         return True
