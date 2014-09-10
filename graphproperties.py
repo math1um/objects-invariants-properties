@@ -1,3 +1,6 @@
+from sage.all import *
+from graphinvariants import *
+
 #sufficient condition for hamiltonicity
 def is_dirac(g):
     n = g.order()

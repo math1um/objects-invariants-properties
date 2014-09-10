@@ -1,3 +1,5 @@
+from sage.all import *
+from graphproperties import *
 
 def dominationNumber(g):
     return len(g.dominating_set())
