@@ -125,8 +125,8 @@ def is_lindquester(g):
     n = g.order()
     V = g.vertices()
     for i in range(n):
-        for j in range(n):
-            if i > j and D[i][j] == 2:
+        for j in range(i):
+            if D[V[i]][V[j]] == 2:
                 if len(neighbors_set(g,[V[i],V[j]])) < (2*n-1)/3.0:
                     return False
     return True
@@ -140,7 +140,7 @@ def is_complete(g):
     D = g.distance_all_pairs()
     for i in range(n):
         for j in range(i):
-            if D[i][j] != 1:
+            if D[V[i]][V[j]] != 1:
                 return False
     return True
 
