@@ -131,8 +131,8 @@ def independence_number(g):
     return g.independent_set(value_only=True)
 
 def chromatic_index(g):
-    L = g.line_graph()
-    return L.chromatic_number()
+    import sage.graphs.graph_coloring
+    return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value]
 
