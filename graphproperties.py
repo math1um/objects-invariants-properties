@@ -216,8 +216,10 @@ def is_cubic(g):
     else:
         return False
 
-#a property that applied to all entered hamiltonian graphs but not the tuttle graph
-def anti_tutte(g):
+#a property that applied to all entered hamiltonian graphs but not the tuttle graph, false for tutte graph
+def is_anti_tutte(g):
+    if g.is_connected() == False:
+        return False
     if independence_number(g) <= g.diameter() + g.girth():
         return True
     else:
@@ -225,7 +227,7 @@ def anti_tutte(g):
 
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic]
 
-intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, anti_tutte ]
+intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte ]
 
 properties = efficiently_computable_properties + intractable_properties
 
