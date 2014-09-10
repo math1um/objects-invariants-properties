@@ -138,6 +138,8 @@ def card_max_cut(g):
     return g.max_cut(value_only=True)
 
 def clique_covering_number(g):
+    if g.is_triangle_free():
+        return g.order() - matching_number(g)
     gc = g.complement()
     return gc.chromatic_number(algorithm="MILP")
 
