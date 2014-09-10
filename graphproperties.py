@@ -176,13 +176,13 @@ def bipartite_double_cover(g):
     return g.tensor_product(graphs.CompleteGraph(2))
 
 def closed_neighborhood(g, verts):
-        if isinstance(verts, list):
-            neighborhood = []
-            for v in verts:
-                neighborhood += [v] + g.neighbors(v)
-            return list(set(neighborhood))
-        else:
-            return [verts] + g.neighbors(verts)
+    if isinstance(verts, list):
+        neighborhood = []
+        for v in verts:
+            neighborhood += [v] + g.neighbors(v)
+        return list(set(neighborhood))
+    else:
+        return [verts] + g.neighbors(verts)
 
 #has no non-empty critical independent set (<=> the only solution to the LP independence number relaxation is all 1/2's)
 def has_empty_KE_part(g):
