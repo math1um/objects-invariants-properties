@@ -139,7 +139,7 @@ def card_max_cut(g):
 
 def clique_covering_number(g):
     gc = g.complement()
-    return gc.chromatic_number()
+    return gc.chromatic_number(algorithm="MILP")
 
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity]
