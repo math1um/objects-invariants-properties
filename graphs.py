@@ -103,4 +103,12 @@ holton_mckay = Graph('WlCGKS??G?_D????_?g?DOa?C?O??G?CC?`?G??_?_?_??L')
 
 #z1 is a graph that shows up in a sufficient condition for hamiltonicity
 z1 = graphs.CycleGraph(3)
-z1.add_edge(0,4)
+z1.add_edge(0,3)
+
+#an example of a bipartite, 1-tough, not van_den_heuvel, not hamiltonian graph
+kratsch_lehel_muller = graphs.PathGraph(12)
+kratsch_lehel_muller.add_edge(0,5)
+kratsch_lehel_muller.add_edge(6,11)
+kratsch_lehel_muller.add_edge(4,9)
+kratsch_lehel_muller.add_edge(1,10)
+kratsch_lehel_muller.add_edge(2,7)
