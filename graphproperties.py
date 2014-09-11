@@ -1,11 +1,13 @@
+from sage.all import *
+
 if not any(f.endswith("graphinvariants.py") for f in attached_files()):
     #graphinvariants is not loaded
-    
+
     #first we add the path of this file to the load path
     for f in attached_files():
         if f.endswith("graphproperties.py"):
             load_attach_path(f.strip("graphproperties.py"))
-            
+
     #then we attach the file
     attach("graphinvariants.py")
 
