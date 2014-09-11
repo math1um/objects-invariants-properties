@@ -1,22 +1,4 @@
-from sage.all import *
-
 #GRAPH INVARIANTS
-
-"""
-if not any(f.endswith("graphproperties.py") for f in attached_files()):
-    #graphinvariants is not loaded
-
-    print(attached_files())
-
-    #first we add the path of this file to the load path
-    for f in attached_files():
-        if f.endswith("graphinvariants.py"):
-            load_attach_path(f.strip("graphinvariants.py"))
-
-    print load_attach_path()
-    #then we attach the file
-    attach("graphproperties.py")
-"""
 
 def dominationNumber(g):
     return len(g.dominating_set())
