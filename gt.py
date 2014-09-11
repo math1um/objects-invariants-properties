@@ -142,6 +142,11 @@ def card_max_cut(g):
     return g.max_cut(value_only=True)
 
 def clique_covering_number(g):
+    # Finding the chromatic number of the complement of a fullerene
+    # is extremely slow, even when using MILP as the algorithm.
+    # Therefore we check to see if the graph is triangle-free.
+    # If it is, then the clique covering number is equal to the
+    # number of vertices minus the size of a maximum matching.
     if g.is_triangle_free():
         return g.order() - matching_number(g)
     gc = g.complement()
