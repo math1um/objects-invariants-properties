@@ -1,7 +1,7 @@
 #GRAPH INVARIANTS
 
 def dominationNumber(g):
-    return len(g.dominating_set())
+    return g.dominating_set(value_only=True)
 
 def min_degree(g):
     return min(g.degree())
