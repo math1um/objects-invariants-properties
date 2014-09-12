@@ -188,6 +188,9 @@ intractable_invariants = [independence_number, domination_number, chromatic_inde
 
 invariants = efficiently_computable_invariants + intractable_invariants
 
+#set precomputed values
+if hasattr(Graph.treewidth.__func__, '_cache'):
+    Graph.treewidth.__func__._cache[graphs.BuckyBall().graph6_string()] = 10
 
 
 #GRAPH PROPERTIES
