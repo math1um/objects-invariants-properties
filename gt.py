@@ -140,7 +140,7 @@ def resistance_distance_matrix(g):
     L = g.laplacian_matrix()
     n = g.order()
     J = ones_matrix(n,n)
-    temp = L+(1/n)*J
+    temp = L+(1.0/n)*J
     X = temp.inverse()
     R = (1.0)*ones_matrix(n,n)
     for i in range(n):
@@ -150,7 +150,7 @@ def resistance_distance_matrix(g):
 
 def kirchhoff_index(g):
     R = resistance_distance_matrix(g)
-    return (1/2)*sum(sum(R))
+    return .5*sum(sum(R))
 
 def largest_singular_value(g):
     A = matrix(RDF,g.adjacency_matrix())
