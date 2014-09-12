@@ -65,6 +65,7 @@ def fractional_alpha(g):
 
     return p.solve()
 
+@memoized
 def lovasz_theta(g):
     import cvxopt.base
     import cvxopt.solvers
