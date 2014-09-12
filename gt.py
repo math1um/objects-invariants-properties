@@ -597,3 +597,6 @@ kratsch_lehel_muller.add_edge(6,11)
 kratsch_lehel_muller.add_edge(4,9)
 kratsch_lehel_muller.add_edge(1,10)
 kratsch_lehel_muller.add_edge(2,7)
+
+#ham, not planar, not anti_tutte
+c6xc6 = graphs.CycleGraph(6).cartesian_product(graphs.CycleGraph(6))
