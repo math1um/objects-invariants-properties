@@ -638,3 +638,6 @@ kratsch_lehel_muller.add_edge(2,7)
 
 #ham, not planar, not anti_tutte
 c6xc6 = graphs.CycleGraph(6).cartesian_product(graphs.CycleGraph(6))
+
+#non-ham, 2-connected, eulerian (4-regular)
+gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
