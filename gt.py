@@ -441,7 +441,7 @@ def localise(f):
     if hasattr(f, '__name__'):
         if f.__name__.startswith('is_'):
             localised_function.__name__ = 'is_locally' + f.__name__[2:]
-        else if f.__name__.startswith('has_'):
+        elif f.__name__.startswith('has_'):
             localised_function.__name__ = 'has_locally' + f.__name__[2:]
         else:
             localised_function.__name__ = 'localised_' + f.__name__
