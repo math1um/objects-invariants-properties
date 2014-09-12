@@ -1,3 +1,24 @@
+# UTILITIES
+def memoized(f):
+    """
+    Enables memoization for functions
+    """
+    import functools
+
+    # create a cache for the function
+    f._cache = {}
+
+    #function that wraps f and handles the caching
+    #@wraps makes sure this is done transparently
+    @functools.wraps(f)
+    def memo(g):
+        key = g.graph6_string()
+        if key not in f._cache:
+            f._cache[key] = f(g)
+        return f._cache[key]
+
+    return memo
+
 #GRAPH INVARIANTS
 
 def domination_number(g):
@@ -44,6 +65,7 @@ def fractional_alpha(g):
 
     return p.solve()
 
+@memoized
 def lovasz_theta(g):
     import cvxopt.base
     import cvxopt.solvers
