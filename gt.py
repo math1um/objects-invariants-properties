@@ -429,6 +429,27 @@ def is_locally_connected(g):
                 return False
     return True
 
+def localise(f):
+    """
+    This function takes a property (i.e., a function taking only a graph as an argument) and
+    returns the local variant of that property. The local variant is True if the property is
+    True for the neighbourhood of each vertex and False otherwise.
+    """
+    #create a local version of f
+    def localised_function(g):
+        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices())
+
+    #we set a nice name for the new function
+    if hasattr(f, '__name__'):
+        if f.__name__.startswith('is_'):
+            localised_function.__name__ = 'is_locally' + f.__name__[2:]
+        else if f.__name__.startswith('has_'):
+            localised_function.__name__ = 'has_locally' + f.__name__[2:]
+        else:
+            localised_function.__name__ = 'localised_' + f.__name__
+
+    return localised_function
+
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
     nu = matching_number(g)
