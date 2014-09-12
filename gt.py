@@ -3,14 +3,14 @@ def memoized(f):
     """
     Enables memoization for functions
     """
-    from functools import wraps
+    import functools
 
     # create a cache for the function
     f._cache = {}
 
     #function that wraps f and handles the caching
     #@wraps makes sure this is done transparently
-    @wraps(f)
+    @functools.wraps(f)
     def memo(g):
         key = g.graph6_string()
         if key not in f._cache:
