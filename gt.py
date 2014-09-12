@@ -10,7 +10,8 @@ def memoized(f):
         f = f.__func__
 
     # create a cache for the function
-    f._cache = {}
+    if not hasattr(f, '_cache'):
+        f._cache = {}
 
     #function that wraps f and handles the caching
     #@wraps makes sure this is done transparently
