@@ -54,7 +54,7 @@ def annihilation_number(g):
 
 def fractional_alpha(g):
     p = MixedIntegerLinearProgram(maximization=True)
-    x = p.new_variable()
+    x = p.new_variable(nonnegative=True)
     p.set_objective(sum(x[v] for v in g.vertices()))
 
     for v in g.vertices():
