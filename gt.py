@@ -5,6 +5,10 @@ def memoized(f):
     """
     import functools
 
+    # make sure we can also handle instance methods
+    if hasattr(f, '__func__'):
+        f = f.__func__
+
     # create a cache for the function
     f._cache = {}
 
