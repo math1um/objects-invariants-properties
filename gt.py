@@ -642,5 +642,8 @@ c6xc6 = graphs.CycleGraph(6).cartesian_product(graphs.CycleGraph(6))
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
 
-#2 k5s with single edge removed from each and lines joining these 4 points to a new center point, non-hamiltonian
-throwing = Graph('J~wWGGB?wF_') s
+#two k5s with single edge removed from each and lines joining these 4 points to a new center point, non-hamiltonian
+throwing = Graph('J~wWGGB?wF_')
+
+#k4 plus k2 on one side, open k5 on other, meet at single point in center, non-hamiltonian
+throwing2 = Graph("K~wWGKA?gB_N")
