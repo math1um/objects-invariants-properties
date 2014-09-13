@@ -647,3 +647,6 @@ throwing = Graph('J~wWGGB?wF_')
 
 #k4 plus k2 on one side, open k5 on other, meet at single point in center, non-hamiltonian
 throwing2 = Graph("K~wWGKA?gB_N")
+
+#similar to throwing2 with pair of edges swapped, non-hamiltonian
+throwing3 = Graph("K~wWGGB?oD_N")
