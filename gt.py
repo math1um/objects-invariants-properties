@@ -650,3 +650,13 @@ throwing2 = Graph("K~wWGKA?gB_N")
 
 #similar to throwing2 with pair of edges swapped, non-hamiltonian
 throwing3 = Graph("K~wWGGB?oD_N")
+
+#graph has diameter != radius but is hamiltonian
+tent = graphs.CycleGraph(4).join(Graph(1),verbose_relabel=false)
+
+#c6 with a k4 subgraph, eulerain, diameter = 3, radius=2, hamiltonian
+c6subk4 = graphs.CycleGraph(6)
+c6subk4.add_edge(1,5)
+c6subk4.add_edge(1,4)
+c6subk4.add_edge(2,5)
+c6subk4.add_edge(2,4)
