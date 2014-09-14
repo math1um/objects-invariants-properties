@@ -181,8 +181,19 @@ def clique_covering_number(g):
     gc = g.complement()
     return gc.chromatic_number(algorithm="MILP")
 
+def welsh_powell(g):
+    n= g.order()
+    D = g.degree()
+    D.sort(reverse=True)
+    mx = 0
+    for i in range(n):
+        temp = min({i,D[i]})
+        if temp > mx:
+            mx = temp
+    return mx + 1
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density]
+
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, card_max_cut, clique_covering_number]
 
@@ -660,3 +671,6 @@ c6subk4.add_edge(1,5)
 c6subk4.add_edge(1,4)
 c6subk4.add_edge(2,5)
 c6subk4.add_edge(2,4)
+
+#C5 with chords from one vertex to other 2 (showed up in auto search for CE's): hamiltonian
+bridge = Graph("DU{")
