@@ -747,7 +747,7 @@ for g in union_objects:
 def remove_duplicates(seq, idfun=None):
    # order preserving
    if idfun is None:
-       def idfun(g): return g.graph6_string()
+       def idfun(x): return x
    seen = {}
    result = []
    for item in seq:
@@ -760,4 +760,4 @@ def remove_duplicates(seq, idfun=None):
        result.append(item)
    return result
 
-graph_objects = remove_duplicates(union_objects)
+graph_objects = remove_duplicates(union_objects, idfun=Graph.graph6_string)
