@@ -679,8 +679,18 @@ hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.
 
 non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.TutteGraph()]
 
-residue_equals_alpha_objects = [graphs.Star(3)]
+residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
-objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects
-objects = list(set(objects)) #removes any duplicates
+other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.MeredithGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph() ]
+
+union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + other_graphs
+
+#remove duplicates in list of ALL objects
+graph_objects = []
+for g in union_objects:
+    if not g in graph_objects:
+        graph_objects.append(g)
+
+#graph_objects: all graphs with no duplicates
+
 
