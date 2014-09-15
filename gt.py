@@ -674,3 +674,13 @@ c6subk4.add_edge(2,4)
 
 #C5 with chords from one vertex to other 2 (showed up in auto search for CE's): hamiltonian
 bridge = Graph("DU{")
+
+hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6]
+
+non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.TutteGraph()]
+
+residue_equals_alpha_objects = [graphs.Star(3)]
+
+objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects
+objects = list(set(objects)) #removes any duplicates
+
