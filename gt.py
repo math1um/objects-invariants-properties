@@ -540,6 +540,7 @@ c4c4.add_edge(3,4)
 c4c4.add_edge(5,4)
 c4c4.add_edge(5,6)
 c4c4.add_edge(6,3)
+c4c4.name(new="c4c4")
 
 #two c5's joined at a vertex: eulerian, not perfect, not hamiltonian
 c5c5=graphs.CycleGraph(5)
@@ -550,11 +551,13 @@ c5c5.add_edge(0,8)
 c5c5.add_edge(6,5)
 c5c5.add_edge(6,7)
 c5c5.add_edge(7,8)
+c5c5.name(new="c5c5")
 
 #triangle plus pendant: not hamiltonian, not triangle-free
 c3p2=graphs.CycleGraph(3)
 c3p2.add_vertex()
 c3p2.add_edge(0,3)
+c3p2.name(new="c3p2")
 
 K4a=graphs.CompleteGraph(4)
 K4b=graphs.CompleteGraph(4)
@@ -563,17 +566,21 @@ K4b.delete_edge(0,1)
 regular_non_trans = K4a.disjoint_union(K4b)
 regular_non_trans.add_edge((0,0),(1,1))
 regular_non_trans.add_edge((0,1),(1,0))
+regular_non_trans.name(new="regular_non_trans")
 
 c6ee = graphs.CycleGraph(6)
 c6ee.add_edges([(1,5), (2,4)])
+c6ee.name(new="c6ee")
 
 #c5 plus a chord
 c5chord = graphs.CycleGraph(5)
 c5chord.add_edge(0,3)
+c5chord.name(new="c5chord")
 
 #c6ee plus another chord: hamiltonian, regular, vertex transitive
 c6eee = copy(c6ee)
 c6eee.add_edge(0,3)
+c6eee.name(new="c6eee")
 
 #c8 plus one long vertical chord and 3 parallel horizontal chords
 c8chorded = graphs.CycleGraph(8)
@@ -581,42 +588,36 @@ c8chorded.add_edge(0,4)
 c8chorded.add_edge(1,7)
 c8chorded.add_edge(2,6)
 c8chorded.add_edge(3,5)
+c8chorded.name(new="c8chorded")
 
 #c8 plus 2 parallel chords: hamiltonian, tri-free, not vertex-transitive
 c8chords = graphs.CycleGraph(8)
 c8chords.add_edge(1,6)
 c8chords.add_edge(2,5)
-
-
-#c6ee plus another chord: hamiltonian, regular, vertex transitive
-c6eee = copy(c6ee)
-c6eee.add_edge(0,3)
-
-#c8 plus one long vertical chord and 3 parallel horizontal chords
-c8chorded = graphs.CycleGraph(8)
-c8chorded.add_edge(0,4)
-c8chorded.add_edge(1,7)
-c8chorded.add_edge(2,6)
-c8chorded.add_edge(3,5)
+c8chords.name(new="c8chords")
 
 #c8 plus 2 parallel chords: hamiltonian, tri-free, not vertex-transitive
 c8chords = graphs.CycleGraph(8)
 c8chords.add_edge(1,6)
 c8chords.add_edge(2,5)
+c8chords.name(new="c8chords")
 
 prism = graphs.CycleGraph(6)
 prism.add_edge(0,2)
 prism.add_edge(3,5)
 prism.add_edge(1,4)
+prism.name(new="prism")
 
 prismsub = copy(prism)
 prismsub.subdivide_edge(1,4,1)
+prismsub.name(new="prismsub")
 
 # ham, not vertex trans, tri-free, not cartesian product
 prismy = graphs.CycleGraph(8)
 prismy.add_edge(2,5)
 prismy.add_edge(0,3)
 prismy.add_edge(4,7)
+prismy.name(new="prismy")
 
 #c10 with chords, ham, tri-free, regular, planar, vertex transitive
 sixfour = graphs.CycleGraph(10)
@@ -625,19 +626,24 @@ sixfour.add_edge(0,2)
 sixfour.add_edge(3,8)
 sixfour.add_edge(4,6)
 sixfour.add_edge(5,7)
+sixfour.name(new="sixfour")
 
 #unique 24-vertex fullerene: hamiltonian, planar, not vertex transitive
 c24 = Graph('WsP@H?PC?O`?@@?_?GG@??CC?G??GG?E???o??B???E???F')
+c24.name(new="c24")
 
 #unique 26-atom fullerene: hamiltonian, planar, not vertex trans, radius=5, diam=6
 c26 = Graph('YsP@H?PC?O`?@@?_?G?@??CC?G??GG?E??@_??K???W???W???H???E_')
+c26.name(new="c26")
 
 #holton-mckay graph: hamiltonian, cubic, planar, radius=4, diameter=6
 holton_mckay = Graph('WlCGKS??G?_D????_?g?DOa?C?O??G?CC?`?G??_?_?_??L')
+holton_mckay.name(new="holton_mckay")
 
 #z1 is a graph that shows up in a sufficient condition for hamiltonicity
 z1 = graphs.CycleGraph(3)
 z1.add_edge(0,3)
+z1.name(new="z1")
 
 #an example of a bipartite, 1-tough, not van_den_heuvel, not hamiltonian graph
 kratsch_lehel_muller = graphs.PathGraph(12)
@@ -646,24 +652,31 @@ kratsch_lehel_muller.add_edge(6,11)
 kratsch_lehel_muller.add_edge(4,9)
 kratsch_lehel_muller.add_edge(1,10)
 kratsch_lehel_muller.add_edge(2,7)
+kratsch_lehel_muller.name(new="kratsch_lehel_muller")
 
 #ham, not planar, not anti_tutte
 c6xc6 = graphs.CycleGraph(6).cartesian_product(graphs.CycleGraph(6))
+c6xc6.name(new="c6xc6")
 
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
+gould.name(new="gould")
 
 #two k5s with single edge removed from each and lines joining these 4 points to a new center point, non-hamiltonian
 throwing = Graph('J~wWGGB?wF_')
+throwing.name(new="throwing")
 
 #k4 plus k2 on one side, open k5 on other, meet at single point in center, non-hamiltonian
 throwing2 = Graph("K~wWGKA?gB_N")
+throwing2.name(new="throwing2")
 
 #similar to throwing2 with pair of edges swapped, non-hamiltonian
 throwing3 = Graph("K~wWGGB?oD_N")
+throwing3.name(new="throwing3")
 
 #graph has diameter != radius but is hamiltonian
 tent = graphs.CycleGraph(4).join(Graph(1),verbose_relabel=false)
+tent.name(new="tent")
 
 #c6 with a k4 subgraph, eulerain, diameter = 3, radius=2, hamiltonian
 c6subk4 = graphs.CycleGraph(6)
@@ -671,30 +684,38 @@ c6subk4.add_edge(1,5)
 c6subk4.add_edge(1,4)
 c6subk4.add_edge(2,5)
 c6subk4.add_edge(2,4)
+c6subk4.name(new="c6subk4")
 
 #C5 with chords from one vertex to other 2 (showed up in auto search for CE's): hamiltonian
 bridge = Graph("DU{")
+bridge.name(new="bridge")
 
 #nico found the smallest hamiltonian overfull graph
 non_ham_over = Graph("HCQRRQo")
+non_ham_over.name(new="non_ham_over")
 
 ryan = Graph("WxEW?CB?I?_R????_?W?@?OC?AW???O?C??B???G?A?_??R")
+ryan.name(new="ryan")
 
 inp = Graph('J?`FBo{fdb?')
+inp.name(new="inp")
 
 #GRAPH LISTS
 
-hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6]
+hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
 
-non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.TutteGraph(), non_ham_over]
+non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller ]
 
 residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
-other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.MeredithGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp ]
+other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.MeredithGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1]
 
 union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + other_graphs
 
+#graph_objects: all graphs with no duplicates
+
 #obvious way to remove duplicates in list of ALL objects
+
 """
 graph_objects = []
 for g in union_objects:
@@ -705,10 +726,11 @@ for g in union_objects:
 #fast way to remove duplicates in list of ALL objects
 #from : http://www.peterbe.com/plog/uniqifiers-benchmark
 
+
 def remove_duplicates(seq, idfun=None):
    # order preserving
    if idfun is None:
-       def idfun(x): return x
+       def idfun(g): return g.graph6_string()
    seen = {}
    result = []
    for item in seq:
@@ -720,7 +742,5 @@ def remove_duplicates(seq, idfun=None):
        seen[marker] = 1
        result.append(item)
    return result
-
-#graph_objects: all graphs with no duplicates
 
 graph_objects = remove_duplicates(union_objects)
