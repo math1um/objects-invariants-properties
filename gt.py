@@ -192,6 +192,14 @@ def welsh_powell(g):
             mx = temp
     return mx + 1
 
+#outputs upper bound from Brooks Theorem
+def brooks(g):
+    Delta = max(g.degree())
+    if is_complete(g):
+        return Delta + 1
+    else:
+        return Delta
+
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell]
 
@@ -735,7 +743,7 @@ union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_a
 
 """
 graph_objects = []
-for g in union_objects:
+for g in union_objects, idfun=Graph.graph6_string:
     if not g in graph_objects:
         graph_objects.append(g)
 """
