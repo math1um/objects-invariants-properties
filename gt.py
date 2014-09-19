@@ -168,6 +168,7 @@ def chromatic_index(g):
     import sage.graphs.graph_coloring
     return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
 
+@memoized
 def card_max_cut(g):
     return g.max_cut(value_only=True)
 
@@ -206,17 +207,22 @@ def brooks(g):
 def wilf(g):
     return max_eigenvalue(g) + 1
 
+#upper bound for chromatic number
+def n_over_alpha(g):
+    n = g.order() + 0.0
+    return n/independence_number(g)
+
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell]
 
-intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, card_max_cut, clique_covering_number]
+intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha]
 
-#FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
-#SLOW but FIXED for SpecialGraphs
+#FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable, mac_cut (except for Schlafli), domination_number, independence_number
+#SLOW but FIXED for SpecialGraphs: chromatic_index (fixed for Meredith)
 
 invariants = efficiently_computable_invariants + intractable_invariants
 
-#removed Graph.treewidth as its very slow
+#removed for speed reasons: Graph.treewidth, card_max_cut (need to add value for Schlafli to cache)
 
 #set precomputed values
 if hasattr(Graph.treewidth.__func__, '_cache'):
@@ -225,6 +231,8 @@ if hasattr(chromatic_index, '_cache'):
     chromatic_index._cache[graphs.MeredithGraph().graph6_string()] = 5
 if hasattr(clique_covering_number, '_cache'):
     clique_covering_number._cache[graphs.SchlaefliGraph().graph6_string()] = 6
+#if hasattr(card_max_cut, '_cache'):
+#    card_max_cut._cache[graphs.SchlaefliGraph().graph6_string()] = ???????????
 
 #GRAPH PROPERTIES
 
