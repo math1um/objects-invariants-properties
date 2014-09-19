@@ -220,14 +220,14 @@ def wilf(g):
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell]
 
-intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, card_max_cut, clique_covering_number]
+intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number]
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
 
 invariants = efficiently_computable_invariants + intractable_invariants
 
-#removed Graph.treewidth as its very slow
+#removed for speed: Graph.treewidth, card_max_cut
 
 #set precomputed values
 add_to_cache(Graph.treewidth, graphs.BuckyBall(), 10)
