@@ -171,6 +171,7 @@ def chromatic_index(g):
 def card_max_cut(g):
     return g.max_cut(value_only=True)
 
+@memoized
 def clique_covering_number(g):
     # Finding the chromatic number of the complement of a fullerene
     # is extremely slow, even when using MILP as the algorithm.
@@ -222,6 +223,8 @@ if hasattr(Graph.treewidth.__func__, '_cache'):
     Graph.treewidth.__func__._cache[graphs.BuckyBall().graph6_string()] = 10
 if hasattr(chromatic_index, '_cache'):
     chromatic_index._cache[graphs.MeredithGraph().graph6_string()] = 5
+if hasattr(clique_covering_number, '_cache'):
+    clique_covering_number._cache[graphs.SchlaefliGraph().graph6_string()] = 6
 
 #GRAPH PROPERTIES
 
