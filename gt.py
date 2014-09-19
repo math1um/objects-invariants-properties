@@ -201,10 +201,17 @@ def brooks(g):
     else:
         return Delta
 
+#wilf's upper bound for chromatic number
+def wilf(g):
+    return max_eigenvalue(g) + 1
+
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, card_max_cut, clique_covering_number]
+
+#FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
+#SLOW but FIXED for SpecialGraphs
 
 invariants = efficiently_computable_invariants + intractable_invariants
 
@@ -547,9 +554,8 @@ efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos ]
 
 #speed notes
-#FAST ENOUGH: is_hamiltonian, is_vertex_transitive, is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric, is_line_graph, is_line_graph,
-#is_planar_transitive
-#SLOW:
+#FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive, is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric, is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
+#SLOW but FIXED for SpecialGraphs: is_class1, is_class2
 
 properties = efficiently_computable_properties + intractable_properties
 
