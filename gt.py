@@ -743,7 +743,7 @@ other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), g
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
 
-union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + other_graphs
+union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + other_graphs + problem_graphs
 
 #graph_objects: all graphs with no duplicates
 
