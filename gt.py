@@ -24,6 +24,16 @@ def memoized(f):
 
     return memo
 
+def add_to_cache(f, g, value):
+    import types
+    if type(f) == types.MethodType:
+        f = f.__func__
+    elif type(f) != types.FunctionType:
+        raise ValueError("The argument f is not a function or instance method")
+
+    if hasattr(f, '_cache'):
+        f._cache[g.graph6_string()] = value
+
 #GRAPH INVARIANTS
 
 def domination_number(g):
@@ -219,12 +229,9 @@ invariants = efficiently_computable_invariants + intractable_invariants
 #removed Graph.treewidth as its very slow
 
 #set precomputed values
-if hasattr(Graph.treewidth.__func__, '_cache'):
-    Graph.treewidth.__func__._cache[graphs.BuckyBall().graph6_string()] = 10
-if hasattr(chromatic_index, '_cache'):
-    chromatic_index._cache[graphs.MeredithGraph().graph6_string()] = 5
-if hasattr(clique_covering_number, '_cache'):
-    clique_covering_number._cache[graphs.SchlaefliGraph().graph6_string()] = 6
+add_to_cache(Graph.treewidth, graphs.BuckyBall(), 10)
+add_to_cache(chromatic_index, graphs.MeredithGraph(), 5)
+add_to_cache(clique_covering_number, graphs.SchlaefliGraph(), 6)
 
 #GRAPH PROPERTIES
 
