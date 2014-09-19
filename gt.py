@@ -161,6 +161,7 @@ def largest_singular_value(g):
 def independence_number(g):
     return g.independent_set(value_only=True)
 
+@memoized
 def chromatic_index(g):
     if g.size() == 0:
         return 0
@@ -212,7 +213,8 @@ invariants = efficiently_computable_invariants + intractable_invariants
 #set precomputed values
 if hasattr(Graph.treewidth.__func__, '_cache'):
     Graph.treewidth.__func__._cache[graphs.BuckyBall().graph6_string()] = 10
-
+if hasattr(chromatic_index.__func__, '_cache'):
+    chromatic_index.._cache[graphs.MeredithGraph().graph6_string()] = 5
 
 #GRAPH PROPERTIES
 
@@ -547,7 +549,7 @@ intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Grap
 #speed notes
 #FAST ENOUGH: is_hamiltonian, is_vertex_transitive, is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric, is_line_graph, is_line_graph,
 #is_planar_transitive
-#SLOW: is_class1
+#SLOW:
 
 properties = efficiently_computable_properties + intractable_properties
 
@@ -742,6 +744,8 @@ other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), g
 
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
+
+#meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 
 union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + other_graphs + problem_graphs
 
