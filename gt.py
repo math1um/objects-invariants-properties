@@ -213,8 +213,8 @@ invariants = efficiently_computable_invariants + intractable_invariants
 #set precomputed values
 if hasattr(Graph.treewidth.__func__, '_cache'):
     Graph.treewidth.__func__._cache[graphs.BuckyBall().graph6_string()] = 10
-if hasattr(chromatic_index.__func__, '_cache'):
-    chromatic_index.._cache[graphs.MeredithGraph().graph6_string()] = 5
+if hasattr(chromatic_index, '_cache'):
+    chromatic_index._cache[graphs.MeredithGraph().graph6_string()] = 5
 
 #GRAPH PROPERTIES
 
