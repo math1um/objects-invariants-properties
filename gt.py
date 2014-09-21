@@ -25,7 +25,7 @@ def memoized(f):
 
     return memo
 
-def add_to_cache(f, g, value):
+def add_to_cache(f, g, value, create_cache=True):
     import types
     if type(f) == types.MethodType:
         f = f.__func__
@@ -34,6 +34,8 @@ def add_to_cache(f, g, value):
 
     if hasattr(f, '_cache'):
         f._cache[g.graph6_string()] = value
+    elif create_cache:
+        f._cache = {g.graph6_string():value}
 
 #GRAPH INVARIANTS
 
