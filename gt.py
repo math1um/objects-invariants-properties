@@ -37,6 +37,13 @@ def add_to_cache(f, g, value, create_cache=True):
     elif create_cache:
         f._cache = {g.graph6_string():value}
 
+def function_index(l, f):
+    """
+    Returns the index of f in l. This works regardless whether f is contained in the
+    list, or the __func__ of f (for unbounded methods), or a memoized version of f.
+    """
+    return [t.__name__ for t in l].index(f.__name__)
+
 #GRAPH INVARIANTS
 
 def domination_number(g):
