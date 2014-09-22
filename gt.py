@@ -214,10 +214,14 @@ def welsh_powell(g):
             mx = temp
     return mx + 1
 
-#outputs upper bound from Brooks Theorem
+#outputs upper bound from Brooks Theorem: returns Delta + 1 for complete and odd cycles
 def brooks(g):
     Delta = max(g.degree())
+    delta = min(g.degree())
+    n = g.order()
     if is_complete(g):
+        return Delta + 1
+    elif n%2 == 1 and g.is_connected() and Delta == 2 and delta == 2: #same as if all degrees are 2
         return Delta + 1
     else:
         return Delta
@@ -763,6 +767,9 @@ ryan.name(new="ryan")
 inp = Graph('J?`FBo{fdb?')
 inp.name(new="inp")
 
+#p10 joined to 2 points of k4, a CE to conjecture: chromatic_number<=avg degree + 1
+p10k4=Graph('MhCGGC@?G?_@_B?B_')
+
 #GRAPH LISTS
 
 hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
@@ -771,7 +778,7 @@ non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.T
 
 residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
-other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1]
+other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1, p10k4]
 
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
