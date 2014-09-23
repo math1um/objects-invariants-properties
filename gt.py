@@ -234,8 +234,12 @@ def n_over_alpha(g):
     n = g.order() + 0.0
     return n/independence_number(g)
 
+#a measure of irregularity
+def different_degrees(g):
+    return len(set(g.degree()))
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks]
+
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, memoized(Graph.chromatic_number)]
 
@@ -770,6 +774,9 @@ inp.name(new="inp")
 #p10 joined to 2 points of k4, a CE to conjecture: chromatic_number<=avg degree + 1
 p10k4=Graph('MhCGGC@?G?_@_B?B_')
 
+#star on 13 points with added edge: CE to alpha <+ dom + girth^2
+s13e = Graph('M{aCCA?_C?O?_?_??')
+
 #GRAPH LISTS
 
 hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
@@ -780,6 +787,8 @@ residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
 chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5)]
 
+alpha_objects = [s13e]
+
 other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1, p10k4]
 
 #graphs were some computations are especially slow
@@ -787,7 +796,7 @@ problem_graphs = [graphs.MeredithGraph()]
 
 #meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 
-union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + chromatic_number_objects + other_graphs + problem_graphs
+union_objects = hamiltonian_objects + non_hamiltonian_objects + residue_equals_alpha_objects + chromatic_number_objects + alpha_objects + other_graphs + problem_graphs
 
 #graph_objects: all graphs with no duplicates
 
