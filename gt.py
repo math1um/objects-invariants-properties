@@ -784,12 +784,15 @@ inp.name(new="inp")
 
 #p10 joined to 2 points of k4, a CE to conjecture: chromatic_number<=avg degree + 1
 p10k4=Graph('MhCGGC@?G?_@_B?B_')
+p10k4.name(new="p10k4")
 
 #star on 13 points with added edge: CE to alpha <+ dom + girth^2
 s13e = Graph('M{aCCA?_C?O?_?_??')
+s13e.name(new="s13e")
 
 #rp CE to alpha<=2*chi+2*residue, has alpha=25,chi=2,residue=10
 ryan2=graphs.CirculantGraph(50,[1,3])
+ryan2.name(new="circulant_50_1_3")
 
 #GRAPH LISTS
 
