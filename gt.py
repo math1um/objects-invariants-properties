@@ -242,8 +242,35 @@ def median_degree(g):
 def different_degrees(g):
     return len(set(g.degree()))
 
+def szekeres_wilf(g):
+    #removes a vertex, if possible, of degree <= i
+    def remove_vertex_of_degree(gc,i):
+        Dc = gc.degree()
+        V = gc.vertices()
+        #print "Dc is %s, V is %s" %(Dc,V)
+        mind = min(Dc)
+        #print "mind is %s" %mind
+        if mind <= i:
+            success = True
+            ind = Dc.index(mind)
+            #print "ind is %s, vertex is %s" %(ind,V[ind])
+            return gc.delete_vertex(V[ind])
+        else:
+            return gc
+    D = g.degree()
+    delta = min(D)
+    Delta = max(D)
+    for i in [delta..Delta]:
+        gc = copy(g)
+        value = g.order() + 1
+        while gc.size() > 0 and gc.order() < value:
+            #gc.show()
+            value = gc.order()
+            remove_vertex_of_degree(gc,i)
+        if gc.size() == 0:
+            return i + 1
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees]
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf]
 
 def median_degree(g):
     return median(g.degree())
