@@ -251,7 +251,7 @@ def szekeres_wilf(g):
         mind = min(Dc)
         #print "mind is %s" %mind
         if mind <= i:
-            success = True
+
             ind = Dc.index(mind)
             #print "ind is %s, vertex is %s" %(ind,V[ind])
             return gc.delete_vertex(V[ind])
@@ -260,7 +260,7 @@ def szekeres_wilf(g):
     D = g.degree()
     delta = min(D)
     Delta = max(D)
-    for i in [delta..Delta]:
+    for i in range(delta,Delta+1):
         gc = copy(g)
         value = g.order() + 1
         while gc.size() > 0 and gc.order() < value:
