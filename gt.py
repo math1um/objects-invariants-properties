@@ -322,6 +322,7 @@ invariants = efficiently_computable_invariants + intractable_invariants
 add_to_cache(chromatic_index, graphs.MeredithGraph(), 5) #number from http://en.wikipedia.org/wiki/Meredith_graph
 add_to_cache(clique_covering_number, graphs.SchlaefliGraph(), 6)
 add_to_cache(Graph.chromatic_number, graphs.SchlaefliGraph(), 9)  #number from http://en.wikipedia.org/wiki/Schl%C3%A4fli_graph
+add_to_cache(lovasz_theta, c100, 46.694)
 
 #GRAPH PROPERTIES
 
@@ -877,6 +878,9 @@ c100=Graph("~?@csP@@?OC?O`?@?@_?O?A??W??_??_G?O??C??@_??C???G???G@??K???A????O??
 #graph from delavina's jets paper
 starfish = Graph('N~~eeQoiCoM?Y?U?F??')
 
+#difficult graph from INP: order=11, alpha=4, best lower bound < 3
+difficult11 = Graph('J?`FBo{fdb?')
+
 #GRAPH LISTS
 
 hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
@@ -887,7 +891,7 @@ residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
 chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5)]
 
-alpha_objects = [s13e, ryan2, s22e]
+alpha_objects = [s13e, ryan2, s22e, difficult11]
 
 other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1, p10k4, c100, starfish]
 
