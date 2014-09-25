@@ -280,7 +280,7 @@ def average_vertex_temperature(g):
 #returns 2 for bipartite graphs, order for non-bipartite
 def bipartite_chromatic(g):
     if g.is_bipartite():
-        return True
+        return 2
     else:
         return g.order()
 
