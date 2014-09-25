@@ -593,6 +593,7 @@ def matching_covered(g):
     return True
 
 #a property that separates tutte from known hamiltonian examples, must be connected
+#radius(tutte) > center(tutte)
 def radius_greater_than_center(g):
     if not g.is_connected() or g.radius() <= card_center(g):
         return False
@@ -600,6 +601,7 @@ def radius_greater_than_center(g):
         return True
 
 #a property that separates tutte from known hamiltonian examples, must be connected
+#avg_dist(tutte) > girth(tutte)
 def avg_distance_greater_than_girth(g):
     if not g.is_connected() or g.average_distance() <= g.girth():
         return False
