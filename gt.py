@@ -592,6 +592,20 @@ def matching_covered(g):
         g.add_edge(e)
     return True
 
+#a property that separates tutte from known hamiltonian examples, must be connected
+def radius_greater_than_center(g):
+    if not g.is_connected() or g.radius() <= card_center(g):
+        return False
+    else:
+        return True
+
+#a property that separates tutte from known hamiltonian examples, must be connected
+def avg_distance_greater_than_girth(g):
+    if not g.is_connected() or g.average_distance() <= g.girth():
+        return False
+    else:
+        return True
+
 def localise(f):
     """
     This function takes a property (i.e., a function taking only a graph as an argument) and
@@ -893,3 +907,16 @@ def remove_duplicates(seq, idfun=None):
     return result
 
 graph_objects = remove_duplicates(union_objects, idfun=Graph.graph6_string)
+
+
+
+#TESTING
+
+#check for invariant relation that separtates G from class defined by property
+def find_separating_invariant_relation(g, objects, property, invariants):
+    L = [x for x in objects if (property)(x)]
+    for inv1 in invariants:
+        for inv2 in invariants:
+            if inv1(g) > inv2(g) and all(inv1(x) <= inv2(x) for x in L):
+                return inv1.__name__, inv2.__name__
+    print "no separating invariants"
