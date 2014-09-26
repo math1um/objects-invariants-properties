@@ -661,6 +661,16 @@ def avg_distance_greater_than_girth(g):
     else:
         return True
 
+#chromatic number equals min of known chi upper bounds
+def chi_equals_min_theory(g):
+    chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
+    min_theory = min([f(g) for f in chromatic_upper_theory])
+    chi = g.chromatic_number()
+    if min_theory == chi:
+        return True
+    else:
+        return False
+
 def localise(f):
     """
     This function takes a property (i.e., a function taking only a graph as an argument) and
@@ -705,7 +715,7 @@ def has_equal_invariants(invar1, invar2, name=None):
 
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic, diameter_equals_twice_radius, has_z1, is_z1_free, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected]
 
-intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos ]
+intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos, chi_equals_min_theory ]
 
 #speed notes
 #FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive, is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric, is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
@@ -928,7 +938,7 @@ c5k3.name(new="c5k3")
 
 #mycieskian of a triangle: CE to conj that chi <= max(clique, nu), chi=4, nu = clique = 3
 c3mycieski = Graph('FJnV?')
-c3mycieski.name=(new="c3mycieski")
+c3mycieski.name(new="c3mycieski")
 
 #GRAPH LISTS
 
