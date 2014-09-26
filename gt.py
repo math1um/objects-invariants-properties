@@ -298,14 +298,55 @@ def bipartite_chromatic(g):
     else:
         return g.order()
 
+#a very good lower bound for alpha
+def max_even_minus_even_horizontal(g):
+    """
+    finds def max_even_minus_even_horizontal for each component and adds them up.
+    """
+    mx_even=0
+    Gcomps=g.connected_components_subgraphs()
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic]
+    while Gcomps != []:
+            H=Gcomps.pop()
+            temp=max_even_minus_even_horizontal_component(H)
+            mx_even+=temp
+            #print "temp = {}, mx_even = {}".format(temp,mx_even)
+
+    return mx_even
+
+def max_even_minus_even_horizontal_component(g):
+    """
+    for each vertex v, find the number of vertices at even distance from v,
+    and substract the number of edges induced by these vertices.
+    this number is a lower bound for independence number.
+    take the max. returns 0 if graph is not connected
+    """
+    if g.is_connected()==False:
+        return 0
+
+    distances = g.distance_all_pairs()
+    mx=0
+    n=g.order()
+    for v in g.vertices():
+        Even=[]
+        for w in g.vertices():
+            if distances[v][w]%2==0:
+                Even.append(w)
+
+        #print len(Even), len(g.subgraph(Even).edges())
+        l=len(Even)-len(g.subgraph(Even).edges())
+        if l>mx:
+            mx=l
+    return mx
 
 def median_degree(g):
     return median(g.degree())
 
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, median_degree]
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic]
+
+
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, Graph.average_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, median_degree, randic, max_even_minus_even_horizontal, avaerage_vertex_temperature]
 
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, memoized(Graph.chromatic_number)]
