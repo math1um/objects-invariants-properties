@@ -1006,3 +1006,17 @@ def find_separating_invariant_relation(g, objects, property, invariants):
             if inv1(g) > inv2(g) and all(inv1(x) <= inv2(x) for x in L):
                 return inv1.__name__, inv2.__name__
     print "no separating invariants"
+
+#finds "difficult" graphs
+#if theory is sufficient conditions, finds graphs which dont have any sufficient
+#if theory is necessary conditions, finds graphs which don't have property but which have all necessary conditions
+def test_properties_upper_bound_theory(objects, property, theory):
+     for g in objects:
+         if not property(g) and all(f(g) for f in theory):
+             print g.name()
+                
+def test_properties_lower_bound_theory(objects, property, theory):
+     for g in objects:
+         if property(g) and not any(f(g) for f in theory):
+             print g.name()
+                
