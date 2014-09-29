@@ -342,8 +342,25 @@ def max_even_minus_even_horizontal_component(g):
 def median_degree(g):
     return median(g.degree())
 
+def laplacian_energy(g):
+     L = g.laplacian_matrix().eigenvalues()
+     Ls = [1/lam^2 for lam in L if lam > 0]
+     return 1 + sum(Ls)
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal]
+#sum of the positive eigenvalues of a graph
+def gutman_energy(g):
+     L = g.adjacency_matrix().eigenvalues()
+     Ls = [lam for lam in L if lam > 0]
+     return sum(Ls)
+
+#the second smallest eigenvalue of the Laplacian matrix of a graph, also called the "algebraic connectivity" - the smallest should be 0
+def fiedler(g):
+     L = g.laplacian_matrix().eigenvalues()
+     L.sort()
+     return L[1]
+
+
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, memoized(Graph.chromatic_number)]
 
@@ -1007,16 +1024,16 @@ def find_separating_invariant_relation(g, objects, property, invariants):
                 return inv1.__name__, inv2.__name__
     print "no separating invariants"
 
-#finds "difficult" graphs
-#if theory is sufficient conditions, finds graphs which dont have any sufficient
-#if theory is necessary conditions, finds graphs which don't have property but which have all necessary conditions
+
+
+#finds "difficult" graphs for necessary conditions, finds graphs which don't have property but which have all necessary conditions
 def test_properties_upper_bound_theory(objects, property, theory):
      for g in objects:
          if not property(g) and all(f(g) for f in theory):
              print g.name()
-                
+
+#finds "difficult" graphs for sufficient conditions, finds graphs which dont have any sufficient but do have property
 def test_properties_lower_bound_theory(objects, property, theory):
      for g in objects:
          if property(g) and not any(f(g) for f in theory):
              print g.name()
-                
