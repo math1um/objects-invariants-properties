@@ -364,7 +364,7 @@ def average_degree(g):
 
 def degree_variance(g):
      mu = mean(g.degree())
-     s = sum((x-mu)^2 for x in g.degree())
+     s = sum((x-mu)**2 for x in g.degree())
      return s/g.order()
 
 def number_of_triangles(g):
