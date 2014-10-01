@@ -398,10 +398,33 @@ def card_zero_eigenvalues(g):
 def card_negative_eigenvalues(g):
     return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam < 0])
 
+#make invariant from property
+def make_invariant_from_property(property, name=None):
+    """
+    This function takes a property as an argument and returns an invariant
+    whose value is 1 if the object has the property, else 0
+    Optionally a name for the new property can be provided as a second argument.
+    """
+    def boolean_valued_invariant(g):
+        if property(g):
+            return 1
+        else:
+            return 0
+
+    if name is not None:
+        boolean_valued_invariant.__name__ = name
+    elif hasattr(property, '__name__'):
+        boolean_valued_invariant.__name__ = '{}_value'.format(property.__name__)
+    else:
+        raise ValueError('Please provide a name for the new function')
+
+    return boolean_valued_invariant
 
 efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, memoized(Graph.chromatic_number)]
+
+#for invariants from properties and INVARIANT_PLUS see below
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
@@ -807,6 +830,10 @@ intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Grap
 
 properties = efficiently_computable_properties + intractable_properties
 properties_plus = efficiently_computable_properties + intractable_properties + invariant_relation_properties
+
+
+invariants_from_properties = [make_invariant_from_property(property) for property in properties]
+invariants_plus = invariants + invariants_from_properties
 
 # Graph.is_prime removed as faulty 9/2014
 # built in Graph.is_transitively_reduced removed 9/2014
