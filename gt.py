@@ -275,6 +275,11 @@ def average_vertex_temperature(g):
      n = g.order()
      return sum([D[i]/(n-D[i]+0.0) for i in range(n)])/n
 
+def sum_temperatures(g):
+     D = g.degree()
+     n = g.order()
+     return sum([D[i]/(n-D[i]+0.0) for i in range(n)])
+
 def randic(g):
      D = g.degree()
      V = g.vertices()
@@ -378,8 +383,23 @@ def number_of_triangles(g):
          total += len(S)
      return total/3
 
+def rank(g):
+    return g.adjacency_matrix().rank()
 
-efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles]
+def inverse_degree(g):
+    return sum([(1.0/d) for d in g.degree() if d!= 0])
+
+def card_positive_eigenvalues(g):
+    return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam > 0])
+
+def card_zero_eigenvalues(g):
+    return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam == 0])
+
+def card_negative_eigenvalues(g):
+    return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam < 0])
+
+
+efficiently_computable_invariants = [Graph.average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, memoized(Graph.chromatic_number)]
 
