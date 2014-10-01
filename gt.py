@@ -1057,6 +1057,15 @@ c5k3.name(new="c5k3")
 c3mycieski = Graph('FJnV?')
 c3mycieski.name(new="c3mycieski")
 
+#4th mycielskian of a triangle, CE to conj chi <= clique + girth, chi = 7, clique = girth = 3
+c3mycielski4=graphs.CycleGraph(3)
+chromatic_index(c3mycielski4)
+for i in [1..3]:
+    c3mycielski4 = graphs.MycielskiStep(c3mycielski4)
+    chromatic_index(c3mycielski4)
+add_to_cache(Graph.chromatic_number, c3mycielski4, 7)
+add_to_cache(chromatic_index, c3mycielski4, 32)
+
 #GRAPH LISTS
 
 hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
@@ -1065,7 +1074,7 @@ non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.T
 
 residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
-chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5), c3mycieski]
+chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5), c3mycieski, c3mycielski4]
 
 alpha_objects = [s13e, ryan2, s22e, difficult11]
 
