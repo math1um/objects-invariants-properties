@@ -286,7 +286,7 @@ def randic(g):
          i = V.index(v)
          w = e[1]
          j = V.index(w)
-         sum += 1/sqrt(D[i]*D[j])
+         sum += 1.0/sqrt(D[i]*D[j])
      return sum
 
 #a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
@@ -344,7 +344,7 @@ def median_degree(g):
 
 def laplacian_energy(g):
      L = g.laplacian_matrix().eigenvalues()
-     Ls = [1/lam^2 for lam in L if lam > 0]
+     Ls = [1/lam**2 for lam in L if lam > 0]
      return 1 + sum(Ls)
 
 #sum of the positive eigenvalues of a graph
