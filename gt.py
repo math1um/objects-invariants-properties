@@ -767,6 +767,10 @@ def has_leq_invariants(invar1, invar2, name=None):
 
     return comparator
 
+#add all properties derived from pairs of invariants
+invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
+
+
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic, diameter_equals_twice_radius, has_z1, is_z1_free, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos, chi_equals_min_theory ]
@@ -776,6 +780,7 @@ intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Grap
 #SLOW but FIXED for SpecialGraphs: is_class1, is_class2
 
 properties = efficiently_computable_properties + intractable_properties
+properties_plus = efficiently_computable_properties + intractable_properties + invariant_relation_properties
 
 # Graph.is_prime removed as faulty 9/2014
 # built in Graph.is_transitively_reduced removed 9/2014
