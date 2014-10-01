@@ -286,7 +286,7 @@ def randic(g):
          i = V.index(v)
          w = e[1]
          j = V.index(w)
-         sum += 1.0/sqrt(D[i]*D[j])
+         sum += 1.0/(D[i]*D[j])**0.5
      return sum
 
 #a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
