@@ -757,7 +757,7 @@ def avg_distance_greater_than_girth(g):
 def chi_equals_min_theory(g):
     chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
     min_theory = min([f(g) for f in chromatic_upper_theory])
-    chi = g.chromatic_number()
+    chi = chromatic_num(g)
     if min_theory == chi:
         return True
     else:
