@@ -1158,3 +1158,10 @@ def test_properties_lower_bound_theory(objects, property, theory):
      for g in objects:
          if property(g) and not any(f(g) for f in theory):
              print g.name()
+
+def find_coextensive_properties(objects, properties):
+     for p1 in properties:
+         for p2 in properties:
+             if p1 != p2 and all(p1(g) == p2(g) for g in objects):
+                 print p1.__name__, p2.__name__
+     print "DONE!"
