@@ -188,6 +188,10 @@ def chromatic_index(g):
     import sage.graphs.graph_coloring
     return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
 
+@memoized
+def chromatic_num(g):
+    return g.chromatic_number()
+
 def card_max_cut(g):
     return g.max_cut(value_only=True)
 
@@ -446,7 +450,7 @@ invariants = efficiently_computable_invariants + intractable_invariants
 #add_to_cache(Graph.treewidth, graphs.BuckyBall(), 10)
 add_to_cache(chromatic_index, graphs.MeredithGraph(), 5) #number from http://en.wikipedia.org/wiki/Meredith_graph
 add_to_cache(clique_covering_number, graphs.SchlaefliGraph(), 6)
-add_to_cache(Graph.chromatic_number, graphs.SchlaefliGraph(), 9)  #number from http://en.wikipedia.org/wiki/Schl%C3%A4fli_graph
+add_to_cache(chromatic_num, graphs.SchlaefliGraph(), 9)  #number from http://en.wikipedia.org/wiki/Schl%C3%A4fli_graph
 
 
 #GRAPH PROPERTIES
@@ -1069,8 +1073,10 @@ c3mycieski.name(new="c3mycieski")
 #4th mycielskian of a triangle, CE to conj chi <= clique + girth, chi = 7, clique = girth = 3
 c3mycielski4 = Graph('~??~??GWkYF@BcuIsJWEo@s?N?@?NyB`qLepJTgRXkAkU?JPg?VB_?W[??Ku??BU_??ZW??@u???Bs???Bw???A??F~~_B}?^sB`o[MOuZErWatYUjObXkZL_QpWUJ?CsYEbO?fB_w[?A`oCM??DL_Hk??DU_Is??Al_Dk???l_@k???Ds?M_???V_?{????oB}?????o[M?????WuZ?????EUjO?????rXk?????BUJ??????EsY??????Ew[??????B`o???????xk???????FU_???????\\k????????|_????????}_????????^_?????????')
 c3mycielski4.name(new="c3mycielski4")
-add_to_cache(Graph.chromatic_number, c3mycielski4, 7)
+add_to_cache(chromatic_num, c3mycielski4, 7)
 add_to_cache(chromatic_index, c3mycielski4, 32)
+
+
 
 #GRAPH LISTS
 
