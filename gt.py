@@ -405,6 +405,9 @@ def card_negative_eigenvalues(g):
 def card_cut_vertices(g):
     return len((g.blocks_and_cut_vertices())[1])
 
+def independent_dominating_set_number(g):
+    return g.dominating_set(value_only=True, independent=True)
+
 #returns average of distances between *distinct* vertices, return infinity is graph is not connected
 def average_distance(g):
     if not g.is_connected():
