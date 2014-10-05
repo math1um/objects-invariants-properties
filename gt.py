@@ -617,6 +617,12 @@ def has_paw(g):
 def is_paw_free(g):
     return not has_paw(g)
 
+def has_dart(g):
+    return g.subgraph_search(dart, induced=True) is not None
+
+def is_dart_free(g):
+    return not has_dart(g)
+
 def has_kite(g):
     return g.subgraph_search(kite, induced=True) is not None
 
@@ -1094,6 +1100,10 @@ paw=Graph('C{')
 
 #a KITE is a C4 with a chord
 kite = Graph('Cn')
+
+#a DART is a kite with a pendant
+dart = Graph('DnC')
+
 
 #GRAPH LISTS
 
