@@ -615,7 +615,13 @@ def has_paw(g):
     return g.subgraph_search(paw, induced=True) is not None
 
 def is_paw_free(g):
-    return not has_claw(g)
+    return not has_paw(g)
+
+def has_kite(g):
+    return g.subgraph_search(kite, induced=True) is not None
+
+def is_kite_free(g):
+    return not has_kite(g)
 
 def has_claw(g):
     return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
@@ -1086,10 +1092,12 @@ add_to_cache(clique_covering_number, c3mycielski4, 31)
 # a PAW is a traingle with a pendant, same as a Z1
 paw=Graph('C{')
 
+#a KITE is a C4 with a chord
+kite = Graph('Cn')
 
 #GRAPH LISTS
 
-forbidden_subgraph = [paw]
+forbidden_subgraph = [paw, kite]
 
 hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
 
