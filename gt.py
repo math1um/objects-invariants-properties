@@ -765,8 +765,7 @@ def has_lovasz_theta_equals_cc(g):
 def is_chvatal_erdos(g):
     return independence_number(g) <= vertex_con()
 
-#locally conn
-ected if the neighborhood of every vertex is connected (stronger than claw-free)
+#locally connected if the neighborhood of every vertex is connected (stronger than claw-free)
 def is_locally_connected(g):
     V = g.vertices()
     for v in V:
