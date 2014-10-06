@@ -859,7 +859,7 @@ def is_locally_two_connected(g):
         N = g.neighbors(v)
         if len(N) > 0:
             GN = g.subgraph(N)
-            if not GN.is_two_connected():
+            if not is_two_connected(GN):
                 return False
     return True
 
@@ -1202,7 +1202,7 @@ non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.T
 
 residue_equals_alpha_objects = [graphs.StarGraph(3)]
 
-chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5), c3mycieski, c3mycielski4]
+chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5), c3mycieski, c3mycielski4, alon_seymour]
 
 alpha_objects = [s13e, ryan2, s22e, difficult11]
 
