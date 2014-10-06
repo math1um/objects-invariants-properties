@@ -751,6 +751,7 @@ def matching_covered(g):
         g.delete_edge(e)
         nu2 = matching_number(g)
         if nu != nu2:
+            g.add_edge(e)
             return False
         g.add_edge(e)
     return True
