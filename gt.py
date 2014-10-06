@@ -763,7 +763,7 @@ def has_lovasz_theta_equals_cc(g):
 
 #sufficient condition for hamiltonicity
 def is_chvatal_erdos(g):
-    return independence_number(g) <= vertex_con()
+    return independence_number(g) <= vertex_con(g)
 
 #locally connected if the neighborhood of every vertex is connected (stronger than claw-free)
 def is_locally_connected(g):
@@ -776,6 +776,7 @@ def is_locally_connected(g):
                 return False
     return True
 
+@memoized
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
     g = g.copy()
@@ -849,7 +850,18 @@ def localise(f):
 
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
-is_locally_two_connected = localise(is_two_connected)
+
+#old version = localise(is_two_connected), can't seem to memoize that
+@memoized
+def is_locally_two_connected(g):
+    V = g.vertices()
+    for v in V:
+        N = g.neighbors(v)
+        if len(N) > 0:
+            GN = g.subgraph(N)
+            if not GN.is_two_connected():
+                return False
+    return True
 
 def has_equal_invariants(invar1, invar2, name=None):
     """
@@ -1177,6 +1189,8 @@ add_to_cache(chromatic_index, alon_seymour, 56)
 add_to_cache(edge_con, alon_seymour, 56)
 add_to_cache(vertex_con, alon_seymour, 56)
 add_to_cache(kirchhoff_index, alon_seymour, 71.0153846154)
+add_to_cache(matching_covered, alon_seymour, True)
+add_to_cache(is_locally_two_connected, alon_seymour, True)
 
 #GRAPH LISTS
 
