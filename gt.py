@@ -509,7 +509,7 @@ def is_ore(g):
 
 #sufficient condition for hamiltonicity
 def is_haggkvist_nicoghossian(g):
-    k = g.vertex_connectivity()
+    k = vertex_con(g)
     n = g.order()
     delta = min(g.degree())
     if k >= 2 and delta >= (1.0/3)*(n+k):
@@ -519,7 +519,7 @@ def is_haggkvist_nicoghossian(g):
 
 #sufficient condition for hamiltonicity
 def is_fan(g):
-    k = g.vertex_connectivity()
+    k = vertex_con(g)
     if k < 2:
         return False
     D = g.degree()
@@ -549,7 +549,7 @@ def neighbors_set(g,S):
 #sufficient condition for hamiltonicity
 def is_generalized_dirac(g):
     n = g.order()
-    k = g.vertex_connectivity()
+    k = vertex_con(g)
     if k < 2:
         return False
     for p in Subsets(g.vertices(),2):
@@ -597,7 +597,7 @@ def is_van_den_heuvel(g):
 
 #necessary condition for hamiltonicity
 def is_two_connected(g):
-    k = g.vertex_connectivity()
+    k = vertex_con(g)
     if k < 2:
         return False
     else:
@@ -605,7 +605,7 @@ def is_two_connected(g):
 
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
-    k = g.vertex_connectivity()
+    k = vertex_con(g)
     if k < 2:
         return False
     D = g.distance_all_pairs()
@@ -763,9 +763,10 @@ def has_lovasz_theta_equals_cc(g):
 
 #sufficient condition for hamiltonicity
 def is_chvatal_erdos(g):
-    return independence_number(g) <= g.vertex_connectivity()
+    return independence_number(g) <= vertex_con()
 
-#locally connected if the neighborhood of every vertex is connected (stronger than claw-free)
+#locally conn
+ected if the neighborhood of every vertex is connected (stronger than claw-free)
 def is_locally_connected(g):
     V = g.vertices()
     for v in V:
