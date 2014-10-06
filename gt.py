@@ -751,6 +751,7 @@ def is_locally_connected(g):
 
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
+    g = g.copy()
     nu = matching_number(g)
     E = g.edges()
     for e in E:
