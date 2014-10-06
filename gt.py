@@ -168,6 +168,7 @@ def resistance_distance_matrix(g):
             R[i,j] = X[i,i] + X[j,j] - 2*X[i,j]
     return R
 
+@memoized
 def kirchhoff_index(g):
     R = resistance_distance_matrix(g)
     return .5*sum(sum(R))
@@ -421,6 +422,18 @@ def average_distance(g):
 def card_pendants(g):
     return sum([x for x in g.degree() if x == 1])
 
+@memoized
+def vertex_con(g):
+    return g.vertex_connectivity()
+
+#returns number of bridges in graph
+def card_bridges(g):
+    gs = g.strong_orientation()
+    bridges = []
+    for scc in gs.strongly_connected_components():
+        bridges.extend(gs.edge_boundary(scc))
+    return len(bridges)
+
 #make invariant from property
 def make_invariant_from_property(property, name=None):
     """
@@ -443,7 +456,7 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, Graph.vertex_connectivity, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants]
+efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, Graph.edge_connectivity, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num, independent_dominating_set_number]
 
@@ -1136,7 +1149,30 @@ k5pendant.name(new="k5pendant")
 killer = Graph('EgSG')
 killer.name(new="killer")
 
-
+#alon_seymour graph: CE to the rank-coloring conjecture, 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
+V = VectorSpace(GF(2),6)
+S=[V[i] for i in range(64)]
+def count_ones(s):
+     count = 0
+     for i in range(len(s)):
+         if s[i] == 1:
+             count += 1
+     return count
+K=[x for x in S if count_ones(x)==1 or count_ones(x) == 6]
+alon_seymour=Graph(64)
+for i in range(64):
+    alon_seymour.set_vertex(i,S[i])
+for i in range(64):
+     for j in range(64):
+         if i < j:
+             if sum([alon_seymour.get_vertex(i),alon_seymour.get_vertex(j)]) not in K:
+                 alon_seymour.add_edge(i,j)
+alon_seymour.name(new="alon_seymour")
+add_to_cache(chromatic_num, alon_seymour, 56)
+add_to_cache(chromatic_index, alon_seymour, 56)
+add_to_cache(Graph.edge_connectivity, alon_seymour, 56)
+add_to_cache(vertex_con, alon_seymour, 56)
+add_to_cache(kirchhoff_index, alon_seymour, 71.0153846154)
 
 #GRAPH LISTS
 
