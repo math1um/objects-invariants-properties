@@ -623,6 +623,12 @@ def has_dart(g):
 def is_dart_free(g):
     return not has_dart(g)
 
+def is_p4_free(g):
+    return not has_p4(g)
+
+def has_p4(g):
+    return g.subgraph_search(p4, induced=True) is not None
+
 def has_kite(g):
     return g.subgraph_search(kite, induced=True) is not None
 
@@ -856,7 +862,7 @@ def has_leq_invariants(invar1, invar2, name=None):
 invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
 
 
-efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic, diameter_equals_twice_radius, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw, is_paw_free]
+efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic, diameter_equals_twice_radius, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw, is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos, chi_equals_min_theory, is_heliotropic_plant, is_geotropic_plant, is_traceable ]
 
@@ -1104,10 +1110,18 @@ kite = Graph('Cn')
 #a DART is a kite with a pendant
 dart = Graph('DnC')
 
+#P4 is a path on 4 vertices
+p4=Gra('Ch')
+
+#a K5 with a pendant, CE to dirac => regular or planar conjecture
+k5pendant = Graph('E~}?')
+
+
+
 
 #GRAPH LISTS
 
-forbidden_subgraph = [paw, kite]
+forbidden_subgraph = [paw, kite, p4, dart]
 
 hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
 
@@ -1119,7 +1133,7 @@ chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5), 
 
 alpha_objects = [s13e, ryan2, s22e, difficult11]
 
-other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1, p10k4, c100, starfish, c5k3]
+other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1, p10k4, c100, starfish, c5k3, k5pendant]
 
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
