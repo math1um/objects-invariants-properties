@@ -426,6 +426,10 @@ def card_pendants(g):
 def vertex_con(g):
     return g.vertex_connectivity()
 
+@memoized
+def edge_con(g):
+    return g.edge_connectivity()
+
 #returns number of bridges in graph
 def card_bridges(g):
     gs = g.strong_orientation()
@@ -1170,7 +1174,7 @@ for i in range(64):
 alon_seymour.name(new="alon_seymour")
 add_to_cache(chromatic_num, alon_seymour, 56)
 add_to_cache(chromatic_index, alon_seymour, 56)
-add_to_cache(Graph.edge_connectivity, alon_seymour, 56)
+add_to_cache(edge_con, alon_seymour, 56)
 add_to_cache(vertex_con, alon_seymour, 56)
 add_to_cache(kirchhoff_index, alon_seymour, 71.0153846154)
 
