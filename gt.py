@@ -438,6 +438,12 @@ def card_bridges(g):
         bridges.extend(gs.edge_boundary(scc))
     return len(bridges)
 
+#upper bound for the domination number
+def alon_spencer(g):
+    delta = min(g.degree())
+    n = g.order()
+    return n*((1+log(delta + 1.0)/(delta + 1)))
+
 #make invariant from property
 def make_invariant_from_property(property, name=None):
     """
@@ -490,7 +496,7 @@ def is_dirac(g):
     n = g.order()
     deg = g.degree()
     delta=min(deg)
-    if n/2 <= delta:
+    if n/2 <= delta and n > 2:
         return True
     else:
         return False
@@ -851,7 +857,7 @@ def localise(f):
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
 
-#old version = localise(is_two_connected), can't seem to memoize that
+#old versioncted), can't seem to memoize that
 @memoized
 def is_locally_two_connected(g):
     V = g.vertices()
