@@ -448,6 +448,10 @@ def alon_spencer(g):
 def caro_wei(g):
     return sum([1.0/(d + 1) for d in g.degree()])
 
+#equals 2*size, the 1st theorem of graph theory
+def degree_sum(g):
+    return sum(g.degree())
+
 #make invariant from property
 def make_invariant_from_property(property, name=None):
     """
@@ -470,7 +474,7 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei]
+efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num, independent_dominating_set_number]
 
