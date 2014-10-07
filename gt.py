@@ -1206,21 +1206,48 @@ add_to_cache(kirchhoff_index, alon_seymour, 71.0153846154)
 add_to_cache(matching_covered, alon_seymour, True)
 add_to_cache(is_locally_two_connected, alon_seymour, True)
 
+k3 = graphs.CompleteGraph(3)
+k3.name(new="k3")
+
+k4 = graphs.CompleteGraph(4)
+k4.name(new="k4")
+
+k5 = graphs.CompleteGraph(5)
+k5.name(new="k5")
+
+c4 = graphs.CycleGraph(4)
+c4.name(new="c4")
+
+p2 = graphs.PathGraph(2)
+p2.name(new="p2")
+
+#star with 3 rays, order = 4
+s3 = graphs.StarGraph(3)
+s3.name(new="s3")
+
+k10 = graphs.CompleteGraph(10)
+k10.name(new="k10")
+
+c60 = graphs.BuckyBall()
+c60.name(new="c60")
+
+pete = graphs.PetersenGraph()
+
 #GRAPH LISTS
 
 forbidden_subgraph = [paw, kite, p4, dart]
 
-hamiltonian_objects = [graphs.CompleteGraph(3), graphs.CompleteGraph(4), graphs.CompleteGraph(5), c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), graphs.CycleGraph(4), prismy, c24, c26, graphs.BuckyBall(), c6xc6, holton_mckay, sixfour]
+hamiltonian_objects = [k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4]
 
-non_hamiltonian_objects = [graphs.PetersenGraph(), graphs.PathGraph(2), graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark() ]
+non_hamiltonian_objects = [graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark() ]
 
-residue_equals_alpha_objects = [graphs.StarGraph(3)]
+residue_equals_alpha_objects = [s3]
 
-chromatic_number_objects = [graphs.CompleteGraph(10), graphs.MycielskiGraph(5), c3mycieski, c3mycielski4, alon_seymour]
+chromatic_number_objects = [k10, graphs.MycielskiGraph(5), c3mycieski, c3mycielski4, alon_seymour]
 
 alpha_objects = [s13e, ryan2, s22e, difficult11]
 
-other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), graphs.PetersenGraph(), graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.BullGraph(), graphs.BuckyBall(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, z1, p10k4, c100, starfish, c5k3, k5pendant]
+other_graphs = [graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.DodecahedralGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant]
 
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
