@@ -1233,6 +1233,14 @@ c60.name(new="c60")
 
 pete = graphs.PetersenGraph()
 
+#residue = alpha = 3, a CE to conjecture that residue=alpha => is_ore
+ryan3=graphs.CycleGraph(15)
+for i in range(15):
+    for j in [1,2,3]:
+        ryan3.add_edge(i,(i+j)%15)
+        ryan3.add_edge(i,(i-j)%15)
+ryan3.name(new="ryan3")
+
 #GRAPH LISTS
 
 forbidden_subgraph = [paw, kite, p4, dart]
@@ -1241,7 +1249,7 @@ hamiltonian_objects = [k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8
 
 non_hamiltonian_objects = [graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark() ]
 
-residue_equals_alpha_objects = [s3]
+residue_equals_alpha_objects = [s3, ryan3]
 
 chromatic_number_objects = [k10, graphs.MycielskiGraph(5), c3mycieski, c3mycielski4, alon_seymour]
 
