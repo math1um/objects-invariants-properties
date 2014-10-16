@@ -843,6 +843,7 @@ def is_traceable(g):
 def has_residue_equals_two(g):
     return residue(g) == 2
 
+#a necessary condition for being even hole free
 def is_chordal_or_not_perfect(g):
     if g.is_chordal():
         return true
