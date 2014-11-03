@@ -681,6 +681,12 @@ def has_H(g):
 def is_H_free(g):
     return not has_H(g)
 
+def has_fork(g):
+    return g.subgraph_search(fork, induced=True) is not None
+
+def is_fork_free(g):
+    return not has_fork(g)
+
 def has_perfect_matching(g):
     n = g.order()
     if n%2 == 1:
