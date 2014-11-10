@@ -452,6 +452,13 @@ def caro_wei(g):
 def degree_sum(g):
     return sum(g.degree())
 
+#smallest sum of degrees of non-adjacent degrees, invariant in ore condition for hamiltonicity
+def sigma_2(g):
+    if g.size() == g.order()*(g.order()-1)/2:
+        return g.order()
+    Dist = g.distance_all_pairs()
+    return min(g.degree(v) + g.degree(w) for v in g for w in g if Dist[v][w] > 1)
+
 #make invariant from property
 def make_invariant_from_property(property, name=None):
     """
