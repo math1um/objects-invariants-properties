@@ -1257,6 +1257,14 @@ edge_critical_5.add_edge(0,3)
 edge_critical_5.add_edge(1,4)
 edge_critical_5.name(new="edge_critical_5")
 
+#a CE to alpha >= min{e-n+1,diameter}
+heather = graphs.CompleteGraph(4)
+heather.add_vertex()
+heather.add_vertex()
+heather.add_edge(0,4)
+heather.add_edge(5,4)
+heather.name(new="heather")
+
 pete = graphs.PetersenGraph()
 
 #residue = alpha = 3, a CE to conjecture that residue=alpha => is_ore
