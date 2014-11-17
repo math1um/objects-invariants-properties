@@ -873,9 +873,27 @@ def has_alpha_residue_equal_two(g):
 def alpha_leq_order_over_two(g):
     return (2*independence_number(g) <= g.order())
 
+
 #in a luo-zhao sufficient condition for alpha <= n/2 (vizing's ind number conj)
 def order_leq_twice_max_degree(g):
     return (g.order() <= 2*max(g.degree()))
+
+#not in properties list until meredith graph is computed
+#critical if connected, class 2, and removal of any edge decreases chromatic number
+def chromatic_index_critical(g):
+    if not g.is_connected():
+        return False
+    Delta = max(g.degree())
+    chi_e = chromatic_index(g)
+    if chi_e != Delta + 1:
+        return False
+    for e in g.edges():
+        gc = copy(g)
+        gc.delete_edge(e)
+        chi_e_prime = chromatic_index(gc)
+        if not chi_e_prime < chi_e:
+            return False
+    return True
 
 def localise(f):
     """
