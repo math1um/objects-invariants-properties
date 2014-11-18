@@ -880,7 +880,7 @@ def order_leq_twice_max_degree(g):
 
 #not in properties list until meredith graph is computed
 #critical if connected, class 2, and removal of any edge decreases chromatic number
-def chromatic_index_critical(g):
+def is_chromatic_index_critical(g):
     if not g.is_connected():
         return False
     Delta = max(g.degree())
@@ -892,6 +892,20 @@ def chromatic_index_critical(g):
         gc.delete_edge(e)
         chi_e_prime = chromatic_index(gc)
         if not chi_e_prime < chi_e:
+            return False
+    return True
+
+#not in properties list
+#connected and alpha(g-e) > alpha(g) for *every* edge g
+def is_alpha_critical(g):
+    if not g.is_connected():
+        return False
+    alpha = independence_number(g)
+    for e in g.edges():
+        gc = copy(g)
+        gc.delete_edge(e)
+        alpha_prime = independence_number(gc)
+        if alpha_prime <= alpha:
             return False
     return True
 
