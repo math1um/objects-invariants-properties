@@ -909,6 +909,10 @@ def is_alpha_critical(g):
             return False
     return True
 
+#graph is KE if matching number + independence number = n
+def is_KE(g):
+    return (g.matching(value_only = True) + independence_number(g) == g.order())
+
 def localise(f):
     """
     This function takes a property (i.e., a function taking only a graph as an argument) and
