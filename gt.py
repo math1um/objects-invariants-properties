@@ -901,7 +901,12 @@ def is_chromatic_index_critical(g):
     chi_e = chromatic_index(g)
     if chi_e != Delta + 1:
         return False
-    for e in g.edges():
+
+    lg=g.line_graph()
+    equiv_lines = lg.automorphism_group(return_group=False,orbits=true)
+    equiv_lines_representatives = [orb[0] for orb in equiv_lines]
+
+    for e in equiv_lines_representatives:
         gc = copy(g)
         gc.delete_edge(e)
         chi_e_prime = chromatic_index(gc)
