@@ -1352,6 +1352,22 @@ fork.add_vertex()
 fork.add_edge(1,4)
 fork.name(new="fork")
 
+#one of the 2 order 11 chromatic edge-critical graphs discovered by brinkmann and steffen
+edge_critical_11_1 = graphs.CycleGraph(11)
+edge_critical_11_1.add_edge(0,2)
+edge_critical_11_1.add_edge(1,6)
+edge_critical_11_1.add_edge(3,8)
+edge_critical_11_1.add_edge(5,9)
+edge_critical_11_1.name(new="edge_critical_11_1")
+
+#one of the 2 order 11 chromatic edge-critical graphs discovered by brinkmann and steffen
+edge_critical_11_2 = graphs.CycleGraph(11)
+edge_critical_11_2.add_edge(0,2)
+edge_critical_11_2.add_edge(3,7)
+edge_critical_11_2.add_edge(6,10)
+edge_critical_11_2.add_edge(4,9)
+edge_critical_11_2.name(new="edge_critical_11_2")
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
