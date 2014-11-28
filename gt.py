@@ -461,6 +461,10 @@ def sigma_2(g):
     Dist = g.distance_all_pairs()
     return min(g.degree(v) + g.degree(w) for v in g for w in g if Dist[v][w] > 1)
 
+#cardinality of the automorphism group of the graph
+def order_automorphism_group(g):
+    return g.automorphism_group(return_group=False, order=True)
+
 #in sufficient condition for graphs where vizing's independence theorem holds
 def brinkmann_steffen(g):
     E = g.edges()
@@ -472,6 +476,31 @@ def brinkmann_steffen(g):
 #cardinality of the automorphism group of the graph
 def order_automorphism_group(g):
     return g.automorphism_group(return_group=False, order=True)
+
+#finds all vertices with weight 1 in some max weighted stable set with wieghts in {0,1,1/2}
+def find_stable_ones_vertices(g):
+    F = []
+    alpha_f = fractional_alpha(g)
+    for v in g.vertices():
+        gc = copy(g)
+        gc.delete_vertices(closed_neighborhood(gc, v))
+        alpha_f_prime = fractional_alpha(gc)
+        if alpha_f == alpha_f_prime + 1:
+            F.append(v)
+    return F
+
+def find_max_critical_independent_set(g):
+    S = find_stable_ones_vertices(g)
+    H = g.subgraph(S)
+    return H.independent_set()
+
+def critical_independence_number(g):
+    return len(find_max_critical_independent_set(g))
+
+
+
+
+
 
 #make invariant from property
 def make_invariant_from_property(property, name=None):
