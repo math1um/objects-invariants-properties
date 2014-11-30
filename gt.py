@@ -477,6 +477,8 @@ def brinkmann_steffen(g):
 def order_automorphism_group(g):
     return g.automorphism_group(return_group=False, order=True)
 
+###several invariants and auxiliary functions related to the Independence Decomposition Theorem
+
 #finds all vertices with weight 1 in some max weighted stable set with wieghts in {0,1,1/2}
 def find_stable_ones_vertices(g):
     F = []
@@ -497,9 +499,27 @@ def find_max_critical_independent_set(g):
 def critical_independence_number(g):
     return len(find_max_critical_independent_set(g))
 
+def card_independence_irreducible_part(g):
+    return len(find_independence_irreducible_part(g))
 
+def find_independence_irreducible_part(g):
+    X = find_KE_part(g)
+    SX = Set(X)
+    Vertices = Set(g.vertices())
+    return list(Vertices.difference(SX))
 
+#returns KE part guaranteed by Independence Decomposition Theorem
+def find_KE_part(g):
+    return closed_neighborhood(g, find_max_critical_independent_set(g))
 
+def card_KE_part(g):
+    return len(find_KE_part(g))
+
+def find_independence_irreducible_subgraph(g):
+    return g.subgraph(find_independence_irreducible_part(g))
+
+def find_KE_subgraph(g):
+    return g.subgraph(find_KE_part(g))
 
 
 #make invariant from property
@@ -960,6 +980,10 @@ def is_alpha_critical(g):
 #graph is KE if matching number + independence number = n
 def is_KE(g):
     return (g.matching(value_only = True) + independence_number(g) == g.order())
+
+#possibly faster version of is_KE (not currently in invariants)
+def is_KE2(g):
+    return (independence_number(g) == critical_independence_number(g))
 
 #g is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
 def is_factor_critical(g):
