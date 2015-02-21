@@ -1561,6 +1561,16 @@ graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.Dodecahe
 
 chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus]
 
+#class 0 pebbling graphs
+import pickle, os, os.path
+class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0dictionary.pickle","r"))
+class0graphs = []
+for d in class0graphs_dict:
+    g = Graph(class0graphs_dict[d])
+    g.name(new = d)
+    class0graphs.append(g)
+class0small = [g for g in class0graphs if g.order() < 30]
+
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
 #meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
