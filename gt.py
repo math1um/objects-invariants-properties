@@ -1563,7 +1563,7 @@ chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5,
 
 #class 0 pebbling graphs
 import pickle, os, os.path
-class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0_dictionary.pickle","r"))
+class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
 class0graphs = []
 for d in class0graphs_dict:
     g = Graph(class0graphs_dict[d])
