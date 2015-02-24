@@ -1003,7 +1003,7 @@ def is_factor_critical(g):
             return False
     return True
 
-#returns a list of vertices that have the same neighbors as v if a pair exists or None
+#returns a list of (necessarily non-adjacent) vertices that have the same neighbors as v if a pair exists or None
 def find_twins_of_vertex(g,v):
     L = []
     V = g.vertices()
@@ -1024,71 +1024,20 @@ def has_twin(g):
 def is_twin_free(g):
     return not has_twin(g)
 
-#return partition of vertices into equivalence classes based on twinhood
-def find_twins(g):
-    V = g.vertices()
-    Twins = []
-    while V != []:
-        v = V.pop()
-        T = [v]
-        T2 = find_twins_of_vertex(g,v)
-        Twins.append(T+T2)
-        for w in T2:
-            V.remove(w)
-    return Twins
+#returns twin pair (v,w) if one exists, else returns None
+def find_twin(g):
 
-#returns graph g stripped of all twins
-def remove_twins(g):
-    Partition = find_twins(g)
-    Verts = []
-    for P in Partition:
-        Verts.append(P[0])
-    #print Verts
-    return g.subgraph(Verts)
-
-
-#returns a list of vertices that have the same neighbors as v if a pair exists or None
-def find_twins_of_vertex(g,v):
-    L = []
     V = g.vertices()
     D = g.distance_all_pairs()
-    for i in range(g.order()):
-        w = V[i]
-        if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
-                L.append(w)
-    return L
+    for v in V:
+        for w in V:
+            if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
+                return (v,w)
+    return None
 
-def has_twin(g):
-    t = find_twin(g)
-    if t == None:
-        return False
-    else:
-        return True
 
-def is_twin_free(g):
-    return not has_twin(g)
 
-#return partition of vertices into equivalence classes based on twinhood
-def find_twins(g):
-    V = g.vertices()
-    Twins = []
-    while V != []:
-        v = V.pop()
-        T = [v]
-        T2 = find_twins_of_vertex(g,v)
-        Twins.append(T+T2)
-        for w in T2:
-            V.remove(w)
-    return Twins
 
-#returns graph g stripped of all twins
-def remove_twins(g):
-    Partition = find_twins(g)
-    Verts = []
-    for P in Partition:
-        Verts.append(P[0])
-    #print Verts
-    return g.subgraph(Verts)
 
 #can't compute membership in this class directly. instead testing isomorhism for 400 known class0 graphs
 def is_pebbling_class0(g):
