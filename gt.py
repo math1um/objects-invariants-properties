@@ -1511,6 +1511,16 @@ for s in L:
     g.name(new="chromatic_index_critical_7_" + s)
     chromatic_index_critical_7.append(g)
 
+#class 0 pebbling graphs
+import pickle, os, os.path
+class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
+class0graphs = []
+for d in class0graphs_dict:
+    g = Graph(class0graphs_dict[d])
+    g.name(new = d)
+    class0graphs.append(g)
+class0small = [g for g in class0graphs if g.order() < 30]
+
 c5=graphs.CycleGraph(5)
 c5.name(new = "c5")
 
@@ -1518,35 +1528,6 @@ graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.Dodecahe
 
 chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus]
 
-#class 0 pebbling graphs
-import pickle, os, os.path
-class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
-class0graphs = []
-for d in class0graphs_dict:
-    g = Graph(class0graphs_dict[d])
-    g.name(new = d)
-    class0graphs.append(g)
-class0small = [g for g in class0graphs if g.order() < 30]
-
-#class 0 pebbling graphs
-import pickle, os, os.path
-class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
-class0graphs = []
-for d in class0graphs_dict:
-    g = Graph(class0graphs_dict[d])
-    g.name(new = d)
-    class0graphs.append(g)
-class0small = [g for g in class0graphs if g.order() < 30]
-
-#class 0 pebbling graphs
-import pickle, os, os.path
-class0graphs_dict = pickle.load(open(os.getcwd() + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
-class0graphs = []
-for d in class0graphs_dict:
-    g = Graph(class0graphs_dict[d])
-    g.name(new = d)
-    class0graphs.append(g)
-class0small = [g for g in class0graphs if g.order() < 30]
 
 #graphs were some computations are especially slow
 problem_graphs = [graphs.MeredithGraph()]
