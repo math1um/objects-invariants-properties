@@ -1513,7 +1513,7 @@ for s in L:
 
 #class 0 pebbling graphs
 import pickle, os, os.path
-class0graphs_dict = pickle.load(open("~/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
+class0graphs_dict = pickle.load(open(os.environ['HOME'] + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
 class0graphs = []
 for d in class0graphs_dict:
     g = Graph(class0graphs_dict[d])
