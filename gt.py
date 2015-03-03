@@ -1607,3 +1607,26 @@ def find_coextensive_properties(objects, properties):
              if p1 != p2 and all(p1(g) == p2(g) for g in objects):
                  print p1.__name__, p2.__name__
      print "DONE!"
+
+#computes and stores data for all graphs and all invariants
+def pickle_graph_invariant_data():
+    graph_invariant_data = {}
+    for g in graph_objects:
+        print g.name()
+        inv_value_dict = {}
+        for inv in invariants:
+            value = inv(g)
+            #print value
+            #if value != +Infinity and value != -Infinity:
+            #if pickle can't pickle value then it skips this value
+            try:
+                pickle.dumps(value)
+            except TypeError:
+                print "could not pickle {} {}".format(g.name(),inv.__name__)
+            else:
+                inv_value_dict[inv.__name__] = value
+        graph_invariant_data[g.name()] = inv_value_dict
+    output = open("graph_invariant_data.pickle","w")
+    pickle.dump(graph_invariant_data, output)
+    output.close()
+    print "DONE"
