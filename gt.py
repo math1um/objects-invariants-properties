@@ -1630,3 +1630,40 @@ def pickle_graph_invariant_data():
     pickle.dump(graph_invariant_data, output)
     output.close()
     print "DONE"
+
+#this version will open existing data file, and update as needed    
+def pickle_graph_property_data():
+    #try to open existing pickled dictionary file, else initialize empty one
+    try:
+        graph_property_file = open('graph_property_data.pickle', 'rb')
+    except IOError:
+        print "can't load properties pickle file"
+        graph_property_data = {}
+    else:
+        graph_property_data = pickle.load(graph_property_file)
+        graph_property_file.close()
+
+    #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
+    for g in graph_objects[0:4]:
+        print g.name()
+        prop_value_dict = graph_property_data.get(g.name(), {})
+
+        #check for property key, if it exists load the current dictionary, if not initialize an empty dictionary for property
+        for prop in properties:
+            value = prop(g)
+            #see if object *can* be pickled
+            try:
+                pickle.dumps(value)
+            except TypeError:
+                print "could not pickle {} {}".format(g.name(),prop.__name__)
+            else:
+                prop_value_dict[prop.__name__] = value
+
+        #add updated record to data file
+        graph_property_data[g.name()] = prop_value_dict
+
+    #pickle updated property dictionary
+    output = open("graph_property_data.pickle","w")
+    pickle.dump(graph_property_data, output)
+    output.close()
+    print "DONE"
