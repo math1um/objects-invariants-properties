@@ -586,7 +586,7 @@ def is_ore(g):
     for i in range(n):
         for j in range(i):
             if A[i][j]==0:
-                if g.degree(i) + g.degree(j) < n:
+                if g.degree()[i] + g.degree()[j] < n:
                     return False
     return True
 
@@ -1631,11 +1631,11 @@ def pickle_graph_invariant_data():
     output.close()
     print "DONE"
 
-#this version will open existing data file, and update as needed    
+#this version will open existing data file, and update as needed
 def pickle_graph_property_data():
     #try to open existing pickled dictionary file, else initialize empty one
     try:
-        graph_property_file = open('graph_property_data.pickle', 'rb')
+        graph_property_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_property_data.pickle', 'rb')
     except IOError:
         print "can't load properties pickle file"
         graph_property_data = {}
@@ -1644,7 +1644,7 @@ def pickle_graph_property_data():
         graph_property_file.close()
 
     #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
-    for g in graph_objects[0:4]:
+    for g in graph_objects[0:10]:
         print g.name()
         prop_value_dict = graph_property_data.get(g.name(), {})
 
@@ -1663,7 +1663,7 @@ def pickle_graph_property_data():
         graph_property_data[g.name()] = prop_value_dict
 
     #pickle updated property dictionary
-    output = open("graph_property_data.pickle","w")
+    output = open(os.environ['HOME'] + "/conjecturing/objects-invariants-properties/graph_property_data.pickle","w")
     pickle.dump(graph_property_data, output)
     output.close()
     print "DONE"
