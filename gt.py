@@ -583,10 +583,11 @@ def is_dirac(g):
 def is_ore(g):
     A = g.adjacency_matrix()
     n = g.order()
+    D = g.degree()
     for i in range(n):
         for j in range(i):
             if A[i][j]==0:
-                if g.degree([i])[i] + g.degree([j])[j] < n:
+                if D[i] + D[j] < n:
                     return False
     return True
 
@@ -790,7 +791,7 @@ def closed_neighborhood(g, verts):
         return list(set(neighborhood))
     else:
         return [verts] + g.neighbors(verts)
-    
+
 #replaced with faster LP-solver is_independence_irreducible
 #has no non-empty critical independent set (<=> the only solution to the LP independence number relaxation is all 1/2's)
 def has_empty_KE_part(g):
