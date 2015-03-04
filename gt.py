@@ -1646,7 +1646,7 @@ def pickle_graph_property_data():
         graph_property_file.close()
 
     #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
-    for g in graph_objects[200:250]:
+    for g in graph_objects:
         print g.name()
         prop_value_dict = graph_property_data.get(g.name(), {})
 
