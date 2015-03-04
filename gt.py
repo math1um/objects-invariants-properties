@@ -586,7 +586,7 @@ def is_ore(g):
     for i in range(n):
         for j in range(i):
             if A[i][j]==0:
-                if g.degree()[i] + g.degree()[j] < n:
+                if g.degree([i])[i] + g.degree([j])[j] < n:
                     return False
     return True
 
@@ -790,7 +790,8 @@ def closed_neighborhood(g, verts):
         return list(set(neighborhood))
     else:
         return [verts] + g.neighbors(verts)
-
+    
+#replaced with faster LP-solver is_independence_irreducible
 #has no non-empty critical independent set (<=> the only solution to the LP independence number relaxation is all 1/2's)
 def has_empty_KE_part(g):
     b = bipartite_double_cover(g)
@@ -1129,7 +1130,7 @@ def has_leq_invariants(invar1, invar2, name=None):
 invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
 
 
-efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, has_empty_KE_part, is_fan, is_cubic, diameter_equals_twice_radius, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw, is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free, has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree, alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible, has_twin, is_twin_free, is_pebbling_class0, diameter_equals_two]
+efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, is_fan, is_cubic, diameter_equals_twice_radius, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw, is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free, has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree, alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible, has_twin, is_twin_free, is_pebbling_class0, diameter_equals_two]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant, is_geotropic_plant, is_traceable, is_chordal_or_not_perfect, has_alpha_residue_equal_two]
 
@@ -1644,7 +1645,7 @@ def pickle_graph_property_data():
         graph_property_file.close()
 
     #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
-    for g in graph_objects[0:10]:
+    for g in graph_objects[200:250]:
         print g.name()
         prop_value_dict = graph_property_data.get(g.name(), {})
 
