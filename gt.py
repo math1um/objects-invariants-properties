@@ -1644,6 +1644,18 @@ def pickle_graph_invariant_data():
     output.close()
     print "DONE"
 
+#load graph property data dictionary, if one exists
+try:
+    graph_property_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_property_data.pickle', 'rb')
+except IOError:
+    print "can't load graph properties pickle file"
+    graph_property_data = {}
+else:
+    graph_property_data = pickle.load(graph_property_file)
+    graph_property_file.close()
+    print "loaded graph properties pickle file"
+
+
 #this version will open existing data file, and update as needed
 def pickle_graph_property_data():
     #try to open existing pickled dictionary file, else initialize empty one
