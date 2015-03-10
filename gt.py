@@ -1621,28 +1621,6 @@ def find_coextensive_properties(objects, properties):
                  print p1.__name__, p2.__name__
      print "DONE!"
 
-#computes and stores data for all graphs and all invariants
-def pickle_graph_invariant_data():
-    graph_invariant_data = {}
-    for g in graph_objects:
-        print g.name()
-        inv_value_dict = {}
-        for inv in invariants:
-            value = inv(g)
-            #print value
-            #if value != +Infinity and value != -Infinity:
-            #if pickle can't pickle value then it skips this value
-            try:
-                pickle.dumps(value)
-            except TypeError:
-                print "could not pickle {} {}".format(g.name(),inv.__name__)
-            else:
-                inv_value_dict[inv.__name__] = value
-        graph_invariant_data[g.name()] = inv_value_dict
-    output = open("graph_invariant_data.pickle","w")
-    pickle.dump(graph_invariant_data, output)
-    output.close()
-    print "DONE"
 
 #load graph property data dictionary, if one exists
 try:
@@ -1692,3 +1670,53 @@ def pickle_graph_property_data():
     pickle.dump(graph_property_data, output)
     output.close()
     print "DONE"
+
+#load graph invariant data dictionary, if one exists
+try:
+    graph_invariant_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
+except IOError:
+    print "can't load graph invariant pickle file"
+    graph_invariant_data = {}
+else:
+    graph_invariant_data = pickle.load(graph_invariant_file)
+    graph_invariant_file.close()
+    print "loaded graph invariants pickle file"
+
+
+#this version will open existing data file, and update as needed
+def pickle_graph_invariant_data():
+    #try to open existing pickled dictionary file, else initialize empty one
+    try:
+        graph_invariant_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
+    except IOError:
+        print "can't load invariant pickle file"
+        graph_invariant_data = {}
+    else:
+        graph_invariant_data = pickle.load(graph_invariant_file)
+        graph_invariant_file.close()
+
+    #check for graph key, if it exists load the current dictionary, if not use empty inv_value_dict as *default*
+    for g in graph_objects:
+        print g.name()
+        inv_value_dict = graph_invariant_data.get(g.name(), {})
+
+        #check for invariant key, if it exists load the current dictionary, if not initialize an empty dictionary for invariant
+        for inv in invariants:
+            value = inv(g)
+            #see if object *can* be pickled
+            try:
+                pickle.dumps(value)
+            except TypeError:
+                print "could not pickle {} {}".format(g.name(),inv.__name__)
+            else:
+                inv_value_dict[inv.__name__] = value
+
+        #add updated record to data file
+        graph_invariant_data[g.name()] = inv_value_dict
+
+    #pickle updated invariant dictionary
+    output = open(os.environ['HOME'] + "/conjecturing/objects-invariants-properties/graph_invariant_data.pickle","w")
+    pickle.dump(graph_property_data, output)
+    output.close()
+    print "DONE"
+
