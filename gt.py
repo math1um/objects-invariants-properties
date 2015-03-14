@@ -1510,6 +1510,15 @@ pete_minus=graphs.PetersenGraph()
 pete_minus.delete_vertex(9)
 pete_minus.name(new="pete_minus")
 
+bow_tie = Graph(5)
+bow_tie.add_edge(0,1)
+bow_tie.add_edge(0,2)
+bow_tie.add_edge(0,3)
+bow_tie.add_edge(0,4)
+bow_tie.add_edge(1,2)
+bow_tie.add_edge(3,4)
+bow_tie.name(new = "bow_tie")
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
