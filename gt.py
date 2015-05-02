@@ -980,10 +980,10 @@ def is_chromatic_index_critical(g):
     return True
 
 #not in properties list
-#connected and alpha(g-e) > alpha(g) for *every* edge g
+#alpha(g-e) > alpha(g) for *every* edge g
 def is_alpha_critical(g):
-    if not g.is_connected():
-        return False
+    #if not g.is_connected():
+        #return False
     alpha = independence_number(g)
     for e in g.edges():
         gc = copy(g)
