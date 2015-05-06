@@ -92,6 +92,21 @@ def fractional_alpha(g):
 
     return p.solve()
 
+def fractional_covering(g):
+    if len(g.vertices()) == 0:
+        return 0
+    p = MixedIntegerLinearProgram(maximization=False)
+    x = p.new_variable(nonnegative=True)
+    p.set_objective(sum(x[v] for v in g.vertices()))
+
+    for v in g.vertices():
+        p.add_constraint(x[v], min=1)
+
+    for (u,v) in g.edge_iterator(labels=False):
+        p.add_constraint(x[u] + x[v], min=1)
+
+    return p.solve()
+
 @memoized
 def lovasz_theta(g):
     import cvxopt.base
@@ -544,7 +559,7 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen, card_independence_irreducible_part, critical_independence_number, card_KE_part]
+efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen, card_independence_irreducible_part, critical_independence_number, card_KE_part, fractional_covering]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num, independent_dominating_set_number]
 
