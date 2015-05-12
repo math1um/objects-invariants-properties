@@ -1557,7 +1557,7 @@ for s in L:
 
 #class 0 pebbling graphs
 import pickle, os, os.path
-class0graphs_dict = pickle.load(open(os.environ['HOME'] + "/conjecturing/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
+class0graphs_dict = pickle.load(open(os.environ['HOME'] + "/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
 class0graphs = []
 for d in class0graphs_dict:
     g = Graph(class0graphs_dict[d])
@@ -1649,7 +1649,7 @@ def find_coextensive_properties(objects, properties):
 
 #load graph property data dictionary, if one exists
 try:
-    graph_property_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_property_data.pickle', 'rb')
+    graph_property_file = open(os.environ['HOME'] +'/objects-invariants-properties/graph_property_data.pickle', 'rb')
 except IOError:
     print "can't load graph properties pickle file"
     graph_property_data = {}
@@ -1663,7 +1663,7 @@ else:
 def pickle_graph_property_data():
     #try to open existing pickled dictionary file, else initialize empty one
     try:
-        graph_property_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_property_data.pickle', 'rb')
+        graph_property_file = open(os.environ['HOME'] +'/objects-invariants-properties/graph_property_data.pickle', 'rb')
     except IOError:
         print "can't load properties pickle file"
         graph_property_data = {}
@@ -1691,14 +1691,14 @@ def pickle_graph_property_data():
         graph_property_data[g.name()] = prop_value_dict
 
     #pickle updated property dictionary
-    output = open(os.environ['HOME'] + "/conjecturing/objects-invariants-properties/graph_property_data.pickle","w")
+    output = open(os.environ['HOME'] + "/objects-invariants-properties/graph_property_data.pickle","w")
     pickle.dump(graph_property_data, output)
     output.close()
     print "DONE"
 
 #load graph invariant data dictionary, if one exists
 try:
-    graph_invariant_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
+    graph_invariant_file = open(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
 except IOError:
     print "can't load graph invariant pickle file"
     graph_invariant_data = {}
@@ -1712,7 +1712,7 @@ else:
 def pickle_graph_invariant_data():
     #try to open existing pickled dictionary file, else initialize empty one
     try:
-        graph_invariant_file = open(os.environ['HOME'] +'/conjecturing/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
+        graph_invariant_file = open(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
     except IOError:
         print "can't load invariant pickle file"
         graph_invariant_data = {}
