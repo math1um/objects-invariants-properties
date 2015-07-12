@@ -44,6 +44,24 @@ def function_index(l, f):
     """
     return [t.__name__ for t in l].index(f.__name__)
 
+#check that a set extends to a maximum independent set
+def check_independence_extension(g,S):
+    V = g.vertices()
+    alpha = independence_number(g)
+    #print alpha
+
+    if not S.issubset(Set(V)) or not g.is_independent_set(S):
+        return False
+
+    N = neighbors_set(g,S)
+    X = [v for v in V if v not in S and v not in N]
+    h = g.subgraph(X)
+    alpha_h = independence_number(h)
+    #print alpha_h, len(S)
+
+    return (alpha == alpha_h + len(S))
+
+
 #GRAPH INVARIANTS
 
 def domination_number(g):
