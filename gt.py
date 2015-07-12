@@ -846,6 +846,10 @@ def has_empty_KE_part(g):
             return False
     return True
 
+def is_bicritical(g):
+    return has_empty_KE_part(g)
+
+
 # Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
     return chromatic_index(g) == max(g.degree())
