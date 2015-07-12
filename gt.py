@@ -1558,7 +1558,10 @@ for s in L:
 
 #class 0 pebbling graphs
 import pickle, os, os.path
-class0graphs_dict = pickle.load(open(os.environ['HOME'] + "/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
+try:
+    class0graphs_dict = pickle.load(open(os.environ['HOME'] + "/objects-invariants-properties/class0graphs_dictionary.pickle","r"))
+except:
+    class0graphs_dict = {}
 class0graphs = []
 for d in class0graphs_dict:
     g = Graph(class0graphs_dict[d])
