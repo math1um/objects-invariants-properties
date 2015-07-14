@@ -61,6 +61,27 @@ def check_independence_extension(g,S):
 
     return (alpha == alpha_h + len(S))
 
+#find and save names of all alpha critical graphs of given order
+def find_alpha_critical_graphs(order):
+    graphgen = graphs(order)
+    count = 0
+    alpha_critical_name_list = []
+    while True:
+        try:
+            g = graphgen.next()
+        except StopIteration:
+            break
+
+        if g.is_connected():
+            count += 1
+            if is_alpha_critical(g):
+                print "current connected count = {}".format(count)
+                print g.graph6_string()
+                alpha_critical_name_list.append(g.graph6_string())
+    s = "alpha_critical_name_list_{}".format(order)
+    save(alpha_critical_name_list, s)
+    return alpha_critical_name_list
+
 
 #GRAPH INVARIANTS
 
