@@ -101,6 +101,51 @@ def find_alpha_critical_graphs(order):
     save(alpha_critical_name_list, s)
     return alpha_critical_name_list
 
+#ALPHA APPROXIMATIONS
+
+#finds independent sets of size i in g unioned with their neighborhoods.
+#return LIST of closed neighborhood SETS
+def find_lower_bound_sets(g, i):
+    V = g.vertices()
+    #print V
+    lowersets = []
+
+    for S in Subsets(Set(V),i):
+        #print S
+        if g.is_independent_set(S):
+            #print "in loop"
+            T = Set(closed_neighborhood(g,list(S)))
+            if T not in Set(lowersets):
+                lowersets.append(T)
+    return lowersets
+
+def alpha_lower_approximation(g, i):
+    n = g.order()
+
+
+    LP = MixedIntegerLinearProgram(maximization=False)
+    x = LP.new_variable(nonnegative=True)
+
+    # We define the objective
+    LP.set_objective(sum([x[v] for v in g]))
+
+    # For any subset, we define a constraint
+    for j in range(1,i+1):
+        for S in find_lower_bound_sets(g, j):
+            #print S, S.cardinality()
+
+            LP.add_constraint(sum([x[k] for k in S]), min = j)
+
+    LP.solve()
+
+    #return LP
+
+    x_sol = LP.get_values(x)
+    print x_sol
+    return sum(x_sol.values())
+
+
+
 
 #GRAPH INVARIANTS
 
