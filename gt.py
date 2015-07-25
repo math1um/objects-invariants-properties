@@ -145,8 +145,27 @@ def alpha_lower_approximation(g, i):
 
 #HEURISTIC ALGORITHMS
 
-#takes vertex of min degree, adds it to max ind set until no vertices left
+#takes vertex of max degree, deletes so long as degree > 0, retuens remaining ind set
+def MAXINE_independence_heuristic(g):
+    V = g.vertices()
+    h = g.subgraph(V)
+    delta = max(h.degree())
 
+    while delta > 0:
+        #print "V is {}".format(V)
+        #print "h vertices = {}, h.degree = {}".format(h.vertices(),h.degree())
+
+        max_degree_vertex = V[h.degree().index(delta)]
+        #print "max_degree_vertex = {}".format(max_degree_vertex)
+        #print "h.neighbors(max_degree_vertex) = {}".format(h.neighbors(max_degree_vertex))
+        V.remove(max_degree_vertex)
+        h = g.subgraph(V)
+        delta = max(h.degree())
+        print "delta = {}".format(delta)
+
+    return len(V)
+
+#takes vertex of min degree, adds it to max ind set until no vertices left
 def MIN_independence_heuristic(g):
     V = g.vertices()
     I = []
