@@ -122,7 +122,6 @@ def find_lower_bound_sets(g, i):
 def alpha_lower_approximation(g, i):
     n = g.order()
 
-
     LP = MixedIntegerLinearProgram(maximization=False)
     x = LP.new_variable(nonnegative=True)
 
@@ -144,7 +143,25 @@ def alpha_lower_approximation(g, i):
     print x_sol
     return sum(x_sol.values())
 
+#HEURISTIC ALGORITHMS
 
+#takes vertex of min degree, adds it to max ind set until no vertices left
+
+def MIN_independence_heuristic(g):
+    V = g.vertices()
+    I = []
+    while V != []:
+        #print "V is {}".format(V)
+        h = g.subgraph(V)
+        #print "h vertices = {}, h.degree = {}".format(h.vertices(),h.degree())
+        delta = min(h.degree())
+        #print "delta = {}".format(delta)
+        min_degree_vertex = V[h.degree().index(delta)]
+        #print "min_degree_vertex = {}".format(min_degree_vertex)
+        I.append(min_degree_vertex)
+        V = [v for v in V if v not in closed_neighborhood(h, min_degree_vertex)]
+        #break
+    return len(I)
 
 
 #GRAPH INVARIANTS
@@ -1290,6 +1307,7 @@ invariants_plus = invariants + invariants_from_properties
 
 #GRAPH OBJECTS
 
+p3 = graphs.PathGraph(3)
 
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
