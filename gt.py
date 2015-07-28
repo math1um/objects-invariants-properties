@@ -69,20 +69,20 @@ def find_all_removable_independent_sets(g,i):
 
     next = find_first_removeable_independent_set(g,i)
     I = I.union(next)
-    print "first I = {}".format(I)
-    print closed_neighborhood(g,list(I))
+    #print "first I = {}".format(I)
+    #print closed_neighborhood(g,list(I))
     #Vh = [v for v in V if v not in closed_neighborhood(g,list(I))]
     #print "Vh = {}".format(Vh)
 
     while next.cardinality() > 0:
         Vh = [v for v in V if v not in closed_neighborhood(g,list(I))]
-        print "Vh = {}".format(Vh)
+        #print "Vh = {}".format(Vh)
         if len(Vh) > 0:
             h = g.subgraph(Vh)
             next = find_first_removeable_independent_set(h,i)
-            print "next = {}".format(next)
+            #print "next = {}".format(next)
             I = I.union(next)
-            print "I = {}".format(I)
+            #print "I = {}".format(I)
         else:
             next = Set([])
 
