@@ -47,6 +47,49 @@ def function_index(l, f):
 
 #GRAPH UTILITIES
 
+#find first i element independent set I with alpha(G[N[I]]) = |I|
+def find_first_removeable_independent_set(g, i):
+    V = g.vertices()
+    #print V
+
+    for S in Subsets(Set(V),i):
+        #print S
+        if g.is_independent_set(S):
+            #print "in loop"
+            T = Set(closed_neighborhood(g,list(S)))
+            alpha = independence_number(g.subgraph(T))
+            if alpha == i:
+                return S
+    return Set([])
+
+#iteratively finds removeable sets of size i until no more can be found
+def find_all_removable_independent_sets(g,i):
+    V = g.vertices()
+    I = Set([])
+
+    next = find_first_removeable_independent_set(g,i)
+    I = I.union(next)
+    print "first I = {}".format(I)
+    print closed_neighborhood(g,list(I))
+    #Vh = [v for v in V if v not in closed_neighborhood(g,list(I))]
+    #print "Vh = {}".format(Vh)
+
+    while next.cardinality() > 0:
+        Vh = [v for v in V if v not in closed_neighborhood(g,list(I))]
+        print "Vh = {}".format(Vh)
+        if len(Vh) > 0:
+            h = g.subgraph(Vh)
+            next = find_first_removeable_independent_set(h,i)
+            print "next = {}".format(next)
+            I = I.union(next)
+            print "I = {}".format(I)
+        else:
+            next = Set([])
+
+    return I
+
+
+
 #finds independent sets of size i in g unioned with their neighborhoods.
 #return LIST of closed neighborhood SETS
 def find_lower_bound_sets(g, i):
