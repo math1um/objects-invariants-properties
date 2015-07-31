@@ -144,6 +144,14 @@ def find_alpha_critical_graphs(order):
     save(alpha_critical_name_list, s)
     return alpha_critical_name_list
 
+#tests whether a sequence is the degree sequence of some graph
+def is_degree_sequence(L):
+    try:
+        graphs.DegreeSequence(L)
+    except:
+        return False
+    return True
+
 #ALPHA APPROXIMATIONS
 
 #finds independent sets of size i in g unioned with their neighborhoods.
