@@ -90,6 +90,49 @@ def find_all_removable_independent_sets(g,i):
 
 
 
+#find first i element independent set I with alpha(G[N[I]]) = |I|
+def find_first_removeable_independent_set(g, i):
+    V = g.vertices()
+    #print V
+
+    for S in Subsets(Set(V),i):
+        #print S
+        if g.is_independent_set(S):
+            #print "in loop"
+            T = Set(closed_neighborhood(g,list(S)))
+            alpha = independence_number(g.subgraph(T))
+            if alpha == i:
+                return S
+    return Set([])
+
+#iteratively finds removeable sets of size i until no more can be found
+def find_all_removable_independent_sets(g,i):
+    V = g.vertices()
+    I = Set([])
+
+    next = find_first_removeable_independent_set(g,i)
+    I = I.union(next)
+    #print "first I = {}".format(I)
+    #print closed_neighborhood(g,list(I))
+    #Vh = [v for v in V if v not in closed_neighborhood(g,list(I))]
+    #print "Vh = {}".format(Vh)
+
+    while next.cardinality() > 0:
+        Vh = [v for v in V if v not in closed_neighborhood(g,list(I))]
+        #print "Vh = {}".format(Vh)
+        if len(Vh) > 0:
+            h = g.subgraph(Vh)
+            next = find_first_removeable_independent_set(h,i)
+            #print "next = {}".format(next)
+            I = I.union(next)
+            #print "I = {}".format(I)
+        else:
+            next = Set([])
+
+    return I
+
+
+
 #finds independent sets of size i in g unioned with their neighborhoods.
 #return LIST of closed neighborhood SETS
 def find_lower_bound_sets(g, i):
@@ -681,6 +724,66 @@ def brinkmann_steffen(g):
 #cardinality of the automorphism group of the graph
 def order_automorphism_group(g):
     return g.automorphism_group(return_group=False, order=True)
+
+def alpha_critical_optimum(g, alpha_critical_names):
+
+    n = g.order()
+    V = g.vertices()
+    #g.show()
+
+    alpha_critical_graph_names = []
+
+    #get alpha_critical graphs with order <= n
+    for name in alpha_critical_names:
+        h = Graph(name)
+        if h.order() <= n:
+            alpha_critical_graph_names.append(h.graph6_string())
+
+    #print alpha_critical_graphs
+
+    LP = MixedIntegerLinearProgram(maximization=True)
+    b = LP.new_variable(nonnegative=True)
+
+    # We define the objective
+    LP.set_objective(sum([b[v] for v in g]))
+
+    # For any edge, we define a constraint
+    for (u,v) in g.edges(labels=None):
+        LP.add_constraint(b[u]+b[v],max=1)
+        #LP.add_constraint(b[u]+b[v],min=1)
+
+    #search through all subsets of g with order >= 3
+    #and look for *any* subgraph isomorphic to an alpha critical graph
+    #for any match we define a constraint
+
+    i = 3
+    while i <= n:
+        SS = Subsets(Set(V),i)
+        for S in SS:
+            L = [g6 for g6 in alpha_critical_graph_names if Graph(g6).order() == i]
+            #print L
+            for g6 in L:
+                h = Graph(g6)
+                if g.subgraph(S).subgraph_search(h, induced=False):
+
+                    #print S
+                    #add constraint
+                    alpha = independence_number(h)
+                    #print h.graph6_string(), alpha
+                    LP.add_constraint(sum([b[j] for j in S]), max = alpha, name = h.graph6_string())
+        i = i + 1
+
+    #for c in LP.constraints():
+        #print c
+
+    # The .solve() functions returns the objective value
+    LP.solve()
+
+    #return LP
+
+    b_sol = LP.get_values(b)
+    return b_sol, sum(b_sol.values())
+
 
 ###several invariants and auxiliary functions related to the Independence Decomposition Theorem
 
