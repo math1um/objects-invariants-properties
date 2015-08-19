@@ -788,6 +788,7 @@ def alpha_critical_optimum(g, alpha_critical_names):
 ###several invariants and auxiliary functions related to the Independence Decomposition Theorem
 
 #finds all vertices with weight 1 in some max weighted stable set with wieghts in {0,1,1/2}
+#had problem that LP solver has small numerical errors, fixed with kludgy if condition
 def find_stable_ones_vertices(g):
     F = []
     alpha_f = fractional_alpha(g)
@@ -795,7 +796,7 @@ def find_stable_ones_vertices(g):
         gc = copy(g)
         gc.delete_vertices(closed_neighborhood(gc, v))
         alpha_f_prime = fractional_alpha(gc)
-        if alpha_f == alpha_f_prime + 1:
+        if abs(alpha_f - alpha_f_prime - 1) < .01:
             F.append(v)
     return F
 
