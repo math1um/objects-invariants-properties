@@ -1688,11 +1688,11 @@ except:
     print "couldn't load dc1024_g6string.sobj"
 
 try:
-    s = load("dc2064_g6string.sobj")
-    dc2064 = Graph(s)
-    dc2064.name(new="dc2064")
+    s = load("dc2048_g6string.sobj")
+    dc2048 = Graph(s)
+    dc2048.name(new="dc2048")
 except:
-    print "couldn't load dc2064_g6string.sobj"
+    print "couldn't load dc2048_g6string.sobj"
 
 #graph from delavina's jets paper
 starfish = Graph('N~~eeQoiCoM?Y?U?F??')
