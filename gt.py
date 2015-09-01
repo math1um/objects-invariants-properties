@@ -1793,6 +1793,13 @@ k10.name(new="k10")
 c60 = graphs.BuckyBall()
 c60.name(new="c60")
 
+#moser spindle
+moser = Graph('Fhfco')
+moser.name(new = "moser")
+
+golomb = Graph("I?C]dPcww")
+golomb.name(new = "golomb")
+
 edge_critical_5=graphs.CycleGraph(5)
 edge_critical_5.add_edge(0,3)
 edge_critical_5.add_edge(1,4)
