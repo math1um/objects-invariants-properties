@@ -1797,6 +1797,10 @@ c60.name(new="c60")
 moser = Graph('Fhfco')
 moser.name(new = "moser")
 
+#Holt graph is smallest graph which is edge-transitive but not arc-transitive
+holt = graphs.HoltGraph()
+holt.name(new = "holt")
+
 golomb = Graph("I?C]dPcww")
 golomb.name(new = "golomb")
 
