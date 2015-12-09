@@ -1380,6 +1380,9 @@ def is_pebbling_class0(g):
 def girth_greater_than_2log(g):
     return bool(g.girth() > 2*log(g.order(),2))
 
+def szekeres_wilf_equals_chromatic_number(g):
+    return szekeres_wilf(g) == g.chromatic_number()
+
 
 def localise(f):
     """
@@ -1776,6 +1779,9 @@ k4.name(new="k4")
 
 k5 = graphs.CompleteGraph(5)
 k5.name(new="k5")
+
+k6 = graphs.CompleteGraph(6)
+k6.name(new="k6")
 
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
