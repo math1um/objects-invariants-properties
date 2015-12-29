@@ -62,6 +62,7 @@ def find_first_removeable_independent_set(g, i):
                 return S
     return Set([])
 
+
 #iteratively finds removeable sets of size i until no more can be found
 def find_all_removable_independent_sets(g,i):
     V = g.vertices()
@@ -236,6 +237,23 @@ def alpha_lower_approximation(g, i):
     x_sol = LP.get_values(x)
     print x_sol
     return sum(x_sol.values())
+
+#input = graph g
+#output = bipartite graph with twice as many nodes and edges
+#new nodes are labeled n to 2n-1
+#assumes nodes in g are labeled [0..n-1]
+#same as cartesian product with k2, but output labeling is guarnateed to be integers
+def make_bidouble_graph(g):
+    n = g.order()
+    V = g.vertices()
+    gdub = Graph(2*n)
+    #print "gdub order = {}".format(gdub.order())
+
+    for (i,j) in g.edges(labels = False):
+        #print (i,j)
+        gdub.add_edge(i,j+n)
+        gdub.add_edge(j,i+n)
+    return gdub
 
 #HEURISTIC ALGORITHMS
 
