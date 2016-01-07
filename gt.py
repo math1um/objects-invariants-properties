@@ -1372,16 +1372,26 @@ def is_twin_free(g):
     return not has_twin(g)
 
 #returns twin pair (v,w) if one exists, else returns None
+#can't be adjacent
 def find_twin(g):
 
     V = g.vertices()
-    D = g.distance_all_pairs()
     for v in V:
+        Nv = set(g.neighbors(v))
         for w in V:
-            if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
+            Nw = set(g.neighbors(w))
+            if v not in Nw and Nv == Nw:
                 return (v,w)
     return None
 
+def find_neighbor_twins(g):
+    V = g.vertices()
+    for v in V:
+        Nv = g.neighbors(v)
+        for w in Nv:
+            if set(closed_neighborhood(g,v)) == set(closed_neighborhood(g,w)):
+                return (v,w)
+    return None
 
 def is_cycle(g):
     return g.is_isomorphic(graphs.CycleGraph(g.order()))
