@@ -1393,6 +1393,35 @@ def find_neighbor_twins(g):
                 return (v,w)
     return None
 
+#given graph g and subset S, looks for any neighbor twin of any vertex in T
+#if result = T, then no twins, else the result is maximal, but not necessarily unique
+def find_neighbor_twin(g, T):
+    gT = g.subgraph(T)
+    for v in T:
+        condition = False
+        Nv = set(g.neighbors(v))
+        #print "v = {}, Nv = {}".format(v,Nv)
+        NvT = set(gT.neighbors(v))
+        for w in Nv:
+            NwT = set(g.neighbors(w)).intersection(set(T))
+            if w not in T and NvT.issubset(NwT):
+                twin = w
+                T.append(w)
+                condition = True
+                #print "TWINS: v = {}, w = {}, sp3 = {}".format(v,w,sp3)
+                break
+        if condition == True:
+            break
+
+#if result = T, then no twins, else the result is maximal, but not necessarily unique
+def iterative_neighbor_twins(g, T):
+    T2 = copy(T)
+    find_neighbor_twin(g, T)
+    while T2 != T:
+        T2 = copy(T)
+        find_neighbor_twin(g, T)
+    return T
+
 def is_cycle(g):
     return g.is_isomorphic(graphs.CycleGraph(g.order()))
 
