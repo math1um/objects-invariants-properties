@@ -2077,11 +2077,11 @@ def update_graph_property_data():
         print "can't load properties sobj file"
         graph_property_data = {}
 
-
-
     #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
     for g in graph_objects:
         print g.name()
+        if g.name not in graph_property_data.keys():
+            graph_property_data[g.name()] = {}
 
         #check for property key, if it exists load the current dictionary, if not initialize an empty dictionary for property
         for prop in properties:
