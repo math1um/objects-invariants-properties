@@ -359,40 +359,6 @@ def fractional_covering(g):
     return p.solve()
 
 
-def lovasz_theta(g):
-    import cvxopt.base
-    import cvxopt.solvers
-
-    cvxopt.solvers.options['show_progress'] = False
-    cvxopt.solvers.options['abstol'] = float(1e-10)
-    cvxopt.solvers.options['reltol'] = float(1e-10)
-
-    gc = g.complement()
-    n = gc.order()
-    m = gc.size()
-
-    if n == 1:
-        return 1.0
-
-    #the definition of Xrow assumes that the vertices are integers from 0 to n-1, so we relabel the graph
-    gc.relabel()
-
-    d = m + n
-    c = -1 * cvxopt.base.matrix([0.0]*(n-1) + [2.0]*(d-n))
-    Xrow = [i*(1+n) for i in xrange(n-1)] + [b+a*n for (a, b) in gc.edge_iterator(labels=False)]
-    Xcol = range(n-1) + range(d-1)[n-1:]
-    X = cvxopt.base.spmatrix(1.0, Xrow, Xcol, (n*n, d-1))
-
-    for i in xrange(n-1):
-        X[n*n-1, i] = -1.0
-
-    sol = cvxopt.solvers.sdp(c, Gs=[-X], hs=[-cvxopt.base.matrix([0.0]*(n*n-1) + [-1.0], (n,n))])
-    v = 1.0 + cvxopt.base.matrix(-c, (1, d-1)) * sol['x']
-
-    # TODO: Rounding here is a total hack, sometimes it can come in slightly
-    # under the analytical answer, for example, 2.999998 instead of 3, which
-    # screws up the floor() call when checking difficult graphs.
-    return round(v[0], 3)
 
 def cvetkovic(g):
     eigenvalues = g.spectrum()
@@ -872,7 +838,7 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen, card_independence_irreducible_part, critical_independence_number, card_KE_part, fractional_covering]
+efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen, card_independence_irreducible_part, critical_independence_number, card_KE_part, fractional_covering]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num, independent_dominating_set_number]
 
@@ -1187,13 +1153,13 @@ def diameter_equals_two(g):
     return g.diameter() == 2
 
 def has_lovasz_theta_equals_alpha(g):
-    if lovasz_theta(g) == independence_number(g):
+    if g.lovasz_theta() == independence_number(g):
         return True
     else:
         return False
 
 def has_lovasz_theta_equals_cc(g):
-    if lovasz_theta(g) == clique_covering_number(g):
+    if g.lovasz_theta() == clique_covering_number(g):
         return True
     else:
         return False
