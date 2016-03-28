@@ -358,7 +358,7 @@ def fractional_covering(g):
 
     return p.solve()
 
-@memoized
+
 def lovasz_theta(g):
     import cvxopt.base
     import cvxopt.solvers
@@ -436,7 +436,7 @@ def resistance_distance_matrix(g):
             R[i,j] = X[i,i] + X[j,j] - 2*X[i,j]
     return R
 
-@memoized
+
 def kirchhoff_index(g):
     R = resistance_distance_matrix(g)
     return .5*sum(sum(R))
@@ -450,21 +450,21 @@ def largest_singular_value(g):
 def independence_number(g):
     return g.independent_set(value_only=True)
 
-@memoized
+
 def chromatic_index(g):
     if g.size() == 0:
         return 0
     import sage.graphs.graph_coloring
     return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
 
-@memoized
+
 def chromatic_num(g):
     return g.chromatic_number()
 
 def card_max_cut(g):
     return g.max_cut(value_only=True)
 
-@memoized
+
 def clique_covering_number(g):
     # Finding the chromatic number of the complement of a fullerene
     # is extremely slow, even when using MILP as the algorithm.
@@ -690,11 +690,11 @@ def average_distance(g):
 def card_pendants(g):
     return sum([x for x in g.degree() if x == 1])
 
-@memoized
+
 def vertex_con(g):
     return g.vertex_connectivity()
 
-@memoized
+
 def edge_con(g):
     return g.edge_connectivity()
 
@@ -1213,7 +1213,7 @@ def is_locally_connected(g):
                 return False
     return True
 
-@memoized
+
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
     g = g.copy()
@@ -1467,7 +1467,7 @@ is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
 
 #old versioncted), can't seem to memoize that
-@memoized
+
 def is_locally_two_connected(g):
     V = g.vertices()
     for v in V:
