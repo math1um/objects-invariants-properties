@@ -2086,9 +2086,9 @@ def update_graph_property_data():
         #check for property key, if it exists load the current dictionary, if not initialize an empty dictionary for property
         for prop in properties:
             try:
-                graph_property_data[g.name()][prop.func_name]
+                graph_property_data[g.name()][prop.__name__]
             except KeyError:
-                graph_property_data[g.name()][prop.func_name] = prop(g)
+                graph_property_data[g.name()][prop.__name__] = prop(g)
 
     save(graph_property_data, "graph_property_data.sobj")
     print "DONE"
