@@ -2059,52 +2059,37 @@ def update_graph_property_data():
     save(graph_property_data, "graph_property_data.sobj")
     print "DONE"
 
-#load graph invariant data dictionary, if one exists
+#load graph property data dictionary, if one exists
 try:
-    graph_invariant_file = open(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
+    graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
+    print "loaded graph properties pickle file"
 except IOError:
-    print "can't load graph invariant pickle file"
+    print "can't load graph invariant sobj file"
     graph_invariant_data = {}
-else:
-    graph_invariant_data = pickle.load(graph_invariant_file)
-    graph_invariant_file.close()
-    print "loaded graph invariants pickle file"
 
 
 #this version will open existing data file, and update as needed
-def pickle_graph_invariant_data():
-    #try to open existing pickled dictionary file, else initialize empty one
+def update_graph_invariant_data():
+    #try to open existing sobj dictionary file, else initialize empty one
     try:
-        graph_invariant_file = open(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.pickle', 'rb')
+        graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
     except IOError:
-        print "can't load invariant pickle file"
+        print "can't load invariant sobj file"
         graph_invariant_data = {}
-    else:
-        graph_invariant_data = pickle.load(graph_invariant_file)
-        graph_invariant_file.close()
 
-    #check for graph key, if it exists load the current dictionary, if not use empty inv_value_dict as *default*
+    #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
     for g in graph_objects:
         print g.name()
-        inv_value_dict = graph_invariant_data.get(g.name(), {})
+        if g.name not in graph_invariant_data.keys():
+            graph_invariant_data[g.name()] = {}
 
-        #check for invariant key, if it exists load the current dictionary, if not initialize an empty dictionary for invariant
+        #check for property key, if it exists load the current dictionary, if not initialize an empty dictionary for property
         for inv in invariants:
-            value = inv(g)
-            #see if object *can* be pickled
             try:
-                pickle.dumps(value)
-            except TypeError:
-                print "could not pickle {} {}".format(g.name(),inv.__name__)
-            else:
-                inv_value_dict[inv.__name__] = value
+                graph_invariant_data[g.name()][inv.__name__]
+            except KeyError:
+                graph_invariant_data[g.name()][inv.__name__] = inv(g)
 
-        #add updated record to data file
-        graph_invariant_data[g.name()] = inv_value_dict
-
-    #pickle updated invariant dictionary
-    output = open(os.environ['HOME'] + "/conjecturing/objects-invariants-properties/graph_invariant_data.pickle","w")
-    pickle.dump(graph_property_data, output)
-    output.close()
+    save(graph_invariant_data, "graph_invariant_data.sobj")
     print "DONE"
 
