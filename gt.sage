@@ -1708,14 +1708,14 @@ dc64 = Graph(dc64_g6string)
 dc64.name(new="dc64")
 
 try:
-    s = load("dc1024_g6string.sobj")
+    s = load(os.environ['HOME'] +'/objects-invariants-properties/dc1024_g6string.sobj')
     dc1024 = Graph(s)
     dc1024.name(new="dc1024")
 except:
     print "couldn't load dc1024_g6string.sobj"
 
 try:
-    s = load("dc2048_g6string.sobj")
+    s = load(os.environ['HOME'] +'/objects-invariants-properties/dc2048_g6string.sobj')
     dc2048 = Graph(s)
     dc2048.name(new="dc2048")
 except:
@@ -2027,7 +2027,7 @@ def find_coextensive_properties(objects, properties):
 #load graph property data dictionary, if one exists
 try:
     graph_property_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_property_data.sobj')
-    print "loaded graph properties pickle file"
+    print "loaded graph properties data file"
 except IOError:
     print "can't load graph properties sobj file"
     graph_property_data = {}
@@ -2073,6 +2073,7 @@ def update_graph_invariant_data():
     #try to open existing sobj dictionary file, else initialize empty one
     try:
         graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
+        print "loaded graph invariants data file"
     except IOError:
         print "can't load invariant sobj file"
         graph_invariant_data = {}
