@@ -1709,6 +1709,7 @@ dc64.name(new="dc64")
 
 try:
     s = load(os.environ['HOME'] +'/objects-invariants-properties/dc1024_g6string.sobj')
+    print "loaded graph dc1024"
     dc1024 = Graph(s)
     dc1024.name(new="dc1024")
 except:
@@ -1716,6 +1717,7 @@ except:
 
 try:
     s = load(os.environ['HOME'] +'/objects-invariants-properties/dc2048_g6string.sobj')
+    print "loaded graph dc2048"
     dc2048 = Graph(s)
     dc2048.name(new="dc2048")
 except:
@@ -2035,7 +2037,7 @@ except IOError:
 
 
 #this version will open existing data file, and update as needed
-def update_graph_property_data():
+def update_graph_property_data(graph_objects,properties):
     #try to open existing sobj dictionary file, else initialize empty one
     try:
         graph_property_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_property_data.sobj')
@@ -2062,14 +2064,14 @@ def update_graph_property_data():
 #load graph property data dictionary, if one exists
 try:
     graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
-    print "loaded graph properties pickle file"
+    print "loaded graph invariants data file"
 except IOError:
     print "can't load graph invariant sobj file"
     graph_invariant_data = {}
 
 
 #this version will open existing data file, and update as needed
-def update_graph_invariant_data():
+def update_graph_invariant_data(graph_objects,invariants):
     #try to open existing sobj dictionary file, else initialize empty one
     try:
         graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
