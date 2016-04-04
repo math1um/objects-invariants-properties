@@ -78,10 +78,22 @@ def find_alpha_critical_graphs(order):
     every edge e in g. This looks at every graph of the given order, so this
     will be slow for any order larger than 8.
 
-    There is a unique alpha critical graph on 3 vertices::
+    There is a unique alpha critical graph on 3 and 4 vertices::
 
         sage: find_alpha_critical_graphs(3)
         ['Bw']
+        sage: find_alpha_critical_graphs(4)
+        ['C~']
+
+    There are two alpha critical graphs on 5 vertices::
+
+        sage: find_alpha_critical_graphs(5)
+        ['Dhc', 'D~{']
+
+    There are two alpha critical graphs on 6 vertices::
+
+        sage: find_alpha_critical_graphs(6)
+        ['E|OW', 'E~~w']
     """
     graphgen = graphs(order)
     count = 0
