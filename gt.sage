@@ -1518,6 +1518,29 @@ def has_Havel_Hakimi_property(g, v):
     return (min(g.degree(nv) for nv in g.neighbors(v)) >=
         max(g.degree(nnv) for nnv in g.vertices() if nnv != v and nnv not in g.neighbors(v)))
 
+def has_strong_Havel_Hakimi_property(g):
+    """
+    This function returns whether the graph g has the strong Havel-Hakimi property
+    as defined in [1]. A graph has the strong Havel-Hakimi property if in every
+    induced subgraph H of G, every vertex of maximum degree has the Havel-Hakimi
+    property.
+
+    [1] Graphs with the strong Havel–Hakimi property, M. Barrus, G. Molnar, Graphs
+        and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
+
+    The graph obtained by connecting two cycles of length 3 by a single edge has
+    the strong Havel-Hakimi property.
+    >>> has_strong_Havel_Hakimi_property(Graph('E{CW'))
+    True
+    """
+    for S in Subsets(g.vertices()):
+        if len(S)>2:
+            H = g.subgraph(S)
+            Delta = max_degree(H)
+            if any(not has_Havel_Hakimi_property(H, v) for v in S if H.degree(v) == Delta):
+                return False
+    return True
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
 
