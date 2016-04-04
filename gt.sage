@@ -1489,23 +1489,25 @@ def has_Havel_Hakimi_property(g, v):
     [1] Graphs with the strong Havel–Hakimi property, M. Barrus, G. Molnar, Graphs
         and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
 
-    Every vertex in a regular graph has the Havel-Hakimi property.
-    >>> P = graphs.PetersenGraph()
-    >>> for v in range(10): has_Havel_Hakimi_property(P,v)
-    True
-    True
-    True
-    True
-    True
-    True
-    True
-    True
-    True
-    True
-    >>> has_Havel_Hakimi_property(Graph([[0,1,2,3],lambda x,y: False]),0)
-    True
-    >>> has_Havel_Hakimi_property(graphs.CompleteGraph(5),0)
-    True
+    Every vertex in a regular graph has the Havel-Hakimi property::
+
+        sage: P = graphs.PetersenGraph()
+        sage: for v in range(10):
+        ....:     has_Havel_Hakimi_property(P,v)
+        True
+        True
+        True
+        True
+        True
+        True
+        True
+        True
+        True
+        True
+        sage: has_Havel_Hakimi_property(Graph([[0,1,2,3],lambda x,y: False]),0)
+        True
+        sage: has_Havel_Hakimi_property(graphs.CompleteGraph(5),0)
+        True
     """
     if max_degree(g) > g.degree(v): return False
 
@@ -1529,9 +1531,10 @@ def has_strong_Havel_Hakimi_property(g):
         and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
 
     The graph obtained by connecting two cycles of length 3 by a single edge has
-    the strong Havel-Hakimi property.
-    >>> has_strong_Havel_Hakimi_property(Graph('E{CW'))
-    True
+    the strong Havel-Hakimi property::
+
+        sage: has_strong_Havel_Hakimi_property(Graph('E{CW'))
+        True
     """
     for S in Subsets(g.vertices()):
         if len(S)>2:
@@ -1978,12 +1981,12 @@ The graph is a 108-regular graph on 220 vertices. The vertices correspond to the
 subsets of {1,...,12} and two such vertices are adjacent whenever the subsets
 intersect in exactly one element.
 
->>> haemers
-haemers: Graph on 220 vertices
->>> haemers.is_regular()
-True
->>> max(haemers.degree())
-108
+    sage: haemers
+    haemers: Graph on 220 vertices
+    sage: haemers.is_regular()
+    True
+    sage: max(haemers.degree())
+    108
 """
 haemers = Graph([Subsets(12,3), lambda s1,s2: len(s1.intersection(s2))==1])
 haemers.relabel()
