@@ -98,12 +98,7 @@ def find_alpha_critical_graphs(order):
     graphgen = graphs(order)
     count = 0
     alpha_critical_name_list = []
-    while True:
-        try:
-            g = graphgen.next()
-        except StopIteration:
-            break
-
+    for g in graphgen:
         if g.is_connected():
             count += 1
             if is_alpha_critical(g):
