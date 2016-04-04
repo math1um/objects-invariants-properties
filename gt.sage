@@ -1910,6 +1910,16 @@ bow_tie.add_edge(1,2)
 bow_tie.add_edge(3,4)
 bow_tie.name(new = "bow_tie")
 
+#Haemers graph
+#G is a 108-regular graph on 220 vertices. The vertices correspond to the 3-element
+#subsets of {1,...,12} and two such vertices are adjacent whenever the subsets
+#intersect in exactly one element. This graph was considered by Haemers, who showed
+#that alpha(G)=theta(G)<vartheta(G)
+haemers = Graph([Subsets(12,3), lambda s1,s2: len(s1.intersection(s2))==1])
+haemers.relabel()
+haemers.name(new="haemers")
+
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
@@ -2095,4 +2105,3 @@ def update_graph_invariant_data(graph_objects,invariants):
 
     save(graph_invariant_data, "graph_invariant_data.sobj")
     print "DONE"
-
