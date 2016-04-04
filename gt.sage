@@ -111,17 +111,28 @@ def is_degree_sequence(L):
 
 #ALPHA APPROXIMATIONS
 
-#finds independent sets of size i in g unioned with their neighborhoods.
-#return LIST of closed neighborhood SETS
 def find_lower_bound_sets(g, i):
+    """
+    Returns a list of independent sets of size i unioned with their neighborhoods.
+    Since this checks all subsets of size i, this is a potentially slow method!
+
+        sage: l = find_lower_bound_sets(graphs.CycleGraph(6),2)
+        sage: l
+        [{0, 1, 2, 3, 5},
+         {0, 1, 2, 3, 4, 5},
+         {0, 1, 3, 4, 5},
+         {0, 1, 2, 3, 4},
+         {0, 1, 2, 4, 5},
+         {1, 2, 3, 4, 5},
+         {0, 2, 3, 4, 5}]
+        sage: type(l[0])
+        <class 'sage.sets.set.Set_object_enumerated_with_category'>
+    """
     V = g.vertices()
-    #print V
     lowersets = []
 
     for S in Subsets(Set(V),i):
-        #print S
         if g.is_independent_set(S):
-            #print "in loop"
             T = Set(closed_neighborhood(g,list(S)))
             if T not in Set(lowersets):
                 lowersets.append(T)
