@@ -47,8 +47,15 @@ def function_index(l, f):
 
 #GRAPH UTILITIES
 
-#check that a set extends to a maximum independent set
 def check_independence_extension(g,S):
+    """
+    Returns True if the set S extends to a maximum independent set of the graph g.
+
+        sage: check_independence_extension(graphs.CycleGraph(6), Set([0,2]))
+        True
+        sage: check_independence_extension(graphs.CycleGraph(6), Set([0,3]))
+        False
+    """
     V = g.vertices()
     alpha = independence_number(g)
     #print alpha
