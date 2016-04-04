@@ -1479,6 +1479,45 @@ def has_leq_invariants(invar1, invar2, name=None):
 
     return comparator
 
+def has_Havel_Hakimi_property(g, v):
+    """
+    This function returns whether the vertex v in the graph g has the Havel-Hakimi
+    property as defined in [1]. A vertex has the Havel-Hakimi property if it has
+    maximum degree and the minimum degree of its neighbours is at least the maximum
+    degree of its non-neigbours.
+
+    [1] Graphs with the strong Havel–Hakimi property, M. Barrus, G. Molnar, Graphs
+        and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
+
+    Every vertex in a regular graph has the Havel-Hakimi property.
+    >>> P = graphs.PetersenGraph()
+    >>> for v in range(10): has_Havel_Hakimi_property(P,v)
+    True
+    True
+    True
+    True
+    True
+    True
+    True
+    True
+    True
+    True
+    >>> has_Havel_Hakimi_property(Graph([[0,1,2,3],lambda x,y: False]),0)
+    True
+    >>> has_Havel_Hakimi_property(graphs.CompleteGraph(5),0)
+    True
+    """
+    if max_degree(g) > g.degree(v): return False
+
+    #handle the case where the graph is an independent set
+    if len(g.neighbors(v)) == 0: return True
+
+    #handle the case where v is adjacent with all vertices
+    if len(g.neighbors(v)) == len(g.vertices()) - 1: return True
+
+    return (min(g.degree(nv) for nv in g.neighbors(v)) >=
+        max(g.degree(nnv) for nnv in g.vertices() if nnv != v and nnv not in g.neighbors(v)))
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
 
