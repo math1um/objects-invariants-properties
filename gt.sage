@@ -2117,7 +2117,7 @@ except IOError:
 
 
 #this version will open existing data file, and update as needed
-def update_graph_property_data(graph_objects,properties):
+def update_graph_property_data(new_objects,properties):
     #try to open existing sobj dictionary file, else initialize empty one
     try:
         graph_property_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_property_data.sobj')
@@ -2126,7 +2126,7 @@ def update_graph_property_data(graph_objects,properties):
         graph_property_data = {}
 
     #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
-    for g in graph_objects:
+    for g in new_objects:
         print g.name()
         if g.name not in graph_property_data.keys():
             graph_property_data[g.name()] = {}
@@ -2151,7 +2151,7 @@ except IOError:
 
 
 #this version will open existing data file, and update as needed
-def update_graph_invariant_data(graph_objects,invariants):
+def update_graph_invariant_data(new_objects,invariants):
     #try to open existing sobj dictionary file, else initialize empty one
     try:
         graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
@@ -2161,7 +2161,7 @@ def update_graph_invariant_data(graph_objects,invariants):
         graph_invariant_data = {}
 
     #check for graph key, if it exists load the current dictionary, if not use empty prop_value_dict as *default*
-    for g in graph_objects:
+    for g in new_objects:
         print g.name()
         if g.name not in graph_invariant_data.keys():
             graph_invariant_data[g.name()] = {}
