@@ -47,22 +47,6 @@ def function_index(l, f):
 
 #GRAPH UTILITIES
 
-#finds independent sets of size i in g unioned with their neighborhoods.
-#return LIST of closed neighborhood SETS
-def find_lower_bound_sets(g, i):
-    V = g.vertices()
-    #print V
-    lowersets = []
-
-    for S in Subsets(Set(V),i):
-        #print S
-        if g.is_independent_set(S):
-            #print "in loop"
-            T = Set(closed_neighborhood(g,list(S)))
-            if T not in Set(lowersets):
-                lowersets.append(T)
-    return lowersets
-
 #check that a set extends to a maximum independent set
 def check_independence_extension(g,S):
     V = g.vertices()
