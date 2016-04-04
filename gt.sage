@@ -107,8 +107,22 @@ def find_alpha_critical_graphs(order):
     save(alpha_critical_name_list, s)
     return alpha_critical_name_list
 
-#tests whether a sequence is the degree sequence of some graph
 def is_degree_sequence(L):
+    """
+    Returns True if the list L is the degree sequence of some graph.
+
+    Since a graph always contains at least two vertices of the same degree, a
+    list containing no duplicates cannot be a degree sequence::
+
+        sage: is_degree_sequence([i for i in range(8)])
+        False
+
+    A cycle has all degrees equal to two and exists for any order larger than
+    3, so a list of twos of length at least 3 is a degree sequence::
+
+        sage: is_degree_sequence([2]*10)
+        True
+    """
     try:
         graphs.DegreeSequence(L)
     except:
