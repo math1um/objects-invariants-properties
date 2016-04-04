@@ -71,8 +71,18 @@ def check_independence_extension(g,S):
 
     return (alpha == alpha_h + len(S))
 
-#find and save names of all alpha critical graphs of given order
 def find_alpha_critical_graphs(order):
+    """
+    Returns a list of the graph6 string of each of the alpha critical graphs of
+    the given order. A graph g is alpha critical if alpha(g-e) > alpha(g) for
+    every edge e in g. This looks at every graph of the given order, so this
+    will be slow for any order larger than 8.
+
+    There is a unique alpha critical graph on 3 vertices::
+
+        sage: find_alpha_critical_graphs(3)
+        ['Bw']
+    """
     graphgen = graphs(order)
     count = 0
     alpha_critical_name_list = []
@@ -85,8 +95,6 @@ def find_alpha_critical_graphs(order):
         if g.is_connected():
             count += 1
             if is_alpha_critical(g):
-                print "current connected count = {}".format(count)
-                print g.graph6_string()
                 alpha_critical_name_list.append(g.graph6_string())
     s = "alpha_critical_name_list_{}".format(order)
     save(alpha_critical_name_list, s)
