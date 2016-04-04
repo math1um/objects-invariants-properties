@@ -242,15 +242,71 @@ def MIN_independence_heuristic(g):
 #GRAPH INVARIANTS
 
 def domination_number(g):
+    """
+    Returns the domination number of the graph g, i.e., the size of a maximum
+    dominating set.
+
+    A complete graph is dominated by any of its vertices::
+
+        sage: domination_number(graphs.CompleteGraph(5))
+        1
+
+    A star graph is dominated by its central vertex::
+
+        sage: domination_number(graphs.StarGraph(5))
+        1
+
+    The domination number of a cycle of length n is the ceil of n/3.
+
+        sage: domination_number(graphs.CycleGraph(5))
+        2
+    """
     return g.dominating_set(value_only=True)
 
 def min_degree(g):
+    """
+    Returns the minimum of all degrees of the graph g.
+
+        sage: min_degree(graphs.CompleteGraph(5))
+        4
+        sage: min_degree(graphs.CycleGraph(5))
+        2
+        sage: min_degree(graphs.StarGraph(5))
+        1
+        sage: min_degree(graphs.CompleteBipartiteGraph(3,5))
+        3
+    """
     return min(g.degree())
 
 def max_degree(g):
+    """
+    Returns the maximum of all degrees of the graph g.
+
+        sage: max_degree(graphs.CompleteGraph(5))
+        4
+        sage: max_degree(graphs.CycleGraph(5))
+        2
+        sage: max_degree(graphs.StarGraph(5))
+        5
+        sage: max_degree(graphs.CompleteBipartiteGraph(3,5))
+        5
+    """
     return max(g.degree())
 
 def matching_number(g):
+    """
+    Returns the matching number of the graph g, i.e., the size of a maximum
+    matching. A matching is a set of independent edges.
+
+        sage: matching_number(graphs.CompleteGraph(5))
+        2
+        sage: matching_number(graphs.CycleGraph(5))
+        2
+        sage: matching_number(graphs.StarGraph(5))
+        1
+        sage: matching_number(graphs.CompleteBipartiteGraph(3,5))
+        3
+    """
     return int(g.matching(value_only=True, use_edge_labels=False))
 
 def residue(g):
