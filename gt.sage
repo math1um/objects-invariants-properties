@@ -1486,7 +1486,7 @@ def has_Havel_Hakimi_property(g, v):
     maximum degree and the minimum degree of its neighbours is at least the maximum
     degree of its non-neigbours.
 
-    [1] Graphs with the strong Havel–Hakimi property, M. Barrus, G. Molnar, Graphs
+    [1] Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs
         and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
 
     Every vertex in a regular graph has the Havel-Hakimi property::
@@ -1527,7 +1527,7 @@ def has_strong_Havel_Hakimi_property(g):
     induced subgraph H of G, every vertex of maximum degree has the Havel-Hakimi
     property.
 
-    [1] Graphs with the strong Havel–Hakimi property, M. Barrus, G. Molnar, Graphs
+    [1] Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs
         and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
 
     The graph obtained by connecting two cycles of length 3 by a single edge has
