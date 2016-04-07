@@ -2160,6 +2160,7 @@ except IOError:
 
 #this version will open existing data file, and update as needed
 def update_graph_property_data(new_objects,properties):
+    global graph_property_data
     #try to open existing sobj dictionary file, else initialize empty one
     try:
         graph_property_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_property_data.sobj')
@@ -2195,6 +2196,7 @@ except IOError:
 #this version will open existing data file, and update as needed
 def update_graph_invariant_data(new_objects,invariants):
     #try to open existing sobj dictionary file, else initialize empty one
+    global graph_invariant_data
     try:
         graph_invariant_data = load(os.environ['HOME'] +'/objects-invariants-properties/graph_invariant_data.sobj')
         print "loaded graph invariants data file"
