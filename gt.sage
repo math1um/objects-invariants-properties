@@ -2050,6 +2050,11 @@ pepper_residue_graph.add_edges([(0,v) for v in pepper_residue_graph.vertices() i
 pepper_residue_graph.relabel()
 pepper_residue_graph.name(new="pepper_residue_graph")
 
+"""
+The Barrus graph was suggested by Mike Barrus in "Havel-Hakimi residues of Unigraphs" (2012) as an example of a graph whose residue (2) is
+less than the independence number of any realization of the degree sequence. the degree sequence is [4^8,2]
+. """
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
