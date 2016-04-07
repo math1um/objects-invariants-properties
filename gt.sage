@@ -307,6 +307,24 @@ def eulerian_faces(g):
     m = g.size()
     return 2 - n + m
 
+def barrus_q(g):
+    """
+    If the degrees sequence is in non-increasing order, with index starting at 1,
+    barrus_q = max(k:d_k >= k)
+
+    Defined by M. Barrus in "Havel-Hakimi Residues of Unigraphs", 2012
+
+        sage: barrus_q(graphs.CompleteGraph(5))
+        4
+        sage: barrus_q(graphs.StarGraph(3))
+        1
+
+    """
+    Degrees = g.degree()
+    Degrees.sort()
+    Degrees.reverse()
+    return max(k for k in range(g.order()) if Degrees[k] >= (k+1)) + 1
+
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
