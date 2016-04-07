@@ -293,6 +293,20 @@ def max_degree(g):
     """
     return max(g.degree())
 
+def eulerian_faces(g):
+    """
+    Returns 2 - order + size, which is the number of faces if the graph is planar,
+    a consequence of Euler's Formula
+
+        sage: eulerian_faces(graphs.CycleGraph(5))
+        2
+        sage: eulerian_faces(graphs.DodecahedralGraph())
+        12
+    """
+    n = g.order()
+    m = g.size()
+    return 2 - n + m
+
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
