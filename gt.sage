@@ -1992,6 +1992,31 @@ haemers = Graph([Subsets(12,3), lambda s1,s2: len(s1.intersection(s2))==1])
 haemers.relabel()
 haemers.name(new="haemers")
 
+"""
+The Pepper residue graph was described by Ryan Pepper in personal communication.
+It is a graph which demonstrates that the residue is not monotone. The graph is
+constructed by taking the complete graph on 3 vertices and attaching a pendant
+vertex to each of its vertices, then taking two copies of this graph, adding a
+vertex and connecting it to all the pendant vertices. This vertex has degree
+sequence [6, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2] which gives residue equal to 4.
+By removing the central vertex with degree 6, you get a graph with degree
+sequence [3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1] which has residue equal to 5.
+
+    sage: pepper_residue_graph
+    pepper_residue_graph: Graph on 13 vertices
+    sage: sorted(pepper_residue_graph.degree(), reverse=True)
+    [6, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2]
+    sage: residue(pepper_residue_graph)
+    4
+    sage: residue(pepper_residue_graph.subgraph(vertex_property=lambda v:pepper_residue_graph.degree(v)<6))
+    5
+"""
+pepper_residue_graph = graphs.CompleteGraph(3)
+pepper_residue_graph.add_edges([(i,i+3) for i in range(3)])
+pepper_residue_graph = pepper_residue_graph.disjoint_union(pepper_residue_graph)
+pepper_residue_graph.add_edges([(0,v) for v in pepper_residue_graph.vertices() if pepper_residue_graph.degree(v)==1])
+pepper_residue_graph.relabel()
+pepper_residue_graph.name(new="pepper_residue_graph")
 
 #GRAPH LISTS
 
