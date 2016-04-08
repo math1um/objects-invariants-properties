@@ -101,6 +101,23 @@ def update_invariant_database(invariants, graphs, timeout=60):
     # close the connection
     conn.close()
 
+def store_invariant_value(invariant, graph, value, overwrite=False):
+    current = invariants_as_dict()
+    i_key = invariant.__name__
+    g_key = graph.canonical_label().graph6_string()
+
+    if not overwrite:
+        if g_key in current:
+            if i_key in current[g_key]:
+                if value!=current[g_key][i_key]:
+                    print "Stored value differs from provided value: {} vs. {}".format(current[g_key][i_key], value)
+                return
+
+    conn = get_connection()
+    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(i_key, g_key, float(value)))
+    conn.commit()
+    conn.close()
+
 def list_missing_invariants(invariants, graphs):
     # get the values which are already in the database
     current = invariants_as_dict()
@@ -162,6 +179,23 @@ def update_property_database(properties, graphs, timeout=60):
                     # the computation might have crashed
                     print "Computation of {} for {} failed!".format(prop.__name__, g.name())
     # close the connection
+    conn.close()
+
+def store_property_value(property, graph, value, overwrite=False):
+    current = properties_as_dict()
+    p_key = property.__name__
+    g_key = graph.canonical_label().graph6_string()
+
+    if not overwrite:
+        if g_key in current:
+            if p_key in current[g_key]:
+                if value!=current[g_key][p_key]:
+                    print "Stored value differs from provided value: {} vs. {}".format(current[g_key][p_key], value)
+                return
+
+    conn = get_connection()
+    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(p_key, g_key, bool(value)))
+    conn.commit()
     conn.close()
 
 def list_missing_properties(properties, graphs):
