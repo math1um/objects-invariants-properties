@@ -2052,23 +2052,17 @@ pepper_residue_graph.name(new="pepper_residue_graph")
 
 """
 The Barrus graph was suggested by Mike Barrus in "Havel-Hakimi residues of Unigraphs" (2012) as an example of a graph whose residue (2) is
-less than the independence number of any realization of the degree sequence. the degree sequence is [4^8,2].
+less than the independence number of any realization of the degree sequence. The degree sequence is [4^8,2].
+The realization is the one given by reversing the Havel-Hakimi process.
 
     sage: barrus_graph
-    haemers: Graph on 9 vertices
-the realization is the one given by reversing the Havel-Hakimi process
-    sage: barrus_graph.name(new = "barrus_graph")
     barrus_graph: Graph on 9 vertices
     sage: residue(barrus_graph)
     2
     sage: independence_number(barrus_graph)
     3
-    sage: residue(barrus_graph)
-    2
-    sage: independence_number(barrus_graph)
-    3
 """
-barrus_graph = Graph("HxNEG{W'")
+barrus_graph = Graph('HxNEG{W')
 barrus_graph.name(new = "barrus_graph")
 
 
