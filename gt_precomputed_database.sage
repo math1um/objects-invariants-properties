@@ -21,6 +21,7 @@ def create_tables(database=None):
     conn = get_connection(database)
     conn.execute("CREATE TABLE IF NOT EXISTS inv_values (invariant TEXT, graph TEXT, value FLOAT)")
     conn.execute("CREATE TABLE IF NOT EXISTS prop_values (property TEXT, graph TEXT, value BOOLEAN)")
+    conn.close()
 
 def invariants_as_dict(database=None):
     d = {}
