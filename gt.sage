@@ -2068,7 +2068,7 @@ the realization is the one given by reversing the Havel-Hakimi process
     sage: independence_number(barrus_graph)
     3
 """
-barrus_graph = Graph('HxNEG{W'")
+barrus_graph = Graph("HxNEG{W'")
 barrus_graph.name(new = "barrus_graph")
 
 
