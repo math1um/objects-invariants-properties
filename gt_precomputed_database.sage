@@ -101,6 +101,17 @@ def update_invariant_database(invariants, graphs, timeout=60):
     # close the connection
     conn.close()
 
+def list_missing_invariants(invariants, graphs):
+    # get the values which are already in the database
+    current = invariants_as_dict()
+
+    for inv in invariants:
+        for g in graphs:
+            g_key = g.canonical_label().graph6_string()
+            if g_key in current:
+                if inv.__name__ in current[g_key]:
+                    continue
+            print "{} for {} is missing.".format(inv.__name__, g.name())
 
 def compute_property_value(property, graph, computation_results):
     value = bool(property(graph))
@@ -152,3 +163,15 @@ def update_property_database(properties, graphs, timeout=60):
                     print "Computation of {} for {} failed!".format(prop.__name__, g.name())
     # close the connection
     conn.close()
+
+def list_missing_properties(properties, graphs):
+    # get the values which are already in the database
+    current = properties_as_dict()
+
+    for prop in properties:
+        for g in graphs:
+            g_key = g.canonical_label().graph6_string()
+            if g_key in current:
+                if prop.__name__ in current[g_key]:
+                    continue
+            print "{} for {} is missing.".format(prop.__name__, g.name())
