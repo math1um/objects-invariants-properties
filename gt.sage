@@ -1832,9 +1832,9 @@ difficult11.name(new="difficult11")
 c5k3=Graph('FheCG')
 c5k3.name(new="c5k3")
 
-#mycieskian of a triangle: CE to conj that chi <= max(clique, nu), chi=4, nu = clique = 3
-c3mycieski = Graph('FJnV?')
-c3mycieski.name(new="c3mycieski")
+#mycielskian of a triangle: CE to conj that chi <= max(clique, nu), chi=4, nu = clique = 3
+c3mycielski = Graph('FJnV?')
+c3mycielski.name(new="c3mycieski")
 
 #4th mycielskian of a triangle, CE to conj chi <= clique + girth, chi = 7, clique = girth = 3
 c3mycielski4 = Graph('~??~??GWkYF@BcuIsJWEo@s?N?@?NyB`qLepJTgRXkAkU?JPg?VB_?W[??Ku??BU_??ZW??@u???Bs???Bw???A??F~~_B}?^sB`o[MOuZErWatYUjObXkZL_QpWUJ?CsYEbO?fB_w[?A`oCM??DL_Hk??DU_Is??Al_Dk???l_@k???Ds?M_???V_?{????oB}?????o[M?????WuZ?????EUjO?????rXk?????BUJ??????EsY??????Ew[??????B`o???????xk???????FU_???????\\k????????|_????????}_????????^_?????????')
@@ -2056,13 +2056,23 @@ less than the independence number of any realization of the degree sequence. the
 
     sage: barrus_graph
     haemers: Graph on 9 vertices
+the realization is the one given by reversing the Havel-Hakimi process
+    sage: barrus_graph.name(new = "barrus_graph")
+    barrus_graph: Graph on 9 vertices
+    sage: residue(barrus_graph)
+    2
+    sage: independence_number(barrus_graph)
+    3
     sage: residue(barrus_graph)
     2
     sage: independence_number(barrus_graph)
     3
 """
-barrus_graph = Graph('HxNEG{W')
+barrus_graph = Graph('HxNEG{W'")
 barrus_graph.name(new = "barrus_graph")
+
+
+
 
 #GRAPH LISTS
 
@@ -2101,7 +2111,7 @@ class0small = [g for g in class0graphs if g.order() < 30]
 c5=graphs.CycleGraph(5)
 c5.name(new = "c5")
 
-graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), s3, ryan3, k10, graphs.MycielskiGraph(5), c3mycieski, c3mycielski4, alon_seymour, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), graphs.MeredithGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph] + alpha_critical_graphs + chromatic_index_critical_7 + class0small
+graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), s3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, c3mycielski4, alon_seymour, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), graphs.MeredithGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph, barrus_graph] + alpha_critical_graphs + chromatic_index_critical_7 + class0small
 
 chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus]
 
