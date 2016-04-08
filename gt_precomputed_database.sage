@@ -12,17 +12,19 @@ EXAMPLE::
 
 import sqlite3
 
-def get_connection():
-    return sqlite3.connect("gt_precomputed_database.db")
+def get_connection(database=None):
+    if database is None:
+        database = "gt_precomputed_database.db"
+    return sqlite3.connect(database)
 
-def create_tables():
-    conn = get_connection()
+def create_tables(database=None):
+    conn = get_connection(database)
     conn.execute("CREATE TABLE IF NOT EXISTS inv_values (invariant TEXT, graph TEXT, value FLOAT)")
     conn.execute("CREATE TABLE IF NOT EXISTS prop_values (property TEXT, graph TEXT, value BOOLEAN)")
 
-def invariants_as_dict():
+def invariants_as_dict(database=None):
     d = {}
-    conn = get_connection()
+    conn = get_connection(database)
     result = conn.execute("SELECT invariant,graph,value FROM inv_values")
     for (i,g,v) in result:
         if g in d:
@@ -32,12 +34,12 @@ def invariants_as_dict():
     conn.close()
     return d
 
-def precomputed_invariants_for_conjecture():
-    return (invariants_as_dict(), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
+def precomputed_invariants_for_conjecture(database=None):
+    return (invariants_as_dict(database), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
 
-def properties_as_dict():
+def properties_as_dict(database=None):
     d = {}
-    conn = get_connection()
+    conn = get_connection(database)
     result = conn.execute("SELECT property,graph,value FROM prop_values")
     for (p,g,v) in result:
         if g in d:
@@ -47,21 +49,21 @@ def properties_as_dict():
     conn.close()
     return d
 
-def precomputed_properties_for_conjecture():
-    return (properties_as_dict(), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
+def precomputed_properties_for_conjecture(database=None):
+    return (properties_as_dict(database), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
 
 def compute_invariant_value(invariant, graph, computation_results):
     value = float(invariant(graph))
     computation_results[(invariant.__name__, graph.canonical_label().graph6_string())] = value
 
-def update_invariant_database(invariants, graphs, timeout=60):
+def update_invariant_database(invariants, graphs, timeout=60, database=None):
     import multiprocessing
 
     # get the values which are already in the database
-    current = invariants_as_dict()
+    current = invariants_as_dict(database)
 
     # open a connection with the database
-    conn = get_connection()
+    conn = get_connection(database)
 
     # create a manager to get the results from the worker thread to the main thread
     manager = multiprocessing.Manager()
@@ -101,8 +103,8 @@ def update_invariant_database(invariants, graphs, timeout=60):
     # close the connection
     conn.close()
 
-def store_invariant_value(invariant, graph, value, overwrite=False):
-    current = invariants_as_dict()
+def store_invariant_value(invariant, graph, value, overwrite=False, database=None):
+    current = invariants_as_dict(database)
     i_key = invariant.__name__
     g_key = graph.canonical_label().graph6_string()
 
@@ -113,14 +115,14 @@ def store_invariant_value(invariant, graph, value, overwrite=False):
                     print "Stored value differs from provided value: {} vs. {}".format(current[g_key][i_key], value)
                 return
 
-    conn = get_connection()
+    conn = get_connection(database)
     conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(i_key, g_key, float(value)))
     conn.commit()
     conn.close()
 
-def list_missing_invariants(invariants, graphs):
+def list_missing_invariants(invariants, graphs, database=None):
     # get the values which are already in the database
-    current = invariants_as_dict()
+    current = invariants_as_dict(database)
 
     for inv in invariants:
         for g in graphs:
@@ -134,14 +136,14 @@ def compute_property_value(property, graph, computation_results):
     value = bool(property(graph))
     computation_results[(property.__name__, graph.canonical_label().graph6_string())] = value
 
-def update_property_database(properties, graphs, timeout=60):
+def update_property_database(properties, graphs, timeout=60, database=None):
     import multiprocessing
 
     # get the values which are already in the database
-    current = properties_as_dict()
+    current = properties_as_dict(database)
 
     # open a connection with the database
-    conn = get_connection()
+    conn = get_connection(database)
 
     # create a manager to get the results from the worker thread to the main thread
     manager = multiprocessing.Manager()
@@ -181,8 +183,8 @@ def update_property_database(properties, graphs, timeout=60):
     # close the connection
     conn.close()
 
-def store_property_value(property, graph, value, overwrite=False):
-    current = properties_as_dict()
+def store_property_value(property, graph, value, overwrite=False, database=None):
+    current = properties_as_dict(database)
     p_key = property.__name__
     g_key = graph.canonical_label().graph6_string()
 
@@ -193,14 +195,14 @@ def store_property_value(property, graph, value, overwrite=False):
                     print "Stored value differs from provided value: {} vs. {}".format(current[g_key][p_key], value)
                 return
 
-    conn = get_connection()
+    conn = get_connection(database)
     conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(p_key, g_key, bool(value)))
     conn.commit()
     conn.close()
 
-def list_missing_properties(properties, graphs):
+def list_missing_properties(properties, graphs, database=None):
     # get the values which are already in the database
-    current = properties_as_dict()
+    current = properties_as_dict(database)
 
     for prop in properties:
         for g in graphs:
