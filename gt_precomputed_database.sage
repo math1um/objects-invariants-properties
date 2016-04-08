@@ -13,17 +13,34 @@ EXAMPLE::
 import sqlite3
 
 def get_connection(database=None):
+    """
+    Returns a connection to the database. If no name is provided, this method
+    will by default open a connection with a database called gt_precomputed_database.db
+    located in the current working directory.
+    """
     if database is None:
         database = "gt_precomputed_database.db"
     return sqlite3.connect(database)
 
 def create_tables(database=None):
+    """
+    Sets up the database for use by the other methods, i.e., this method creates
+    the necessary tables in the database. It is safe to run this method even if
+    the tables already exist. If no database name is provided, this method will
+    default to the default database of get_connection().
+    """
     conn = get_connection(database)
     conn.execute("CREATE TABLE IF NOT EXISTS inv_values (invariant TEXT, graph TEXT, value FLOAT)")
     conn.execute("CREATE TABLE IF NOT EXISTS prop_values (property TEXT, graph TEXT, value BOOLEAN)")
     conn.close()
 
 def invariants_as_dict(database=None):
+    """
+    Returns a dictionary containing for each graph a dictionary containing for
+    each invariant the invariant value for that invariant and graph. If no
+    database name is provided, this method will default to the default database
+    of get_connection().
+    """
     d = {}
     conn = get_connection(database)
     result = conn.execute("SELECT invariant,graph,value FROM inv_values")
@@ -36,9 +53,20 @@ def invariants_as_dict(database=None):
     return d
 
 def precomputed_invariants_for_conjecture(database=None):
+    """
+    Returns a tuple of length 3 that can be used for the conjecture method of
+    conjecturing.py. If no database name is provided, this method will default
+    to the default database of get_connection().
+    """
     return (invariants_as_dict(database), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
 
 def properties_as_dict(database=None):
+    """
+    Returns a dictionary containing for each graph a dictionary containing for
+    each property the property value for that property and graph. If no
+    database name is provided, this method will default to the default database
+    of get_connection().
+    """
     d = {}
     conn = get_connection(database)
     result = conn.execute("SELECT property,graph,value FROM prop_values")
@@ -51,13 +79,32 @@ def properties_as_dict(database=None):
     return d
 
 def precomputed_properties_for_conjecture(database=None):
+    """
+    Returns a tuple of length 3 that can be used for the propertyBasedConjecture
+    method of conjecturing.py. If no database name is provided, this method will
+    default to the default database of get_connection().
+    """
     return (properties_as_dict(database), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
 
 def compute_invariant_value(invariant, graph, computation_results):
+    """
+    Computes the value of invariant for graph and stores the result in the
+    dictionary computation_results. This method is not intended to be called
+    directly. It will be called by the method update_invariant_database as a
+    separate process.
+    """
     value = float(invariant(graph))
     computation_results[(invariant.__name__, graph.canonical_label().graph6_string())] = value
 
 def update_invariant_database(invariants, graphs, timeout=60, database=None):
+    """
+    Tries to compute the invariant value of each invariant in invariants for each
+    graph in graphs and stores it in the database. If the value is already in the
+    database it is not recomputed. If the computation does not end in timeout
+    seconds, then it is terminated. The default value for the timeout is 60 (one
+    minute). If no database name is provided, this method will default to the
+    default database of get_connection().
+    """
     import multiprocessing
 
     # get the values which are already in the database
@@ -105,6 +152,14 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None):
     conn.close()
 
 def store_invariant_value(invariant, graph, value, overwrite=False, database=None):
+    """
+    Stores the given value in the database for the given invariant and graph.
+    This method can be used to store hard to compute invariant values which are
+    already known. If overwrite is False, then no value in the database will be
+    overwritten and a warning will be printed if the provided value differs from
+    the value which is currently in the database. If no database name is provided,
+    this method will default to the default database of get_connection().
+    """
     current = invariants_as_dict(database)
     i_key = invariant.__name__
     g_key = graph.canonical_label().graph6_string()
@@ -122,6 +177,11 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
     conn.close()
 
 def list_missing_invariants(invariants, graphs, database=None):
+    """
+    Prints a list of all invariant and graph pairs from invariants and graphs
+    which are not in the database. If no database name is provided, this method
+    will default to the default database of get_connection().
+    """
     # get the values which are already in the database
     current = invariants_as_dict(database)
 
@@ -134,10 +194,24 @@ def list_missing_invariants(invariants, graphs, database=None):
             print "{} for {} is missing.".format(inv.__name__, g.name())
 
 def compute_property_value(property, graph, computation_results):
+    """
+    Computes the value of property for graph and stores the result in the
+    dictionary computation_results. This method is not intended to be called
+    directly. It will be called by the method update_property_database as a
+    separate process.
+    """
     value = bool(property(graph))
     computation_results[(property.__name__, graph.canonical_label().graph6_string())] = value
 
 def update_property_database(properties, graphs, timeout=60, database=None):
+    """
+    Tries to compute the property value of each property in properties for each
+    graph in graphs and stores it in the database. If the value is already in the
+    database it is not recomputed. If the computation does not end in timeout
+    seconds, then it is terminated. The default value for the timeout is 60 (one
+    minute). If no database name is provided, this method will default to the
+    default database of get_connection().
+    """
     import multiprocessing
 
     # get the values which are already in the database
@@ -185,6 +259,14 @@ def update_property_database(properties, graphs, timeout=60, database=None):
     conn.close()
 
 def store_property_value(property, graph, value, overwrite=False, database=None):
+    """
+    Stores the given value in the database for the given property and graph.
+    This method can be used to store hard to compute property values which are
+    already known. If overwrite is False, then no value in the database will be
+    overwritten and a warning will be printed if the provided value differs from
+    the value which is currently in the database. If no database name is provided,
+    this method will default to the default database of get_connection().
+    """
     current = properties_as_dict(database)
     p_key = property.__name__
     g_key = graph.canonical_label().graph6_string()
@@ -202,6 +284,11 @@ def store_property_value(property, graph, value, overwrite=False, database=None)
     conn.close()
 
 def list_missing_properties(properties, graphs, database=None):
+    """
+    Prints a list of all property and graph pairs from properties and graphs
+    which are not in the database. If no database name is provided, this method
+    will default to the default database of get_connection().
+    """
     # get the values which are already in the database
     current = properties_as_dict(database)
 
