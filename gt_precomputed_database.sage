@@ -193,6 +193,55 @@ def list_missing_invariants(invariants, graphs, database=None):
                     continue
             print "{} for {} is missing.".format(inv.__name__, g.name())
 
+def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60, database=None):
+    """
+    Tries to compute the invariant value of each invariant in invariants for each
+    graph in graphs and compares it to the value stored in the database. If the
+    computation does not end in timeout seconds, then it is terminated. The
+    default value for the timeout is 60 (one minute). If no database name is
+    provided, this method will default to the default database of get_connection().
+    """
+    import multiprocessing
+
+    # get the values which are already in the database
+    current = invariants_as_dict(database)
+
+    # create a manager to get the results from the worker thread to the main thread
+    manager = multiprocessing.Manager()
+    computation_results = manager.dict()
+
+    for inv in invariants:
+        for g in graphs:
+            # first we check to see if the value is already known
+            g_key = g.canonical_label().graph6_string()
+            if g_key in current:
+                if inv.__name__ in current[g_key]:
+                     # start a worker thread to compute the value
+                     p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, computation_results))
+                     p.start()
+
+                     # give the worker thread some time to calculate the value
+                     p.join(timeout)
+
+                     # if the worker thread is not finished we kill it. Otherwise we store the value in the database
+                     if p.is_alive():
+                         print "Computation of {} for {} did not end in time... killing!".format(inv.__name__, g.name())
+
+                         p.terminate()
+                         p.join()
+                     else:
+                         #computation did end, so we verify the value
+                         if (inv.__name__, g.canonical_label().graph6_string()) in computation_results:
+                             value = computation_results[(inv.__name__, g.canonical_label().graph6_string())]
+                             if value != current[g.canonical_label().graph6_string()][inv.__name__] and abs(value - current[g.canonical_label().graph6_string()][inv.__name__]) > epsilon:
+                                 print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
+                                            inv.__name__, g.name(),
+                                            current[g.canonical_label().graph6_string()][inv.__name__],
+                                            value)
+                         else:
+                             # the computation might have crashed
+                             print "Computation of {} for {} failed!".format(inv.__name__, g.name())
+
 def compute_property_value(property, graph, computation_results):
     """
     Computes the value of property for graph and stores the result in the
@@ -299,3 +348,52 @@ def list_missing_properties(properties, graphs, database=None):
                 if prop.__name__ in current[g_key]:
                     continue
             print "{} for {} is missing.".format(prop.__name__, g.name())
+
+def verify_property_values(properties, graphs, timeout=60, database=None):
+    """
+    Tries to compute the property value of each property in properties for each
+    graph in graphs and compares it to the value stored in the database. If the
+    computation does not end in timeout seconds, then it is terminated. The
+    default value for the timeout is 60 (one minute). If no database name is
+    provided, this method will default to the default database of get_connection().
+    """
+    import multiprocessing
+
+    # get the values which are already in the database
+    current = properties_as_dict(database)
+
+    # create a manager to get the results from the worker thread to the main thread
+    manager = multiprocessing.Manager()
+    computation_results = manager.dict()
+
+    for prop in properties:
+        for g in graphs:
+            # first we check to see if the value is already known
+            g_key = g.canonical_label().graph6_string()
+            if g_key in current:
+                if prop.__name__ in current[g_key]:
+                     # start a worker thread to compute the value
+                     p = multiprocessing.Process(target=compute_property_value, args=(prop, g, computation_results))
+                     p.start()
+
+                     # give the worker thread some time to calculate the value
+                     p.join(timeout)
+
+                     # if the worker thread is not finished we kill it. Otherwise we store the value in the database
+                     if p.is_alive():
+                         print "Computation of {} for {} did not end in time... killing!".format(prop.__name__, g.name())
+
+                         p.terminate()
+                         p.join()
+                     else:
+                         #computation did end, so we verify the value
+                         if (prop.__name__, g.canonical_label().graph6_string()) in computation_results:
+                             value = computation_results[(prop.__name__, g.canonical_label().graph6_string())]
+                             if value != current[g.canonical_label().graph6_string()][prop.__name__]:
+                                 print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
+                                            prop.__name__, g.name(),
+                                            current[g.canonical_label().graph6_string()][prop.__name__],
+                                            value)
+                         else:
+                             # the computation might have crashed
+                             print "Computation of {} for {} failed!".format(prop.__name__, g.name())
