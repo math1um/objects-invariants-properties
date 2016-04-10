@@ -1857,23 +1857,7 @@ killer = Graph('EgSG')
 killer.name(new="killer")
 
 #alon_seymour graph: CE to the rank-coloring conjecture, 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
-V = VectorSpace(GF(2),6)
-S=[V[i] for i in range(64)]
-def count_ones(s):
-     count = 0
-     for i in range(len(s)):
-         if s[i] == 1:
-             count += 1
-     return count
-K=[x for x in S if count_ones(x)==1 or count_ones(x) == 6]
-alon_seymour=Graph(64)
-for i in range(64):
-    alon_seymour.set_vertex(i,S[i])
-for i in range(64):
-     for j in range(64):
-         if i < j:
-             if sum([alon_seymour.get_vertex(i),alon_seymour.get_vertex(j)]) not in K:
-                 alon_seymour.add_edge(i,j)
+alon_seymour=Graph([[0..63], lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16,32,63)])
 alon_seymour.name(new="alon_seymour")
 
 k3 = graphs.CompleteGraph(3)
