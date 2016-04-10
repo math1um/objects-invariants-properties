@@ -96,7 +96,7 @@ def compute_invariant_value(invariant, graph, computation_results):
     value = float(invariant(graph))
     computation_results[(invariant.__name__, graph.canonical_label().graph6_string())] = value
 
-def update_invariant_database(invariants, graphs, timeout=60, database=None):
+def update_invariant_database(invariants, graphs, timeout=60, database=None, verbose=False):
     """
     Tries to compute the invariant value of each invariant in invariants for each
     graph in graphs and stores it in the database. If the value is already in the
@@ -148,6 +148,8 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None):
                 else:
                     # the computation might have crashed
                     print "Computation of {} for {} failed!".format(inv.__name__, g.name())
+        if verbose:
+            print "Finished {}".format(inv.__name__)
     # close the connection
     conn.close()
 
@@ -252,7 +254,7 @@ def compute_property_value(property, graph, computation_results):
     value = bool(property(graph))
     computation_results[(property.__name__, graph.canonical_label().graph6_string())] = value
 
-def update_property_database(properties, graphs, timeout=60, database=None):
+def update_property_database(properties, graphs, timeout=60, database=None, verbose=False):
     """
     Tries to compute the property value of each property in properties for each
     graph in graphs and stores it in the database. If the value is already in the
@@ -304,6 +306,8 @@ def update_property_database(properties, graphs, timeout=60, database=None):
                 else:
                     # the computation might have crashed
                     print "Computation of {} for {} failed!".format(prop.__name__, g.name())
+        if verbose:
+            print "Finished {}".format(prop.__name__)
     # close the connection
     conn.close()
 
