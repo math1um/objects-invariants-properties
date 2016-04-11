@@ -1907,15 +1907,6 @@ p2.name(new="p2")
 p6 = graphs.PathGraph(6)
 p6.name(new="p6")
 
-p6 = graphs.PathGraph(6)
-p6.name(new="p6")
-
-p6 = graphs.PathGraph(6)
-p6.name(new="p6")
-
-p6 = graphs.PathGraph(6)
-p6.name(new="p6")
-
 #star with 3 rays, order = 4
 s3 = graphs.StarGraph(3)
 s3.name(new="s3")
