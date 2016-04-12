@@ -1657,7 +1657,28 @@ c24.name(new="c24")
 c26 = Graph('YsP@H?PC?O`?@@?_?G?@??CC?G??GG?E??@_??K???W???W???H???E_')
 c26.name(new="c26")
 
-#holton-mckay graph: hamiltonian, cubic, planar, radius=4, diameter=6
+"""
+The Holton-McKay graph is the smallest planar cubic hamiltonian graph with an edge
+that is not contained in a hamiltonian cycle. It has 24 vertices and the edges (0,3)
+and (4,7) are not contained in a hamiltonian cycle. This graph was mentioned in
+D. A. Holton and B. D. McKay, Cycles in 3-connected cubic planar graphs II, Ars
+Combinatoria, 21A (1986) 107-114.
+
+    sage: holton_mckay
+    holton_mckay: Graph on 24 vertices
+    sage: holton_mckay.is_planar()
+    True
+    sage: holton_mckay.is_regular()
+    True
+    sage: max(holton_mckay.degree())
+    3
+    sage: holton_mckay.is_hamiltonian()
+    True
+    sage: holton_mckay.radius()
+    4
+    sage: holton_mckay.diameter()
+    6
+"""
 holton_mckay = Graph('WlCGKS??G?_D????_?g?DOa?C?O??G?CC?`?G??_?_?_??L')
 holton_mckay.name(new="holton_mckay")
 
