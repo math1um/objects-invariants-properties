@@ -153,7 +153,7 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
     # close the connection
     conn.close()
 
-def store_invariant_value(invariant, graph, value, overwrite=False, database=None, epsilon= 0.00000001):
+def store_invariant_value(invariant, graph, value, overwrite=False, database=None, epsilon= 0.00000001, verbose=False):
     """
     Stores the given value in the database for the given invariant and graph.
     This method can be used to store hard to compute invariant values which are
@@ -171,12 +171,16 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
             if i_key in current[g_key]:
                 if value!=current[g_key][i_key] and abs(value - current[g_key][i_key]) > epsilon:
                     print "Stored value of {} for {} differs from provided value: {} vs. {}".format(i_key, graph.name(), current[g_key][i_key], value)
+                elif verbose:
+                    print "Value of {} for {} is already in the database".format(i_key, graph.name())
                 return
 
     conn = get_connection(database)
     conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(i_key, g_key, float(value)))
     conn.commit()
     conn.close()
+    if verbose:
+        print "Inserted value of {} for {}: {}".format(i_key, graph.name(), float(value))
 
 def list_missing_invariants(invariants, graphs, database=None):
     """
@@ -311,7 +315,7 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
     # close the connection
     conn.close()
 
-def store_property_value(property, graph, value, overwrite=False, database=None):
+def store_property_value(property, graph, value, overwrite=False, database=None, verbose=False):
     """
     Stores the given value in the database for the given property and graph.
     This method can be used to store hard to compute property values which are
@@ -329,12 +333,16 @@ def store_property_value(property, graph, value, overwrite=False, database=None)
             if p_key in current[g_key]:
                 if value!=current[g_key][p_key]:
                     print "Stored value of {} for {} differs from provided value: {} vs. {}".format(p_key, graph.name(), current[g_key][p_key], value)
+                elif verbose:
+                    print "Value of {} for {} is already in the database".format(p_key, graph.name())
                 return
 
     conn = get_connection(database)
     conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(p_key, g_key, bool(value)))
     conn.commit()
     conn.close()
+    if verbose:
+        print "Inserted value of {} for {}: {}".format(i_key, graph.name(), bool(value))
 
 def list_missing_properties(properties, graphs, database=None):
     """
