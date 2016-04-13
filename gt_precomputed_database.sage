@@ -162,18 +162,21 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
     the value which is currently in the database. If no database name is provided,
     this method will default to the default database of get_connection().
     """
-    current = invariants_as_dict(database)
     i_key = invariant.__name__
     g_key = graph.canonical_label(algorithm='sage').graph6_string()
+    conn = get_connection(database)
+    result = conn.execute("SELECT value FROM inv_values WHERE invariant=? AND graph=?",
+                        (i_key, g_key)).fetchone()
+    conn.close()
 
     if not overwrite:
-        if g_key in current:
-            if i_key in current[g_key]:
-                if value!=current[g_key][i_key] and abs(value - current[g_key][i_key]) > epsilon:
-                    print "Stored value of {} for {} differs from provided value: {} vs. {}".format(i_key, graph.name(), current[g_key][i_key], value)
-                elif verbose:
-                    print "Value of {} for {} is already in the database".format(i_key, graph.name())
-                return
+        if result is not None:
+            stored_value = result[0]
+            if value!=stored_value and abs(value - stored_value) > epsilon:
+                print "Stored value of {} for {} differs from provided value: {} vs. {}".format(i_key, graph.name(), stored_value, value)
+            elif verbose:
+                print "Value of {} for {} is already in the database".format(i_key, graph.name())
+            return
 
     conn = get_connection(database)
     conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(i_key, g_key, float(value)))
@@ -324,18 +327,21 @@ def store_property_value(property, graph, value, overwrite=False, database=None,
     the value which is currently in the database. If no database name is provided,
     this method will default to the default database of get_connection().
     """
-    current = properties_as_dict(database)
     p_key = property.__name__
     g_key = graph.canonical_label(algorithm='sage').graph6_string()
+    conn = get_connection(database)
+    result = conn.execute("SELECT value FROM prop_values WHERE property=? AND graph=?",
+                        (p_key, g_key)).fetchone()
+    conn.close()
 
     if not overwrite:
-        if g_key in current:
-            if p_key in current[g_key]:
-                if value!=current[g_key][p_key]:
-                    print "Stored value of {} for {} differs from provided value: {} vs. {}".format(p_key, graph.name(), current[g_key][p_key], value)
-                elif verbose:
-                    print "Value of {} for {} is already in the database".format(p_key, graph.name())
-                return
+        if result is not None:
+            stored_value = result[0]
+            if value!=stored_value:
+                print "Stored value of {} for {} differs from provided value: {} vs. {}".format(p_key, graph.name(), stored_value, value)
+            elif verbose:
+                print "Value of {} for {} is already in the database".format(p_key, graph.name())
+            return
 
     conn = get_connection(database)
     conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(p_key, g_key, bool(value)))
