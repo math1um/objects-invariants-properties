@@ -10,7 +10,7 @@ EXAMPLE::
     sage: store_values()
 """
 
-def store_values(overwrite=False, database=None):
+def store_values(overwrite=False, database=None, verbose=False):
     """
     Stores some hard to compute values in the specified database. If no database
     name is provided, this defaults to the default database of get_connection().
@@ -18,22 +18,22 @@ def store_values(overwrite=False, database=None):
     if the existing value differs from the value that is provided here.
     """
     #taken from http://en.wikipedia.org/wiki/Meredith_graph
-    store_invariant_value(chromatic_index, graphs.MeredithGraph(), 5, overwrite=overwrite, database=database)
+    store_invariant_value(chromatic_index, graphs.MeredithGraph(), 5, overwrite=overwrite, database=database, verbose=verbose)
 
     #taken from http://en.wikipedia.org/wiki/Schl%C3%A4fli_graph
-    store_invariant_value(clique_covering_number, graphs.SchlaefliGraph(), 6, overwrite=overwrite, database=database)
-    store_invariant_value(chromatic_num, graphs.SchlaefliGraph(), 9, overwrite=overwrite, database=database)
+    store_invariant_value(clique_covering_number, graphs.SchlaefliGraph(), 6, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(chromatic_num, graphs.SchlaefliGraph(), 9, overwrite=overwrite, database=database, verbose=verbose)
 
-    store_invariant_value(Graph.lovasz_theta, c100, 46.694, overwrite=overwrite, database=database)
+    store_invariant_value(Graph.lovasz_theta, c100, 46.694, overwrite=overwrite, database=database, verbose=verbose)
 
-    store_invariant_value(chromatic_num, c3mycielski4, 7, overwrite=overwrite, database=database)
-    store_invariant_value(chromatic_index, c3mycielski4, 32, overwrite=overwrite, database=database)
-    store_invariant_value(clique_covering_number, c3mycielski4, 31, overwrite=overwrite, database=database)
+    store_invariant_value(chromatic_num, c3mycielski4, 7, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(chromatic_index, c3mycielski4, 32, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(clique_covering_number, c3mycielski4, 31, overwrite=overwrite, database=database, verbose=verbose)
 
-    store_invariant_value(chromatic_num, alon_seymour, 56, overwrite=overwrite, database=database)
-    store_invariant_value(chromatic_index, alon_seymour, 56, overwrite=overwrite, database=database)
-    store_invariant_value(edge_con, alon_seymour, 56, overwrite=overwrite, database=database)
-    store_invariant_value(vertex_con, alon_seymour, 56, overwrite=overwrite, database=database)
-    store_invariant_value(kirchhoff_index, alon_seymour, 71.0153846154, overwrite=overwrite, database=database)
-    store_property_value(matching_covered, alon_seymour, True, overwrite=overwrite, database=database)
-    store_property_value(is_locally_two_connected, alon_seymour, True, overwrite=overwrite, database=database)
+    store_invariant_value(chromatic_num, alon_seymour, 56, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(chromatic_index, alon_seymour, 56, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(edge_con, alon_seymour, 56, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(vertex_con, alon_seymour, 56, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(kirchhoff_index, alon_seymour, 71.0153846154, overwrite=overwrite, database=database, verbose=verbose)
+    store_property_value(matching_covered, alon_seymour, True, overwrite=overwrite, database=database, verbose=verbose)
+    store_property_value(is_locally_two_connected, alon_seymour, True, overwrite=overwrite, database=database, verbose=verbose)
