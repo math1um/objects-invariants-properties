@@ -170,7 +170,7 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
         if g_key in current:
             if i_key in current[g_key]:
                 if value!=current[g_key][i_key] and abs(value - current[g_key][i_key]) > epsilon:
-                    print "Stored value differs from provided value: {} vs. {}".format(current[g_key][i_key], value)
+                    print "Stored value of {} for {} differs from provided value: {} vs. {}".format(i_key, graph.name(), current[g_key][i_key], value)
                 return
 
     conn = get_connection(database)
@@ -328,7 +328,7 @@ def store_property_value(property, graph, value, overwrite=False, database=None)
         if g_key in current:
             if p_key in current[g_key]:
                 if value!=current[g_key][p_key]:
-                    print "Stored value differs from provided value: {} vs. {}".format(current[g_key][p_key], value)
+                    print "Stored value of {} for {} differs from provided value: {} vs. {}".format(p_key, graph.name(), current[g_key][p_key], value)
                 return
 
     conn = get_connection(database)
