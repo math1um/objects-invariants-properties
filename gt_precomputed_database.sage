@@ -153,7 +153,7 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
     # close the connection
     conn.close()
 
-def store_invariant_value(invariant, graph, value, overwrite=False, database=None):
+def store_invariant_value(invariant, graph, value, overwrite=False, database=None, epsilon= 0.00000001):
     """
     Stores the given value in the database for the given invariant and graph.
     This method can be used to store hard to compute invariant values which are
@@ -169,7 +169,7 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
     if not overwrite:
         if g_key in current:
             if i_key in current[g_key]:
-                if value!=current[g_key][i_key]:
+                if value!=current[g_key][i_key] and abs(value - current[g_key][i_key]) > epsilon:
                     print "Stored value differs from provided value: {} vs. {}".format(current[g_key][i_key], value)
                 return
 
