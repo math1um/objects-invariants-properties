@@ -58,7 +58,7 @@ def precomputed_invariants_for_conjecture(database=None):
     conjecturing.py. If no database name is provided, this method will default
     to the default database of get_connection().
     """
-    return (invariants_as_dict(database), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
+    return (invariants_as_dict(database), (lambda g: g.canonical_label(algorithm='sage').graph6_string()), (lambda f: f.__name__))
 
 def properties_as_dict(database=None):
     """
@@ -84,7 +84,7 @@ def precomputed_properties_for_conjecture(database=None):
     method of conjecturing.py. If no database name is provided, this method will
     default to the default database of get_connection().
     """
-    return (properties_as_dict(database), (lambda g: g.canonical_label().graph6_string()), (lambda f: f.__name__))
+    return (properties_as_dict(database), (lambda g: g.canonical_label(algorithm='sage').graph6_string()), (lambda f: f.__name__))
 
 def compute_invariant_value(invariant, graph, computation_results):
     """
@@ -94,7 +94,7 @@ def compute_invariant_value(invariant, graph, computation_results):
     separate process.
     """
     value = float(invariant(graph))
-    computation_results[(invariant.__name__, graph.canonical_label().graph6_string())] = value
+    computation_results[(invariant.__name__, graph.canonical_label(algorithm='sage').graph6_string())] = value
 
 def update_invariant_database(invariants, graphs, timeout=60, database=None, verbose=False):
     """
@@ -120,7 +120,7 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
     for inv in invariants:
         for g in graphs:
             # first we check to see if the value is already known
-            g_key = g.canonical_label().graph6_string()
+            g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if inv.__name__ in current[g_key]:
                     continue
@@ -140,9 +140,9 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
                 p.join()
             else:
                 #computation did end, so we add the value to the database
-                if (inv.__name__, g.canonical_label().graph6_string()) in computation_results:
-                    value = computation_results[(inv.__name__, g.canonical_label().graph6_string())]
-                    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(inv.__name__, g.canonical_label().graph6_string(), value))
+                if (inv.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
+                    value = computation_results[(inv.__name__, g.canonical_label(algorithm='sage').graph6_string())]
+                    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(inv.__name__, g.canonical_label(algorithm='sage').graph6_string(), value))
                     # commit the data so we don't lose anything if we abort early
                     conn.commit()
                 else:
@@ -164,7 +164,7 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
     """
     current = invariants_as_dict(database)
     i_key = invariant.__name__
-    g_key = graph.canonical_label().graph6_string()
+    g_key = graph.canonical_label(algorithm='sage').graph6_string()
 
     if not overwrite:
         if g_key in current:
@@ -193,7 +193,7 @@ def list_missing_invariants(invariants, graphs, database=None):
 
     for inv in invariants:
         for g in graphs:
-            g_key = g.canonical_label().graph6_string()
+            g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if inv.__name__ in current[g_key]:
                     continue
@@ -219,7 +219,7 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
     for inv in invariants:
         for g in graphs:
             # first we check to see if the value is already known
-            g_key = g.canonical_label().graph6_string()
+            g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if inv.__name__ in current[g_key]:
                      # start a worker thread to compute the value
@@ -237,12 +237,12 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
                          p.join()
                      else:
                          #computation did end, so we verify the value
-                         if (inv.__name__, g.canonical_label().graph6_string()) in computation_results:
-                             value = computation_results[(inv.__name__, g.canonical_label().graph6_string())]
-                             if value != current[g.canonical_label().graph6_string()][inv.__name__] and abs(value - current[g.canonical_label().graph6_string()][inv.__name__]) > epsilon:
+                         if (inv.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
+                             value = computation_results[(inv.__name__, g.canonical_label(algorithm='sage').graph6_string())]
+                             if value != current[g.canonical_label(algorithm='sage').graph6_string()][inv.__name__] and abs(value - current[g.canonical_label(algorithm='sage').graph6_string()][inv.__name__]) > epsilon:
                                  print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
                                             inv.__name__, g.name(),
-                                            current[g.canonical_label().graph6_string()][inv.__name__],
+                                            current[g.canonical_label(algorithm='sage').graph6_string()][inv.__name__],
                                             value)
                          else:
                              # the computation might have crashed
@@ -256,7 +256,7 @@ def compute_property_value(property, graph, computation_results):
     separate process.
     """
     value = bool(property(graph))
-    computation_results[(property.__name__, graph.canonical_label().graph6_string())] = value
+    computation_results[(property.__name__, graph.canonical_label(algorithm='sage').graph6_string())] = value
 
 def update_property_database(properties, graphs, timeout=60, database=None, verbose=False):
     """
@@ -282,7 +282,7 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
     for prop in properties:
         for g in graphs:
             # first we check to see if the value is already known
-            g_key = g.canonical_label().graph6_string()
+            g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if prop.__name__ in current[g_key]:
                     continue
@@ -302,9 +302,9 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
                 p.join()
             else:
                 #computation did end, so we add the value to the database
-                if (prop.__name__, g.canonical_label().graph6_string()) in computation_results:
-                    value = computation_results[(prop.__name__, g.canonical_label().graph6_string())]
-                    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g.canonical_label().graph6_string(), value))
+                if (prop.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
+                    value = computation_results[(prop.__name__, g.canonical_label(algorithm='sage').graph6_string())]
+                    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g.canonical_label(algorithm='sage').graph6_string(), value))
                     # commit the data so we don't lose anything if we abort early
                     conn.commit()
                 else:
@@ -326,7 +326,7 @@ def store_property_value(property, graph, value, overwrite=False, database=None,
     """
     current = properties_as_dict(database)
     p_key = property.__name__
-    g_key = graph.canonical_label().graph6_string()
+    g_key = graph.canonical_label(algorithm='sage').graph6_string()
 
     if not overwrite:
         if g_key in current:
@@ -355,7 +355,7 @@ def list_missing_properties(properties, graphs, database=None):
 
     for prop in properties:
         for g in graphs:
-            g_key = g.canonical_label().graph6_string()
+            g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if prop.__name__ in current[g_key]:
                     continue
@@ -381,7 +381,7 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
     for prop in properties:
         for g in graphs:
             # first we check to see if the value is already known
-            g_key = g.canonical_label().graph6_string()
+            g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if prop.__name__ in current[g_key]:
                      # start a worker thread to compute the value
@@ -399,12 +399,12 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
                          p.join()
                      else:
                          #computation did end, so we verify the value
-                         if (prop.__name__, g.canonical_label().graph6_string()) in computation_results:
-                             value = computation_results[(prop.__name__, g.canonical_label().graph6_string())]
-                             if value != current[g.canonical_label().graph6_string()][prop.__name__]:
+                         if (prop.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
+                             value = computation_results[(prop.__name__, g.canonical_label(algorithm='sage').graph6_string())]
+                             if value != current[g.canonical_label(algorithm='sage').graph6_string()][prop.__name__]:
                                  print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
                                             prop.__name__, g.name(),
-                                            current[g.canonical_label().graph6_string()][prop.__name__],
+                                            current[g.canonical_label(algorithm='sage').graph6_string()][prop.__name__],
                                             value)
                          else:
                              # the computation might have crashed
