@@ -72,9 +72,9 @@ def properties_as_dict(database=None):
     result = conn.execute("SELECT property,graph,value FROM prop_values")
     for (p,g,v) in result:
         if g in d:
-            d[g][p] = v
+            d[g][p] = bool(v)
         else:
-            d[g] = {p:v}
+            d[g] = {p:bool(v)}
     conn.close()
     return d
 
