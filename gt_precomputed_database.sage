@@ -348,7 +348,7 @@ def store_property_value(property, graph, value, overwrite=False, database=None,
     conn.commit()
     conn.close()
     if verbose:
-        print "Inserted value of {} for {}: {}".format(i_key, graph.name(), bool(value))
+        print "Inserted value of {} for {}: {}".format(p_key, graph.name(), bool(value))
 
 def list_missing_properties(properties, graphs, database=None):
     """
