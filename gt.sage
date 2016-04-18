@@ -1855,6 +1855,10 @@ ce5=Graph("X~}AHKVB{GGPGRCJ`B{GOO`C`AW`AwO`}CGOO`AHACHaCGVACG^")
 ce5.name(new = "ce5")
 #ce5 is a ce to: (((is_line_graph)&(is_cartesian_product))|(is_split))->(has_residue_equals_alpha)
 
+ce6 = Graph("H??E@cN")
+#ce6 is a ce to: (is_split)->((order_leq_twice_max_degree)&(is_chordal))
+ce6.name(new = "ce6")
+
 
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
 k5pendant = Graph('E~}?')
