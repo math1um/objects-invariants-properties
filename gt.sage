@@ -962,11 +962,12 @@ def is_two_connected(g):
 
 #part of pebbling class0 sufficient condition
 def is_three_connected(g):
-    k = vertex_con(g)
-    if k < 3:
-        return False
-    else:
-        return True
+    for v in g.vertices():
+        L=g.vertices()
+        L.remove(v)
+        if not is_two_connected(g.subgraph(L)):
+            return False
+    return True
 
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
