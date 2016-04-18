@@ -1554,6 +1554,10 @@ invariants_plus = invariants + invariants_from_properties
 #GRAPH OBJECTS
 
 p3 = graphs.PathGraph(3)
+p3.name(new = "p3")
+
+k3_3=graphs.CompleteBipartiteGraph(3,3)
+k3_3.name(new = "k3_3")
 
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
