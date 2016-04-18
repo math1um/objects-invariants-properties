@@ -953,11 +953,12 @@ def is_van_den_heuvel(g):
 
 #necessary condition for hamiltonicity
 def is_two_connected(g):
-    k = vertex_con(g)
-    if k < 2:
-        return False
-    else:
-        return True
+    for v in g.vertices():
+        L=g.vertices()
+        L.remove(v)
+        if not(g.subgraph(L)).is_connected():
+            return False
+    return True
 
 #part of pebbling class0 sufficient condition
 def is_three_connected(g):
