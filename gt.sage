@@ -194,6 +194,75 @@ def MIN_independence_heuristic(g):
 
 #GRAPH INVARIANTS
 
+#inspired by the Friendship Theorem
+def common_neighbors(g,v,w):
+    """
+    returns the Set of common neighbors of v and w in graph g
+        sage: common_neighbors(p4,0,3)
+        {}
+        sage: common_neighbors(p4,0,2)
+        {1}
+    """
+    Nv = Set(g.neighbors(v))
+    Nw = Set(g.neighbors(w))
+    return Nv.intersection(Nw)
+
+def max_common_neighbors(g):
+    """
+    returns the maximum number of common neighbors of any pair of distinct vertices in g
+        sage: max_common_neighbors(p4)
+        1
+        sage: max_common_neighbors(k4)
+        2
+    """
+    max = 0
+    V = g.vertices()
+    n = g.order()
+    for i in range(n):
+        for j in range(n):
+            if i < j:
+                temp = len(common_neighbors(g, V[i], V[j]))
+                if temp > max:
+                    max = temp
+    return max
+
+def min_common_neighbors(g):
+    """
+    returns the minimum number of common neighbors of any pair of distinct vertices in g,
+    which is necessarily 0 for disconnected graphs
+        sage: min_common_neighbors(p4)
+        0
+        sage: min_common_neighbors(k4)
+        2
+    """
+    n = g.order()
+    min = n
+    V = g.vertices()
+    for i in range(n):
+        for j in range(n):
+            if i < j:
+                temp = len(common_neighbors(g, V[i], V[j]))
+                if temp < min:
+                    min = temp
+    return min
+
+def mean_common_neighbors(g):
+    """
+    returns the average number of common neighbors of any pair of distinct vertices in g
+        sage: mean_common_neighbors(p4)
+        1/3
+        sage: mean_common_neighbors(k4)
+        2
+    """
+    V = g.vertices()
+    n = g.order()
+    sum = 0
+    for i in range(n):
+        for j in range(n):
+            if i < j:
+                sum += len(common_neighbors(g, V[i], V[j]))
+    return 2*sum/(n*(n-1))
+
 def domination_number(g):
     """
     Returns the domination number of the graph g, i.e., the size of a maximum
