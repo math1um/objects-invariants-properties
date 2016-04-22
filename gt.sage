@@ -878,6 +878,8 @@ def is_two_connected(g):
         sage: is_two_connected(graphs.CompleteGraph(1))
         False
     """
+    if g.order() <= 2:
+        return False
     for v in g.vertices():
         L=g.vertices()
         L.remove(v)
@@ -908,6 +910,8 @@ def is_three_connected(g):
         sage: is_three_connected(graphs.CompleteGraph(1))
         False
     """
+    if g.order() <= 3:
+        return False
     for v in g.vertices():
         L=g.vertices()
         L.remove(v)
