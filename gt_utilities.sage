@@ -10,7 +10,7 @@ def check_independence_extension(g,S):
         False
     """
     V = g.vertices()
-    alpha = independence_number(g)
+    alpha = g.independent_set(value_only=True)
     #print alpha
 
     if not S.issubset(Set(V)) or not g.is_independent_set(S):
@@ -19,7 +19,7 @@ def check_independence_extension(g,S):
     N = neighbors_set(g,S)
     X = [v for v in V if v not in S and v not in N]
     h = g.subgraph(X)
-    alpha_h = independence_number(h)
+    alpha_h = h.independent_set(value_only=True)
     #print alpha_h, len(S)
 
     return (alpha == alpha_h + len(S))
@@ -151,6 +151,34 @@ def make_bidouble_graph(g):
         gdub.add_edge(i,j+n)
         gdub.add_edge(j,i+n)
     return gdub
+
+def neighbors_set(g,S):
+    N = set()
+    for v in S:
+        for n in g.neighbors(v):
+            N.add(n)
+    return list(N)
+
+def closed_neighborhood(g, verts):
+    if isinstance(verts, list):
+        neighborhood = []
+        for v in verts:
+            neighborhood += [v] + g.neighbors(v)
+        return list(set(neighborhood))
+    else:
+        return [verts] + g.neighbors(verts)
+
+def is_alpha_critical(g):
+    #if not g.is_connected():
+        #return False
+    alpha = g.independent_set(value_only=True)
+    for e in g.edges():
+        gc = copy(g)
+        gc.delete_edge(e)
+        alpha_prime = gc.independent_set(value_only=True)
+        if alpha_prime <= alpha:
+            return False
+    return True
 
 #HEURISTIC ALGORITHMS
 
