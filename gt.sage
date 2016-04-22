@@ -864,6 +864,20 @@ def is_van_den_heuvel(g):
 
 #necessary condition for hamiltonicity
 def is_two_connected(g):
+    """
+    Returns True if the graph is 2-connected and False otherwise. A graph is
+    2-connected if the removal of any single vertex gives a connected graph.
+    By definition a graph on 2 or less vertices is not 2-connected.
+
+        sage: is_two_connected(graphs.CycleGraph(5))
+        True
+        sage: is_two_connected(graphs.PathGraph(5))
+        False
+        sage: is_two_connected(graphs.CompleteGraph(2))
+        False
+        sage: is_two_connected(graphs.CompleteGraph(1))
+        False
+    """
     for v in g.vertices():
         L=g.vertices()
         L.remove(v)
@@ -873,6 +887,27 @@ def is_two_connected(g):
 
 #part of pebbling class0 sufficient condition
 def is_three_connected(g):
+    """
+    Returns True if the graph is 3-connected and False otherwise. A graph is
+    3-connected if the removal of any single vertex or any pair of vertices
+    gives a connected graph. By definition a graph on 3 or less vertices is
+    not 3-connected.
+
+        sage: is_three_connected(graphs.PetersenGraph())
+        True
+        sage: is_three_connected(graphs.CompleteGraph(4))
+        True
+        sage: is_three_connected(graphs.CycleGraph(5))
+        False
+        sage: is_three_connected(graphs.PathGraph(5))
+        False
+        sage: is_three_connected(graphs.CompleteGraph(3))
+        False
+        sage: is_three_connected(graphs.CompleteGraph(2))
+        False
+        sage: is_three_connected(graphs.CompleteGraph(1))
+        False
+    """
     for v in g.vertices():
         L=g.vertices()
         L.remove(v)
