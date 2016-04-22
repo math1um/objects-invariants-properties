@@ -880,10 +880,9 @@ def is_two_connected(g):
     """
     if g.order() <= 2:
         return False
-    for v in g.vertices():
-        L=g.vertices()
-        L.remove(v)
-        if not(g.subgraph(L)).is_connected():
+    from itertools import combinations
+    for s in combinations(g.vertices(), g.order() - 1):
+        if not g.subgraph(s).is_connected():
             return False
     return True
 
@@ -912,10 +911,9 @@ def is_three_connected(g):
     """
     if g.order() <= 3:
         return False
-    for v in g.vertices():
-        L=g.vertices()
-        L.remove(v)
-        if not is_two_connected(g.subgraph(L)):
+    from itertools import combinations
+    for s in combinations(g.vertices(), g.order() - 2):
+        if not g.subgraph(s).is_connected():
             return False
     return True
 
