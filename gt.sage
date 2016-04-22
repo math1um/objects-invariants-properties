@@ -698,9 +698,26 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen, card_independence_irreducible_part, critical_independence_number, card_KE_part, fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors, max_common_neighbors, min_common_neighbors]
+efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
+Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
+min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
+Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery,
+max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con,
+Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks,
+different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree,
+max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree,
+degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures,
+card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues,
+card_cut_vertices, Graph.clustering_average, Graph.connected_components_number,
+Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
+degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
+card_independence_irreducible_part, critical_independence_number, card_KE_part,
+fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
+max_common_neighbors, min_common_neighbors]
 
-intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num, independent_dominating_set_number]
+intractable_invariants = [independence_number, domination_number, chromatic_index,
+Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
+independent_dominating_set_number]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
@@ -1422,14 +1439,38 @@ def has_strong_Havel_Hakimi_property(g):
 invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
 
 
-efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, is_fan, is_cubic, diameter_equals_twice_radius, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw, is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free, has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree, alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible, has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle, is_flower]
+efficiently_computable_properties = [Graph.is_regular, Graph.is_planar,
+Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique,
+Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite,
+Graph.is_cartesian_product,Graph.is_distance_regular,  Graph.is_even_hole_free,
+Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
+Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
+Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian,
+is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
+is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter,
+is_not_forest, is_fan, is_cubic, diameter_equals_twice_radius,
+diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac,
+is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
+is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
+has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
+alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
+has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
+is_flower]
 
-intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant, is_geotropic_plant, is_traceable, is_chordal_or_not_perfect, has_alpha_residue_equal_two]
+intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
+Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
+Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
+is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
+has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
+is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
+has_alpha_residue_equal_two]
 
 removed_properties = [is_pebbling_class0]
 
 #speed notes
-#FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive, is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric, is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
+#FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive,
+#    is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric,
+#    is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
 #SLOW but FIXED for SpecialGraphs: is_class1, is_class2
 
 properties = efficiently_computable_properties + intractable_properties
@@ -1989,12 +2030,34 @@ class0small = [g for g in class0graphs if g.order() < 30]
 c5=graphs.CycleGraph(5)
 c5.name(new = "c5")
 
-graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), s3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), graphs.MeredithGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph, p4, p5, c6, c9, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals]
+graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord,
+graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(), prismy,
+c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2,
+graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller,
+graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(),
+s3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, difficult11,
+graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(),
+graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(),
+graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.HouseXGraph(),
+graphs.OctahedralGraph(), graphs.ThomsenGraph(), graphs.TetrahedralGraph(), pete,
+graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(),
+graphs.HerschelGraph(), graphs.SchlaefliGraph(), graphs.CoxeterGraph(),
+graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(),
+graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(),
+graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(),
+graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4,
+regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant,
+graphs.ShrikhandeGraph(), graphs.MeredithGraph(), sylvester, fork, edge_critical_5,
+edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph,
+barrus_graph, p4, p5, c6, c9, ce3, ce4, ce5, k4e2split, flower_with_3_petals,
+flower_with_4_petals]
 
-chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus]
+chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5,
+edge_critical_11_1, edge_critical_11_2, pete_minus]
 
 #graphs where some computations are especially slow
-problem_graphs = [graphs.MeredithGraph(), haemers, c3mycielski4, alon_seymour] + alpha_critical_graphs + chromatic_index_critical_7 + class0small
+problem_graphs = ([graphs.MeredithGraph(), haemers, c3mycielski4, alon_seymour]
+ + alpha_critical_graphs + chromatic_index_critical_7 + class0small)
 #meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 
 
