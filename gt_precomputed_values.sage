@@ -38,6 +38,6 @@ def store_values(overwrite=False, database=None, verbose=False):
     store_property_value(matching_covered, alon_seymour, True, overwrite=overwrite, database=database, verbose=verbose)
     store_property_value(is_locally_two_connected, alon_seymour, True, overwrite=overwrite, database=database, verbose=verbose)
     #c100 is hamiltonian. Cite: Aldred, Robert EL, et al. "Nonhamiltonian 3-connected cubic planar graphs." SIAM Journal on Discrete Mathematics 13.1 (2000): 25-32.
-    store_property_value(is_hamiltonian, c100, True, overwrite=overwrite, database=database, verbose=verbose)
+    store_property_value(Graph.is_hamiltonian, c100, True, overwrite=overwrite, database=database, verbose=verbose)
     #calculated haemers *is* 3connected using new property definition on 160418
     store_property_value(is_three_connected, haemers, True, overwrite=overwrite, database=database, verbose=verbose)
