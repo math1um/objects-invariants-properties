@@ -756,14 +756,14 @@ def is_complement_of_chordal(g):
 
 #a consequence of the Friendship Theorem:
 #the only connected graphs where every pair of vertices has a unique neghbor are flowers
-def is_flower(g):
+def pairs_have_unique_common_neighbor(g):
     """
     tests if a graph is a collection of disjoint triangles with a single identified vertex
-        sage: is_flower(flower(5))
+        sage: pairs_have_unique_common_neighbor(flower(5))
         True
-        sage: is_flower(k3)
+        sage: pairs_have_unique_common_neighbor(k3)
         True
-        sage: is_flower(k4)
+        sage: pairs_have_unique_common_neighbor(k4)
         False
     """
     if not g.is_connected():
@@ -1522,7 +1522,7 @@ is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
-is_flower]
+pairs_have_unique_common_neighbor]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
