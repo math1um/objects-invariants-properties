@@ -907,6 +907,17 @@ invariants = efficiently_computable_invariants + intractable_invariants
 
 #GRAPH PROPERTIES
 
+#split graphs have the property that their complements are chordal
+def is_complement_of_chordal(g):
+    """
+    tests is a graph is a complement of a chordal graph
+        sage: is_complement_of_chordal(p4)
+        True
+        sage: is_complement_of_chordal(p5)
+        False
+    """
+    h = g.complement()
+    return h.is_chordal()
 
 #a consequence of the Friendship Theorem:
 #the only connected graphs where every pair of vertices has a unique neghbor are flowers
