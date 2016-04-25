@@ -1,197 +1,3 @@
-#GRAPH UTILITIES
-
-def check_independence_extension(g,S):
-    """
-    Returns True if the set S extends to a maximum independent set of the graph g.
-
-        sage: check_independence_extension(graphs.CycleGraph(6), Set([0,2]))
-        True
-        sage: check_independence_extension(graphs.CycleGraph(6), Set([0,3]))
-        False
-    """
-    V = g.vertices()
-    alpha = independence_number(g)
-    #print alpha
-
-    if not S.issubset(Set(V)) or not g.is_independent_set(S):
-        return False
-
-    N = neighbors_set(g,S)
-    X = [v for v in V if v not in S and v not in N]
-    h = g.subgraph(X)
-    alpha_h = independence_number(h)
-    #print alpha_h, len(S)
-
-    return (alpha == alpha_h + len(S))
-
-def find_alpha_critical_graphs(order):
-    """
-    Returns a list of the graph6 string of each of the alpha critical graphs of
-    the given order. A graph g is alpha critical if alpha(g-e) > alpha(g) for
-    every edge e in g. This looks at every graph of the given order, so this
-    will be slow for any order larger than 8.
-
-    There is a unique alpha critical graph on 3 and 4 vertices::
-
-        sage: find_alpha_critical_graphs(3)
-        ['Bw']
-        sage: find_alpha_critical_graphs(4)
-        ['C~']
-
-    There are two alpha critical graphs on 5 vertices::
-
-        sage: find_alpha_critical_graphs(5)
-        ['Dhc', 'D~{']
-
-    There are two alpha critical graphs on 6 vertices::
-
-        sage: find_alpha_critical_graphs(6)
-        ['E|OW', 'E~~w']
-    """
-    graphgen = graphs(order)
-    count = 0
-    alpha_critical_name_list = []
-    for g in graphgen:
-        if g.is_connected():
-            count += 1
-            if is_alpha_critical(g):
-                alpha_critical_name_list.append(g.graph6_string())
-    s = "alpha_critical_name_list_{}".format(order)
-    save(alpha_critical_name_list, s)
-    return alpha_critical_name_list
-
-def is_degree_sequence(L):
-    """
-    Returns True if the list L is the degree sequence of some graph.
-
-    Since a graph always contains at least two vertices of the same degree, a
-    list containing no duplicates cannot be a degree sequence::
-
-        sage: is_degree_sequence([i for i in range(8)])
-        False
-
-    A cycle has all degrees equal to two and exists for any order larger than
-    3, so a list of twos of length at least 3 is a degree sequence::
-
-        sage: is_degree_sequence([2]*10)
-        True
-    """
-    try:
-        graphs.DegreeSequence(L)
-    except:
-        return False
-    return True
-
-#ALPHA APPROXIMATIONS
-
-def find_lower_bound_sets(g, i):
-    """
-    Returns a list of independent sets of size i unioned with their neighborhoods.
-    Since this checks all subsets of size i, this is a potentially slow method!
-
-        sage: l = find_lower_bound_sets(graphs.CycleGraph(6),2)
-        sage: l
-        [{0, 1, 2, 3, 5},
-         {0, 1, 2, 3, 4, 5},
-         {0, 1, 3, 4, 5},
-         {0, 1, 2, 3, 4},
-         {0, 1, 2, 4, 5},
-         {1, 2, 3, 4, 5},
-         {0, 2, 3, 4, 5}]
-        sage: type(l[0])
-        <class 'sage.sets.set.Set_object_enumerated_with_category'>
-    """
-    V = g.vertices()
-    lowersets = []
-
-    for S in Subsets(Set(V),i):
-        if g.is_independent_set(S):
-            T = Set(closed_neighborhood(g,list(S)))
-            if T not in Set(lowersets):
-                lowersets.append(T)
-    return lowersets
-
-def alpha_lower_approximation(g, i):
-    n = g.order()
-
-    LP = MixedIntegerLinearProgram(maximization=False)
-    x = LP.new_variable(nonnegative=True)
-
-    # We define the objective
-    LP.set_objective(sum([x[v] for v in g]))
-
-    # For any subset, we define a constraint
-    for j in range(1,i+1):
-        for S in find_lower_bound_sets(g, j):
-            #print S, S.cardinality()
-
-            LP.add_constraint(sum([x[k] for k in S]), min = j)
-
-    LP.solve()
-
-    #return LP
-
-    x_sol = LP.get_values(x)
-    print x_sol
-    return sum(x_sol.values())
-
-#input = graph g
-#output = bipartite graph with twice as many nodes and edges
-#new nodes are labeled n to 2n-1
-#assumes nodes in g are labeled [0..n-1]
-#same as cartesian product with k2, but output labeling is guarnateed to be integers
-def make_bidouble_graph(g):
-    n = g.order()
-    V = g.vertices()
-    gdub = Graph(2*n)
-    #print "gdub order = {}".format(gdub.order())
-
-    for (i,j) in g.edges(labels = False):
-        #print (i,j)
-        gdub.add_edge(i,j+n)
-        gdub.add_edge(j,i+n)
-    return gdub
-
-#HEURISTIC ALGORITHMS
-
-#takes vertex of max degree, deletes so long as degree > 0, retuens remaining ind set
-def MAXINE_independence_heuristic(g):
-    V = g.vertices()
-    h = g.subgraph(V)
-    delta = max(h.degree())
-
-    while delta > 0:
-        #print "V is {}".format(V)
-        #print "h vertices = {}, h.degree = {}".format(h.vertices(),h.degree())
-
-        max_degree_vertex = V[h.degree().index(delta)]
-        #print "max_degree_vertex = {}".format(max_degree_vertex)
-        #print "h.neighbors(max_degree_vertex) = {}".format(h.neighbors(max_degree_vertex))
-        V.remove(max_degree_vertex)
-        h = g.subgraph(V)
-        delta = max(h.degree())
-        print "delta = {}".format(delta)
-
-    return len(V)
-
-#takes vertex of min degree, adds it to max ind set until no vertices left
-def MIN_independence_heuristic(g):
-    V = g.vertices()
-    I = []
-    while V != []:
-        #print "V is {}".format(V)
-        h = g.subgraph(V)
-        #print "h vertices = {}, h.degree = {}".format(h.vertices(),h.degree())
-        delta = min(h.degree())
-        #print "delta = {}".format(delta)
-        min_degree_vertex = V[h.degree().index(delta)]
-        #print "min_degree_vertex = {}".format(min_degree_vertex)
-        I.append(min_degree_vertex)
-        V = [v for v in V if v not in closed_neighborhood(h, min_degree_vertex)]
-        #break
-    return len(I)
-
-
 #GRAPH INVARIANTS
 
 #inspired by the Friendship Theorem
@@ -892,9 +698,26 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius, Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index, min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha, Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery, max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con, Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks, different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree, max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree, degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures, card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues, card_cut_vertices, Graph.clustering_average, Graph.connected_components_number, Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei, degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen, card_independence_irreducible_part, critical_independence_number, card_KE_part, fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors, max_common_neighbors, min_common_neighbors]
+efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
+Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
+min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
+Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery,
+max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con,
+Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks,
+different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree,
+max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree,
+degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures,
+card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues,
+card_cut_vertices, Graph.clustering_average, Graph.connected_components_number,
+Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
+degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
+card_independence_irreducible_part, critical_independence_number, card_KE_part,
+fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
+max_common_neighbors, min_common_neighbors]
 
-intractable_invariants = [independence_number, domination_number, chromatic_index, Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num, independent_dominating_set_number]
+intractable_invariants = [independence_number, domination_number, chromatic_index,
+Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
+independent_dominating_set_number]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
@@ -1064,19 +887,56 @@ def is_van_den_heuvel(g):
 
 #necessary condition for hamiltonicity
 def is_two_connected(g):
-    for v in g.vertices():
-        L=g.vertices()
-        L.remove(v)
-        if not(g.subgraph(L)).is_connected():
+    """
+    Returns True if the graph is 2-connected and False otherwise. A graph is
+    2-connected if the removal of any single vertex gives a connected graph.
+    By definition a graph on 2 or less vertices is not 2-connected.
+
+        sage: is_two_connected(graphs.CycleGraph(5))
+        True
+        sage: is_two_connected(graphs.PathGraph(5))
+        False
+        sage: is_two_connected(graphs.CompleteGraph(2))
+        False
+        sage: is_two_connected(graphs.CompleteGraph(1))
+        False
+    """
+    if g.order() <= 2:
+        return False
+    from itertools import combinations
+    for s in combinations(g.vertices(), g.order() - 1):
+        if not g.subgraph(s).is_connected():
             return False
     return True
 
 #part of pebbling class0 sufficient condition
 def is_three_connected(g):
-    for v in g.vertices():
-        L=g.vertices()
-        L.remove(v)
-        if not is_two_connected(g.subgraph(L)):
+    """
+    Returns True if the graph is 3-connected and False otherwise. A graph is
+    3-connected if the removal of any single vertex or any pair of vertices
+    gives a connected graph. By definition a graph on 3 or less vertices is
+    not 3-connected.
+
+        sage: is_three_connected(graphs.PetersenGraph())
+        True
+        sage: is_three_connected(graphs.CompleteGraph(4))
+        True
+        sage: is_three_connected(graphs.CycleGraph(5))
+        False
+        sage: is_three_connected(graphs.PathGraph(5))
+        False
+        sage: is_three_connected(graphs.CompleteGraph(3))
+        False
+        sage: is_three_connected(graphs.CompleteGraph(2))
+        False
+        sage: is_three_connected(graphs.CompleteGraph(1))
+        False
+    """
+    if g.order() <= 3:
+        return False
+    from itertools import combinations
+    for s in combinations(g.vertices(), g.order() - 2):
+        if not g.subgraph(s).is_connected():
             return False
     return True
 
@@ -1646,14 +1506,38 @@ def has_strong_Havel_Hakimi_property(g):
 invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
 
 
-efficiently_computable_properties = [Graph.is_regular, Graph.is_planar, Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique, Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite, Graph.is_cartesian_product, Graph.is_distance_regular,  Graph.is_even_hole_free, Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect, Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free, Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian, is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected, is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter, is_not_forest, is_fan, is_cubic, diameter_equals_twice_radius, diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac, is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw, is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free, has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree, alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible, has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle, is_flower]
+efficiently_computable_properties = [Graph.is_regular, Graph.is_planar,
+Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique,
+Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite,
+Graph.is_cartesian_product,Graph.is_distance_regular,  Graph.is_even_hole_free,
+Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
+Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
+Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian,
+is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
+is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter,
+is_not_forest, is_fan, is_cubic, diameter_equals_twice_radius,
+diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac,
+is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
+is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
+has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
+alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
+has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
+is_flower]
 
-intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive, Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free, Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1, is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc, has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant, is_geotropic_plant, is_traceable, is_chordal_or_not_perfect, has_alpha_residue_equal_two]
+intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
+Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
+Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
+is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
+has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
+is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
+has_alpha_residue_equal_two]
 
 removed_properties = [is_pebbling_class0]
 
 #speed notes
-#FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive, is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric, is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
+#FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive,
+#    is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric,
+#    is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
 #SLOW but FIXED for SpecialGraphs: is_class1, is_class2
 
 properties = efficiently_computable_properties + intractable_properties
