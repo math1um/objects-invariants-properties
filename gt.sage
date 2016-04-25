@@ -1397,8 +1397,15 @@ def is_KE(g):
 def is_independence_irreducible(g):
     return g.order() == card_independence_irreducible_part(g)
 
-#g is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
+
 def is_factor_critical(g):
+    """
+    a graph is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
+        is_factor_critical(p3)
+        False
+        sage: is_factor_critical(c5)
+        True
+    """
     if g.order() % 2 == 0:
         return False
     for v in g.vertices():
