@@ -1530,7 +1530,7 @@ Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
 is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
-has_alpha_residue_equal_two]
+has_alpha_residue_equal_two, has_star_center, is_complement_of_chordal]
 
 removed_properties = [is_pebbling_class0]
 
