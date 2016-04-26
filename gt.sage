@@ -48,6 +48,8 @@ def min_common_neighbors(g):
         for j in range(n):
             if i < j:
                 temp = len(common_neighbors(g, V[i], V[j]))
+                #if temp == 0:
+                    #print "i={}, j={}".format(i,j)
                 if temp < min:
                     min = temp
     return min
@@ -766,9 +768,7 @@ def pairs_have_unique_common_neighbor(g):
         sage: pairs_have_unique_common_neighbor(k4)
         False
     """
-    if not g.is_connected():
-        return False
-    elif max_common_neighbors(g) != 1:
+    if max_common_neighbors(g) != 1:
         return False
     elif min_common_neighbors(g) != 1:
         return False
@@ -968,6 +968,11 @@ def is_complete(g):
                 return False
     return True
 
+def has_c4(g):
+    return g.subgraph_search(c4, induced=True) is not None
+
+def is_c4_free(g):
+    return not has_c4(g)
 
 def has_paw(g):
     return g.subgraph_search(paw, induced=True) is not None
@@ -1522,7 +1527,7 @@ is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
-pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal]
+pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, has_c4, is_c4_free]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
