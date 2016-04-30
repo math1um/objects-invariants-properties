@@ -1568,6 +1568,7 @@ p3.name(new = "p3")
 k3_3=graphs.CompleteBipartiteGraph(3,3)
 k3_3.name(new = "k3_3")
 
+#this graph shows that the cartesian product of 2 KE graphs is not necessarily KE
 paw_x_paw = paw.cartesian_product(paw)
 paw_x_paw.name(new = "paw_x_paw")
 
