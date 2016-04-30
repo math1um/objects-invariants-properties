@@ -182,7 +182,7 @@ def is_alpha_critical(g):
 
 #HEURISTIC ALGORITHMS
 
-#takes vertex of max degree, deletes so long as degree > 0, retuens remaining ind set
+#takes vertex of max degree, deletes so long as degree > 0, returns remaining ind set
 def MAXINE_independence_heuristic(g):
     V = g.vertices()
     h = g.subgraph(V)
