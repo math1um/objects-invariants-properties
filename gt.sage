@@ -1568,11 +1568,6 @@ p3.name(new = "p3")
 k3_3=graphs.CompleteBipartiteGraph(3,3)
 k3_3.name(new = "k3_3")
 
-#this graph shows that the cartesian product of 2 KE graphs is not necessarily KE
-# appears in Abay-Asmerom, Ghidewon, et al. "Notes on the independence number in the Cartesian product of graphs." Discussiones Mathematicae Graph Theory 31.1 (2011): 25-35.
-paw_x_paw = paw.cartesian_product(paw)
-paw_x_paw.name(new = "paw_x_paw")
-
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
 for i in [4,5,6]:
@@ -1829,6 +1824,11 @@ c3mycielski4.name(new="c3mycielski4")
 # a PAW is a traingle with a pendant, same as a Z1
 paw=Graph('C{')
 paw.name(new="paw")
+
+#this graph shows that the cartesian product of 2 KE graphs is not necessarily KE
+# appears in Abay-Asmerom, Ghidewon, et al. "Notes on the independence number in the Cartesian product of graphs." Discussiones Mathematicae Graph Theory 31.1 (2011): 25-35.
+paw_x_paw = paw.cartesian_product(paw)
+paw_x_paw.name(new = "paw_x_paw")
 
 #a KITE is a C4 with a chord
 kite = Graph('Cn')
