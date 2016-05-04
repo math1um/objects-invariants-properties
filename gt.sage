@@ -1,5 +1,15 @@
 #GRAPH INVARIANTS
 
+def distinct_degrees(g):
+    """
+    returns the number of distinct degrees of a graph
+        sage: distinct_degrees(p4)
+        2
+        sage: distinct_degrees(k4)
+        1
+    """
+    return len(set(g.degree()))
+
 #inspired by the Friendship Theorem
 def common_neighbors(g,v,w):
     """
@@ -715,7 +725,7 @@ Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
 degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
 card_independence_irreducible_part, critical_independence_number, card_KE_part,
 fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
-max_common_neighbors, min_common_neighbors]
+max_common_neighbors, min_common_neighbors, distinct_degrees]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
