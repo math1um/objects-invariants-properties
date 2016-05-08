@@ -1934,8 +1934,11 @@ ce12.name(new = "ce12")
 
 ce13 = Graph("ExOG")
 #counterexample to: ((diameter_equals_twice_radius)&(is_claw_free))->(has_residue_equals_two)
-
 ce13.name(new = "ce13")
+
+ce14 = Graph('IhCGGC_@?')
+#counterexample to: (~(matching_covered))->(has_residue_equals_alpha)
+ce14.name(new = "IhCGGC_@?")
 
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
 k5pendant = Graph('E~}?')
