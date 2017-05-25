@@ -2335,3 +2335,11 @@ def update_graph_invariant_data(new_objects,invariants):
 
     save(graph_invariant_data, "graph_invariant_data.sobj")
     print "DONE"
+
+
+
+# THEORY
+
+alpha_upper_bounds = []
+
+alpha_lower_bounds = []
