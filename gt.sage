@@ -2147,7 +2147,16 @@ flower_with_3_petals.name(new = "flower_with_3_petals")
 flower_with_4_petals = flower(4)
 flower_with_4_petals.name(new = "flower_with_4_petals")
 
-# Non-perfect, alpha = 2, order = 6
+"""
+Non-perfect, alpha = 2, order = 6
+
+    sage: pepper_non_perfect_graph.is_perfect()
+    false
+    sage: independence_number(pepper_non_perfect_graph)
+    2
+    sage: pepper_non_perfect_graph.order()
+    6
+"""
 pepper_non_perfect_graph = Graph("EdZG")
 pepper_non_perfect_graph.name(new = "pepper_non_planar")
 
