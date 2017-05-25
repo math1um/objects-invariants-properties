@@ -2149,7 +2149,7 @@ flower_with_4_petals.name(new = "flower_with_4_petals")
 
 # Non-perfect, alpha = 2, order = 6
 pepper_non_perfect_graph = Graph("EdZG")
-pepper_non_perfect_graph.name
+pepper_non_perfect_graph.name(new = "pepper_non_planar")
 
 #GRAPH LISTS
 
