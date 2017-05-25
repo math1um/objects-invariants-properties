@@ -2164,6 +2164,20 @@ pepper_non_perfect_graph.name(new = "pepper_non_planar")
 gallai_tree = Graph("`hCKGC@?G@?K?@?@_?w?@??C??G??G??c??o???G??@_??F???N????_???G???B????C????W????G????G????C")
 gallai_tree.name(new = "gallai_tree")
 
+"""
+From Willis's thesis, page 4
+Alpha = Fractional Alpha = 4
+    
+    sage: independence_number(willis_page4)
+    4
+    sage: fractional_alpha(willis_page4)
+    4
+"""
+willis_page4 = Graph("GlCKIS")
+willis_page4.name(new = "willis_page4")
+
+
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
