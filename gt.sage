@@ -2147,6 +2147,10 @@ flower_with_3_petals.name(new = "flower_with_3_petals")
 flower_with_4_petals = flower(4)
 flower_with_4_petals.name(new = "flower_with_4_petals")
 
+# Non-perfect, alpha = 2, order = 6
+pepper_non_perfect_graph = Graph("EdZG")
+pepper_non_perfect_graph.name
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
