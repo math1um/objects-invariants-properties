@@ -2191,6 +2191,7 @@ willis_page13_fig27.name(new = "willis_page13_fig27")
 
 """
 From Willis's thesis, page 9, Figure 2.1
+Graph for which the Cvetkovic bound is the best upper bound present in the thesis
 
     sage: independence_number(willis_page9)
     3
