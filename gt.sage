@@ -2261,6 +2261,23 @@ Graph for which the minimum degree  is the best upper bound present in the thesi
 willis_page18 = Graph("E}lw")
 willis_page18.name(new = "willis_page18")
 
+"""
+From Willis's thesis, page 21, Figure 3.1
+Graph for which n/chi is the best lower bound present in the thesis
+
+    sage: independence_number(willis_page9)
+    4
+    sage: willis_page9.order()
+    12
+    sage: willis_page9.size()
+    20
+    sage: max_degree(willis_page9)
+    4
+    sage: chromatic_num(willis_page9)
+    3
+"""
+
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
