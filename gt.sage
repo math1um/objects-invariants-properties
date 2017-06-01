@@ -2298,7 +2298,7 @@ Graph for which n/chi is the best lower bound present in the thesis
     sage: chromatic_num(willis_page21)
     3
 """
-willis_page21 = Graph("'KoD?Xb?@HBBB")
+willis_page21 = Graph("KoD?Xb?@HBBB")
 willis_page21.name(new = "willis_page21")
 
 """
