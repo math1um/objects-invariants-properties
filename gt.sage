@@ -1992,8 +1992,8 @@ p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
 
 #star with 3 rays, order = 4
-s3 = graphs.StarGraph(3)
-s3.name(new="s3")
+k1_3 = graphs.StarGraph(3)
+k1_3.name(new="k1_3")
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
