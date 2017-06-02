@@ -2021,7 +2021,11 @@ p2.name(new="p2")
 p6 = graphs.PathGraph(6)
 p6.name(new="p6")
 
-# CE to alpha <= e^(cosh(max_degree(x) - 1))
+"""
+CE to independence_number(x) <= e^(cosh(max_degree(x) - 1))
+ and to
+independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
+"""
 p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
 
