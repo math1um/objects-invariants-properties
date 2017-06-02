@@ -2013,7 +2013,7 @@ ce26 = Graph("NF?_?o@?Oa?BC_?OOaO")
 ce26.name(new = "ce26")
 
 # CE to independence_number(x) <= floor(average_distance(x)) + maximum(max_even_minus_even_horizontal(x), brinkmann_steffen(x))
-ce27 = Graph("K_GBXSysCE_")
+ce27 = Graph("K_GBXS`ysCE_")
 ce27.name(new = "ce27")
 
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
