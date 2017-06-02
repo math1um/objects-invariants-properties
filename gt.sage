@@ -1892,7 +1892,9 @@ p5.name(new = "p5")
 """
 P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x)) 
  and to  
-<=max_degree(x)^e^card_center(x)
+<= max_degree(x)^e^card_center(x)
+ and to
+<= max_degree(x)^2 + card_periphery(x)
 """
 p29 = graphs.PathGraph(29)
 p29.name(new = "p29")
