@@ -1895,7 +1895,7 @@ P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenva
 <=max_degree(x)^e^card_center(x)
 """
 p29 = graphs.PathGraph(29)
-p29.name(new "p29")
+p29.name(new = "p29")
 
 c9 = graphs.CycleGraph(9)
 c9.name(new = "c9")
