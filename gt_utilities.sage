@@ -219,5 +219,14 @@ def MIN_independence_heuristic(g):
         #break
     return len(I)
 
+"""
+Returns true if the given graph exists in the given list. 
+It also prints out all graphs in the list that are isomorphic so that duplicates may also be found here.
+"""
 def does_graph_exist(g, L):
-    return any(g.is_isomorphic(gL) for gL in L)
+    success = False
+    for gL in L:
+        if g.is_isomorphic(gL):
+            print gL.name()
+            success = True
+    return success
