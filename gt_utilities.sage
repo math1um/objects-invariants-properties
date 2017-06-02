@@ -220,4 +220,4 @@ def MIN_independence_heuristic(g):
     return len(I)
 
 def does_graph_exist(g, L):
-    any(g.is_isomorphic(gL) for gL in L)
+    return any(g.is_isomorphic(gL) for gL in L)
