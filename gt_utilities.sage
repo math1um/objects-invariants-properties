@@ -218,3 +218,15 @@ def MIN_independence_heuristic(g):
         V = [v for v in V if v not in closed_neighborhood(h, min_degree_vertex)]
         #break
     return len(I)
+
+"""
+Returns true if the given graph exists in the given list. 
+It also prints out all graphs in the list that are isomorphic so that duplicates may also be found here.
+"""
+def does_graph_exist(g, L):
+    success = False
+    for gL in L:
+        if g.is_isomorphic(gL):
+            print gL.name()
+            success = True
+    return success

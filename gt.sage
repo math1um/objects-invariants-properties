@@ -1600,6 +1600,10 @@ p3.name(new = "p3")
 k3_3=graphs.CompleteBipartiteGraph(3,3)
 k3_3.name(new = "k3_3")
 
+# The line graph of k3,3
+k3_3_line_graph = k3_3.line_graph()
+k3_3_line_graph.name(new = "k3_3 line graph")
+
 k5_3=graphs.CompleteBipartiteGraph(5,3)
 k5_3.name(new = "k5_3")
 
@@ -1885,6 +1889,16 @@ p4.name(new="p4")
 p5 = graphs.PathGraph(5)
 p5.name(new = "p5")
 
+"""
+P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x)) 
+ and to  
+<= max_degree(x)^e^card_center(x)
+ and to
+<= max_degree(x)^2 + card_periphery(x)
+"""
+p29 = graphs.PathGraph(29)
+p29.name(new = "p29")
+
 c9 = graphs.CycleGraph(9)
 c9.name(new = "c9")
 
@@ -1954,6 +1968,70 @@ CE to independence_number(x) <= 10^order_automorphism_group(x)
 ce15 = Graph("x??C?O?????A?@_G?H??????A?C??EGo?@S?O@?O??@G???CO???CAC_??a?@G?????H???????????O?_?H??G??G??@??_??OA?OCHCO?YA????????A?O???G?O?@????OOC???_@??????MCOC???O_??[Q??@???????O??_G?P?GO@A?G_???A???A@??g???W???@CG_???`_@O??????@?O@?AGO?????C??A??F??????@C????A?E@L?????P@`??")
 ce15.name(new = "ce15")
 
+# CE to independence_number(x) <= 2*maximum(welsh_powell(x), max_even_minus_even_horizontal(x))
+ce16 = Graph("mG???GP?CC?Aa?GO?o??I??c??O??G?ACCGW@????OC?G@?_A_W_OC@??@?I??O?_AC?Oo?E@_?O??I??B_?@_A@@@??O?OC?GC?CD?C___gAO?G??KOcGCiA??SC????GAVQy????CQ?cCACKC_?A?E_??g_AO@C??c??@@?pY?G?")
+ce16.name(new = "ce16")
+
+# CE to independence_number(x) >= 1/2*cvetkovic(x) 
+ce17 = Graph("S??wG@@h_GWC?AHG?_gMGY_FaIOk@?C?S")
+ce17.name(new = "ce17")
+
+# CE to independence_number(x) >= matching_number - sigma_2
+ce18 = Graph("cGO_?CCOB@O?oC?sTDSOCC@O???W??H?b???hO???A@CCKB??I??O??AO@CGA???CI?S?OGG?ACgQa_Cw^GP@AID?Gh??ogD_??dR[?AG?")
+ce18.name(new = "ce18")
+
+# CE to independence_number(x) <= maximum(max_even_minus_even_horizontal(x), radius(x)*welsh_powell(x))
+ce19 = Graph('J?@OOGCgO{_')
+ce19.name(new = "ce19")
+
+# CE to independence_number(x) <= card_center(x) + max_even_minus_even_horizontal(x) + 1
+ce20 = Graph('M?CO?k?OWEQO_O]c_')
+ce20.name(new = "ce20")
+
+# CE to independence_number(x) <= median_degree(x)^2 + card_periphery(x)
+ce21 = Graph('FiQ?_')
+ce21.name(new = "ce21")
+
+# CE to independence_number(x) <= brinkmann_steffen(x) + max_even_minus_even_horizontal(x) + 1
+ce22 = Graph('Ss?fB_DYUg?gokTEAHC@ECSMQI?OO?GD?')
+ce22.name(new = "ce22")
+
+# CE to independence_number(x) <= inverse_degree(x) + order_automorphism_group(x) + 1
+ce23 = Graph("HkIU|eA")
+ce23.name(new = "ce23")
+
+# CE to independence_number(x) <= ceil(eulerian_faces(x)/diameter(x)) +max_even_minus_even_horizontal(x)
+ce24 = Graph('JCbcA?@@AG?')
+ce24.name(new = "ce24")
+
+# CE to independence_number(x) <= floor(e^(maximum(max_even_minus_even_horizontal(x), fiedler(x))))
+ce25 = Graph('OX??ZHEDxLvId_rgaC@SA')
+ce25.name(new = "ce25")
+
+# CE to independence_number(x) <= maximum(card_periphery(x), radius(x)*welsh_powell(x))
+ce26 = Graph("NF?_?o@?Oa?BC_?OOaO")
+ce26.name(new = "ce26")
+
+# CE to independence_number(x) <= floor(average_distance(x)) + maximum(max_even_minus_even_horizontal(x), brinkmann_steffen(x))
+ce27 = Graph("K_GBXS`ysCE_")
+ce27.name(new = "ce27")
+
+# CE to independence_number(x) <= minimum(annihilation_number(x), 2*e^sum_temperatures(x))
+ce28 = Graph("g??O?C_?`?@?O??A?A????????C?????G?????????A@aA??_???G??GA?@????????_???GHC???CG?_???@??_??OB?C?_??????_???G???C?O?????O??A??????G??")
+ce28.name(new = "ce28")
+
+# CE to independence_number(x) <= maximum(2*welsh_powell(x), maximum(max_even_minus_even_horizontal(x), laplacian_energy(x)))
+ce29 = Graph("P@g??BSCcIA???COcSO@@O@c")
+ce29.name(new = "ce29")
+
+# CE to independence_number(x) <= maximum(order_automorphism_group(x), 2*cvetkovic(x) - matching_number(x))
+ce30 = Graph("G~q|{W")
+ce30.name(new = "ce30")
+
+# CE to independence_number(x) <= max_even_minus_even_horizontal(x) + min_degree(x) + welsh_powell(x)
+ce31 = Graph("VP??oq_?PDOGhAwS??bSS_nOo?OHBqPi?I@AGP?POAi?")
+ce31.name(new = "ce31")
+
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
 k5pendant = Graph('E~}?')
 k5pendant.name(new="k5pendant")
@@ -1981,19 +2059,31 @@ k6.name(new="k6")
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 
+# CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
+c102 = graphs.CycleGraph(102)
+c102.name(new = "c102")
+
 p2 = graphs.PathGraph(2)
 p2.name(new="p2")
 
 p6 = graphs.PathGraph(6)
 p6.name(new="p6")
 
-# CE to alpha <= e^(cosh(max_degree(x) - 1))
+"""
+CE to independence_number(x) <= e^(cosh(max_degree(x) - 1))
+ and to
+independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
+"""
 p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
 
+# CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
+p102 = graphs.PathGraph(102)
+p102.name(new = "p102")
+
 #star with 3 rays, order = 4
-s3 = graphs.StarGraph(3)
-s3.name(new="s3")
+k1_3 = graphs.StarGraph(3)
+k1_3.name(new="k1_3")
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
@@ -2176,7 +2266,7 @@ Non-perfect, alpha = 2, order = 6
     6
 """
 pepper_non_perfect_graph = Graph("EdZG")
-pepper_non_perfect_graph.name(new = "pepper_non_planar")
+pepper_non_perfect_graph.name(new = "pepper_non_perfect")
 
 # Gallai Tree graph
 gallai_tree = Graph("`hCKGC@?G@?K?@?@_?w?@??C??G??G??c??o???G??@_??F???N????_???G???B????C????W????G????G????C")
@@ -2266,6 +2356,24 @@ willis_page10_fig24 = Graph("WvOGWK@?G@_B???@_?O?F?????G??W?@K_?????G??@_?@B")
 willis_page10_fig24.name(new = "willis_page10_fig24")
 
 """
+From Willis's thesis, page 13, Figure 2.6
+Graph for which the fractional independence bound is the best upper bound present in the thesis
+
+    sage: independence_number(willis_page13_fig26)
+    3
+    sage: willis_page13_fig26.order()
+    7
+    sage: willis_page13_fig26.size()
+    12
+    sage: max_degree(willis_page13_fig26)
+    4
+    sage: min_degree(willis_page13_fig26)
+    3
+"""
+willis_page13_fig26 = Graph("FstpW")
+willis_page13_fig26.name(new = "willis_page13_fig26")
+
+"""
 From Willis's thesis, page 18, Figure 2.9
 Graph for which the minimum degree  is the best upper bound present in the thesis
 
@@ -2298,7 +2406,7 @@ Graph for which n/chi is the best lower bound present in the thesis
     sage: chromatic_num(willis_page21)
     3
 """
-willis_page21 = Graph("'KoD?Xb?@HBBB")
+willis_page21 = Graph("KoD?Xb?@HBBB")
 willis_page21.name(new = "willis_page21")
 
 """
@@ -2334,8 +2442,8 @@ Graph for which residue is the best lower bound present in the thesis
     sage: chromatic_num(willis_page25_fig33)
     4
 """
-willis_page25_fig32 = Graph("Mts?GKE@QDCIQIKD?")
-willis_page25_fig32.name(new = "willis_page25_fig33")
+willis_page25_fig33 = Graph("Mts?GKE@QDCIQIKD?")
+willis_page25_fig33.name(new = "willis_page25_fig33")
 
 # The Lemke Graph
 lemke = Graph("G_?ztw")
@@ -2493,6 +2601,48 @@ A graph where none of the upper or lower bounds in the thesis give the exact val
 willis_page40_fig512 = Graph("Ms???\?OGdAQJ?J??")
 willis_page40_fig512.name(new = "willis_page40_fig512")
 
+"""
+From Willis's thesis, page 41, Figure 5.14
+A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
+
+    sage: independence_number(willis_page41_fig514)
+    5
+    sage: willis_page41_fig514.order()
+    12
+    sage: willis_page41_fig514.size()
+    18
+"""
+willis_page41_fig514 = Graph("Kt?GGGBQGeL?")
+willis_page41_fig514.name(new = "willis_page41_fig514")
+
+"""
+From Willis's thesis, page 41, Figure 5.15
+A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
+
+    sage: independence_number(willis_page41_fig515)
+    4
+    sage: willis_page41_fig515.order()
+    11
+    sage: willis_page41_fig515.size()
+    22
+"""
+willis_page41_fig515 = Graph("JskIIDBLPh?")
+willis_page41_fig515.name(new = "willis_page41_fig515")
+
+"""
+From Elphick-Wocjan page 8
+"""
+elphick_wocjan_page8 = Graph("F?Azw")
+elphick_wocjan_page8.name(new = "Elphick-Wocjan p.8")
+
+"""
+From Elphick-Wocjan page 9
+"""
+elphick_wocjan_page9 = Graph("FqhXw")
+elphick_wocjan_page9.name(new = "Elphick-Wocjan p.9")
+
+
+
 #GRAPH LISTS
 
 #all with order 3 to 9, a graph is chroamtic_index_critical if it is class 2 removing any edge increases chromatic index
@@ -2530,7 +2680,7 @@ class0small = [g for g in class0graphs if g.order() < 30]
 c5=graphs.CycleGraph(5)
 c5.name(new = "c5")
 
-graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), s3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph, p5, c6, c9, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals, paw_x_paw, graphs.WagnerGraph(), houseX, ce7, triangle_star, ce8, ce9, ce10, p3, binary_octahedron, ce11, prism, ce12, ce13, ce14, pepper_non_planar_graph, gallai_tree, willis_page4, willis_page13_fig27, willis_page9, willis_page10_fig23, willis_page10_fig24, willis_page18, willis_page21, willis_page25_fig32, willis_page25_fig33, lemke, k5_3, willis_page29, p9, ce15, willis_page35_fig51, willis_page35_fig52, willis_page36_fig53, willis_page36_fig54, willis_page36_fig55, willis_page37_fig56, willis_page37_fig58, trig_antiprism_capped, willis_page39_fig510, willis_page39_fig511, willis_page40_fig512] + alpha_critical_easy
+graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), k1_3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph, p5, c6, c9, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals, paw_x_paw, graphs.WagnerGraph(), houseX, ce7, triangle_star, ce8, ce9, ce10, p3, binary_octahedron, ce11, prism, ce12, ce13, ce14, pepper_non_perfect_graph, gallai_tree, willis_page4, willis_page13_fig27, willis_page9, willis_page10_fig23, willis_page10_fig24, willis_page13_fig26, willis_page18, willis_page21, willis_page25_fig32, willis_page25_fig33, lemke, k5_3, willis_page29, p9, ce15, willis_page35_fig51, willis_page35_fig52, willis_page36_fig53, willis_page36_fig54, willis_page36_fig55, willis_page37_fig56, willis_page37_fig58, trig_antiprism_capped, willis_page39_fig510, willis_page39_fig511, willis_page40_fig512, willis_page41_fig514, willis_page41_fig515, k3_3_line_graph, ce16, ce17, elphick_wocjan_page8, elphick_wocjan_page9, p29, ce18, ce19, ce20, ce21, ce22, ce23, ce24, ce25, ce26, ce27, c102, p102, ce28, ce29, ce30, ce31] + alpha_critical_easy
 
 alpha_critical_hard = [Graph('Hj\\x{F{')]
 
