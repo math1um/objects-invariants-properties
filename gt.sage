@@ -2061,6 +2061,10 @@ independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
 p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
 
+# CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
+p102 = graphs.PathGraph(102)
+p102.name(new = "p102")
+
 #star with 3 rays, order = 4
 k1_3 = graphs.StarGraph(3)
 k1_3.name(new="k1_3")
