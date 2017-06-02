@@ -218,3 +218,6 @@ def MIN_independence_heuristic(g):
         V = [v for v in V if v not in closed_neighborhood(h, min_degree_vertex)]
         #break
     return len(I)
+
+def does_graph_exist(g, L):
+    any(g.is_isomorphic(gL) for gL in L)
