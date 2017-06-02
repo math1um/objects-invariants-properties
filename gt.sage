@@ -1992,6 +1992,10 @@ ce20.name(new = "ce20")
 ce21 = Graph('FiQ?_')
 ce21.name(new = "ce21")
 
+# CE to independence_number(x) <= brinkmann_steffen(x) + max_even_minus_even_horizontal(x) + 1
+ce22 = Graph('Ss?fB_DYUg?gokTEAHC@ECSMQI?OO?GD?')
+ce22.name(new = "ce22")
+
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
 k5pendant = Graph('E~}?')
 k5pendant.name(new="k5pendant")
