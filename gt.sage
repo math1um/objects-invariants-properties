@@ -2136,6 +2136,10 @@ ce54.name(new = "ce54")
 ce55 = Graph("I~~~~~~zw")
 ce55.name(new = "ce55")
 
+# CE to independence_number(x) >= lovasz_theta(x)/edge_con(x)
+ce56 = Graph('HsaGpOe')
+ce56.name(new = "ce56")
+
 # CE to independence_number(x) >= minimum(max_degree(x), floor(lovasz_theta(x))) 
 ce57 = Graph("^?H{BDHqHosG??OkHOhE??B[CInU?@j_A?CoA^azGPLcb_@GEYYRPgG?K@gdPAg?d@_?_sGcED`@``O")
 ce57.name(new = "ce57")
