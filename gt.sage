@@ -2100,6 +2100,10 @@ ce46.name(new = "ce46")
 ce47 = Graph("KVOzWAxewcaE")
 ce47.name(new = "ce47")
 
+# CE to independence_number(x) <= maximum(card_periphery(x), max_even_minus_even_horizontal(x) + min_degree(x))
+ce48 = Graph('Iq]ED@_s?')
+ce48.name(new = "ce48")
+
 # CE to independence_number(x) >= sqrt(card_positive_eigenvalues(x)) 
 ce49 = Graph("K^~lmrvv{~~Z")
 ce49.name(new = "ce49")
