@@ -2152,6 +2152,10 @@ ce58.name(new = "ce58")
 #ce59 = Graph("RxCWGCB?G?B?@???N??F??B_??w?")
 #ce59.name(new = "ce59")
 
+# CE to independence_number(x) >= -1/2*diameter(x) + lovasz_theta(x)
+ce60 = Graph('wSh[?GCfclJm?hmgA^We?Q_KIXbf\@SgDNxpwHTQIsIB?MIDZukArBAeXE`vqDLbHCwf{fD?bKSVLklQHspD`Lo@cQlEBFSheAH?yW\YOCeaqmOfsZ?rmOSM?}HwPCIAYLdFx?o[B?]ZYb~IK~Z`ol~Ux[B]tYUE`_gnVyHRQ?{cXG?k\BL?vVGGtCufY@JIQYjByg?Q?Qb`SKM`@[BVCKDcMxF|ADGGMBW`ANV_IKw??DRkY\KOCW??P_?ExJDSAg')
+ce60.name(new = "ce60")
+
 # CE to independence_number(x) <= maximum(card_negative_eigenvalues(x), max_common_neighbors(x) + max_even_minus_even_horizontal(x))
 ce61 = Graph("KsaAA?OOC??C")
 ce61.name(new = "ce61")
