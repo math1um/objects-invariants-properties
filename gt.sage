@@ -2108,6 +2108,10 @@ ce48.name(new = "ce48")
 ce49 = Graph("K^~lmrvv{~~Z")
 ce49.name(new = "ce49")
 
+# CE to  independence_number(x) <= max_degree(x) + maximum(max_even_minus_even_horizontal(x), sigma_2(x))
+ce50 = Graph('bCaJf?A_??GY_O?KEGA???OMP@PG???G?CO@OOWO@@m?a?WPWI?G_A_?C`OIG?EDAIQ?PG???A_A?C??CC@_G?GDI]CYG??GA_A??')
+ce50.name(new = "ce50")
+
 # CE to independence_number(x) >= matching_number(x) - order_automorphism_group(x) - 1 
 ce51 = Graph("Ivq~j^~vw")
 ce51.name(new = "ce51")
