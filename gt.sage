@@ -2068,6 +2068,10 @@ ce38.name(new = "ce38")
 ce39 = Graph("FBAuo")
 ce39.name(new = "ce39") 
 
+# CE to independence_number(x) <= floor(inverse_degree(x)) + order_automorphism_group(x) + 1
+ce40 = Graph('Htji~Ei')
+ce40.name(new = "ce40")
+
 # CE to independence_number(x) <= maximum(girth(x), card_center(x) + card_periphery(x)) 
 ce41 = Graph("FhX?G")
 ce41.name(new = "ce41")
