@@ -2076,6 +2076,10 @@ ce40.name(new = "ce40")
 ce41 = Graph("FhX?G")
 ce41.name(new = "ce41")
 
+# CE to independence_number(x) <= card_center(x) + maximum(residue(x), card_periphery(x))
+ce42 = Graph('GP[KGC')
+ce42.name(new = "ce42") 
+
 # CE to independence_number(x) <= maximum(girth(x), (barrus_bound(x) - order_automorphism_group(x))^2) 
 ce43 = Graph("Exi?")
 ce43.name(new = "ce43")
