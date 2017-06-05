@@ -2144,6 +2144,10 @@ ce56.name(new = "ce56")
 ce57 = Graph("^?H{BDHqHosG??OkHOhE??B[CInU?@j_A?CoA^azGPLcb_@GEYYRPgG?K@gdPAg?d@_?_sGcED`@``O")
 ce57.name(new = "ce57")
 
+# CE to independence_number>= barrus_bound(x) - max(card_center(x), card_positive_eigenvalues(x))
+ce58 = Graph('Sj[{Eb~on~nls~NJWLVz~~^|{l]b\uFss')
+ce58.name(new = "ce58")
+
 # CE to independence_number(x) >= floor(tan(barrus_bound(x) - 1))
 #ce59 = Graph("RxCWGCB?G?B?@???N??F??B_??w?")
 #ce59.name(new = "ce59")
