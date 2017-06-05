@@ -2092,6 +2092,10 @@ ce55.name(new = "ce55")
 ce57 = Graph("^?H{BDHqHosG??OkHOhE??B[CInU?@j_A?CoA^azGPLcb_@GEYYRPgG?K@gdPAg?d@_?_sGcED`@``O")
 ce57.name(new = "ce57")
 
+# CE to independence_number(x) >= floor(tan(barrus_bound(x) - 1))
+ce59 = Graph("RxCWGCB?G?B?@???N??F??B_??w?")
+ce59.name(new = "ce59")
+
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
 k5pendant = Graph('E~}?')
 k5pendant.name(new="k5pendant")
