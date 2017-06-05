@@ -2189,6 +2189,10 @@ ce66.name(new = "ce66")
 ce67 = Graph("G??EDw")
 ce67.name(new = "ce67")
 
+# CE to independence_number(x) >= minimum(card_positive_eigenvalues(x), 2*card_zero_eigenvalues(x))
+ce68 = Graph('HzzP|~]')
+ce68.name(new = "ce68")
+
 # CE to independence_number(x) <= maximum(max_degree(x), radius(x)^card_periphery(x)) 
 ce69 = Graph("F?BvO")
 ce69.name(new = "ce69")
