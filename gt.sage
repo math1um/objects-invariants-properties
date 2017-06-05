@@ -2084,6 +2084,10 @@ ce42.name(new = "ce42")
 ce43 = Graph("Exi?")
 ce43.name(new = "ce43")
 
+# CE to independence_number(x) <= (brinkmann_steffen(x) - szekeres_wilf(x))^2 + max_even_minus_even_horizontal(x)
+ce44 = Graph('GGDSsg')
+ce44.name(new = "ce44")
+
 # CE to independence_number(x) <= maximum(max_even_minus_even_horizontal(x), radius(x)*szekeres_wilf(x)) 
 ce45 = Graph("FWKH?")
 ce45.name(new = "ce45")
