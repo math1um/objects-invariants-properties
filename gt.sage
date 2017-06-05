@@ -2168,6 +2168,10 @@ ce62.name(new = "ce62")
 ce63 = Graph("KOGkYBOCOAi@")
 ce63.name(new = "ce63")
 
+# CE to independence_number(x) >= -max_common_neighbors(x) + min_degree(x)
+ce64 = Graph('`szvym|h~RMQLTNNiZzsgQynDR\p~~rTZXi~n`kVvKolVJfP}TVEN}Thj~tv^KJ}D~VqqsNy|NY|ybklZLnz~TfyG')
+ce64.name(new = "ce64")
+
 # CE to independence_number(x) >= -10^different_degrees(x) + matching_number(x) 
 ce65 = Graph("W~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 ce65.name(new = "ce65")
