@@ -2205,6 +2205,10 @@ ce70.name(new = "ce70")
 ce71 = Graph('ECYW')
 ce71.name(new = "ce71")
 
+# CE to independence_number(x)>=-1/2*x.diameter() + x.lovasz_theta()
+ce72 = Graph('fdSYkICGVs_m_TPs`Fmj_|pGhC@@_[@xWawsgEDe_@g`TC{P@pqGoocqOw?HBDS[R?CdG\e@kMCcgqr?G`NHGXgYpVGCoJdOKBJQAsG|ICE_BeMQGOwKqSd\W?CRg')
+ce72.name(new = "ce72")
+
 #a K5 with a pendant, CE to dirac => regular or planar conjecture
 k5pendant = Graph('E~}?')
 k5pendant.name(new="k5pendant")
