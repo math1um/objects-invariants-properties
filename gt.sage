@@ -1611,6 +1611,11 @@ k3_3_line_graph.name(new = "k3_3 line graph")
 k5_3=graphs.CompleteBipartiteGraph(5,3)
 k5_3.name(new = "k5_3")
 
+# independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x)) is false
+#This is also a counterexample to independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
+k1_9 = graphs.CompleteBipartiteGraph(1,9)
+k1_9.name(new = "k1_9")
+
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
 for i in [4,5,6]:
