@@ -721,6 +721,10 @@ def make_invariant_from_property(property, name=None):
 
     return boolean_valued_invariant
 
+# defined by R. Pepper in an unpublished paper on graph irregularity
+def geometric_length_of_degree_sequence(g):
+    return sqrt(sum(d^2 for d in g.degree()))
+
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -736,7 +740,7 @@ Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
 degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
 card_independence_irreducible_part, critical_independence_number, card_KE_part,
 fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
-max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound]
+max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound, geometric_length_of_degree_sequence]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
