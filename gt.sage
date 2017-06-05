@@ -2124,6 +2124,10 @@ ce52.name(new = "ce52")
 ce53 = Graph("]?GEPCGg]S?`@??_EM@OTp?@E_gm?GW_og?pWO?_??GQ?A?^HIRwH?Y?__BC?G?[PD@Gs[O?GW")
 ce53.name(new = "ce53")
 
+# CE to independence_number(x) >= -average_distance(x) + ceil(lovasz_theta(x))
+ce54 = Graph('lckMIWzcWDsSQ_xTlFX?AoCbEC?f^xwGHOA_q?m`PDDvicEWP`qA@``?OEySJX_SQHPc_H@RMGiM}`CiG?HCsm_JO?QhI`?ARLAcdBAaOh_QMG?`D_o_FvQgHGHD?sKLEAR^ASOW~uAUQcA?SoD?_@wECSKEc?GCX@`DkC')
+ce54.name(new = "ce54")
+
 # CE to independence_number(x) >= -card_periphery(x) + matching_number(x) 
 ce55 = Graph("I~~~~~~zw")
 ce55.name(new = "ce55")
