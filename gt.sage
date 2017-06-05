@@ -2092,6 +2092,10 @@ ce44.name(new = "ce44")
 ce45 = Graph("FWKH?")
 ce45.name(new = "ce45")
 
+# CE to independence_number(x) <= maximum(card_periphery(x), radius(x)*szekeres_wilf(x))
+ce46 = Graph('F`I`?')
+ce46.name(new = "ce46")
+
 # CE to independence_number(x) <= maximum(card_periphery(x), diameter(x) + inverse_degree(x)) 
 ce47 = Graph("KVOzWAxewcaE")
 ce47.name(new = "ce47")
