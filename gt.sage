@@ -2116,6 +2116,10 @@ ce50.name(new = "ce50")
 ce51 = Graph("Ivq~j^~vw")
 ce51.name(new = "ce51")
 
+# CE to independence_number(x) >= order(x)/szekeres_wilf(x)
+ce52 = Graph('H?QaOiG')
+ce52.name(new = "ce52")
+
 # CE to independence_number(x) >= matching_number(x) - sigma_2(x) - 1 
 ce53 = Graph("]?GEPCGg]S?`@??_EM@OTp?@E_gm?GW_og?pWO?_??GQ?A?^HIRwH?Y?__BC?G?[PD@Gs[O?GW")
 ce53.name(new = "ce53")
