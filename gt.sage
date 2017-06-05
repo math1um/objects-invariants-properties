@@ -2040,6 +2040,10 @@ ce32.name(new = "ce32")
 ce33 = Graph("O_aHgP_kVSGOCXAiODcA_")
 ce33.name(new = "ce33")
 
+# CE to independence_number(x) <= card_center(x) + maximum(diameter(x), card_periphery(x))
+ce34 = Graph('H?PA_F_')
+ce34.name(new = "ce34")
+ 
 # CE to independence_number(x) <= card_center(x) + maximum(diameter(x), card_periphery(x))ce35 = Graph("")
 ce35 = Graph("HD`cgGO")
 ce35.name(new = "ce35")
