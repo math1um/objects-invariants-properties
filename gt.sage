@@ -2908,7 +2908,18 @@ From Elphick-Wocjan page 9
 elphick_wocjan_page9 = Graph("FqhXw")
 elphick_wocjan_page9.name(new = "Elphick-Wocjan p.9")
 
+"""
+An odd wheel with 8 vertices
+p.175
+Rebennack, Steffen, Gerhard Reinelt, and Panos M. Pardalos. "A tutorial on branch and cut algorithms for the maximum stable set problem." International Transactions in Operational Research 19.1-2 (2012): 161-199.
 
+    sage: odd_wheel_8.order()
+    8
+    sage: odd_wheel_8.size()
+    14
+"""
+odd_wheel_8 = Graph("G|eKMC")
+odd_wheel_8.name(new = "odd_wheel_8")
 
 #GRAPH LISTS
 
