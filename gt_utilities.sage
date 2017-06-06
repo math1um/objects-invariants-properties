@@ -230,3 +230,15 @@ def does_graph_exist(g, L):
             print gL.name()
             success = True
     return success
+
+"""
+Returns a list of all pairs of isomorphic graphs in the given list.
+"""
+import itertools
+def find_isomorphic_pairs(l):
+    pairs = []
+    L = itertools.combinations(l, r = 2)
+    for pair in L:
+        if pair[0].is_isomorphic(pair[1]):
+            pairs.append(pair)
+    return pairs
