@@ -2223,7 +2223,7 @@ ce73 = Graph('h???_?CA?A?@AA????OPGoC@????A@?A?_C?C?C_A_???_??_G????HG????c?G_?G
 ce73.name(new = "ce73")
 
 # CE to independence_number(x) >= minimum(diameter(x), lovasz_theta(x))
-ce74 = Graph("DCw")
+ce74 = Graph("FCQb_")
 ce74.name(new = "ce74")
 
 # CE to independence_number(x) >= minimum(girth(x), floor(lovasz_theta(x)))
