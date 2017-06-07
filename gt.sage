@@ -3280,7 +3280,9 @@ fractional_thm = fractional_alpha
 # D. M. Cvetkovic, M. Doob, and H. Sachs. Spectra of graphs. Academic Press, New York, 1980.
 cvetkovic_thm = cvetkovic
 
+# Trivial
+trivial_thm = Graph.order
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm]
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm]
 
 alpha_lower_bounds = []
