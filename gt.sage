@@ -3270,6 +3270,10 @@ def update_graph_invariant_data(new_objects,invariants):
 
 # THEORY
 
-alpha_upper_bounds = []
+# R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
+annihilation_thm = annihilation_number
+
+
+alpha_upper_bounds = [annihilation_thm]
 
 alpha_lower_bounds = []
