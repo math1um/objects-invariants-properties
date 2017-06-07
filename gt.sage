@@ -3295,6 +3295,10 @@ def hansen_thm(g):
 def matching_number_thm(g): 
     return order(g) - matching_number(g)
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm]
+# Min-Degree Theorm
+def min_degree_thm(g):
+    return order(g) - min_degree(g)
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm]
 
 alpha_lower_bounds = []
