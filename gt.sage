@@ -3277,9 +3277,10 @@ annihilation_thm = annihilation_number
 # Nemhauser, George L., and Leslie E. Trotter. "Properties of vertex packing and independence system polyhedra." Mathematical Programming 6.1 (1974): 48-61.
 fractional_thm = fractional_alpha
 
+# D. M. Cvetkovic, M. Doob, and H. Sachs. Spectra of graphs. Academic Press, New York, 1980.
+cvetkovic_thm = cvetkovic
 
 
-
-alpha_upper_bounds = [annihilation_thm, fractional_thm]
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm]
 
 alpha_lower_bounds = []
