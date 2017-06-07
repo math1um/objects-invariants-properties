@@ -3300,10 +3300,12 @@ def min_degree_thm(g):
     return order(g) - min_degree(g)
 
 # Cut Vertices Theorem
+# Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
 def cut_vertices_thm(g):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
 
 # Radius Pendants Theorem
+# Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
 def radius_pendants_thm(g):
     return (g.radius() + (card_pendants(g)/2) - 1)
 
