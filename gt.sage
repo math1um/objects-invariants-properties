@@ -3273,7 +3273,13 @@ def update_graph_invariant_data(new_objects,invariants):
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
 annihilation_thm = annihilation_number
 
+# Nemhauser, George L., and Leslie Earl Trotter. "Vertex packings: structural properties and algorithms." Mathematical Programming 8.1 (1975): 232-248.
+# Nemhauser, George L., and Leslie E. Trotter. "Properties of vertex packing and independence system polyhedra." Mathematical Programming 6.1 (1974): 48-61.
+fractional_thm = fractional_alpha
 
-alpha_upper_bounds = [annihilation_thm]
+
+
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm]
 
 alpha_lower_bounds = []
