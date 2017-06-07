@@ -3284,12 +3284,12 @@ cvetkovic_thm = cvetkovic
 trivial_thm = Graph.order
 
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
-kwok_thm = lambda g: order(g) - (size(g)/max_degree(g))
-kwok_thm.__name__ = 'kwok'
+def kwok_thm(g):
+    return order(g) - (size(g)/max_degree(g))
 
 # P. Hansen and M. Zheng. Sharp Bounds on the order, size, and stability number of graphs. NETWORKS 23 (1993), no. 2, 99-102.
-hansen_thm = lambda g: floor(1/2 + sqrt(1/4 + order(g)**2 - order(g) - 2*size(g)))
-hansen_thm.__name__ = "hansen"
+def hansen_thm(g): 
+    return floor(1/2 + sqrt(1/4 + order(g)**2 - order(g) - 2*size(g)))
 
 alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm]
 
