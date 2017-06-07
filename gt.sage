@@ -3283,6 +3283,10 @@ cvetkovic_thm = cvetkovic
 # Trivial
 trivial_thm = Graph.order
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm]
+# R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
+kwok_thm = lambda g: order(g) - (size(g)/max_degree(g))
+kwok_thm.__name__ = 'kwok'
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm]
 
 alpha_lower_bounds = []
