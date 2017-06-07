@@ -3270,6 +3270,10 @@ def update_graph_invariant_data(new_objects,invariants):
 
 # THEORY
 
+#####
+# UPPER BOUND
+#####
+
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
 annihilation_thm = annihilation_number
 
@@ -3304,7 +3308,12 @@ def min_degree_thm(g):
 def cut_vertices_thm(g):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm]
+# Median Degree Theorem
+# Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
+def median_degree_thm(g):
+    return (g.order() - (median_degree(g)/2) - 1/2)
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, median_degree_thm]
 
 #####
 # LOWER BOUNDS
