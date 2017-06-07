@@ -3303,6 +3303,10 @@ def min_degree_thm(g):
 def cut_vertices_thm(g):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm]
+# Radius Pendants Theorem
+def radius_pendants_thm(g):
+    return (g.radius() + (card_pendants(g)/2) - 1)
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, radius_pendants_thm]
 
 alpha_lower_bounds = []
