@@ -3055,7 +3055,27 @@ Chartrand Fig 1.8 - G
 chartrand_18_g = Graph("Fo@Xo")
 chartrand_18_g.name(new = "chartrand fig 1.8 - G")
 
+"""
+Chartrand Fig 1.8 - F1
 
+    sage: chartrand_18_f1.order()
+    7
+    sage: chartrand_18_f1.size()
+    10
+"""
+chartrand_18_f1 = Graph("F@J]o")
+chartrand_18_f1.name(new = "chartrand fig 1.8 - F1")
+
+"""
+Chartrand Fig 1.8 - F2
+
+    sage: chartrand_18_f2.order()
+    7
+    sage: chartrand_18_f2.size()
+    10
+"""
+chartrand_18_f2 = Graph("F?NVo")
+chartrand_18_f2.name(new = "chartrand fig 1.8 - F2")
 
 #GRAPH LISTS
 
@@ -3094,7 +3114,7 @@ class0small = [g for g in class0graphs if g.order() < 30]
 c5=graphs.CycleGraph(5)
 c5.name(new = "c5")
 
-graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), k1_3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph, p5, c6, c9, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals, paw_x_paw, graphs.WagnerGraph(), houseX, ce7, triangle_star, ce8, ce9, ce10, p3, binary_octahedron, ce11, prism, ce12, ce13, ce14, pepper_non_perfect_graph, gallai_tree, willis_page4, willis_page13_fig27, willis_page9, willis_page10_fig23, willis_page10_fig24, willis_page13_fig26, willis_page18, willis_page21, willis_page25_fig32, willis_page25_fig33, lemke, k5_3, willis_page29, p9, ce15, willis_page35_fig51, willis_page35_fig52, willis_page36_fig53, willis_page36_fig54, willis_page36_fig55, willis_page37_fig56, willis_page37_fig58, trig_antiprism_capped, willis_page39_fig510, willis_page39_fig511, willis_page40_fig512, willis_page41_fig514, willis_page41_fig515, k3_3_line_graph, ce16, ce17, elphick_wocjan_page8, elphick_wocjan_page9, p29, ce18, ce19, ce20, ce21, ce22, ce23, ce24, ce25, ce26, ce27, c102, p102, ce28, ce29, ce30, ce31, ce32, ce33, ce34, ce35, ce36, ce37, ce38, ce39, ce40, ce41, ce42, ce43, ce44, ce45, ce47, ce48, ce49, ce50, ce51, ce52, ce53, ce54, ce55, ce56, ce57, k37, c34, ce58, ce59, ce60, ce61, ce62, ce63, ce64, ce65, ce66, ce67, ce68, ce69, ce70, ce71, ce72, ce73, k1_9, ce74, ce75, ce76, ce77, ce78, ce79, ce80, ce81, ce82, ce83, ce84, ce85, ce86, ce87, ce88, ce89, ce91, c22, odd_wheel_8, odd_antihole_7, ce90, golomb, c4_1, c4_2, c6_1, steinberg_ce_g1, four_pan, kite_with_tail, ce92, chartrand_11, chartrand_12, chartrand_13, chartrand_18_g, double_fork, facet_inducing] + alpha_critical_easy
+graph_objects = [paw, kite, p4, dart, k3, k4, k5, c6ee, c5chord, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, graphs.PetersenGraph(), p2, graphs.TutteGraph(), non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), graphs.FlowerSnark(), k1_3, ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, difficult11, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.OctahedralGraph(), graphs.ThomsenGraph(), pete , graphs.PappusGraph(), graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, c5, bow_tie, pepper_residue_graph, barrus_graph, p5, c6, c9, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals, paw_x_paw, graphs.WagnerGraph(), houseX, ce7, triangle_star, ce8, ce9, ce10, p3, binary_octahedron, ce11, prism, ce12, ce13, ce14, pepper_non_perfect_graph, gallai_tree, willis_page4, willis_page13_fig27, willis_page9, willis_page10_fig23, willis_page10_fig24, willis_page13_fig26, willis_page18, willis_page21, willis_page25_fig32, willis_page25_fig33, lemke, k5_3, willis_page29, p9, ce15, willis_page35_fig51, willis_page35_fig52, willis_page36_fig53, willis_page36_fig54, willis_page36_fig55, willis_page37_fig56, willis_page37_fig58, trig_antiprism_capped, willis_page39_fig510, willis_page39_fig511, willis_page40_fig512, willis_page41_fig514, willis_page41_fig515, k3_3_line_graph, ce16, ce17, elphick_wocjan_page8, elphick_wocjan_page9, p29, ce18, ce19, ce20, ce21, ce22, ce23, ce24, ce25, ce26, ce27, c102, p102, ce28, ce29, ce30, ce31, ce32, ce33, ce34, ce35, ce36, ce37, ce38, ce39, ce40, ce41, ce42, ce43, ce44, ce45, ce47, ce48, ce49, ce50, ce51, ce52, ce53, ce54, ce55, ce56, ce57, k37, c34, ce58, ce59, ce60, ce61, ce62, ce63, ce64, ce65, ce66, ce67, ce68, ce69, ce70, ce71, ce72, ce73, k1_9, ce74, ce75, ce76, ce77, ce78, ce79, ce80, ce81, ce82, ce83, ce84, ce85, ce86, ce87, ce88, ce89, ce91, c22, odd_wheel_8, odd_antihole_7, ce90, golomb, c4_1, c4_2, c6_1, steinberg_ce_g1, four_pan, kite_with_tail, ce92, chartrand_11, chartrand_12, chartrand_13, chartrand_18_g, chartrand_18_f1, chartrand_18_f2, double_fork, facet_inducing] + alpha_critical_easy
 
 alpha_critical_hard = [Graph('Hj\\x{F{')]
 
