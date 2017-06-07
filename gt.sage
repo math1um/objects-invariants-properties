@@ -3291,6 +3291,10 @@ def kwok_thm(g):
 def hansen_thm(g): 
     return floor(1/2 + sqrt(1/4 + order(g)**2 - order(g) - 2*size(g)))
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm]
+# Matching Number - Folklore
+def matching_number_thm(g): 
+    return order(g) - matching_number(g)
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm]
 
 alpha_lower_bounds = []
