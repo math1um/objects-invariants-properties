@@ -3299,6 +3299,10 @@ def matching_number_thm(g):
 def min_degree_thm(g):
     return order(g) - min_degree(g)
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm]
+# Cut Vertices Theorem
+def cut_vertices_thm(g):
+    return (g.order() - (card_cut_vertices(g)/2) - (1/2))
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm]
 
 alpha_lower_bounds = []
