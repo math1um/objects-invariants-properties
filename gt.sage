@@ -769,6 +769,11 @@ def theta_theta_complement(g):
 def depth(g):
     return g.order()-residue(g)
 
+# Clearly intractable
+# alpha / order
+def independence_ratio(g):
+    return independence_number(g)/(g.order()+0.0)
+
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -791,7 +796,7 @@ depth]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
-independent_dominating_set_number]
+independent_dominating_set_numberi, independence_ratio]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
