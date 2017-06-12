@@ -780,6 +780,10 @@ def godsil_newman_thm_invariant(g):
     L = max(g.laplacian_matrix().change_ring(RDF).eigenvalues())
     return g.order()*(L-min_degree(g))/L
 
+# Lovasz Theta of the complement of the given graph
+def lovasz_theta_complement(g):
+    return g.complement().lovasz_theta()
+
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -798,7 +802,7 @@ fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
 max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound, 
 geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
 median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
-depth, godsil_newman_thm_invariant]
+depth, godsil_newman_thm_invariant, lovasz_theta_complement]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
