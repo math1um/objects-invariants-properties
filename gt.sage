@@ -802,7 +802,7 @@ depth, godsil_newman_thm_invariant]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
-independent_dominating_set_numberi, independence_ratio]
+independent_dominating_set_number, independence_ratio]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
