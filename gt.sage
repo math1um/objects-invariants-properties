@@ -730,6 +730,11 @@ def geometric_length_of_degree_sequence(g):
 def cut_vertices_thm_invariant(G):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
 
+# Radius Pendants Theorem
+# Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
+def radius_pendants_thm_invariant(g):
+    return (g.radius() + (card_pendants(g)/2) - 1)
+
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -746,7 +751,7 @@ degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
 card_independence_irreducible_part, critical_independence_number, card_KE_part,
 fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
 max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound, 
-geometric_length_of_degree_sequence, cut_vertices_thm_invariant]
+geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
