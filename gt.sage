@@ -757,7 +757,7 @@ def two_stability_theta_bound(g):
 # Lovasz Theta over Root N
 # The Sandwich Theorem by Knuth p. 45
 def lovasz_theta_over_root_n(g):
-    return g.lovasz_theta()/sqrt(g.order) 
+    return g.lovasz_theta()/sqrt(g.order()) 
 
 # Theta * Theta-Complement
 # The Sandwich Theorem by Knuth, p. 27
