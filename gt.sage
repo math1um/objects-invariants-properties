@@ -756,7 +756,7 @@ degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
 card_independence_irreducible_part, critical_independence_number, card_KE_part,
 fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
 max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound, 
-geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant
+geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
 median_degree_thm_invariant]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
