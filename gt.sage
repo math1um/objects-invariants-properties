@@ -790,6 +790,32 @@ def lovasz_theta_complement(g):
 def n_over_lovasz_theta_complement(g):
     return g.order()/lovasz_theta_complement(g)
 
+# The number of vertices at even distance from v and return the max over all vertices
+def max_even(g):
+    from sage.graphs.distances_all_pairs import distances_all_pairs
+    D = distances_all_pairs(g)
+    evens_list = []
+    for u in D:
+        evens = 0
+        for v in D[u]:
+            if D[u][v] % 2 == 0:
+                evens += 1
+        evens_list.append(evens)
+    return max(evens_list)
+
+# The number of vertices at even distance from v and return the min over all vertices
+def min_even(g):
+    from sage.graphs.distances_all_pairs import distances_all_pairs
+    D = distances_all_pairs(g)
+    evens_list = []
+    for u in D:
+        evens = 0
+        for v in D[u]:
+            if D[u][v] % 2 == 0:
+                evens += 1
+        evens_list.append(evens)
+    return min(evens_list)
+
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -808,7 +834,8 @@ fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
 max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound, 
 geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
 median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
-depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement]
+depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
+max_even, min_even]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
