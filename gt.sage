@@ -847,6 +847,11 @@ def min_odd(g):
 def AGX_upper_bound_thm_invariant(g):
     return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
 
+# AGX Lower Bound Theorem as invariant
+# Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
+def AGX_lower_bound_thm_invariant(g):
+    return ceil(2 * sqrt(g.order()))
+
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -866,7 +871,7 @@ max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound,
 geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
 median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
 depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
-max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant]
+max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_bound_thm_invariant]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
@@ -3464,4 +3469,9 @@ alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_t
 def radius_pendants_thm(g):
     return (g.radius() + (card_pendants(g)/2) - 1)
 
-alpha_lower_bounds = [radius_pendants_thm]
+# AGX Lower Bound Theorem
+# Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
+def AGX_lower_bound_thm(g):
+    return ceil(2 * sqrt(g.order()))
+
+alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm]
