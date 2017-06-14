@@ -3443,7 +3443,12 @@ def godsil_newman_thm(g):
     L = max(g.laplacian_matrix().change_ring(RDF).eigenvalues())
     return g.order()*(L-min_degree(g))/L
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, median_degree_thm, godsil_newman_thm]
+# AGX Upper Bound Theorem
+#Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
+def AGX_upper_bound_thm(g):
+    return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
+
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, median_degree_thm, godsil_newman_thm, AGX_upper_bound_thm]
 
 #####
 # LOWER BOUNDS
