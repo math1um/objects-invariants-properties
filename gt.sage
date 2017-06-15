@@ -875,7 +875,7 @@ max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_b
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
-independent_dominating_set_number, independence_ratio]
+independent_dominating_set_number, independence_ratio, Graph.treewidth]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
