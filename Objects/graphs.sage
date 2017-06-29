@@ -35,25 +35,6 @@ p29.name(new = "p29")
 p102 = graphs.PathGraph(102)
 p102.name(new = "p102")
 
-#star with 3 rays, order = 4
-k1_3 = graphs.StarGraph(3)
-k1_3.name(new="k1_3")
-
-# independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x)) is false
-#This is also a counterexample to independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
-k1_9 = graphs.CompleteBipartiteGraph(1,9)
-k1_9.name(new = "k1_9")
-
-k3_3 = graphs.CompleteBipartiteGraph(3,3)
-k3_3.name(new = "k3_3")
-
-# The line graph of k3,3
-k3_3_line_graph = k3_3.line_graph()
-k3_3_line_graph.name(new = "k3_3 line graph")
-
-k5_3=graphs.CompleteBipartiteGraph(5,3)
-k5_3.name(new = "k5_3")
-
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 
@@ -77,6 +58,44 @@ c34.name(new = "c34")
 # CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
+
+k3 = graphs.CompleteGraph(3)
+k3.name(new="k3")
+
+k4 = graphs.CompleteGraph(4)
+k4.name(new="k4")
+
+k5 = graphs.CompleteGraph(5)
+k5.name(new="k5")
+
+k6 = graphs.CompleteGraph(6)
+k6.name(new="k6")
+
+k10 = graphs.CompleteGraph(10)
+k10.name(new="k10")
+
+# CE to independence_number(x) >= floor(tan(floor(gutman_energy(x))))
+k37 = graphs.CompleteGraph(37)
+k37.name(new = "k37")
+
+#star with 3 rays, order = 4
+k1_3 = graphs.StarGraph(3)
+k1_3.name(new="k1_3")
+
+# independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x)) is false
+#This is also a counterexample to independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
+k1_9 = graphs.CompleteBipartiteGraph(1,9)
+k1_9.name(new = "k1_9")
+
+k3_3 = graphs.CompleteBipartiteGraph(3,3)
+k3_3.name(new = "k3_3")
+
+# The line graph of k3,3
+k3_3_line_graph = k3_3.line_graph()
+k3_3_line_graph.name(new = "k3_3 line graph")
+
+k5_3=graphs.CompleteBipartiteGraph(5,3)
+k5_3.name(new = "k5_3")
 
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
@@ -353,56 +372,56 @@ kite.name(new="kite")
 dart = Graph('DnC')
 dart.name(new="dart")
 
-ce3=Graph("Gr`HOk")
-ce3.name(new = "ce3")
-#ce3 is a ce to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
-
+# CE to ((is_chordal)^(is_forest))->(has_residue_equals_alpha)
 ce2=Graph("HdGkCA?")
-#ce2 is a ce to ((is_chordal)^(is_forest))->(has_residue_equals_alpha)
 ce2.name(new = "ce2")
 
+# CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
+ce3=Graph("Gr`HOk")
+ce3.name(new = "ce3")
+
+# CE to ((~(is_planar))&(is_chordal))->(has_residue_equals_alpha)
 ce4=Graph("G~sNp?")
 ce4.name(new = "ce4")
-#ce4 is a ce to ((~(is_planar))&(is_chordal))->(has_residue_equals_alpha)
 
+# CE to (((is_line_graph)&(is_cartesian_product))|(is_split))->(has_residue_equals_alpha)
 ce5=Graph("X~}AHKVB{GGPGRCJ`B{GOO`C`AW`AwO`}CGOO`AHACHaCGVACG^")
 ce5.name(new = "ce5")
-#ce5 is a ce to: (((is_line_graph)&(is_cartesian_product))|(is_split))->(has_residue_equals_alpha)
 
+# CE to (is_split)->((order_leq_twice_max_degree)&(is_chordal))
 ce6 = Graph("H??E@cN")
-#ce6 is a ce to: (is_split)->((order_leq_twice_max_degree)&(is_chordal))
 ce6.name(new = "ce6")
 
+# CE to (has_residue_equals_alpha)->((is_bipartite)->(order_leq_twice_max_degree))
 ce7 = Graph("FpGK?")
-#counterexample to: (has_residue_equals_alpha)->((is_bipartite)->(order_leq_twice_max_degree))
 ce7.name(new = "ce7")
 
+# CE to ((has_paw)&(is_circular_planar))->(has_residue_equals_alpha)
 ce8 = Graph('IxCGGC@_G')
-#counterexample to: ((has_paw)&(is_circular_planar))->(has_residue_equals_alpha)
 ce8.name(new = "ce8")
 
+# CE to ((has_H)&(is_forest))->(has_residue_equals_alpha)
 ce9 = Graph('IhCGGD?G?')
-#counterexample to: ((has_H)&(is_forest))->(has_residue_equals_alpha)
 ce9.name(new = "ce9")
 
+# CE to (((is_eulerian)&(is_planar))&(has_paw))->(has_residue_equals_alpha)
 ce10=Graph('KxkGGC@?G?o@')
-#counterexample to: (((is_eulerian)&(is_planar))&(has_paw))->(has_residue_equals_alpha)
 ce10.name(new = "ce10")
 
+# CE to (has_alpha_residue_equal_two)->((is_perfect)|(is_regular))
 ce11 = Graph("E|OW")
-#counterexample to: (has_alpha_residue_equal_two)->((is_perfect)|(is_regular))
 ce11.name(new = "ce11")
 
+# CE to (((is_cubic)&(is_triangle_free))&(is_H_free))->(has_residue_equals_two)
 ce12 = Graph("Edo_")
-#counterexample to: (((is_cubic)&(is_triangle_free))&(is_H_free))->(has_residue_equals_two)
 ce12.name(new = "ce12")
 
+# CE to ((diameter_equals_twice_radius)&(is_claw_free))->(has_residue_equals_two)
 ce13 = Graph("ExOG")
-#counterexample to: ((diameter_equals_twice_radius)&(is_claw_free))->(has_residue_equals_two)
 ce13.name(new = "ce13")
 
+# CE to (~(matching_covered))->(has_residue_equals_alpha)
 ce14 = Graph('IhCGGC_@?')
-#counterexample to: (~(matching_covered))->(has_residue_equals_alpha)
 ce14.name(new = "IhCGGC_@?")
 
 """
@@ -684,12 +703,19 @@ ce81.name(new = "ce81")
 ce82 = Graph('O????B~~^Zx^wnc~ENqxY')
 ce82.name(new = "ce82")
 
-# CE to independence_number(x) <= minimum(lovasz_theta(x), residue(x)^2)
-#independence_number(x) <= minimum(annihilation_number(x), residue(x)^2)
-#independence_number(x) <= minimum(fractional_alpha(x), residue(x)^2)
-#independence_number(x) <= minimum(cvetkovic(x), residue(x)^2)
-#independence_number(x) <= minimum(residue(x)^2, floor(lovasz_theta(x)))
-#independence_number(x) <= minimum(size(x), residue(x)^2)
+"""
+CE to independence_number(x) <= minimum(lovasz_theta(x), residue(x)^2)
+    and
+    <= minimum(annihilation_number(x), residue(x)^2)
+    and
+    <= minimum(fractional_alpha(x), residue(x)^2)
+    and
+    <= minimum(cvetkovic(x), residue(x)^2)
+    and
+    <= minimum(residue(x)^2, floor(lovasz_theta(x)))
+    and
+    <= minimum(size(x), residue(x)^2)
+"""
 ce83 = Graph('LEYSrG|mrQ[ppi')
 ce83.name(new = "ce83")
 
@@ -740,25 +766,6 @@ killer.name(new="killer")
 #alon_seymour graph: CE to the rank-coloring conjecture, 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
 alon_seymour=Graph([[0..63], lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16,32,63)])
 alon_seymour.name(new="alon_seymour")
-
-k3 = graphs.CompleteGraph(3)
-k3.name(new="k3")
-
-k4 = graphs.CompleteGraph(4)
-k4.name(new="k4")
-
-k5 = graphs.CompleteGraph(5)
-k5.name(new="k5")
-
-k6 = graphs.CompleteGraph(6)
-k6.name(new="k6")
-
-# CE to independence_number(x) >= floor(tan(floor(gutman_energy(x))))
-k37 = graphs.CompleteGraph(37)
-k37.name(new = "k37")
-
-k10 = graphs.CompleteGraph(10)
-k10.name(new="k10")
 
 c60 = graphs.BuckyBall()
 c60.name(new="c60")
