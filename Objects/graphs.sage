@@ -1,5 +1,39 @@
+p2 = graphs.PathGraph(2)
+p2.name(new="p2")
+
 p3 = graphs.PathGraph(3)
 p3.name(new = "p3")
+
+p4 = graphs.PathGraph(4)
+p4.name(new="p4")
+
+p5 = graphs.PathGraph(5)
+p5.name(new = "p5")
+
+p6 = graphs.PathGraph(6)
+p6.name(new="p6")
+
+"""
+CE to independence_number(x) <= e^(cosh(max_degree(x) - 1))
+ and to
+independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
+"""
+p9 = graphs.PathGraph(9)
+p9.name(new = "p9")
+
+"""
+P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x)) 
+ and to  
+<= max_degree(x)^e^card_center(x)
+ and to
+<= max_degree(x)^2 + card_periphery(x)
+"""
+p29 = graphs.PathGraph(29)
+p29.name(new = "p29")
+
+# CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
+p102 = graphs.PathGraph(102)
+p102.name(new = "p102")
 
 k3_3=graphs.CompleteBipartiteGraph(3,3)
 k3_3.name(new = "k3_3")
@@ -290,23 +324,6 @@ kite.name(new="kite")
 #a DART is a kite with a pendant
 dart = Graph('DnC')
 dart.name(new="dart")
-
-#P4 is a path on 4 vertices
-p4=Graph('Ch')
-p4.name(new="p4")
-
-p5 = graphs.PathGraph(5)
-p5.name(new = "p5")
-
-"""
-P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x)) 
- and to  
-<= max_degree(x)^e^card_center(x)
- and to
-<= max_degree(x)^2 + card_periphery(x)
-"""
-p29 = graphs.PathGraph(29)
-p29.name(new = "p29")
 
 c9 = graphs.CycleGraph(9)
 c9.name(new = "c9")
@@ -732,24 +749,6 @@ c4.name(new="c4")
 # CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
-
-p2 = graphs.PathGraph(2)
-p2.name(new="p2")
-
-p6 = graphs.PathGraph(6)
-p6.name(new="p6")
-
-"""
-CE to independence_number(x) <= e^(cosh(max_degree(x) - 1))
- and to
-independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
-"""
-p9 = graphs.PathGraph(9)
-p9.name(new = "p9")
-
-# CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
-p102 = graphs.PathGraph(102)
-p102.name(new = "p102")
 
 #star with 3 rays, order = 4
 k1_3 = graphs.StarGraph(3)
