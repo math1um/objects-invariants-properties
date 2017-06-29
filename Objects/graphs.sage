@@ -54,6 +54,30 @@ k3_3_line_graph.name(new = "k3_3 line graph")
 k5_3=graphs.CompleteBipartiteGraph(5,3)
 k5_3.name(new = "k5_3")
 
+c4 = graphs.CycleGraph(4)
+c4.name(new="c4")
+
+c5=graphs.CycleGraph(5)
+c5.name(new = "c5")
+
+c6 = graphs.CycleGraph(6)
+c6.name(new = "c6")
+
+c9 = graphs.CycleGraph(9)
+c9.name(new = "c9")
+
+# CE to independence_number(x) <= (e^welsh_powell(x) - graph_rank(x))^2
+c22 = graphs.CycleGraph(22)
+c22.name(new = "c22")
+
+# CE to independence_number(x) <= minimum(cvetkovic(x), 2*e^sum_temperatures(x)) 
+c34 = graphs.CycleGraph(34)
+c34.name(new = "c34")
+
+# CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
+c102 = graphs.CycleGraph(102)
+c102.name(new = "c102")
+
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
 for i in [4,5,6]:
@@ -329,17 +353,6 @@ kite.name(new="kite")
 dart = Graph('DnC')
 dart.name(new="dart")
 
-c9 = graphs.CycleGraph(9)
-c9.name(new = "c9")
-
-# CE to independence_number(x) <= (e^welsh_powell(x) - graph_rank(x))^2
-c22 = graphs.CycleGraph(22)
-c22.name(new = "c22")
-
-# CE to independence_number(x) <= minimum(cvetkovic(x), 2*e^sum_temperatures(x)) 
-c34 = graphs.CycleGraph(34)
-c34.name(new = "c34")
-
 ce3=Graph("Gr`HOk")
 ce3.name(new = "ce3")
 #ce3 is a ce to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -347,9 +360,6 @@ ce3.name(new = "ce3")
 ce2=Graph("HdGkCA?")
 #ce2 is a ce to ((is_chordal)^(is_forest))->(has_residue_equals_alpha)
 ce2.name(new = "ce2")
-
-c6 = graphs.CycleGraph(6)
-c6.name(new = "c6")
 
 ce4=Graph("G~sNp?")
 ce4.name(new = "ce4")
@@ -746,13 +756,6 @@ k6.name(new="k6")
 # CE to independence_number(x) >= floor(tan(floor(gutman_energy(x))))
 k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
-
-c4 = graphs.CycleGraph(4)
-c4.name(new="c4")
-
-# CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
-c102 = graphs.CycleGraph(102)
-c102.name(new = "c102")
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
@@ -1505,9 +1508,6 @@ for d in class0graphs_dict:
     class0graphs.append(g)
 class0small = [g for g in class0graphs if g.order() < 30]
 
-c5=graphs.CycleGraph(5)
-c5.name(new = "c5")
-
 sage_graphs = [graphs.Balaban11Cage(), graphs.BiggsSmithGraph(), graphs.BrouwerHaemersGraph(), 
 graphs.CameronGraph(), graphs.Cell120(), graphs.Cell600(), graphs.DejterGraph(), 
 graphs.DoubleStarSnark(), graphs.DurerGraph(), graphs.DyckGraph(), 
@@ -1527,7 +1527,7 @@ graphs.WienerArayaGraph(), graphs.WorldMap(), graphs.MathonStronglyRegularGraph(
 graphs.MathonStronglyRegularGraph(1), graphs.MathonStronglyRegularGraph(2), 
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800), graphs.IcosahedralGraph()]
 
-graph_objects = [paw, p4, dart, c6ee, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.ThomsenGraph(), pete , graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, bow_tie, pepper_residue_graph, barrus_graph, p5, c6, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals, paw_x_paw, houseX, ce7, triangle_star, ce8, ce9, ce10, p3, binary_octahedron, prism, ce12, ce13, ce14, gallai_tree, willis_page4, willis_page13_fig27, willis_page9, willis_page10_fig23, willis_page10_fig24, willis_page13_fig26, willis_page18, willis_page21, willis_page25_fig32, willis_page25_fig33, lemke, k5_3, willis_page29, p9, ce15, willis_page35_fig51, willis_page35_fig52, willis_page36_fig53, willis_page36_fig54, willis_page36_fig55, willis_page37_fig56, willis_page37_fig58, trig_antiprism_capped, willis_page39_fig510, willis_page39_fig511, willis_page40_fig512, willis_page41_fig514, willis_page41_fig515, k3_3_line_graph, ce16, ce17, elphick_wocjan_page8, elphick_wocjan_page9, p29, ce18, ce19, ce20, ce21, ce22, ce23, ce24, ce25, ce26, ce27, c102, p102, ce28, ce29, ce30, ce31, ce32, ce33, ce34, ce35, ce36, ce37, ce38, ce39, ce40, ce41, ce42, ce43, ce44, ce45, ce47, ce48, ce49, ce50, ce51, ce52, ce53, ce54, ce55, ce56, ce57, k37, c34, ce58, ce59, ce60, ce61, ce62, ce63, ce64, ce65, ce66, ce67, ce68, ce69, ce70, ce71, ce72, ce73, k1_9, ce74, ce75, ce76, ce77, ce78, ce79, ce80, ce81, ce82, ce83, ce84, ce85, ce86, ce87, ce88, ce89, ce91, c22, odd_wheel_8, odd_antihole_7, ce90, golomb, c4_1, c4_2, c6_1, steinberg_ce_g1, four_pan, kite_with_tail, ce92, chartrand_11, chartrand_12, chartrand_13, chartrand_18_g, chartrand_18_f1, chartrand_18_f2, double_fork, facet_inducing, p6, k3_3] + alpha_critical_easy + sage_graphs
+graph_objects = [paw, p4, dart, c6ee, graphs.DodecahedralGraph(), c8chorded, c8chords, graphs.ClebschGraph(),  prismy, c24, c26, c60, c6xc6, holton_mckay, sixfour, c4, non_ham_over, throwing, throwing2, throwing3, kratsch_lehel_muller, graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(), ryan3, k10, graphs.MycielskiGraph(5), c3mycielski, s13e, ryan2, s22e, graphs.BullGraph(), graphs.ChvatalGraph(), graphs.ClawGraph(), graphs.DesarguesGraph(), graphs.DiamondGraph(), graphs.FlowerSnark(), graphs.FruchtGraph(), graphs.HoffmanSingletonGraph(), graphs.HouseGraph(), graphs.ThomsenGraph(), pete , graphs.GrotzschGraph(), graphs.GrayGraph(), graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.CoxeterGraph(), graphs.BrinkmannGraph(), graphs.TutteCoxeterGraph(), graphs.TutteGraph(), graphs.RobertsonGraph(), graphs.FolkmanGraph(), graphs.Balaban10Cage(), graphs.PappusGraph(), graphs.TietzeGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(), graphs.MoebiusKantorGraph(), ryan, inp, c4c4, regular_non_trans, bridge, p10k4, c100, starfish, c5k3, k5pendant, graphs.ShrikhandeGraph(), sylvester, fork, edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus, bow_tie, pepper_residue_graph, barrus_graph, p5, c6, ce3, ce4, ce5, k4e2split, flower_with_3_petals, flower_with_4_petals, paw_x_paw, houseX, ce7, triangle_star, ce8, ce9, ce10, p3, binary_octahedron, prism, ce12, ce13, ce14, gallai_tree, willis_page4, willis_page13_fig27, willis_page9, willis_page10_fig23, willis_page10_fig24, willis_page13_fig26, willis_page18, willis_page21, willis_page25_fig32, willis_page25_fig33, lemke, k5_3, willis_page29, p9, ce15, willis_page35_fig51, willis_page35_fig52, willis_page36_fig53, willis_page36_fig54, willis_page36_fig55, willis_page37_fig56, willis_page37_fig58, trig_antiprism_capped, willis_page39_fig510, willis_page39_fig511, willis_page40_fig512, willis_page41_fig514, willis_page41_fig515, k3_3_line_graph, ce16, ce17, elphick_wocjan_page8, elphick_wocjan_page9, p29, ce18, ce19, ce20, ce21, ce22, ce23, ce24, ce25, ce26, ce27, c102, p102, ce28, ce29, ce30, ce31, ce32, ce33, ce34, ce35, ce36, ce37, ce38, ce39, ce40, ce41, ce42, ce43, ce44, ce45, ce47, ce48, ce49, ce50, ce51, ce52, ce53, ce54, ce55, ce56, ce57, k37, c34, ce58, ce59, ce60, ce61, ce62, ce63, ce64, ce65, ce66, ce67, ce68, ce69, ce70, ce71, ce72, ce73, k1_9, ce74, ce75, ce76, ce77, ce78, ce79, ce80, ce81, ce82, ce83, ce84, ce85, ce86, ce87, ce88, ce89, ce91, c22, odd_wheel_8, odd_antihole_7, ce90, golomb, c4_1, c4_2, c6_1, steinberg_ce_g1, four_pan, kite_with_tail, ce92, chartrand_11, chartrand_12, chartrand_13, chartrand_18_g, chartrand_18_f1, chartrand_18_f2, double_fork, facet_inducing, p6, k3_3, c5, c9] + alpha_critical_easy + sage_graphs
 
 alpha_critical_hard = [Graph('Hj\\x{F{')]
 
