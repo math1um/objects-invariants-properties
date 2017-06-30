@@ -202,18 +202,22 @@ add_to_lists(k37, graph_objects)
 #star with 3 rays, order = 4
 k1_3 = graphs.StarGraph(3)
 k1_3.name(new="k1_3")
+add_to_lists(k1_3, graph_objects)
 
 # independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x)) is false
 #This is also a counterexample to independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
 k1_9 = graphs.CompleteBipartiteGraph(1,9)
 k1_9.name(new = "k1_9")
+add_to_lists(k1_9, graph_objects)
 
 # The line graph of k3,3
 k3_3_line_graph = graphs.CompleteBipartiteGraph(3, 3).line_graph()
 k3_3_line_graph.name(new = "k3_3 line graph")
+add_to_lists(k3_3_line_graph, graph_objects)
 
 k5_3=graphs.CompleteBipartiteGraph(5,3)
 k5_3.name(new = "k5_3")
+add_to_lists(k5_3, graph_objects)
 
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
