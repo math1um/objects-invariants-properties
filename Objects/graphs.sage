@@ -10,7 +10,13 @@ def add_to_lists(graph, *L):
 
 graph_objects = []
 alpha_critical_easy = []
+alpha_critical_hard = []
+chromatic_index_critical = []
 chromatic_index_critical_7 = []
+problem_graphs = []
+class0graphs = []
+class0small = []
+
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
@@ -49,6 +55,9 @@ graphs.MathonStronglyRegularGraph(1), graphs.MathonStronglyRegularGraph(2),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800), 
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
+for graph in sage_graphs:
+    add_to_lists(graph, graph_objects)
+
 # A graph is alpha_critical if removing any edge increases independence number
 # All alpha critical graphs of orders 2 to 9, 53 in total
 alpha_critical_graph_names = ['A_','Bw', 'C~', 'Dhc', 'D~{', 'E|OW', 'E~~w', 'FhCKG', 'F~[KG', 
@@ -57,19 +66,21 @@ alpha_critical_graph_names = ['A_','Bw', 'C~', 'Dhc', 'D~{', 'E|OW', 'E~~w', 'Fh
 'HxCw}V`', 'HhcGKf_', 'HhKGKf_', 'Hh[gMEO', 'HhdGKE[', 'HhcWKE[', 'HhdGKFK', 'HhCGGE@', 'Hn[gGE@', 
 'Hn^zxU@', 'HlDKhEH', 'H~~~~~~', 'HnKmH]N', 'HnvzhEH', 'HhfJGE@', 'HhdJGM@', 'Hj~KHeF', 'HhdGHeB', 
 'HhXg[EO', 'HhGG]ES', 'H~Gg]f{', 'H~?g]vs', 'H~@w[Vs', 'Hn_k[^o']
+
 for s in alpha_critical_graph_names:
     g = Graph(s)
     g.name(new="alpha_critical_"+ s)
-    alpha_critical_easy.append(g)
+    add_to_lists(g, alpha_critical_easy, graph_objects)
 
 # All order-7 chromatic_index_critical_graphs (and all are overfull)
 L = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G', 
 'FnNLG', 'F~^LW', 'Fll\\G', 'FllNG', 'F~l^G', 'F~|^w', 'F~~^W', 'Fnl^W', 'FlNNG', 'F|\\Kg', 
 'F~^kg', 'FlKMG']
+
 for s in L:
     g=Graph(s)
     g.name(new="chromatic_index_critical_7_" + s)
-    chromatic_index_critical_7.append(g)
+    add_to_list(g, chromatic_index_critical_7, problem_graphs)
 
 # Class 0 pebbling graphs
 import pickle, os, os.path
@@ -77,11 +88,12 @@ try:
     class0graphs_dict = pickle.load(open("objects-invariants-properties/Objects/class0graphs_dictionary.pickle","r"))
 except:
     class0graphs_dict = {}
-class0graphs = []
+
 for d in class0graphs_dict:
     g = Graph(class0graphs_dict[d])
     g.name(new = d)
-    class0graphs.append(g)
+    add_to_lists(g, class0graphs)
+
 class0small = [g for g in class0graphs if g.order() < 30]
 
 alpha_critical_hard = [Graph('Hj\\x{F{')]
