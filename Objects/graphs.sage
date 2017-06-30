@@ -1194,20 +1194,6 @@ willis_page39_fig510 = Graph("Kt?GOKEOGal?")
 willis_page39_fig510.name(new = "willis_page39_fig510")
 
 """
-From Willis's thesis, page 39, Figure 5.11
-A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
-
-    sage: independence_number(willis_page39_fig511)
-    5
-    sage: willis_page39_fig511.order()
-    12
-    sage: willis_page39_fig511.size()
-    18
-"""
-willis_page39_fig511 = Graph("KhCGKCHHACqC")
-willis_page39_fig511.name(new = "willis_page39_fig511")
-
-"""
 From Willis's thesis, page 40, Figure 5.12
 A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
 
@@ -1458,7 +1444,8 @@ class0small = [g for g in class0graphs if g.order() < 30]
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
-# OctohedralGraph is a graph for which the minimum degree is the best upper bound present in the thesis
+# OctohedralGraph is a graph for which the minimum degree is the best upper bound present in the Willis thesis
+# BidiakisCube is a graph where none of the upper or lower bounds in the Willis thesis give the exact value for alpha
 
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(), 
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(), 
