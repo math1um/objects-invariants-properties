@@ -1,5 +1,13 @@
 # Graph Lists
 
+def add_to_lists(graph, *L):
+    """
+    Adds the specified graph to the arbitrary number of lists given as the second through last argument
+    Use this function to build the lists of graphs
+    """
+    for list in L:
+            list.append(graph)
+
 graph_objects = []
 alpha_critical_easy = []
 chromatic_index_critical_7 = []
