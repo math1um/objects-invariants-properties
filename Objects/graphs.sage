@@ -16,7 +16,7 @@ chromatic_index_critical_7 = []
 problem_graphs = []
 class0graphs = []
 class0small = []
-
+counter_examples = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
@@ -133,7 +133,7 @@ independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
 """
 p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
-add_to_lists(p9, graph_objects)
+add_to_lists(p9, graph_objects, counter_examples)
 
 """
 P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x)) 
@@ -144,12 +144,12 @@ P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenva
 """
 p29 = graphs.PathGraph(29)
 p29.name(new = "p29")
-add_to_lists(p29, graph_objects)
+add_to_lists(p29, graph_objects, counter_examples)
 
 # CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
 p102 = graphs.PathGraph(102)
 p102.name(new = "p102")
-add_to_lists(p102, graph_objects)
+add_to_lists(p102, graph_objects, counter_examples)
 
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
@@ -162,17 +162,17 @@ add_to_lists(c6, graph_objects)
 # CE to independence_number(x) <= (e^welsh_powell(x) - graph_rank(x))^2
 c22 = graphs.CycleGraph(22)
 c22.name(new = "c22")
-add_to_lists(c22, graph_objects)
+add_to_lists(c22, graph_objects, counter_examples)
 
 # CE to independence_number(x) <= minimum(cvetkovic(x), 2*e^sum_temperatures(x)) 
 c34 = graphs.CycleGraph(34)
 c34.name(new = "c34")
-add_to_lists(c34, graph_objects)
+add_to_lists(c34, graph_objects, counter_examples)
 
 # CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
-add_to_lists(c102, graph_objects)
+add_to_lists(c102, graph_objects, counter_examples)
 
 k3 = graphs.CompleteGraph(3)
 k3.name(new="k3")
@@ -197,18 +197,19 @@ add_to_lists(k10, graph_objects)
 # CE to independence_number(x) >= floor(tan(floor(gutman_energy(x))))
 k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
-add_to_lists(k37, graph_objects)
+add_to_lists(k37, graph_objects, counter_examples)
 
 #star with 3 rays, order = 4
 k1_3 = graphs.StarGraph(3)
 k1_3.name(new="k1_3")
 add_to_lists(k1_3, graph_objects)
 
-# independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x)) is false
-#This is also a counterexample to independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
+# CE to independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x))
+#   and to
+# independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
 k1_9 = graphs.CompleteBipartiteGraph(1,9)
 k1_9.name(new = "k1_9")
-add_to_lists(k1_9, graph_objects)
+add_to_lists(k1_9, graph_objects, counter_examples)
 
 # The line graph of k3,3
 k3_3_line_graph = graphs.CompleteBipartiteGraph(3, 3).line_graph()
@@ -228,6 +229,7 @@ c4c4.add_edge(5,4)
 c4c4.add_edge(5,6)
 c4c4.add_edge(6,3)
 c4c4.name(new="c4c4")
+add_to_lists(c4c4, graph_objects)
 
 #two c5's joined at a vertex: eulerian, not perfect, not hamiltonian
 c5c5=graphs.CycleGraph(5)
@@ -239,6 +241,7 @@ c5c5.add_edge(6,5)
 c5c5.add_edge(6,7)
 c5c5.add_edge(7,8)
 c5c5.name(new="c5c5")
+add_to_lists(c5c5, graph_objects)
 
 #triangle plus pendant: not hamiltonian, not triangle-free
 c3p2=graphs.CycleGraph(3)
