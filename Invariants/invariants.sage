@@ -326,6 +326,12 @@ def clique_covering_number(g):
     return gc.chromatic_number(algorithm="MILP")
 
 def welsh_powell(g):
+    """
+    for degrees d_1 >= ... >= d_n
+    returns the maximum over all indices i of of the min(i,d_i + 1)
+
+    sage: welsh_powell(k5) = 4
+    """
     n= g.order()
     D = g.degree()
     D.sort(reverse=True)
@@ -741,14 +747,14 @@ def median_degree_thm_invariant(g):
     return (g.order() - (median_degree(g)/2) - 1/2)
 
 # Two Stability Theta Bound
-# For graphs with alpha <= 2, 
+# For graphs with alpha <= 2,
 # lovasz_theta <= 2^(2/3)*n^(1/3)
 # The Sandwich Theorem by Knuth p. 47
 def two_stability_theta_bound(g):
     return 2^(2/3)*g.order()^(1/3)
 
 # Two Stability Theta Bound
-# For graphs with alpha <= 2, 
+# For graphs with alpha <= 2,
 # lovasz_theta <= 2^(2/3)*n^(1/3)
 # The Sandwich Theorem by Knuth p. 47
 def two_stability_theta_bound(g):
@@ -757,7 +763,7 @@ def two_stability_theta_bound(g):
 # Lovasz Theta over Root N
 # The Sandwich Theorem by Knuth p. 45
 def lovasz_theta_over_root_n(g):
-    return g.lovasz_theta()/sqrt(g.order()) 
+    return g.lovasz_theta()/sqrt(g.order())
 
 # Theta * Theta-Complement
 # The Sandwich Theorem by Knuth, p. 27
@@ -877,7 +883,7 @@ Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
 degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
 card_independence_irreducible_part, critical_independence_number, card_KE_part,
 fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
-max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound, 
+max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound,
 geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
 median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
 depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,

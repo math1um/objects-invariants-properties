@@ -22,11 +22,11 @@ def kwok_thm(g):
     return order(g) - (size(g)/max_degree(g))
 
 # P. Hansen and M. Zheng. Sharp Bounds on the order, size, and stability number of graphs. NETWORKS 23 (1993), no. 2, 99-102.
-def hansen_thm(g): 
+def hansen_thm(g):
     return floor(1/2 + sqrt(1/4 + order(g)**2 - order(g) - 2*size(g)))
 
 # Matching Number - Folklore
-def matching_number_thm(g): 
+def matching_number_thm(g):
     return order(g) - matching_number(g)
 
 # Min-Degree Theorm

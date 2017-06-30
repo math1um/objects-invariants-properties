@@ -1,17 +1,130 @@
+# Graph Lists
+
+def add_to_lists(graph, *L):
+    """
+    Adds the specified graph to the arbitrary number of lists given as the second through last argument
+    Use this function to build the lists of graphs
+    """
+    for list in L:
+            list.append(graph)
+
+graph_objects = []
+alpha_critical_easy = []
+alpha_critical_hard = []
+chromatic_index_critical = []
+chromatic_index_critical_7 = []
+problem_graphs = []
+class0graphs = []
+class0small = []
+counter_examples = []
+
+# HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
+# WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
+# OctohedralGraph is a graph for which the minimum degree is the best upper bound present in the Willis thesis
+# BidiakisCube is a graph where none of the upper or lower bounds in the Willis thesis give the exact value for alpha
+# TetrahedralGraph and MoserSpindle in the alpha critical list as "C~" and "FzEKW" respectively
+# MeredithGraph and SchlaefliGraph are in the Problem Graphs list
+
+sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
+graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
+graphs.Balaban11Cage(), graphs.BidiakisCube(),
+graphs.BiggsSmithGraph(), graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(),
+graphs.BrinkmannGraph(), graphs.BrouwerHaemersGraph(), graphs.BuckyBall(), graphs.CameronGraph(),
+graphs.Cell120(), graphs.Cell600(), graphs.ChvatalGraph(), graphs.ClebschGraph(),
+graphs.CoxeterGraph(), graphs.DesarguesGraph(), graphs.DejterGraph(), graphs.DoubleStarSnark(),
+graphs.DurerGraph(), graphs.DyckGraph(), graphs.EllinghamHorton54Graph(),
+graphs.EllinghamHorton78Graph(), graphs.ErreraGraph(), graphs.F26AGraph(), graphs.FlowerSnark(),
+graphs.FolkmanGraph(), graphs.FosterGraph(), graphs.FranklinGraph(), graphs.FruchtGraph(),
+graphs.GoldnerHararyGraph(), graphs.GossetGraph(), graphs.GrayGraph(), graphs.GrotzschGraph(),
+graphs.HallJankoGraph(), graphs.HarborthGraph(), graphs.HarriesGraph(), graphs.HarriesWongGraph(),
+graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.HigmanSimsGraph(), graphs.HoffmanGraph(),
+graphs.HoffmanSingletonGraph(), graphs.HoltGraph(), graphs.HortonGraph(),
+graphs.IoninKharaghani765Graph(), graphs.JankoKharaghaniTonchevGraph(), graphs.KittellGraph(),
+graphs.KrackhardtKiteGraph(), graphs.Klein3RegularGraph(), graphs.Klein7RegularGraph(),
+graphs.LocalMcLaughlinGraph(), graphs.LjubljanaGraph(), graphs.M22Graph(),
+graphs.MarkstroemGraph(), graphs.McGeeGraph(), graphs.McLaughlinGraph(),
+graphs.MoebiusKantorGraph(), graphs.NauruGraph(), graphs.PappusGraph(),
+graphs.PoussinGraph(), graphs.PerkelGraph(), graphs.PetersenGraph(), graphs.RobertsonGraph(),
+graphs.ShrikhandeGraph(), graphs.SimsGewirtzGraph(),
+graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
+graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
+graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
+graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
+graphs.WienerArayaGraph(), graphs.WorldMap(), graphs.MathonStronglyRegularGraph(0),
+graphs.MathonStronglyRegularGraph(1), graphs.MathonStronglyRegularGraph(2),
+graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
+graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
+
+for graph in sage_graphs:
+    add_to_lists(graph, graph_objects)
+
+# A graph is alpha_critical if removing any edge increases independence number
+# All alpha critical graphs of orders 2 to 9, 53 in total
+alpha_critical_graph_names = ['A_','Bw', 'C~', 'Dhc', 'D~{', 'E|OW', 'E~~w', 'FhCKG', 'F~[KG',
+'FzEKW', 'Fn[kG', 'F~~~w', 'GbL|TS', 'G~?mvc', 'GbMmvG', 'Gb?kTG', 'GzD{Vg', 'Gb?kR_', 'GbqlZ_',
+'GbilZ_', 'G~~~~{', 'GbDKPG', 'HzCGKFo', 'H~|wKF{', 'HnLk]My', 'HhcWKF_', 'HhKWKF_', 'HhCW[F_',
+'HxCw}V`', 'HhcGKf_', 'HhKGKf_', 'Hh[gMEO', 'HhdGKE[', 'HhcWKE[', 'HhdGKFK', 'HhCGGE@', 'Hn[gGE@',
+'Hn^zxU@', 'HlDKhEH', 'H~~~~~~', 'HnKmH]N', 'HnvzhEH', 'HhfJGE@', 'HhdJGM@', 'Hj~KHeF', 'HhdGHeB',
+'HhXg[EO', 'HhGG]ES', 'H~Gg]f{', 'H~?g]vs', 'H~@w[Vs', 'Hn_k[^o']
+
+for s in alpha_critical_graph_names:
+    g = Graph(s)
+    g.name(new="alpha_critical_"+ s)
+    add_to_lists(g, alpha_critical_easy, graph_objects)
+
+# All order-7 chromatic_index_critical_graphs (and all are overfull)
+L = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G',
+'FnNLG', 'F~^LW', 'Fll\\G', 'FllNG', 'F~l^G', 'F~|^w', 'F~~^W', 'Fnl^W', 'FlNNG', 'F|\\Kg',
+'F~^kg', 'FlKMG']
+
+for s in L:
+    g=Graph(s)
+    g.name(new="chromatic_index_critical_7_" + s)
+    add_to_lists(g, chromatic_index_critical_graphs, chromatic_index_critical_7, problem_graphs)
+
+# Class 0 pebbling graphs
+import pickle, os, os.path
+try:
+    class0graphs_dict = pickle.load(open("objects-invariants-properties/Objects/class0graphs_dictionary.pickle","r"))
+except:
+    class0graphs_dict = {}
+
+for d in class0graphs_dict:
+    g = Graph(class0graphs_dict[d])
+    g.name(new = d)
+    add_to_lists(g, class0graphs)
+
+class0small = [g for g in class0graphs if g.order() < 30]
+
+alpha_critical_hard = [Graph('Hj\\x{F{')]
+
+chromatic_index_critical_graphs = [edge_critical_5, edge_critical_11_1, edge_critical_11_2, pete_minus]
+
+# Graphs for which some computations are especially slow
+# Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
+problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph(), haemers, c3mycielski4, alon_seymour] + class0small + alpha_critical_hard
+
+# Graph objects
+
 p2 = graphs.PathGraph(2)
 p2.name(new="p2")
+add_to_lists(p2, graph_objects)
 
 p3 = graphs.PathGraph(3)
 p3.name(new = "p3")
+add_to_lists(p3, graph_objects)
 
 p4 = graphs.PathGraph(4)
 p4.name(new="p4")
+add_to_lists(p4, graph_objects)
 
 p5 = graphs.PathGraph(5)
 p5.name(new = "p5")
+add_to_lists(p5, graph_objects)
 
 p6 = graphs.PathGraph(6)
 p6.name(new="p6")
+add_to_lists(p6, graph_objects)
 
 """
 CE to independence_number(x) <= e^(cosh(max_degree(x) - 1))
@@ -20,6 +133,7 @@ independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
 """
 p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
+add_to_lists(p9, graph_objects, counter_examples)
 
 """
 P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x))
@@ -30,63 +144,81 @@ P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenva
 """
 p29 = graphs.PathGraph(29)
 p29.name(new = "p29")
+add_to_lists(p29, graph_objects, counter_examples)
 
 # CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
 p102 = graphs.PathGraph(102)
 p102.name(new = "p102")
+add_to_lists(p102, graph_objects, counter_examples)
 
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
+add_to_lists(c4, graph_objects)
 
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
+add_to_lists(c6, graph_objects)
 
 # CE to independence_number(x) <= (e^welsh_powell(x) - graph_rank(x))^2
 c22 = graphs.CycleGraph(22)
 c22.name(new = "c22")
+add_to_lists(c22, graph_objects, counter_examples)
 
 # CE to independence_number(x) <= minimum(cvetkovic(x), 2*e^sum_temperatures(x))
 c34 = graphs.CycleGraph(34)
 c34.name(new = "c34")
+add_to_lists(c34, graph_objects, counter_examples)
 
 # CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
+add_to_lists(c102, graph_objects, counter_examples)
 
 k3 = graphs.CompleteGraph(3)
 k3.name(new="k3")
+add_to_lists(k3, graph_objects)
 
 k4 = graphs.CompleteGraph(4)
 k4.name(new="k4")
+add_to_lists(k4, graph_objects)
 
 k5 = graphs.CompleteGraph(5)
 k5.name(new="k5")
+add_to_lists(k5, graph_objects)
 
 k6 = graphs.CompleteGraph(6)
 k6.name(new="k6")
+add_to_lists(k6, graph_objects)
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
+add_to_lists(k10, graph_objects)
 
 # CE to independence_number(x) >= floor(tan(floor(gutman_energy(x))))
 k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
+add_to_lists(k37, graph_objects, counter_examples)
 
 #star with 3 rays, order = 4
 k1_3 = graphs.StarGraph(3)
 k1_3.name(new="k1_3")
+add_to_lists(k1_3, graph_objects)
 
-# independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x)) is false
-#This is also a counterexample to independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
+# CE to independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x))
+#   and to
+# independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
 k1_9 = graphs.CompleteBipartiteGraph(1,9)
 k1_9.name(new = "k1_9")
+add_to_lists(k1_9, graph_objects, counter_examples)
 
 # The line graph of k3,3
 k3_3_line_graph = graphs.CompleteBipartiteGraph(3, 3).line_graph()
 k3_3_line_graph.name(new = "k3_3 line graph")
+add_to_lists(k3_3_line_graph, graph_objects)
 
 k5_3=graphs.CompleteBipartiteGraph(5,3)
 k5_3.name(new = "k5_3")
+add_to_lists(k5_3, graph_objects)
 
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
@@ -97,6 +229,7 @@ c4c4.add_edge(5,4)
 c4c4.add_edge(5,6)
 c4c4.add_edge(6,3)
 c4c4.name(new="c4c4")
+add_to_lists(c4c4, graph_objects)
 
 #two c5's joined at a vertex: eulerian, not perfect, not hamiltonian
 c5c5=graphs.CycleGraph(5)
@@ -108,6 +241,7 @@ c5c5.add_edge(6,5)
 c5c5.add_edge(6,7)
 c5c5.add_edge(7,8)
 c5c5.name(new="c5c5")
+add_to_lists(c5c5, graph_objects)
 
 #triangle plus pendant: not hamiltonian, not triangle-free
 c3p2=graphs.CycleGraph(3)
@@ -1483,7 +1617,6 @@ chromatic_index_critical_graphs = chromatic_index_critical_7 + [edge_critical_5,
 #graphs where some computations are especially slow
 problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph(), haemers, c3mycielski4, alon_seymour] + chromatic_index_critical_7 + class0small + alpha_critical_hard
 #meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
-
 
 #graph_objects: all graphs with no duplicates
 

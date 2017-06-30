@@ -220,7 +220,7 @@ def MIN_independence_heuristic(g):
     return len(I)
 
 """
-Returns true if the given graph exists in the given list. 
+Returns true if the given graph exists in the given list.
 It also prints out all graphs in the list that are isomorphic so that duplicates may also be found here.
 """
 def does_graph_exist(g, L):
