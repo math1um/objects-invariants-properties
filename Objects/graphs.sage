@@ -82,7 +82,7 @@ k1_9 = graphs.CompleteBipartiteGraph(1,9)
 k1_9.name(new = "k1_9")
 
 # The line graph of k3,3
-k3_3_line_graph = k3_3.line_graph()
+k3_3_line_graph = graphs.CompleteBipartiteGraph(3, 3).line_graph()
 k3_3_line_graph.name(new = "k3_3 line graph")
 
 k5_3=graphs.CompleteBipartiteGraph(5,3)
