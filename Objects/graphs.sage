@@ -880,7 +880,7 @@ ce91.name(new = "ce91")
 ce92 = Graph("qR}fexr{J\\innanomndYrzmy^p~Ri]c]lA{~jVurv]n~reCed~|j{TtvnMtB~nZFrz{wUnV^fzV\\rUlt|qvJubnFwWSxxzfZ}Btj`yV~rv\\nknwl~Z?T]{qwn~bFzh^\\{Ezv}p~I^RV|oXe~knL~x^nNtvYlrezLX^tj{S^Rflqqv]e|S^}vpbe~Ni]m]}zfbZolnPl{N~}]X?")
 ce92.name(new = "ce92")
 
-#CE to: alpha >= diameter for regular graphs
+#CE to: alpha >= diameter for regular graphs, found by ryan pepper (june 2017)
 ce93 = Graph('_t???CA???_B?E?@??WAB?G??_GA?W?????@???W??B???A???BA??@__???G??@A???LA???AW???@_???G')
 ce93.name(new = "ce93")
 
