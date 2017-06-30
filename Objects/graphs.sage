@@ -108,18 +108,23 @@ problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph(), haemers, c3my
 
 p2 = graphs.PathGraph(2)
 p2.name(new="p2")
+add_to_lists(p2, graph_objects)
 
 p3 = graphs.PathGraph(3)
 p3.name(new = "p3")
+add_to_lists(p3, graph_objects)
 
 p4 = graphs.PathGraph(4)
 p4.name(new="p4")
+add_to_lists(p4, graph_objects)
 
 p5 = graphs.PathGraph(5)
 p5.name(new = "p5")
+add_to_lists(p5, graph_objects)
 
 p6 = graphs.PathGraph(6)
 p6.name(new="p6")
+add_to_lists(p6, graph_objects)
 
 """
 CE to independence_number(x) <= e^(cosh(max_degree(x) - 1))
@@ -128,6 +133,7 @@ independence_number(x) <= max_degree(x)*min_degree(x) + card_periphery(x)
 """
 p9 = graphs.PathGraph(9)
 p9.name(new = "p9")
+add_to_lists(p9, graph_objects)
 
 """
 P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenvalues(x)) 
@@ -138,10 +144,12 @@ P29 is a CE to independence_number(x) <=degree_sum(x)/sqrt(card_negative_eigenva
 """
 p29 = graphs.PathGraph(29)
 p29.name(new = "p29")
+add_to_lists(p29, graph_objects)
 
 # CE to independence_number(x) <= 2*cvetkovic(x)*log(10)/log(x.size())
 p102 = graphs.PathGraph(102)
 p102.name(new = "p102")
+add_to_lists(p102, graph_objects)
 
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
