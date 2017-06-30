@@ -958,24 +958,6 @@ willis_page13_fig27 = Graph("Fs\zw")
 willis_page13_fig27.name(new = "willis_page13_fig27")
 
 """
-From Willis's thesis, page 9, Figure 2.1
-Graph for which the Cvetkovic bound is the best upper bound present in the thesis
-
-    sage: independence_number(willis_page9)
-    3
-    sage: willis_page9.order()
-    8
-    sage: willis_page9.size()
-    12
-    sage: max_degree(willis_page9)
-    3
-    sage: min_degree(willis_page9)
-    3
-"""
-willis_page9 = Graph("GrCkQK")
-willis_page9.name(new = "willis_page9")
-
-"""
 From Willis's thesis, page 10, Figure 2.2
 Graph for which the Cvetkovic bound is the best upper bound present in the thesis
 
@@ -1493,6 +1475,7 @@ for d in class0graphs_dict:
 class0small = [g for g in class0graphs if g.order() < 30]
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
+# WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
 
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(), 
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(), 
