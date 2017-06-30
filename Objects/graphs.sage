@@ -1012,24 +1012,6 @@ willis_page13_fig26 = Graph("FstpW")
 willis_page13_fig26.name(new = "willis_page13_fig26")
 
 """
-From Willis's thesis, page 18, Figure 2.9
-Graph for which the minimum degree  is the best upper bound present in the thesis
-
-    sage: independence_number(willis_page18)
-    2
-    sage: willis_page18.order()
-    6
-    sage: willis_page18.size()
-    12
-    sage: max_degree(willis_page18)
-    4
-    sage: min_degree(willis_page18)
-    4
-"""
-willis_page18 = Graph("E}lw")
-willis_page18.name(new = "willis_page18")
-
-"""
 From Willis's thesis, page 21, Figure 3.1
 Graph for which n/chi is the best lower bound present in the thesis
 
@@ -1476,6 +1458,7 @@ class0small = [g for g in class0graphs if g.order() < 30]
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
+# OctohedralGraph is a graph for which the minimum degree is the best upper bound present in the thesis
 
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(), 
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(), 
