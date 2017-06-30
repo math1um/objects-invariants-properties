@@ -306,7 +306,7 @@ dc64 = Graph(dc64_g6string)
 dc64.name(new="dc64")
 
 try:
-    s = load(os.environ['HOME'] +'/objects-invariants-properties/dc1024_g6string.sobj')
+    s = load('/objects-invariants-properties/Objects/dc1024_g6string.sobj')
     print "loaded graph dc1024"
     dc1024 = Graph(s)
     dc1024.name(new="dc1024")
@@ -314,7 +314,7 @@ except:
     print "couldn't load dc1024_g6string.sobj"
 
 try:
-    s = load(os.environ['HOME'] +'/objects-invariants-properties/dc2048_g6string.sobj')
+    s = load('/objects-invariants-properties/Objects/dc2048_g6string.sobj')
     print "loaded graph dc2048"
     dc2048 = Graph(s)
     dc2048.name(new="dc2048")
