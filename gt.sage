@@ -1,7 +1,7 @@
-load("Invariants/invariants.sage")
-load("Properties/properties.sage")
-load("Objects/graphs.sage")
-load("Theorems/theorems.sage")
+load("objects-invariants-properties/Invariants/invariants.sage")
+load("objects-invariants-properties/Properties/properties.sage")
+load("objects-invariants-properties/Objects/graphs.sage")
+load("objects-invariants-properties/Theorems/theorems.sage")
 
 #TESTING
 
