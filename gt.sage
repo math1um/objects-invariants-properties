@@ -1,4 +1,4 @@
-load("Invariants/invariants.sage"
+load("Invariants/invariants.sage")
 load("Properties/properties.sage")
 load("Objects/graphs.sage")
 load("Theorems/theorems.sage")
