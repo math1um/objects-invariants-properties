@@ -248,6 +248,7 @@ c3p2=graphs.CycleGraph(3)
 c3p2.add_vertex()
 c3p2.add_edge(0,3)
 c3p2.name(new="c3p2")
+add_to_lists(c3p2, graph_objects)
 
 K4a=graphs.CompleteGraph(4)
 K4b=graphs.CompleteGraph(4)
@@ -257,15 +258,18 @@ regular_non_trans = K4a.disjoint_union(K4b)
 regular_non_trans.add_edge((0,0),(1,1))
 regular_non_trans.add_edge((0,1),(1,0))
 regular_non_trans.name(new="regular_non_trans")
+add_to_lists(regular_non_trans, graph_objects)
 
 c6ee = graphs.CycleGraph(6)
 c6ee.add_edges([(1,5), (2,4)])
 c6ee.name(new="c6ee")
+add_to_lists(c6ee, graph_objects)
 
 #c5 plus a chord
 c5chord = graphs.CycleGraph(5)
 c5chord.add_edge(0,3)
 c5chord.name(new="c5chord")
+add_to_lists(c5chord, graph_objects)
 
 #c6ee plus another chord: hamiltonian, regular, vertex transitive
 c6eee = copy(c6ee)
