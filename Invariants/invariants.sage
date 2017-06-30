@@ -4,7 +4,7 @@ def barrus_bound(g):
     """
     returns n - barrus q
     defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    sage: barrus_bound(k4):
+    sage: barrus_bound(k4)
     1
     sage: barrus_bound(graphs.OctahedralGraph())
     2
@@ -341,6 +341,15 @@ def welsh_powell(g):
         if temp > mx:
             mx = temp
     return mx + 1
+
+def welsh_powell_alpha_bound(g):
+    """
+    This returns a lower bound for the independence number of a graph.
+
+    sage: welsh_powell_alpha_bound(k5)
+    1
+    """
+    return ceil(g.order()/welsh_powell(g))
 
 #outputs upper bound from Brooks Theorem: returns Delta + 1 for complete and odd cycles
 def brooks(g):
