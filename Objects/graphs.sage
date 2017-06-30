@@ -153,21 +153,26 @@ add_to_lists(p102, graph_objects)
 
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
+add_to_lists(c4, graph_objects)
 
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
+add_to_lists(c6, graph_objects)
 
 # CE to independence_number(x) <= (e^welsh_powell(x) - graph_rank(x))^2
 c22 = graphs.CycleGraph(22)
 c22.name(new = "c22")
+add_to_lists(c22, graph_objects)
 
 # CE to independence_number(x) <= minimum(cvetkovic(x), 2*e^sum_temperatures(x)) 
 c34 = graphs.CycleGraph(34)
 c34.name(new = "c34")
+add_to_lists(c34, graph_objects)
 
 # CE to independence_number(x) <= residue(x)^(degree_sum(x)^density(x))
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
+add_to_lists(c102, graph_objects)
 
 k3 = graphs.CompleteGraph(3)
 k3.name(new="k3")
