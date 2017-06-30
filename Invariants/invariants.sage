@@ -861,6 +861,7 @@ def transmission(g):
     n = g.order()
     return sum([D[v][w] for v in V for w in V if v != w])
 
+# removed fiedler for incorrect value calculations
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
 min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
@@ -868,7 +869,7 @@ Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_peripher
 max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con,
 Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks,
 different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree,
-max_even_minus_even_horizontal, fiedler, laplacian_energy, gutman_energy, average_degree,
+max_even_minus_even_horizontal, laplacian_energy, gutman_energy, average_degree,
 degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures,
 card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues,
 card_cut_vertices, Graph.clustering_average, Graph.connected_components_number,
