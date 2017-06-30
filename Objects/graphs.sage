@@ -80,7 +80,7 @@ L = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'Fn
 for s in L:
     g=Graph(s)
     g.name(new="chromatic_index_critical_7_" + s)
-    add_to_list(g, chromatic_index_critical_7, problem_graphs)
+    add_to_lists(g, chromatic_index_critical_7, problem_graphs)
 
 # Class 0 pebbling graphs
 import pickle, os, os.path
