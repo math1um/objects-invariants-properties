@@ -1,7 +1,14 @@
 load("objects-invariants-properties/Invariants/invariants.sage")
+print("loaded invariants")
+
 load("objects-invariants-properties/Properties/properties.sage")
+print("loaded properties")
+
 load("objects-invariants-properties/Objects/graphs.sage")
+print("loaded graphs")
+
 load("objects-invariants-properties/Theorems/theorems.sage")
+print("loaded theorems")
 
 #TESTING
 
