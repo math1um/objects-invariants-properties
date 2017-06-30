@@ -176,22 +176,28 @@ add_to_lists(c102, graph_objects)
 
 k3 = graphs.CompleteGraph(3)
 k3.name(new="k3")
+add_to_lists(k3, graph_objects)
 
 k4 = graphs.CompleteGraph(4)
 k4.name(new="k4")
+add_to_lists(k4, graph_objects)
 
 k5 = graphs.CompleteGraph(5)
 k5.name(new="k5")
+add_to_lists(k5, graph_objects)
 
 k6 = graphs.CompleteGraph(6)
 k6.name(new="k6")
+add_to_lists(k6, graph_objects)
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
+add_to_lists(k10, graph_objects)
 
 # CE to independence_number(x) >= floor(tan(floor(gutman_energy(x))))
 k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
+add_to_lists(k37, graph_objects)
 
 #star with 3 rays, order = 4
 k1_3 = graphs.StarGraph(3)
