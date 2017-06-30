@@ -1,8 +1,13 @@
 # THEORY
 
 #####
-# UPPER BOUND
+# ALPHA UPPER BOUNDS
+
+#see: alpha_upper_bounds list below
 #####
+
+
+
 
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
 annihilation_thm = annihilation_number
@@ -54,7 +59,8 @@ def godsil_newman_thm(g):
 def AGX_upper_bound_thm(g):
     return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
 
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, median_degree_thm, godsil_newman_thm, AGX_upper_bound_thm]
+alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, median_degree_thm, godsil_newman_thm, AGX_upper_bound_thm, Graph.lovasz_theta]
+
 
 #####
 # LOWER BOUNDS
@@ -70,4 +76,13 @@ def radius_pendants_thm(g):
 def AGX_lower_bound_thm(g):
     return ceil(2 * sqrt(g.order()))
 
-alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm]
+max_degree_minus_triangles = lambda g: max_degree(g) - number_of_triangles(g)
+
+order_brooks_bound = lambda x: ceil(order(x)/brooks(x))
+
+szekeres_wilf_bound = lambda x: ceil(order(x)/szekeres_wilf(x))
+
+#many of the following are invariants defined in invariants.sage
+
+alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm, average_distance, Graph.radius, residue, max_even_minus_even_horizontal, critical_independence_number, max_degree_minus_triangles, order_brooks_bound, szekeres_wilf_bound]
+
