@@ -380,6 +380,13 @@ def different_degrees(g):
     return len(set(g.degree()))
 
 def szekeres_wilf(g):
+    """
+    Returns 1+ max of the minimum degrees for all subgraphs
+    Its an upper bound for chromatic number
+
+    sage: szekeres_wilf(k5)
+    5
+    """
     #removes a vertex, if possible, of degree <= i
     def remove_vertex_of_degree(gc,i):
         Dc = gc.degree()
@@ -406,6 +413,15 @@ def szekeres_wilf(g):
             remove_vertex_of_degree(gc,i)
         if gc.size() == 0:
             return i + 1
+
+def szekeres_wilf_alpha_bound(g):
+    """
+    Returns an alpha-lower bound following the chromatic number bound of Skekeres and Wilf
+
+    sage: szekeres_wilf_alpha_bound(k5)
+    1
+    """
+    return ceil(g.order()/szekeres_wilf(g))
 
 def average_vertex_temperature(g):
      D = g.degree()
