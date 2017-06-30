@@ -82,7 +82,9 @@ order_brooks_bound = lambda x: ceil(order(x)/brooks(x))
 
 szekeres_wilf_bound = lambda x: ceil(order(x)/szekeres_wilf(x))
 
+welsh_powell_alpha_bound = lambda g: ceil(g.order()/welsh_powell(g))
+
 #many of the following are invariants defined in invariants.sage
 
-alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm, average_distance, Graph.radius, residue, max_even_minus_even_horizontal, critical_independence_number, max_degree_minus_triangles, order_brooks_bound, szekeres_wilf_bound]
+alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm, average_distance, Graph.radius, residue, max_even_minus_even_horizontal, critical_independence_number, max_degree_minus_triangles, order_brooks_bound, szekeres_wilf_bound, welsh_powell_alpha_bound]
 
