@@ -1162,21 +1162,6 @@ flower_with_4_petals = flower(4)
 flower_with_4_petals.name(new = "flower_with_4_petals")
 add_to_lists(flower_with_4_petals, graph_objects)
 
-"""
-Non-perfect, alpha = 2, order = 6
-
-    sage: pepper_non_perfect_graph.is_perfect()
-    false
-    sage: independence_number(pepper_non_perfect_graph)
-    2
-    sage: pepper_non_perfect_graph.order()
-    6
-"""
-pepper_non_perfect_graph = Graph("EdZG")
-pepper_non_perfect_graph.name(new = "pepper_non_perfect")
-add_to_lists(pepper_non_perfect_graph, graph_objects)
-
-
 # Gallai Tree graph
 gallai_tree = Graph("`hCKGC@?G@?K?@?@_?w?@??C??G??G??c??o???G??@_??F???N????_???G???B????C????W????G????G????C")
 gallai_tree.name(new = "gallai_tree")
