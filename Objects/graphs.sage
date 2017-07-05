@@ -959,11 +959,6 @@ k5pendant = Graph('E~}?')
 k5pendant.name(new="k5pendant")
 add_to_lists(k5pendant, graph_objects, counter_examples)
 
-# same as H
-killer = Graph('EgSG')
-killer.name(new="killer")
-add_to_lists(killer, graph_objects)
-
 #alon_seymour graph: 
 # CE to the rank-coloring conjecture, 
 # 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
