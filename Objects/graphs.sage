@@ -331,12 +331,6 @@ holton_mckay = Graph('WlCGKS??G?_D????_?g?DOa?C?O??G?CC?`?G??_?_?_??L')
 holton_mckay.name(new="holton_mckay")
 add_to_lists(holton_mckay, graph_objects)
 
-#z1 is a graph that shows up in a sufficient condition for hamiltonicity
-z1 = graphs.CycleGraph(3)
-z1.add_edge(0,3)
-z1.name(new="z1")
-add_to_lists(z1, graph_objects)
-
 #an example of a bipartite, 1-tough, not van_den_heuvel, not hamiltonian graph
 kratsch_lehel_muller = graphs.PathGraph(12)
 kratsch_lehel_muller.add_edge(0,5)
@@ -491,7 +485,8 @@ c3mycielski4 = Graph('~??~??GWkYF@BcuIsJWEo@s?N?@?NyB`qLepJTgRXkAkU?JPg?VB_?W[??
 c3mycielski4.name(new="c3mycielski4")
 add_to_lists(c3mycielski4, graph_objects, counter_examples)
 
-# a PAW is a traingle with a pendant, same as a Z1
+# A PAW is a traingle with a pendant
+# Shows up in a sufficient condition for hamiltonicity
 paw=Graph('C{')
 paw.name(new="paw")
 add_to_lists(paw, graph_objects)
