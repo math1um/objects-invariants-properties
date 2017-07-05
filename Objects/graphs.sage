@@ -106,10 +106,6 @@ problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph(), haemers, c3my
 
 # Graph objects
 
-p2 = graphs.PathGraph(2)
-p2.name(new="p2")
-add_to_lists(p2, graph_objects)
-
 p3 = graphs.PathGraph(3)
 p3.name(new = "p3")
 add_to_lists(p3, graph_objects)
