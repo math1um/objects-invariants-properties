@@ -260,12 +260,6 @@ c6ee.add_edges([(1,5), (2,4)])
 c6ee.name(new="c6ee")
 add_to_lists(c6ee, graph_objects)
 
-#c5 plus a chord
-c5chord = graphs.CycleGraph(5)
-c5chord.add_edge(0,3)
-c5chord.name(new="c5chord")
-add_to_lists(c5chord, graph_objects)
-
 #c6ee plus another chord: hamiltonian, regular, vertex transitive
 c6eee = copy(c6ee)
 c6eee.add_edge(0,3)
