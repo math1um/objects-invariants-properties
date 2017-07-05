@@ -966,10 +966,6 @@ alon_seymour=Graph([[0..63], lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16
 alon_seymour.name(new="alon_seymour")
 add_to_lists(alon_seymour, graph_objects, counter_examples)
 
-golomb = Graph("I?C]dPcww")
-golomb.name(new = "golomb")
-add_to_lists(golomb, graph_objects)
-
 edge_critical_5=graphs.CycleGraph(5)
 edge_critical_5.add_edge(0,3)
 edge_critical_5.add_edge(1,4)
