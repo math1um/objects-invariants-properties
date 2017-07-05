@@ -381,10 +381,6 @@ ryan2=graphs.CirculantGraph(50,[1,3])
 ryan2.name(new="circulant_50_1_3")
 add_to_lists(ryan2, graph_objects)
 
-inp = Graph('J?`FBo{fdb?')
-inp.name(new="inp")
-add_to_lists(inp, graph_objects)
-
 # p10 joined to 2 points of k4
 # CE to chromatic_number <= avg_degree + 1
 p10k4=Graph('MhCGGC@?G?_@_B?B_')
