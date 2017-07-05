@@ -170,22 +170,6 @@ c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
 add_to_lists(c102, graph_objects, counter_examples)
 
-k3 = graphs.CompleteGraph(3)
-k3.name(new="k3")
-add_to_lists(k3, graph_objects)
-
-k4 = graphs.CompleteGraph(4)
-k4.name(new="k4")
-add_to_lists(k4, graph_objects)
-
-k5 = graphs.CompleteGraph(5)
-k5.name(new="k5")
-add_to_lists(k5, graph_objects)
-
-k6 = graphs.CompleteGraph(6)
-k6.name(new="k6")
-add_to_lists(k6, graph_objects)
-
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
 add_to_lists(k10, graph_objects)
