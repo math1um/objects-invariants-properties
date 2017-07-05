@@ -60,6 +60,9 @@ for graph in sage_graphs:
 
 # A graph is alpha_critical if removing any edge increases independence number
 # All alpha critical graphs of orders 2 to 9, 53 in total
+
+# "E|OW" is CE to (has_alpha_residue_equal_two)->((is_perfect)|(is_regular))
+
 alpha_critical_graph_names = ['A_','Bw', 'C~', 'Dhc', 'D~{', 'E|OW', 'E~~w', 'FhCKG', 'F~[KG',
 'FzEKW', 'Fn[kG', 'F~~~w', 'GbL|TS', 'G~?mvc', 'GbMmvG', 'Gb?kTG', 'GzD{Vg', 'Gb?kR_', 'GbqlZ_',
 'GbilZ_', 'G~~~~{', 'GbDKPG', 'HzCGKFo', 'H~|wKF{', 'HnLk]My', 'HhcWKF_', 'HhKWKF_', 'HhCW[F_',
@@ -549,11 +552,6 @@ add_to_lists(ce9, graph_objects, counter_examples)
 ce10=Graph('KxkGGC@?G?o@')
 ce10.name(new = "ce10")
 add_to_lists(ce10, graph_objects, counter_examples)
-
-# CE to (has_alpha_residue_equal_two)->((is_perfect)|(is_regular))
-ce11 = Graph("E|OW")
-ce11.name(new = "ce11")
-add_to_lists(ce11, graph_objects, counter_examples)
 
 # CE to (((is_cubic)&(is_triangle_free))&(is_H_free))->(has_residue_equals_two)
 ce12 = Graph("Edo_")
