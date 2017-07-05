@@ -536,11 +536,6 @@ paw_x_paw = paw.cartesian_product(paw)
 paw_x_paw.name(new = "paw_x_paw")
 add_to_lists(paw_x_paw, graph_objects)
 
-#a KITE is a C4 with a chord
-kite = Graph('Cn')
-kite.name(new="kite")
-add_to_lists(kite, graph_objects)
-
 #a DART is a kite with a pendant
 dart = Graph('DnC')
 dart.name(new="dart")
