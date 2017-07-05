@@ -1027,11 +1027,6 @@ moser = Graph('Fhfco')
 moser.name(new = "moser")
 add_to_lists(moser, graph_objects)
 
-#Holt graph is smallest graph which is edge-transitive but not arc-transitive
-holt = graphs.HoltGraph()
-holt.name(new = "holt")
-add_to_lists(holt, graph_objects)
-
 golomb = Graph("I?C]dPcww")
 golomb.name(new = "golomb")
 add_to_lists(golomb, graph_objects)
