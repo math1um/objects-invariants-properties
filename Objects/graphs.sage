@@ -199,11 +199,6 @@ k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
 add_to_lists(k37, graph_objects, counter_examples)
 
-#star with 3 rays, order = 4
-k1_3 = graphs.StarGraph(3)
-k1_3.name(new="k1_3")
-add_to_lists(k1_3, graph_objects)
-
 # CE to independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x))
 #   and to
 # independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
