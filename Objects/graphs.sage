@@ -221,13 +221,6 @@ c5c5.add_edge(7,8)
 c5c5.name(new="c5c5")
 add_to_lists(c5c5, graph_objects)
 
-#triangle plus pendant: not hamiltonian, not triangle-free
-c3p2=graphs.CycleGraph(3)
-c3p2.add_vertex()
-c3p2.add_edge(0,3)
-c3p2.name(new="c3p2")
-add_to_lists(c3p2, graph_objects)
-
 K4a=graphs.CompleteGraph(4)
 K4b=graphs.CompleteGraph(4)
 K4a.delete_edge(0,1)
