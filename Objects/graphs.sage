@@ -360,15 +360,6 @@ tent = graphs.CycleGraph(4).join(Graph(1),labels="integers")
 tent.name(new="tent")
 add_to_lists(tent, graph_objects)
 
-#c6 with a k4 subgraph, eulerain, diameter = 3, radius=2, hamiltonian
-c6subk4 = graphs.CycleGraph(6)
-c6subk4.add_edge(1,5)
-c6subk4.add_edge(1,4)
-c6subk4.add_edge(2,5)
-c6subk4.add_edge(2,4)
-c6subk4.name(new="c6subk4")
-add_to_lists(c6subk4, graph_objects)
-
 # C5 with chords from one vertex to other 2 (showed up in auto search for CE's): hamiltonian
 bridge = Graph("DU{")
 bridge.name(new="bridge")
@@ -1111,6 +1102,9 @@ add_to_lists(barrus_graph, graph_objects)
 
 # CE to (is_split)->((is_eulerian)->(is_regular))
 # split graph from k4 and e2 that is eulerian but not regular
+# isomorphic to c6 with a k4 subgraph
+# eulerain, diameter = 3, radius=2, hamiltonian
+
 k4e2split = graphs.CompleteGraph(4)
 k4e2split.add_vertices([4,5])
 k4e2split.add_edge(4,0)
