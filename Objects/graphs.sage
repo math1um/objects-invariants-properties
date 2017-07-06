@@ -151,6 +151,10 @@ p102 = graphs.PathGraph(102)
 p102.name(new = "p102")
 add_to_lists(p102, graph_objects, counter_examples)
 
+# CE to independence_number(x)<=welsh_powell(x)^e^different_degrees(x)
+p6707 = graphs.PathGraph(6707)
+p6707.name(new = "p6707")
+
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 add_to_lists(c4, graph_objects)
