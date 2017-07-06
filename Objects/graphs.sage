@@ -13,7 +13,6 @@ alpha_critical_easy = []
 alpha_critical_hard = []
 chromatic_index_critical = []
 chromatic_index_critical_7 = []
-problem_graphs = []
 class0graphs = []
 class0small = []
 counter_examples = []
@@ -104,7 +103,7 @@ alpha_critical_hard = [Graph('Hj\\x{F{')]
 
 # Graphs for which some computations are especially slow
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
-problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph(), haemers, c3mycielski4, alon_seymour] + class0small + alpha_critical_hard
+problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph()] + class0small + alpha_critical_hard
 
 # Graph objects
 
@@ -461,7 +460,7 @@ add_to_lists(c5k3, graph_objects)
 # chi=4, nu = clique = 3
 c3mycielski = Graph('FJnV?')
 c3mycielski.name(new="c3mycieski")
-add_to_lists(c3mycielski, graph_objects, counter_examples)
+add_to_lists(c3mycielski, problem_graphs , counter_examples)
 
 # 4th mycielskian of a triangle, 
 # CE to chi <= clique + girth
@@ -973,7 +972,7 @@ add_to_lists(k5pendant, graph_objects, counter_examples)
 # 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
 alon_seymour=Graph([[0..63], lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16,32,63)])
 alon_seymour.name(new="alon_seymour")
-add_to_lists(alon_seymour, graph_objects, counter_examples)
+add_to_lists(alon_seymour, problem_graphs, counter_examples)
 
 edge_critical_5=graphs.CycleGraph(5)
 edge_critical_5.add_edge(0,3)
@@ -1051,7 +1050,7 @@ intersect in exactly one element.
 haemers = Graph([Subsets(12,3), lambda s1,s2: len(s1.intersection(s2))==1])
 haemers.relabel()
 haemers.name(new="haemers")
-add_to_lists(haemers, graph_objects)
+add_to_lists(haemers, problem_graphs)
 
 """
 The Pepper residue graph was described by Ryan Pepper in personal communication.
