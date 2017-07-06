@@ -17,6 +17,7 @@ problem_graphs = []
 class0graphs = []
 class0small = []
 counter_examples = []
+all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
@@ -1647,6 +1648,13 @@ Chartrand Fig 1.8 - F2
 chartrand_18_f2 = Graph("F?NVo")
 chartrand_18_f2.name(new = "chartrand fig 1.8 - F2")
 add_to_lists(chartrand_18_f2, graph_objects)
+
+
+##############
+# ALL GRAPHS #
+##############
+all_graphs = graph_objects + problem_graphs + class0graphs
+
 
 #graph_objects: all graphs with no duplicates
 
