@@ -204,6 +204,7 @@ k5_3.name(new = "k5_3")
 add_to_lists(k5_3, graph_objects)
 
 # CE to independence_number(x) <= diameter^(max_degree-1)
+# diameter is 16, Delta=3, alpha = 341
 bt2_8 = graphs.BalancedTree(2,8)
 bt2_8.name(new = "bt2_8")
 add_to_lists(bt2_8, graph_objects, counter_examples)
