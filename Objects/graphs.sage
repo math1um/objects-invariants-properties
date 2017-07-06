@@ -102,8 +102,6 @@ class0small = [g for g in class0graphs if g.order() < 30]
 
 alpha_critical_hard = [Graph('Hj\\x{F{')]
 
-chromatic_index_critical_graphs = [pete_minus]
-
 # Graphs for which some computations are especially slow
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph(), haemers, c3mycielski4, alon_seymour] + class0small + alpha_critical_hard
