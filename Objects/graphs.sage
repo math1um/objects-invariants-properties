@@ -203,6 +203,11 @@ k5_3=graphs.CompleteBipartiteGraph(5,3)
 k5_3.name(new = "k5_3")
 add_to_lists(k5_3, graph_objects)
 
+# CE to independence_number(x) <= diameter^(max_degree-1)
+bt2_8 = graphs.BalancedTree(2,8)
+bt2_8.name(new = "bt2_8")
+add_to_lists(bt2_8, graph_objects, counter_examples)
+
 #two c4's joined at a vertex
 c4c4=graphs.CycleGraph(4)
 for i in [4,5,6]:
