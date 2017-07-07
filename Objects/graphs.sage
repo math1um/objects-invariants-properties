@@ -81,11 +81,11 @@ for s in alpha_critical_graph_names:
     add_to_lists(g, alpha_critical_easy, graph_objects, all_graphs)
 
 # All order-7 chromatic_index_critical_graphs (and all are overfull)
-L = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G',
+n7_chromatic_index_critical_names = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G',
 'FnNLG', 'F~^LW', 'Fll\\G', 'FllNG', 'F~l^G', 'F~|^w', 'F~~^W', 'Fnl^W', 'FlNNG', 'F|\\Kg',
 'F~^kg', 'FlKMG']
 
-for s in L:
+for s in n7_chromatic_index_critical_names:
     g=Graph(s)
     g.name(new="chromatic_index_critical_7_" + s)
     add_to_lists(g, chromatic_index_critical, chromatic_index_critical_7, problem_graphs, all_graphs)
