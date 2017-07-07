@@ -887,10 +887,15 @@ def AGX_lower_bound_thm_invariant(g):
 def transmission(g):
     if not g.is_connected():
         return Infinity
-    V = g.vertices()
-    D = g.distance_all_pairs()
-    n = g.order()
-    return sum([D[v][w] for v in V for w in V if v != w])
+    if g.is_tree() and max(g.degree()) == 2:
+        summation = 0
+        for i in [1..(g.order()-1)]:
+            summation += (i*(i+1))/2
+        return summation * 2
+    else:
+        V = g.vertices()
+        D = g.distance_all_pairs()
+        return sum([D[v][w] for v in V for w in V if v != w])
 
 # removed fiedler for incorrect value calculations
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
