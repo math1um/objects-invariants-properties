@@ -561,9 +561,14 @@ def independent_dominating_set_number(g):
 def average_distance(g):
     if not g.is_connected():
         return Infinity
+    n = g.order()
+    if g.is_tree() and max(g.degree()) == 2:
+        summation = 0
+        for i in [1..(n-1)]:
+            summation += (i*(i+1))/2
+        return (summation * 2)/(n*(n-1))
     V = g.vertices()
     D = g.distance_all_pairs()
-    n = g.order()
     return sum([D[v][w] for v in V for w in V if v != w])/(n*(n-1))
 
 #return number of leafs or pendants
