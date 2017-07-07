@@ -428,7 +428,7 @@ ryan = Graph("WxEW?CB?I?_R????_?W?@?OC?AW???O?C??B???G?A?_??R")
 ryan.name(new="ryan")
 add_to_lists(ryan, graph_objects)
 
-# rp 
+# rp
 # CE to alpha <= 2*chi+2*residue
 # has alpha=25,chi=2,residue=10
 ryan2=graphs.CirculantGraph(50,[1,3])
@@ -445,7 +445,7 @@ p10k4=Graph('MhCGGC@?G?_@_B?B_')
 p10k4.name(new="p10k4")
 add_to_lists(p10k4, graph_objects, counter_examples)
 
-# star on 13 points with added edge: 
+# star on 13 points with added edge:
 # CE to alpha <= dom + girth^2
 s13e = Graph('M{aCCA?_C?O?_?_??')
 s13e.name(new="s13e")
@@ -505,14 +505,14 @@ c5k3=Graph('FheCG')
 c5k3.name(new="c5k3")
 add_to_lists(c5k3, graph_objects)
 
-# mycielskian of a triangle: 
+# mycielskian of a triangle:
 # CE to chi <= max(clique, nu)
 # chi=4, nu = clique = 3
 c3mycielski = Graph('FJnV?')
 c3mycielski.name(new="c3mycieski")
 add_to_lists(c3mycielski, graph_objects, counter_examples)
 
-# 4th mycielskian of a triangle, 
+# 4th mycielskian of a triangle,
 # CE to chi <= clique + girth
 # chi = 7, clique = girth = 3
 c3mycielski4 = Graph('~??~??GWkYF@BcuIsJWEo@s?N?@?NyB`qLepJTgRXkAkU?JPg?VB_?W[??Ku??BU_??ZW??@u???Bs???Bw???A??F~~_B}?^sB`o[MOuZErWatYUjObXkZL_QpWUJ?CsYEbO?fB_w[?A`oCM??DL_Hk??DU_Is??Al_Dk???l_@k???Ds?M_???V_?{????oB}?????o[M?????WuZ?????EUjO?????rXk?????BUJ??????EsY??????Ew[??????B`o???????xk???????FU_???????\\k????????|_????????}_????????^_?????????')
@@ -1031,8 +1031,8 @@ killer = Graph('EgSG')
 killer.name(new="killer")
 add_to_lists(killer, graph_objects)
 
-#alon_seymour graph: 
-# CE to the rank-coloring conjecture, 
+#alon_seymour graph:
+# CE to the rank-coloring conjecture,
 # 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
 alon_seymour=Graph([[0..63], lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16,32,63)])
 alon_seymour.name(new="alon_seymour")
@@ -1067,7 +1067,7 @@ heather.add_edge(5,4)
 heather.name(new="heather")
 add_to_lists(heather, graph_objects, counter_examples)
 
-#residue = alpha = 3 
+#residue = alpha = 3
 # CE to residue = alpha => is_ore
 ryan3=graphs.CycleGraph(15)
 for i in range(15):
