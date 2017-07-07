@@ -51,8 +51,7 @@ graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
 graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
 graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
-graphs.WienerArayaGraph(), graphs.WorldMap(), graphs.MathonStronglyRegularGraph(0),
-graphs.MathonStronglyRegularGraph(1), graphs.MathonStronglyRegularGraph(2),
+graphs.WienerArayaGraph(), graphs.WorldMap(),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
