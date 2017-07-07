@@ -16,6 +16,7 @@ chromatic_index_critical_7 = []
 class0graphs = []
 class0small = []
 counter_examples = []
+problem_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -58,6 +59,10 @@ graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), 
 for graph in sage_graphs:
     add_to_lists(graph, graph_objects, all_graphs)
 
+# Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
+add_to_lists(graphs.MeredithGraph(), problem_graphs, all_graphs)
+add_to_lists(graphs.SchlaefliGraph(), problem_graphs, all_graphs)
+
 # A graph is alpha_critical if removing any edge increases independence number
 # All alpha critical graphs of orders 2 to 9, 53 in total
 
@@ -98,12 +103,12 @@ for d in class0graphs_dict:
     add_to_lists(g, class0graphs, all_graphs)
 
 class0small = [g for g in class0graphs if g.order() < 30]
+for g in class0small:
+    add_to_lists(g, problem_graphs)
 
 alpha_critical_hard = [Graph('Hj\\x{F{')]
-
-# Graphs for which some computations are especially slow
-# Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
-problem_graphs = [graphs.MeredithGraph(), graphs.SchlaefliGraph()] + class0small + alpha_critical_hard
+for g in alpha_critical_hard:
+    add_to_lists(g, problem_graphs, all_graphs)
 
 # Graph objects
 
