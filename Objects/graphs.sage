@@ -31,7 +31,7 @@ graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
 graphs.BiggsSmithGraph(), graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(),
 graphs.BrinkmannGraph(), graphs.BrouwerHaemersGraph(), graphs.BuckyBall(), graphs.CameronGraph(),
-graphs.Cell120(), graphs.Cell600(), graphs.ChvatalGraph(), graphs.ClebschGraph(),
+graphs.ChvatalGraph(), graphs.ClebschGraph(),
 graphs.CoxeterGraph(), graphs.DesarguesGraph(), graphs.DejterGraph(), graphs.DoubleStarSnark(),
 graphs.DurerGraph(), graphs.DyckGraph(), graphs.EllinghamHorton54Graph(),
 graphs.EllinghamHorton78Graph(), graphs.ErreraGraph(), graphs.F26AGraph(), graphs.FlowerSnark(),
@@ -56,7 +56,24 @@ graphs.MathonStronglyRegularGraph(1), graphs.MathonStronglyRegularGraph(2),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
-for graph in sage_graphs:
+# These built in graphs are nameless so here they are given names
+#
+temp1 = graphs.Cell120()
+temp1.name(new = "Cell120")
+
+temp2 = graphs.Cell600()
+temp2.name(new = "Cell600")
+ 
+temp3 = graphs.MathonStronglyRegularGraph(0)
+temp3.name(new = "Mathon Strongly Regular Graph 0")
+
+temp4 = graphs.MathonStronglyRegularGraph(1)
+temp4.name(new = "Mathon Strongly Regular Graph 1")
+
+temp5 = graphs.MathonStronglyRegularGraph(2)
+temp5.name(new = "Mathon Strongly Regular Graph 2")
+
+for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5]:
     add_to_lists(graph, graph_objects, all_graphs)
 
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
