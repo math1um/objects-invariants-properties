@@ -1697,6 +1697,15 @@ lovasz_plummer = Graph('iOQBC__???G_?OCG@??C???_C?G?@_?__??????_??@???E?C?C?A?A?
 lovasz_plummer.name(new = "lovasz_plummer graph")
 add_to_lists(lovasz_plummer, graph_objects, all_graphs)
 
+# Jorgenson graphs from: Jørgensen, Leif K. "Diameters of cubic graphs." Discrete applied mathematics 37 (1992): 347-351.
+jorgenson_1 = Graph('Ss??GOG?OC?_?I?DGCa?oDO?i??_C@?AC')
+jorgenson_1.name(new = "jorgenson_1")
+add_to_lists(jorgenson_1, graph_objects, all_graphs)
+
+jorgenson_2 = Graph('GtP@Ww')
+jorgenson_2.name(new = "jorgenson_2")
+add_to_lists(jorgenson_2, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
