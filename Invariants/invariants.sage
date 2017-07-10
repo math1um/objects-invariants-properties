@@ -905,6 +905,12 @@ def transmission(g):
         D = g.distance_all_pairs()
         return sum([D[v][w] for v in V for w in V if v != w])
 
+def harmonic_index(g):
+    sum = 0
+    for edge in g.edges(labels = false):
+        sum += (2 / (g.degree()[edge[0]] + g.degree()[edge[1]]))
+    return sum
+
 # removed fiedler for incorrect value calculations
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
@@ -926,7 +932,7 @@ geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants
 median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
 depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
 max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_bound_thm_invariant,
-transmission, card_connectors]
+transmission, card_connectors, harmonic_index]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
