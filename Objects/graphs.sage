@@ -18,6 +18,7 @@ class0small = []
 counter_examples = []
 problem_graphs = []
 sloane_graphs = []
+non_connected_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -52,7 +53,7 @@ graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
 graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
 graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
-graphs.WienerArayaGraph(), graphs.WorldMap(),
+graphs.WienerArayaGraph(),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
@@ -75,6 +76,8 @@ temp5.name(new = "Mathon Strongly Regular Graph 2")
 
 for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5]:
     add_to_lists(graph, graph_objects, all_graphs)
+
+add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
 
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 add_to_lists(graphs.MeredithGraph(), problem_graphs, all_graphs)
