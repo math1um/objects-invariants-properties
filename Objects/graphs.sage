@@ -134,12 +134,12 @@ for g in alpha_critical_hard:
 
 # Add all DIMACS graphs from the DIMACS subdirectory
 
-files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
+# files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
 
-for filename in files:
-    g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
-    g.name(new = filename[:-4])
-    add_to_lists(g, dimacs_graphs, all_graphs)
+# for filename in files:
+#    g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
+#    g.name(new = filename[:-4])
+#    add_to_lists(g, dimacs_graphs, all_graphs)
 
 # Graph objects
 
