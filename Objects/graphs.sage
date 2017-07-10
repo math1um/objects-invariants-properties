@@ -1790,6 +1790,10 @@ cgt_13_bottom = Graph("Iv?GOKFY?")
 cgt_13_bottom.name(new = "CGT Page 13, Bottom")
 add_to_lists(cgt_13_bottom, graph_objects, all_graphs)
 
+cgt_15 = Graph("FD^vW")
+cgt_15_left.name(new = "CGT Page 15, left")
+add_to_lists(cgt_15_left, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
