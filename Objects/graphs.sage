@@ -1778,6 +1778,13 @@ cgt_8_bottom = Graph("FqhXw")
 cgt_8_bottom.name(new = "CGT Page 8, bottom")
 add_to_lists(cgt_8_bottom, graph_objects, all_graphs)
 
+cgt_10_left = Graph("E`~o")
+cgt_10_left.name(new = "CGT Page 10, left")
+add_to_lists(cgt_10_left, graph_objects, all_graphs)
+
+cgt_10_right = Graph("EFxw")
+cgt_10_right.name(new = "CGT Page 10, right")
+add_to_lists(cgt_10_right, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 
