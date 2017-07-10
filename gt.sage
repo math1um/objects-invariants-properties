@@ -1,3 +1,6 @@
+load("objects-invariants-properties/gt_utilities.sage")
+print("loaded utilities")
+
 load("objects-invariants-properties/Invariants/invariants.sage")
 print("loaded invariants")
 
