@@ -17,6 +17,7 @@ class0graphs = []
 class0small = []
 counter_examples = []
 problem_graphs = []
+sloane_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -439,7 +440,7 @@ O?J?FG_FOOEw_FpGA[OAxa?VC?lWOAm_DM@?Mx?Y{A?XU?hwA?PM?PW@?G@sGBgl?Gi???C@_FP_O?OM
 ???O??_CJNacABK?G?OAwP??b???GNPyGPCG@???"
 dc64 = Graph(dc64_g6string)
 dc64.name(new="dc64")
-add_to_lists(dc64, graph_objects, all_graphs)
+add_to_lists(dc64, sloane_graphs, all_graphs)
 
 
 try:
@@ -447,7 +448,7 @@ try:
     print "loaded graph dc1024"
     dc1024 = Graph(s)
     dc1024.name(new="dc1024")
-    add_to_lists(dc1024, graph_objects, all_graphs)
+    add_to_lists(dc1024, sloane_graphs, all_graphs)
 except:
     print "couldn't load dc1024_g6string.sobj"
 
@@ -456,7 +457,7 @@ try:
     print "loaded graph dc2048"
     dc2048 = Graph(s)
     dc2048.name(new="dc2048")
-    add_to_lists(dc2048, graph_objects, all_graphs)
+    add_to_lists(dc2048, sloane_graphs, all_graphs)
 
 except:
     print "couldn't load dc2048_g6string.sobj"
