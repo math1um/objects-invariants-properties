@@ -992,10 +992,15 @@ ce92 = Graph("qR}fexr{J\\innanomndYrzmy^p~Ri]c]lA{~jVurv]n~reCed~|j{TtvnMtB~nZFr
 ce92.name(new = "ce92")
 add_to_lists(ce92, graph_objects, counter_examples, all_graphs)
 
-#CE to: alpha >= diameter for regular graphs, found by ryan pepper (june 2017)
+# CE to independence_number(x) >= diameter for regular graphs, Ryan Pepper, June 2017
 ce93 = Graph('_t???CA???_B?E?@??WAB?G??_GA?W?????@???W??B???A???BA??@__???G??@A???LA???AW???@_???G')
 ce93.name(new = "ce93")
 add_to_lists(ce93, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= diameter for regular graphs, Ryan Pepper, June 2017
+ce94 = Graph('Yv?GW?@?WB?A?A?@_?oGA?_KG????G??K??A???W??@???AO??BG??B?')
+ce94.name(new = "ce94")
+add_to_lists(ce94, graph_objects, counter_examples, all_graphs)
 
 #a K5 with a pendant
 # CE to dirac => regular or planar
