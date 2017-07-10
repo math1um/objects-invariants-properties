@@ -193,6 +193,16 @@ def matching_number(g):
     return int(g.matching(value_only=True, use_edge_labels=False))
 
 def residue(g):
+    """
+    If the Havel-Hakimi process is iterated until a sequence of 0s is returned,
+    residue is defined to be the number of zeros of this sequence.
+
+        sage: residue(k4)
+        1
+        sage: residue(p4)
+        2
+
+    """
     seq = g.degree_sequence()
 
     while seq[0] > 0:
