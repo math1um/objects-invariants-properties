@@ -14,11 +14,10 @@ $ cd path/to/project
 $ git clone https://github.com/math1um/objects-invariants-properties
 ```
 
-This should create a subdirectory called `objects-invariants-properties`. Then you can load `gt.sage`. The utilities file is unnecessary in most cases.
+This should create a subdirectory called `objects-invariants-properties`. Then you can load `gt.sage`. GT loads the utilities file, as well as all coded graphs, invariants, properties, and theorems. It does not load the database utilities. 
 
 ```sage
 sage: load("objects-invariants-properties/gt.sage")
-sage: load("objects-invariants-properties/gt_utilities.sage")
 ```
 
 `gt.sage` loads all of the other necessary files so you can now access all invariant methods, graph objects and lists, etc. 
