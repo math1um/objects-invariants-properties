@@ -554,6 +554,9 @@ def card_negative_eigenvalues(g):
 def card_cut_vertices(g):
     return len((g.blocks_and_cut_vertices())[1])
 
+def card_connectors(g):
+    return g.order() - card_cut_vertices(g)
+
 def independent_dominating_set_number(g):
     return g.dominating_set(value_only=True, independent=True)
 
@@ -923,7 +926,7 @@ geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants
 median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
 depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
 max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_bound_thm_invariant,
-transmission]
+transmission, card_connectors]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
