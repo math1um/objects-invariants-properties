@@ -63,7 +63,7 @@ temp1.name(new = "Cell120")
 
 temp2 = graphs.Cell600()
 temp2.name(new = "Cell600")
- 
+
 temp3 = graphs.MathonStronglyRegularGraph(0)
 temp3.name(new = "Mathon Strongly Regular Graph 0")
 
