@@ -1767,6 +1767,13 @@ jorgenson_2 = Graph('GtP@Ww')
 jorgenson_2.name(new = "jorgenson_2")
 add_to_lists(jorgenson_2, graph_objects, all_graphs)
 
+# CGT graphs come from
+#     Examples and Counter Examples in Graph Theory by Michael Capobianco and John C. Molluzzo
+
+cgt_5 = Graph("J??GkPPgbG?")
+cgt_5.name(new = "CGT Page 5")
+add_to_lists(cgt_5, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
