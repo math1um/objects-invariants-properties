@@ -1786,9 +1786,9 @@ cgt_10_right = Graph("EFxw")
 cgt_10_right.name(new = "CGT Page 10, right")
 add_to_lists(cgt_10_right, graph_objects, all_graphs)
 
-cgt_11_1.22.1 = Graph("H`_YPN~")
-cgt_11_1.22.1.name(new = "CGT Page 11, Figure 1.22.1")
-add_to_lists(cgt_11_1.22.1, graph_objects, all_graphs)
+cgt_11_1221 = Graph("H`_YPN~")
+cgt_11_1221.name(new = "CGT Page 11, Figure 1.22.1")
+add_to_lists(cgt_11_1221, graph_objects, all_graphs)
 
 cgt_13_bottom = Graph("Iv?GOKFY?")
 cgt_13_bottom.name(new = "CGT Page 13, Bottom")
