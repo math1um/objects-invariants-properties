@@ -139,7 +139,7 @@ files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
 for filename in files:
     g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
     g.name(new = filename[:-4])
-    add_to_lists(g, dimacs_list, all_graphs)
+    add_to_lists(g, dimacs_graphs, all_graphs)
 
 # Graph objects
 
