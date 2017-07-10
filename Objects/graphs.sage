@@ -17,6 +17,7 @@ class0graphs = []
 class0small = []
 counter_examples = []
 problem_graphs = []
+sloane_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -51,8 +52,7 @@ graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
 graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
 graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
-graphs.WienerArayaGraph(), graphs.WorldMap(), graphs.MathonStronglyRegularGraph(0),
-graphs.MathonStronglyRegularGraph(1), graphs.MathonStronglyRegularGraph(2),
+graphs.WienerArayaGraph(), graphs.WorldMap(),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
@@ -440,7 +440,7 @@ O?J?FG_FOOEw_FpGA[OAxa?VC?lWOAm_DM@?Mx?Y{A?XU?hwA?PM?PW@?G@sGBgl?Gi???C@_FP_O?OM
 ???O??_CJNacABK?G?OAwP??b???GNPyGPCG@???"
 dc64 = Graph(dc64_g6string)
 dc64.name(new="dc64")
-add_to_lists(dc64, graph_objects, all_graphs)
+add_to_lists(dc64, sloane_graphs, all_graphs)
 
 
 try:
@@ -448,7 +448,7 @@ try:
     print "loaded graph dc1024"
     dc1024 = Graph(s)
     dc1024.name(new="dc1024")
-    add_to_lists(dc1024, graph_objects, all_graphs)
+    add_to_lists(dc1024, sloane_graphs, all_graphs)
 except:
     print "couldn't load dc1024_g6string.sobj"
 
@@ -457,7 +457,7 @@ try:
     print "loaded graph dc2048"
     dc2048 = Graph(s)
     dc2048.name(new="dc2048")
-    add_to_lists(dc2048, graph_objects, all_graphs)
+    add_to_lists(dc2048, sloane_graphs, all_graphs)
 
 except:
     print "couldn't load dc2048_g6string.sobj"
@@ -1677,6 +1677,11 @@ Chartrand Fig 1.8 - F2
 chartrand_18_f2 = Graph("F?NVo")
 chartrand_18_f2.name(new = "chartrand fig 1.8 - F2")
 add_to_lists(chartrand_18_f2, graph_objects, all_graphs)
+
+# From their Mathing Theory book
+lovasz_plummer = Graph('iOQBC__???G_?OCG@??C???_C?G?@_?__??????_??@???E?C?C?A?A??CC????O???@??G??_????o?????????A?????O????B?????A????CO?????C?????@??????C??????W?????CO')
+lovasz_plummer.name(new = "lovasz_plummer graph")
+add_to_lists(lovasz_plummer, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 
