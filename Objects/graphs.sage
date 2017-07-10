@@ -8,6 +8,8 @@ def add_to_lists(graph, *L):
     for list in L:
             list.append(graph)
 
+import pickle, os
+
 graph_objects = []
 alpha_critical_easy = []
 alpha_critical_hard = []
@@ -19,6 +21,7 @@ counter_examples = []
 problem_graphs = []
 sloane_graphs = []
 non_connected_graphs = []
+dimacs_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -111,7 +114,6 @@ for s in n7_chromatic_index_critical_names:
     add_to_lists(g, chromatic_index_critical, chromatic_index_critical_7, problem_graphs, all_graphs)
 
 # Class 0 pebbling graphs
-import pickle, os, os.path
 try:
     class0graphs_dict = pickle.load(open("objects-invariants-properties/Objects/class0graphs_dictionary.pickle","r"))
 except:
@@ -129,6 +131,15 @@ for g in class0small:
 alpha_critical_hard = [Graph('Hj\\x{F{')]
 for g in alpha_critical_hard:
     add_to_lists(g, problem_graphs, all_graphs)
+
+# Add all DIMACS graphs from the DIMACS subdirectory
+
+files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
+
+for filename in files:
+    g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
+    g.name(new = filename[:-4])
+    add_to_lists(g, dimacs_list, all_graphs)
 
 # Graph objects
 
