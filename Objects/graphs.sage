@@ -1002,6 +1002,62 @@ ce94 = Graph('Yv?GW?@?WB?A?A?@_?oGA?_KG????G??K??A???W??@???AO??BG??B?')
 ce94.name(new = "ce94")
 add_to_lists(ce94, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= -average_distance(x) + ceil(lovasz_theta(x))
+ce95 = Graph('epCpih@K}gSGIZfc?Rkf{EWtVKJTmJtWYl_IoDOKOikwDSKtbH\\fi_g`affO\\|Agq`WcLoakSLNPaWZ@PQhCh?ylTR\\tIR?WfoJNYJ@B{GiOWMUZX_puFP?')
+ce95.name(new = "ce95")
+add_to_lists(ce95, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= ceil(1/2*cvetkovic(x))
+# CE to independence_number(x) >= 1/2*cvetkovic(x)
+ce96 = Graph('Gvz~r{')
+ce96.name(new = "ce96")
+add_to_lists(ce96, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= -max_common_neighbors(x) + min_degree(x)
+ce97 = Graph('eLvnv~yv{yJ~rlB^Mn|v^nz~V]mwVji}^vZf{\\\\nqZLfVBze}y[ym|jevvt~NNucret|~ejj~rz}Q\\~^an}XzTV~t]a]v}nx\\u]n{}~ffqjn`~e}lZvV]t_')
+ce97.name(new = "ce97")
+add_to_lists(ce97, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= max_degree(x) - order_automorphism_group(x)
+ce98 = Graph('ETzw')
+ce98.name(new = "ce98")
+add_to_lists(ce98, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= -card_periphery(x) + matching_number(x)
+ce99 = Graph('I~~~}~~~w')
+ce99.name(new = "ce99")
+add_to_lists(ce99, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= lovasz_theta(x)/radius(x)
+ce100 = Graph('~?@A~~~~~~z~~~~~~~~^~~~~~z~~~~~~~~~~~~~~~v~~~v~~~~~~~~~~z~~~~~~~~^~~~~~~~~~}\~~}v~^~~}~~^~~~~~~~~~~~~^~~~~~~~~V~~~n~~n~~~~~~}~~|~}~~~~~~~~~~~~~~~~~~~~~vv~|~~~~~~~~~~~~~~~~~z~~w~~~~~~~~~~~~~~~~n~~~|~~~~~~~v~|~~~~~~~~~~}~|~r~V~~~n~~~~~~~~z~~}}~}~~~~vz~~z~~~z}~~~n~~~~~~~~~~~~n~~~~~~~z~~~~~~~~~~~~~~^~~~~~~~~~n~~]~~~~~n~~~}~~~~~~~~~~^~^~~~~}~~~~~~~~~~~z~~~~^~~~~~~w')
+ce100.name(new = "ce100")
+add_to_lists(ce100, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= matching_number(x) - order_automorphism_group(x) - 1
+ce101 = Graph('I~~Lt~\Nw')
+ce101.name(new = "ce101")
+add_to_lists(ce101, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= card_positive_eigenvalues(x) - lovasz_theta(x)
+ce102 = Graph('N^nN~~}Z~|}~~\~]zzw')
+ce102.name(new = "ce102")
+add_to_lists(ce102, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= card_negative_eigenvalues(x) - sigma_2(x)
+ce103 = Graph('IOilnemjG')
+ce103.name(new = "ce103")
+add_to_lists(ce103, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= minimum(card_positive_eigenvalues(x),2*card_zero_eigenvalues(x))
+ce104 = Graph('Hx~\\rnV')
+ce104.name(new = "ce104")
+add_to_lists(ce104, graph_objects, counter_examples, all_graphs)
+
+# CE to independence_number(x) >= minimum(min_degree(x), floor(lovasz_theta(x)))
+ce105 =  Graph('z@M@E?OYOSCPBTp?mOWaP_?W[OG[abE_?P[@?@REt?ggAAOH?N@?CATE\oE?WO@GOKu?LJ_??SDP@CIA?AFHCC?kZQMo@CkOGoiJSs`?g?oDJqC?S?qJSqA?GN]?OPd?cGHE?AOpE_c_O@kC_?DF@HGgJ?ygAACdcCMPA[d`SHE@?PqRE?CO_?CWO?H_b_EBoOKI@CWAadQ?eOO?oT_@STAWCCCMOK?A@?TsBoJa@?PGQ_CiKPC_@_iE_hL@ACAIJQDgOSG?G[cG_D[A_CbDKO[goBH_?S?')
+ce105.name(new = "ce105")
+add_to_lists(ce105, graph_objects, counter_examples, all_graphs)
+
 #a K5 with a pendant
 # CE to dirac => regular or planar
 k5pendant = Graph('E~}?')
