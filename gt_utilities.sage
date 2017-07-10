@@ -257,8 +257,8 @@ def read_dimacs_edge_file(filename):
         if line[0] == 'c':
             continue
         elif line[0] == 'p':
-            p, edge, order, size = line.split()
-            assert(edge == "edge"), "Must be an edge problem file"
+            p, problem, order, size = line.split()
+            assert(problem in ("edge", "col")), "Must be an edge problem file"
             order, size = int(order), int(size)
         elif line[0] == 'e':
             e, u, v = line.split()
