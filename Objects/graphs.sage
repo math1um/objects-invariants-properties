@@ -1045,11 +1045,16 @@ ce112 = Graph("flthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{
 ce112.name(new = "ce112")
 add_to_lists(ce112, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= ceil(lovasz_theta(x)) - diameter(x)
+paley_37 = graphs.PaleyGraph(37)
+paley_37.name(new = "paley_37")
+add_to_lists(paley_37, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= minimum(floor(lovasz_theta(x)), tan(randic(x))) 
-paley_53 = graphs.PaleyGraph(53)
-paley_53.add_edge(52,53)
-paley_53.name(new = "paley_53")
-add_to_lists(paley_53, graph_objects, counter_examples, all_graphs)
+paley_53e = graphs.PaleyGraph(53)
+paley_53e.add_edge(52,53)
+paley_53e.name(new = "paley_53e")
+add_to_lists(paley_53e, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= cos(alon_spencer(x))*floor(lovasz_theta(x))
 paley_149 = graphs.PaleyGraph(149)
