@@ -412,16 +412,23 @@ non_ham_over = Graph("HCQRRQo")
 non_ham_over.name(new="non_ham_over")
 add_to_lists(non_ham_over, graph_objects, all_graphs)
 
+# From Ryan Pepper
 ryan = Graph("WxEW?CB?I?_R????_?W?@?OC?AW???O?C??B???G?A?_??R")
 ryan.name(new="ryan")
 add_to_lists(ryan, graph_objects, all_graphs)
 
-# rp
+# Ryan Pepper
 # CE to alpha <= 2*chi+2*residue
 # has alpha=25,chi=2,residue=10
 ryan2=graphs.CirculantGraph(50,[1,3])
 ryan2.name(new="circulant_50_1_3")
-add_to_lists(ryan2, graph_objects, all_graphs)
+add_to_lists(ryan2, graph_objects, counter_examples, all_graphs)
+
+# From Ryan Pepper
+# CE to alpha >= diameter - 1 for regular graphs
+pepper_1_gadget = Graph('Ot???CA?WB`_B@O_B_B?A')
+pepper_1_gadget.name(new = "pepper_1_gadget")
+add_to_lists(pepper_1_gadget, graph_objects, counter_examples, all_graphs)
 
 # p10 joined to 2 points of k4
 # CE to chromatic_number <= avg_degree + 1
