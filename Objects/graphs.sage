@@ -1070,6 +1070,11 @@ ce117 = Graph("N???F~}~f{^_z_~_^o?")
 ce117.name(new = "ce117")
 add_to_lists(ce117, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) <= maximum(caro_wei(x), e^different_degrees(x))^2
+ce118 = Graph("O????B~~v}^w~o~o^wF}?")
+ce118.name(new = "ce118")
+add_to_lists(ce118, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
