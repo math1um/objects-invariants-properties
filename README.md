@@ -14,11 +14,12 @@ $ cd path/to/project
 $ git clone https://github.com/math1um/objects-invariants-properties
 ```
 
-This should create a subdirectory called `objects-invariants-properties`. Then you can load `gt.sage`. GT loads the utilities file, as well as all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs or the database utilities. Use the utility method to load the DIMACS graphs. This populates the `dimacs_graphs` list.
+This should create a subdirectory called `objects-invariants-properties`. Then you can load `gt.sage`. GT loads the utilities file, as well as all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs, Sloane Graphs, or the database utilities. Use the utility methods to load the DIMACS and Sloane graphs. This populates the `dimacs_graphs` list.
 
 ```sage
 sage: load("objects-invariants-properties/gt.sage")
 sage: load_dimacs_graphs()
+sage: load_sloane_graphs()
 ```
 
 ##### Use
