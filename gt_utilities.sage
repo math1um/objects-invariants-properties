@@ -276,3 +276,32 @@ def load_dimacs_graphs():
         g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
         g.name(new = filename[:-4])
         add_to_lists(g, dimacs_graphs, all_graphs)
+
+# Load the Sloane graphs
+def load_sloane_graphs():
+    dc64_g6string ="~?@?JXxwm?OJ@wESEYMMbX{VDokGxAWvH[RkTAzA_Tv@w??wF]?oE\?OAHoC_@A@g?PGM?AKOQ??ZPQ?@rgt??{mIO?NSD_AD?mC\
+    O?J?FG_FOOEw_FpGA[OAxa?VC?lWOAm_DM@?Mx?Y{A?XU?hwA?PM?PW@?G@sGBgl?Gi???C@_FP_O?OM?VMA_?OS?lSB??PS?`sU\
+    ??Gx?OyF_?AKOCN`w??PA?P[J??@C?@CU_??AS?AW^G??Ak?AwVZg|?Oy_@?????d??iDu???C_?D?j_???M??[Bl_???W??oEV?\
+    ???O??_CJNacABK?G?OAwP??b???GNPyGPCG@???"
+    dc64 = Graph(dc64_g6string)
+    dc64.name(new="dc64")
+    add_to_lists(dc64, sloane_graphs, all_graphs)
+
+    try:
+        s = load('objects-invariants-properties/Objects/dc1024_g6string.sobj')
+        print "loaded graph dc1024"
+        dc1024 = Graph(s)
+        dc1024.name(new="dc1024")
+        add_to_lists(dc1024, sloane_graphs, all_graphs)
+    except:
+        print "couldn't load dc1024_g6string.sobj"
+
+    try:
+        s = load('objects-invariants-properties/Objects/dc2048_g6string.sobj')
+        print "loaded graph dc2048"
+        dc2048 = Graph(s)
+        dc2048.name(new="dc2048")
+        add_to_lists(dc2048, sloane_graphs, all_graphs)
+
+    except:
+        print "couldn't load dc2048_g6string.sobj"
