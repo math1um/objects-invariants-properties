@@ -1075,6 +1075,11 @@ ce118 = Graph("O????B~~v}^w~o~o^wF}?")
 ce118.name(new = "ce118")
 add_to_lists(ce118, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) <= 10^sinh(average_vertex_temperature(x) + card_center(x)) 
+ce119 = Graph("\?@CoO_CDOC?G?_?O?CO?_?BO?C???O?Bw??k??D_??O???_???C???A???@????g????")
+ce119.name(new = "ce119")
+add_to_lists(ce119, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
