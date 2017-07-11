@@ -1065,6 +1065,11 @@ ce116 = Graph("J?Bzvrw}Fo?")
 ce116.name(new = "ce116")
 add_to_lists(ce116, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) <= residue(x)^2/density(x)
+ce117 = Graph("N???F~}~f{^_z_~_^o?")
+ce117.name(new = "ce117")
+add_to_lists(ce117, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
