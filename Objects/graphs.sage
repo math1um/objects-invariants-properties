@@ -1792,6 +1792,28 @@ cgt_15_left = Graph("FD^vW")
 cgt_15_left.name(new = "CGT Page 15, left")
 add_to_lists(cgt_15_left, graph_objects, all_graphs)
 
+# Sabidussi Graphs from Sabidussi, Gert. "The centrality index of a graph." Psychometrika 31.4 (1966): 581-603.
+
+sabidussi_2 = Graph('Ls_aGcKSpiDCQH')
+sabidussi_2.name(new = "sabidussi_2")
+add_to_lists(sabidussi_2, graph_objects, all_graphs)
+
+sabidussi_3 = Graph('H`?NeW{')
+sabidussi_3.name(new = "sabidussi_3")
+add_to_lists(sabidussi_3, graph_objects, all_graphs)
+
+sabidussi_4 = Graph('L?O_?C@?G_oOF?')
+sabidussi_4.name(new = "sabidussi_4")
+add_to_lists(sabidussi_4, graph_objects, all_graphs)
+
+sabidussi_5 = Graph('L??GH?GOC@AWKC')
+sabidussi_5.name(new = "sabidussi_5")
+add_to_lists(sabidussi_5, graph_objects, all_graphs)
+
+sabidussi_6 = Graph('L??G?COGQCOCN?')
+sabidussi_6.name(new = "sabidussi_6")
+add_to_lists(sabidussi_6, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
