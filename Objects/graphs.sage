@@ -1140,6 +1140,11 @@ ce132 = Graph("b????????????????????~~|~~|}~x~n~vp~{Nz{^e~svN}Xc~zFKZ~uyX[z[J\\t
 ce132.name(new = "ce132")
 add_to_lists(ce132, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= -brinkmann_steffen(x) - girth(x) + matching_number(x)
+ce133 = Graph("~?@VNtyzkW^v~_?UMVuzfYa_~}|tWZ}v~~v}WgheAI[pTRjr\\Wv}y~VeypzF\\^zmq}C\\UFoD^XJFQwvU^AovUND~XnF]STE_EF~v^~~JF\\X{X\\VFoeMvmy~xzZv\\^{|n~v~~~^v}y~xz]Wihy_Lzmq]CxSawvUNFZr]zj~fl|vMy~wz^Z}q}MxvsZv\\^{|nnuMy~wr^\\vmy~xz^^z~\\^}|nny{qUMHRpZSSE_EC_A@VXJAShyGe|vV~NZz~i}vUNnZr~n]zj~fl|vr^u~p~~}~~z}v}N~~v~~nzNwzf^\\n~TuQodI]AHvuMy^wr^\\wkNz^w~|~^}~y}vUNNZr~n~v}y~|z^^|~~^zn~~n~~v~y}q]MxVtZn|y{qUMHRpZfx|WyhIbL|vap[~}~~~~~~~~~}|vV~NZz~fz~jzHWydNDmzvz~~~~~~~~~~~~c?AGgA]Kw_PC_?_???O?????V~v~~~^~~n~~}\\uRofIca@FHcd~z~N~~~~~~~}Zaw}?oscOOx?d}ptR|EZznDbxsj~z~~~~~~~~~}^cAAYgA^KwgPCc]~v^~~^~~n~~}znz\\w~|~^}~~~r|v}y~|z^^|~~~t^Vuyp|z]^|~~~dZz~\\^{|nn}~~~ynw")
+ce133.name(new = "ce133")
+add_to_lists(ce133, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
