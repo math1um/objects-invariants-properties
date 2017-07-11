@@ -1043,6 +1043,11 @@ ce105 =  Graph('z@M@E?OYOSCPBTp?mOWaP_?W[OG[abE_?P[@?@REt?ggAAOH?N@?CATE\oE?WO@G
 ce105.name(new = "ce105")
 add_to_lists(ce105, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) <= minimum(floor(lovasz_theta(x)), 10^laplacian_energy(x))  
+ce106 = Graph("k??????????????????????????????????????F~~~z~~~\~~~~{~^|nvny\^~~Njj~~zo}^yB|z~}h|Vv\Jft]~RlhV~tZMC^~fpvBynshVa~yw~@Tv\IVaJ}tvA\erD|Xx_rijkiIxLx}GE\pZ{yIwW?vV}K")
+ce106.name(new = "ce106")
+add_to_lists(ce106, graph_objects, counter_examples, all_graphs)
+
 #a K5 with a pendant
 # CE to dirac => regular or planar
 k5pendant = Graph('E~}?')
