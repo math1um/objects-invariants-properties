@@ -1045,6 +1045,11 @@ ce112 = Graph("flthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{
 ce112.name(new = "ce112")
 add_to_lists(ce112, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= ceil(lovasz_theta(x)) - radius(x)
+ce113 = Graph("dlthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{Obstw`Fhlw`Fhi{ObssnCG|Ldw`FhmVaC]eknCG|LknCG|L")
+ce113.name(new = "ce113")
+add_to_lists(ce113, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= ceil(lovasz_theta(x)) - diameter(x)
 paley_37 = graphs.PaleyGraph(37)
 paley_37.name(new = "paley_37")
