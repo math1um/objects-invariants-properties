@@ -1135,6 +1135,11 @@ ce131 = Graph("W?????????^~~}~}^~F~o~}B~wF}oF~oB~w?~}?F~o?^~??")
 ce131.name(new = "ce131")
 add_to_lists(ce131, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) <= minimum(size(x), 10^laplacian_energy(x))
+ce132 = Graph("b????????????????????~~|~~|}~x~n~vp~{Nz{^e~svN}Xc~zFKZ~uyX[z[J\\ti@M~mT@]}X{SzQZQQ^posGNlZg?R}lp`LX{L?")
+ce132.name(new = "ce132")
+add_to_lists(ce132, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
