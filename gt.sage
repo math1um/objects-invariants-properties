@@ -13,6 +13,8 @@ print("loaded graphs")
 load("objects-invariants-properties/Theorems/theorems.sage")
 print("loaded theorems")
 
+print("\nRemember to load DIMACS and Sloane graphs if you want them")
+
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
