@@ -1050,6 +1050,11 @@ ce113 = Graph("dlthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{
 ce113.name(new = "ce113")
 add_to_lists(ce113, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
+paley_17 = graphs.PaleyGraph(17)
+paley_17.name(new = "paley_17")
+add_to_lists(paley_17, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= ceil(lovasz_theta(x)) - diameter(x)
 paley_37 = graphs.PaleyGraph(37)
 paley_37.name(new = "paley_37")
