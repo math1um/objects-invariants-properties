@@ -266,3 +266,13 @@ def read_dimacs_edge_file(filename):
     assert(g.order() == order), "Order in problem line does not match generated order"
     assert(g.size() == size), "Size in problem line does not match generated size"
     return g
+
+
+# Add all DIMACS graphs from the DIMACS subdirectory
+def load_dimacs_graphs():
+    files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
+
+    for filename in files:
+        g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
+        g.name(new = filename[:-4])
+        add_to_lists(g, dimacs_graphs, all_graphs)
