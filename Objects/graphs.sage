@@ -1018,16 +1018,6 @@ ce97 = Graph('eLvnv~yv{yJ~rlB^Mn|v^nz~V]mwVji}^vZf{\\\\nqZLfVBze}y[ym|jevvt~NNuc
 ce97.name(new = "ce97")
 add_to_lists(ce97, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) >= max_degree(x) - order_automorphism_group(x)
-ce98 = Graph('ETzw')
-ce98.name(new = "ce98")
-add_to_lists(ce98, graph_objects, counter_examples, all_graphs)
-
-# CE to independence_number(x) >= -card_periphery(x) + matching_number(x)
-ce99 = Graph('I~~~}~~~w')
-ce99.name(new = "ce99")
-add_to_lists(ce99, graph_objects, counter_examples, all_graphs)
-
 # CE to independence_number(x) >= lovasz_theta(x)/radius(x)
 ce100 = Graph('~?@A~~~~~~z~~~~~~~~^~~~~~z~~~~~~~~~~~~~~~v~~~v~~~~~~~~~~z~~~~~~~~^~~~~~~~~~}\~~}v~^~~}~~^~~~~~~~~~~~~^~~~~~~~~V~~~n~~n~~~~~~}~~|~}~~~~~~~~~~~~~~~~~~~~~vv~|~~~~~~~~~~~~~~~~~z~~w~~~~~~~~~~~~~~~~n~~~|~~~~~~~v~|~~~~~~~~~~}~|~r~V~~~n~~~~~~~~z~~}}~}~~~~vz~~z~~~z}~~~n~~~~~~~~~~~~n~~~~~~~z~~~~~~~~~~~~~~^~~~~~~~~~n~~]~~~~~n~~~}~~~~~~~~~~^~^~~~~}~~~~~~~~~~~z~~~~^~~~~~~w')
 ce100.name(new = "ce100")
@@ -1047,11 +1037,6 @@ add_to_lists(ce102, graph_objects, counter_examples, all_graphs)
 ce103 = Graph('IOilnemjG')
 ce103.name(new = "ce103")
 add_to_lists(ce103, graph_objects, counter_examples, all_graphs)
-
-# CE to independence_number(x) >= minimum(card_positive_eigenvalues(x),2*card_zero_eigenvalues(x))
-ce104 = Graph('Hx~\\rnV')
-ce104.name(new = "ce104")
-add_to_lists(ce104, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= minimum(min_degree(x), floor(lovasz_theta(x)))
 ce105 =  Graph('z@M@E?OYOSCPBTp?mOWaP_?W[OG[abE_?P[@?@REt?ggAAOH?N@?CATE\oE?WO@GOKu?LJ_??SDP@CIA?AFHCC?kZQMo@CkOGoiJSs`?g?oDJqC?S?qJSqA?GN]?OPd?cGHE?AOpE_c_O@kC_?DF@HGgJ?ygAACdcCMPA[d`SHE@?PqRE?CO_?CWO?H_b_EBoOKI@CWAadQ?eOO?oT_@STAWCCCMOK?A@?TsBoJa@?PGQ_CiKPC_@_iE_hL@ACAIJQDgOSG?G[cG_D[A_CbDKO[goBH_?S?')
@@ -1773,10 +1758,6 @@ add_to_lists(jorgenson_2, graph_objects, all_graphs)
 cgt_5 = Graph("J??GkPPgbG?")
 cgt_5.name(new = "CGT Page 5")
 add_to_lists(cgt_5, graph_objects, all_graphs)
-
-cgt_8_bottom = Graph("FqhXw")
-cgt_8_bottom.name(new = "CGT Page 8, bottom")
-add_to_lists(cgt_8_bottom, graph_objects, all_graphs)
 
 cgt_10_left = Graph("E`~o")
 cgt_10_left.name(new = "CGT Page 10, left")
