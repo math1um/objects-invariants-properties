@@ -223,6 +223,8 @@ add_to_lists(k37, graph_objects, counter_examples, all_graphs)
 # CE to independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x))
 #   and to
 # independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
+#   and to
+# independence_number(x) >= -brinkmann_steffen(x) + 1/2*card_center(x)
 k1_9 = graphs.CompleteBipartiteGraph(1,9)
 k1_9.name(new = "k1_9")
 add_to_lists(k1_9, graph_objects, counter_examples, all_graphs)
