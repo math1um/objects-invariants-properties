@@ -1056,6 +1056,11 @@ ce109 = Graph("Z???????????????????????????????B~~~v~~z~~|~nvnnjz~~xfntuV~w")
 ce109.name(new = "ce109")
 add_to_lists(ce109, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= minimum(diameter(x), lovasz_theta(x))
+ce110 = Graph("FCQb_")
+ce110.name(new = "ce110")
+add_to_lists(ce110, graphs_objects, counter_examples, all_graphs)
+
 #a K5 with a pendant
 # CE to dirac => regular or planar
 k5pendant = Graph('E~}?')
