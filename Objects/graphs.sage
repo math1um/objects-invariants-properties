@@ -1105,6 +1105,11 @@ ce124 = Graph("Z????????????????????~~~~~v~vf|~b~~o~~sF~~_^~}?~|k?z~w?^~}??")
 ce124.name(new = "ce124")
 add_to_lists(ce124, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) <= ceil(e^caro_wei(x))
+ce125 = Graph("L??F~z{~FwN_~?")
+ce125.name(new = "ce125")
+add_to_lists(ce125, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
