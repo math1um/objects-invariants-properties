@@ -1040,21 +1040,21 @@ ce110 = Graph("GUxvuw")
 ce110.name(new = "ce110")
 add_to_lists(ce110, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) >= minimum(floor(lovasz_theta(x)), tan(randic(x))) 
-ce111 = graphs.PaleyGraph(53)
-ce111.add_edge(52,53)
-ce111.name(new = "ce111")
-add_to_lists(ce111, graph_objects, counter_examples, all_graphs)
-
 # CE to independence_number(x) >= minimum(lovasz_theta(x), max_degree(x)/card_center(x))
 ce112 = Graph("flthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{Obstw`Fhlw`Fhi{ObssnCG|Ldw`FhmVaC]eknCG|LknCG|L??????_?????G")
 ce112.name(new = "ce112")
 add_to_lists(ce112, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= minimum(floor(lovasz_theta(x)), tan(randic(x))) 
+paley_53 = graphs.PaleyGraph(53)
+paley_53.add_edge(52,53)
+paley_53.name(new = "paley_53")
+add_to_lists(paley_53, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= cos(alon_spencer(x))*floor(lovasz_theta(x))
-ce113 = graphs.PaleyGraph(149)
-ce113.name(new = "ce113")
-add_to_lists(ce113, graph_objects, counter_examples, all_graphs)
+paley_149 = graphs.PaleyGraph(149)
+paley_149.name(new = "paley_149")
+add_to_lists(paley_149, graph_objects, counter_examples, all_graphs)
 
 #a K5 with a pendant
 # CE to dirac => regular or planar
