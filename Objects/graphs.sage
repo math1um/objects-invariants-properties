@@ -1046,6 +1046,11 @@ ce111.add_edge(52,53)
 ce111.name(new = "ce111")
 add_to_lists(ce111, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= minimum(lovasz_theta(x), max_degree(x)/card_center(x))
+ce112 = Graph("flthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{Obstw`Fhlw`Fhi{ObssnCG|Ldw`FhmVaC]eknCG|LknCG|L??????_?????G")
+ce112.name(new = "ce112")
+add_to_lists(ce112, graph_objects, counter_examples, all_graphs)
+
 #a K5 with a pendant
 # CE to dirac => regular or planar
 k5pendant = Graph('E~}?')
