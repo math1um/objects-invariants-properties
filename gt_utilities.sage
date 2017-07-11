@@ -276,6 +276,7 @@ def load_dimacs_graphs():
         g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
         g.name(new = filename[:-4])
         add_to_lists(g, dimacs_graphs, all_graphs)
+        print "loaded graph - ", g
 
 # Load the Sloane graphs
 def load_sloane_graphs():
@@ -286,6 +287,7 @@ O?J?FG_FOOEw_FpGA[OAxa?VC?lWOAm_DM@?Mx?Y{A?XU?hwA?PM?PW@?G@sGBgl?Gi???C@_FP_O?OM
     dc64 = Graph(dc64_g6string)
     dc64.name(new="dc64")
     add_to_lists(dc64, sloane_graphs, all_graphs)
+    print "loaded graph dc64"
 
     try:
         s = load('objects-invariants-properties/Objects/dc1024_g6string.sobj')
