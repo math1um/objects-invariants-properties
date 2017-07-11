@@ -1040,6 +1040,12 @@ ce110 = Graph("GUxvuw")
 ce110.name(new = "ce110")
 add_to_lists(ce110, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= minimum(floor(lovasz_theta(x)), tan(randic(x))) 
+ce111 = graphs.PaleyGraph(53)
+ce111.add_edge(52,53)
+ce111.name(new = "ce111")
+add_to_lists(ce111, graph_objects, counter_examples, all_graphs)
+
 #a K5 with a pendant
 # CE to dirac => regular or planar
 k5pendant = Graph('E~}?')
