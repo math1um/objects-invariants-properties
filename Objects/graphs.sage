@@ -1051,6 +1051,11 @@ ce112 = Graph("flthktLhme|L|L]efhg|LbstFhhFhgbssG|L`FhiC]ecG|LCG|LaC]ew`FhnCG|L{
 ce112.name(new = "ce112")
 add_to_lists(ce112, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= cos(alon_spencer(x))*floor(lovasz_theta(x))
+ce113 = graphs.PaleyGraph(149)
+ce113.name(new = "ce113")
+add_to_lists(ce113, graph_objects, counter_examples, all_graphs)
+
 #a K5 with a pendant
 # CE to dirac => regular or planar
 k5pendant = Graph('E~}?')
