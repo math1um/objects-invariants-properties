@@ -1,15 +1,10 @@
 #GRAPH INVARIANTS
+all_invariants = []
 
-def barrus_bound(g):
-    """
-    returns n - barrus q
-    defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    sage: barrus_bound(k4)
-    1
-    sage: barrus_bound(graphs.OctahedralGraph())
-    2
-    """
-    return g.order() - barrus_q(g)
+efficient_invariants = []
+intractable_invariants = []
+
+theorem_invariants = []
 
 def distinct_degrees(g):
     """
@@ -20,6 +15,7 @@ def distinct_degrees(g):
         1
     """
     return len(set(g.degree()))
+add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 
 #inspired by the Friendship Theorem
 def common_neighbors(g,v,w):
@@ -33,6 +29,7 @@ def common_neighbors(g,v,w):
     Nv = Set(g.neighbors(v))
     Nw = Set(g.neighbors(w))
     return Nv.intersection(Nw)
+add_to_lists(common_neighbors, efficient_invariants, all_invariants)
 
 def max_common_neighbors(g):
     """
@@ -52,6 +49,7 @@ def max_common_neighbors(g):
                 if temp > max:
                     max = temp
     return max
+add_to_lists(max_common_neighbors, efficient_invariants, all_invariants)
 
 def min_common_neighbors(g):
     """
@@ -74,6 +72,7 @@ def min_common_neighbors(g):
                 if temp < min:
                     min = temp
     return min
+add_to_lists(min_common_neighbors, efficient_invariants, all_invariants)
 
 def mean_common_neighbors(g):
     """
@@ -91,28 +90,7 @@ def mean_common_neighbors(g):
             if i < j:
                 sum += len(common_neighbors(g, V[i], V[j]))
     return 2*sum/(n*(n-1))
-
-def domination_number(g):
-    """
-    Returns the domination number of the graph g, i.e., the size of a maximum
-    dominating set.
-
-    A complete graph is dominated by any of its vertices::
-
-        sage: domination_number(graphs.CompleteGraph(5))
-        1
-
-    A star graph is dominated by its central vertex::
-
-        sage: domination_number(graphs.StarGraph(5))
-        1
-
-    The domination number of a cycle of length n is the ceil of n/3.
-
-        sage: domination_number(graphs.CycleGraph(5))
-        2
-    """
-    return g.dominating_set(value_only=True)
+add_to_lists(mean_common_neighbors, efficient_invariants, all_invariants)
 
 def min_degree(g):
     """
@@ -128,6 +106,7 @@ def min_degree(g):
         3
     """
     return min(g.degree())
+add_to_lists(min_degree, efficient_invariants, all_invariants)
 
 def max_degree(g):
     """
@@ -143,6 +122,19 @@ def max_degree(g):
         5
     """
     return max(g.degree())
+add_to_lists(max_degree, efficient_invariants, all_invariants)
+
+def average_degree(g):
+     return mean(g.degree())
+add_to_lists(average_degree, efficient_invariants, all_invariants)
+
+def median_degree(g):
+    return median(g.degree())
+add_to_lists(median_degree, efficient_invariants, all_invariants)
+
+def inverse_degree(g):
+    return sum([(1.0/d) for d in g.degree() if d!= 0])
+add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 
 def eulerian_faces(g):
     """
@@ -157,6 +149,7 @@ def eulerian_faces(g):
     n = g.order()
     m = g.size()
     return 2 - n + m
+add_to_lists(eulerian_faces, efficient_invariants, all_invariants)
 
 def barrus_q(g):
     """
@@ -175,6 +168,19 @@ def barrus_q(g):
     Degrees.sort()
     Degrees.reverse()
     return max(k for k in range(g.order()) if Degrees[k] >= (k+1)) + 1
+add_to_lists(barrus_q, efficient_invariants, all_invariants)
+
+def barrus_bound(g):
+    """
+    returns n - barrus q
+    defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
+    sage: barrus_bound(k4)
+    1
+    sage: barrus_bound(graphs.OctahedralGraph())
+    2
+    """
+    return g.order() - barrus_q(g)
+add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 
 def matching_number(g):
     """
@@ -191,6 +197,7 @@ def matching_number(g):
         3
     """
     return int(g.matching(value_only=True, use_edge_labels=False))
+add_to_lists(matching_number, efficient_invariants, all_invariants)
 
 def residue(g):
     """
@@ -211,6 +218,7 @@ def residue(g):
         seq.sort(reverse=True)
 
     return len(seq)
+add_to_lists(residue, efficient_invariants, all_invariants)
 
 def annihilation_number(g):
     seq = sorted(g.degree())
@@ -220,6 +228,7 @@ def annihilation_number(g):
         a += 1
 
     return a
+add_to_lists(annihilation_number, efficient_invariants, all_invariants)
 
 def fractional_alpha(g):
     if len(g.vertices()) == 0:
@@ -235,6 +244,7 @@ def fractional_alpha(g):
         p.add_constraint(x[u] + x[v], max=1)
 
     return p.solve()
+add_to_lists(fractional_alpha, efficient_invariants, all_invariants)
 
 def fractional_covering(g):
     if len(g.vertices()) == 0:
@@ -250,8 +260,7 @@ def fractional_covering(g):
         p.add_constraint(x[u] + x[v], min=1)
 
     return p.solve()
-
-
+add_to_lists(fractional_covering, efficient_invariants, all_invariants)
 
 def cvetkovic(g):
     eigenvalues = g.spectrum()
@@ -267,21 +276,23 @@ def cvetkovic(g):
             zero += 1
 
     return zero + min([positive, negative])
+add_to_lists(cvetkovic, efficient_invariants, all_invariants)
 
 def cycle_space_dimension(g):
     return g.size()-g.order()+g.connected_components_number()
+add_to_lists(cycle_space_dimension, efficient_invariants, all_invariants)
 
 def card_center(g):
     return len(g.center())
-
-def cycle_space_dimension(g):
-    return g.size()-g.order()+g.connected_components_number()
+add_to_lists(card_center, efficient_invariants, all_invariants)
 
 def card_periphery(g):
     return len(g.periphery())
+add_to_lists(card_periphery, efficient_invariants, all_invariants)
 
 def max_eigenvalue(g):
     return max(g.adjacency_matrix().change_ring(RDF).eigenvalues())
+add_to_lists(max_eigenvalue, efficient_invariants, all_invariants)
 
 def resistance_distance_matrix(g):
     L = g.laplacian_matrix()
@@ -295,45 +306,21 @@ def resistance_distance_matrix(g):
             R[i,j] = X[i,i] + X[j,j] - 2*X[i,j]
     return R
 
-
 def kirchhoff_index(g):
     R = resistance_distance_matrix(g)
     return .5*sum(sum(R))
+add_to_lists(kirchhoff_index, efficient_invariants, all_invariants)
 
 def largest_singular_value(g):
     A = matrix(RDF,g.adjacency_matrix())
     svd = A.SVD()
     sigma = svd[1]
     return sigma[0,0]
-
-def independence_number(g):
-    return g.independent_set(value_only=True)
-
-
-def chromatic_index(g):
-    if g.size() == 0:
-        return 0
-    import sage.graphs.graph_coloring
-    return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
-
-
-def chromatic_num(g):
-    return g.chromatic_number()
+add_to_lists(largest_singular_value, efficient_invariants, all_invariants)
 
 def card_max_cut(g):
     return g.max_cut(value_only=True)
-
-
-def clique_covering_number(g):
-    # Finding the chromatic number of the complement of a fullerene
-    # is extremely slow, even when using MILP as the algorithm.
-    # Therefore we check to see if the graph is triangle-free.
-    # If it is, then the clique covering number is equal to the
-    # number of vertices minus the size of a maximum matching.
-    if g.is_triangle_free():
-        return g.order() - matching_number(g)
-    gc = g.complement()
-    return gc.chromatic_number(algorithm="MILP")
+add_to_lists(card_max_cut, efficient_invariants, all_invariants)
 
 def welsh_powell(g):
     """
@@ -351,8 +338,9 @@ def welsh_powell(g):
         if temp > mx:
             mx = temp
     return mx + 1
+add_to_lists(welsh_powell, efficient_invariants, all_invariants)
 
-def welsh_powell_alpha_bound(g):
+def alpha_welsh_powell_bound_invariant(g):
     """
     This returns a lower bound for the independence number of a graph.
 
@@ -360,6 +348,7 @@ def welsh_powell_alpha_bound(g):
     1
     """
     return ceil(g.order()/welsh_powell(g))
+add_to_lists(alpha_welsh_powell_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 #outputs upper bound from Brooks Theorem: returns Delta + 1 for complete and odd cycles
 def brooks(g):
@@ -372,22 +361,17 @@ def brooks(g):
         return Delta + 1
     else:
         return Delta
+add_to_lists(brooks, efficient_invariants, all_invariants)
 
 #wilf's upper bound for chromatic number
 def wilf(g):
     return max_eigenvalue(g) + 1
-
-def n_over_alpha(g):
-    n = g.order() + 0.0
-    return n/independence_number(g)
-
-def median_degree(g):
-    return median(g.degree())
-
+add_to_lists(wilf, efficient_invariants, all_invariants)
 
 #a measure of irregularity
 def different_degrees(g):
     return len(set(g.degree()))
+add_to_lists(different_degrees, efficient_invariants, all_invariants)
 
 def szekeres_wilf(g):
     """
@@ -423,8 +407,9 @@ def szekeres_wilf(g):
             remove_vertex_of_degree(gc,i)
         if gc.size() == 0:
             return i + 1
+add_to_lists(szekeres_wilf, efficient_invariants, all_invariants)
 
-def szekeres_wilf_alpha_bound(g):
+def alpha_szekeres_wilf_bound_invariant(g):
     """
     Returns an alpha-lower bound following the chromatic number bound of Skekeres and Wilf
 
@@ -432,16 +417,19 @@ def szekeres_wilf_alpha_bound(g):
     1
     """
     return ceil(g.order()/szekeres_wilf(g))
+add_to_lists(szekeres_wilf, efficient_invariants, theorem_invariants, all_invariants)
 
 def average_vertex_temperature(g):
      D = g.degree()
      n = g.order()
      return sum([D[i]/(n-D[i]+0.0) for i in range(n)])/n
+add_to_lists(average_vertex_temperature, efficient_invariants, all_invariants)
 
 def sum_temperatures(g):
      D = g.degree()
      n = g.order()
      return sum([D[i]/(n-D[i]+0.0) for i in range(n)])
+add_to_lists(sum_temperatures, efficient_invariants, all_invariants)
 
 def randic(g):
      D = g.degree()
@@ -456,15 +444,7 @@ def randic(g):
          j = V.index(w)
          sum += 1.0/(D[i]*D[j])**0.5
      return sum
-
-#a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
-#all upper bounds in theory have value at least 3 for c8chords
-#returns 2 for bipartite graphs, order for non-bipartite
-def bipartite_chromatic(g):
-    if g.is_bipartite():
-        return 2
-    else:
-        return g.order()
+add_to_lists(randic, efficient_invariants, all_invariants)
 
 #a very good lower bound for alpha
 def max_even_minus_even_horizontal(g):
@@ -481,6 +461,7 @@ def max_even_minus_even_horizontal(g):
             #print "temp = {}, mx_even = {}".format(temp,mx_even)
 
     return mx_even
+add_to_lists(max_even_minus_even_horizontal, efficient_invariants, theorem_invariants, all_invariants)
 
 def max_even_minus_even_horizontal_component(g):
     """
@@ -507,33 +488,31 @@ def max_even_minus_even_horizontal_component(g):
             mx=l
     return mx
 
-def median_degree(g):
-    return median(g.degree())
-
 def laplacian_energy(g):
      L = g.laplacian_matrix().change_ring(RDF).eigenvalues()
      Ls = [1/lam**2 for lam in L if lam > 0]
      return 1 + sum(Ls)
+add_to_lists(laplacian_energy, efficient_invariants, all_invariants)
 
 #sum of the positive eigenvalues of a graph
 def gutman_energy(g):
      L = g.adjacency_matrix().change_ring(RDF).eigenvalues()
      Ls = [lam for lam in L if lam > 0]
      return sum(Ls)
+add_to_lists(gutman_energy, efficient_invariants, all_invariants)
 
 #the second smallest eigenvalue of the Laplacian matrix of a graph, also called the "algebraic connectivity" - the smallest should be 0
 def fiedler(g):
      L = g.laplacian_matrix().change_ring(RDF).eigenvalues()
      L.sort()
      return L[1]
-
-def average_degree(g):
-     return mean(g.degree())
+add_to_lists(fiedler, broken_invariants, all_invariants)
 
 def degree_variance(g):
      mu = mean(g.degree())
      s = sum((x-mu)**2 for x in g.degree())
      return s/g.order()
+add_to_lists(degree_variance, efficient_invariants, all_invariants)
 
 def number_of_triangles(g):
      E = g.edges()
@@ -545,30 +524,31 @@ def number_of_triangles(g):
          S = [u for u in g.vertices() if D[u][v] == 1 and D[u][w] == 1]
          total += len(S)
      return total/3
+add_to_lists(number_of_triangles, efficient_invariants, all_invariants)
 
 def graph_rank(g):
     return g.adjacency_matrix().rank()
-
-def inverse_degree(g):
-    return sum([(1.0/d) for d in g.degree() if d!= 0])
+add_to_lists(graph_rank, efficient_invariants, all_invariants)
 
 def card_positive_eigenvalues(g):
     return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam > 0])
+add_to_lists(card_positive_eigenvalues, efficient_invariants, all_invariants)
 
 def card_zero_eigenvalues(g):
     return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam == 0])
+add_to_lists(card_zero_eigenvalues, efficient_invariants, all_invariants)
 
 def card_negative_eigenvalues(g):
     return len([lam for lam in g.adjacency_matrix().eigenvalues() if lam < 0])
+add_to_lists(card_negative_eigenvalues, efficient_invariants, all_invariants)
 
 def card_cut_vertices(g):
     return len((g.blocks_and_cut_vertices())[1])
+add_to_lists(card_cut_vertices, efficient_invariants, all_invariants)
 
 def card_connectors(g):
     return g.order() - card_cut_vertices(g)
-
-def independent_dominating_set_number(g):
-    return g.dominating_set(value_only=True, independent=True)
+add_to_lists(card_connectors, efficient_invariants, all_invariants)
 
 #returns average of distances between *distinct* vertices, return infinity is graph is not connected
 def average_distance(g):
@@ -583,18 +563,20 @@ def average_distance(g):
     V = g.vertices()
     D = g.distance_all_pairs()
     return sum([D[v][w] for v in V for w in V if v != w])/(n*(n-1))
+add_to_lists(average_distance, efficient_invariants, all_invariants)
 
 #return number of leafs or pendants
 def card_pendants(g):
     return sum([x for x in g.degree() if x == 1])
-
+add_to_lists(card_pendants, efficient_invariants, all_invariants)
 
 def vertex_con(g):
     return g.vertex_connectivity()
-
+add_to_lists(vertex_con, efficient_invariants, all_invariants)
 
 def edge_con(g):
     return g.edge_connectivity()
+add_to_lists(edge_con, efficient_invariants, all_invariants)
 
 #returns number of bridges in graph
 def card_bridges(g):
@@ -603,20 +585,24 @@ def card_bridges(g):
     for scc in gs.strongly_connected_components():
         bridges.extend(gs.edge_boundary(scc))
     return len(bridges)
+add_to_lists(card_bridgess, efficient_invariants, all_invariants)
 
 #upper bound for the domination number
 def alon_spencer(g):
     delta = min(g.degree())
     n = g.order()
     return n*((1+log(delta + 1.0)/(delta + 1)))
+add_to_lists(alon_spencer, efficient_invariants, all_invariants)
 
 #lower bound for residue and, hence, independence number
 def caro_wei(g):
     return sum([1.0/(d + 1) for d in g.degree()])
+add_to_lists(card_wei, efficient_invariants, all_invariants)
 
 #equals 2*size, the 1st theorem of graph theory
 def degree_sum(g):
     return sum(g.degree())
+add_to_lists(degree_sum, efficient_invariants, all_invariants)
 
 #smallest sum of degrees of non-adjacent degrees, invariant in ore condition for hamiltonicity
 #default for complete graph?
@@ -625,10 +611,12 @@ def sigma_2(g):
         return g.order()
     Dist = g.distance_all_pairs()
     return min(g.degree(v) + g.degree(w) for v in g for w in g if Dist[v][w] > 1)
+add_to_lists(sigma_2, efficient_invariants, all_invariants)
 
 #cardinality of the automorphism group of the graph
 def order_automorphism_group(g):
     return g.automorphism_group(return_group=False, order=True)
+add_to_lists(order_automorphism_group, efficient_invariants, all_invariants)
 
 #in sufficient condition for graphs where vizing's independence theorem holds
 def brinkmann_steffen(g):
@@ -637,10 +625,7 @@ def brinkmann_steffen(g):
         return 0
     Dist = g.distance_all_pairs()
     return min(g.degree(v) + g.degree(w) for v in g for w in g if Dist[v][w] == 1)
-
-#cardinality of the automorphism group of the graph
-def order_automorphism_group(g):
-    return g.automorphism_group(return_group=False, order=True)
+add_to_lists(brinkmann_steffen, efficient_invariants, all_invariants)
 
 def alpha_critical_optimum(g, alpha_critical_names):
 
@@ -724,9 +709,11 @@ def find_max_critical_independent_set(g):
 
 def critical_independence_number(g):
     return len(find_max_critical_independent_set(g))
+add_to_lists(critical_independence_number, efficient_invariants, all_invariants)
 
 def card_independence_irreducible_part(g):
     return len(find_independence_irreducible_part(g))
+add_to_lists(card_independence_irreducible_part, efficient_invariants, all_invariants)
 
 def find_independence_irreducible_part(g):
     X = find_KE_part(g)
@@ -740,6 +727,7 @@ def find_KE_part(g):
 
 def card_KE_part(g):
     return len(find_KE_part(g))
+add_to_lists(card_KE_part, efficient_invariants, all_invariants)
 
 def find_independence_irreducible_subgraph(g):
     return g.subgraph(find_independence_irreducible_part(g))
@@ -773,21 +761,25 @@ def make_invariant_from_property(property, name=None):
 # defined by R. Pepper in an unpublished paper on graph irregularity
 def geometric_length_of_degree_sequence(g):
     return sqrt(sum(d^2 for d in g.degree()))
+add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_invariants)
 
 # Cut Vertices Theorem as invariant
 # Cited in the theorem section
-def cut_vertices_thm_invariant(G):
+def alpha_cut_vertices_bound_invariant(G):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
+add_to_lists(alpha_cut_vertices_bound_invariant, efficient_invariants, theorem_invariants all_invariants)
 
 # Radius Pendants Theorem as invariant
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def radius_pendants_thm_invariant(g):
+def alpha_radius_pendants_bound_invariant(g):
     return (g.radius() + (card_pendants(g)/2) - 1)
+add_to_lists(alpha_radius_pendants_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 # Median Degree Theorem as invariant
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
 def median_degree_thm_invariant(g):
     return (g.order() - (median_degree(g)/2) - 1/2)
+add_to_lists(alpha_median_degree_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 # Two Stability Theta Bound
 # For graphs with alpha <= 2,
@@ -795,49 +787,44 @@ def median_degree_thm_invariant(g):
 # The Sandwich Theorem by Knuth p. 47
 def two_stability_theta_bound(g):
     return 2^(2/3)*g.order()^(1/3)
-
-# Two Stability Theta Bound
-# For graphs with alpha <= 2,
-# lovasz_theta <= 2^(2/3)*n^(1/3)
-# The Sandwich Theorem by Knuth p. 47
-def two_stability_theta_bound(g):
-    return 2^(2/3)*g.order()^(1/3)
+add_to_lists(two_stability_theta_bound, efficient_invariants, all_invariants)
 
 # Lovasz Theta over Root N
 # The Sandwich Theorem by Knuth p. 45
 def lovasz_theta_over_root_n(g):
     return g.lovasz_theta()/sqrt(g.order())
+add_to_lists(lovasz_theta_over_root_n, efficient_invariants, all_invariants)
 
 # Theta * Theta-Complement
 # The Sandwich Theorem by Knuth, p. 27
 def theta_theta_complement(g):
     return g.lovasz_theta() * g.complement().lovasz_theta()
+add_to_lists(theta_theta_complement, efficient_invariants, all_invariants)
 
 # Depth = Order - Residue
 # This is the number of steps it takes for Havel-Hakimi to terminate
 def depth(g):
     return g.order()-residue(g)
-
-# Clearly intractable
-# alpha / order
-def independence_ratio(g):
-    return independence_number(g)/(g.order()+0.0)
+add_to_lists(depth, efficient_invariants, all_invariants)
 
 # Godsil-Newman Upper Bound theorem as invariant
 # Godsil, Chris D., and Mike W. Newman. "Eigenvalue bounds for independent sets." Journal of Combinatorial Theory, Series B 98.4 (2008): 721-734.
-def godsil_newman_thm_invariant(g):
+def alpha_godsil_newman_bound_invariant(g):
     L = max(g.laplacian_matrix().change_ring(RDF).eigenvalues())
     return g.order()*(L-min_degree(g))/L
+add_to_lists(alpha_godsil_newman_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 # Lovasz Theta of the complement of the given graph
 def lovasz_theta_complement(g):
     return g.complement().lovasz_theta()
+add_to_lists(lovasz_theta_complement, efficient_invariants, all_invariants)
 
 # N over lovasz_theta_complement
 # This is a lower bound for lovasz theta
 # The Sandwich Theorem by Knuth, p. 27
 def n_over_lovasz_theta_complement(g):
     return g.order()/lovasz_theta_complement(g)
+add_to_lists(n_over_lovasz_theta_complement, efficient_invariants, all_invariants)
 
 # The number of vertices at even distance from v and return the max over all vertices
 def max_even(g):
@@ -851,6 +838,7 @@ def max_even(g):
                 evens += 1
         evens_list.append(evens)
     return max(evens_list)
+add_to_lists(max_even, efficient_invariants, all_invariants)
 
 # The number of vertices at even distance from v and return the min over all vertices
 def min_even(g):
@@ -864,6 +852,7 @@ def min_even(g):
                 evens += 1
         evens_list.append(evens)
     return min(evens_list)
+add_to_lists(min_even, efficient_invariants, all_invariants)
 
 # The number of vertices at odd distance from v and return the max over all vertices
 def max_odd(g):
@@ -877,6 +866,7 @@ def max_odd(g):
                 odds += 1
         odds_list.append(odds)
     return max(odds_list)
+add_to_lists(max_odd, efficient_invariants, all_invariants)
 
 # The number of vertices at odd distance from v and return the min over all vertices
 def min_odd(g):
@@ -890,16 +880,19 @@ def min_odd(g):
                 odds += 1
         odds_list.append(odds)
     return min(odds_list)
+add_to_lists(min_odd, efficient_invariants, all_invariants)
 
 # AGX Upper Bound Theorem as invariant
 #Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
-def AGX_upper_bound_thm_invariant(g):
+def alpha_AGX_upper_bound_invariant(g):
     return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
+add_to_lists(alpha_AGX_upper_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 # AGX Lower Bound Theorem as invariant
 # Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
 def AGX_lower_bound_thm_invariant(g):
     return ceil(2 * sqrt(g.order()))
+add_to_lists(alpha_AGX_lower_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 #returns sum of distances between *distinct* vertices, return infinity is graph is not connected
 def transmission(g):
@@ -914,39 +907,14 @@ def transmission(g):
         V = g.vertices()
         D = g.distance_all_pairs()
         return sum([D[v][w] for v in V for w in V if v != w])
+add_to_lists(transmission, efficient_invariants, all_invariants)
 
 def harmonic_index(g):
     sum = 0
     for edge in g.edges(labels = false):
         sum += (2 / (g.degree()[edge[0]] + g.degree()[edge[1]]))
     return sum
-
-def min_degree_of_max_ind_set(g):
-    """
-    Returns the minimum degree of any vertex that is a part of any maximum indepdendent set
-    
-    sage: min_degree_of_vertex_in_max_ind_set(c4)
-    2
-    sage: min_degree_of_vertex_in_max_ind_set(pete)
-    3
-    """
-
-    low_degree = g.order()
-    list_of_vertices = []
-
-    UnionSet = Set({})
-    IndSets = find_all_max_ind_sets(g)
-
-    for s in IndSets:
-        UnionSet = UnionSet.union(Set(s))
-
-    list_of_vertices = list(UnionSet)
-
-    for v in list_of_vertices:
-        if g.degree(v) < low_degree:
-            low_degree = g.degree(v)
-
-    return low_degree
+add_to_lists(harmonic_index, efficient_invariants, all_invariants)
 
 def bavelas_index(g):
     """
@@ -977,8 +945,9 @@ def bavelas_index(g):
         sum_final += (s_aux(w) / s_aux(v)) + (s_aux(v) / s_aux(w))
 
     return sum_final
+add_to_lists(bavelas_index, efficient_invariants, all_invariants)
 
-def staton_girth_thm_invariant(g):
+def alpha_staton_girth_bound_invariant(g):
     """
     Hopkins, Glenn, and William Staton. "Girth and independence ratio." Can. Math. Bull. 25.2 (1982): 179-186.
     """
@@ -987,39 +956,151 @@ def staton_girth_thm_invariant(g):
     else:
         d = max_degree(g)
         return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
+add_to_lists(alpha_staton_girth_bound_invariant, efficient_invariants, all_invariants)
 
 # removed fiedler for incorrect value calculations
-efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
-Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
-min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
-Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery,
-max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con,
-Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks,
-different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree,
-max_even_minus_even_horizontal, laplacian_energy, gutman_energy, average_degree,
-degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures,
-card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues,
-card_cut_vertices, Graph.clustering_average, Graph.connected_components_number,
-Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
-degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
-card_independence_irreducible_part, critical_independence_number, card_KE_part,
-fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
-max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound,
-geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
-median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
-depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
-max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_bound_thm_invariant,
-transmission, card_connectors, harmonic_index, staton_girth_thm_invariant]
+#efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
+#Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
+#min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
+#Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery,
+#max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con,
+#Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks,
+#different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree,
+#max_even_minus_even_horizontal, laplacian_energy, gutman_energy, average_degree,
+#degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures,
+#card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues,
+#card_cut_vertices, Graph.clustering_average, Graph.connected_components_number,
+#Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
+#degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
+#card_independence_irreducible_part, critical_independence_number, card_KE_part,
+#fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
+#max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound,
+#geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
+#median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
+#depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
+#max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_bound_thm_invariant,
+#transmission, card_connectors, harmonic_index, staton_girth_thm_invariant]
 
-intractable_invariants = [independence_number, domination_number, chromatic_index,
-Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
-independent_dominating_set_number, independence_ratio, Graph.treewidth, min_degree_of_max_ind_set]
+
+
+def domination_number(g):
+    """
+    Returns the domination number of the graph g, i.e., the size of a maximum
+    dominating set.
+
+    A complete graph is dominated by any of its vertices::
+
+        sage: domination_number(graphs.CompleteGraph(5))
+        1
+
+    A star graph is dominated by its central vertex::
+
+        sage: domination_number(graphs.StarGraph(5))
+        1
+
+    The domination number of a cycle of length n is the ceil of n/3.
+
+        sage: domination_number(graphs.CycleGraph(5))
+        2
+    """
+    return g.dominating_set(value_only=True)
+add_to_lists(domination_number, intractable_invariants, all_invariants)
+
+def independence_number(g):
+    return g.independent_set(value_only=True)
+add_to_lists(independence_number, intractable_invariants, all_invariants)
+
+def chromatic_index(g):
+    if g.size() == 0:
+        return 0
+    import sage.graphs.graph_coloring
+    return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
+add_to_lists(chromatic_index, intractable_invariants, all_invariants)
+
+def chromatic_num(g):
+    return g.chromatic_number()
+add_to_lists(chromatic_num, intractable_invariants, all_invariants)
+
+def clique_covering_number(g):
+    # Finding the chromatic number of the complement of a fullerene
+    # is extremely slow, even when using MILP as the algorithm.
+    # Therefore we check to see if the graph is triangle-free.
+    # If it is, then the clique covering number is equal to the
+    # number of vertices minus the size of a maximum matching.
+    if g.is_triangle_free():
+        return g.order() - matching_number(g)
+    gc = g.complement()
+    return gc.chromatic_number(algorithm="MILP")
+add_to_lists(clique_covering_number, intractable_invariants, all_invariants)
+
+def n_over_alpha(g):
+    n = g.order() + 0.0
+    return n/independence_number(g)
+add_to_lists(n_over_alpha, intractable_invariants, all_invariants)
+
+def independent_dominating_set_number(g):
+    return g.dominating_set(value_only=True, independent=True)
+add_to_lists(independence_dominating_set_number, intractable_invariants, all_invariants)
+
+# Clearly intractable
+# alpha / order
+def independence_ratio(g):
+    return independence_number(g)/(g.order()+0.0)
+add_to_lists(independence_ratio, intractable_invariants, all_invariants)
+
+def min_degree_of_max_ind_set(g):
+    """
+    Returns the minimum degree of any vertex that is a part of any maximum indepdendent set
+    
+    sage: min_degree_of_vertex_in_max_ind_set(c4)
+    2
+    sage: min_degree_of_vertex_in_max_ind_set(pete)
+    3
+    """
+
+    low_degree = g.order()
+    list_of_vertices = []
+
+    UnionSet = Set({})
+    IndSets = find_all_max_ind_sets(g)
+
+    for s in IndSets:
+        UnionSet = UnionSet.union(Set(s))
+
+    list_of_vertices = list(UnionSet)
+
+    for v in list_of_vertices:
+        if g.degree(v) < low_degree:
+            low_degree = g.degree(v)
+
+    return low_degree
+add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
+
+#intractable_invariants = [independence_number, domination_number, chromatic_index,
+#Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
+#independent_dominating_set_number, independence_ratio, Graph.treewidth, min_degree_of_max_ind_set]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
 
-invariants = efficiently_computable_invariants + intractable_invariants
+#invariants = efficiently_computable_invariants + intractable_invariants
 
 #removed for speed: Graph.treewidth, card_max_cut
+
+
+
+
+
+
+
+
+#a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
+#all upper bounds in theory have value at least 3 for c8chords
+#returns 2 for bipartite graphs, order for non-bipartite
+def bipartite_chromatic(g):
+    if g.is_bipartite():
+        return 2
+    else:
+        return g.order()
