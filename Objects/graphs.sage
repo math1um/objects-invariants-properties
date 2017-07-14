@@ -74,6 +74,10 @@ for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5]:
 
 add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
 
+k4 = graphs.CompleteGraph(4)
+k4.name(new = "k4")
+add_to_lists(k4, graph_objects, all_graphs)
+
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 add_to_lists(graphs.MeredithGraph(), problem_graphs, all_graphs)
 add_to_lists(graphs.SchlaefliGraph(), problem_graphs, all_graphs)
