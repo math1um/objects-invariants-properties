@@ -418,14 +418,14 @@ ryan.name(new="ryan")
 add_to_lists(ryan, graph_objects, all_graphs)
 
 # Ryan Pepper
-# CE to alpha <= 2*chi+2*residue
+# CE to independence_number(x) <= 2 * chromatic_number(x) + 2 * residue(x)
 # has alpha=25,chi=2,residue=10
 ryan2=graphs.CirculantGraph(50,[1,3])
 ryan2.name(new="circulant_50_1_3")
 add_to_lists(ryan2, graph_objects, counter_examples, all_graphs)
 
 # From Ryan Pepper
-# CE to alpha >= diameter - 1 for regular graphs
+# CE to independence_number(x) >= diameter(x) - 1 for regular graphs
 pepper_1_gadget = Graph('Ot???CA?WB`_B@O_B_B?A')
 pepper_1_gadget.name(new = "pepper_1_gadget")
 add_to_lists(pepper_1_gadget, graph_objects, counter_examples, all_graphs)
@@ -437,12 +437,13 @@ p10k4.name(new="p10k4")
 add_to_lists(p10k4, graph_objects, counter_examples, all_graphs)
 
 # star on 13 points with added edge:
-# CE to alpha <= dom + girth^2
+# CE to independence_number(x) <= dom + girth(x)^2
 s13e = Graph('M{aCCA?_C?O?_?_??')
 s13e.name(new="s13e")
 add_to_lists(s13e, graph_objects, counter_examples, all_graphs)
 
-# CE to alpha <= 2*girth^2+2, star with 22 rays plus extra edge
+# CE to independence_number(x) <= 2 * girth(x)^2 + 2
+# Star with 22 rays plus extra edge
 s22e = graphs.StarGraph(22)
 s22e.add_edge(1,2)
 s22e.name(new="s22e")
@@ -737,7 +738,7 @@ ce49 = Graph("K^~lmrvv{~~Z")
 ce49.name(new = "ce49")
 add_to_lists(ce49, graph_objects, counter_examples, all_graphs)
 
-# CE to  independence_number(x) <= max_degree(x) + maximum(max_even_minus_even_horizontal(x), sigma_2(x))
+# CE to independence_number(x) <= max_degree(x) + maximum(max_even_minus_even_horizontal(x), sigma_2(x))
 ce50 = Graph('bCaJf?A_??GY_O?KEGA???OMP@PG???G?CO@OOWO@@m?a?WPWI?G_A_?C`OIG?EDAIQ?PG???A_A?C??CC@_G?GDI]CYG??GA_A??')
 ce50.name(new = "ce50")
 add_to_lists(ce50, graph_objects, counter_examples, all_graphs)
@@ -1186,7 +1187,7 @@ edge_critical_5.add_edge(1,4)
 edge_critical_5.name(new="edge_critical_5")
 add_to_lists(edge_critical_5, graph_objects, chromatic_index_critical, all_graphs)
 
-# CE to alpha >= min(e-n+1, diameter)
+# CE to independence_number(x) >= min(e - n + 1, diameter(x))
 heather = graphs.CompleteGraph(4)
 heather.add_vertex()
 heather.add_vertex()
