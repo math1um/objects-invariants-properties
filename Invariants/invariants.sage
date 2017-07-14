@@ -921,6 +921,33 @@ def harmonic_index(g):
         sum += (2 / (g.degree()[edge[0]] + g.degree()[edge[1]]))
     return sum
 
+def min_degree_of_max_ind_set(g):
+    """
+    Returns the minimum degree of any vertex that is a part of any maximum indepdendent set
+    
+    sage: min_degree_of_vertex_in_max_ind_set(c4)
+    2
+    sage: min_degree_of_vertex_in_max_ind_set(pete)
+    3
+    """
+
+    low_degree = g.order()
+    list_of_vertices = []
+
+    UnionSet = Set({})
+    IndSets = find_all_max_ind_sets(g)
+
+    for s in IndSets:
+        UnionSet = UnionSet.union(Set(s))
+
+    list_of_vertices = list(UnionSet)
+
+    for v in list_of_vertices:
+        if g.degree(v) < low_degree:
+            low_degree = g.degree(v)
+
+    return low_degree
+
 # removed fiedler for incorrect value calculations
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
@@ -946,7 +973,7 @@ transmission, card_connectors, harmonic_index]
 
 intractable_invariants = [independence_number, domination_number, chromatic_index,
 Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
-independent_dominating_set_number, independence_ratio, Graph.treewidth]
+independent_dominating_set_number, independence_ratio, Graph.treewidth, min_degree_of_max_ind_set]
 
 #for invariants from properties and INVARIANT_PLUS see below
 
