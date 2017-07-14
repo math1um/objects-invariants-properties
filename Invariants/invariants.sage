@@ -890,7 +890,7 @@ add_to_lists(alpha_AGX_upper_bound_invariant, efficient_invariants, theorem_inva
 
 # AGX Lower Bound Theorem as invariant
 # Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
-def AGX_lower_bound_thm_invariant(g):
+def alpha_AGX_lower_bound_invariant(g):
     return ceil(2 * sqrt(g.order()))
 add_to_lists(alpha_AGX_lower_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
