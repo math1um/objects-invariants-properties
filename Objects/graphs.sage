@@ -387,6 +387,11 @@ k1_4xp3 = graphs.CompleteBipartiteGraph(1, 4).cartesian_product(graphs.PathGraph
 k1_4xp3.name(new = "k1_4xp3")
 add_to_lists(k1_4xp3, graph_objects, all_graphs)
 
+# Product Graphs, fig. 1.14
+p4xk3xk2 = graphs.PathGraph(4).cartesian_product(graphs.CompleteGraph(3)).cartesian_product(graphs.CompleteGraph(2))
+p4xk3xk2.name(new = "p4xk3xk2")
+add_to_lists(p4xk3xk2, graph_objects, all_graphs)
+
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
 gould.name(new="gould")
