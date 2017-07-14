@@ -1895,6 +1895,54 @@ chartrand_18_f2 = Graph("F?NVo")
 chartrand_18_f2.name(new = "chartrand fig 1.8 - F2")
 add_to_lists(chartrand_18_f2, graph_objects, all_graphs)
 
+"""
+Chartrand Fig 1.10 - H1
+
+    sage: chartrand_110_h1.order()
+    7
+    sage: chartrand_110_h1.size()
+    7
+"""
+chartrand_110_h1 = Graph("F@@Kw")
+chartrand_110_h1.name(new = "chartrand fig 1.10 - H1")
+add_to_lists(chartrand_110_h1, graph_objects, all_graphs)
+
+"""
+Chartrand Fig 1.10 - H2
+
+    sage: chartrand_110_h2.order()
+    7
+    sage: chartrand_110_h2.size()
+    7
+"""
+chartrand_110_h2 = Graph("F?C^G")
+chartrand_110_h2.name(new = "chartrand fig 1.10 - H2")
+add_to_lists(chartrand_110_h2, graph_objects, all_graphs)
+
+"""
+Chartrand Fig 1.10 - H3
+
+    sage: chartrand_110_h3.order()
+    9
+    sage: chartrand_110_h3.size()
+    8
+"""
+chartrand_110_h3 = Graph("H???]Os")
+chartrand_110_h3.name(new = "chartrand fig 1.10 - H3")
+add_to_lists(chartrand_110_h3, graph_objects, all_graphs)
+
+"""
+Chartrand Fig 1.10 - H4
+
+    sage: chartrand_110_h4.order()
+    9
+    sage: chartrand_110_h4.size()
+    8
+"""
+chartrand_110_h4 = Graph("H?C?JEK")
+chartrand_110_h4.name(new = "chartrand fig 1.10 - H4")
+add_to_lists(chartrand_110_h4, graph_objects, all_graphs)
+
 # From their Mathing Theory book
 lovasz_plummer = Graph('iOQBC__???G_?OCG@??C???_C?G?@_?__??????_??@???E?C?C?A?A??CC????O???@??G??_????o?????????A?????O????B?????A????CO?????C?????@??????C??????W?????CO')
 lovasz_plummer.name(new = "lovasz_plummer graph")
