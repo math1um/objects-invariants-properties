@@ -307,3 +307,17 @@ O?J?FG_FOOEw_FpGA[OAxa?VC?lWOAm_DM@?Mx?Y{A?XU?hwA?PM?PW@?G@sGBgl?Gi???C@_FP_O?OM
 
     except:
         print "couldn't load dc2048_g6string.sobj"
+
+def find_all_max_ind_sets(g):
+    """
+    Finds all the maximum independent sets and stores them in a list
+    """
+    final_list = []
+    V = Set(g.vertices())
+    alpha = independence_number(g)
+
+    for s in V.subsets(alpha):
+        if g.is_independent_set(s):
+            final_list.append(s)
+
+    return final_list
