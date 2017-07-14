@@ -978,6 +978,9 @@ def bavelas_index(g):
 
     return sum_final
 
+def szekeres_wilf_thm_invariant(g):
+    return ceil(order(g)/szekeres_wilf(g))
+
 # removed fiedler for incorrect value calculations
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
