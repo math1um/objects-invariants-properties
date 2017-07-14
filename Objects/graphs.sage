@@ -402,6 +402,11 @@ p4Xp5 = graphs.PathGraph(4).strong_product(graphs.PathGraph(5))
 p4Xp5.name(new = "p4Xp5")
 add_to_lists(p4Xp5, graph_objects, all_graphs)
 
+# Product Graphs, fig. 5.4
+p5txp3 = graphs.PathGraph(5).tensor_product(graphs.PathGraph(3))
+p5txp3.name(new = "p5txp3")
+add_to_lists(p5txp3, graph_objects, all_graphs)
+
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
 gould.name(new="gould")
