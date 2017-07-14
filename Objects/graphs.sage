@@ -715,11 +715,6 @@ ce40 = Graph('Htji~Ei')
 ce40.name(new = "ce40")
 add_to_lists(ce40, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) <= maximum(girth(x), card_center(x) + card_periphery(x))
-ce41 = Graph("FhX?G")
-ce41.name(new = "ce41")
-add_to_lists(ce41, graph_objects, counter_examples, all_graphs)
-
 # CE to independence_number(x) <= card_center(x) + maximum(residue(x), card_periphery(x))
 ce42 = Graph('GP[KGC')
 ce42.name(new = "ce42")
@@ -1889,6 +1884,7 @@ add_to_lists(chartrand_18_f2, graph_objects, all_graphs)
 
 """
 Chartrand Fig 1.10 - H1
+CE to independence_number(x) <= maximum(girth(x), card_center(x) + card_periphery(x))
 
     sage: chartrand_110_h1.order()
     7
@@ -1897,7 +1893,7 @@ Chartrand Fig 1.10 - H1
 """
 chartrand_110_h1 = Graph("F@@Kw")
 chartrand_110_h1.name(new = "chartrand fig 1.10 - H1")
-add_to_lists(chartrand_110_h1, graph_objects, all_graphs)
+add_to_lists(chartrand_110_h1, graph_objects, counter_examples, all_graphs)
 
 """
 Chartrand Fig 1.10 - H2
