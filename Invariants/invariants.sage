@@ -417,7 +417,7 @@ def alpha_szekeres_wilf_bound_invariant(g):
     1
     """
     return ceil(g.order()/szekeres_wilf(g))
-add_to_lists(szekeres_wilf, efficient_invariants, theorem_invariants, all_invariants)
+add_to_lists(alpha_szekeres_wilf_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 def average_vertex_temperature(g):
      D = g.degree()
