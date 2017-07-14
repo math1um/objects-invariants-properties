@@ -1040,7 +1040,7 @@ add_to_lists(n_over_alpha, intractable_invariants, all_invariants)
 
 def independent_dominating_set_number(g):
     return g.dominating_set(value_only=True, independent=True)
-add_to_lists(independence_dominating_set_number, intractable_invariants, all_invariants)
+add_to_lists(independent_dominating_set_number, intractable_invariants, all_invariants)
 
 # Clearly intractable
 # alpha / order
