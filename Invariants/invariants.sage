@@ -956,7 +956,22 @@ def alpha_staton_girth_bound_invariant(g):
     else:
         d = max_degree(g)
         return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
-add_to_lists(alpha_staton_girth_bound_invariant, efficient_invariants, all_invariants)
+add_to_lists(alpha_staton_girth_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
+
+add_to_lists(Graph.diameter, efficient_invariants, all_invariants)
+add_to_lists(Graph.radius, efficient_invariants, all_invariants)
+add_to_lists(Graph.girth, efficient_invariants, all_invariants)
+add_to_lists(Graph.order, efficient_invariants, all_invariants)
+add_to_lists(Graph.size, efficient_invariants, all_invariants)
+add_to_lists(Graph.szeged_index, efficient_invariants, all_invariants)
+add_to_lists(Graph.wiener_index, efficient_invariants, all_invariants)
+add_to_lists(Graph.maximum_average_degree, efficient_invariants, all_invariants)
+add_to_lists(Graph.lovasz_theta, efficient_invariants, all_invariants)
+add_to_lists(Graph.density, efficient_invariants, all_invariants)
+add_to_lists(Graph.clustering_average, efficient_invariants, all_invariants)
+add_to_lists(Graph.connected_components_number, efficient_invariants, all_invariants)
+add_to_lists(Graph.spanning_trees_count, efficient_invariants, all_invariants)
+
 
 # removed fiedler for incorrect value calculations
 #efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
@@ -1075,6 +1090,9 @@ def min_degree_of_max_ind_set(g):
 
     return low_degree
 add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
+
+add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
+add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
 #intractable_invariants = [independence_number, domination_number, chromatic_index,
 #Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
