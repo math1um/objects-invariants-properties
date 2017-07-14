@@ -321,3 +321,11 @@ def find_all_max_ind_sets(g):
             final_list.append(s)
 
     return final_list
+
+def add_to_lists(graph, *L):
+    """
+    Adds the specified graph to the arbitrary number of lists given as the second through last argument
+    Use this function to build the lists of graphs
+    """
+    for list in L:
+            list.append(graph)
