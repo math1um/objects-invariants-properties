@@ -320,7 +320,7 @@ add_to_lists(largest_singular_value, efficient_invariants, all_invariants)
 
 def card_max_cut(g):
     return g.max_cut(value_only=True)
-add_to_lists(card_max_cut, efficient_invariants, all_invariants)
+add_to_lists(card_max_cut, intractable_invariants, all_invariants)
 
 def welsh_powell(g):
     """
