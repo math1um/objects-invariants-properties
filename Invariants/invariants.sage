@@ -3,8 +3,8 @@ all_invariants = []
 
 efficient_invariants = []
 intractable_invariants = []
-
 theorem_invariants = []
+broken_invariants = []
 
 def distinct_degrees(g):
     """
