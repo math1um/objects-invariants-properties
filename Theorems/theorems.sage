@@ -1,66 +1,78 @@
 # THEORY
+all_theorems = []
+
+alpha_upper_bounds = []
+alpha_lower_bounds = []
 
 #####
 # ALPHA UPPER BOUNDS
-
-#see: alpha_upper_bounds list below
 #####
 
-
-
-
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
-annihilation_thm = annihilation_number
+alpha_annihilation_bound = annihilation_number
+add_to_lists(alpha_annihilation_bound, alpha_upper_bounds, all_theorems)
 
 # Nemhauser, George L., and Leslie Earl Trotter. "Vertex packings: structural properties and algorithms." Mathematical Programming 8.1 (1975): 232-248.
 # Nemhauser, George L., and Leslie E. Trotter. "Properties of vertex packing and independence system polyhedra." Mathematical Programming 6.1 (1974): 48-61.
-fractional_thm = fractional_alpha
+alpha_fractional_bound = fractional_alpha
+add_to_lists(alpha_fractional_bound, alpha_upper_bounds, all_theorems)
 
 # D. M. Cvetkovic, M. Doob, and H. Sachs. Spectra of graphs. Academic Press, New York, 1980.
-cvetkovic_thm = cvetkovic
+alpha_cvetkovic_bound = cvetkovic
+add_to_lists(alpha_cvetkovic_bound, alpha_upper_bounds, all_theorems)
 
 # Trivial
-trivial_thm = Graph.order
+alpha_trivial_bound = Graph.order
+add_to_lists(alpha_trivial_bound, alpha_upper_bounds, all_theorems)
+
+# Lovasz Theta
+alpha_lovasz_theta_bound = Graph.lovasz_theta
+add_to_lists(alpha_lovasz_theta_bound, alpha_upper_bounds, all_theorems)
 
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
-def kwok_thm(g):
+def alpha_kwok_bound(g):
     return order(g) - (size(g)/max_degree(g))
+add_to_lists(alpha_kwok_bound, alpha_upper_bounds, all_theorems)
 
 # P. Hansen and M. Zheng. Sharp Bounds on the order, size, and stability number of graphs. NETWORKS 23 (1993), no. 2, 99-102.
-def hansen_thm(g):
+def alpha_hansen_bound(g):
     return floor(1/2 + sqrt(1/4 + order(g)**2 - order(g) - 2*size(g)))
+add_to_lists(alpha_hansen_bound, alpha_upper_bounds, all_theorems)
 
 # Matching Number - Folklore
-def matching_number_thm(g):
+def alpha_matching_number_bound(g):
     return order(g) - matching_number(g)
+add_to_lists(alpha_matching_number_bound, alpha_upper_bounds, all_theorems)
 
 # Min-Degree Theorm
-def min_degree_thm(g):
+def alpha_min_degree_bound(g):
     return order(g) - min_degree(g)
+add_to_lists(alpha_min_degree_bound, alpha_upper_bounds, all_theorems)
 
 # Cut Vertices Theorem
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def cut_vertices_thm(g):
+def alpha_cut_vertices_bound(g):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
+add_to_lists(alpha_cut_vertices_bound, alpha_upper_bounds, all_theorems)
 
 # Median Degree Theorem
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def median_degree_thm(g):
+def alpha_median_degree_bound(g):
     return (g.order() - (median_degree(g)/2) - 1/2)
+add_to_lists(alpha_median_degree_bound, alpha_upper_bounds, all_theorems)
 
 # Godsil-Newman Upper Bound theorem
 # Godsil, Chris D., and Mike W. Newman. "Eigenvalue bounds for independent sets." Journal of Combinatorial Theory, Series B 98.4 (2008): 721-734.
-def godsil_newman_thm(g):
+def alpha_godsil_newman_bound(g):
     L = max(g.laplacian_matrix().change_ring(RDF).eigenvalues())
     return g.order()*(L-min_degree(g))/L
+add_to_lists(alpha_godsil_newman_bound, alpha_upper_bounds, all_theorems)
 
 # AGX Upper Bound Theorem
 #Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
-def AGX_upper_bound_thm(g):
+def alpha_AGX_upper_bound(g):
     return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
-
-alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_thm, kwok_thm, hansen_thm, matching_number_thm, min_degree_thm, cut_vertices_thm, median_degree_thm, godsil_newman_thm, AGX_upper_bound_thm, Graph.lovasz_theta]
-
+add_to_lists(alpha_AGX_upper_bound, alpha_upper_bounds, all_theorems)
 
 #####
 # LOWER BOUNDS
@@ -68,23 +80,33 @@ alpha_upper_bounds = [annihilation_thm, fractional_thm, cvetkovic_thm, trivial_t
 
 # Radius Pendants Theorem
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def radius_pendants_thm(g):
+def alpha_radius_pendants_bound(g):
     return (g.radius() + (card_pendants(g)/2) - 1)
+add_to_lists(alpha_radius_pendants_bound, alpha_lower_bounds, all_theorems)
 
 # AGX Lower Bound Theorem
 # Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
-def AGX_lower_bound_thm(g):
+def alpha_AGX_lower_bound(g):
     return ceil(2 * sqrt(g.order()))
+add_to_lists(alpha_AGX_lower_bound, alpha_lower_bounds, all_theorems)
 
-max_degree_minus_triangles = lambda g: max_degree(g) - number_of_triangles(g)
+def alpha_max_degree_minus_triangles_bound(g):
+    return max_degree(g) - number_of_triangles(g)
+add_to_lists(alpha_max_degree_minus_triangles_bound, alpha_lower_bounds, all_theorems)
 
-order_brooks_bound = lambda x: ceil(order(x)/brooks(x))
+def alpha_order_brooks_bound(g):
+    return ceil(order(x)/brooks(x))
+add_to_lists(alpha_order_brooks_bound, alpha_lower_bounds, all_theorems)
 
-szekeres_wilf_bound = lambda x: ceil(order(x)/szekeres_wilf(x))
+def alpha_szekeres_wilf_bound(g):
+    return ceil(order(x)/szekeres_wilf(x))
+add_to_lists(alpha_szekeres_wilf_bound, alpha_lower_bounds, all_theorems)
 
-welsh_powell_alpha_bound = lambda g: ceil(g.order()/welsh_powell(g))
+def alpha_welsh_powell_bound(g):
+    return ceil(g.order()/welsh_powell(g))
+add_to_lists(alpha_welsh_powell_bound, alpha_lower_bounds, all_theorems)
 
-def staton_girth_thm(g):
+def alpha_staton_girth_bound(g):
     """
     Hopkins, Glenn, and William Staton. "Girth and independence ratio." Can. Math. Bull. 25.2 (1982): 179-186.
     """
@@ -93,8 +115,19 @@ def staton_girth_thm(g):
     else:
         d = max_degree(g)
         return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
+add_to_lists(alpha_staton_girth_bound, alpha_lower_bounds, all_theorems)
 
-#many of the following are invariants defined in invariants.sage
+alpha_average_distance_bound = average_distance
+add_to_lists(alpha_average_distance_bound, alpha_lower_bounds, all_theorems)
 
-alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm, average_distance, Graph.radius, residue, max_even_minus_even_horizontal, critical_independence_number, max_degree_minus_triangles, order_brooks_bound, szekeres_wilf_bound, welsh_powell_alpha_bound, staton_girth_thm]
+alpha_radius_bound = Graph.radius
+add_to_lists(alpha_radius_bound, alpha_lower_bounds, all_theorems)
 
+alpha_residue_bound = residue
+add_to_lists(alpha_residue_bound, alpha_lower_bounds, all_theorems)
+
+alpha_max_even_minus_even_horizontal_bound = max_even_minus_even_horizontal
+add_to_lists(alpha_max_even_minus_even_horizontal_bound, alpha_lower_bounds, all_theorems)
+
+alpha_critical_independence_number_bound = critical_independence_number
+add_to_lists(alpha_critical_independence_number_bound, alpha_lower_bounds, all_theorems)
