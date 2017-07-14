@@ -585,7 +585,7 @@ def card_bridges(g):
     for scc in gs.strongly_connected_components():
         bridges.extend(gs.edge_boundary(scc))
     return len(bridges)
-add_to_lists(card_bridgess, efficient_invariants, all_invariants)
+add_to_lists(card_bridges, efficient_invariants, all_invariants)
 
 #upper bound for the domination number
 def alon_spencer(g):
