@@ -948,6 +948,36 @@ def min_degree_of_max_ind_set(g):
 
     return low_degree
 
+def bavelas_index(g):
+    """
+    returns sum over all edges (v,w) of (distance from v to all other vertices)/(distance from w to all other vertices)
+    computes each edge twice (once with v computation in numerator, once with w computation in numerator)
+
+        sage: bavelas_index(p6)
+        5086/495
+        sage: bavelas_index(k4)
+        12
+    """
+    D = g.distance_all_pairs()
+
+    def s_aux(v):
+        """
+        computes sum of distances from v to all other vertices
+        """
+        sum = 0
+        for w in g.vertices():
+            sum += D[v][w]
+        return sum
+
+    sum_final = 0
+
+    for edge in g.edges(labels=false):
+        v = edge[0]
+        w = edge[1]
+        sum_final += (s_aux(w) / s_aux(v)) + (s_aux(v) / s_aux(w))
+
+    return sum_final
+
 # removed fiedler for incorrect value calculations
 efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
 Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
