@@ -767,7 +767,7 @@ add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_inva
 # Cited in the theorem section
 def alpha_cut_vertices_bound_invariant(G):
     return (g.order() - (card_cut_vertices(g)/2) - (1/2))
-add_to_lists(alpha_cut_vertices_bound_invariant, efficient_invariants, theorem_invariants all_invariants)
+add_to_lists(alpha_cut_vertices_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 # Radius Pendants Theorem as invariant
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
