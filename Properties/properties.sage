@@ -793,7 +793,7 @@ def is_subcubic(g):
 
 
 #add all properties derived from pairs of invariants
-invariant_relation_properties = [has_leq_invariants(f,g) for f in invariants for g in invariants if f != g]
+invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
 
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar,
@@ -835,7 +835,7 @@ properties_plus = efficiently_computable_properties + intractable_properties + i
 
 
 invariants_from_properties = [make_invariant_from_property(property) for property in properties]
-invariants_plus = invariants + invariants_from_properties
+invariants_plus = all_invariants + invariants_from_properties
 
 # Graph.is_prime removed as faulty 9/2014
 # built in Graph.is_transitively_reduced removed 9/2014
