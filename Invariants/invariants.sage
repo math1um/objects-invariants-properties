@@ -29,7 +29,6 @@ def common_neighbors(g,v,w):
     Nv = Set(g.neighbors(v))
     Nw = Set(g.neighbors(w))
     return Nv.intersection(Nw)
-add_to_lists(common_neighbors, efficient_invariants, all_invariants)
 
 def max_common_neighbors(g):
     """
