@@ -397,6 +397,11 @@ p3xk2xk2 = graphs.PathGraph(3).cartesian_product(graphs.CompleteGraph(2)).cartes
 p3xk2xk2.name(new = "p3xk2xk2")
 add_to_lists(p3xk2xk2, graph_objects, all_graphs)
  
+# Product Graphs, fig. 5.1
+p4Xp5 = graphs.PathGraph(4).strong_product(graphs.PathGraph(5))
+p4Xp5.name(new = "p4Xp5")
+add_to_lists(p4Xp5, graph_objects, all_graphs)
+
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
 gould.name(new="gould")
