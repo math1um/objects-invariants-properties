@@ -777,7 +777,7 @@ add_to_lists(alpha_radius_pendants_bound_invariant, efficient_invariants, theore
 
 # Median Degree Theorem as invariant
 # Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def median_degree_thm_invariant(g):
+def alpha_median_degree_bound_invariant(g):
     return (g.order() - (median_degree(g)/2) - 1/2)
 add_to_lists(alpha_median_degree_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
