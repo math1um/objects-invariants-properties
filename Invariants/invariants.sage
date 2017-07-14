@@ -597,7 +597,7 @@ add_to_lists(alon_spencer, efficient_invariants, all_invariants)
 #lower bound for residue and, hence, independence number
 def caro_wei(g):
     return sum([1.0/(d + 1) for d in g.degree()])
-add_to_lists(card_wei, efficient_invariants, all_invariants)
+add_to_lists(caro_wei, efficient_invariants, all_invariants)
 
 #equals 2*size, the 1st theorem of graph theory
 def degree_sum(g):
