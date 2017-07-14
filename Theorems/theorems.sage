@@ -84,7 +84,17 @@ szekeres_wilf_bound = lambda x: ceil(order(x)/szekeres_wilf(x))
 
 welsh_powell_alpha_bound = lambda g: ceil(g.order()/welsh_powell(g))
 
+def staton_girth_thm(g):
+    """
+    Hopkins, Glenn, and William Staton. "Girth and independence ratio." Can. Math. Bull. 25.2 (1982): 179-186.
+    """
+    if g.girth() < 6:
+        return 1
+    else:
+        d = max_degree(g)
+        return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
+
 #many of the following are invariants defined in invariants.sage
 
-alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm, average_distance, Graph.radius, residue, max_even_minus_even_horizontal, critical_independence_number, max_degree_minus_triangles, order_brooks_bound, szekeres_wilf_bound, welsh_powell_alpha_bound]
+alpha_lower_bounds = [radius_pendants_thm, AGX_lower_bound_thm, average_distance, Graph.radius, residue, max_even_minus_even_horizontal, critical_independence_number, max_degree_minus_triangles, order_brooks_bound, szekeres_wilf_bound, welsh_powell_alpha_bound, staton_girth_thm]
 
