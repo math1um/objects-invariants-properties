@@ -957,6 +957,17 @@ def alpha_staton_girth_bound_invariant(g):
         return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
 add_to_lists(alpha_staton_girth_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
+
+#a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
+#all upper bounds in theory have value at least 3 for c8chords
+#returns 2 for bipartite graphs, order for non-bipartite
+def bipartite_chromatic(g):
+    if g.is_bipartite():
+        return 2
+    else:
+        return g.order()
+add_to_lists(bipartite_chromatic, efficient_invariants, all_invariants)
+
 add_to_lists(Graph.diameter, efficient_invariants, all_invariants)
 add_to_lists(Graph.radius, efficient_invariants, all_invariants)
 add_to_lists(Graph.girth, efficient_invariants, all_invariants)
@@ -971,32 +982,9 @@ add_to_lists(Graph.clustering_average, efficient_invariants, all_invariants)
 add_to_lists(Graph.connected_components_number, efficient_invariants, all_invariants)
 add_to_lists(Graph.spanning_trees_count, efficient_invariants, all_invariants)
 
-
-# removed fiedler for incorrect value calculations
-#efficiently_computable_invariants = [average_distance, Graph.diameter, Graph.radius,
-#Graph.girth,  Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
-#min_degree, max_degree, matching_number, residue, annihilation_number, fractional_alpha,
-#Graph.lovasz_theta, cvetkovic, cycle_space_dimension, card_center, card_periphery,
-#max_eigenvalue, kirchhoff_index, largest_singular_value, vertex_con, edge_con,
-#Graph.maximum_average_degree, Graph.density, welsh_powell, wilf, brooks,
-#different_degrees, szekeres_wilf, average_vertex_temperature, randic, median_degree,
-#max_even_minus_even_horizontal, laplacian_energy, gutman_energy, average_degree,
-#degree_variance, number_of_triangles, graph_rank, inverse_degree, sum_temperatures,
-#card_positive_eigenvalues, card_negative_eigenvalues, card_zero_eigenvalues,
-#card_cut_vertices, Graph.clustering_average, Graph.connected_components_number,
-#Graph.spanning_trees_count, card_pendants, card_bridges, alon_spencer, caro_wei,
-#degree_sum, order_automorphism_group, sigma_2, brinkmann_steffen,
-#card_independence_irreducible_part, critical_independence_number, card_KE_part,
-#fractional_covering, eulerian_faces, barrus_q, mean_common_neighbors,
-#max_common_neighbors, min_common_neighbors, distinct_degrees, barrus_bound,
-#geometric_length_of_degree_sequence, cut_vertices_thm_invariant, radius_pendants_thm_invariant,
-#median_degree_thm_invariant, two_stability_theta_bound, lovasz_theta_over_root_n, theta_theta_complement,
-#depth, godsil_newman_thm_invariant, lovasz_theta_complement, n_over_lovasz_theta_complement,
-#max_even, min_even, max_odd, min_odd, AGX_upper_bound_thm_invariant, AGX_lower_bound_thm_invariant,
-#transmission, card_connectors, harmonic_index, staton_girth_thm_invariant]
-
-
-
+#####
+# INTRACTABLE INVATIANTS
+#####
 def domination_number(g):
     """
     Returns the domination number of the graph g, i.e., the size of a maximum
@@ -1093,31 +1081,5 @@ add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
 add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
 add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
-#intractable_invariants = [independence_number, domination_number, chromatic_index,
-#Graph.clique_number, clique_covering_number, n_over_alpha, chromatic_num,
-#independent_dominating_set_number, independence_ratio, Graph.treewidth, min_degree_of_max_ind_set]
-
-#for invariants from properties and INVARIANT_PLUS see below
-
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
-
-#invariants = efficiently_computable_invariants + intractable_invariants
-
-#removed for speed: Graph.treewidth, card_max_cut
-
-
-
-
-
-
-
-
-#a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
-#all upper bounds in theory have value at least 3 for c8chords
-#returns 2 for bipartite graphs, order for non-bipartite
-def bipartite_chromatic(g):
-    if g.is_bipartite():
-        return 2
-    else:
-        return g.order()
