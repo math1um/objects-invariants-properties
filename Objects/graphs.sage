@@ -2006,6 +2006,10 @@ sabidussi_6 = Graph('L??G?COGQCOCN?')
 sabidussi_6.name(new = "sabidussi_6")
 add_to_lists(sabidussi_6, graph_objects, all_graphs)
 
+barnette = Graph("Ss?GOCDA?@_I@??_C?q?QC?_O@@??I??S")
+barnette.name(new = "Barnette-Bosak-Lederberg Graph")
+add_to_lists(barnette, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
