@@ -194,10 +194,6 @@ c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
 add_to_lists(c102, graph_objects, counter_examples, all_graphs)
 
-k4 = graphs.CompleteGraph(4)
-k4.name(new = "k4")
-add_to_lists(k4, graph_objects, all_graphs)
-
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
 add_to_lists(k10, graph_objects, all_graphs)
