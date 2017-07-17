@@ -2010,6 +2010,15 @@ barnette = Graph("Ss?GOCDA?@_I@??_C?q?QC?_O@@??I??S")
 barnette.name(new = "Barnette-Bosak-Lederberg Graph")
 add_to_lists(barnette, graph_objects, all_graphs)
 
+# Maximally Irregular Graphs
+mir_6 = MIR(6)
+mir_6.name(new = "max_irregular_6")
+add_to_lists(mir_6, graph_objects, all_graphs)
+
+mir_7 = MIR(7)
+mir_7.name(new = "max_irregular_7")
+add_to_lists(mir_7, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
