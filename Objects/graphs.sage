@@ -1735,9 +1735,9 @@ A facet-inducing graph
 p.176
 Rebennack, Steffen, Gerhard Reinelt, and Panos M. Pardalos. "A tutorial on branch and cut algorithms for the maximum stable set problem." International Transactions in Operational Research 19.1-2 (2012): 161-199.
 
-    sage: odd_antihole_7.order()
+    sage: facet_inducing.order()
     8
-    sage: odd_antihole_7.size()
+    sage: facet_inducing.size()
     11
 """
 facet_inducing = Graph("G@hicc")
