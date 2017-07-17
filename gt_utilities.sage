@@ -343,3 +343,17 @@ def MIR(n):
             g.add_edge(v, new_v)
         g.add_edge(new_v, g.add_vertex())
     return g
+
+def Ciliate(q, r):
+    if q < 1:
+        raise RuntimeError("q must be greater than or equal to 1")
+    if r < q:
+        raise RuntimeError("r must be greater than or equal to q")
+    if q == 1:
+        return graphs.PathGraph(2*r)
+    if q == r:
+        return graphs.CycleGraph(2*q)
+    g = graphs.CycleGraph(2*q)
+    for v in g.vertices():
+        g.add_path([v]+[g.add_vertex() for i in [1..r-q]])
+    return g
