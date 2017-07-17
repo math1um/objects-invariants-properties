@@ -357,3 +357,8 @@ def Ciliate(q, r):
     for v in g.vertices():
         g.add_path([v]+[g.add_vertex() for i in [1..r-q]])
     return g
+
+def Antihole(n):
+    if n < 5:
+        raise RuntimeError("antihole is defined for n > 5")
+    return graphs.CycleGraph(n).complement()
