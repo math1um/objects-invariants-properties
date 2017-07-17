@@ -1407,7 +1407,7 @@ From Willis's thesis, page 13, Fig. 2.7
 """
 willis_page13_fig27 = Graph("Fs\zw")
 willis_page13_fig27.name(new = "willis_page13_fig27")
-add_to_lists(willis_page10_fig23, graph_objects, all_graphs)
+add_to_lists(willis_page13_fig27, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 10, Figure 2.2
