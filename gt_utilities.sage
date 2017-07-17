@@ -329,3 +329,17 @@ def add_to_lists(graph, *L):
     """
     for list in L:
             list.append(graph)
+
+def MIR(n):
+    if n < 2:
+        raise RuntimeError("MIR is defined for n >= 2")
+    if n % 2 == 0:
+        g = graphs.PathGraph(2)
+    else:
+        g = graphs.PathGraph(3)
+    while g.order() < n:
+        new_v = g.add_vertex()
+        for v in g.vertices():
+            g.add_edge(v, new_v)
+        g.add_edge(new_v, g.add_vertex())
+    return g
