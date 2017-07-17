@@ -2020,7 +2020,7 @@ add_to_lists(antihole_7, graph_objects, all_graphs)
 
 antihole_8 = Antihole(8)
 antihole_8.name(new = "Antihole 8")
-add_to_lists(antihole_8, graph_objects, all_objects)
+add_to_lists(antihole_8, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 
