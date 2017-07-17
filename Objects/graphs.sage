@@ -1780,21 +1780,6 @@ golomb = Graph("I?C]dPcww")
 golomb.name(new = "Golomb Graph")
 add_to_lists(golomb, graph_objects, all_graphs)
 
-# Ciliate 4, 1
-c4_1 = Graph("G?_gqK")
-c4_1.name(new = "c4_1")
-add_to_lists(c4_1, graph_objects, all_graphs)
-
-# Ciliate 4, 2
-c4_2 = Graph("K?`@?_G?gB?b")
-c4_2.name(new = "c4_2")
-add_to_lists(c4_2, graph_objects, all_graphs)
-
-# Ciliate 6, 1
-c6_1 = Graph("K??C?SEO?acE")
-c6_1.name(new = "c6_1")
-add_to_lists(c6_1, graph_objects, all_graphs)
-
 """
 Fig. 1, G1 p. 454 of
 Steinberg’s Conjecture is false by
@@ -2018,6 +2003,19 @@ add_to_lists(mir_6, graph_objects, all_graphs)
 mir_7 = MIR(7)
 mir_7.name(new = "max_irregular_7")
 add_to_lists(mir_7, graph_objects, all_graphs)
+
+# Radius Critical Ciliates
+c4_1 = Ciliate(2, 3)
+c4_1.name(new = "Ciliate 4, 1")
+add_to_lists(c4_1, graph_objects, all_graphs)
+
+c4_2 = Ciliate(2, 4)
+c4_2.name(new = "Ciliate 4, 2")
+add_to_lists(c4_2, graph_objects, all_graphs)
+
+c6_1 = Ciliate(3, 4)
+c6_1.name(new = "Ciliate 6, 1")
+add_to_lists(c6_1, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 
