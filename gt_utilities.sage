@@ -220,7 +220,7 @@ def MIN_independence_heuristic(g):
     return len(I)
 
 """
-Returns true if the given graph exists in the given list. 
+Returns true if the given graph exists in the given list.
 It also prints out all graphs in the list that are isomorphic so that duplicates may also be found here.
 """
 def does_graph_exist(g, L):
@@ -257,8 +257,8 @@ def read_dimacs_edge_file(filename):
         if line[0] == 'c':
             continue
         elif line[0] == 'p':
-            p, edge, order, size = line.split()
-            assert(edge == "edge"), "Must be an edge problem file"
+            p, problem, order, size = line.split()
+            assert(problem in ("edge", "col")), "Must be an edge problem file"
             order, size = int(order), int(size)
         elif line[0] == 'e':
             e, u, v = line.split()
@@ -266,3 +266,99 @@ def read_dimacs_edge_file(filename):
     assert(g.order() == order), "Order in problem line does not match generated order"
     assert(g.size() == size), "Size in problem line does not match generated size"
     return g
+
+
+# Add all DIMACS graphs from the DIMACS subdirectory
+def load_dimacs_graphs():
+    files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
+
+    for filename in files:
+        g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
+        g.name(new = filename[:-4])
+        add_to_lists(g, dimacs_graphs, all_graphs)
+        print "loaded graph - ", g
+
+# Load the Sloane graphs
+def load_sloane_graphs():
+    dc64_g6string ="~?@?JXxwm?OJ@wESEYMMbX{VDokGxAWvH[RkTAzA_Tv@w??wF]?oE\?OAHoC_@A@g?PGM?AKOQ??ZPQ?@rgt??{mIO?NSD_AD?mC\
+O?J?FG_FOOEw_FpGA[OAxa?VC?lWOAm_DM@?Mx?Y{A?XU?hwA?PM?PW@?G@sGBgl?Gi???C@_FP_O?OM?VMA_?OS?lSB??PS?`sU\
+??Gx?OyF_?AKOCN`w??PA?P[J??@C?@CU_??AS?AW^G??Ak?AwVZg|?Oy_@?????d??iDu???C_?D?j_???M??[Bl_???W??oEV?\
+???O??_CJNacABK?G?OAwP??b???GNPyGPCG@???"
+    dc64 = Graph(dc64_g6string)
+    dc64.name(new="dc64")
+    add_to_lists(dc64, sloane_graphs, all_graphs)
+    print "loaded graph dc64"
+
+    try:
+        s = load('objects-invariants-properties/Objects/dc1024_g6string.sobj')
+        print "loaded graph dc1024"
+        dc1024 = Graph(s)
+        dc1024.name(new="dc1024")
+        add_to_lists(dc1024, sloane_graphs, all_graphs)
+    except:
+        print "couldn't load dc1024_g6string.sobj"
+
+    try:
+        s = load('objects-invariants-properties/Objects/dc2048_g6string.sobj')
+        print "loaded graph dc2048"
+        dc2048 = Graph(s)
+        dc2048.name(new="dc2048")
+        add_to_lists(dc2048, sloane_graphs, all_graphs)
+
+    except:
+        print "couldn't load dc2048_g6string.sobj"
+
+def find_all_max_ind_sets(g):
+    """
+    Finds all the maximum independent sets and stores them in a list
+    """
+    final_list = []
+    V = Set(g.vertices())
+    alpha = independence_number(g)
+
+    for s in V.subsets(alpha):
+        if g.is_independent_set(s):
+            final_list.append(s)
+
+    return final_list
+
+def add_to_lists(graph, *L):
+    """
+    Adds the specified graph to the arbitrary number of lists given as the second through last argument
+    Use this function to build the lists of graphs
+    """
+    for list in L:
+            list.append(graph)
+
+def MIR(n):
+    if n < 2:
+        raise RuntimeError("MIR is defined for n >= 2")
+    if n % 2 == 0:
+        g = graphs.PathGraph(2)
+    else:
+        g = graphs.PathGraph(3)
+    while g.order() < n:
+        new_v = g.add_vertex()
+        for v in g.vertices():
+            g.add_edge(v, new_v)
+        g.add_edge(new_v, g.add_vertex())
+    return g
+
+def Ciliate(q, r):
+    if q < 1:
+        raise RuntimeError("q must be greater than or equal to 1")
+    if r < q:
+        raise RuntimeError("r must be greater than or equal to q")
+    if q == 1:
+        return graphs.PathGraph(2*r)
+    if q == r:
+        return graphs.CycleGraph(2*q)
+    g = graphs.CycleGraph(2*q)
+    for v in g.vertices():
+        g.add_path([v]+[g.add_vertex() for i in [1..r-q]])
+    return g
+
+def Antihole(n):
+    if n < 5:
+        raise RuntimeError("antihole is defined for n > 5")
+    return graphs.CycleGraph(n).complement()
