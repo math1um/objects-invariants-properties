@@ -1731,20 +1731,6 @@ odd_wheel_8.name(new = "odd_wheel_8")
 add_to_lists(odd_wheel_8, graph_objects, all_graphs)
 
 """
-An odd antihole with 7 vertices
-p.175
-Rebennack, Steffen, Gerhard Reinelt, and Panos M. Pardalos. "A tutorial on branch and cut algorithms for the maximum stable set problem." International Transactions in Operational Research 19.1-2 (2012): 161-199.
-
-    sage: odd_antihole_7.order()
-    7
-    sage: odd_antihole_7.size()
-    14
-"""
-odd_antihole_7 = Graph("F}hXw")
-odd_antihole_7.name(new = "odd_antihole_7")
-add_to_lists(odd_antihole_7, graph_objects, all_graphs)
-
-"""
 A facet-inducing graph
 p.176
 Rebennack, Steffen, Gerhard Reinelt, and Panos M. Pardalos. "A tutorial on branch and cut algorithms for the maximum stable set problem." International Transactions in Operational Research 19.1-2 (2012): 161-199.
@@ -2016,6 +2002,25 @@ add_to_lists(c4_2, graph_objects, all_graphs)
 c6_1 = Ciliate(3, 4)
 c6_1.name(new = "Ciliate 6, 1")
 add_to_lists(c6_1, graph_objects, all_graphs)
+
+# Antiholes
+"""
+An odd antihole with 7 vertices
+p.175
+Rebennack, Steffen, Gerhard Reinelt, and Panos M. Pardalos. "A tutorial on branch and cut algorithms for the maximum stable set problem." International Transactions in Operational Research 19.1-2 (2012): 161-199.
+
+    sage: odd_antihole_7.order()
+    7
+    sage: odd_antihole_7.size()
+    14
+"""
+antihole_7 = Antihole(7)
+antihole_7.name(new = "Antihole 7")
+add_to_lists(antihole_7, graph_objects, all_graphs)
+
+antihole_8 = Antihole(8)
+antihole_8.name(new = "Antihole 8")
+add_to_lists(antihole_8, graph_objects, all_objects)
 
 #graph_objects: all graphs with no duplicates
 
