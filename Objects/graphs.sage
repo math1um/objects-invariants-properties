@@ -2030,6 +2030,13 @@ fish = Graph("E@ro")
 fish.name(new = "fish")
 add_to_lists(fish, graph_objects, all_graphs)
 
+"""
+p.10
+Barrus, Michael D. "On fractional realizations of graph degree sequences." arXiv preprint arXiv:1310.1112 (2013).
+"""
+fish_mod = Graph("EiKw")
+fish_mod.name(new = "fish_mod")
+add_to_lists(fish_mod, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 
