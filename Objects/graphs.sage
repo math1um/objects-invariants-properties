@@ -2022,6 +2022,15 @@ antihole_8 = Antihole(8)
 antihole_8.name(new = "Antihole 8")
 add_to_lists(antihole_8, graph_objects, all_graphs)
 
+"""
+p.10
+Barrus, Michael D. "On fractional realizations of graph degree sequences." arXiv preprint arXiv:1310.1112 (2013).
+"""
+fish = Graph("E@ro")
+fish.name(new = "fish")
+add_to_lists(fish, graph_objects, all_graphs)
+
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
