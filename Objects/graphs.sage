@@ -2038,6 +2038,15 @@ fish_mod = Graph("EiKw")
 fish_mod.name(new = "fish_mod")
 add_to_lists(fish_mod, graph_objects, all_graphs)
 
+"""
+All of the graphs with the name barrus_[0-9]{6} comes from the appendix of
+Barrus, Michael D. "On fractional realizations of graph degree sequences." arXiv preprint arXiv:1310.1112 (2013).
+"""
+
+barrus_322111a = Graph("EAIW")
+barrus_322111a.name(new = "barrus_322111a")
+add_to_lists(barrus_322111a, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 
 #obvious way to remove duplicates in list of ALL objects
