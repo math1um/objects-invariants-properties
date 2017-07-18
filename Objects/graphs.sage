@@ -2223,6 +2223,10 @@ barrus_444332c = Graph("EMlw")
 barrus_444332c.name(new = "barrus_444332c")
 add_to_lists(barrus_444332c, graph_objects, all_graphs)
 
+barrus_444433a = Graph("ER~o")
+barrus_444433a.name(new = "barrus_444433a")
+add_to_lists(barrus_444433a, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
