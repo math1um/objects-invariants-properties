@@ -2087,9 +2087,13 @@ barrus_333221a = Graph("E`LW")
 barrus_333221a.name(new = "barrus_333221a")
 add_to_lists(barrus_333221a, graph_objects, all_graphs)
 
-barrus_332222b = Graph("EKSw")
-barrus_332222b.name(new = "barrus_332222b")
-add_to_lists(barrus_332222b, graph_objects, all_graphs)
+barrus_333221b = Graph("EKSw")
+barrus_333221b.name(new = "barrus_333221b")
+add_to_lists(barrus_333221b, graph_objects, all_graphs)
+
+barrus_333221c = Graph("EELg")
+barrus_333221c.name(new = "barrus_333221c")
+add_to_lists(barrus_333221c, graph_objects, all_graphs)
 
 
 #graph_objects: all graphs with no duplicates
