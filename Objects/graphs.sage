@@ -2277,7 +2277,13 @@ thomas_walls_4 = Graph("LQCkCD?OGM@EKB")
 thomas_walls_4.name(new = "thomas_walls_4")
 add_to_lists(thomas_walls_4, graph_objects, all_graphs)
 
-
+"""
+P. 24, 1st figure
+From a knuth paper, linked in issue #342
+"""
+knuth_24_1 = Graph("E`~w")
+knuth_24_1.name(new = "knuth_24_1")
+add_to_lists(knuth_24_1, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
