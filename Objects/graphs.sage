@@ -2258,6 +2258,15 @@ thomas_walls_3 = Graph("IRaIACbFG")
 thomas_walls_3.name(new = "thomas_walls_3")
 add_to_lists(thomas_walls_3, graph_objects, all_graphs)
 
+"""
+From:
+p.3
+Dvořák, Zdeněk, and Jordan Venters. "Triangle-free planar graphs with small independence number." arXiv preprint arXiv:1702.02888 (2017).
+"""
+thomas_walls_4 = Graph("LQCkCD?OGM@EKB")
+thomas_walls_4.name(new = "thomas_walls_4")
+add_to_lists(thomas_walls_4, graph_objects, all_graphs)
+
 
 
 #graph_objects: all graphs with no duplicates
