@@ -399,6 +399,11 @@ p5txp3 = graphs.PathGraph(5).tensor_product(graphs.PathGraph(3))
 p5txp3.name(new = "p5txp3")
 add_to_lists(p5txp3, graph_objects, all_graphs)
 
+# Product Graphs, Fig 6.1
+k3lxp3 = graphs.CompleteGraph(3).lexicographic_product(graphs.PathGraph(3))
+k3lxp3.name(new = "k3lxp3")
+add_to_lists(k3lxp3, graph_objects, all_graphs)
+
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
 gould.name(new="gould")
