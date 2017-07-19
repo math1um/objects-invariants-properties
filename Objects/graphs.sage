@@ -2241,6 +2241,20 @@ barrus_444433b = Graph("Et\w")
 barrus_444433b.name(new = "barrus_444433b")
 add_to_lists(barrus_444433b, graph_objects, all_graphs)
 
+"""
+From:
+Alcón, Liliana, Marisa Gutierrez, and Glenn Hurlbert. "Pebbling in split graphs." SIAM Journal on Discrete Mathematics 28.3 (2014): 1449-1466.
+"""
+pyramid = Graph("EElw")
+pyramid.name(new = "pyramid")
+add_to_lists(pyramid, graph_objects, all_graphs)
+
+
+
+
+
+
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
