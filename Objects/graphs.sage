@@ -2278,6 +2278,14 @@ thomas_walls_4.name(new = "thomas_walls_4")
 add_to_lists(thomas_walls_4, graph_objects, all_graphs)
 
 """
+P. 23
+From a knuth paper, linked in issue #341
+"""
+knuth_23 = Graph("E?~o")
+knuth_23.name(new = "knuth_23")
+add_to_lists(knuth_23, graph_objects, all_graphs)
+
+"""
 P. 24, 1st figure
 From a knuth paper, linked in issue #342
 """
