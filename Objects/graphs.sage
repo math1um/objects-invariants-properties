@@ -1180,6 +1180,11 @@ ce134 = Graph('rQjxS{d~tvtrkz~pIJZ{gflAUdYPfybdzswqqS~i`~EfCmswgpu[zfAxLl\TtJEFl
 ce134.name(new = "ce134")
 add_to_lists(ce134, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= floor(tan(brooks(x)))
+ce135 = Graph('Nzx~VT}yzxNd^J^Jn~w')
+ce135.name(new = "ce135")
+add_to_lists(ce135, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
