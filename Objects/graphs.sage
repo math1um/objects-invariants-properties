@@ -1175,6 +1175,11 @@ ce133 = Graph("~?@VNtyzkW^v~_?UMVuzfYa_~}|tWZ}v~~v}WgheAI[pTRjr\\Wv}y~VeypzF\\^z
 ce133.name(new = "ce133")
 add_to_lists(ce133, graph_objects, counter_examples, all_graphs)
 
+# CE to independence_number(x) >= -max_common_neighbors(x) + min_degree(x) - 1
+ce134 = Graph('rQjxS{d~tvtrkz~pIJZ{gflAUdYPfybdzswqqS~i`~EfCmswgpu[zfAxLl\TtJEFlilHnZicmo}ZYJjAluT]d|scS\LgJ[|cs~}TBXxNQnJxSm]}oSMt{\kxUl|UhPZHlz`smizxCPTiNL[Mv|kbKUI}^r}oiAdMLE\^rga{v]z@U]Hb}wupjLh`Yg|Rn|`b[iLNp}Oudo~r_`oFEjTzvw')
+ce134.name(new = "ce134")
+add_to_lists(ce134, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
