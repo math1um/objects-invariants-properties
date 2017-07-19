@@ -2285,6 +2285,14 @@ knuth_24_1 = Graph("E`~w")
 knuth_24_1.name(new = "knuth_24_1")
 add_to_lists(knuth_24_1, graph_objects, all_graphs)
 
+"""
+P. 24, 2nd figure
+From a knuth paper, linked in issue #343
+"""
+knuth_24_2 = Graph("Er~w")
+knuth_24_2.name(new = "knuth_24_2")
+add_to_lists(knuth_24_2, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
