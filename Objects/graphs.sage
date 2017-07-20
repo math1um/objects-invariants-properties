@@ -413,6 +413,14 @@ p3lxk3 = graphs.PathGraph(3).lexicographic_product(graphs.CompleteGraph(3))
 p3lxk3.name(new = "p3lxk3")
 add_to_lists(p3lxk3, graph_objects, all_graphs)
 
+"""
+Referenced p.15
+Mathew, K. Ashik, and Patric RJ Östergård. "New lower bounds for the Shannon capacity of odd cycles." Designs, Codes and Cryptography (2015): 1-10.
+"""
+c5Xc5 = graphs.CycleGraph(5).strong_product(graphs.CycleGraph(5))
+c5Xc5.name(new = "c5Xc5")
+add_to_lists(c5Xc5, graph_objects, all_graphs)
+
 #non-ham, 2-connected, eulerian (4-regular)
 gould = Graph('S~dg?CB?wC_L????_?W?F??c?@gOOOGGK')
 gould.name(new="gould")
