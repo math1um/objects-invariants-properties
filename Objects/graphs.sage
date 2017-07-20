@@ -2305,6 +2305,14 @@ knuth_24_2 = Graph("Er~w")
 knuth_24_2.name(new = "knuth_24_2")
 add_to_lists(knuth_24_2, graph_objects, all_graphs)
 
+"""
+From Craig Larson, Critical Independence paper
+Has non empty critical independence set
+"""
+larson = Graph("F@N~w")
+larson.name(new = "larson")
+add_to_lists(larson, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
