@@ -369,6 +369,10 @@ c6xc6 = graphs.CycleGraph(6).cartesian_product(graphs.CycleGraph(6))
 c6xc6.name(new="c6xc6")
 add_to_lists(c6xc6, graph_objects, all_graphs)
 
+c7xc7 = graphs.CycleGraph(7).cartesian_product(graphs.CycleGraph(7))
+c7xc7.name(new="c7xc7")
+add_to_lists(c7xc7, graph_objects, all_graphs)
+
 # Product Graphs, fig. 1.13
 c6xk2 = graphs.CycleGraph(6).cartesian_product(graphs.CompleteGraph(2))
 c6xk2.name(new = "c6xk2")
