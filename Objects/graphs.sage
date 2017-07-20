@@ -175,6 +175,10 @@ c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 add_to_lists(c4, graph_objects, all_graphs)
 
+c5star = Graph("Ehdo")
+c5star.name(new = "C5*")
+add_to_lists(c5star, graph_objects, all_graphs)
+
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
 add_to_lists(c6, graph_objects, all_graphs)
