@@ -40,7 +40,7 @@ def store_values(overwrite=False, database=None, verbose=False):
     store_invariant_value(Graph.lovasz_theta, starfish, 10, overwrite=overwrite, database=database, verbose=verbose)
 
     # Miscomputed by Sage as 6.9999
-    store_invariant_value(Graph.lovasz_theta, sylvester, 7, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(Graph.lovasz_theta, sylvester, 7, overwrite=True, database=database, verbose=verbose)
 
     # c100 is hamiltonian. Cite: Aldred, Robert EL, et al. "Nonhamiltonian 3-connected cubic planar graphs." SIAM Journal on Discrete Mathematics 13.1 (2000): 25-32.
     store_property_value(Graph.is_hamiltonian, c100, True, overwrite=overwrite, database=database, verbose=verbose)
