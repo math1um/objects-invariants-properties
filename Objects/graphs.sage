@@ -23,6 +23,8 @@ all_graphs = []
 # TetrahedralGraph and MoserSpindle in the alpha critical list as "C~" and "FzEKW" respectively
 # MeredithGraph and SchlaefliGraph are in the Problem Graphs list
 
+#removed built-in  graphs.McLaughlinGraph(), as GAP package is throwing errors on cluster
+
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
@@ -40,7 +42,7 @@ graphs.HoffmanSingletonGraph(), graphs.HoltGraph(), graphs.HortonGraph(),
 graphs.IoninKharaghani765Graph(), graphs.JankoKharaghaniTonchevGraph(), graphs.KittellGraph(),
 graphs.KrackhardtKiteGraph(), graphs.Klein3RegularGraph(), graphs.Klein7RegularGraph(),
 graphs.LocalMcLaughlinGraph(), graphs.LjubljanaGraph(), graphs.M22Graph(),
-graphs.MarkstroemGraph(), graphs.McGeeGraph(), graphs.McLaughlinGraph(),
+graphs.MarkstroemGraph(), graphs.McGeeGraph(),
 graphs.MoebiusKantorGraph(), graphs.NauruGraph(), graphs.PappusGraph(),
 graphs.PoussinGraph(), graphs.PerkelGraph(), graphs.PetersenGraph(), graphs.RobertsonGraph(),
 graphs.ShrikhandeGraph(), graphs.SimsGewirtzGraph(),
