@@ -54,25 +54,30 @@ graphs.WienerArayaGraph(),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
+#these graphs give errors on Compile.vcu.edu, and are removed
+
 # These built in graphs are nameless so here they are given names
 #
-temp1 = graphs.Cell120()
-temp1.name(new = "Cell120")
+#temp1 = graphs.Cell120()
+#temp1.name(new = "Cell120")
 
-temp2 = graphs.Cell600()
-temp2.name(new = "Cell600")
+#temp2 = graphs.Cell600()
+#temp2.name(new = "Cell600")
 
-temp3 = graphs.MathonStronglyRegularGraph(0)
-temp3.name(new = "Mathon Strongly Regular Graph 0")
+#temp3 = graphs.MathonStronglyRegularGraph(0)
+#temp3.name(new = "Mathon Strongly Regular Graph 0")
 
-temp4 = graphs.MathonStronglyRegularGraph(1)
-temp4.name(new = "Mathon Strongly Regular Graph 1")
+#temp4 = graphs.MathonStronglyRegularGraph(1)
+#temp4.name(new = "Mathon Strongly Regular Graph 1")
 
-temp5 = graphs.MathonStronglyRegularGraph(2)
-temp5.name(new = "Mathon Strongly Regular Graph 2")
+#temp5 = graphs.MathonStronglyRegularGraph(2)
+#temp5.name(new = "Mathon Strongly Regular Graph 2")
 
+"""
 for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5]:
     add_to_lists(graph, graph_objects, all_graphs)
+"""
+
 
 add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
 
