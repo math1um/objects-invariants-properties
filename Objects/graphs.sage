@@ -25,6 +25,7 @@ all_graphs = []
 
 #removed built-in  graphs.McLaughlinGraph(), as GAP package is throwing errors on cluster
 
+"""
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
@@ -53,6 +54,7 @@ graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.We
 graphs.WienerArayaGraph(),
 graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
+"""
 
 #these graphs give errors on Compile.vcu.edu, and are removed
 
