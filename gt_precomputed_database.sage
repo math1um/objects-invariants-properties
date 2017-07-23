@@ -30,8 +30,8 @@ def create_tables(database=None):
     default to the default database of get_connection().
     """
     conn = get_connection(database)
-    conn.execute("CREATE TABLE IF NOT EXISTS inv_values (invariant TEXT, graph TEXT, value FLOAT)")
-    conn.execute("CREATE TABLE IF NOT EXISTS prop_values (property TEXT, graph TEXT, value BOOLEAN)")
+    conn.execute("CREATE TABLE IF NOT EXISTS inv_values (invariant TEXT, graph TEXT, value FLOAT, UNIQUE(invariant, graph))")
+    conn.execute("CREATE TABLE IF NOT EXISTS prop_values (property TEXT, graph TEXT, value BOOLEAN, UNIQUE(property, graph))")
     conn.close()
 
 def invariants_as_dict(database=None):
