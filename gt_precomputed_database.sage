@@ -179,7 +179,10 @@ def store_invariant_value(invariant, graph, value, overwrite=False, database=Non
             return
 
     conn = get_connection(database)
-    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(i_key, g_key, float(value)))
+    if result is None:
+        conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(i_key, g_key, float(value)))
+    else:
+        conn.execute("UPDATE inv_values SET value=(?) WHERE invariant = (?) AND graph = (?)",(float(value), i_key, g_key))
     conn.commit()
     conn.close()
     if verbose:
@@ -344,7 +347,10 @@ def store_property_value(property, graph, value, overwrite=False, database=None,
             return
 
     conn = get_connection(database)
-    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(p_key, g_key, bool(value)))
+    if result is None:
+        conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(p_key, g_key, bool(value)))
+    else:
+        conn.execute("UPDATE prop_values SET value=(?) WHERE property = (?) AND graph = (?)",(bool(value), p_key, g_key))
     conn.commit()
     conn.close()
     if verbose:
