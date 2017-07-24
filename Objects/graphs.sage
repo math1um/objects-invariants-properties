@@ -178,10 +178,6 @@ c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 add_to_lists(c4, graph_objects, all_graphs)
 
-c5star = Graph("Ehdo")
-c5star.name(new = "C5*")
-add_to_lists(c5star, graph_objects, all_graphs)
-
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
 add_to_lists(c6, graph_objects, all_graphs)
@@ -200,10 +196,6 @@ add_to_lists(c34, graph_objects, counter_examples, all_graphs)
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
 add_to_lists(c102, graph_objects, counter_examples, all_graphs)
-
-k4star = Graph("GhcGKc")
-k4star.name(new = "K4*")
-add_to_lists(k4star, graph_objects, all_graphs)
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
