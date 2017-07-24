@@ -123,10 +123,6 @@ def max_degree(g):
     return max(g.degree())
 add_to_lists(max_degree, efficient_invariants, all_invariants)
 
-def average_degree(g):
-     return mean(g.degree())
-add_to_lists(average_degree, efficient_invariants, all_invariants)
-
 def median_degree(g):
     return median(g.degree())
 add_to_lists(median_degree, efficient_invariants, all_invariants)
@@ -513,18 +509,6 @@ def degree_variance(g):
      return s/g.order()
 add_to_lists(degree_variance, efficient_invariants, all_invariants)
 
-def number_of_triangles(g):
-     E = g.edges()
-     D = g.distance_all_pairs()
-     total = 0
-     for e in E:
-         v = e[0]
-         w = e[1]
-         S = [u for u in g.vertices() if D[u][v] == 1 and D[u][w] == 1]
-         total += len(S)
-     return total/3
-add_to_lists(number_of_triangles, efficient_invariants, all_invariants)
-
 def graph_rank(g):
     return g.adjacency_matrix().rank()
 add_to_lists(graph_rank, efficient_invariants, all_invariants)
@@ -548,21 +532,6 @@ add_to_lists(card_cut_vertices, efficient_invariants, all_invariants)
 def card_connectors(g):
     return g.order() - card_cut_vertices(g)
 add_to_lists(card_connectors, efficient_invariants, all_invariants)
-
-#returns average of distances between *distinct* vertices, return infinity is graph is not connected
-def average_distance(g):
-    if not g.is_connected():
-        return Infinity
-    n = g.order()
-    if g.is_tree() and max(g.degree()) == 2:
-        summation = 0
-        for i in [1..(n-1)]:
-            summation += (i*(i+1))/2
-        return (summation * 2)/(n*(n-1))
-    V = g.vertices()
-    D = g.distance_all_pairs()
-    return sum([D[v][w] for v in V for w in V if v != w])/(n*(n-1))
-add_to_lists(average_distance, efficient_invariants, all_invariants)
 
 #return number of leafs or pendants
 def card_pendants(g):
