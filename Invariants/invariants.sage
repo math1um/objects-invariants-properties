@@ -1108,6 +1108,44 @@ def bipartite_number(g):
     return verts
 add_to_lists(bipartite_number, intractable_invariants, all_invariants)
 
+def cheeger_constant(g):
+    """
+    Defined at https://en.wikipedia.org/wiki/Cheeger_constant_(graph_theory)
+
+    sage: cheeger_constant(p2)
+    1
+    sage: cheeger_constant(k5)
+    3
+    sage: cheeger_constant(paw)
+    1
+    """
+    n = g.order()
+    upper = floor(n/2)
+
+    v = g.vertices()
+    SetV = Set(v)
+
+    temp = g.order()
+    best = n
+
+    for i in [1..upper]:
+        for s in SetV.subsets(i):
+            print 's is {}'.format(s)
+            count = 0
+            for u in s:
+                print 'u is {}'.format(u)
+                for w in SetV.difference(s):
+                    print 'w is {}'.format(w)
+                    for e in g.edges(labels=false):
+                        if Set([u,w]) == Set(e):
+                            count += 1
+                            print 'count is {}'.format(count)
+            temp = count/i
+            if temp < best:
+                best = temp
+    return best
+add_to_lists(cheeger_constant, intractable_invariants, all_invariants)
+
 add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
 add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
