@@ -972,6 +972,34 @@ def alpha_order_brooks_bound_invariant(g):
     return ceil(order(x)/brooks(x))
 add_to_lists(alpha_order_brooks_bound_invariant, efficient_invariants, all_invariants)
 
+def beauchamp_index(g):
+    """
+    Defined on page 597 of Sabidussi, Gert. "The centrality index of a graph." Psychometrika 31.4 (1966): 581-603.
+    
+    sage: beauchamp_index(c4)
+    1
+    sage: beauchamp_index(p5)
+    137/210
+    sage: beauchamp_index(pete)
+    2/3
+    """
+    
+    D = g.distance_all_pairs()
+
+    def s_aux(v): #computes sum of distances from v to all other vertices
+        sum = 0
+        for w in g.vertices():
+            sum += D[v][w]
+        return sum
+
+    sum_final = 0
+
+    for v in g.vertices():
+        sum_final += 1/s_aux(v)
+
+    print sum_final
+add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
+
 add_to_lists(Graph.diameter, efficient_invariants, all_invariants)
 add_to_lists(Graph.radius, efficient_invariants, all_invariants)
 add_to_lists(Graph.girth, efficient_invariants, all_invariants)
