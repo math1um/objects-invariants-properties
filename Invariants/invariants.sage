@@ -1000,19 +1000,12 @@ def beauchamp_index(g):
     print sum_final
 add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
 
-add_to_lists(Graph.diameter, efficient_invariants, all_invariants)
-add_to_lists(Graph.radius, efficient_invariants, all_invariants)
-add_to_lists(Graph.girth, efficient_invariants, all_invariants)
-add_to_lists(Graph.order, efficient_invariants, all_invariants)
-add_to_lists(Graph.size, efficient_invariants, all_invariants)
-add_to_lists(Graph.szeged_index, efficient_invariants, all_invariants)
-add_to_lists(Graph.wiener_index, efficient_invariants, all_invariants)
-add_to_lists(Graph.maximum_average_degree, efficient_invariants, all_invariants)
-add_to_lists(Graph.lovasz_theta, efficient_invariants, all_invariants)
-add_to_lists(Graph.density, efficient_invariants, all_invariants)
-add_to_lists(Graph.clustering_average, efficient_invariants, all_invariants)
-add_to_lists(Graph.connected_components_number, efficient_invariants, all_invariants)
-add_to_lists(Graph.spanning_trees_count, efficient_invariants, all_invariants)
+sage_invariants = [Graph.diameter, Graph.radius, Graph.girth, Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
+Graph.maximum_average_degree, Graph.lovasz_theta, Graph.density, Graph.clustering_average, Graph.connected_components_number,
+Graph.spanning_trees_count]
+
+for i in sage_invariants:
+    add_to_lists(i, efficient_invariants, all_invariants)
 
 #####
 # INTRACTABLE INVATIANTS
