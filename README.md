@@ -33,4 +33,4 @@ sage: conjecture(graph_objects, efficiently_computable_invariants, 0)
 
 ##### Known Issues
 
-The graphs McLaughlinGraph and LocalMcLaughlinGraph, that are built in to sage, cannot be created on a barebones installation of Sage. They require the gap package design. This is not an issue on Cocalc/SageMathCloud. 
+The graphs McLaughlinGraph and LocalMcLaughlinGraph, that are built in to sage, cannot be created on a barebones installation of Sage. They require extra packages. This is not an issue on Cocalc/SageMathCloud. 
