@@ -25,6 +25,10 @@ all_graphs = []
 
 # Removed graphs.McLaughlinGraph() and graphs.LocalMcLaughlinGraph() and graphs.CameronGraph() due to errors.
 
+#removed all for now, some don't load on compile.vcu, some are probably too big,
+#it must definitely at least be possible to compute alpha for any graph in graph objects
+
+"""
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
@@ -50,9 +54,10 @@ graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
 graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
 graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
-graphs.WienerArayaGraph(),
-graphs.JankoKharaghaniGraph(936), graphs.JankoKharaghaniGraph(1800),
+graphs.WienerArayaGraph(), graphs.JankoKharaghaniGraph(1800),
+graphs.JankoKharaghaniGraph(936),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
+"""
 
 #These built in graphs are nameless so here they are given names
 
