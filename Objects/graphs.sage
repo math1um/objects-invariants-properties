@@ -23,14 +23,13 @@ all_graphs = []
 # TetrahedralGraph and MoserSpindle in the alpha critical list as "C~" and "FzEKW" respectively
 # MeredithGraph and SchlaefliGraph are in the Problem Graphs list
 
-# Removed graphs.McLaughlinGraph() and graphs.LocalMcLaughlinGraph(), as gap package design failed to load.
-# will try to install this later.
+# Removed graphs.McLaughlinGraph() and graphs.LocalMcLaughlinGraph() and graphs.CameronGraph() due to errors.
 
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
 graphs.BiggsSmithGraph(), graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(),
-graphs.BrinkmannGraph(), graphs.BrouwerHaemersGraph(), graphs.BuckyBall(), graphs.CameronGraph(),
+graphs.BrinkmannGraph(), graphs.BrouwerHaemersGraph(), graphs.BuckyBall(),
 graphs.ChvatalGraph(), graphs.ClebschGraph(),
 graphs.CoxeterGraph(), graphs.DesarguesGraph(), graphs.DejterGraph(), graphs.DoubleStarSnark(),
 graphs.DurerGraph(), graphs.DyckGraph(), graphs.EllinghamHorton54Graph(),
