@@ -791,6 +791,11 @@ def has_strong_Havel_Hakimi_property(g):
 def is_subcubic(g):
     return max_degree(g) == 3
 
+# Max and min degree varies by at most 1
+def is_quasi_regular(g):
+    if max_degree(g) - min_degree(g) < 2:
+        return true
+    return false
 
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -812,7 +817,8 @@ is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
-pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, has_c4, is_c4_free, is_subcubic]
+pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
+has_c4, is_c4_free, is_subcubic, is_quasi_regular]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
