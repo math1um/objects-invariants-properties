@@ -1000,9 +1000,10 @@ def beauchamp_index(g):
     print sum_final
 add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
 
-sage_invariants = [Graph.diameter, Graph.radius, Graph.girth, Graph.order, Graph.size, Graph.szeged_index, Graph.wiener_index,
-Graph.maximum_average_degree, Graph.lovasz_theta, Graph.density, Graph.clustering_average, Graph.connected_components_number,
-Graph.spanning_trees_count]
+sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree, 
+Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
+Graph.average_distance, Graph.connected_components_number,
+Graph.maximum_average_degree, Graph.lovasz_theta, Graph.clustering_average, Graph.spanning_trees_count]
 
 for i in sage_invariants:
     add_to_lists(i, efficient_invariants, all_invariants)
