@@ -178,10 +178,6 @@ c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 add_to_lists(c4, graph_objects, all_graphs)
 
-c5star = Graph("Ehdo")
-c5star.name(new = "C5*")
-add_to_lists(c5star, graph_objects, all_graphs)
-
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
 add_to_lists(c6, graph_objects, all_graphs)
@@ -200,10 +196,6 @@ add_to_lists(c34, graph_objects, counter_examples, all_graphs)
 c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
 add_to_lists(c102, graph_objects, counter_examples, all_graphs)
-
-k4star = Graph("GhcGKc")
-k4star.name(new = "K4*")
-add_to_lists(k4star, graph_objects, all_graphs)
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
@@ -412,7 +404,7 @@ add_to_lists(p4Xp5, graph_objects, all_graphs)
 # Product Graphs, fig. 5.4
 p5txp3 = graphs.PathGraph(5).tensor_product(graphs.PathGraph(3))
 p5txp3.name(new = "p5txp3")
-add_to_lists(p5txp3, graph_objects, all_graphs)
+add_to_lists(p5txp3, non_connected_graphs, all_graphs)
 
 # Product Graphs, Fig 6.1
 k3lxp3 = graphs.CompleteGraph(3).lexicographic_product(graphs.PathGraph(3))

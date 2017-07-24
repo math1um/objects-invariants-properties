@@ -968,6 +968,10 @@ def bipartite_chromatic(g):
         return g.order()
 add_to_lists(bipartite_chromatic, efficient_invariants, all_invariants)
 
+def alpha_order_brooks_bound_invariant(g):
+    return ceil(order(x)/brooks(x))
+add_to_lists(alpha_order_brooks_bound_invariant, efficient_invariants, all_invariants)
+
 add_to_lists(Graph.diameter, efficient_invariants, all_invariants)
 add_to_lists(Graph.radius, efficient_invariants, all_invariants)
 add_to_lists(Graph.girth, efficient_invariants, all_invariants)
@@ -1077,6 +1081,70 @@ def min_degree_of_max_ind_set(g):
 
     return low_degree
 add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
+
+# Needs enhancement
+def bipartite_number(g):
+    """
+    Defined as the largest number of vertices that induces a bipartite subgraph
+    
+    sage: bipartite_number(pete)
+    7
+    sage: bipartite_number(c4)
+    4
+    sage: bipartite_number(k3)
+    2
+    """
+    
+    set_of_subsets = Set(g.vertices()).subsets()
+    
+    verts = 0
+    
+    for x in set_of_subsets:
+        h = g.subgraph(list(x))
+        if h.is_bipartite():
+            if h.order() > verts:
+                verts = h.order()
+    
+    return verts
+add_to_lists(bipartite_number, intractable_invariants, all_invariants)
+
+def cheeger_constant(g):
+    """
+    Defined at https://en.wikipedia.org/wiki/Cheeger_constant_(graph_theory)
+
+    sage: cheeger_constant(p2)
+    1
+    sage: cheeger_constant(k5)
+    3
+    sage: cheeger_constant(paw)
+    1
+    """
+    n = g.order()
+    upper = floor(n/2)
+
+    v = g.vertices()
+    SetV = Set(v)
+
+    temp = g.order()
+    best = n
+
+    for i in [1..upper]:
+        for s in SetV.subsets(i):
+            print 's is {}'.format(s)
+            count = 0
+            for u in s:
+                print 'u is {}'.format(u)
+                for w in SetV.difference(s):
+                    print 'w is {}'.format(w)
+                    for e in g.edges(labels=false):
+                        if Set([u,w]) == Set(e):
+                            count += 1
+                            print 'count is {}'.format(count)
+            temp = count/i
+            if temp < best:
+                best = temp
+    return best
+add_to_lists(cheeger_constant, intractable_invariants, all_invariants)
 
 add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
 add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
