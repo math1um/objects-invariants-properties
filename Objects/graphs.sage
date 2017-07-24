@@ -404,7 +404,7 @@ add_to_lists(p4Xp5, graph_objects, all_graphs)
 # Product Graphs, fig. 5.4
 p5txp3 = graphs.PathGraph(5).tensor_product(graphs.PathGraph(3))
 p5txp3.name(new = "p5txp3")
-add_to_lists(p5txp3, graph_objects, all_graphs)
+add_to_lists(p5txp3, non_connected_graphs, all_graphs)
 
 # Product Graphs, Fig 6.1
 k3lxp3 = graphs.CompleteGraph(3).lexicographic_product(graphs.PathGraph(3))
