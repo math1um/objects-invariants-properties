@@ -968,6 +968,10 @@ def bipartite_chromatic(g):
         return g.order()
 add_to_lists(bipartite_chromatic, efficient_invariants, all_invariants)
 
+def alpha_order_brooks_bound_invariant(g):
+    return ceil(order(x)/brooks(x))
+add_to_lists(alpha_order_brooks_bound_invariant, efficient_invariants, all_invariants)
+
 add_to_lists(Graph.diameter, efficient_invariants, all_invariants)
 add_to_lists(Graph.radius, efficient_invariants, all_invariants)
 add_to_lists(Graph.girth, efficient_invariants, all_invariants)
