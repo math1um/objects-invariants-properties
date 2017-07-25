@@ -2361,8 +2361,12 @@ balanski = Graph("H??xuRo")
 balanski.name(new = "balanski")
 add_to_lists(balanski, graph_objects, all_graphs)
 
-
-
+"""
+Instance of the Erdos-Faber-Lovasz conjecture
+"""
+efl_instance = Graph("J`?GECrB~z_")
+efl_instance.name(new = "efl_instance")
+add_to_lists(efl_instance, graph_objects, all_graphs)
 
 
 
