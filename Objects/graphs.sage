@@ -2370,6 +2370,14 @@ add_to_lists(efl_instance, graph_objects, all_graphs)
 
 """
 From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
+with defect 2
+"""
+basic_facet_1 = Graph("FCS~?")
+basic_facet_1.name(new = "basic facet-graph")
+add_to_list(basic_facet_1, graph_objects, all_graphs)
+
+"""
+From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
 """
 crit_facet_1 = Graph("H@BDQo{")
 crit_facet_1.name(new = "critical facet graph 1")
