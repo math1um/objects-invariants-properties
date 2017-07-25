@@ -2430,6 +2430,15 @@ tarjan = Graph("JQ?CQOKDXL_")
 tarjan.name(new = "tarjan")
 add_to_lists(tarjan, graph_objects, all_graphs)
 
+"""
+From:
+p.225
+Tarjan, Robert E. "Decomposition by clique separators." Discrete mathematics 55.2 (1985): 221-232.
+"""
+tarjan_fillin = Graph("JQAa_OFJWv_")
+tarjan_fillin.name(new = "tarjan_fillin")
+add_to_lists(tarjan_fillin, graph_objects, all_graphs)
+
 
 
 #graph_objects: all graphs with no duplicates
