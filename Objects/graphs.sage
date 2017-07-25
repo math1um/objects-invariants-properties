@@ -2439,6 +2439,21 @@ tarjan_fillin = Graph("JQAa_OFJWv_")
 tarjan_fillin.name(new = "tarjan_fillin")
 add_to_lists(tarjan_fillin, graph_objects, all_graphs)
 
+"""
+From:
+p.252
+Sewell, E. C., and L. E. Trotter. "Stability critical graphs and ranks facets of the stable set polytope." Discrete Mathematics 147.1-3 (1995): 247-255.
+"""
+sewell_1 = Graph("H@GOkXI")
+sewell_1.name(new = "sewell_1")
+add_to_lists(sewell_1, graph_objects, all_graphs)
+
+
+
+
+
+
+
 
 
 #graph_objects: all graphs with no duplicates
