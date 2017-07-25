@@ -2374,7 +2374,7 @@ with defect 2
 """
 basic_facet_1 = Graph("FCS~?")
 basic_facet_1.name(new = "basic facet-graph")
-add_to_list(basic_facet_1, graph_objects, all_graphs)
+add_to_lists(basic_facet_1, graph_objects, all_graphs)
 
 """
 From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
@@ -2382,7 +2382,7 @@ with defect 2
 """
 basic_facet_2 = Graph("I_?BSgcEG")
 basic_facet_2.name(new = "basic facet-graph two")
-add_to_list(basic_facet_2, graph_objects, all_graphs)
+add_to_lists(basic_facet_2, graph_objects, all_graphs)
 
 """
 From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
@@ -2390,7 +2390,7 @@ with defect 2
 """
 basic_facet_3 = Graph("L@Q????o`QAc?w")
 basic_facet_3.name(new = "basic facet-graph three")
-add_to_list(basic_facet_3, graph_objects, all_graphs)
+add_to_lists(basic_facet_3, graph_objects, all_graphs)
 
 """
 From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
