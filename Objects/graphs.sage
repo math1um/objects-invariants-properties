@@ -196,6 +196,16 @@ c102 = graphs.CycleGraph(102)
 c102.name(new = "c102")
 add_to_lists(c102, graph_objects, counter_examples, all_graphs)
 
+"""
+Sage defines circulant graphs without the cycle, whereas the paper defines it with the cycle
+From:
+Brimkov, Valentin. "Algorithmic and explicit determination of the Lovasz number for certain circulant graphs." Discrete Applied Mathematics 155.14 (2007): 1812-1825.
+"""
+c13_2 = graphs.CirculantGraph(13, 2)
+c13_2.add_cycle([0..12])
+c13_2.name(new = "c13_2")
+add_to_lists(c13_2, graph_objects, all_graphs)
+
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
 add_to_lists(k10, graph_objects, all_graphs)
