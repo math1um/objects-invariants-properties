@@ -23,18 +23,14 @@ all_graphs = []
 # TetrahedralGraph and MoserSpindle in the alpha critical list as "C~" and "FzEKW" respectively
 # MeredithGraph and SchlaefliGraph are in the Problem Graphs list
 
-# Removed graphs.McLaughlinGraph() and graphs.LocalMcLaughlinGraph() and graphs.CameronGraph() due to errors.
+# Removed graphs.McLaughlinGraph() and graphs.LocalMcLaughlinGraph() due to needing extra packages.
 
-#removed all for now, some don't load on compile.vcu, some are probably too big,
-#it must definitely at least be possible to compute alpha for any graph in graph objects
-
-"""
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
 graphs.BiggsSmithGraph(), graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(),
 graphs.BrinkmannGraph(), graphs.BrouwerHaemersGraph(), graphs.BuckyBall(),
-graphs.ChvatalGraph(), graphs.ClebschGraph(),
+graphs.ChvatalGraph(), graphs.ClebschGraph(), graphs.CameronGraph(),
 graphs.CoxeterGraph(), graphs.DesarguesGraph(), graphs.DejterGraph(), graphs.DoubleStarSnark(),
 graphs.DurerGraph(), graphs.DyckGraph(), graphs.EllinghamHorton54Graph(),
 graphs.EllinghamHorton78Graph(), graphs.ErreraGraph(), graphs.F26AGraph(), graphs.FlowerSnark(),
@@ -57,14 +53,9 @@ graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.We
 graphs.WienerArayaGraph(), graphs.JankoKharaghaniGraph(1800),
 graphs.JankoKharaghaniGraph(936),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
-"""
 
 #These built in graphs are nameless so here they are given names
 
-#removing these: one or more doesn't load on compile.vcu
-#these need to be *tested*
-
-"""
 temp1 = graphs.Cell120()
 temp1.name(new = "Cell120")
 
@@ -82,7 +73,6 @@ temp5.name(new = "Mathon Strongly Regular Graph 2")
 
 for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5]:
     add_to_lists(graph, graph_objects, all_graphs)
-"""
 
 add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
 
