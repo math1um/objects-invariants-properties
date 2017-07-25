@@ -2371,9 +2371,16 @@ add_to_lists(efl_instance, graph_objects, all_graphs)
 """
 From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
 """
-crit_facet = Graph("J?AAHGIC^o?")
-crit_facet.name(new = "critical facet graph")
-add_to_lists(crit_facet, graph_objects, all_graphs)
+crit_facet_1 = Graph("H@BDQo{")
+crit_facet_1.name(new = "critical facet graph 1")
+add_to_lists(crit_facet_1, graph_objects, all_graphs)
+
+"""
+From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
+"""
+crit_facet_2 = Graph("J?AAHGIC^o?")
+crit_facet_2.name(new = "critical facet graph 2")
+add_to_lists(crit_facet_2, graph_objects, all_graphs)
 
 
 
