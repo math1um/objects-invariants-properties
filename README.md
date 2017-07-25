@@ -14,6 +14,8 @@ $ cd path/to/project
 $ git clone https://github.com/math1um/objects-invariants-properties
 ```
 
+NOTE ON BRANCHES: The master branch is known to load with no issues on Mac running Mac OSX v10.11.6 using a bare bones installation of SageMath version 7.6, Release Date: 2017-03-25. However, it is known to throw some errors on RHELS 7.3 with the gap_packages installed. The compile_server branch will be used to test this issue.
+
 This should create a subdirectory called `objects-invariants-properties`. Then you can load `gt.sage`. GT loads the utilities file, as well as all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs, Sloane Graphs, or the database utilities. Use the utility methods to load the DIMACS and Sloane graphs. This populates the `dimacs_graphs` list.
 
 ```sage
@@ -33,4 +35,4 @@ sage: conjecture(graph_objects, efficiently_computable_invariants, 0)
 
 ##### Known Issues
 
-The graphs McLaughlinGraph and LocalMcLaughlinGraph, that are built in to sage, cannot be created on a barebones installation of Sage. They require extra packages. This is not an issue on Cocalc/SageMathCloud. 
+The graphs McLaughlinGraph and LocalMcLaughlinGraph, that are built in to sage, cannot be created on a barebones installation of Sage. They require extra packages. This is not an issue on Cocalc/SageMathCloud.
