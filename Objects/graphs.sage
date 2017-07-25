@@ -1813,6 +1813,10 @@ double_fork = Graph("E?dg")
 double_fork.name(new = "double_fork")
 add_to_lists(double_fork, graph_objects, all_graphs)
 
+double_fork_sub = Graph("G??MPg")
+double_fork_sub.name(new = "double_fork_sub")
+add_to_lists(double_fork_sub, graph_objects, all_graphs)
+
 """
 Golomb Graph
 Appears in THE FRACTIONAL CHROMATIC NUMBER OF THE PLANE by Cranston and Rabern
