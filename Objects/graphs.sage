@@ -2315,6 +2315,28 @@ larson = Graph("F@N~w")
 larson.name(new = "larson")
 add_to_lists(larson, graph_objects, all_graphs)
 
+"""
+From:
+Vizing's independence number conjecture is true asymptotically
+Eckhard Steffen
+"""
+steffen_1 = Graph("HqP@xw{")
+steffen_1.name(new = "steffen_1")
+add_to_lists(steffen_1, graph_objects, all_graphs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
