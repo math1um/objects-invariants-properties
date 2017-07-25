@@ -2342,8 +2342,14 @@ steffen_3 = Graph("Z??xpow@o@?A?B?B?@_?C??_?@??@??A???__?Dc??kO?AoO?AWO?AWG?@K?"
 steffen_3.name(new = "steffen_3")
 add_to_lists(steffen_3, graph_objects, all_graphs)
 
-
-
+"""
+From:
+p.231
+Balinski, Michel L. "Notes—On a Selection Problem." Management Science 17.3 (1970): 230-231.
+"""
+balanski = Graph("H??xuRo")
+balanski.name(new = "balanski")
+add_to_lists(balanski, graph_objects, all_graphs)
 
 
 
