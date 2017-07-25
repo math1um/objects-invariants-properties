@@ -2333,6 +2333,16 @@ steffen_2 = Graph("N??xpow@o@?AoBoBW@_")
 steffen_2.name(new = "steffen_2")
 add_to_lists(steffen_2, graph_objects, all_graphs)
 
+"""
+From:
+Vizing's independence number conjecture is true asymptotically
+Eckhard Steffen
+"""
+steffen_3 = Graph("Z??xpow@o@?A?B?B?@_?C??_?@??@??A???__?Dc??kO?AoO?AWO?AWG?@K?")
+steffen_3.name(new = "steffen_3")
+add_to_lists(steffen_3, graph_objects, all_graphs)
+
+
 
 
 
