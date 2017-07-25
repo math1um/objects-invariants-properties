@@ -1,5 +1,4 @@
 # Graph Lists
-# Example Comment to demonstrate git
 
 import pickle, os
 
