@@ -215,6 +215,11 @@ k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
 add_to_lists(k37, graph_objects, counter_examples, all_graphs)
 
+# A 4 ray star with each ray subdivided into two edges
+k1_4_sub2 = Graph("H?EA@?^")
+k1_4_sub2.name(new = "k1_4_sub2")
+add_to_lists(k1_4_sub2, graph_objects, all_graphs)
+
 # CE to independence_number(x) <= minimum(lovasz_theta(x), 2*e^sum_temperatures(x))
 #   and to
 # independence_number(x) <= minimum(floor(lovasz_theta(x)), 2*e^sum_temperatures(x))
