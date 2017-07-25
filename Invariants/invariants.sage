@@ -944,7 +944,7 @@ add_to_lists(alpha_order_brooks_bound_invariant, efficient_invariants, all_invar
 def beauchamp_index(g):
     """
     Defined on page 597 of Sabidussi, Gert. "The centrality index of a graph." Psychometrika 31.4 (1966): 581-603.
-    
+
     sage: beauchamp_index(c4)
     1
     sage: beauchamp_index(p5)
@@ -952,7 +952,7 @@ def beauchamp_index(g):
     sage: beauchamp_index(pete)
     2/3
     """
-    
+
     D = g.distance_all_pairs()
 
     def s_aux(v): #computes sum of distances from v to all other vertices
@@ -969,7 +969,7 @@ def beauchamp_index(g):
     print sum_final
 add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
 
-sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree, 
+sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
 Graph.maximum_average_degree, Graph.lovasz_theta, Graph.clustering_average, Graph.spanning_trees_count]
@@ -1048,7 +1048,7 @@ add_to_lists(independence_ratio, intractable_invariants, all_invariants)
 def min_degree_of_max_ind_set(g):
     """
     Returns the minimum degree of any vertex that is a part of any maximum indepdendent set
-    
+
     sage: min_degree_of_vertex_in_max_ind_set(c4)
     2
     sage: min_degree_of_vertex_in_max_ind_set(pete)
@@ -1077,7 +1077,7 @@ add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
 def bipartite_number(g):
     """
     Defined as the largest number of vertices that induces a bipartite subgraph
-    
+
     sage: bipartite_number(pete)
     7
     sage: bipartite_number(c4)
@@ -1085,17 +1085,19 @@ def bipartite_number(g):
     sage: bipartite_number(k3)
     2
     """
+    if g.is_bipartite():
+        return g.order()
     
     set_of_subsets = Set(g.vertices()).subsets()
-    
+
     verts = 0
-    
+
     for x in set_of_subsets:
         h = g.subgraph(list(x))
         if h.is_bipartite():
             if h.order() > verts:
                 verts = h.order()
-    
+
     return verts
 add_to_lists(bipartite_number, intractable_invariants, all_invariants)
 
