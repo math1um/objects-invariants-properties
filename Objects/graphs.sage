@@ -1237,6 +1237,10 @@ paley_53e.add_edge(52,53)
 paley_53e.name(new = "paley_53e")
 add_to_lists(paley_53e, graph_objects, counter_examples, all_graphs)
 
+paley_101 = graphs.PaleyGraph(101)
+paley_101.name(new = "paley_101")
+add_to_lists(paley_101, graph_objects, all_graphs)
+
 # CE to independence_number(x) >= cos(alon_spencer(x))*floor(lovasz_theta(x))
 paley_149 = graphs.PaleyGraph(149)
 paley_149.name(new = "paley_149")
