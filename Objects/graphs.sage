@@ -2421,7 +2421,14 @@ crit_facet_2 = Graph("J?AAHGIC^o?")
 crit_facet_2.name(new = "critical facet graph 2")
 add_to_lists(crit_facet_2, graph_objects, all_graphs)
 
-
+"""
+From:
+p.222
+Tarjan, Robert E. "Decomposition by clique separators." Discrete mathematics 55.2 (1985): 221-232.
+"""
+tarjan = Graph("JQ?CQOKDXL_")
+tarjan.name(new = "tarjan")
+add_to_lists(tarjan, graph_objects, all_graphs)
 
 
 
