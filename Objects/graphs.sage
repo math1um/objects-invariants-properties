@@ -215,6 +215,11 @@ k37 = graphs.CompleteGraph(37)
 k37.name(new = "k37")
 add_to_lists(k37, graph_objects, counter_examples, all_graphs)
 
+# Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
+k1_4 = graphs.CompleteBipartiteGraph(1, 4)
+k1_4.name(new = "k1_4")
+add_to_lists(k1_4, graph_objects, all_graphs)
+
 # A 4 ray star with each ray subdivided into two edges
 # Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
 k1_4_sub2 = Graph("H?EA@?^")
