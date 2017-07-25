@@ -2368,8 +2368,12 @@ efl_instance = Graph("J`?GECrB~z_")
 efl_instance.name(new = "efl_instance")
 add_to_lists(efl_instance, graph_objects, all_graphs)
 
-
-
+"""
+From Lipták, László, and László Lovász. "Critical facets of the stable set polytope." Combinatorica 21.1 (2001): 61-88.
+"""
+crit_facet = Graph("J?AAHGIC^o?")
+crit_facet.name(new = "critical facet graph")
+add_to_lists(crit_facet, graph_objects, all_graphs)
 
 
 
