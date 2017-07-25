@@ -117,7 +117,7 @@ def alpha_staton_girth_bound(g):
         return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
 add_to_lists(alpha_staton_girth_bound, alpha_lower_bounds, all_theorems)
 
-alpha_average_distance_bound = average_distance
+alpha_average_distance_bound = Graph.average_distance
 add_to_lists(alpha_average_distance_bound, alpha_lower_bounds, all_theorems)
 
 alpha_radius_bound = Graph.radius
