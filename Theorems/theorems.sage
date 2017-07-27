@@ -135,3 +135,14 @@ add_to_lists(alpha_critical_independence_number_bound, alpha_lower_bounds, all_t
 def alpha_max_degree_minus_number_of_triangles_bound(g):
     return max_degree(g) - number_of_triangles(g)
 add_to_lists(alpha_max_degree_minus_number_of_triangles_bound, alpha_lower_bounds, all_theorems)
+
+
+
+
+
+
+# Adds all theorems to the efficient_invariants list
+# Does not insert duplicates if the method is already in efficient_invariants
+for t in all_theorems:
+    if t not in efficient_invariants:
+        add_to_lists(t, efficient_invariants)
