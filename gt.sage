@@ -7,11 +7,11 @@ print("loaded invariants")
 load("objects-invariants-properties/Properties/properties.sage")
 print("loaded properties")
 
-load("objects-invariants-properties/Objects/graphs.sage")
-print("loaded graphs")
-
 load("objects-invariants-properties/Theorems/theorems.sage")
 print("loaded theorems")
+
+load("objects-invariants-properties/Objects/graphs.sage")
+print("loaded graphs")
 
 print("\nRemember to load DIMACS and Sloane graphs if you want them")
 
