@@ -145,4 +145,4 @@ add_to_lists(alpha_max_degree_minus_number_of_triangles_bound, alpha_lower_bound
 # Does not insert duplicates if the method is already in efficient_invariants
 for t in all_theorems:
     if t not in efficient_invariants:
-        add_to_lists(t, efficient_invariants)
+        add_to_lists(t, efficient_invariants, theorem_invariants, all_invariants)
