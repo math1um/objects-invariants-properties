@@ -1732,6 +1732,14 @@ willis_page40_fig512.name(new = "willis_page40_fig512")
 add_to_lists(willis_page40_fig512, graph_objects, all_graphs)
 
 """
+From Willis's thesis, page 40, Figure 5.13
+A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
+"""
+willis_page40_fig513 = Graph("UhCGKE??Q?_D?K??__g?@G?C??OC???ACG?DC??_")
+willis_page40_fig513.name(new = "willis_page40_fig513")
+add_to_lists(willis_page40_fig513, graph_objects, all_graphs)
+
+"""
 From Willis's thesis, page 41, Figure 5.14
 A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
 
