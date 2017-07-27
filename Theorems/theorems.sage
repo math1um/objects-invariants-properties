@@ -131,3 +131,7 @@ add_to_lists(alpha_max_even_minus_even_horizontal_bound, alpha_lower_bounds, all
 
 alpha_critical_independence_number_bound = critical_independence_number
 add_to_lists(alpha_critical_independence_number_bound, alpha_lower_bounds, all_theorems)
+
+def alpha_max_degree_minus_number_of_triangles_bound(g):
+    return max_degree(g) - number_of_triangles(g)
+add_to_lists(alpha_max_degree_minus_number_of_triangles_bound, alpha_lower_bounds, all_theorems)
