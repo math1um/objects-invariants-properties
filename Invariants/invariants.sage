@@ -335,16 +335,6 @@ def welsh_powell(g):
     return mx + 1
 add_to_lists(welsh_powell, efficient_invariants, all_invariants)
 
-def alpha_welsh_powell_bound_invariant(g):
-    """
-    This returns a lower bound for the independence number of a graph.
-
-    sage: welsh_powell_alpha_bound(k5)
-    1
-    """
-    return ceil(g.order()/welsh_powell(g))
-add_to_lists(alpha_welsh_powell_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
 #outputs upper bound from Brooks Theorem: returns Delta + 1 for complete and odd cycles
 def brooks(g):
     Delta = max(g.degree())
@@ -403,16 +393,6 @@ def szekeres_wilf(g):
         if gc.size() == 0:
             return i + 1
 add_to_lists(szekeres_wilf, efficient_invariants, all_invariants)
-
-def alpha_szekeres_wilf_bound_invariant(g):
-    """
-    Returns an alpha-lower bound following the chromatic number bound of Skekeres and Wilf
-
-    sage: szekeres_wilf_alpha_bound(k5)
-    1
-    """
-    return ceil(g.order()/szekeres_wilf(g))
-add_to_lists(alpha_szekeres_wilf_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 def average_vertex_temperature(g):
      D = g.degree()
@@ -731,24 +711,6 @@ def geometric_length_of_degree_sequence(g):
     return sqrt(sum(d^2 for d in g.degree()))
 add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_invariants)
 
-# Cut Vertices Theorem as invariant
-# Cited in the theorem section
-def alpha_cut_vertices_bound_invariant(G):
-    return (g.order() - (card_cut_vertices(g)/2) - (1/2))
-add_to_lists(alpha_cut_vertices_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
-# Radius Pendants Theorem as invariant
-# Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def alpha_radius_pendants_bound_invariant(g):
-    return (g.radius() + (card_pendants(g)/2) - 1)
-add_to_lists(alpha_radius_pendants_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
-# Median Degree Theorem as invariant
-# Three Bounds on the Independence Number of a Graph - C. E. Larson, R. Pepper
-def alpha_median_degree_bound_invariant(g):
-    return (g.order() - (median_degree(g)/2) - 1/2)
-add_to_lists(alpha_median_degree_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
 # Two Stability Theta Bound
 # For graphs with alpha <= 2,
 # lovasz_theta <= 2^(2/3)*n^(1/3)
@@ -774,13 +736,6 @@ add_to_lists(theta_theta_complement, efficient_invariants, all_invariants)
 def depth(g):
     return g.order()-residue(g)
 add_to_lists(depth, efficient_invariants, all_invariants)
-
-# Godsil-Newman Upper Bound theorem as invariant
-# Godsil, Chris D., and Mike W. Newman. "Eigenvalue bounds for independent sets." Journal of Combinatorial Theory, Series B 98.4 (2008): 721-734.
-def alpha_godsil_newman_bound_invariant(g):
-    L = max(g.laplacian_matrix().change_ring(RDF).eigenvalues())
-    return g.order()*(L-min_degree(g))/L
-add_to_lists(alpha_godsil_newman_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
 
 # Lovasz Theta of the complement of the given graph
 def lovasz_theta_complement(g):
@@ -850,18 +805,6 @@ def min_odd(g):
     return min(odds_list)
 add_to_lists(min_odd, efficient_invariants, all_invariants)
 
-# AGX Upper Bound Theorem as invariant
-#Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
-def alpha_AGX_upper_bound_invariant(g):
-    return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
-add_to_lists(alpha_AGX_upper_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
-# AGX Lower Bound Theorem as invariant
-# Aouchiche, Mustapha, Gunnar Brinkmann, and Pierre Hansen. "Variable neighborhood search for extremal graphs. 21. Conjectures and results about the independence number." Discrete Applied Mathematics 156.13 (2008): 2530-2542.
-def alpha_AGX_lower_bound_invariant(g):
-    return ceil(2 * sqrt(g.order()))
-add_to_lists(alpha_AGX_lower_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
 #returns sum of distances between *distinct* vertices, return infinity is graph is not connected
 def transmission(g):
     if not g.is_connected():
@@ -915,18 +858,6 @@ def bavelas_index(g):
     return sum_final
 add_to_lists(bavelas_index, efficient_invariants, all_invariants)
 
-def alpha_staton_girth_bound_invariant(g):
-    """
-    Hopkins, Glenn, and William Staton. "Girth and independence ratio." Can. Math. Bull. 25.2 (1982): 179-186.
-    """
-    if g.girth() < 6:
-        return 1
-    else:
-        d = max_degree(g)
-        return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
-add_to_lists(alpha_staton_girth_bound_invariant, efficient_invariants, theorem_invariants, all_invariants)
-
-
 #a solution of the invariant interpolation problem for upper bound of chromatic number for c8chords
 #all upper bounds in theory have value at least 3 for c8chords
 #returns 2 for bipartite graphs, order for non-bipartite
@@ -936,10 +867,6 @@ def bipartite_chromatic(g):
     else:
         return g.order()
 add_to_lists(bipartite_chromatic, efficient_invariants, all_invariants)
-
-def alpha_order_brooks_bound_invariant(g):
-    return ceil(order(x)/brooks(x))
-add_to_lists(alpha_order_brooks_bound_invariant, efficient_invariants, all_invariants)
 
 def beauchamp_index(g):
     """
@@ -968,10 +895,6 @@ def beauchamp_index(g):
 
     print sum_final
 add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
-
-def alpha_max_degree_minus_number_of_triangles_bound_invariant(g):
-    return max_degree(g) - number_of_triangles(g)
-add_to_lists(alpha_max_degree_minus_number_of_triangles_bound_invariant, efficient_invariants, all_invariants)
 
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
