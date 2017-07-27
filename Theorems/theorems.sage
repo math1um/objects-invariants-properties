@@ -117,6 +117,14 @@ def alpha_staton_girth_bound(g):
         return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
 add_to_lists(alpha_staton_girth_bound, alpha_lower_bounds, all_theorems)
 
+def alpha_staton_triangle_free_bound(g):
+    """
+    Staton, William. "Some Ramsey-type numbers and the independence ratio." Transactions of the American Mathematical Society 256 (1979): 353-370.
+    """
+    if g.is_triangle_free() and (max_degree(g) > 2):
+        return (5 * g.order() ) / ((5 * max_degree(g)) - 1)
+    return 1
+
 alpha_average_distance_bound = Graph.average_distance
 add_to_lists(alpha_average_distance_bound, alpha_lower_bounds, all_theorems)
 
@@ -135,11 +143,6 @@ add_to_lists(alpha_critical_independence_number_bound, alpha_lower_bounds, all_t
 def alpha_max_degree_minus_number_of_triangles_bound(g):
     return max_degree(g) - number_of_triangles(g)
 add_to_lists(alpha_max_degree_minus_number_of_triangles_bound, alpha_lower_bounds, all_theorems)
-
-
-
-
-
 
 # Adds all theorems to the efficient_invariants list
 # Does not insert duplicates if the method is already in efficient_invariants
