@@ -2470,8 +2470,16 @@ sewell_1 = Graph("H@GOkXI")
 sewell_1.name(new = "sewell_1")
 add_to_lists(sewell_1, graph_objects, all_graphs)
 
+"""
+Graphs which are two cliques somehow connected to each other
+"""
+two_clique_1 = Graph("OwCW?CB???_Bw?F?_[W?~")
+two_clique_1.name(new = "two-clique 1"
+add_to_lists(two_clique_1, graph_objects, all_graphs)
 
-
+two_clique_2 = Graph("FwC^w")
+two_clique_2.name(new = "two-clique 2"
+add_to_lists(two_clique_2, graph_objects, all_graphs)
 
 
 
