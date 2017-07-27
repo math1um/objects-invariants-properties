@@ -124,6 +124,7 @@ def alpha_staton_triangle_free_bound(g):
     if g.is_triangle_free() and (max_degree(g) > 2):
         return (5 * g.order() ) / ((5 * max_degree(g)) - 1)
     return 1
+add_to_lists(alpha_staton_triangle_free_bound, alpha_lower_bounds, all_theorems)
 
 alpha_average_distance_bound = Graph.average_distance
 add_to_lists(alpha_average_distance_bound, alpha_lower_bounds, all_theorems)
