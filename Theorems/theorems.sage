@@ -157,7 +157,7 @@ def alpha_HHRS_bound(g):
         return 1
     if has_k4(g):
         return 1
-    return (4*g.order() - g.size() - (1 if is_bad(g) else 0) - tr(g)) / 7
+    return (4*g.order() - g.size() - (1 if is_bad(g) else 0) - subcubic_tr(g)) / 7
 add_to_lists(alpha_HHRS_bound, alpha_lower_bounds, all_theorems)
 
 # Adds all theorems to the efficient_invariants list
