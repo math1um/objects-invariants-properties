@@ -285,6 +285,12 @@ def has_fork(g):
 def is_fork_free(g):
     return not has_fork(g)
 
+def has_k4(g):
+    return g.subgraph_search(alpha_critical_easy[2], induced=True) is not None
+
+def is_k4_free(g):
+    return not has_k4(g)
+
 def is_biclique(g):
     """
     a graph is a biclique if the vertices can be partitioned into 2 sets that induce cliques
