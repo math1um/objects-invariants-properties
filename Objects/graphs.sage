@@ -2506,6 +2506,11 @@ jakovac_5 = Graph("Q`?G?C??G??@?B?K?W?W@o?go@O")
 jakovac_5.name(new = "jakovac fig 5")
 add_to_lists(jakovac_5, graph_objects, all_graphs)
 
+# From A survey of selected recent results on total domination in graphs By Michael A. Henning
+henning_5 = Graph("H?qipno")
+henning_5.name(new = "henning fig 5")
+add_to_lists(henning_5, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
