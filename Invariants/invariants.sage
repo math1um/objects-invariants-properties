@@ -961,6 +961,52 @@ def mean_edge_clustering_centrality(g):
     return sum(centralities) / len(centralities)
 add_to_lists(mean_edge_clustering_centrality, efficient_invariants, all_invariants)
 
+def local_density(g, vertex = None):
+    """
+    Returns local density for all vertices as a list, or a single local density for the given vertex
+    INPUT: g - a graph
+           vertex - (default: None) A vertex in g. If given, it will compute local density for just that vertex, otherwise for all of them
+
+    Pavlopoulos, Georgios A., et al. "Using graph theory to analyze biological networks." BioData mining 4.1 (2011): 10.
+    """
+    if vertex == None:
+        densities = []
+        for v in g.vertices():
+            densities.append(g.subgraph(g[v] + [v]).density())
+        return densities
+    return g.subgraph(g[vertex] + [vertex]).density()
+
+def min_local_density(g):
+    """
+        sage: min_local_density(p3)
+        2/3
+        sage: min_local_density(paw)
+        2/3
+    """
+    return min(local_density(g))
+add_to_lists(min_local_density, efficient_invariants, all_invariants)
+
+def max_local_density(g):
+    """
+        sage: max_local_density(p3)
+        1
+        sage: max_local_density(paw)
+        1
+    """
+    return max(local_density(g))
+add_to_lists(max_local_density, efficient_invariants, all_invariants)
+
+def mean_local_density(g):
+    """
+        sage: mean_local_density(p3)
+        8/9
+        sage: mean_local_density(paw)
+        11/12
+    """
+    densities = local_density(g)
+    return sum(densities) / len(densities)
+add_to_lists(mean_local_density, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
