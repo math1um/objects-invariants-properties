@@ -276,6 +276,10 @@ c5c5.add_edge(7,8)
 c5c5.name(new="c5c5")
 add_to_lists(c5c5, graph_objects, all_graphs)
 
+k4=graphs.CompleteGraph(4)
+k4.name(new="k4")
+add_to_lists(k4, graph_objects, all_graphs)
+
 K4a=graphs.CompleteGraph(4)
 K4b=graphs.CompleteGraph(4)
 K4a.delete_edge(0,1)
