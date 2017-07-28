@@ -2481,10 +2481,13 @@ two_clique_2 = Graph("FwC^w")
 two_clique_2.name(new = "two-clique 2")
 add_to_lists(two_clique_2, graph_objects, all_graphs)
 
+caro_roditty_4 = Caro_Roditty(4)
+caro_roditty_4.name(new = "Caro-Roditty 4 Graph")
+add_to_lists(caro_roditty_4, graph_objects, all_graphs)
 
-
-
-
+caro_roditty_5 = Caro_Roditty(5)
+caro_roditty_5.name(new = "Caro-Roditty 5 Graph")
+add_to_lists(caro_roditty_5, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
