@@ -362,3 +362,19 @@ def Antihole(n):
     if n < 5:
         raise RuntimeError("antihole is defined for n > 5")
     return graphs.CycleGraph(n).complement()
+
+def Caro_Roditty(n):
+    """
+    p.171
+    Caro, Y., and Y. Roditty. "On the vertex-independence number and star decomposition of graphs." Ars Combinatoria 20 (1985): 167-180.
+    """
+    g = graphs.CycleGraph(4)
+    iters = 1
+    while iters < n:
+        len_v = len(g.vertices())
+        g.add_cycle([len_v..len_v+3])
+        last_cycle = g.vertices()[-4:]
+        for v in last_cycle:
+            g.add_edge(v, v-4)
+        iters += 1
+    return g
