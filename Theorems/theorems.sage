@@ -160,6 +160,18 @@ def alpha_HHRS_bound(g):
     return (4*g.order() - g.size() - (1 if is_bad(g) else 0) - subcubic_tr(g)) / 7
 add_to_lists(alpha_HHRS_bound, alpha_lower_bounds, all_theorems)
 
+def alpha_seklow_bound(g):
+    """
+    Returns the Seklow bound from:
+    Selkow, Stanley M. "A probabilistic lower bound on the independence number of graphs." Discrete Mathematics 132.1-3 (1994): 363-365.
+    """
+    v_sum = 0
+    for v in g.vertices():
+        d = g.degree(v)
+        v_sum += ((1/(d + 1)) * (1 + max(0, (d/(d + 1) - sum([(1/(g.degree(w) + 1)) for w in g.neighbors(v)])))))
+    return v_sum
+add_to_lists(alpha_seklow_bound, alpha_lower_bounds, all_theorems)
+
 # Adds all theorems to the efficient_invariants list
 # Does not insert duplicates if the method is already in efficient_invariants
 for t in all_theorems:
