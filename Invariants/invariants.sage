@@ -914,10 +914,10 @@ def edge_clustering_centrality(g, edge = None):
     From:
     An Application of Edge Clustering Centrality to Brain Connectivity by Joy Lind, Frank Garcea, Bradford Mahon, Roger Vargas, Darren A. Narayan
     """
-    sum = 0
     if edge == None:
         edge_clusering_centralities = []
         for e in g.edges(labels = False):
+            sum = 0
             for v in g.vertices():
                 if g.subgraph(g.neighbors(v) + [v]).has_edge(e):
                     sum += 1
@@ -925,6 +925,7 @@ def edge_clustering_centrality(g, edge = None):
         return edge_clusering_centralities
     else:
         for v in g.vertices():
+            sum = 0
             if g.subgraph(g.neighbors(v) + [v]).has_edge(edge):
                 sum += 1
         return sum
