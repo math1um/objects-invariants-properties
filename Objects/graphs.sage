@@ -209,6 +209,8 @@ c13_2.add_cycle([0..12])
 c13_2.name(new = "c13_2")
 add_to_lists(c13_2, graph_objects, all_graphs)
 
+k4 = alpha_critical_easy[2]
+
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
 add_to_lists(k10, graph_objects, all_graphs)
@@ -275,10 +277,6 @@ c5c5.add_edge(6,7)
 c5c5.add_edge(7,8)
 c5c5.name(new="c5c5")
 add_to_lists(c5c5, graph_objects, all_graphs)
-
-k4=graphs.CompleteGraph(4)
-k4.name(new="k4")
-add_to_lists(k4, graph_objects, all_graphs)
 
 K4a=graphs.CompleteGraph(4)
 K4b=graphs.CompleteGraph(4)
