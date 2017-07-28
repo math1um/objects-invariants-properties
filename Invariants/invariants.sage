@@ -905,6 +905,31 @@ def subcubic_tr(g):
     return len(form_triangles_graph(g).connected_components())
 add_to_lists(subcubic_tr, efficient_invariants, all_invariants)
 
+def edge_clustering_centrality(g, edge = None):
+    """
+    Returns edge clustering centrality for all edges in a list, or a single centrality for the given edge
+    Utility to be used with min, avg, max invariants
+    INPUT: g - a graph
+           edge - (default: None) An edge in g. If given, will compute centrality for given edge, otherwise all edges. See Graph.has_Edge for acceptable input.
+    From:
+    An Application of Edge Clustering Centrality to Brain Connectivity by Joy Lind, Frank Garcea, Bradford Mahon, Roger Vargas, Darren A. Narayan
+    """
+    sum = 0
+    if edge == None:
+        edge_clusering_centralities = []
+        for e in g.edges(labels = False):
+            for v in g.vertices():
+                if g.subgraph(g.neighbors(v) + [v]).has_edge(e):
+                    sum += 1
+            edge_clusering_centralities.append(sum)
+        return edge_clusering_centralities
+    else:
+        for v in g.vertices():
+            if g.subgraph(g.neighbors(v) + [v]).has_edge(edge):
+                sum += 1
+        return sum
+
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
