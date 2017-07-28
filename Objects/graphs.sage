@@ -38,8 +38,7 @@ graphs.FolkmanGraph(), graphs.FosterGraph(), graphs.FranklinGraph(), graphs.Fruc
 graphs.GoldnerHararyGraph(), graphs.GossetGraph(), graphs.GrayGraph(), graphs.GrotzschGraph(),
 graphs.HallJankoGraph(), graphs.HarborthGraph(), graphs.HarriesGraph(), graphs.HarriesWongGraph(),
 graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.HigmanSimsGraph(), graphs.HoffmanGraph(),
-graphs.HoffmanSingletonGraph(), graphs.HoltGraph(), graphs.HortonGraph(),
-graphs.IoninKharaghani765Graph(), graphs.JankoKharaghaniTonchevGraph(), graphs.KittellGraph(),
+graphs.HoffmanSingletonGraph(), graphs.HoltGraph(), graphs.HortonGraph(), graphs.JankoKharaghaniTonchevGraph(), graphs.KittellGraph(),
 graphs.KrackhardtKiteGraph(), graphs.Klein3RegularGraph(), graphs.Klein7RegularGraph(),
 graphs.LjubljanaGraph(), graphs.M22Graph(),
 graphs.MarkstroemGraph(), graphs.McGeeGraph(),
@@ -53,6 +52,10 @@ graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.We
 graphs.WienerArayaGraph(), graphs.JankoKharaghaniGraph(1800),
 graphs.JankoKharaghaniGraph(936),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
+
+#hard built-in Sage graphs
+add_to_lists(graphs.IoninKharaghani765Graph(), problem_graphs, all_graphs)
+
 
 #These built in graphs are nameless so here they are given names
 
