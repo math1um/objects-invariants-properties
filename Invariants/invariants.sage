@@ -896,6 +896,15 @@ def beauchamp_index(g):
     print sum_final
 add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
 
+def subcubic_tr(g):
+    """
+    Returns the maximum number of vertex disjoint triangles of the graph
+
+    Harant, Jochen, et al. "The independence number in graphs of maximum degree three." Discrete Mathematics 308.23 (2008): 5829-5833.
+    """
+    return len(form_triangles_graph(g).connected_components())
+add_to_lists(subcubic_tr, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
@@ -1065,6 +1074,17 @@ def cheeger_constant(g):
                 best = temp
     return best
 add_to_lists(cheeger_constant, intractable_invariants, all_invariants)
+
+def tr(g):
+    """
+    Returns the maximum number of vertex disjoint triangles of the graph
+
+    Harant, Jochen, et al. "The independence number in graphs of maximum degree three." Discrete Mathematics 308.23 (2008): 5829-5833.
+    """
+    if is_subcubic(g):
+        return subcubic_tr(g)
+    return independence_number(form_triangles_graph(g))
+add_to_lists(tr, intractable_invariants, all_invariants)
 
 add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
 add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
