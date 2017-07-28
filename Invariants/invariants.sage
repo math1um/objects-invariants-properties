@@ -931,14 +931,32 @@ def edge_clustering_centrality(g, edge = None):
         return sum
 
 def max_edge_clustering_centrality(g):
+    """
+        sage: max_edge_clustering_centrality(p3)
+        2
+        sage: max_edge_clustering_centrality(paw)
+        3
+    """
     return max(edge_clustering_centrality(g))
 add_to_lists(max_edge_clustering_centrality, efficient_invariants, all_invariants)
 
 def min_edge_clustering_centrality(g):
+    """
+        sage: min_edge_clustering_centrality(p3)
+        2
+        sage: min_edge_clustering_centrality(paw)
+        2
+    """
     return min(edge_clustering_centrality(g))
 add_to_lists(min_edge_clustering_centrality, efficient_invariants, all_invariants)
 
 def mean_edge_clustering_centrality(g):
+    """
+        sage: mean_edge_clustering_centrality(p3)
+        2
+        sage: mean_edge_clustering_centrality(paw)
+        11/4
+    """
     centralities = edge_clustering_centrality(g)
     return sum(centralities) / len(centralities)
 add_to_lists(mean_edge_clustering_centrality, efficient_invariants, all_invariants)
