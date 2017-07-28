@@ -145,6 +145,21 @@ def alpha_max_degree_minus_number_of_triangles_bound(g):
     return max_degree(g) - number_of_triangles(g)
 add_to_lists(alpha_max_degree_minus_number_of_triangles_bound, alpha_lower_bounds, all_theorems)
 
+def alpha_HHRS_bound(g):
+    """
+    Returns 1 if max_degree > 3 or if g has k4 as a subgraph
+    ONLY WORKS FOR CONNECTED GRAPHS becasue that is what we are focussing on, disconnected graphs just need to count the bad compenents
+
+    Harant, Jochen, et al. "The independence number in graphs of maximum degree three." Discrete Mathematics 308.23 (2008): 5829-5833.
+    """
+    assert(g.is_connected() == true)
+    if not is_subcubic(g):
+        return 1
+    if has_k4(g):
+        return 1
+    return (4*g.order() - g.size() - (1 if is_bad(g) else 0) - tr(g)) / 7
+add_to_lists(alpha_HHRS_bound, alpha_lower_bounds, all_theorems)
+
 # Adds all theorems to the efficient_invariants list
 # Does not insert duplicates if the method is already in efficient_invariants
 for t in all_theorems:
