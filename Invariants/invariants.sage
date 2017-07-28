@@ -930,6 +930,18 @@ def edge_clustering_centrality(g, edge = None):
                 sum += 1
         return sum
 
+def max_edge_clustering_centrality(g):
+    return max(edge_clustering_centrality(g))
+add_to_lists(max_edge_clustering_centrality, efficient_invariants, all_invariants)
+
+def min_edge_clustering_centrality(g):
+    return min(edge_clustering_centrality(g))
+add_to_lists(min_edge_clustering_centrality, efficient_invariants, all_invariants)
+
+def mean_edge_clustering_centrality(g):
+    centralities = edge_clustering_centrality(g)
+    return sum(centralities) / len(centralities)
+add_to_lists(mean_edge_clustering_centrality, efficient_invariants, all_invariants)
 
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
