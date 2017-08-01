@@ -2566,6 +2566,14 @@ levit_1 = Graph("G?rHx{")
 levit_1.name(new = "levit_1")
 add_to_lists(levit_1, graph_objects, all_graphs)
 
+"""
+From:
+On alpha+ - Stable K¨onig-Egervary Graphs
+Vadim E. Levit and Eugen Mandrescu
+"""
+levit_2 = Graph("GCOihs")
+levit_2.name(new = "levit_2")
+add_to_lists(levit_2, graph_objects, all_graphs)
 
 
 #graph_objects: all graphs with no duplicates
