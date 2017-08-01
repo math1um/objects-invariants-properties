@@ -1154,15 +1154,13 @@ def edge_bipartite_number(g):
 
     if g.is_bipartite():
         return g.size()
-
     max_edges = 0
-    for sub_g in Set(g.vertices()).subsets():
+    for sub_g in reversed(Subsets(g.vertices()).list()):
         h = g.subgraph(list(sub_g))
         if h.is_bipartite():
-            if h.size() > max_edges:
-                max_edges = h.size()
-
-    return max_edges
+            if h.size() < max_edges:
+                return max_edges
+            max_edges = h.size()
 add_to_lists(edge_bipartite_number, intractable_invariants, all_invariants)
 
 def cheeger_constant(g):
