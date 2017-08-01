@@ -321,6 +321,12 @@ c10e.add_edge(0,5)
 c10e.name(new = "c10e")
 add_to_lists(c10e, graph_objects, all_graphs)
 
+# C10e with another edge through center
+c10ee = graphs.CycleGraph(10)
+c10ee.add_edges([(0,5), (9, 4)])
+c10ee.name(new = "c10ee")
+add_to_lists(c10ee, graph_objects, all_graphs)
+
 prismsub = graphs.CycleGraph(6)
 prismsub.add_edge(0,2)
 prismsub.add_edge(3,5)
