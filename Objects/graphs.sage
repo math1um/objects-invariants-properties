@@ -2548,6 +2548,15 @@ for v in henning_15.vertices():
 henning_15.name(new = "henning fig 15")
 add_to_lists(henning_15, graph_objects, all_graphs)
 
+"""
+From:
+Weighted and Unweighted Maximum Clique Algorithms with Upper Bounds from Fractional Coloring
+E. Balas and Jue Xue
+"""
+balas_1 = Graph("HWFZvq}")
+balas_1.name(new = "balas_1")
+add_to_lists(balas_1, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
