@@ -1084,6 +1084,10 @@ def sum_edges_degree_difference(g):
     return sum([abs(g.degree(e[0]) - g.degree(e[1])) for e in g.edges()])
 add_to_lists(sum_edges_degree_difference, efficient_invariants, all_invariants)
 
+def one_over_size_sedd(g):
+    return 1/g.size() * sum_edges_degree_difference(g)
+add_to_lists(one_over_size_sedd, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
