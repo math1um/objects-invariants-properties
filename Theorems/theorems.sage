@@ -172,6 +172,15 @@ def alpha_seklow_bound(g):
     return v_sum
 add_to_lists(alpha_seklow_bound, alpha_lower_bounds, all_theorems)
 
+def alpha_harant_bound(g):
+    """
+    From:
+    A lower bound on the independence number of a graph
+    Jochen Harant
+    """
+    return (caro_wei(g)**2) / (caro_wei(g) - sum([(g.degree(e[0]) - g.degree(e[1]))**2 * (1/g.degree(e[0]))**2 * (1/g.degree(e[1]))**2 for e in g.edges()]))
+add_to_lists(alpha_harant_bound, alpha_lower_bounds, all_theorems)
+
 # Adds all theorems to the efficient_invariants list
 # Does not insert duplicates if the method is already in efficient_invariants
 for t in all_theorems:
