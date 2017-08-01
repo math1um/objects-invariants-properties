@@ -1088,6 +1088,10 @@ def one_over_size_sedd(g):
     return 1/g.size() * sum_edges_degree_difference(g)
 add_to_lists(one_over_size_sedd, efficient_invariants, all_invariants)
 
+def largest_eigenvalue_minus_avg_degree(g):
+    return max_eigenvalue(g) - g.average_degree()
+add_to_lists(largest_eigenvalue_minus_avg_degree, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
