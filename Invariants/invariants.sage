@@ -1007,6 +1007,66 @@ def mean_local_density(g):
     return sum(densities) / len(densities)
 add_to_lists(mean_local_density, efficient_invariants, all_invariants)
 
+def card_simple_blocks(g):
+    """
+    returns the number of blocks with order 2
+
+        sage: card_simple_blocks(k10)
+        0
+        sage: card_simple_blocks(paw)
+        1
+        sage: card_simple_blocks(kite_with_tail)
+        1
+    """
+    blocks = g.blocks_and_cut_vertices()[0]
+    count = 0
+    for block in blocks:
+        if len(block) == 2:
+            count += 1
+    return count
+add_to_lists(card_simple_blocks, efficient_invariants, all_invariants)
+
+# Block of more than 2 vertices
+def card_complex_blocks(g):
+    """
+    returns the number of blocks with order 2
+
+        sage: card_complex_blocks(k10)
+        1
+        sage: card_complex_blocks(paw)
+        1
+        sage: card_complex_blocks(kite_with_tail)
+        1
+    """
+    blocks = g.blocks_and_cut_vertices()[0]
+    count = 0
+    for block in blocks:
+        if len(block) > 2:
+            count += 1
+    return count
+add_to_lists(card_complex_blocks, efficient_invariants, all_invariants)
+
+# Block is a clique and more than 2 vertices
+def card_complex_cliques(g):
+    """
+    returns the number of blocks with order 2
+
+        sage: card_complex_clique(k10)
+        1
+        sage: card_complex_clique(paw)
+        1
+        sage: card_complex_clique(kite_with_tail)
+        0
+    """
+    blocks = g.blocks_and_cut_vertices()[0]
+    count = 0
+    for block in blocks:
+        h = g.subgraph(block)
+        if h.is_clique() and h.order() > 2:
+            count += 1
+    return count
+add_to_lists(card_complex_cliques, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
