@@ -2575,6 +2575,14 @@ levit_2 = Graph("GCOihs")
 levit_2.name(new = "levit_2")
 add_to_lists(levit_2, graph_objects, all_graphs)
 
+"""
+From:
+On alpha+ - Stable K¨onig-Egervary Graphs
+Vadim E. Levit and Eugen Mandrescu
+"""
+levit_3 = Graph("G@G]@{")
+levit_3.name(new = "levit_3")
+add_to_lists(levit_3, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
