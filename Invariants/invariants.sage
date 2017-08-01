@@ -1067,6 +1067,19 @@ def card_complex_cliques(g):
     return count
 add_to_lists(card_complex_cliques, efficient_invariants, all_invariants)
 
+def max_minus_min_degrees(g):
+    return max_degree(g) - min_degree(g)
+add_to_lists(max_minus_min_degrees, efficient_invariants, all_invariants)
+
+def randic_irregularity(g):
+    return order(g)/2 - randic(g)
+add_to_lists(randic_irregularity, efficient_invariants, all_invariants)
+
+def degree_variance(g):
+    avg_degree = g.average_degree()
+    return 1/order(g) * sum([d**2 - avg_degree for d in [g.degree(v) for v in g.vertices()]])
+add_to_lists(degree_variance, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
