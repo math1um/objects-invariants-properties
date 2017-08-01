@@ -49,8 +49,7 @@ graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
 graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
 graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
-graphs.WienerArayaGraph(), graphs.JankoKharaghaniGraph(1800),
-graphs.JankoKharaghaniGraph(936),
+graphs.WienerArayaGraph(),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
 #hard built-in Sage graphs
@@ -74,7 +73,13 @@ temp4.name(new = "Mathon Strongly Regular Graph 1")
 temp5 = graphs.MathonStronglyRegularGraph(2)
 temp5.name(new = "Mathon Strongly Regular Graph 2")
 
-for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5]:
+temp6 = graphs.JankoKharaghaniGraph(936)
+temp6.name(new = "Janko-Kharaghani 936")
+
+temp7 = graphs.JankoKharaghaniGraph(1800)
+temp7.name(new = "Janko-Kharagani 1800")
+
+for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5, temp6, temp7]:
     add_to_lists(graph, graph_objects, all_graphs)
 
 add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
