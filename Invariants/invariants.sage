@@ -1116,11 +1116,11 @@ def bipartite_number(g):
     """
     Defined as the largest number of vertices that induces a bipartite subgraph
 
-    sage: bipartite_number(pete)
+    sage: bipartite_number(graphs.PetersenGraph())
     7
     sage: bipartite_number(c4)
     4
-    sage: bipartite_number(k3)
+    sage: bipartite_number(graphs.CompleteGraph(3))
     2
     """
     if g.is_bipartite():
@@ -1138,6 +1138,22 @@ def bipartite_number(g):
 
     return verts
 add_to_lists(bipartite_number, intractable_invariants, all_invariants)
+
+# Needs Enhancement
+def edge_bipartite_number(g):
+    """
+    Defined as the largest number of edges in an induced bipartite subgraph
+    """
+
+    max_edges = 0
+    for sub_g in Set(g.vertices()).subsets():
+        h = g.subgraph(list(sub_g))
+        if h.is_bipartite():
+            if h.size() > max_edges:
+                max_edges = h.size()
+
+    return max_edges
+add_to_lists(edge_bipartite_number, intractable_invariants, all_invariants)
 
 def cheeger_constant(g):
     """
