@@ -1143,6 +1143,13 @@ add_to_lists(bipartite_number, intractable_invariants, all_invariants)
 def edge_bipartite_number(g):
     """
     Defined as the largest number of edges in an induced bipartite subgraph
+    
+        sage: edge_bipartite_number(graphs.CompleteGraph(5))
+        1
+        sage: edge_bipartite_number(graphs.CompleteBipartiteGraph(5, 5))
+        25
+        sage: edge_bipartite_number(graphs.ButterflyGraph())
+        2
     """
 
     max_edges = 0
