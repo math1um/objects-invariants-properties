@@ -2523,6 +2523,10 @@ henning_5 = Graph("H?qipno")
 henning_5.name(new = "henning fig 5")
 add_to_lists(henning_5, graph_objects, all_graphs)
 
+henning_8 = Graph("[SP???_C?O?_?_?O?G?C????????CO?AG??c??E??W??E?????@???A_??QG??BD")
+henning_8.name(new = henning fig 8")
+add_to_lists(henning_8, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
