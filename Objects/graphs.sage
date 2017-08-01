@@ -2539,7 +2539,7 @@ henning_15 = graphs.CycleGraph(4)
 for v in henning_15.vertices():
     count = len(henning_15.vertices())
     henning_15.add_cycle([count..count+9])
-    g.add_edge((henning_15, count))
+    henning_15.add_edge((henning_15, count))
 henning_15.name(new = "henning fig 15")
 add_to_lists(henning_15, graph_objects, all_graphs)
 
