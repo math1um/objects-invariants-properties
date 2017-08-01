@@ -315,6 +315,12 @@ c8chords.add_edge(2,5)
 c8chords.name(new="c8chords")
 add_to_lists(c8chords, graph_objects, all_graphs)
 
+# C10 with an edge through the center
+c10e = graphs.CycleGraph(10)
+c10e.add_edge(0,5)
+c10e.name(new = "c10e")
+add_to_lists(c10e, graph_objects, all_graphs)
+
 prismsub = graphs.CycleGraph(6)
 prismsub.add_edge(0,2)
 prismsub.add_edge(3,5)
