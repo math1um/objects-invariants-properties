@@ -1152,6 +1152,9 @@ def edge_bipartite_number(g):
         2
     """
 
+    if g.is_bipartite():
+        return g.size()
+
     max_edges = 0
     for sub_g in Set(g.vertices()).subsets():
         h = g.subgraph(list(sub_g))
