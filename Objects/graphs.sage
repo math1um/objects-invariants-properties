@@ -2584,6 +2584,17 @@ levit_3 = Graph("G@G]@{")
 levit_3.name(new = "levit_3")
 add_to_lists(levit_3, graph_objects, all_graphs)
 
+"""
+From:
+On alpha-Critical Edges in K¨onig-Egerv´ary Graphs
+Vadim E. Levit and Eugen Mandrescu
+"""
+levit_4 = Graph("KGD?_O_@GE~~")
+levit_4.name(new = "levit_4")
+add_to_lists(levit_4, graph_objects, all_graphs)
+
+
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
