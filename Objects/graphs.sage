@@ -2557,6 +2557,17 @@ balas_1 = Graph("HWFZvq}")
 balas_1.name(new = "balas_1")
 add_to_lists(balas_1, graph_objects, all_graphs)
 
+"""
+From:
+On alpha+ - Stable K¨onig-Egervary Graphs
+Vadim E. Levit and Eugen Mandrescu
+"""
+levit_1 = Graph("G?rHx{")
+levit_1.name(new = "levit_1")
+add_to_lists(levit_1, graph_objects, all_graphs)
+
+
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
