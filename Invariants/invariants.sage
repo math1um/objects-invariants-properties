@@ -1092,6 +1092,21 @@ def largest_eigenvalue_minus_avg_degree(g):
     return max_eigenvalue(g) - g.average_degree()
 add_to_lists(largest_eigenvalue_minus_avg_degree, efficient_invariants, all_invariants)
 
+def min_betweenness_centrality(g):
+    centralities = g.centrality_betweenness(exact=True)
+    return centralities[min(centralities)]
+add_to_lists(min_betweenness_centrality, efficient_invariants, all_invariants)
+
+def max_betweenness_centrality(g):
+    centralities = g.centrality_betweenness(exact=True)
+    return centralities[max(centralities)]
+add_to_lists(max_betweenness_centrality, efficient_invariants, all_invariants)
+
+def mean_betweenness_centrality(g):
+    centralities = g.centrality_betweenness(exact=True)
+    return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
+add_to_lists(mean_betweenness_centrality, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
