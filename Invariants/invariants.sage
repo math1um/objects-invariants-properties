@@ -1122,6 +1122,21 @@ def mean_centrality_closeness(g):
     return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
 add_to_lists(mean_centrality_closeness, efficient_invariants, all_invariants)
 
+def min_centrality_degree(g):
+    centralities = g.centrality_degree()
+    return centralities[min(centralities)]
+add_to_lists(min_centrality_degree, efficient_invariants, all_invariants)
+
+def max_centrality_degree(g):
+    centralities = g.centrality_degree()
+    return centralities[max(centralities)]
+add_to_lists(max_centrality_degree, efficient_invariants, all_invariants)
+
+def mean_centrality_degree(g):
+    centralities = g.centrality_degree()
+    return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
+add_to_lists(mean_centrality_degree, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
