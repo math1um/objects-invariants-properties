@@ -1342,6 +1342,10 @@ def tr(g):
     return independence_number(form_triangles_graph(g))
 add_to_lists(tr, intractable_invariants, all_invariants)
 
+def total_domination_number(g):
+    return g.dominating_set(total=True, value_only=True)
+add_to_lists(total_domination_number, intractable_invariants, all_invariants)
+
 add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
 add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
