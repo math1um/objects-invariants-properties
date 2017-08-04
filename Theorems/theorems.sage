@@ -206,6 +206,17 @@ def alpha_harant_bound(g):
     return (caro_wei(g)**2) / (caro_wei(g) - sum([(g.degree(e[0]) - g.degree(e[1]))**2 * (1/g.degree(e[0]))**2 * (1/g.degree(e[1]))**2 for e in g.edges()]))
 add_to_lists(alpha_harant_bound, alpha_lower_bounds, all_theorems)
 
+def alpha_harant_schiermeyer_bound(g):
+    """
+    From:
+    On the independence number of a graph in terms of order and size
+    By J. Harant and I. Schiermeyerb
+    """
+    order = g.order()
+    t = 2*g.size() + order + 1
+    return (t - sqrt(t**2 - 4 * order**2)) / 2
+add_to_lists(alpha_harant_schiermeyer_bound, alpha_lower_bounds, all_theorems)
+
 # Adds all theorems to the efficient_invariants list
 # Does not insert duplicates if the method is already in efficient_invariants
 for t in all_theorems:
