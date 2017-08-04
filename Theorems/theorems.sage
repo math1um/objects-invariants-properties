@@ -83,6 +83,15 @@ def alpha_li_zhang_1_bound(g):
     return (((max_degree(g)) - min_degree(g) - min_eigenvalue(g)) / max_degree(g)) * g.order()
 add_to_lists(alpha_li_zhang_1_bound, alpha_upper_bounds, all_theorems)
 
+def alpha_li_zhang_2_bound(g):
+    """
+    From:
+    A note on eigenvalue bounds for independence numbers of non-regular graphs
+    By Yusheng Li, Zhen Zhang
+    """
+    return ((max_eigenvalue(g) - min_eigenvalue(g) + max_degree(g) - 2 * min_degree(g)) / (max_eigenvalue(g) - min_eigenvalue(g) + max_degree(g) - min_degree(g))) * g.order()
+add_to_lists(alpha_li_zhang_2_bound, alpha_upper_bounds, all_theorems)
+
 def alpha_haemers_bound(g):
     """
     From: W. Haemers, Interlacing eigenvalues and graphs, Linear Algebra Appl. 226/228 (1995) 593–616.
