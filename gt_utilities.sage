@@ -378,3 +378,28 @@ def Caro_Roditty(n):
             g.add_edge(v, v-4)
         iters += 1
     return g
+
+def find_all_triangles(g):
+    E = g.edges()
+    A = g.adjacency_matrix()
+    pos = {v:p for (p,v) in enumerate(g.vertices())}
+    triangles = []
+
+    for e in E:
+        v,w = (e[0], e[1]) if pos[e[0]] < pos[e[1]] else (e[1], e[0])
+        S = [u for u in g.vertices() if A[u][v] == 1 and A[u][w] == 1 and pos[u] > pos[w]]
+        for u in S:
+            s = Set([u,v,w])
+            triangles.append(s)
+    return triangles
+
+# the triangles of a graph g are the vertices of the returned auxilliary graph aux_g
+# with edges in aux_g between a pair of vertices in aux_g if the corresponding triangles share a vertex of g
+def form_triangles_graph(g):
+    vertices = find_all_triangles(g)
+    edges = []
+    for i in range(len(vertices)-1):
+        for j in range(i+1, len(vertices)):
+            if not((vertices[i].intersection(vertices[j])).is_empty()):
+                edges.append((vertices[i],vertices[j]))
+    return Graph([vertices,edges])
