@@ -2583,6 +2583,10 @@ henning_16_g6 = Graph("LSP??CAGOa`C@H")
 henning_16_g6.name(new = "henning fig 16 g6")
 add_to_lists(henning_16_g6, graph_objects, all_graphs)
 
+henning_16_g7 = Graph("NCGaC@?C?@_J?_A?__W")
+henning_16_g7.name(new = "henning fig 16 g7")
+add_to_lists(henning_16_g7, graph_objects, all_graphs)
+
 """
 From:
 Weighted and Unweighted Maximum Clique Algorithms with Upper Bounds from Fractional Coloring
