@@ -403,3 +403,30 @@ def form_triangles_graph(g):
             if not((vertices[i].intersection(vertices[j])).is_empty()):
                 edges.append((vertices[i],vertices[j]))
     return Graph([vertices,edges])
+
+def max_bipartite_set(g,s,c):
+    #print "s is {}".format(s)
+    #print "c is {}".format(c)
+    if len(c) == 0:
+        return s
+    
+    v = c[0]
+    #print "v is {}".format(v)
+    SCopy = copy(s)
+    SCopy.append(v)
+    Gprime = g.subgraph(SCopy)
+    
+    CCopy = copy(c)
+    CCopy.remove(v) #CCopy is C with v removed
+    if not(Gprime.is_bipartite()):
+        #print "{} is not bipartite".format(SCopy)
+        return bs(g, s, CCopy)
+    
+    
+    temp1 = bs(g, SCopy, CCopy)
+    temp2 = bs(g, s, CCopy)
+    
+    if len(temp1) > len(temp2):
+        return temp1
+    else:
+        return temp2
