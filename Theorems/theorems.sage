@@ -217,6 +217,23 @@ def alpha_harant_schiermeyer_bound(g):
     return (t - sqrt(t**2 - 4 * order**2)) / 2
 add_to_lists(alpha_harant_schiermeyer_bound, alpha_lower_bounds, all_theorems)
 
+def alpha_shearer_bound(g):
+    """
+    From:
+    Shearer, James B. "The independence number of dense graphs with large odd girth." Electron. J. Combin 2.2 (1995).
+    """
+    girth = g.girth()
+
+    if girth == +Infinity:
+        return 1.0
+    if is_even(girth):
+        return 1.0
+
+    k = ((girth - 1) / 2.0)
+    v_sum = sum([g.degree(v)**(1/(k - 1.0)) for v in g.vertices()])
+    return 2**(-((k - 1.0)/k)) * v_sum**((k - 1.0)/k)
+add_to_lists(alpha_shearer_bound, alpha_lower_bounds, all_theorems)
+
 # Adds all theorems to the efficient_invariants list
 # Does not insert duplicates if the method is already in efficient_invariants
 for t in all_theorems:
