@@ -1264,11 +1264,10 @@ def min_degree_of_max_ind_set(g):
     return low_degree
 add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
 
-# Needs enhancement
 def bipartite_number(g):
     """
     Defined as the largest number of vertices that induces a bipartite subgraph
-
+    
     sage: bipartite_number(graphs.PetersenGraph())
     7
     sage: bipartite_number(c4)
@@ -1278,18 +1277,7 @@ def bipartite_number(g):
     """
     if g.is_bipartite():
         return g.order()
-    
-    set_of_subsets = Set(g.vertices()).subsets()
-
-    verts = 0
-
-    for x in set_of_subsets:
-        h = g.subgraph(list(x))
-        if h.is_bipartite():
-            if h.order() > verts:
-                verts = h.order()
-
-    return verts
+    return len(max_bipartite_set(g, [], g.vertices()))
 add_to_lists(bipartite_number, intractable_invariants, all_invariants)
 
 # Needs Enhancement
