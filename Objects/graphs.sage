@@ -2559,6 +2559,10 @@ for v in henning_15.vertices():
 henning_15.name(new = "henning fig 15")
 add_to_lists(henning_15, graph_objects, all_graphs)
 
+henning_16_g1 = Graph("Fq?gw")
+henning_16_g1.name(new = "henning fig 16 g1")
+add_to_lists(henning_16_g1, graph_objects, all_graphs)
+
 """
 From:
 Weighted and Unweighted Maximum Clique Algorithms with Upper Bounds from Fractional Coloring
