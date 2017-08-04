@@ -289,6 +289,10 @@ def max_eigenvalue(g):
     return max(g.adjacency_matrix().change_ring(RDF).eigenvalues())
 add_to_lists(max_eigenvalue, efficient_invariants, all_invariants)
 
+def min_eigenvalue(g):
+    return min(g.adjacency_matrix().change_ring(RDF).eigenvalues())
+add_to_lists(min_eigenvalue, efficient_invariants, all_invariants)
+
 def resistance_distance_matrix(g):
     L = g.laplacian_matrix()
     n = g.order()
