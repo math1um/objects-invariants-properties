@@ -1292,16 +1292,7 @@ def edge_bipartite_number(g):
         sage: edge_bipartite_number(graphs.ButterflyGraph())
         2
     """
-
-    if g.is_bipartite():
-        return g.size()
-    max_edges = 0
-    for sub_g in reversed(Subsets(g.vertices()).list()):
-        h = g.subgraph(list(sub_g))
-        if h.is_bipartite():
-            if h.size() < max_edges:
-                return max_edges
-            max_edges = h.size()
+    return g.subgraph(max_bipartite_set(g, [], g.vertices())).size()
 add_to_lists(edge_bipartite_number, intractable_invariants, all_invariants)
 
 def cheeger_constant(g):
