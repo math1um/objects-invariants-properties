@@ -473,6 +473,15 @@ def laplacian_energy(g):
      return 1 + sum(Ls)
 add_to_lists(laplacian_energy, efficient_invariants, all_invariants)
 
+def laplacian_energy_like(g):
+    """
+    Returns the sum of the square roots of the laplacian eigenvalues
+
+    Liu, Jianping, and Bolian Liu. "A Laplacian-energy-like invariant of a graph." MATCH-COMMUNICATIONS IN MATHEMATICAL AND IN COMPUTER CHEMISTRY 59.2 (2008): 355-372.
+    """
+    return sum([sqrt(x) for x in g.spectrum(laplacian = True)])
+add_to_lists(laplacian_energy_like, efficient_invariants, all_invariants)
+
 #sum of the positive eigenvalues of a graph
 def gutman_energy(g):
      L = g.adjacency_matrix().change_ring(RDF).eigenvalues()
