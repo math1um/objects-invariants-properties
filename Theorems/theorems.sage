@@ -74,6 +74,15 @@ def alpha_AGX_upper_bound(g):
     return (g.order() + max_degree(g) - ceil(2 * sqrt(g.order() - 1)))
 add_to_lists(alpha_AGX_upper_bound, alpha_upper_bounds, all_theorems)
 
+def alpha_li_zhang_1_bound(g):
+    """
+    From:
+    A note on eigenvalue bounds for independence numbers of non-regular graphs
+    By Yusheng Li, Zhen Zhang
+    """
+    return (((max_degree(g)) - min_degree(g) - min_eigenvalue(g)) / max_degree(g)) * g.order()
+add_to_lists(alpha_li_zhang_1_bound, alpha_upper_bounds, all_theorems)
+
 #####
 # LOWER BOUNDS
 #####
