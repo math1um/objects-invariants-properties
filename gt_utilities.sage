@@ -420,11 +420,11 @@ def max_bipartite_set(g,s,c):
     CCopy.remove(v) #CCopy is C with v removed
     if not(Gprime.is_bipartite()):
         #print "{} is not bipartite".format(SCopy)
-        return bs(g, s, CCopy)
+        return max_bipartite_set(g, s, CCopy)
     
     
-    temp1 = bs(g, SCopy, CCopy)
-    temp2 = bs(g, s, CCopy)
+    temp1 = max_bipartite_set(g, SCopy, CCopy)
+    temp2 = max_bipartite_set(g, s, CCopy)
     
     if len(temp1) > len(temp2):
         return temp1
