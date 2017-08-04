@@ -1137,6 +1137,25 @@ def mean_centrality_degree(g):
     return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
 add_to_lists(mean_centrality_degree, efficient_invariants, all_invariants)
 
+def homo_lumo_gap(g):
+    order = g.order()
+    if order % 2 != 0:
+        return 0
+    eigenvalues = g.spectrum()
+    # Minus 1 accounts for the 0 indexing of a list
+    return eigenvalues[floor((order+1)/2) - 1] - eigenvalues[ceil((order+1)/2) - 1]
+add_to_lists(homo_lumo_gap, efficient_invariants, all_invariants)
+
+def homo_lumo_index(g):
+    order = g.order()
+    eigenvalues = g.spectrum()
+    if order%2 == 0:
+        # Minus 1 accounts for the 0 indexing of a list
+        return max(abs(eigenvalues[floor((order+1)/2) - 1]), abs(eigenvalues[ceil((order+1)/2) - 1]))
+    else:
+        return eigenvalues[floor(order/2)]
+add_to_lists(homo_lumo_index, efficient_invariants, all_invariants)
+
 sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number,
