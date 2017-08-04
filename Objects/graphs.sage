@@ -1725,6 +1725,21 @@ willis_page37_fig58.name(new = "willis_page37_fig58")
 add_to_lists(willis_page37_fig58, graph_objects, all_graphs)
 
 """
+From Willis's thesis, page 38, Figure 5.9
+A graph where none of the lower bounds in the thesis give the exact value for alpha
+
+    sage: independence_number(willis_page38)
+    3
+    sage: willis_page38.order()
+    7
+    sage: willis_page38.size()
+    13
+"""
+willis_page38 = Graph("FSpzw")
+willis_page38.name(new = "willis_page38")
+add_to_lists(willis_page38, graph_objects, all_graphs)
+
+"""
 From Willis's thesis, page 39, Figure 5.10
 A graph where none of the upper or lower bounds in the thesis give the exact value for alpha
 
