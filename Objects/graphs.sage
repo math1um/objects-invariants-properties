@@ -214,6 +214,7 @@ c13_2.add_cycle([0..12])
 c13_2.name(new = "c13_2")
 add_to_lists(c13_2, graph_objects, all_graphs)
 
+k3 = alpha_critical_easy[1]
 k4 = alpha_critical_easy[2]
 
 k10 = graphs.CompleteGraph(10)
