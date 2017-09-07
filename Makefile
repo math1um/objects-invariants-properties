@@ -1,5 +1,5 @@
 .PHONY: build db dist clean clear
-build:
+build: db
 	mkdir -p build
 	cp -r src/* build
 
