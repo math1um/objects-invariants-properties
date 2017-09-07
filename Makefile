@@ -15,7 +15,7 @@ dist: build
 	cd build && zip -r ../dist/objects-invariants-properties.zip *
 
 clean:
-	rm -r build
+	rm -rf build
 
 clear: clean
-	rm -r dist
+	rm -rf dist
