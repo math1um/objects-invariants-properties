@@ -115,21 +115,6 @@ for s in n7_chromatic_index_critical_names:
     g.name(new="chromatic_index_critical_7_" + s)
     add_to_lists(g, chromatic_index_critical, chromatic_index_critical_7, problem_graphs, all_graphs)
 
-# Class 0 pebbling graphs
-try:
-    class0graphs_dict = pickle.load(open("objects-invariants-properties/Objects/class0graphs_dictionary.pickle","r"))
-except:
-    class0graphs_dict = {}
-
-for d in class0graphs_dict:
-    g = Graph(class0graphs_dict[d])
-    g.name(new = d)
-    add_to_lists(g, class0graphs, all_graphs)
-
-class0small = [g for g in class0graphs if g.order() < 30]
-for g in class0small:
-    add_to_lists(g, problem_graphs)
-
 alpha_critical_hard = [Graph('Hj\\x{F{')]
 for g in alpha_critical_hard:
     add_to_lists(g, problem_graphs, all_graphs)
