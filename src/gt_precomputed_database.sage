@@ -421,3 +421,55 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
                          else:
                              # the computation might have crashed
                              print "Computation of {} for {} failed!".format(prop.__name__, g.name())
+
+def dump_database(folder="db", database=None):
+    """
+    Writes the specified database to a series of SQL files in the specified folder.
+    If no folder is given, then this method defaults to a folder named db. If no
+    database name is provided, this method will default to the default database
+    of get_connection().
+    """
+    import os
+
+    #make sure all necessary folders exist
+    if not os.path.exists(os.path.join(folder, 'invariants')):
+        os.makedirs(os.path.join(folder, 'invariants'))
+    if not os.path.exists(os.path.join(folder, 'properties')):
+        os.makedirs(os.path.join(folder, 'properties'))
+
+    conn = get_connection(database)
+    #dump the table with invariant values
+    current = invariants_as_dict(database)
+    invs = set()
+
+    for g in current.keys():
+        invs.update(current[g].keys())
+
+    for inv in sorted(invs):
+        f = open(os.path.join(folder, 'invariants', inv + '.sql'), 'w')
+        q = "SELECT 'INSERT INTO \"inv_values\" VALUES('||quote(invariant)||','||quote(graph)||','||quote(value)||')' FROM 'inv_values' WHERE invariant=? ORDER BY graph ASC"
+        query_res = conn.execute(q, (inv,))
+        for row in query_res:
+            s = row[0]
+            #fix issue with sqlite3 not being able to read its own output
+            if s[-5:] == ',Inf)':
+                s = s[:-5] + ',1e999)'
+            elif s[-6:] == ',-Inf)':
+                s = s[:-6] + ',-1e999)'
+            f.write("{};\n".format(s))
+        f.close()
+
+    #dump the table with property values
+    current = properties_as_dict(database)
+    props = set()
+
+    for g in current.keys():
+        props.update(current[g].keys())
+
+    for prop in sorted(props):
+        f = open(os.path.join(folder, 'properties', prop + '.sql'), 'w')
+        q = "SELECT 'INSERT INTO \"prop_values\" VALUES('||quote(property)||','||quote(graph)||','||quote(value)||')' FROM 'prop_values' WHERE property=? ORDER BY graph ASC"
+        query_res = conn.execute(q, (prop,))
+        for row in query_res:
+            f.write("{};\n".format(row[0]))
+        f.close()
