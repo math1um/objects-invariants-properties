@@ -13,7 +13,8 @@ Bugs are incorrect results from **THIS** set of files. They could be incorrect c
 * It is very possible that some method or graph construction is not as efficient as it could be. If you have an enhancement to contribute, open a pull request with your enhanced version. Please use the title and description to make very clear the change you made and how it is more efficient code. It may take time for the enhancement to be verified and the PR accepted.
 
 #### Contributing Objects
-* Ensure that the graph doesn't already exist in the `graphs.sage` file. A quick `ctrl-f` search should, with luck, give you a go ahead or not. But don't worry if you miss it and code it anyways, you'll catch this in a later step. 
+* Note that during development the project is split over multiple file, but during the build process everything will be compiled into a single file.
+* Ensure that the graph doesn't already exist in the `graph.sage` file. A quick `ctrl-f` search should, with luck, give you a go ahead or not. But don't worry if you miss it and code it anyways, you'll catch this in a later step. 
 * Check the [issues](https://github.com/math1um/objects-invariants-properties/issues) on Github to make sure someone isn't already contributing your graph. Let people know with a comment on an open issue or by opening a new issue if you are going to add a specific graph. The goal is to not duplicate effort.
 * Code the graph, either by using its Graph6 string or by coding it manually. Give it a name. Add it to the appropriate lists using the `add_to_lists` function. Be sure to add a comment above the graph giving a short description of the graph if it is not trivial.
    ```sage
@@ -22,7 +23,7 @@ Bugs are incorrect results from **THIS** set of files. They could be incorrect c
    c102.name(new = "c102")
    add_to_lists(c102, graph_objects, counter_examples)
    ```
-* For **ALL OBJECTS**, use the utility function found in `gt_utilities.sage` called `does_graph_exist` to make sure the graph, or an isomorphic graph doesn't already exist in the graphs.sage file already. This example returns true.
+* For **ALL OBJECTS**, use the utility function called `does_graph_exist` to make sure the graph, or an isomorphic graph doesn't already exist in the graphs.sage file already. This example returns true.
    ```sage
    graph = graphs.PetersenGraph()
    does_graph_exist(graph, all_graphs)
@@ -33,9 +34,9 @@ Bugs are incorrect results from **THIS** set of files. They could be incorrect c
 
 #### Contributing Invariants, Theorems, and Properties
 
-* Ensure that the method doesn't already exist in the appropriate file. A quick `ctrl-f` search should, with luck, give you a go ahead or not. 
+* Ensure that the method doesn't already exist in the appropriate file. A quick `ctrl-f` search should, with luck, give you a go ahead or not.
 * Check the [issues](https://github.com/math1um/objects-invariants-properties/issues) on Github to make sure someone isn't already contributing this method. Let people know with a comment on an open issue or by opening a new issue if you are going to tackle it.
-* Code the invariant, theorem, or property. Add a method comment so that others can know what the method does and how to use it. Doctests are very helpful to ensure the method returns the correct value. **REQUIRED** for theorems, and highly suggested for invariants and properties, is a citation to a proof. Unproven theorems will not be accepted. 
+* Code the invariant, theorem, or property. Add a method comment so that others can know what the method does and how to use it. Doctests are very helpful to ensure the method returns the correct value. **REQUIRED** for theorems, and highly suggested for invariants and properties, is a citation to a proof. Unproven theorems will not be accepted.
    * Theorems can and should also be added as invariants.
    ```sage
    def distinct_degrees(g):
