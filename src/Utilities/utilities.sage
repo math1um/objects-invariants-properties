@@ -398,6 +398,3 @@ def find_coextensive_properties(objects, properties):
              if p1 != p2 and all(p1(g) == p2(g) for g in objects):
                  print p1.__name__, p2.__name__
      print "DONE!"
-
-
-print("loaded utilities")
