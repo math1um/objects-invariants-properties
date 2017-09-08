@@ -243,41 +243,6 @@ def find_isomorphic_pairs(l):
             pairs.append(pair)
     return pairs
 
-"""
- Returns a Sage graph object generated from the given uncompressed DIMACS file
-"""
-def read_dimacs_edge_file(filename):
-    g = Graph()
-    try:
-        f = open(filename)
-    except IOError:
-        print "Couldn't open file:", filename
-        exit(-1)
-    for line in f:
-        if line[0] == 'c':
-            continue
-        elif line[0] == 'p':
-            p, problem, order, size = line.split()
-            assert(problem in ("edge", "col")), "Must be an edge problem file"
-            order, size = int(order), int(size)
-        elif line[0] == 'e':
-            e, u, v = line.split()
-            g.add_edge(u, v)
-    assert(g.order() == order), "Order in problem line does not match generated order"
-    assert(g.size() == size), "Size in problem line does not match generated size"
-    return g
-
-
-# Add all DIMACS graphs from the DIMACS subdirectory
-def load_dimacs_graphs():
-    files = os.listdir("objects-invariants-properties/Objects/DIMACS/")
-
-    for filename in files:
-        g = read_dimacs_edge_file("objects-invariants-properties/Objects/DIMACS/" + filename)
-        g.name(new = filename[:-4])
-        add_to_lists(g, dimacs_graphs, all_graphs)
-        print "loaded graph - ", g
-
 def find_all_max_ind_sets(g):
     """
     Finds all the maximum independent sets and stores them in a list
