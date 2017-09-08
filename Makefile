@@ -1,5 +1,6 @@
 SOURCEFILES = src/gt_precomputed_database.sage src/gt_precomputed_values.sage
-GT_COMPONENTS = src/gt_utilities.sage src/Invariants/invariants.sage  src/Invariants/final.sage \
+GT_COMPONENTS = src/Utilities/utilities.sage \
+src/Invariants/invariants.sage  src/Invariants/final.sage \
 src/Properties/properties.sage src/Properties/final.sage \
 src/Theorems/theorems.sage src/Theorems/final.sage \
 src/Objects/graphs.sage src/Objects/class0graphs.sage src/Objects/sloanegraphs.sage \
