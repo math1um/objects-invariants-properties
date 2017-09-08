@@ -1,7 +1,17 @@
+SOURCEFILES = src/gt_precomputed_database.sage src/gt_precomputed_values.sage
+GT_COMPONENTS = src/gt_utilities.sage src/Invariants/invariants.sage  src/Invariants/final.sage \
+src/Properties/properties.sage src/Properties/final.sage \
+src/Theorems/theorems.sage src/Theorems/final.sage \
+src/Objects/graphs.sage src/Objects/class0graphs.sage src/Objects/sloanegraphs.sage \
+src/Objects/dimacsgraphs.sage src/Objects/final.sage \
+src/final.sage
+
+
 .PHONY: build db dist clean clear
 build: db
 	mkdir -p build
-	cp -r src/* build
+	cp -r $(SOURCEFILES) build
+	cat $(GT_COMPONENTS) > build/gt.sage
 
 db:
 	mkdir -p build
