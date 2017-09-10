@@ -275,7 +275,8 @@ def MIR(n):
     while g.order() < n:
         new_v = g.add_vertex()
         for v in g.vertices():
-            g.add_edge(v, new_v)
+            if v != new_v:
+                g.add_edge(v, new_v)
         g.add_edge(new_v, g.add_vertex())
     return g
 
