@@ -6,7 +6,7 @@ OIP-GT is a set of files that contain objects (graphs), invariants and propertie
 
 ### Loading the file
 
-Download the [zip file](https://github.com/math1um/objects-invariants-properties/releases/download/2017-09-12/objects-invariants-properties.zip) and unpack it. Make sure that the files are located in the directory from which you will run Sage, and not in a subdirectory. Note that to use these files on [CoCalc](https://www.cocalc.com) within a Sagemath worksheet, this means that the files should be placed in the home directory of the project. Now you can load `gt.sage`. This file contains all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs, Sloane Graphs, or the database utilities. Use the utility methods to load the DIMACS and Sloane graphs. This populates the `dimacs_graphs` list and the `sloane_graphs` list.
+Download the [zip file]({{ site.latestrelease }}) and unpack it. Make sure that the files are located in the directory from which you will run Sage, and not in a subdirectory. Note that to use these files on [CoCalc](https://www.cocalc.com) within a Sagemath worksheet, this means that the files should be placed in the home directory of the project. Now you can load `gt.sage`. This file contains all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs, Sloane Graphs, or the database utilities. Use the utility methods to load the DIMACS and Sloane graphs. This populates the `dimacs_graphs` list and the `sloane_graphs` list.
 
 ```sage
 sage: load("gt.sage")
