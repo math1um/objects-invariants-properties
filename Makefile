@@ -1,4 +1,4 @@
-SOURCEFILES = src/gt_precomputed_database.sage src/gt_precomputed_values.sage
+SOURCEFILES = src/gt_precomputed_database.sage
 GT_COMPONENTS = src/Utilities/utilities.sage src/Utilities/final.sage \
 src/Invariants/invariants.sage  src/Invariants/final.sage \
 src/Properties/properties.sage src/Properties/final.sage \
