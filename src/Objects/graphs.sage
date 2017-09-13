@@ -23,8 +23,6 @@ all_graphs = []
 # TetrahedralGraph and MoserSpindle in the alpha critical list as "C~" and "FzEKW" respectively
 # MeredithGraph and SchlaefliGraph are in the Problem Graphs list
 
-# Removed graphs.McLaughlinGraph() and graphs.LocalMcLaughlinGraph() due to needing extra packages.
-
 sage_graphs = [graphs.BullGraph(), graphs.ButterflyGraph(), graphs.ClawGraph(),
 graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban10Cage(),
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
@@ -51,6 +49,18 @@ graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGra
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
 graphs.WienerArayaGraph(),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
+
+try:
+    add_to_lists(graphs.McLaughlinGraph(), sage_graphs)
+except Exception as e:
+    print("The McLaughlin graph was not loaded. Caused by:")
+    print(e)
+
+try:
+    add_to_lists(graphs.LocalMcLaughlinGraph(), sage_graphs)
+except Exception as e:
+    print("The local McLaughlin graph was not loaded. Caused by:")
+    print(e)
 
 #hard built-in Sage graphs
 add_to_lists(graphs.IoninKharaghani765Graph(), problem_graphs, all_graphs)
