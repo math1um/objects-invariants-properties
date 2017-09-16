@@ -87,37 +87,37 @@ add_to_lists(graphs.IoninKharaghani765Graph(), problem_graphs, all_graphs)
 #These built in graphs are nameless so here they are given names
 
 try:
-    temp1 = graphs.Cell120()
-    temp1.name(new = "Cell120")
-    add_to_lists(temp1, sage_graphs)
+    cell120 = graphs.Cell120()
+    cell120.name(new = "Cell120")
+    add_to_lists(cell120, sage_graphs)
 except Exception as e:
     print("The graph of the 120-cell was not loaded. Caused by:")
     print(e)
 
 try:
-    temp2 = graphs.Cell600()
-    temp2.name(new = "Cell600")
-    add_to_lists(temp2, sage_graphs)
+    cell600 = graphs.Cell600()
+    cell600.name(new = "Cell600")
+    add_to_lists(cell600, sage_graphs)
 except Exception as e:
     print("The graph of the 600-cell was not loaded. Caused by:")
     print(e)
 
-temp3 = graphs.MathonStronglyRegularGraph(0)
-temp3.name(new = "Mathon Strongly Regular Graph 0")
+mathon_strongly_regular0 = graphs.MathonStronglyRegularGraph(0)
+mathon_strongly_regular0.name(new = "Mathon Strongly Regular Graph 0")
 
-temp4 = graphs.MathonStronglyRegularGraph(1)
-temp4.name(new = "Mathon Strongly Regular Graph 1")
+mathon_strongly_regular1 = graphs.MathonStronglyRegularGraph(1)
+mathon_strongly_regular1.name(new = "Mathon Strongly Regular Graph 1")
 
-temp5 = graphs.MathonStronglyRegularGraph(2)
-temp5.name(new = "Mathon Strongly Regular Graph 2")
+mathon_strongly_regular2 = graphs.MathonStronglyRegularGraph(2)
+mathon_strongly_regular2.name(new = "Mathon Strongly Regular Graph 2")
 
-temp6 = graphs.JankoKharaghaniGraph(936)
-temp6.name(new = "Janko-Kharaghani 936")
+janko_kharaghani936 = graphs.JankoKharaghaniGraph(936)
+janko_kharaghani936.name(new = "Janko-Kharaghani 936")
 
-temp7 = graphs.JankoKharaghaniGraph(1800)
-temp7.name(new = "Janko-Kharagani 1800")
+janko_kharaghani1800 = graphs.JankoKharaghaniGraph(1800)
+janko_kharaghani1800.name(new = "Janko-Kharagani 1800")
 
-for graph in sage_graphs + [temp3, temp4, temp5, temp6, temp7]:
+for graph in sage_graphs + [mathon_strongly_regular0, mathon_strongly_regular1, mathon_strongly_regular2, janko_kharaghani936, janko_kharaghani1800]:
     add_to_lists(graph, graph_objects, all_graphs)
 
 add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
