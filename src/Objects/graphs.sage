@@ -28,7 +28,7 @@ graphs.DiamondGraph(), graphs.HouseGraph(), graphs.HouseXGraph(), graphs.Balaban
 graphs.Balaban11Cage(), graphs.BidiakisCube(),
 graphs.BiggsSmithGraph(), graphs.BlanusaFirstSnarkGraph(), graphs.BlanusaSecondSnarkGraph(),
 graphs.BrinkmannGraph(), graphs.BrouwerHaemersGraph(), graphs.BuckyBall(),
-graphs.ChvatalGraph(), graphs.ClebschGraph(), graphs.CameronGraph(),
+graphs.ChvatalGraph(), graphs.ClebschGraph(),
 graphs.CoxeterGraph(), graphs.DesarguesGraph(), graphs.DejterGraph(), graphs.DoubleStarSnark(),
 graphs.DurerGraph(), graphs.DyckGraph(), graphs.EllinghamHorton54Graph(),
 graphs.EllinghamHorton78Graph(), graphs.ErreraGraph(), graphs.F26AGraph(), graphs.FlowerSnark(),
@@ -38,17 +38,35 @@ graphs.HallJankoGraph(), graphs.HarborthGraph(), graphs.HarriesGraph(), graphs.H
 graphs.HeawoodGraph(), graphs.HerschelGraph(), graphs.HigmanSimsGraph(), graphs.HoffmanGraph(),
 graphs.HoffmanSingletonGraph(), graphs.HoltGraph(), graphs.HortonGraph(), graphs.JankoKharaghaniTonchevGraph(), graphs.KittellGraph(),
 graphs.KrackhardtKiteGraph(), graphs.Klein3RegularGraph(), graphs.Klein7RegularGraph(),
-graphs.LjubljanaGraph(), graphs.M22Graph(),
+graphs.LjubljanaGraph(),
 graphs.MarkstroemGraph(), graphs.McGeeGraph(),
 graphs.MoebiusKantorGraph(), graphs.NauruGraph(), graphs.PappusGraph(),
 graphs.PoussinGraph(), graphs.PerkelGraph(), graphs.PetersenGraph(), graphs.RobertsonGraph(),
 graphs.ShrikhandeGraph(), graphs.SimsGewirtzGraph(),
 graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
-graphs.ThomsenGraph(), graphs.TietzeGraph(), graphs.TruncatedIcosidodecahedralGraph(),
+graphs.ThomsenGraph(), graphs.TietzeGraph(),
 graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
 graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
 graphs.WienerArayaGraph(),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
+
+try:
+    add_to_lists(graphs.CameronGraph(), sage_graphs)
+except Exception as e:
+    print("The Cameron graph was not loaded. Caused by:")
+    print(e)
+
+try:
+    add_to_lists(graphs.M22Graph(), sage_graphs)
+except Exception as e:
+    print("The M22 graph was not loaded. Caused by:")
+    print(e)
+
+try:
+    add_to_lists(graphs.TruncatedIcosidodecahedralGraph(), sage_graphs)
+except Exception as e:
+    print("The truncated icosidodecahedral graph was not loaded. Caused by:")
+    print(e)
 
 try:
     add_to_lists(graphs.McLaughlinGraph(), sage_graphs)
@@ -68,11 +86,21 @@ add_to_lists(graphs.IoninKharaghani765Graph(), problem_graphs, all_graphs)
 
 #These built in graphs are nameless so here they are given names
 
-temp1 = graphs.Cell120()
-temp1.name(new = "Cell120")
+try:
+    temp1 = graphs.Cell120()
+    temp1.name(new = "Cell120")
+    add_to_lists(temp1, sage_graphs)
+except Exception as e:
+    print("The graph of the 120-cell was not loaded. Caused by:")
+    print(e)
 
-temp2 = graphs.Cell600()
-temp2.name(new = "Cell600")
+try:
+    temp2 = graphs.Cell600()
+    temp2.name(new = "Cell600")
+    add_to_lists(temp2, sage_graphs)
+except Exception as e:
+    print("The graph of the 600-cell was not loaded. Caused by:")
+    print(e)
 
 temp3 = graphs.MathonStronglyRegularGraph(0)
 temp3.name(new = "Mathon Strongly Regular Graph 0")
@@ -89,7 +117,7 @@ temp6.name(new = "Janko-Kharaghani 936")
 temp7 = graphs.JankoKharaghaniGraph(1800)
 temp7.name(new = "Janko-Kharagani 1800")
 
-for graph in sage_graphs + [temp1, temp2, temp3, temp4, temp5, temp6, temp7]:
+for graph in sage_graphs + [temp3, temp4, temp5, temp6, temp7]:
     add_to_lists(graph, graph_objects, all_graphs)
 
 add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
