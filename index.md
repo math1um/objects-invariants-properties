@@ -1,4 +1,5 @@
 ## Objects, Invariants, and Properties for Graph Theory
+{:.no_toc}
 
 * Table of Contents
 {:toc}
