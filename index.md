@@ -1,5 +1,8 @@
 ## Objects, Invariants, and Properties for Graph Theory
 
+* Table of Contents
+{:toc}
+
 Designed for use with the Sage program [CONJECTURING](http://nvcleemp.github.io/conjecturing/) and maintained by Craig Larson, Nico Van Cleemput, and Reid Barden.
 
 OIP-GT is a set of files that contain objects (graphs), invariants and properties of graphs, and theorems relating to those invariants and graphs. While designed for automated conjecturing, these files can be used generally as well.
