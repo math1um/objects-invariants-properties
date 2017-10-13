@@ -42,4 +42,4 @@ sage: conjecture(graph_objects, efficiently_computable_invariants, 0, precompute
 
 ### Getting involved
 
-We need your help to expand this project. If you notice any bugs or would like to suggest a graph, invariant, or property to be added to this project, then don't hesitate to visit the project on GitHub (link on the left-hand side) to open an issue. If you would like to contribute, then the GitHub project is also the right place to start.
+We need your help to expand this project. If you notice any bugs or would like to suggest a graph, invariant, or property to be added to this project, then don't hesitate to visit the [GitHub project]({{ site.github.repository_url }}) to open an issue. If you would like to contribute, then the GitHub project is also the right place to start.
