@@ -77,7 +77,7 @@ def is_haggkvist_nicoghossian(g):
         return False
 
 #sufficient condition for hamiltonicity
-def is_fan(g):
+def is_genghua_fan(g):
     k = vertex_con(g)
     if k < 2:
         return False
