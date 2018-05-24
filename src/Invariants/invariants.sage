@@ -905,8 +905,6 @@ def beauchamp_index(g):
 
     for v in g.vertices():
         sum_final += 1/s_aux(v)
-
-    print sum_final
 add_to_lists(beauchamp_index, efficient_invariants, all_invariants)
 
 def subcubic_tr(g):

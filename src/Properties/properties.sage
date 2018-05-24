@@ -262,7 +262,7 @@ def has_p4(g):
     return g.subgraph_search(p4, induced=True) is not None
 
 def has_kite(g):
-    return g.subgraph_search(kite, induced=True) is not None
+    return g.subgraph_search(kite_with_tail, induced=True) is not None
 
 def is_kite_free(g):
     return not has_kite(g)
@@ -274,7 +274,7 @@ def is_claw_free(g):
     return not has_claw(g)
 
 def has_H(g):
-    return g.subgraph_search(killer, induced=True) is not None
+    return g.subgraph_search(double_fork, induced=True) is not None
 
 def is_H_free(g):
     return not has_H(g)
