@@ -31,7 +31,7 @@ add_to_lists(alpha_lovasz_theta_bound, alpha_upper_bounds, all_theorems)
 
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
 def alpha_kwok_bound(g):
-    return order(g) - (size(g)/max_degree(g))
+    return order(g) - (g.size()/max_degree(g))
 add_to_lists(alpha_kwok_bound, alpha_upper_bounds, all_theorems)
 
 # P. Hansen and M. Zheng. Sharp Bounds on the order, size, and stability number of graphs. NETWORKS 23 (1993), no. 2, 99-102.
