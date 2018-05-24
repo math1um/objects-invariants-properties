@@ -2704,3 +2704,10 @@ def remove_duplicates(seq, idfun=None):
 
 #could run this occasionally to check there are no duplicates
 #graph_objects = remove_duplicates(union_objects, idfun=Graph.graph6_string)
+
+#Two cycles of order cycle1 and cycle2 ajoined at a single vertex.
+def glasses_graph(cycle1, cycle2):
+    glasses = graphs.CycleGraph(cycle1)
+    glasses.add_cycle(range(cycle1, cycle1 + cycle2))
+    glasses.merge_vertices([0, cycle1])
+    return glasses
