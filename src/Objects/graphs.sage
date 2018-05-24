@@ -2239,9 +2239,12 @@ barrus_333221a = Graph("E`LW")
 barrus_333221a.name(new = "barrus_333221a")
 add_to_lists(barrus_333221a, graph_objects, all_graphs)
 
+# CE to claw-free & chordal => Hamiltonian
 barrus_333221b = Graph("EKSw")
-barrus_333221b.name(new = "barrus_333221b")
+barrus_333221b.name(new = "barrus_333221b(c5_chord_tail)")
 add_to_lists(barrus_333221b, graph_objects, all_graphs)
+c5_chord_tail = barrus_333221b
+add_to_lists(c5_chord_tail, graph_objects, all_graphs)
 
 barrus_333221c = Graph("EELg")
 barrus_333221c.name(new = "barrus_333221c")
