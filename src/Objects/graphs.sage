@@ -2687,9 +2687,12 @@ add_to_lists(glasses_5_5, graph_objects, all_graphs)
 # CE to Hamiltonian => g.is_bipartite() and g.is_strongly_regular()
 # CE to Hamiltonian => g.is_circular_planar() and g.is_bipartite()
 ham1 = Graph("I~EGYCxyG")
-ham1.name(new = "")
+ham1.name(new = "ham1")
 add_to_lists(ham1, graph_objects, all_graphs)
 
+# CE to ((is_van_den_heuvel)&(is_circular_planar))->(is_hamiltonian)
+umbrella_4 = Graph("Ep{G")
+umbrella_4.name(new = "umbrella_4") 
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
