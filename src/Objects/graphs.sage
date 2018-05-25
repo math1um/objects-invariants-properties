@@ -2682,13 +2682,13 @@ def glasses_graph(cycle1, cycle2):
 
 # CE to (~weakly_chordial) & is_eularian => is_hamiltonian
 glasses_5_5 = glasses_graph(5,5)
-add_to_lists(graph_objects, all_graphs)
+add_to_lists(glasses_5_5, graph_objects, all_graphs)
 
 # CE to Hamiltonian => g.is_bipartite() and g.is_strongly_regular()
 # CE to Hamiltonian => g.is_circular_planar() and g.is_bipartite()
 ham1 = Graph("I~EGYCxyG")
 ham1.name(new = "")
-add_to_lists(graph_objects, all_graphs)
+add_to_lists(ham1, graph_objects, all_graphs)
 
 
 #graph_objects: all graphs with no duplicates
