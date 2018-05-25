@@ -2695,6 +2695,23 @@ umbrella_4 = Graph("Ep{G")
 umbrella_4.name(new = "umbrella_4")
 add_to_lists(umbrella_4, graph_objects, all_graphs)
 
+def kite_necklace(k):
+    #returns k kites joined head to tail
+    if k == 1:
+        return Graph('DJk')
+    g = graphs.CycleGraph(2*k)
+    for i in [0..k-1]:
+        g.subdivide_edge((2*i, 1 + 2*i), 1)
+        g.add_edge(2*i, 1 + 2*i)
+        g.subdivide_edge((2*i, 1 + 2*i), 1)
+        g.add_edge(2*k + 2*i, 2*k + 2*i + 1)
+    return g
+
+# CE to (is_hamiltonian)->( (is_regular)->(is_kite_free) )
+kite_necklace_3 = kite_necklace(3)
+kite_necklace_3.name(new = "kite_necklace_3")
+add_to_lists(kite_necklace_3, graph_objects, all_graphs)
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
