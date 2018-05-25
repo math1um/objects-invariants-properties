@@ -43,6 +43,24 @@ def pairs_have_unique_common_neighbor(g):
         return False
     else:
         return True
+    
+#Returns whether g is a distance-transitive graph
+#Test cases:
+#is_distance_transitive(graphs.Tutte12Cage()) False
+#is_distance_transitive(graphs.FosterGraph()) True
+def is_distance_transitive(g):
+    n=g.automorphism_group()
+    for p in [2..a.diameter()]:
+        Dist = g.distance_all_pairs()
+        d = 2
+        dn = []
+        for u in g:
+            for v in g:
+                if Dist[u][v]==d:
+                    dn.append((u,v))
+        if not(Set(dn)==Set(n.orbit(dn[1], action = "OnTuples"))):
+            return False
+    return True
 
 #sufficient condition for hamiltonicity
 def is_dirac(g):
