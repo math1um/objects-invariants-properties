@@ -2692,7 +2692,8 @@ add_to_lists(ham1, graph_objects, all_graphs)
 
 # CE to ((is_van_den_heuvel)&(is_circular_planar))->(is_hamiltonian)
 umbrella_4 = Graph("Ep{G")
-umbrella_4.name(new = "umbrella_4") 
+umbrella_4.name(new = "umbrella_4")
+add_to_lists(umbrella_4, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
