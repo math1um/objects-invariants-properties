@@ -367,6 +367,28 @@ def max_bipartite_set(g,s,c):
     else:
         return temp2
 
+# output = closure of input graph
+# Useful: a graph is hamiltonian iff its closure is hamiltonian
+def closure(graph):
+	"""
+	Test cases:
+		sage: closure(graphs.CycleGraph(4)).is_isomorphic(graphs.CompleteGraph(4))
+		True
+		sage: closure(graphs.CycleGraph(5)).is_isomorphic(graphs.CycleGraph(5))
+		True
+	"""
+	from itertools import combinations
+	g = graph.copy()
+	while(True):
+		flag = False
+		deg = g.degree()
+		for (v,w) in combinations(g.vertices(), 2):
+			if (not g.has_edge(v,w)) and deg[v] + deg[w] >= g.order():
+				g.add_edge(v,w)
+				flag = True
+		if flag == False:
+			break
+	return g
 
 #TESTING
 
