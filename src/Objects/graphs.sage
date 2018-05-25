@@ -2688,7 +2688,7 @@ add_to_lists(graph_objects, all_graphs)
 # CE to Hamiltonian => g.is_circular_planar() and g.is_bipartite()
 ham1 = Graph("I~EGYCxyG")
 ham1.name(new = "")
-add_to_lists(graphs_objects, all_graphs)
+add_to_lists(graph_objects, all_graphs)
 
 
 #graph_objects: all graphs with no duplicates
