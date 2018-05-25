@@ -2673,12 +2673,16 @@ levit_4 = Graph("KGD?_O_@GE~~")
 levit_4.name(new = "levit_4")
 add_to_lists(levit_4, graph_objects, all_graphs)
 
-# Two cycles of order cycle1 and cycle2 ajoined at a single vertex.
+# Two cycles of order cycle1 and cycle2 adjoined at a single vertex.
 def glasses_graph(cycle1, cycle2):
     glasses = graphs.CycleGraph(cycle1)
     glasses.add_cycle(range(cycle1, cycle1 + cycle2))
     glasses.merge_vertices([0, cycle1])
     return glasses
+
+# CE to (~weakly_chordial) & is_eularian => is_hamiltonian
+glasses_5_5 = glasses_graph(5,5)
+add_to_lists(graph_objects, all_graphs)
 
 # CE to Hamiltonian => g.is_bipartite() and g.is_strongly_regular()
 # CE to Hamiltonian => g.is_circular_planar() and g.is_bipartite()
