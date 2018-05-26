@@ -815,16 +815,8 @@ def is_bad(g):
     return False
 
 # Graph g is co-hamiltonian if the complement of the graph is hamiltonian.
-def is_cohamiltonian(g):
+def is_complement_hamiltonian(g):
     return g.complement().is_hamiltonian()
-
-# Graph g is weakly total hamiltonain if either the graph or its complement is hamiltonian.
-def is_weakly_total_hamiltonian(g):
-    return g.is_hamiltonian() or g.complement().is_hamiltonian()
-
-# Graph g is strongly total hamiltonain if either the graph or its copmlement is strongly hamiltonian.
-def is_strongly_total_hamiltonian(g):
-    return g.is_hamiltonian() and g.complement().is_hamiltonian()
 
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -855,7 +847,7 @@ Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
 is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
-has_alpha_residue_equal_two, is_cohamiltonian, is_weakly_total_hamiltonian, is_strongly_total_hamiltonian]
+has_alpha_residue_equal_two, is_complement_hamiltonian]
 
 removed_properties = [is_pebbling_class0]
 
