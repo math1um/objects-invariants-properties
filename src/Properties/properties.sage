@@ -814,6 +814,10 @@ def is_bad(g):
             return True
     return False
 
+# Graph g is complement_hamiltonian if the complement of the graph is hamiltonian.
+def is_complement_hamiltonian(g):
+    return g.complement().is_hamiltonian()
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
@@ -843,7 +847,7 @@ Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
 is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
-has_alpha_residue_equal_two]
+has_alpha_residue_equal_two, is_complement_hamiltonian]
 
 removed_properties = [is_pebbling_class0]
 
