@@ -54,16 +54,17 @@ def is_distance_transitive(g):
         sage: is_distance_transitive(graphs.FosterGraph())
         True
     """
+    from itertools import combinations
     n = g.automorphism_group()
     for p in [2..g.diameter()]:
-        Dist = g.distance_all_pairs()
-        dn = []
-        for u in g:
-            for v in g:
-                if Dist[u][v] == p:
-                    dn.append((u,v))
-        if not(Set(dn) == Set(n.orbit(dn[1], action = "OnTuples"))):
-            return False
+        dist = g.distance_all_pairs()
+        sameDistPairs = []
+        for (u,v) in combinations(g.vertices(), 2):
+            if dist[u][v] == p:
+                sameDistPairs.append(Set([u,v]))
+        if sameDistPairs: # True if nonempty
+            if not(Set(sameDistPairs) == Set(n.orbit(sameDistPairs[1], action = "OnSets"))):
+                return False
     return True
 
 #sufficient condition for hamiltonicity
@@ -857,7 +858,8 @@ has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
-has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free]
+has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
+is_distance_transitive]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
