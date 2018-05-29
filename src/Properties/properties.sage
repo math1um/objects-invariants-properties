@@ -55,13 +55,12 @@ def is_distance_transitive(g):
         True
     """
     n = g.automorphism_group()
-    for p in [2..a.diameter()]:
+    for p in [2..g.diameter()]:
         Dist = g.distance_all_pairs()
-        d = 2
         dn = []
         for u in g:
             for v in g:
-                if Dist[u][v] == d:
+                if Dist[u][v] == p:
                     dn.append((u,v))
         if not(Set(dn) == Set(n.orbit(dn[1], action = "OnTuples"))):
             return False
