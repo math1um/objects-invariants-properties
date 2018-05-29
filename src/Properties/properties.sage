@@ -44,21 +44,26 @@ def pairs_have_unique_common_neighbor(g):
     else:
         return True
     
-#Returns whether g is a distance-transitive graph
-#Test cases:
-#is_distance_transitive(graphs.Tutte12Cage()) False
-#is_distance_transitive(graphs.FosterGraph()) True
+# Returns whether g is a distance-transitive graph
+# A graph is_distance_transitive if a,b,u,v satisfy dist(a,b) = dist(u,v) implies there is an automorphism sending a->u and b->v.
 def is_distance_transitive(g):
-    n=g.automorphism_group()
+    """
+    Test cases:
+        sage: is_distance_transitive(graphs.Tutte12Cage())
+        False
+        sage: is_distance_transitive(graphs.FosterGraph())
+        True
+    """
+    n = g.automorphism_group()
     for p in [2..a.diameter()]:
         Dist = g.distance_all_pairs()
         d = 2
         dn = []
         for u in g:
             for v in g:
-                if Dist[u][v]==d:
+                if Dist[u][v] == d:
                     dn.append((u,v))
-        if not(Set(dn)==Set(n.orbit(dn[1], action = "OnTuples"))):
+        if not(Set(dn) == Set(n.orbit(dn[1], action = "OnTuples"))):
             return False
     return True
 
