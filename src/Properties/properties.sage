@@ -814,7 +814,7 @@ def is_bad(g):
             return True
     return False
 
-# Graph g is co-hamiltonian if the complement of the graph is hamiltonian.
+# Graph g is complement_hamiltonian if the complement of the graph is hamiltonian.
 def is_complement_hamiltonian(g):
     return g.complement().is_hamiltonian()
 
