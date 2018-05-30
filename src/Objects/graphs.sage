@@ -2712,6 +2712,13 @@ kite_necklace_3 = kite_necklace(3)
 kite_necklace_3.name(new = "kite_necklace_3")
 add_to_lists(kite_necklace_3, graph_objects, all_graphs)
 
+# CE to (locally connected)->(is_hamiltonian)
+bus = graphs.CycleGraph(4)
+bus.add_vertex(4)
+bus.add_edges([(0,4),(2,4),(0,2)])
+add_to_lists(bus, graph_objects, all_graphs)
+
+
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
