@@ -2752,6 +2752,57 @@ crossingNumberGraph3E = Graph('Ms??WX?CH@CQCQR??')
 crossingNumberGraph3E.name(new = "crossingNumberGraph3E")
 add_to_lists(crossingNumberGraph3E, graph_objects, all_graphs)
 
+# CE to ((is_quasi_regular)&(is_cartesian_product))->(is_hamiltonian)
+ce136 = Graph('K{CY?CBG??_B').cartesian_product(graphs.CompleteGraph(2))
+ce136.name(new = "ce136")
+add_to_lists(ce136, graph_objects, all_graphs)
+
+# CE to (((has_radius_equal_diameter)&(is_line_graph))&(~(is_perfect)))->(is_hamiltonian)
+# CE to (((has_radius_equal_diameter)&(is_line_graph))&(~(is_quasi_regular)))->(is_hamiltonian)
+ce137 = Graph('X~aKWOHAYA?H?ROAG@H@?G@C_?WGGOGACC?B?GSO@?__?`O??OS')
+ce137.name(new = "ce137")
+add_to_lists(ce137, graph_objects, all_graphs)
+
+# CE to ((~(is_perfect))&(girth_greater_than_2log))->(is_hamiltonian)
+glasses_17_17 = glasses_graph(17,17)
+glasses_17_17.name(new = "glasses_17_17")
+add_to_lists(glasses_17_17, graph_objects, all_graphs)
+
+# CE to (((is_factor_critical)&(has_radius_equal_diameter))&((is_perfect)^(has_lovasz_theta_equals_alpha)))->(is_hamiltonian)
+ce138 = Graph('N_goPePG?_POB_aWyB_')
+ce138.name(new = "ce138")
+add_to_lists(ce138, graph_objects, all_graphs)
+
+# CE to (((is_quasi_regular)&(is_H_free))&(has_dart))->(is_hamiltonian)
+ce139 = Graph('Iv??G[N]?')
+ce139.name(new = "ce139")
+add_to_lists(ce139, graph_objects, all_graphs)
+
+# CE to (((has_radius_equal_diameter)&(has_kite))&(is_quasi_regular))->(is_hamiltonian)
+ce140 = Graph('Mt?GOGB@?CgHOKM??')
+ce140.name(new = "ce140")
+add_to_lists(ce140, graph_objects, all_graphs)
+
+# CE to ((~((is_quasi_regular)|(is_perfect)))&(has_radius_equal_diameter))->(is_hamiltonian)
+ce141 = Graph('KGh?Q?ALCjQ[')
+ce141.name(new = "ce141")
+add_to_lists(ce141, graph_objects, all_graphs)
+
+# CE to ((~(is_c4_free))&(is_locally_connected))->(is_hamiltonian)
+ce142 = Graph('F?~vw')
+ce142.name(new = "ce142")
+add_to_lists(ce142, graph_objects, all_graphs)
+
+# CE to (is_perfect & is_three_connected & alpha_leq_order_over_two)->(is_hamiltonian)
+triangleReplacedPetersen = Graph(']t?G?C????_CAG@C?H?CG?G_?P??G_?P???G???W??G???P???K???BG???I???DF????b????')
+triangleReplacedPetersen.name(new = "triangleReplacedPetersen")
+add_to_lists(triangleReplacedPetersen, graph_objects, all_graphs)
+
+# CE to ((alpha_leq_order_over_two)&(is_locally_two_connected))->(is_hamiltonian)
+ce143 = Graph('K~e[Mm@oYaAg')
+ce143.name(new = "ce143")
+add_to_lists(ce143, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
