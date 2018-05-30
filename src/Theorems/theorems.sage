@@ -236,9 +236,3 @@ def alpha_shearer_bound(g):
     v_sum = sum([g.degree(v)**(1/(k - 1.0)) for v in g.vertices()])
     return 2**(-((k - 1.0)/k)) * v_sum**((k - 1.0)/k)
 add_to_lists(alpha_shearer_bound, alpha_lower_bounds, all_invariant_theorems)
-
-# Adds all invariant theorems to the efficient_invariants list
-# Does not insert duplicates if the method is already in efficient_invariants
-for t in all_invariant_theorems:
-    if t not in efficient_invariants:
-        add_to_lists(t, efficient_invariants, theorem_invariants, all_invariants)
