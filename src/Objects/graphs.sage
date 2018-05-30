@@ -2747,6 +2747,11 @@ add_to_lists(truncatedCubical, graph_objects, all_graphs)
 add_to_lists(truncatedDodecahedral, graph_objects, all_graphs)
 add_to_lists(truncatedOctahedral, graph_objects, all_graphs)
 
+# CE to ((is_heliotropic_plant)&(is_regular))->(is_hamiltonian)
+crossingNumberGraph3E = Graph('Ms??WX?CH@CQCQR??')
+crossingNumberGraph3E.name(new = "crossingNumberGraph3E")
+add_to_lists(crossingNumberGraph3E, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
