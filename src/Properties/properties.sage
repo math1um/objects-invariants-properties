@@ -818,7 +818,7 @@ def has_strong_Havel_Hakimi_property(g):
 
 # Graph is subcubic is each vertex is at most degree 3
 def is_subcubic(g):
-    return max_degree(g) == 3
+    return max_degree(g) <= 3
 
 # Max and min degree varies by at most 1
 def is_quasi_regular(g):
