@@ -2718,6 +2718,16 @@ bus.add_vertex(4)
 bus.add_edges([(0,4),(2,4),(0,2)])
 add_to_lists(bus, graph_objects, all_graphs)
 
+# from p.37 of Algorithmic Graph Theory In Sage by authors DaMNeD
+DaMNeD1 = Graph('E@~w')
+DaMNeD2 = Graph('F@N]w')
+DaMNeD3 = Graph('GIaHx{')
+DaMNeD4 = Graph('HIaJ`{~')
+add_to_lists(DaMNeD1, graph_objects, all_graphs)
+add_to_lists(DaMNeD2, graph_objects, all_graphs)
+add_to_lists(DaMNeD3, graph_objects, all_graphs)
+add_to_lists(DaMNeD4, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
