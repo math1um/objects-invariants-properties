@@ -841,6 +841,30 @@ def is_bad(g):
 def is_complement_hamiltonian(g):
     return g.complement().is_hamiltonian()
 
+# A graph is unicyclic if it is connected and has order == size
+# Equivalently, graph is connected and has exactly one cycle
+def is_unicyclic(g):
+    """
+    Tests:
+        sage: is_unicyclic(graphs.BullGraph())
+        True
+        sage: is_unicyclic(graphs.ButterflyGraph())
+        False
+    """
+    return g.is_connected() and g.order() == g.size()
+
+# A graph is locally unicyclic if all its local subgraphs are unicyclic
+def is_locally_unicyclic(g):
+    """
+    Tests:
+        sage: is_locally_unicyclic(graphs.OctahedralGraph())
+        True
+        sage: is_locally_unicyclic(graphs.BullGraph())
+        False
+    """
+    return localise(is_unicyclic)(g)
+
+	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
@@ -863,7 +887,7 @@ alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
-is_distance_transitive]
+is_distance_transitive, is_unicyclic, is_locally_unicyclic]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
