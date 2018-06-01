@@ -2805,6 +2805,11 @@ ce143 = Graph('K~e[Mm@oYaAg')
 ce143.name(new = "ce143")
 add_to_lists(ce143, graph_objects, all_graphs)
 
+# CE to (is_hamiltonian)->((order_leq_twice_max_degree)|(is_locally_bipartite))
+ce144 = 
+ce144.name(new = "ce144")
+add_to_lists(ce144, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
