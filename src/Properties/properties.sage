@@ -870,6 +870,23 @@ def is_1_tough(g):
     return is_k_tough(g, 1)
 def is_2_tough(g):
     return is_k_tough(g, 2)
+
+# True if graph has at least two hamiltonian cycles. The cycles may share some edges.
+def has_two_ham_cycles(gIn):
+    g = gIn.copy()
+    g.relabel()
+    try:
+        ham1 = g.hamiltonian_cycle()
+    except EmptySetError:
+        return False
+    n = g.order()
+    for e in ham1.edges():
+        h = copy(g)
+        h.delete_edge(e)
+        if h.is_hamiltonian():
+            return true
+    return false	
+
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -901,7 +918,8 @@ Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
 is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
-has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough]
+has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
+has_two_ham_cycles]
 
 removed_properties = [is_pebbling_class0]
 
