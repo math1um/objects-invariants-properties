@@ -1381,7 +1381,7 @@ def toughness(g):
             if k > 1:
                 t = min(float(len(x)) / k, t)
     return t
-	
+add_to_lists(toughness, intractable_invariants, all_invariants)
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
