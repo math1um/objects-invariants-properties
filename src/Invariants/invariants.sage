@@ -1358,5 +1358,30 @@ add_to_lists(total_domination_number, intractable_invariants, all_invariants)
 add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
 add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
+# A graph G is t-tough for real t if for every integer k>1, G cannot be split into k connected components by removal of fewer than tk vertices
+# Returns Infinity if g is complete
+# Inefficient to calculate
+def toughness(g):
+    """
+    Tests:
+        sage: toughness(graphs.PathGraph(3))
+        0.5
+        sage: toughness(graphs.CompleteGraph(5))
+        Infinity
+        sage: toughness(graphs.PetersenGraph())
+        float(4)/3
+    """
+    order = g.order()
+    t = Infinity
+    for x in Subsets(g.vertices()):
+        if x and len(x) != order: # Proper, non-empty subset
+            H = copy(g)
+            H.delete_vertices(x)
+            k = H.connected_components_number()
+            if k > 1:
+                t = min(float(len(x)) / k, t)
+    return t
+	
+
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
