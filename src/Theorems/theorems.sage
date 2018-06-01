@@ -236,3 +236,34 @@ def alpha_shearer_bound(g):
     v_sum = sum([g.degree(v)**(1/(k - 1.0)) for v in g.vertices()])
     return 2**(-((k - 1.0)/k)) * v_sum**((k - 1.0)/k)
 add_to_lists(alpha_shearer_bound, alpha_lower_bounds, all_invariant_theorems)
+
+
+####
+# HAMILTONICITY SUFFICIENT CONDITIONS
+####
+# Chvátal, V., & Erdös, P. (1972). A note on hamiltonian circuits. Discrete Mathematics, 2(2), 111-113.
+add_to_lists(is_chvatal_erdos, hamiltonian_sufficient, all_property_theorems)
+
+# R.J Faudree, Ronald J Gould, Michael S Jacobson, R.H Schelp, Neighborhood unions and hamiltonian properties in graphs, Journal of Combinatorial Theory, Series B, Volume 47, Issue 1, 1989, Pages 1-9
+add_to_lists(is_generalized_dirac, hamiltonian_sufficient, all_property_theorems)
+
+# Häggkvist, Roland & Nicoghossian, G. G. (1981). A remark on hamiltonian cycles. Journal of Combinatorial Theory, 30(1), 118-120
+add_to_lists(is_haggkvist_nicoghossian, hamiltonian_sufficient, all_property_theorems)
+
+# Fan, G. H. (1984). New sufficient conditions for cycles in graphs. Journal of Combinatorial Theory, 37(3), 221-227.
+add_to_lists(is_genghua_fan, hamiltonian_sufficient, all_property_theorems)
+
+# Lindquester, T. E. (1989). The effects of distance and neighborhood union conditions on hamiltonian properties in graphs. Journal of Graph Theory, 13(3), 335-352.
+# Ore, Ø. (1960), "Note on Hamilton circuits", American Mathematical Monthly, 67 (1): 55, doi:10.2307/2308928, JSTOR 2308928.
+def is_lindquester_or_is_ore(g):
+    return is_lindquester(g) or is_ore(g)
+add_to_lists(is_lindquester_or_is_ore, hamiltonian_sufficient, all_property_theorems)
+
+# Trivial / "belongs to folklore"
+def is_cycle_or_is_clique(g):
+    return is_cycle(g) or g.is_clique()
+add_to_lists(is_cycle_or_is_clique, hamiltonian_sufficient, all_property_theorems)
+
+####
+# HAMILTONICITY NECESSARY CONDITIONS
+####
