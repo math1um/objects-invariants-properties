@@ -1383,5 +1383,28 @@ def toughness(g):
     return t
 add_to_lists(toughness, intractable_invariants, all_invariants)
 
+# Sigma_k = min( sum( degrees(v_i) : every k-element independent set v_1,..,v_k ) )
+# Inefficient to calculate
+def sigma_k(g,k):
+    """
+    Tests:
+        sage: sigma_k(graphs.CompleteGraph(5), 1)
+        4
+        sage: sigma_k(graphs.PathGraph(4), 2)
+        2
+    """
+    sigma = Infinity
+    for S in Subsets(g.vertices(), k):
+        if g.is_independent_set(S):
+            sigma = min(sigma, sum([g.degree(x) for x in S]) )
+    return sigma
+
+def sigma_2(g):
+    return sigma_k(g,2)
+def sigma_3(g):
+    return sigma_k(g,3)
+add_to_lists(sigma_2, intractable_invariants, all_invariants)
+add_to_lists(sigma_3, intractable_invariants, all_invariants)
+
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
