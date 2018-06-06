@@ -264,6 +264,12 @@ def is_cycle_or_is_clique(g):
     return is_cycle(g) or g.is_clique()
 add_to_lists(is_cycle_or_is_clique, hamiltonian_sufficient, all_property_theorems)
 
+# Geng-Hua Fan. "New Sufficient Conditions for Cycles in Graphs". Journal of Combinatorial Theory 37.3(1984):221-227.
+def sigma_dist2_geq_half_n(g):
+    return sigma_dist2(g) >= g.order()/2
+add_to_lists(sigma_dist2_geq_half_n, hamiltonian_sufficient, all_property_theorems)
+
+
 ####
 # HAMILTONICITY NECESSARY CONDITIONS
 ####
