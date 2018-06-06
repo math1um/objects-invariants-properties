@@ -691,7 +691,7 @@ ce17 = Graph("S??wG@@h_GWC?AHG?_gMGY_FaIOk@?C?S")
 ce17.name(new = "ce17")
 add_to_lists(ce17, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) >= matching_number - sigma_2
+# CE to independence_number(x) >= matching_number - sigma_dist2
 ce18 = Graph("cGO_?CCOB@O?oC?sTDSOCC@O???W??H?b???hO???A@CCKB??I??O??AO@CGA???CI?S?OGG?ACgQa_Cw^GP@AID?Gh??ogD_??dR[?AG?")
 ce18.name(new = "ce18")
 add_to_lists(ce18, graph_objects, counter_examples, all_graphs)
@@ -846,7 +846,7 @@ ce49 = Graph("K^~lmrvv{~~Z")
 ce49.name(new = "ce49")
 add_to_lists(ce49, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) <= max_degree(x) + maximum(max_even_minus_even_horizontal(x), sigma_2(x))
+# CE to independence_number(x) <= max_degree(x) + maximum(max_even_minus_even_horizontal(x), sigma_dist2(x))
 ce50 = Graph('bCaJf?A_??GY_O?KEGA???OMP@PG???G?CO@OOWO@@m?a?WPWI?G_A_?C`OIG?EDAIQ?PG???A_A?C??CC@_G?GDI]CYG??GA_A??')
 ce50.name(new = "ce50")
 add_to_lists(ce50, graph_objects, counter_examples, all_graphs)
@@ -861,7 +861,7 @@ ce52 = Graph('H?QaOiG')
 ce52.name(new = "ce52")
 add_to_lists(ce52, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) >= matching_number(x) - sigma_2(x) - 1
+# CE to independence_number(x) >= matching_number(x) - sigma_dist2(x) - 1
 ce53 = Graph("]?GEPCGg]S?`@??_EM@OTp?@E_gm?GW_og?pWO?_??GQ?A?^HIRwH?Y?__BC?G?[PD@Gs[O?GW")
 ce53.name(new = "ce53")
 add_to_lists(ce53, graph_objects, counter_examples, all_graphs)
@@ -996,7 +996,7 @@ ce79 = Graph('J?B|~fpwsw_')
 ce79.name(new = "ce79")
 add_to_lists(ce79, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) <= 10^(card_center(x)*log(10)/log(sigma_2(x)))
+# CE to independence_number(x) <= 10^(card_center(x)*log(10)/log(sigma_dist2(x)))
 ce80 = Graph('T?????????????????F~~~v}~|zn}ztn}zt^')
 ce80.name(new = "ce80")
 add_to_lists(ce80, graph_objects, counter_examples, all_graphs)
@@ -1116,7 +1116,7 @@ ce102 = Graph('N^nN~~}Z~|}~~\~]zzw')
 ce102.name(new = "ce102")
 add_to_lists(ce102, graph_objects, counter_examples, all_graphs)
 
-# CE to independence_number(x) >= card_negative_eigenvalues(x) - sigma_2(x)
+# CE to independence_number(x) >= card_negative_eigenvalues(x) - sigma_dist2(x)
 ce103 = Graph('IOilnemjG')
 ce103.name(new = "ce103")
 add_to_lists(ce103, graph_objects, counter_examples, all_graphs)

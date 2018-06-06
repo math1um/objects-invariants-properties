@@ -567,12 +567,12 @@ add_to_lists(degree_sum, efficient_invariants, all_invariants)
 
 #smallest sum of degrees of non-adjacent degrees, invariant in ore condition for hamiltonicity
 #default for complete graph?
-def sigma_2(g):
+def sigma_dist2(g):
     if g.size() == g.order()*(g.order()-1)/2:
         return g.order()
     Dist = g.distance_all_pairs()
     return min(g.degree(v) + g.degree(w) for v in g for w in g if Dist[v][w] > 1)
-add_to_lists(sigma_2, efficient_invariants, all_invariants)
+add_to_lists(sigma_dist2, efficient_invariants, all_invariants)
 
 #cardinality of the automorphism group of the graph
 def order_automorphism_group(g):
