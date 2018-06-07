@@ -1469,5 +1469,13 @@ def sigma_3(g):
 add_to_lists(sigma_2, intractable_invariants, all_invariants)
 add_to_lists(sigma_3, intractable_invariants, all_invariants)
 
+def homogenous_number(g):
+    """
+    Equals the larger of the independence number or the clique number
+    """
+    return max(independence_number(g), g.clique_number())
+add_to_lists(homogenous_number, intractable_invariants, all_invariants)
+
+
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
