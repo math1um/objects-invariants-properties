@@ -3,7 +3,7 @@
 
 def has_star_center(g):
     """
-    tests if graph has vertex adjacent to all others
+    tests if graph has vertex adjacent to all others, also known as "universal vertex"
         sage: has_star_center(flower_with_3_petals)
         True
         sage: has_star_center(c4)
