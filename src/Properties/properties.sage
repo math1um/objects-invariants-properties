@@ -279,9 +279,9 @@ def is_dart_free(g):
     return not has_dart(g)
 
 def is_p4_free(g):
-	"""
-	Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
-	"""
+    """
+    Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
+    """
     return not has_p4(g)
 
 def has_p4(g):
@@ -888,7 +888,7 @@ def has_two_ham_cycles(gIn):
         h.delete_edge(e)
         if h.is_hamiltonian():
             return true
-    return false	
+    return false
 
 def has_simplical_vertex(g):
     """
@@ -898,14 +898,14 @@ def has_simplical_vertex(g):
         if is_simplical_vertex(g, v):
             return true
     return false
-	
+
 def has_exactly_two_simplical_vertices(g):
     """
     v is a simplical vertex if induced neighborhood is a clique.
     """
     return simplical_vertices(g) == 2
-	
-	
+
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
