@@ -390,6 +390,15 @@ def closure(graph):
 			break
 	return g
 
+def is_simplical_vertex(g, v):
+    """
+    Vertex v is a simplical vertex in g if the induced neighborhood of v is a clique
+    """
+    neighbors = g.neighbors(v)
+    induced_neighborhood = g.subgraph(neighbors)
+    return induced_neighborhood.is_clique()
+	
+	
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
