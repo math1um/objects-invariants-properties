@@ -890,6 +890,21 @@ def has_two_ham_cycles(gIn):
             return true
     return false	
 
+def has_simplical_vertex(g):
+    """
+    v is a simplical vertex if induced neighborhood is a clique.
+    """
+    for v in g.vertices():
+        if is_simplical_vertex(g, v):
+            return true
+    return false
+	
+def has_exactly_two_simplical_vertices(g):
+    """
+    v is a simplical vertex if induced neighborhood is a clique.
+    """
+    return simplical_vertices(g) == 2
+	
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -913,7 +928,8 @@ alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
-is_distance_transitive, is_unicyclic, is_locally_unicyclic]
+is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex.
+has_exactly_two_simplical_vertices]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,

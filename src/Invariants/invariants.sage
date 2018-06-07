@@ -1194,7 +1194,15 @@ def neighborhood_union_dist2(g):
     else:
         return min( len(union(g.neighbors(v), g.neighbors(w))) for (v, w) in dist2)
 add_to_lists(neighborhood_union_dist2, efficient_invariants, all_invariants)
-	
+
+def simplical_vertices(g):
+    """
+    The number of simplical vertices in g.
+    v is simplical if the induced nieghborhood is a clique.
+    """
+    return sum( is_simplical_vertex(g,v) for v in g.vertices() )
+add_to_lists(simplical_vertices, efficient_invariants, all_invariants)
+
 	
 #####
 # INTRACTABLE INVATIANTS
