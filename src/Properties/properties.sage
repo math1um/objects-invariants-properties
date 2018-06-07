@@ -931,6 +931,12 @@ def is_two_path(g):
     """
     return has_exactly_two_simplical_vertices(g) and is_two_tree(g)
 
+def is_prism_hamiltonian(g):
+    """
+    A graph G is prism hamiltonian if G x K2 (cartesian product) is hamiltonian
+    """
+    return g.cartesian_product(graphs.CompleteGraph(2)).is_hamiltonian()
+	
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -964,7 +970,7 @@ is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
-has_two_ham_cycles, is_two_tree, is_two_path]
+has_two_ham_cycles, is_two_tree, is_two_path, is_prism_hamiltonian]
 
 removed_properties = [is_pebbling_class0]
 
