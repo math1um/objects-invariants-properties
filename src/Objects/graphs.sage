@@ -2815,6 +2815,11 @@ petersen_line_graph.relabel()
 petersen_line_graph.name(new = "Line graph of Petersen graph")
 add_to_lists(petersen_line_graph, graph_objects, all_graphs)
 
+# CE to is_locally_unicyclic -> is_hamiltonian
+ce145 = Graph('K~?GW[PeW@_F')
+ce145.name(new = "ce145") # Contributed by Sarah
+add_to_lists(ce145, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
