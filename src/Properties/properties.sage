@@ -905,6 +905,26 @@ def has_exactly_two_simplical_vertices(g):
     """
     return simplical_vertices(g) == 2
 
+def is_two_tree(g):
+    """
+    Define k-tree recursively:
+        - Complete Graph on k vertices is a k-tree
+        - A k-tree on n+1 vertices is constructed by selecting some k-tree on n vertices and
+            adding a degree k vertex such that its open neighborhood is a clique.
+    """
+    if(g.is_isomorphic(graphs.CompleteGraph(3))):
+        return True
+
+    degree_two_vertices = (v for v in g.vertices() if g.degree(v) == 2)
+    for v in degree_two_vertices:
+        if not g.is_clique(g.neighbors(v) + [v]):
+            return false
+        g2 = g.copy()
+        g2.delete_vertex(v)
+        if is_two_tree(g2):
+            return True
+    return False
+	
 
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -938,7 +958,7 @@ is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
-has_two_ham_cycles]
+has_two_ham_cycles, is_two_tree]
 
 removed_properties = [is_pebbling_class0]
 
