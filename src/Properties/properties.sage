@@ -279,6 +279,9 @@ def is_dart_free(g):
     return not has_dart(g)
 
 def is_p4_free(g):
+	"""
+	Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
+	"""
     return not has_p4(g)
 
 def has_p4(g):
