@@ -1224,6 +1224,19 @@ def degree_order_minus_one_vertices(g):
     return len([deg for deg in g.degree() if deg == g.order() - 1])
 add_to_lists(degree_order_minus_one_vertices, efficient_invariants, all_invariants)
 
+def maximum_degree_vertices(g):
+    """
+    The number of vertices with degree equal to the maximum degree
+    """
+    return len([deg for deg in g.degree() if deg == max_degree(g)])
+add_to_lists(maximum_degree_vertices, efficient_invariants, all_invariants)
+
+def minimum_degree_vertices(g):
+    """
+    The number of vertices with degree equal to the minimum degree
+    """
+    return len([deg for deg in g.degree() if deg == min_degree(g)])
+add_to_lists(minimum_degree_vertices, efficient_invariants, all_invariants)
 
 #####
 # INTRACTABLE INVATIANTS
