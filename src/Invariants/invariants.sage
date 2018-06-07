@@ -1210,6 +1210,20 @@ def first_zagreb_index(g):
     return sum(g.degree(v)**2 for v in g.vertices())
 add_to_lists(first_zagreb_index, efficient_invariants, all_invariants)
 
+def degree_two_vertices(g):
+    """
+    The number of degree 2 vertices
+    """
+    return len([deg for deg in g.degree() if deg == 2])
+add_to_lists(degree_two_vertices, efficient_invariants, all_invariants)
+
+def degree_order_minus_one_vertices(g):
+    """
+    The number of vertices with degree = n-1
+    """
+    return len([deg for deg in g.degree() if deg == g.order() - 1])
+add_to_lists(degree_order_minus_one_vertices, efficient_invariants, all_invariants)
+
 
 #####
 # INTRACTABLE INVATIANTS
