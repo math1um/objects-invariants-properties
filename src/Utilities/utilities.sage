@@ -398,6 +398,14 @@ def is_simplical_vertex(g, v):
     induced_neighborhood = g.subgraph(neighbors)
     return induced_neighborhood.is_clique()
 	
+# Defined by Sergey Norin at SIAM DM 2018
+def is_homogenous_set(g, s):
+    """
+    Set of vertices s is homogenous if s induces a clique or s is an independent set.
+    """
+    induced_g = g.subgraph(s)
+    return g.is_independent_set(s) or induced_g.is_clique()
+
 	
 #TESTING
 
