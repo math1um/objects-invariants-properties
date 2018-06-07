@@ -928,7 +928,7 @@ alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
-is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex.
+is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
 has_exactly_two_simplical_vertices]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
