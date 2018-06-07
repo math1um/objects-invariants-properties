@@ -1203,7 +1203,14 @@ def simplical_vertices(g):
     return sum( is_simplical_vertex(g,v) for v in g.vertices() )
 add_to_lists(simplical_vertices, efficient_invariants, all_invariants)
 
-	
+def first_zagreb_index(g):
+    """
+    The sume of squares of the degrees
+    """
+    return sum(g.degree(v)**2 for v in g.vertices())
+add_to_lists(first_zagreb_index, efficient_invariants, all_invariants)
+
+
 #####
 # INTRACTABLE INVATIANTS
 #####
