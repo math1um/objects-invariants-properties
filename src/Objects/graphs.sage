@@ -2810,6 +2810,11 @@ ce144 = Graph('LdEIDOHA{dc_Sa')
 ce144.name(new = "ce144")
 add_to_lists(ce144, graph_objects, all_graphs)
 
+petersen_line_graph = (graphs.PetersenGraph()).line_graph()
+petersen_line_graph.relabel()
+petersen_line_graph.name(new = "Line graph of Petersen graph")
+add_to_lists(petersen_line_graph, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
