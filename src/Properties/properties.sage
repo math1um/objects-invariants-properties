@@ -908,7 +908,7 @@ def has_exactly_two_simplical_vertices(g):
 def is_two_tree(g):
     """
     Define k-tree recursively:
-        - Complete Graph on k vertices is a k-tree
+        - Complete Graph on (k+1)-vertices is a k-tree
         - A k-tree on n+1 vertices is constructed by selecting some k-tree on n vertices and
             adding a degree k vertex such that its open neighborhood is a clique.
     """
