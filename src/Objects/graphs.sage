@@ -2820,6 +2820,11 @@ ce145 = Graph('K~?GW[PeW@_F')
 ce145.name(new = "ce145") # Contributed by Sarah
 add_to_lists(ce145, graph_objects, all_graphs)
 
+# CE to independence number >= min( girth, floor(lovasz_theta) )
+ce146 = Graph('hUYuvZu}rzVuvuzz]}vvu^^Y}}q}}t^^ZVvuy}}vjzzNVvunVvuVjzzTy}}unVvuy|^^Zty}}vty}}ry|^^Y}nVvuvty}}v^Vjzz]}nVvu}}nVvu^^VjzzVvty}}u}}nVvuZzy|^^W')
+ce146.name(new = "ce146") # Contributed by Jianxian Chen, @a234
+add_to_lists(ce146, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
