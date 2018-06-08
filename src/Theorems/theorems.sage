@@ -269,6 +269,9 @@ def sigma_dist2_geq_half_n(g):
     return sigma_dist2(g) >= g.order()/2
 add_to_lists(sigma_dist2_geq_half_n, hamiltonian_sufficient, all_property_theorems)
 
+# Bauer, Douglas, et al. "Long cycles in graphs with large degree sums." Discrete Mathematics 79.1 (1990): 59-70.
+add_to_lists(is_bauer, hamiltonian_sufficient, all_property_theorems)
+
 
 ####
 # HAMILTONICITY NECESSARY CONDITIONS
