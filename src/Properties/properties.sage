@@ -936,7 +936,14 @@ def is_prism_hamiltonian(g):
     A graph G is prism hamiltonian if G x K2 (cartesian product) is hamiltonian
     """
     return g.cartesian_product(graphs.CompleteGraph(2)).is_hamiltonian()
-	
+
+# Bauer, Douglas, et al. "Long cycles in graphs with large degree sums." Discrete Mathematics 79.1 (1990): 59-70.
+def is_bauer(g):
+    """
+    True if g is 2_tough and sigma_3 >= order
+    """
+    return is_2_tough(g) and sigma_k(g, 3) >= g.order()	
+
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -970,7 +977,7 @@ is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
-has_two_ham_cycles, is_two_tree, is_two_path, is_prism_hamiltonian]
+has_two_ham_cycles, is_two_tree, is_two_path, is_prism_hamiltonian, is_bauer]
 
 removed_properties = [is_pebbling_class0]
 
