@@ -2843,6 +2843,11 @@ DLV05 = Graph( 'Qs???CA??B_M?_B?`_QW?KC@o??')
 DLV05.name(new = "DLV05")
 add_to_lists(DLV05, graph_objects, all_graphs)
 
+# Felix Lazebnik and Spencer Tofts, An Extremal Property of Turan Graphs. The electronic journal of combinatorics, 2010.
+LozTof10 = Graph('P????????????@?@?Y?@UBEO')
+LozTof10.name(new = "LozTof10")
+add_to_lists(LozTof10, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
