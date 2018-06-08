@@ -42,9 +42,9 @@ def store_values(overwrite=False, database=None, verbose=False):
     # Miscomputed by Sage as 6.9999
     store_invariant_value(Graph.lovasz_theta, sylvester, 7, overwrite=overwrite, database=database, verbose=verbose)
 
-    # c100 is hamiltonian. Cite: Aldred, Robert EL, et al. "Nonhamiltonian 3-connected cubic planar graphs." SIAM Journal on Discrete Mathematics 13.1 (2000): 25-32.
-    store_property_value(Graph.is_hamiltonian, c100, True, overwrite=overwrite, database=database, verbose=verbose)
-    store_invariant_value(Graph.lovasz_theta, c100, 46.694, overwrite=overwrite, database=database, verbose=verbose)
+    # fullerene100 is hamiltonian. Cite: Aldred, Robert EL, et al. "Nonhamiltonian 3-connected cubic planar graphs." SIAM Journal on Discrete Mathematics 13.1 (2000): 25-32.
+    store_property_value(Graph.is_hamiltonian, fullerene100, True, overwrite=overwrite, database=database, verbose=verbose)
+    store_invariant_value(Graph.lovasz_theta, fullerene100, 46.694, overwrite=overwrite, database=database, verbose=verbose)
 
     # Calculated haemers *is* 3-connected using new property definition on 160418
     store_property_value(is_three_connected, haemers, True, overwrite=overwrite, database=database, verbose=verbose)
