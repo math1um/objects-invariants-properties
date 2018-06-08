@@ -406,6 +406,13 @@ def is_homogenous_set(g, s):
     induced_g = g.subgraph(s)
     return g.is_independent_set(s) or induced_g.is_clique()
 
+def generalized_degree(g,S):
+    """
+    The cardinality of the union of the neighborhoods of each v in S.
+    """
+    neighborhood_union = set(w for v in S for w in g.neighbors(v))
+    return len(neighborhood_union)
+	
 	
 #TESTING
 
