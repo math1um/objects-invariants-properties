@@ -1238,6 +1238,14 @@ def minimum_degree_vertices(g):
     return len([deg for deg in g.degree() if deg == min_degree(g)])
 add_to_lists(minimum_degree_vertices, efficient_invariants, all_invariants)
 
+def second_zagreb_index(g):
+    """
+    The sum over all edges (v,w) of the product of degrees(v)*degree(w)
+    """
+    return sum(g.degree(v)*g.degree(w) for (v,w) in g.edge_iterator(labels=False))
+add_to_lists(second_zagreb_index, efficient_invariants, all_invariants)
+
+
 #####
 # INTRACTABLE INVATIANTS
 #####
