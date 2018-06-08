@@ -2824,6 +2824,10 @@ add_to_lists(ce145, graph_objects, all_graphs)
 ce146 = Graph('hUYuvZu}rzVuvuzz]}vvu^^Y}}q}}t^^ZVvuy}}vjzzNVvunVvuVjzzTy}}unVvuy|^^Zty}}vty}}ry|^^Y}nVvuvty}}v^Vjzz]}nVvu}}nVvu^^VjzzVvty}}u}}nVvuZzy|^^W')
 ce146.name(new = "ce146") # Contributed by Jianxian Chen, @a234
 add_to_lists(ce146, graph_objects, all_graphs)
+ 
+c4_free_subgraph_of_Q3 = Graph('Gb_k@C')
+c4_free_subgraph_of_Q3.name(new = "c4_free_subgraph_of_Q3")
+add_to_lists(c4_free_subgraph_of_Q3, graph_objects, all_graphs)
 
 
 #graph_objects: all graphs with no duplicates
