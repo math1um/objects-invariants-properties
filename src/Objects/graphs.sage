@@ -2848,6 +2848,11 @@ LozTof10 = Graph('P????????????@?@?Y?@UBEO')
 LozTof10.name(new = "LozTof10")
 add_to_lists(LozTof10, graph_objects, all_graphs)
 
+# Garnick, D. K., Kwong, Y. H. and Lazebnik, F. (1993), Extremal graphs without three‐cycles or four‐cycles. J. Graph Theory, 17: 633-645. doi:10.1002/jgt.3190170511
+GKL11 = Graph('Jo?OQoqJAK?')
+GKL11.name(new = "GKL11")
+add_to_lists(GKL11, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
