@@ -2857,6 +2857,16 @@ triangleReplacedCoxeter = Graph("~?@S{CWOCB?O?_B?A??_?W?A??C??W??O??C??B@?????A_
 triangleReplacedCoxeter.name(new = "triangleReplacedCoxeter")
 add_to_lists(triangleReplacedCoxeter, graph_objects, all_graphs)
 
+# Fig 5.4 of Chartrand, Gary, Linda Lesniak, and Ping Zhang. Graphs & digraphs. Vol. 39. CRC press, 2010.
+CGLZ10_f54 = Graph('I?_aCwvUw')
+CGLZ10_f54.name(new = "CGLZ10_f54")
+add_to_lists(CGLZ10_f54, graph_objects, all_graphs)
+
+# Fig 5.5 of Chartrand, Gary, Linda Lesniak, and Ping Zhang. Graphs & digraphs. Vol. 39. CRC press, 2010.
+CGLZ10_f55 = Graph('K??H?C@?W`z_')
+CGLZ10_f55.name(new = "CGLZ10_f55")
+add_to_lists(CGLZ10_f55, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
