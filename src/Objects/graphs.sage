@@ -2838,6 +2838,11 @@ CaHKLS17 = Graph("~?AeCsAGK_WG??@?B?A?@GG@@?C??I??I?AC?@@???G???_??b??KA?@????_?
 CaHKLS17.name(new = "CaHKLS17")
 add_to_lists(CaHKLS17, graph_objects, all_graphs)
 
+# Dmytrenko, V. , Lazebnik, F. and Viglione, R. (2005), Isomorphism criterion for monomial graphs. J. Graph Theory, 48: 322-328. doi:10.1002/jgt.20055
+DLV05 = Graph( 'Qs???CA??B_M?_B?`_QW?KC@o??')
+DLV05.name(new = "DLV05")
+add_to_lists(DLV05, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
