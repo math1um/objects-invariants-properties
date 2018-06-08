@@ -2829,6 +2829,10 @@ c4_free_subgraph_of_Q3 = Graph('Gb_k@C')
 c4_free_subgraph_of_Q3.name(new = "c4_free_subgraph_of_Q3")
 add_to_lists(c4_free_subgraph_of_Q3, graph_objects, all_graphs)
 
+ce147 = Graph('L`?M@_LBf_Q~Y}')
+ce147.name(new = "ce147")
+add_to_lists(ce147, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
