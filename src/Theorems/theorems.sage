@@ -272,6 +272,9 @@ add_to_lists(sigma_dist2_geq_half_n, hamiltonian_sufficient, all_property_theore
 # Bauer, Douglas, et al. "Long cycles in graphs with large degree sums." Discrete Mathematics 79.1 (1990): 59-70.
 add_to_lists(is_bauer, hamiltonian_sufficient, all_property_theorems)
 
+# Jung, H. A. "On maximal circuits in finite graphs." Annals of Discrete Mathematics. Vol. 3. Elsevier, 1978. 129-144.
+add_to_lists(is_jung, hamiltonian_sufficient, all_property_theorems)
+
 
 ####
 # HAMILTONICITY NECESSARY CONDITIONS
