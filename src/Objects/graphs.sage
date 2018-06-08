@@ -2867,6 +2867,11 @@ CGLZ10_f55 = Graph('K??H?C@?W`z_')
 CGLZ10_f55.name(new = "CGLZ10_f55")
 add_to_lists(CGLZ10_f55, graph_objects, all_graphs)
 
+# Jan Goedgebeur, On minimal triangle-free 6-chromatic graphs. 2017. https://arxiv.org/pdf/1707.07581.pdf
+Goedgebeur17 = Graph('U???CA?O?O_aGC?`A@?HDGQOPAA@AGE@?Gc@~_??')
+Goedgebeur17.name(new = "Goedgebuer17")
+add_to_lists(Goedgebeur17, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
