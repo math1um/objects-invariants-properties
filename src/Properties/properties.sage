@@ -915,15 +915,20 @@ def is_two_tree(g):
     if(g.is_isomorphic(graphs.CompleteGraph(3))):
         return True
 
+    # We can just recurse from any degree-2 vertex; no need to test is_two_tree(g-w) if is_two_tree(g-v) returns False.
+    # Intuition why: if neighborhood of a degree-2 v is not a triangle, it won't become one if we remove w (so clique check OK),
+    # and, removing a degree-2 vertex of one triangle cannot destroy another triangle (so recursion OK).
     degree_two_vertices = (v for v in g.vertices() if g.degree(v) == 2)
-    for v in degree_two_vertices:
-        if not g.is_clique(g.neighbors(v) + [v]):
-            return false
-        g2 = g.copy()
-        g2.delete_vertex(v)
-        if is_two_tree(g2):
-            return True
-    return False
+    try:
+        v = next(degree_two_vertices)
+    except StopIteration: # Empty list. No degree 2 vertices.
+        return False
+
+    if not g.has_edge(g.neighbors(v)): # Clique
+        return false
+    g2 = g.copy()
+    g2.delete_vertex(v)
+    return is_two_tree(g2)
 	
 def is_two_path(g):
     """
@@ -976,7 +981,7 @@ has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
-has_exactly_two_simplical_vertices]
+has_exactly_two_simplical_vertices, is_two_tree]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
@@ -985,8 +990,7 @@ is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
-has_two_ham_cycles, is_two_tree, is_two_path, is_prism_hamiltonian, is_bauer,
-is_jung]
+has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung]
 
 removed_properties = [is_pebbling_class0]
 
