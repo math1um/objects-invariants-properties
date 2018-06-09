@@ -2872,6 +2872,14 @@ Goedgebeur17 = Graph('U???CA?O?O_aGC?`A@?HDGQOPAA@AGE@?Gc@~_??')
 Goedgebeur17.name(new = "Goedgebuer17")
 add_to_lists(Goedgebeur17, graph_objects, all_graphs)
 
+# David Garnick, Y.H. Harris Kwong, and Felxi Lazebnik, Algorithmic search for extremal graphs of girth at least five. 1992.
+GKL92_1 = Graph('Q??G_GBD?SOAOAGKcHaPGcObe??')
+GKL92_1.name(new = "GKL92_1")
+add_to_lists(GKL92_1, graph_objects, all_graphs)
+GKL92_2 = Graph('WhCGKC@QGC_@CPP?_?HC@a@C?`H?OGQ@D?C@@G?K_P?aO?c')
+GKL92_2.name(new = "GKL92_2")
+add_to_lists(GKL92_2, graph_objects, all_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
