@@ -2909,6 +2909,10 @@ thomassen105 = Graph("~?@hhe?IC@GG?a@?@A?__GG???CA?GC????C@?@?O?????_C?@?G??????
 thomassen105.name(new = "thomassen105")
 add_to_lists(thomassen105, graph_objects, all_graphs)
 
+# R.L. Graham, On edgewise 2-colord graphs with monchromatic triangles and containing no complete hexagon. Journal of Combinatorial Theory, 4(3): 300, 1968.
+Graham68 = Graph('GUZ~~{')
+Graham68.name(new = "Graham68")
+add_to_lists(Graham68, graph_objects, all_graphs)
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
