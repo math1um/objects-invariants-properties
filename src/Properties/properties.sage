@@ -232,6 +232,14 @@ def is_three_connected(g):
             return False
     return True
 
+def is_four_connected(g):
+    """
+    True if g is at least four connected, i.e. must remove at least 4 vertices to disconnect graph
+
+    Implementation requires Sage 8.2+.
+    """
+    return g.vertex_connectivity(k = 4)
+	
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
     k = vertex_con(g)
@@ -988,7 +996,8 @@ has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
-has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar]
+has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar, 
+is_four_connected]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
