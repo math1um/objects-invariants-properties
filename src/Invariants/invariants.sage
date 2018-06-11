@@ -1497,6 +1497,13 @@ def homogenous_number(g):
     return max(independence_number(g), g.clique_number())
 add_to_lists(homogenous_number, intractable_invariants, all_invariants)
 
+def edge_domination_number(g):
+    """
+    The minimum size of a set of edges S such that every edge not in S is incident to an edge in S
+    """
+    return domination_number(g.line_graph())
+add_to_lists(edge_domination_number, intractable_invariants, all_invariants)
+	
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
