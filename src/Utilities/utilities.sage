@@ -413,6 +413,16 @@ def generalized_degree(g,S):
     neighborhood_union = set(w for v in S for w in g.neighbors(v))
     return len(neighborhood_union)
 	
+def common_neighbors(g, s):
+    """
+    Returns the vertices in g adjacent to every vertex in s
+    """
+    if not s:
+        return []
+    comm_neigh = Set(g.neighbors(s[0]))
+    for v in s[1:]:
+        comm_neigh = comm_neigh.intersection(Set(g.neighbors(v)))
+    return list(comm_neigh)	
 	
 #TESTING
 
