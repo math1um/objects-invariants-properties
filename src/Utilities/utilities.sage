@@ -424,6 +424,25 @@ def common_neighbors(g, s):
         comm_neigh = comm_neigh.intersection(set(g.neighbors(v)))
     return list(comm_neigh)	
 	
+def extremal_triangle_free_extension(g):
+    """
+    Returns graph with edges added until no more possible without creating triangles. 
+    If input is not triangle-free, raises RuntimeError.
+
+    This function is not deterministic; the output may vary among any of possibly many extremal triangle-free extensions.
+    The output is also not necessarily the maximal triangle-free extension.
+    """
+    if not g.is_triangle_free():
+        raise RuntimeError("Graph is not triangle-free")
+
+    g2 = g.copy()
+    from itertools import combinations
+    for (v,w) in combinations(sample(g2.vertices(), k = g2.order()), 2): # Sample so output not deterministic
+        if not g2.has_edge(v, w) and all(u not in g2.neighbors(v) for u in g2.neighbors(w)):
+            g2.add_edge(v, w)
+    return g2
+	
+	
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
