@@ -1245,6 +1245,19 @@ def second_zagreb_index(g):
     return sum(g.degree(v)*g.degree(w) for (v,w) in g.edge_iterator(labels=False))
 add_to_lists(second_zagreb_index, efficient_invariants, all_invariants)
 
+# Damir Vukicevic, Qiuli Li, Jelena Sedlar, and Tomislav Doslic, Lanzhou Index. MATCH Commun. Math. Comput. Chem., 80: 863-876, 2018.
+def lanzhou_index(g):
+    """
+    The sum over all vertices v of products of the co-degree of v (deg(v) in the complement of g) times the square of deg(v).
+
+    sage: lanzhou_index(graphs.CompleteGraph(10))
+    0
+    sage: lanzhou_index(graphs.CompleteBipartiteGraph(5,5))
+    1000
+    """
+    n = g.order()
+    return sum( ((n-1) - g.degree(v)) * (g.degree(v) ** 2) for v in g.vertices() )
+add_to_lists(lanzhou_index, efficient_invariants, all_invariants)
 
 #####
 # INTRACTABLE INVATIANTS
