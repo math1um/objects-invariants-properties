@@ -956,6 +956,13 @@ def is_jung(g):
     See functions toughness(g) and sigma_2(g) for more details.
     """
     return g.order() >= 11 and is_1_tough(g) and sigma_2(g) >= g.order() - 4
+
+def is_locally_planar(g):
+    """
+    True if the open neighborhood of each vertex v is planar
+    """
+    # Can't use localise() method because g.is_planar() is a built-in method; doesn't accept g as argument.
+    return all(g.subgraph(g.neighbors(v)).is_planar() for v in g.vertices())
 	
 	
 #add all properties derived from pairs of invariants
@@ -981,7 +988,7 @@ has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
-has_exactly_two_simplical_vertices, is_two_tree]
+has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
