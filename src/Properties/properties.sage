@@ -44,7 +44,7 @@ def pairs_have_unique_common_neighbor(g):
     else:
         return True
     
-def is_distance_transitive(G):
+def is_distance_transitive(g):
     """
     True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there is an automorphism sending a->u and b->v
 
