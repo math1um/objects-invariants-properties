@@ -44,26 +44,26 @@ def pairs_have_unique_common_neighbor(g):
     else:
         return True
     
-# Returns whether g is a distance-transitive graph
-# A graph is_distance_transitive if a,b,u,v satisfy dist(a,b) = dist(u,v) implies there is an automorphism sending a->u and b->v.
-def is_distance_transitive(g):
+def is_distance_transitive(G):
     """
-    Test cases:
-        sage: is_distance_transitive(graphs.Tutte12Cage())
-        False
-        sage: is_distance_transitive(graphs.FosterGraph())
-        True
+    True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there is an automorphism sending a->u and b->v
+
+    sage: is_distance_transitive(graphs.Tutte12Cage())
+    False
+    sage: is_distance_transitive(graphs.FosterGraph())
+    True
     """
     from itertools import combinations
-    n = g.automorphism_group()
-    for p in [2..g.diameter()]:
-        dist = g.distance_all_pairs()
+    dist_dict = g.distance_all_pairs()
+    auto_group = g.automorphism_group()
+
+    for d in g.distances_distribution():
         sameDistPairs = []
         for (u,v) in combinations(g.vertices(), 2):
-            if dist[u][v] == p:
+            if dist_dict[u].get(v, +Infinity) == d: # By default, no entry if disconnected. We substitute +Infinity.
                 sameDistPairs.append(Set([u,v]))
-        if sameDistPairs: # True if nonempty
-            if not(Set(sameDistPairs) == Set(n.orbit(sameDistPairs[1], action = "OnSets"))):
+        if len(sameDistPairs) >= 2:
+            if not(Set(sameDistPairs) == Set(auto_group.orbit(sameDistPairs[0], action = "OnSets"))):
                 return False
     return True
 
