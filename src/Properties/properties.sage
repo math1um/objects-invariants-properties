@@ -63,7 +63,7 @@ def is_distance_transitive(g):
             if dist_dict[u].get(v, +Infinity) == d: # By default, no entry if disconnected. We substitute +Infinity.
                 sameDistPairs.append(Set([u,v]))
         if len(sameDistPairs) >= 2:
-            if not(Set(sameDistPairs) == Set(auto_group.orbit(sameDistPairs[0], action = "OnSets"))):
+            if not(len(sameDistPairs) == len(auto_group.orbit(sameDistPairs[0], action = "OnSets"))):
                 return False
     return True
 
