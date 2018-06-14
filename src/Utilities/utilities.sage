@@ -442,6 +442,27 @@ def extremal_triangle_free_extension(g):
             g2.add_edge(v, w)
     return g2
 	
+def pyramid_encapsulation(g):
+    """
+    Returns the pyramid encapsulation of graph g.
+
+    Let a pyramid be a triangle with each edge bisected, and the midpoints
+        joined to form an inner triangle on vertices 0,1,2
+    For any graph g, make all its vertices adjacent to 0,1,2.
+
+    The pyramid is a pebbling Class1 graph (pebbling number is order + 1).
+    The pyramid encapuslation always yields a Class1 graph.
+    """
+    pyramid = graphs.CompleteGraph(3)
+    pyramid.add_vertices([3..5])
+    pyramid.add_edges([[3,1], [3,0], [4,1], [4,2], [5,0], [5,2]])
+
+    pe = pyramid.disjoint_union(g)
+    for v in [0..2]:
+        for w in g.vertices():
+            pe.add_edge((0, v), (1,w))
+    return pe
+
 	
 #TESTING
 
