@@ -1503,7 +1503,19 @@ def edge_domination_number(g):
     """
     return domination_number(g.line_graph())
 add_to_lists(edge_domination_number, intractable_invariants, all_invariants)
-	
+
+def circumference(g):
+    """
+    Returns length of longest cycle in g
+
+    If acyclic, returns +Infinity.
+    """
+    lengths = cycle_lengths(g)
+    if not lengths:
+        return +Infinity
+    else:
+        return max(lengths)
+add_to_lists(circumference, intractable_invariants, all_invariants)		
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
