@@ -14,6 +14,7 @@ problem_graphs = []
 sloane_graphs = []
 non_connected_graphs = []
 dimacs_graphs = []
+disconnected_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -2843,11 +2844,6 @@ DLV05 = Graph( 'Qs???CA??B_M?_B?`_QW?KC@o??')
 DLV05.name(new = "DLV05")
 add_to_lists(DLV05, graph_objects, all_graphs)
 
-# Felix Lazebnik and Spencer Tofts, An Extremal Property of Turan Graphs. The electronic journal of combinatorics, 2010.
-LozTof10 = Graph('P????????????@?@?Y?@UBEO')
-LozTof10.name(new = "LozTof10")
-add_to_lists(LozTof10, graph_objects, all_graphs)
-
 # Garnick, D. K., Kwong, Y. H. and Lazebnik, F. (1993), Extremal graphs without three‐cycles or four‐cycles. J. Graph Theory, 17: 633-645. doi:10.1002/jgt.3190170511
 GKL11 = Graph('Jo?OQoqJAK?')
 GKL11.name(new = "GKL11")
@@ -2913,6 +2909,15 @@ add_to_lists(thomassen105, graph_objects, all_graphs)
 Graham68 = Graph('GUZ~~{')
 Graham68.name(new = "Graham68")
 add_to_lists(Graham68, graph_objects, all_graphs)
+
+
+######  DISCONNECTED GRAPHS  ######
+
+# Felix Lazebnik and Spencer Tofts, An Extremal Property of Turan Graphs. The electronic journal of combinatorics, 2010.
+LozTof10 = Graph('P????????????@?@?Y?@UBEO')
+LozTof10.name(new = "LozTof10")
+add_to_lists(LozTof10, disconnected_graphs)
+
 
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
