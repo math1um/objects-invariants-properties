@@ -971,7 +971,24 @@ def is_locally_planar(g):
     """
     # Can't use localise() method because g.is_planar() is a built-in method; doesn't accept g as argument.
     return all(g.subgraph(g.neighbors(v)).is_planar() for v in g.vertices())
-	
+
+# Bela Bollobas and Andrew Thomason, Weakly Pancyclic Graphs. Journal of Combinatorial Theory 77: 121--137, 1999.
+def is_weakly_pancyclic(g):
+    """
+    True if g contains cycles of every length k from k = girth to k = circumfrence
+
+    Returns False if g is acyclic (in which case girth = circumfrence = +Infinity).
+
+    sage: is_weakly_pancyclic(graphs.CompleteGraph(6))
+    True
+    sage: is_weakly_pancyclic(graphs.PetersenGraph())
+    False
+    """
+    lengths = cycle_lengths(g)
+    if not lengths: # acyclic
+        return False
+    else:
+        return lengths == set([min(lengths)..max(lengths)])
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -1006,7 +1023,8 @@ is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
-has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung]
+has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
+is_weakly_pancyclic]
 
 removed_properties = [is_pebbling_class0]
 
