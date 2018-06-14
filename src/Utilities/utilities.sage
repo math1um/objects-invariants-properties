@@ -463,6 +463,25 @@ def pyramid_encapsulation(g):
             pe.add_edge((0, v), (1,w))
     return pe
 
+def cycle_lengths(g):
+    """
+    Returns set of all cycle lengths in g - without repetition
+
+    If g is acyclic, returns an empty list.
+    Performs depth-first search of all possible cycles.
+    """
+    lengths = set()
+    for init_vertex in g.vertices():
+        path_stack = [[init_vertex]]
+        while path_stack:
+            path = path_stack.pop()
+            for neighbor in g.neighbors(path[-1]):
+                if neighbor not in path:
+                    path_stack.append(path + [neighbor])
+                elif neighbor == path[0] and len(path) > 2:
+                    lengths.add(len(path))
+    return lengths
+	
 	
 #TESTING
 
