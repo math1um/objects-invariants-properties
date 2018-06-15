@@ -986,7 +986,7 @@ def is_weakly_pancyclic(g):
     """
     lengths = cycle_lengths(g)
     if not lengths: # acyclic
-        return False
+        raise ValueError("Graph is acyclic. Property undefined.")
     else:
         return lengths == set([min(lengths)..max(lengths)])
 
