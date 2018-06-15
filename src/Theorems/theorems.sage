@@ -275,6 +275,10 @@ add_to_lists(is_bauer, hamiltonian_sufficient, all_property_theorems)
 # Jung, H. A. "On maximal circuits in finite graphs." Annals of Discrete Mathematics. Vol. 3. Elsevier, 1978. 129-144.
 add_to_lists(is_jung, hamiltonian_sufficient, all_property_theorems)
 
+# S. Goodman and S. Hedetniemi, Sufficient Conditions for a Graph to Be Hamiltonian. Journal of Combinatorial Theory 16: 175--180, 1974.
+def is_two_connected_claw_free_paw_free(g):
+	return is_two_connected(g) and is_claw_free_paw_free(g)
+add_to_lists(is_claw_free_paw_free, hamiltonian_sufficient, all_property_theorems)
 
 ####
 # HAMILTONICITY NECESSARY CONDITIONS
