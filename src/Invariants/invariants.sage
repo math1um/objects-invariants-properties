@@ -1508,11 +1508,11 @@ def circumference(g):
     """
     Returns length of longest cycle in g
 
-    If acyclic, returns +Infinity.
+    If acyclic, throws a ValueError. Some define this to be 0; we leave it up to the user.
     """
     lengths = cycle_lengths(g)
     if not lengths:
-        return +Infinity
+        raise ValueError("Graph is acyclic. Circumference undefined")
     else:
         return max(lengths)
 add_to_lists(circumference, intractable_invariants, all_invariants)		
