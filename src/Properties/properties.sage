@@ -1036,6 +1036,9 @@ def is_bull_free(g):
     True if g does not have an induced subgraph isomoprhic to graphs.BullGraph()
     """
     return not has_bull(g)
+
+def is_claw_free_bull_free(g):
+	return is_claw_free(g) and is_bull_free(g)
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -1061,7 +1064,8 @@ pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal,
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
 has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar, 
-is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free]
+is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free, 
+is_claw_free_bull_free]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
