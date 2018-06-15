@@ -14,7 +14,6 @@ problem_graphs = []
 sloane_graphs = []
 non_connected_graphs = []
 dimacs_graphs = []
-disconnected_graphs = []
 all_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
@@ -120,8 +119,6 @@ janko_kharaghani1800.name(new = "Janko-Kharagani 1800")
 
 for graph in sage_graphs + [mathon_strongly_regular0, mathon_strongly_regular1, mathon_strongly_regular2, janko_kharaghani936, janko_kharaghani1800]:
     add_to_lists(graph, graph_objects, all_graphs)
-
-add_to_lists(graphs.WorldMap(), non_connected_graphs, all_graphs)
 
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
 add_to_lists(graphs.MeredithGraph(), problem_graphs, all_graphs)
@@ -467,11 +464,6 @@ add_to_lists(p3xk2xk2, graph_objects, all_graphs)
 p4Xp5 = graphs.PathGraph(4).strong_product(graphs.PathGraph(5))
 p4Xp5.name(new = "p4Xp5")
 add_to_lists(p4Xp5, graph_objects, all_graphs)
-
-# Product Graphs, fig. 5.4
-p5txp3 = graphs.PathGraph(5).tensor_product(graphs.PathGraph(3))
-p5txp3.name(new = "p5txp3")
-add_to_lists(p5txp3, non_connected_graphs, all_graphs)
 
 # Product Graphs, Fig 6.1
 k3lxp3 = graphs.CompleteGraph(3).lexicographic_product(graphs.PathGraph(3))
@@ -2916,7 +2908,14 @@ add_to_lists(Graham68, graph_objects, all_graphs)
 # Felix Lazebnik and Spencer Tofts, An Extremal Property of Turan Graphs. The electronic journal of combinatorics, 2010.
 LozTof10 = Graph('P????????????@?@?Y?@UBEO')
 LozTof10.name(new = "LozTof10")
-add_to_lists(LozTof10, disconnected_graphs)
+add_to_lists(LozTof10, non_connected_graphs)
+
+# Product Graphs, fig. 5.4
+p5txp3 = graphs.PathGraph(5).tensor_product(graphs.PathGraph(3))
+p5txp3.name(new = "p5txp3")
+add_to_lists(p5txp3, non_connected_graphs)
+
+add_to_lists(graphs.WorldMap(), non_connected_graphs)
 
 
 #graph_objects: all graphs with no duplicates
