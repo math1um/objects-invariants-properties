@@ -1001,7 +1001,29 @@ def is_pancyclic(g):
     """
     lengths = cycle_lengths(g)
     return lengths == set([3..g.order()])
-		
+
+def has_two_walk(g):
+    """
+    A two-walk is a closed walk that visits every vertex and visits no vertex more than twice.
+
+    Two-walk is a generalization of Hamiltonian cycles. If a graph is Hamiltonian, then it has a two-walk.
+
+    sage: has_two_walk(c4c4)
+    True
+    sage: has_two_walk(graphs.WindmillGraph(3,3))
+    """
+    for init_vertex in g.vertices():
+        path_stack = [[init_vertex]]
+        while path_stack:
+            path = path_stack.pop()
+            for neighbor in g.neighbors(path[-1]):
+                if neighbor == path[0] and all(v in path for v in g.vertices()):
+                    return True
+                elif path.count(neighbor) < 2:
+                    path_stack.append(path + [neighbor])
+    return False
+
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
@@ -1036,7 +1058,7 @@ has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
-is_weakly_pancyclic, is_pancyclic]
+is_weakly_pancyclic, is_pancyclic, has_two_walk]
 
 removed_properties = [is_pebbling_class0]
 
