@@ -1515,7 +1515,17 @@ def circumference(g):
         raise ValueError("Graph is acyclic. Circumference undefined")
     else:
         return max(lengths)
-add_to_lists(circumference, intractable_invariants, all_invariants)		
+add_to_lists(circumference, intractable_invariants, all_invariants)
+
+def tree_number(g):
+    """
+    The order of a maximum-size induced subgraph that's a tree in g
+
+    See Erdös, Paul, Michael Saks, and Vera T. Sós. "Maximum induced trees in graphs." Journal of Combinatorial Theory, Series B 41.1 (1986): 61-79.
+    """
+    return max_induced_tree(g).order()
+add_to_lists(tree_number, intractable_invariants, all_invariants)
+	
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
