@@ -481,8 +481,25 @@ def cycle_lengths(g):
                 elif neighbor == path[0] and len(path) > 2:
                     lengths.add(len(path))
     return lengths
-	
-	
+
+def max_induced_tree(g):
+    """
+    Returns *a* maximum-size tree which is an induced subgraph of g
+
+    Raises ValueError if g is not connected, since some invariant theorems assume connected.
+    """
+    if not g.is_connected():
+        raise ValueError("Input graph is not connected")
+
+    from itertools import combinations
+    for j in xrange(g.order()):
+        for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
+            sub_g = g.copy()
+            sub_g.delete_vertices(subset)
+            if sub_g.is_tree():
+                return sub_g
+
+
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
