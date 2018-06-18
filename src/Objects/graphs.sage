@@ -2817,7 +2817,7 @@ add_to_lists(ce145, graph_objects, all_graphs)
 ce146 = Graph('hUYuvZu}rzVuvuzz]}vvu^^Y}}q}}t^^ZVvuy}}vjzzNVvunVvuVjzzTy}}unVvuy|^^Zty}}vty}}ry|^^Y}nVvuvty}}v^Vjzz]}nVvu}}nVvu^^VjzzVvty}}u}}nVvuZzy|^^W')
 ce146.name(new = "ce146") # Contributed by Jianxian Chen, @a234
 add_to_lists(ce146, graph_objects, all_graphs)
- 
+
 c4_free_subgraph_of_Q3 = Graph('Gb_k@C')
 c4_free_subgraph_of_Q3.name(new = "c4_free_subgraph_of_Q3")
 add_to_lists(c4_free_subgraph_of_Q3, graph_objects, all_graphs)
@@ -2921,32 +2921,25 @@ add_to_lists(graphs.WorldMap(), non_connected_graphs)
 #graph_objects: all graphs with no duplicates
 #obvious way to remove duplicates in list of ALL objects
 
-"""
-graph_objects = []
-for g in union_objects, idfun=Graph.graph6_string:
-    if not g in graph_objects:
-        graph_objects.append(g)
-"""
-
-#fast way to remove duplicates in list of ALL objects
-#from : http://www.peterbe.com/plog/uniqifiers-benchmark
-
-
 def remove_duplicates(seq, idfun=None):
-    # order preserving
+    """
+    Utility method to remove duplicates from a list. Equality is determined
+    based on the return value of the idfun parameter. If idfun is not given,
+    the identity is used.
+
+    This method is taken from http://www.peterbe.com/plog/uniqifiers-benchmark
+        sage: graph_objects = remove_duplicates(union_objects, idfun=lambda g: g.canonical_label(algorithm='sage').graph6_string())
+    """
     if idfun is None:
         def idfun(x): return x
     seen = {}
     result = []
     for item in seq:
         marker = idfun(item)
-        # in old Python versions:
-        # if seen.has_key(marker)
-        # but in new ones:
         if marker in seen: continue
         seen[marker] = 1
         result.append(item)
     return result
 
 #could run this occasionally to check there are no duplicates
-#graph_objects = remove_duplicates(union_objects, idfun=Graph.graph6_string)
+#graph_objects = remove_duplicates(union_objects, idfun=g.canonical_label(algorithm='sage').graph6_string())
