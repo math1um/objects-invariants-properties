@@ -1063,6 +1063,12 @@ def is_oberly_sumner_p4(g):
     """
     return is_two_connected(g) and is_claw_free(g) and is_p4_free(g)
 
+# Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
+def is_matthews_sumner(g):
+    """
+    True if g is 2-connected, claw-free, and minimum-degree >= (order-1) / 3
+    """
+    return is_two_connected(g) and is_claw_free(g) and min_degree(g) >= (g.order() - 1) / 3
 	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -1090,7 +1096,7 @@ is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex
 has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar, 
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free, 
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
-is_oberly_sumner_p4]
+is_oberly_sumner_p4, is_matthews_sumner]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
