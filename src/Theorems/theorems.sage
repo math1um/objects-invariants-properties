@@ -285,6 +285,8 @@ add_to_lists(is_oberly_sumner, hamiltonian_sufficient, all_property_theorems)
 add_to_lists(is_oberly_sumner_bull, hamiltonian_sufficient, all_property_theorems)
 add_to_lists(is_oberly_sumner_p4, hamiltonian_sufficient, all_property_theorems)
 add_to_lists(is_matthews_sumner, hamiltonian_sufficient, all_property_theorems)
+add_to_lists(is_broersma_veldman_gould, hamiltonian_sufficient, all_property_theorems)
+
 
 ####
 # HAMILTONICITY NECESSARY CONDITIONS
