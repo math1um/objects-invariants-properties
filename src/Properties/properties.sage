@@ -1052,8 +1052,18 @@ def is_oberly_sumner(g):
     g is_oberly_sumner if order >= 3, is_two_connected, is_claw_free, AND is_F_free
     """
     return g.order() >= 3 and is_two_connected(g) and is_claw_free(g) and is_F_free(g)
+def is_oberly_sumner_bull(g):
+    """
+    True if g is 2-connected, claw-free, and bull-free
+    """
+    return is_two_connected(g) and is_claw_free_bull_free(g)
+def is_oberly_sumner_p4(g):
+    """
+    True if g is 2-connected, claw-free, and p4-free
+    """
+    return is_two_connected(g) and is_claw_free(g) and is_p4_free(g)
 
-
+	
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
@@ -1079,7 +1089,8 @@ has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
 has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar, 
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free, 
-is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner]
+is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
+is_oberly_sumner_p4]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
