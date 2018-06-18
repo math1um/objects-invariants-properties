@@ -1069,7 +1069,13 @@ def is_matthews_sumner(g):
     True if g is 2-connected, claw-free, and minimum-degree >= (order-1) / 3
     """
     return is_two_connected(g) and is_claw_free(g) and min_degree(g) >= (g.order() - 1) / 3
-	
+def is_broersma_veldman_gould(g):
+    """
+    True if g is 2-connected, claw-free, and diameter <= 2
+    """
+    return is_two_connected(g) and is_claw_free(g) and g.diameter() <= 2
+
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
