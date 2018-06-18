@@ -1525,6 +1525,29 @@ def tree_number(g):
     """
     return max_induced_tree(g).order()
 add_to_lists(tree_number, intractable_invariants, all_invariants)
+
+def minimum_maximal_matching_size(g):
+    """
+    The minimum number of edges k s.t. there exists a matching of size k which is not extendable
+    """
+    if(g.size() == 0):
+        return 0
+
+    matchings_old = []
+    matchings = [[e] for e in g.edges()]
+    while True:
+        matchings_old = matchings
+        matchings = []
+        for matching in matchings_old:
+            extendable = False
+            for e in (edge for edge in g.edges() if edge not in matching):
+                possible_matching = matching + [e]
+                if is_matching(possible_matching):
+                    matchings.append(possible_matching)
+                    extendable = True
+            if not extendable:
+                return len(matching)
+add_to_lists(minimum_maximal_matching_size, intractable_invariants, all_invariants)
 	
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
