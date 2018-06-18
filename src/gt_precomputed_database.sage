@@ -140,9 +140,9 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
                 p.join()
             else:
                 #computation did end, so we add the value to the database
-                if (inv.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
-                    value = computation_results[(inv.__name__, g.canonical_label(algorithm='sage').graph6_string())]
-                    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(inv.__name__, g.canonical_label(algorithm='sage').graph6_string(), value))
+                if (inv.__name__, g_key) in computation_results:
+                    value = computation_results[(inv.__name__, g_key)]
+                    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(inv.__name__, g_key, value))
                     # commit the data so we don't lose anything if we abort early
                     conn.commit()
                 else:
@@ -243,12 +243,12 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
                          p.join()
                      else:
                          #computation did end, so we verify the value
-                         if (inv.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
-                             value = computation_results[(inv.__name__, g.canonical_label(algorithm='sage').graph6_string())]
-                             if value != current[g.canonical_label(algorithm='sage').graph6_string()][inv.__name__] and abs(value - current[g.canonical_label(algorithm='sage').graph6_string()][inv.__name__]) > epsilon:
+                         if (inv.__name__, g_key) in computation_results:
+                             value = computation_results[(inv.__name__, g_key)]
+                             if value != current[g_key][inv.__name__] and abs(value - current[g_key][inv.__name__]) > epsilon:
                                  print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
                                             inv.__name__, g.name(),
-                                            current[g.canonical_label(algorithm='sage').graph6_string()][inv.__name__],
+                                            current[g_key][inv.__name__],
                                             value)
                          else:
                              # the computation might have crashed
@@ -308,9 +308,9 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
                 p.join()
             else:
                 #computation did end, so we add the value to the database
-                if (prop.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
-                    value = computation_results[(prop.__name__, g.canonical_label(algorithm='sage').graph6_string())]
-                    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g.canonical_label(algorithm='sage').graph6_string(), value))
+                if (prop.__name__, g_key) in computation_results:
+                    value = computation_results[(prop.__name__, g_key)]
+                    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g_key, value))
                     # commit the data so we don't lose anything if we abort early
                     conn.commit()
                 else:
@@ -411,12 +411,12 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
                          p.join()
                      else:
                          #computation did end, so we verify the value
-                         if (prop.__name__, g.canonical_label(algorithm='sage').graph6_string()) in computation_results:
-                             value = computation_results[(prop.__name__, g.canonical_label(algorithm='sage').graph6_string())]
-                             if value != current[g.canonical_label(algorithm='sage').graph6_string()][prop.__name__]:
+                         if (prop.__name__, g_key) in computation_results:
+                             value = computation_results[(prop.__name__, g_key)]
+                             if value != current[g_key][prop.__name__]:
                                  print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
                                             prop.__name__, g.name(),
-                                            current[g.canonical_label(algorithm='sage').graph6_string()][prop.__name__],
+                                            current[g_key][prop.__name__],
                                             value)
                          else:
                              # the computation might have crashed
