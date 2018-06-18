@@ -499,6 +499,18 @@ def max_induced_tree(g):
             if sub_g.is_tree():
                 return sub_g
 
+def is_matching(s):
+    """
+    True if set of edges s is a matching, i.e. no edges share a common vertex
+
+    Ignores edges labels; only compares indices 0 and 1 in edge tuples.
+    """
+    vertex_list = [v for e in s for v in e[:2]] # Ignore any labels
+    if len(vertex_list) != len(set(vertex_list)):
+        return False
+    else:
+        return True
+
 
 #TESTING
 
