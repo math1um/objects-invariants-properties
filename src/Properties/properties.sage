@@ -329,7 +329,7 @@ def is_biclique(g):
     a graph is a biclique if the vertices can be partitioned into 2 sets that induce cliques
     sage: is_biclique(p4)
     True
-    sage: is_biclique(bow_tie)
+    sage: is_biclique(graphs.ButterlyGraph())
     True
     """
     gc = g.complement()
