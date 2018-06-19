@@ -24,24 +24,25 @@ def is_complement_of_chordal(g):
     h = g.complement()
     return h.is_chordal()
 
-#a consequence of the Friendship Theorem:
-#the only connected graphs where every pair of vertices has a unique neghbor are flowers
 def pairs_have_unique_common_neighbor(g):
     """
-    tests if a graph is a collection of disjoint triangles with a single identified vertex
-        sage: pairs_have_unique_common_neighbor(flower(5))
-        True
-        sage: pairs_have_unique_common_neighbor(k3)
-        True
-        sage: pairs_have_unique_common_neighbor(k4)
-        False
+    True if each pair of vertices in g has exactly one common neighbor
+
+    Related to the Friendship Theorem: the only connected graphs where every pair of vertices 
+    has a unique neghbor are flowers.
+
+    sage: pairs_have_unique_common_neighbor(flower(5))
+    True
+    sage: pairs_have_unique_common_neighbor(k3)
+    True
+    sage: pairs_have_unique_common_neighbor(k4)
+    False
     """
-    if max_common_neighbors(g) != 1:
-        return False
-    elif min_common_neighbors(g) != 1:
-        return False
-    else:
-        return True
+    from itertools import combinations
+    for (u,v) in combinations(g.vertices(), 2):
+        if len(common_neighbors(g, V[i], V[j])) != 1:
+            return False
+    return max
     
 def is_distance_transitive(g):
     """
