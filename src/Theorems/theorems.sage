@@ -287,6 +287,9 @@ add_to_lists(is_oberly_sumner_p4, hamiltonian_sufficient, all_property_theorems)
 add_to_lists(is_matthews_sumner, hamiltonian_sufficient, all_property_theorems)
 add_to_lists(is_broersma_veldman_gould, hamiltonian_sufficient, all_property_theorems)
 
+# Chvátal, Václav. "On Hamilton's ideals." Journal of Combinatorial Theory, Series B 12.2 (1972): 163-168.
+add_to_lists(chvatals_condition, hamiltonian_sufficient, all_property_theorems)
+
 
 ####
 # HAMILTONICITY NECESSARY CONDITIONS
