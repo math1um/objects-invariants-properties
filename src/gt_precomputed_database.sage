@@ -86,7 +86,7 @@ def precomputed_properties_for_conjecture(database=None):
     """
     return (properties_as_dict(database), (lambda g: g.canonical_label(algorithm='sage').graph6_string()), (lambda f: f.__name__))
 
-def compute_invariant_value(invariant, graph, computation_results):
+def compute_invariant_value(invariant, graph, g_key, computation_results):
     """
     Computes the value of invariant for graph and stores the result in the
     dictionary computation_results. This method is not intended to be called
@@ -94,7 +94,7 @@ def compute_invariant_value(invariant, graph, computation_results):
     separate process.
     """
     value = float(invariant(graph))
-    computation_results[(invariant.__name__, graph.canonical_label(algorithm='sage').graph6_string())] = value
+    computation_results[(invariant.__name__, g_key)] = value
 
 def update_invariant_database(invariants, graphs, timeout=60, database=None, verbose=False):
     """
@@ -126,7 +126,7 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
                     continue
 
             # start a worker thread to compute the value
-            p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, computation_results))
+            p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, g_key, computation_results))
             p.start()
 
             # give the worker thread some time to calculate the value
@@ -229,7 +229,7 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
             if g_key in current:
                 if inv.__name__ in current[g_key]:
                      # start a worker thread to compute the value
-                     p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, computation_results))
+                     p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, g_key, computation_results))
                      p.start()
 
                      # give the worker thread some time to calculate the value
@@ -254,7 +254,7 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
                              # the computation might have crashed
                              print "Computation of {} for {} failed!".format(inv.__name__, g.name())
 
-def compute_property_value(property, graph, computation_results):
+def compute_property_value(property, graph, g_key, computation_results):
     """
     Computes the value of property for graph and stores the result in the
     dictionary computation_results. This method is not intended to be called
@@ -262,7 +262,7 @@ def compute_property_value(property, graph, computation_results):
     separate process.
     """
     value = bool(property(graph))
-    computation_results[(property.__name__, graph.canonical_label(algorithm='sage').graph6_string())] = value
+    computation_results[(property.__name__, g_key)] = value
 
 def update_property_database(properties, graphs, timeout=60, database=None, verbose=False):
     """
@@ -294,7 +294,7 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
                     continue
 
             # start a worker thread to compute the value
-            p = multiprocessing.Process(target=compute_property_value, args=(prop, g, computation_results))
+            p = multiprocessing.Process(target=compute_property_value, args=(prop, g, g_key, computation_results))
             p.start()
 
             # give the worker thread some time to calculate the value
@@ -397,7 +397,7 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
             if g_key in current:
                 if prop.__name__ in current[g_key]:
                      # start a worker thread to compute the value
-                     p = multiprocessing.Process(target=compute_property_value, args=(prop, g, computation_results))
+                     p = multiprocessing.Process(target=compute_property_value, args=(prop, g, g_key, computation_results))
                      p.start()
 
                      # give the worker thread some time to calculate the value
