@@ -2943,5 +2943,57 @@ def remove_duplicates(seq, idfun=None):
         result.append(item)
     return result
 
+def remove_duplicates_colours(seq, idfuns, verbose=False):
+    """
+    Utility method to remove duplicates from a list. Equality is determined
+    based on the return values of the idfuns parameter. This parameter expects
+    to receive a list of functions (colours) which can be used to distinguish
+    graphs. The only requirements are that calling any of the colours on isomorphic
+    graphs should always return the same value, and that the last colour in
+    the list should be different for non-isomorphic graphs.
+
+    This method is based on a method from http://www.peterbe.com/plog/uniqifiers-benchmark
+
+        sage: graphs = [graphs.CompleteGraph(4), graphs.CompleteGraph(3), graphs.CycleGraph(4), graphs.CycleGraph(3)]
+        sage: remove_duplicates_colours(graphs, [Graph.order, (lambda g: max(g.degree())), lambda g: g.canonical_label(algorithm='sage').graph6_string()])
+        [Complete graph: Graph on 4 vertices,
+         Complete graph: Graph on 3 vertices,
+         Cycle graph: Graph on 4 vertices]
+    """
+    seen = {}
+    result = []
+    for item in seq:
+        current = seen
+        for pos, idfun in enumerate(idfuns):
+            colour = idfun(item)
+            if colour in current:
+                if type(current[colour]) == dict:
+                    current = current[colour]
+                elif pos == len(idfuns) - 1:
+                    if verbose: print "{} was already in the list. Previous version was {}.".format(item, current[colour])
+                else:
+                    prev_item = current[colour]
+                    remaining_idfuns = idfuns[pos+1:]
+                    for pos2, idfun in enumerate(remaining_idfuns):
+                        colour1, colour2 = idfun(prev_item), idfun(item)
+                        if colour1 == colour2:
+                            if pos2 == len(remaining_idfuns) - 1:
+                                current[colour] = {colour1: prev_item}
+                                if verbose: print "{} was already in the list. Previous version was {}.".format(item, prev_item)
+                            else:
+                                current[colour] = {}
+                                current, colour = current[colour], colour1
+                        else:
+                            current[colour] = {colour1: prev_item, colour2: item}
+                            result.append(item)
+                            break
+                    break
+            else:
+                current[colour] = item
+                result.append(item)
+                break
+    return result
+
+
 #could run this occasionally to check there are no duplicates
 #graph_objects = remove_duplicates(union_objects, idfun=g.canonical_label(algorithm='sage').graph6_string())
