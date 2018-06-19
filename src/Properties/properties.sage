@@ -1076,6 +1076,21 @@ def is_broersma_veldman_gould(g):
     """
     return is_two_connected(g) and is_claw_free(g) and g.diameter() <= 2
 
+def chvatals_condition(g):
+    """
+    True if g.order()>=3 and given increasing degrees d_1,..,d_n, for all i, i>=n/2 or d_i>i or d_{n-i}>=n-1
+
+    This condition is based on Thm 1 of 
+    Chvátal, Václav. "On Hamilton's ideals." Journal of Combinatorial Theory, Series B 12.2 (1972): 163-168.
+    
+    [Chvatal, 72] also showed this condition is sufficient to imply g is Hamiltonian.
+    """
+    if g.order() < 3:
+        return False
+    degrees = g.degree()
+    degrees.sort()
+    n = g.order()
+    return all(degrees[i] > i or i >= n/2 or degrees[n-i] >= n-i for i in range(0, len(degrees)))
 
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
@@ -1103,7 +1118,7 @@ is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex
 has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar, 
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free, 
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
-is_oberly_sumner_p4, is_matthews_sumner]
+is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
