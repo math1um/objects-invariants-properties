@@ -2936,7 +2936,9 @@ def remove_duplicates(seq, idfun=None):
     result = []
     for item in seq:
         marker = idfun(item)
-        if marker in seen: continue
+        if marker in seen:
+            print "{} was already in the list".format(item)
+            continue
         seen[marker] = 1
         result.append(item)
     return result
