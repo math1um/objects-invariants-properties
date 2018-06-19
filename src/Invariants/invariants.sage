@@ -1548,6 +1548,33 @@ def minimum_maximal_matching_size(g):
             if not extendable:
                 return len(matching)
 add_to_lists(minimum_maximal_matching_size, intractable_invariants, all_invariants)
+
+def hamiltonian_index(g):
+    """
+    Returns i, where L^i(g) = L(L(L(...L(g)))) is the first line graph iterate of g such that L^i(g) is Hamiltonian
+
+    If g is Hamiltonian, then h(G) = 0.
+    Raises ValueError if g is disconnected or if g is a simple path, since h(g) is undefined for either.
+
+    Defined in: Chartrand, Gary. "On hamiltonian line-graphs." Transactions of the American Mathematical Society 134.3 (1968): 559-566.
+
+    sage: hamiltonian_index(graphs.CycleGraph(5))
+    0
+    sage: hamiltonian_index(graphs.PetersenGraph())
+    1
+    sage: hamiltonian_index(graphs.TadpoleGraph(4, 3))
+    3
+    """
+    if not g.is_connected():
+        raise ValueError("The input graph g is not connected. The Hamiltonian index is only defined for connected graphs.")
+    if g.is_isomorphic(graphs.PathGraph(g.order())):
+        raise ValueError("The input graph g is a simple path. The Hamiltonian index is not defined for path graphs.")
+    line_graph_i = g
+    for index in xrange(0, (g.order() - 3) + 1): # [Chartrand, 68] proved index is upper bounded by n - 3.
+        if line_graph_i.is_hamiltonian():
+            return index
+        line_graph_i = line_graph_i.line_graph()
+add_to_lists(hamiltonian_index, intractable_invariants, all_invariants)
 	
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
