@@ -26,10 +26,10 @@ def is_complement_of_chordal(g):
 
 def pairs_have_unique_common_neighbor(g):
     """
-    True if each pair of vertices in g has exactly one common neighbor
+    True if each pair of vertices in g has exactly one common neighbor.
 
     Related to the Friendship Theorem: the only connected graphs where every pair of vertices
-    has a unique neghbor are flowers.
+    has a unique neighbor are flowers.
 
     sage: pairs_have_unique_common_neighbor(flower(5))
     True
