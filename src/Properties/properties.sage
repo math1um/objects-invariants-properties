@@ -1033,7 +1033,7 @@ def has_leq_invariants(invar1, invar2, name=None):
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
 
-def localise(f, name=None):
+def localise(f, name=None, documentation=None):
     """
     This function takes a property (i.e., a function taking only a graph as an argument) and
     returns the local variant of that property. The local variant is True if the property is
@@ -1056,15 +1056,14 @@ def localise(f, name=None):
     else:
         raise ValueError('Please provide a name for the new function')
 
+    localised_function.__doc__ = documentation
+
     return localised_function
 
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
 is_locally_two_connected = localise(is_two_connected)
-"""
-True if the open neighborhood of each vertex v is planar
-"""
-is_locally_planar = localise(Graph.is_planar)
+is_locally_planar = localise(Graph.is_planar, documentation="True if the open neighborhood of each vertex v is planar")
 """
 Tests:
     sage: is_locally_unicyclic(graphs.OctahedralGraph())
@@ -1072,10 +1071,15 @@ Tests:
     sage: is_locally_unicyclic(graphs.BullGraph())
     False
 """
-# A graph is locally unicyclic if all its local subgraphs are unicyclic
-is_locally_unicyclic = localise(is_unicyclic)
-#locally connected if the neighborhood of every vertex is connected (stronger than claw-free)
-is_locally_connected = localise(Graph.is_connected)
+is_locally_unicyclic = localise(is_unicyclic, documentation="""A graph is locally unicyclic if all its local subgraphs are unicyclic.
+
+Tests:
+    sage: is_locally_unicyclic(graphs.OctahedralGraph())
+    True
+    sage: is_locally_unicyclic(graphs.BullGraph())
+    False
+""")
+is_locally_connected = localise(Graph.is_connected, documentation="True if the neighborhood of every vertex is connected (stronger than claw-free)")
 
 ######################################################################################################################
 
