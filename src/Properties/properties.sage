@@ -1033,7 +1033,7 @@ def has_leq_invariants(invar1, invar2, name=None):
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
 
-def localise(f):
+def localise(f, name=None):
     """
     This function takes a property (i.e., a function taking only a graph as an argument) and
     returns the local variant of that property. The local variant is True if the property is
@@ -1044,13 +1044,17 @@ def localise(f):
         return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices())
 
     #we set a nice name for the new function
-    if hasattr(f, '__name__'):
+    if name is not None:
+        localised_function.__name__ = name
+    elif hasattr(f, '__name__'):
         if f.__name__.startswith('is_'):
             localised_function.__name__ = 'is_locally' + f.__name__[2:]
         elif f.__name__.startswith('has_'):
             localised_function.__name__ = 'has_locally' + f.__name__[2:]
         else:
             localised_function.__name__ = 'localised_' + f.__name__
+    else:
+        raise ValueError('Please provide a name for the new function')
 
     return localised_function
 
