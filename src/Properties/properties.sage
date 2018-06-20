@@ -991,6 +991,20 @@ def chvatals_condition(g):
     n = g.order()
     return all(degrees[i] > i or i >= n/2 or degrees[n-i] >= n-i for i in range(0, len(degrees)))
 
+def is_matching(g):
+    """
+    Returns True if this graph is the disjoint union of complete graphs of order 2.
+
+    Tests:
+        sage: is_matching(graphs.CompleteGraph(2))
+        True
+        sage: is_matching(graphs.PathGraph(4))
+        False
+        sage: is_matching(graphs.CompleteGraph(2).disjoint_union(graphs.CompleteGraph(2)))
+        True
+    """
+    return min(g.degree())==1 and max(g.degree())==1
+
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
