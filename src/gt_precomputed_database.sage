@@ -93,8 +93,12 @@ def compute_invariant_value(invariant, graph, g_key, computation_results):
     directly. It will be called by the method update_invariant_database as a
     separate process.
     """
-    value = float(invariant(graph))
-    computation_results[(invariant.__name__, g_key)] = value
+    try:
+        value = float(invariant(graph))
+        computation_results[(invariant.__name__, g_key)] = value
+    except Exception as e:
+        print "Error while computing {} for {}".format(invariant.__name__, graph.name())
+        print type(e), e.message
 
 def update_invariant_database(invariants, graphs, timeout=60, database=None, verbose=False):
     """
@@ -261,8 +265,12 @@ def compute_property_value(property, graph, g_key, computation_results):
     directly. It will be called by the method update_property_database as a
     separate process.
     """
-    value = bool(property(graph))
-    computation_results[(property.__name__, g_key)] = value
+    try:
+        value = bool(property(graph))
+        computation_results[(property.__name__, g_key)] = value
+    except Exception as e:
+        print "Error while computing {} for {}".format(invariant.__name__, graph.name())
+        print type(e), e.message
 
 def update_property_database(properties, graphs, timeout=60, database=None, verbose=False):
     """
