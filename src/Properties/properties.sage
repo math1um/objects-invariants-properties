@@ -28,7 +28,7 @@ def pairs_have_unique_common_neighbor(g):
     """
     True if each pair of vertices in g has exactly one common neighbor
 
-    Related to the Friendship Theorem: the only connected graphs where every pair of vertices 
+    Related to the Friendship Theorem: the only connected graphs where every pair of vertices
     has a unique neghbor are flowers.
 
     sage: pairs_have_unique_common_neighbor(flower(5))
@@ -43,7 +43,7 @@ def pairs_have_unique_common_neighbor(g):
         if len(common_neighbors(g, V[i], V[j])) != 1:
             return False
     return max
-    
+
 def is_distance_transitive(g):
     """
     True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there is an automorphism sending a->u and b->v
@@ -239,7 +239,7 @@ def is_four_connected(g):
     Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 4)
-	
+
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
     k = vertex_con(g)
@@ -928,7 +928,7 @@ def is_two_tree(g):
     g2 = g.copy()
     g2.delete_vertex(v)
     return is_two_tree(g2)
-	
+
 def is_two_path(g):
     """
     Graph g is a two_path if it is a two_tree and has exactly 2 simplical vertices
@@ -946,7 +946,7 @@ def is_bauer(g):
     """
     True if g is 2_tough and sigma_3 >= order
     """
-    return is_2_tough(g) and sigma_k(g, 3) >= g.order()	
+    return is_2_tough(g) and sigma_k(g, 3) >= g.order()
 
 # Jung, H. A. "On maximal circuits in finite graphs." Annals of Discrete Mathematics. Vol. 3. Elsevier, 1978. 129-144.
 def is_jung(g):
@@ -1080,7 +1080,7 @@ def chvatals_condition(g):
     """
     True if g.order()>=3 and given increasing degrees d_1,..,d_n, for all i, i>=n/2 or d_i>i or d_{n-i}>=n-1
 
-    This condition is based on Thm 1 of 
+    This condition is based on Thm 1 of
     Chvátal, Václav. "On Hamilton's ideals." Journal of Combinatorial Theory, Series B 12.2 (1972): 163-168.
     
     [Chvatal, 72] also showed this condition is sufficient to imply g is Hamiltonian.
@@ -1112,11 +1112,11 @@ is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
-pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal, 
+pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal,
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
-has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar, 
-is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free, 
+has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
+is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition]
 
@@ -1150,5 +1150,3 @@ invariants_plus = all_invariants + invariants_from_properties
 # is_line_graph is theoretically efficient - but Sage's implementation is not 9/2014
 
 # weakly_chordal = weakly chordal, i.e., the graph and its complement have no induced cycle of length at least 5
-
-
