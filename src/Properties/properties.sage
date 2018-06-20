@@ -681,78 +681,6 @@ def girth_greater_than_2log(g):
 def szekeres_wilf_equals_chromatic_number(g):
     return szekeres_wilf(g) == g.chromatic_number()
 
-
-def localise(f):
-    """
-    This function takes a property (i.e., a function taking only a graph as an argument) and
-    returns the local variant of that property. The local variant is True if the property is
-    True for the neighbourhood of each vertex and False otherwise.
-    """
-    #create a local version of f
-    def localised_function(g):
-        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices())
-
-    #we set a nice name for the new function
-    if hasattr(f, '__name__'):
-        if f.__name__.startswith('is_'):
-            localised_function.__name__ = 'is_locally' + f.__name__[2:]
-        elif f.__name__.startswith('has_'):
-            localised_function.__name__ = 'has_locally' + f.__name__[2:]
-        else:
-            localised_function.__name__ = 'localised_' + f.__name__
-
-    return localised_function
-
-is_locally_dirac = localise(is_dirac)
-is_locally_bipartite = localise(Graph.is_bipartite)
-
-#old versioncted), can't seem to memoize that
-
-def is_locally_two_connected(g):
-    V = g.vertices()
-    for v in V:
-        N = g.neighbors(v)
-        if len(N) > 0:
-            GN = g.subgraph(N)
-            if not is_two_connected(GN):
-                return False
-    return True
-
-def has_equal_invariants(invar1, invar2, name=None):
-    """
-    This function takes two invariants as an argument and returns the property that these invariants are equal.
-    Optionally a name for the new function can be provided as a third argument.
-    """
-    def equality_checker(g):
-        return invar1(g) == invar2(g)
-
-    if name is not None:
-        equality_checker.__name__ = name
-    elif hasattr(invar1, '__name__') and hasattr(invar2, '__name__'):
-        equality_checker.__name__ = 'has_{}_equals_{}'.format(invar1.__name__, invar2.__name__)
-    else:
-        raise ValueError('Please provide a name for the new function')
-
-    return equality_checker
-
-def has_leq_invariants(invar1, invar2, name=None):
-    """
-    This function takes two invariants as an argument and returns the property that the first invariant is
-    less than or equal to the second invariant.
-    Optionally a name for the new function can be provided as a third argument.
-    """
-    def comparator(g):
-        return invar1(g) <= invar2(g)
-
-    if name is not None:
-        comparator.__name__ = name
-    elif hasattr(invar1, '__name__') and hasattr(invar2, '__name__'):
-        comparator.__name__ = 'has_{}_leq_{}'.format(invar1.__name__, invar2.__name__)
-    else:
-        raise ValueError('Please provide a name for the new function')
-
-    return comparator
-
 def has_Havel_Hakimi_property(g, v):
     """
     This function returns whether the vertex v in the graph g has the Havel-Hakimi
@@ -855,17 +783,6 @@ def is_unicyclic(g):
     """
     return g.is_connected() and g.order() == g.size()
 
-# A graph is locally unicyclic if all its local subgraphs are unicyclic
-def is_locally_unicyclic(g):
-    """
-    Tests:
-        sage: is_locally_unicyclic(graphs.OctahedralGraph())
-        True
-        sage: is_locally_unicyclic(graphs.BullGraph())
-        False
-    """
-    return localise(is_unicyclic)(g)
-
 def is_k_tough(g,k):
     return toughness(g) >= k # In invariants
 def is_1_tough(g):
@@ -955,13 +872,6 @@ def is_jung(g):
     See functions toughness(g) and sigma_2(g) for more details.
     """
     return g.order() >= 11 and is_1_tough(g) and sigma_2(g) >= g.order() - 4
-
-def is_locally_planar(g):
-    """
-    True if the open neighborhood of each vertex v is planar
-    """
-    # Can't use localise() method because g.is_planar() is a built-in method; doesn't accept g as argument.
-    return all(g.subgraph(g.neighbors(v)).is_planar() for v in g.vertices())
 
 # Bela Bollobas and Andrew Thomason, Weakly Pancyclic Graphs. Journal of Combinatorial Theory 77: 121--137, 1999.
 def is_weakly_pancyclic(g):
@@ -1082,7 +992,7 @@ def chvatals_condition(g):
 
     This condition is based on Thm 1 of
     Chvátal, Václav. "On Hamilton's ideals." Journal of Combinatorial Theory, Series B 12.2 (1972): 163-168.
-    
+
     [Chvatal, 72] also showed this condition is sufficient to imply g is Hamiltonian.
     """
     if g.order() < 3:
@@ -1092,9 +1002,103 @@ def chvatals_condition(g):
     n = g.order()
     return all(degrees[i] > i or i >= n/2 or degrees[n-i] >= n-i for i in range(0, len(degrees)))
 
+######################################################################################################################
+#Below are some factory methods which create properties based on invariants or other properties
+
+def has_equal_invariants(invar1, invar2, name=None):
+    """
+    This function takes two invariants as an argument and returns the property that these invariants are equal.
+    Optionally a name for the new function can be provided as a third argument.
+    """
+    def equality_checker(g):
+        return invar1(g) == invar2(g)
+
+    if name is not None:
+        equality_checker.__name__ = name
+    elif hasattr(invar1, '__name__') and hasattr(invar2, '__name__'):
+        equality_checker.__name__ = 'has_{}_equals_{}'.format(invar1.__name__, invar2.__name__)
+    else:
+        raise ValueError('Please provide a name for the new function')
+
+    return equality_checker
+
+def has_leq_invariants(invar1, invar2, name=None):
+    """
+    This function takes two invariants as an argument and returns the property that the first invariant is
+    less than or equal to the second invariant.
+    Optionally a name for the new function can be provided as a third argument.
+    """
+    def comparator(g):
+        return invar1(g) <= invar2(g)
+
+    if name is not None:
+        comparator.__name__ = name
+    elif hasattr(invar1, '__name__') and hasattr(invar2, '__name__'):
+        comparator.__name__ = 'has_{}_leq_{}'.format(invar1.__name__, invar2.__name__)
+    else:
+        raise ValueError('Please provide a name for the new function')
+
+    return comparator
+
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
+
+def localise(f):
+    """
+    This function takes a property (i.e., a function taking only a graph as an argument) and
+    returns the local variant of that property. The local variant is True if the property is
+    True for the neighbourhood of each vertex and False otherwise.
+    """
+    #create a local version of f
+    def localised_function(g):
+        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices())
+
+    #we set a nice name for the new function
+    if hasattr(f, '__name__'):
+        if f.__name__.startswith('is_'):
+            localised_function.__name__ = 'is_locally' + f.__name__[2:]
+        elif f.__name__.startswith('has_'):
+            localised_function.__name__ = 'has_locally' + f.__name__[2:]
+        else:
+            localised_function.__name__ = 'localised_' + f.__name__
+
+    return localised_function
+
+is_locally_dirac = localise(is_dirac)
+is_locally_bipartite = localise(Graph.is_bipartite)
+
+#old versioncted), can't seem to memoize that
+
+def is_locally_two_connected(g):
+    V = g.vertices()
+    for v in V:
+        N = g.neighbors(v)
+        if len(N) > 0:
+            GN = g.subgraph(N)
+            if not is_two_connected(GN):
+                return False
+    return True
+
+def is_locally_planar(g):
+    """
+    True if the open neighborhood of each vertex v is planar
+    """
+    # Can't use localise() method because g.is_planar() is a built-in method; doesn't accept g as argument.
+    return all(g.subgraph(g.neighbors(v)).is_planar() for v in g.vertices())
+
+# A graph is locally unicyclic if all its local subgraphs are unicyclic
+def is_locally_unicyclic(g):
+    """
+    Tests:
+        sage: is_locally_unicyclic(graphs.OctahedralGraph())
+        True
+        sage: is_locally_unicyclic(graphs.BullGraph())
+        False
+    """
+    return localise(is_unicyclic)(g)
+
+######################################################################################################################
 
 efficiently_computable_properties = [Graph.is_regular, Graph.is_planar,
 Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique,
