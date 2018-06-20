@@ -1094,6 +1094,24 @@ Tests:
     False
 """)
 is_locally_connected = localise(Graph.is_connected, documentation="True if the neighborhood of every vertex is connected (stronger than claw-free)")
+"""
+sage: is_local_matching(graphs.CompleteGraph(3))
+True
+sage: is_local_matching(graphs.CompleteGraph(4))
+False
+sage: is_local_matching(graphs.FriendshipGraph(5))
+True
+"""
+is_local_matching = localise(is_matching, name="is_local_matching", documentation="""True if the neighborhood of each vertex consists of independent edges.
+
+Tests:
+    sage: is_local_matching(graphs.CompleteGraph(3))
+    True
+    sage: is_local_matching(graphs.CompleteGraph(4))
+    False
+    sage: is_local_matching(graphs.FriendshipGraph(5))
+    True
+""")
 
 ######################################################################################################################
 
@@ -1119,7 +1137,7 @@ is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex
 has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
-is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition]
+is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
