@@ -435,17 +435,6 @@ def has_lovasz_theta_equals_cc(g):
 def is_chvatal_erdos(g):
     return independence_number(g) <= vertex_con(g)
 
-#locally connected if the neighborhood of every vertex is connected (stronger than claw-free)
-def is_locally_connected(g):
-    V = g.vertices()
-    for v in V:
-        N = g.neighbors(v)
-        if len(N) > 0:
-            GN = g.subgraph(N)
-            if not GN.is_connected():
-                return False
-    return True
-
 
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
@@ -1067,36 +1056,22 @@ def localise(f):
 
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
-
-#old versioncted), can't seem to memoize that
-
-def is_locally_two_connected(g):
-    V = g.vertices()
-    for v in V:
-        N = g.neighbors(v)
-        if len(N) > 0:
-            GN = g.subgraph(N)
-            if not is_two_connected(GN):
-                return False
-    return True
-
-def is_locally_planar(g):
-    """
-    True if the open neighborhood of each vertex v is planar
-    """
-    # Can't use localise() method because g.is_planar() is a built-in method; doesn't accept g as argument.
-    return all(g.subgraph(g.neighbors(v)).is_planar() for v in g.vertices())
-
+is_locally_two_connected = localise(is_two_connected)
+"""
+True if the open neighborhood of each vertex v is planar
+"""
+is_locally_planar = localise(Graph.is_planar)
+"""
+Tests:
+    sage: is_locally_unicyclic(graphs.OctahedralGraph())
+    True
+    sage: is_locally_unicyclic(graphs.BullGraph())
+    False
+"""
 # A graph is locally unicyclic if all its local subgraphs are unicyclic
-def is_locally_unicyclic(g):
-    """
-    Tests:
-        sage: is_locally_unicyclic(graphs.OctahedralGraph())
-        True
-        sage: is_locally_unicyclic(graphs.BullGraph())
-        False
-    """
-    return localise(is_unicyclic)(g)
+is_locally_unicyclic = localise(is_unicyclic)
+#locally connected if the neighborhood of every vertex is connected (stronger than claw-free)
+is_locally_connected = localise(Graph.is_connected)
 
 ######################################################################################################################
 
