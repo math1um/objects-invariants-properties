@@ -2154,9 +2154,9 @@ An odd antihole with 7 vertices
 p.175
 Rebennack, Steffen, Gerhard Reinelt, and Panos M. Pardalos. "A tutorial on branch and cut algorithms for the maximum stable set problem." International Transactions in Operational Research 19.1-2 (2012): 161-199.
 
-    sage: odd_antihole_7.order()
+    sage: antihole_7.order()
     7
-    sage: odd_antihole_7.size()
+    sage: antihole_7.size()
     14
 """
 antihole_7 = Antihole(7)
