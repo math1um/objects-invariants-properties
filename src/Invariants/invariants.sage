@@ -1345,7 +1345,7 @@ add_to_lists(min_degree_of_max_ind_set, intractable_invariants, all_invariants)
 def bipartite_number(g):
     """
     Defined as the largest number of vertices that induces a bipartite subgraph
-    
+
     sage: bipartite_number(graphs.PetersenGraph())
     7
     sage: bipartite_number(c4)
@@ -1362,7 +1362,7 @@ add_to_lists(bipartite_number, intractable_invariants, all_invariants)
 def edge_bipartite_number(g):
     """
     Defined as the largest number of edges in an induced bipartite subgraph
-    
+
         sage: edge_bipartite_number(graphs.CompleteGraph(5))
         1
         sage: edge_bipartite_number(graphs.CompleteBipartiteGraph(5, 5))
@@ -1569,7 +1569,7 @@ def hamiltonian_index(g):
             return index
         line_graph_i = line_graph_i.line_graph()
 add_to_lists(hamiltonian_index, intractable_invariants, all_invariants)
-	
+
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
