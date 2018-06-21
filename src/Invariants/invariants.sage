@@ -1051,11 +1051,11 @@ def card_complex_cliques(g):
     """
     returns the number of blocks with order 2
 
-        sage: card_complex_clique(k10)
+        sage: card_complex_cliques(k10)
         1
-        sage: card_complex_clique(paw)
+        sage: card_complex_cliques(paw)
         1
-        sage: card_complex_clique(kite_with_tail)
+        sage: card_complex_cliques(kite_with_tail)
         0
     """
     blocks = g.blocks_and_cut_vertices()[0]
