@@ -40,9 +40,9 @@ def pairs_have_unique_common_neighbor(g):
     """
     from itertools import combinations
     for (u,v) in combinations(g.vertices(), 2):
-        if len(common_neighbors(g, V[i], V[j])) != 1:
+        if len(common_neighbors(g, u, v)) != 1:
             return False
-    return max
+    return True
 
 def is_distance_transitive(g):
     """
