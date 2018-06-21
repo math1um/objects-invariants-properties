@@ -422,8 +422,20 @@ def common_neighbors_of_set(g, s):
     comm_neigh = set(g.neighbors(s[0]))
     for v in s[1:]:
         comm_neigh = comm_neigh.intersection(set(g.neighbors(v)))
-    return list(comm_neigh)	
-	
+    return list(comm_neigh)
+
+def common_neighbors(g, v, w):
+    """
+    returns the Set of common neighbors of v and w in graph g
+        sage: common_neighbors(p4, 0, 3)
+        {}
+        sage: common_neighbors(p4, 0, 2)
+        {1}
+    """
+    Nv = Set(g.neighbors(v))
+    Nw = Set(g.neighbors(w))
+    return Nv.intersection(Nw)
+
 def extremal_triangle_free_extension(g):
     """
     Returns graph with edges added until no more possible without creating triangles. 
