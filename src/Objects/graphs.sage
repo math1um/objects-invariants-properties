@@ -2928,7 +2928,13 @@ def remove_duplicates(seq, idfun=None):
     the identity is used.
 
     This method is taken from http://www.peterbe.com/plog/uniqifiers-benchmark
-        sage: graph_objects = remove_duplicates(union_objects, idfun=lambda g: g.canonical_label(algorithm='sage').graph6_string())
+
+    sage: graphs = [graphs.CompleteGraph(4), graphs.CompleteGraph(3), graphs.CycleGraph(4), graphs.CycleGraph(3)]
+    sage: remove_duplicates(graphs, idfun=lambda g: g.canonical_label(algorithm='sage').graph6_string())
+    Cycle graph was already in the list
+    [Complete graph: Graph on 4 vertices,
+     Complete graph: Graph on 3 vertices,
+     Cycle graph: Graph on 4 vertices]
     """
     if idfun is None:
         def idfun(x): return x
