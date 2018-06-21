@@ -876,7 +876,7 @@ def beauchamp_index(g):
     1
     sage: beauchamp_index(p5)
     137/210
-    sage: beauchamp_index(pete)
+    sage: beauchamp_index(graphs.PetersenGraph())
     2/3
     """
 
