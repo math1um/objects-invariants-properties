@@ -1395,16 +1395,12 @@ def cheeger_constant(g):
 
     for i in [1..upper]:
         for s in SetV.subsets(i):
-            print 's is {}'.format(s)
             count = 0
             for u in s:
-                print 'u is {}'.format(u)
                 for w in SetV.difference(s):
-                    print 'w is {}'.format(w)
                     for e in g.edges(labels=false):
                         if Set([u,w]) == Set(e):
                             count += 1
-                            print 'count is {}'.format(count)
             temp = count/i
             if temp < best:
                 best = temp
