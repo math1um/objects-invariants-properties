@@ -1436,9 +1436,9 @@ def toughness(g):
         sage: toughness(graphs.PathGraph(3))
         0.5
         sage: toughness(graphs.CompleteGraph(5))
-        Infinity
+        +Infinity
         sage: toughness(graphs.PetersenGraph())
-        float(4)/3
+        1.3333333333333333
     """
     order = g.order()
     t = Infinity
