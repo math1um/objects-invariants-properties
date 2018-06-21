@@ -1318,9 +1318,9 @@ def min_degree_of_max_ind_set(g):
     """
     Returns the minimum degree of any vertex that is a part of any maximum indepdendent set
 
-    sage: min_degree_of_vertex_in_max_ind_set(c4)
+    sage: min_degree_of_max_ind_set(c4)
     2
-    sage: min_degree_of_vertex_in_max_ind_set(pete)
+    sage: min_degree_of_max_ind_set(graphs.PetersenGraph())
     3
     """
 
