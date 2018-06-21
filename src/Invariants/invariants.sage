@@ -354,7 +354,7 @@ def szekeres_wilf(g):
     Returns 1+ max of the minimum degrees for all subgraphs
     Its an upper bound for chromatic number
 
-    sage: szekeres_wilf(k5)
+    sage: szekeres_wilf(graphs.CompleteGraph(5))
     5
     """
     #removes a vertex, if possible, of degree <= i
