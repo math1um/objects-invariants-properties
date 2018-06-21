@@ -1377,9 +1377,9 @@ def cheeger_constant(g):
     """
     Defined at https://en.wikipedia.org/wiki/Cheeger_constant_(graph_theory)
 
-    sage: cheeger_constant(p2)
+    sage: cheeger_constant(graphs.PathGraph(2))
     1
-    sage: cheeger_constant(k5)
+    sage: cheeger_constant(graphs.CompleteGraph(5))
     3
     sage: cheeger_constant(paw)
     1
