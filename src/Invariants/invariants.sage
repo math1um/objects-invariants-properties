@@ -1513,6 +1513,13 @@ def tree_number(g):
     return max_induced_tree(g).order()
 add_to_lists(tree_number, intractable_invariants, all_invariants)
 
+def forest_number(g):
+    """
+    The order of a maximum-size induced subgraph of g that's a forest
+    """
+    return max_induced_forest(g).order()
+add_to_lists(forest_number, intractable_invariants, all_invariants)
+
 def minimum_maximal_matching_size(g):
     """
     The minimum number of edges k s.t. there exists a matching of size k which is not extendable
