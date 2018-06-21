@@ -511,6 +511,20 @@ def max_induced_tree(g):
             if sub_g.is_tree():
                 return sub_g
 
+def max_induced_forest(g):
+    """
+    Returns *a* maximum-size induced subgraph of g which is a forest
+
+    Accepts both connected and disconnected graphs as input.
+    """
+    from itertools import combinations
+    for j in xrange(g.order()):
+        for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
+            sub_g = g.copy()
+            sub_g.delete_vertices(subset)
+            if sub_g.is_forest():
+                return sub_g
+                
 def is_matching(s):
     """
     True if set of edges s is a matching, i.e. no edges share a common vertex
