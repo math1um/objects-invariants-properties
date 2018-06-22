@@ -258,16 +258,15 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
                              # the computation might have crashed
                              print "Computation of {} for {} failed!".format(inv.__name__, g.name())
 
-def compute_property_value(property, graph, g_key, computation_results):
+def compute_property_value(property, graph, g_key):
     """
-    Computes the value of property for graph and stores the result in the
-    dictionary computation_results. This method is not intended to be called
-    directly. It will be called by the method update_property_database as a
-    separate process.
+    Computes the value of property for graph and returns it, if succesful. 
+    This method is not intended to be called directly. It will be called by the 
+    method update_property_database as a separate process.
     """
     try:
         value = bool(property(graph))
-        computation_results[(property.__name__, g_key)] = value
+        return value
     except Exception as e:
         print "Error while computing {} for {}".format(invariant.__name__, graph.name())
         print type(e), e.message
@@ -287,7 +286,6 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
     # open a connection with the database
     conn = get_connection(database)
 
-    computation_results = {}
     for prop in properties:
         for g in graphs:
             # first we check to see if the value is already known
@@ -295,19 +293,19 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
             if g_key in current:
                 if prop.__name__ in current[g_key]:
                     continue
-
+            
+            result = None
             try:
                 alarm(timeout)
-                compute_property_value(prop, g, g_key, computation_results)
+                result = compute_property_value(prop, g, g_key)
             except AlarmInterrupt:
                 # Computation did not end. We interrupt/kill it.
                 print "Computation of {} for {} did not end in time... killing!".format(prop.__name__, g.name())
             else:
                 # computation did end, so we add the value to the database
                 cancel_alarm()
-                if (prop.__name__, g_key) in computation_results:
-                    value = computation_results[(prop.__name__, g_key)]
-                    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g_key, value))
+                if result != None:
+                    conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g_key, result))
                     # commit the data so we don't lose anything if we abort early
                     conn.commit()
                 else:
