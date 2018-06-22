@@ -281,18 +281,13 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
     minute). If no database name is provided, this method will default to the
     default database of get_connection().
     """
-    import multiprocessing
-
     # get the values which are already in the database
     current = properties_as_dict(database)
 
     # open a connection with the database
     conn = get_connection(database)
 
-    # create a manager to get the results from the worker thread to the main thread
-    manager = multiprocessing.Manager()
-    computation_results = manager.dict()
-
+    computation_results = {}
     for prop in properties:
         for g in graphs:
             # first we check to see if the value is already known
@@ -301,21 +296,15 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
                 if prop.__name__ in current[g_key]:
                     continue
 
-            # start a worker thread to compute the value
-            p = multiprocessing.Process(target=compute_property_value, args=(prop, g, g_key, computation_results))
-            p.start()
-
-            # give the worker thread some time to calculate the value
-            p.join(timeout)
-
-            # if the worker thread is not finished we kill it. Otherwise we store the value in the database
-            if p.is_alive():
+            try:
+                alarm(timeout)
+                compute_property_value(prop, g, g_key, computation_results)
+            except AlarmInterrupt:
+                # Computation did not end. We interrupt/kill it.
                 print "Computation of {} for {} did not end in time... killing!".format(prop.__name__, g.name())
-
-                p.terminate()
-                p.join()
             else:
-                #computation did end, so we add the value to the database
+                # computation did end, so we add the value to the database
+                cancel_alarm()
                 if (prop.__name__, g_key) in computation_results:
                     value = computation_results[(prop.__name__, g_key)]
                     conn.execute("INSERT INTO prop_values(property, graph, value) VALUES (?,?,?)",(prop.__name__, g_key, value))
