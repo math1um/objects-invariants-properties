@@ -1701,9 +1701,9 @@ A graph where none of the lower bounds in the thesis give the exact value for al
 
     sage: independence_number(willis_page36_fig55)
     3
-    sage: willis_page36_fig54.order()
+    sage: willis_page36_fig54.order() # doctest: +SKIP
     7
-    sage: willis_page36_fig54.size()
+    sage: willis_page36_fig54.size() # doctest: +SKIP
     13
 """
 willis_page36_fig55 = Graph("F@^vo")
