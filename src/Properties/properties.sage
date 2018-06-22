@@ -930,7 +930,7 @@ def is_bull_free(g):
     return not has_bull(g)
 
 def is_claw_free_bull_free(g):
-	return is_claw_free(g) and is_bull_free(g)
+    return is_claw_free(g) and is_bull_free(g)
 
 def has_F(g):
     """

@@ -370,25 +370,25 @@ def max_bipartite_set(g,s,c):
 # output = closure of input graph
 # Useful: a graph is hamiltonian iff its closure is hamiltonian
 def closure(graph):
-	"""
-	Test cases:
-		sage: closure(graphs.CycleGraph(4)).is_isomorphic(graphs.CompleteGraph(4))
-		True
-		sage: closure(graphs.CycleGraph(5)).is_isomorphic(graphs.CycleGraph(5))
-		True
-	"""
-	from itertools import combinations
-	g = graph.copy()
-	while(True):
-		flag = False
-		deg = g.degree()
-		for (v,w) in combinations(g.vertices(), 2):
-			if (not g.has_edge(v,w)) and deg[v] + deg[w] >= g.order():
-				g.add_edge(v,w)
-				flag = True
-		if flag == False:
-			break
-	return g
+    """
+    Test cases:
+        sage: closure(graphs.CycleGraph(4)).is_isomorphic(graphs.CompleteGraph(4))
+        True
+        sage: closure(graphs.CycleGraph(5)).is_isomorphic(graphs.CycleGraph(5))
+        True
+    """
+    from itertools import combinations
+    g = graph.copy()
+    while(True):
+        flag = False
+        deg = g.degree()
+        for (v,w) in combinations(g.vertices(), 2):
+            if (not g.has_edge(v,w)) and deg[v] + deg[w] >= g.order():
+                g.add_edge(v,w)
+                flag = True
+        if flag == False:
+            break
+    return g
 
 def is_simplical_vertex(g, v):
     """
@@ -397,7 +397,7 @@ def is_simplical_vertex(g, v):
     neighbors = g.neighbors(v)
     induced_neighborhood = g.subgraph(neighbors)
     return induced_neighborhood.is_clique()
-	
+    
 # Defined by Sergey Norin at SIAM DM 2018
 def is_homogenous_set(g, s):
     """
@@ -412,7 +412,7 @@ def generalized_degree(g,S):
     """
     neighborhood_union = set(w for v in S for w in g.neighbors(v))
     return len(neighborhood_union)
-	
+    
 def common_neighbors_of_set(g, s):
     """
     Returns the vertices in g adjacent to every vertex in s
@@ -453,7 +453,7 @@ def extremal_triangle_free_extension(g):
         if not g2.has_edge(v, w) and all(u not in g2.neighbors(v) for u in g2.neighbors(w)):
             g2.add_edge(v, w)
     return g2
-	
+    
 def pyramid_encapsulation(g):
     """
     Returns the pyramid encapsulation of graph g.

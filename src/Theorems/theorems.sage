@@ -277,7 +277,7 @@ add_to_lists(is_jung, hamiltonian_sufficient, all_property_theorems)
 
 # S. Goodman and S. Hedetniemi, Sufficient Conditions for a Graph to Be Hamiltonian. Journal of Combinatorial Theory 16: 175--180, 1974.
 def is_two_connected_claw_free_paw_free(g):
-	return is_two_connected(g) and is_claw_free_paw_free(g)
+    return is_two_connected(g) and is_claw_free_paw_free(g)
 add_to_lists(is_claw_free_paw_free, hamiltonian_sufficient, all_property_theorems)
 
 # Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
