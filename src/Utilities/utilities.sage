@@ -24,12 +24,14 @@ def check_independence_extension(g,S):
 
     return (alpha == alpha_h + len(S))
 
-def find_alpha_critical_graphs(order):
+def find_alpha_critical_graphs(order, save = False):
     """
     Returns a list of the graph6 string of each of the alpha critical graphs of
     the given order. A graph g is alpha critical if alpha(g-e) > alpha(g) for
     every edge e in g. This looks at every graph of the given order, so this
     will be slow for any order larger than 8.
+    If save = True (default False), then list will be saved to a file 
+    named "alpha_critical_name_list_{order}".
 
     There is a unique alpha critical graph on 3 and 4 vertices::
 
@@ -57,7 +59,8 @@ def find_alpha_critical_graphs(order):
             if is_alpha_critical(g):
                 alpha_critical_name_list.append(g.graph6_string())
     s = "alpha_critical_name_list_{}".format(order)
-    save(alpha_critical_name_list, s)
+    if save:
+        save(alpha_critical_name_list, s)
     return alpha_critical_name_list
 
 def is_degree_sequence(L):
