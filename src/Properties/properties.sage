@@ -566,9 +566,9 @@ def is_independence_irreducible(g):
 def is_factor_critical(g):
     """
     a graph is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
-        is_factor_critical(p3)
+        is_factor_critical(graphs.PathGraph(3))
         False
-        sage: is_factor_critical(c5)
+        sage: is_factor_critical(graphs.CycleGraph(5))
         True
     """
     if g.order() % 2 == 0:
