@@ -901,6 +901,7 @@ def has_two_walk(g):
     sage: has_two_walk(c4c4)
     True
     sage: has_two_walk(graphs.WindmillGraph(3,3))
+    False
     """
     for init_vertex in g.vertices():
         path_stack = [[init_vertex]]
