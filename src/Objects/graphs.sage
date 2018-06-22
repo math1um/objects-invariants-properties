@@ -1468,59 +1468,59 @@ add_to_lists(trig_antiprism_capped, graph_objects, all_graphs)
 From Willis's thesis, page 4
 Alpha = Fractional Alpha = 4
 
-    sage: independence_number(willis_page4)
+    sage: independence_number(willis_page4) # doctest: +SKIP
     4
-    sage: fractional_alpha(willis_page4)
+    sage: fractional_alpha(willis_page4) # doctest: +SKIP
     4
 """
-willis_page4 = Graph("GlCKIS")
-willis_page4.name(new = "willis_page4")
-add_to_lists(willis_page4, graph_objects, all_graphs)
+# willis_page4 = Graph("GlCKIS")
+# willis_page4.name(new = "willis_page4")
+# add_to_lists(willis_page4, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 7
 
-    sage: willis_page7.radius()
+    sage: willis_page7.radius() # doctest: +SKIP
     2
-    sage: average_distance(willis_page7)
+    sage: average_distance(willis_page7) # doctest: +SKIP
     1.467
 """
-willis_page7 = Graph("ELRW")
-willis_page7.name(new = "willis_page7")
-add_to_lists(willis_page7, graph_objects, all_graphs)
+# willis_page7 = Graph("ELRW")
+# willis_page7.name(new = "willis_page7")
+# add_to_lists(willis_page7, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 13, Fig. 2.7
 
-    sage: independence_number(willis_page13_fig27)
+    sage: independence_number(willis_page13_fig27) # doctest: +SKIP
     4
-    sage: willis_page13_fig27.order()
+    sage: willis_page13_fig27.order() # doctest: +SKIP
     7
-    sage: willis_page13_fig27.size()
+    sage: willis_page13_fig27.size() # doctest: +SKIP
     15
 """
-willis_page13_fig27 = Graph("Fs\zw")
-willis_page13_fig27.name(new = "willis_page13_fig27")
-add_to_lists(willis_page13_fig27, graph_objects, all_graphs)
+# willis_page13_fig27 = Graph("Fs\zw")
+# willis_page13_fig27.name(new = "willis_page13_fig27")
+# add_to_lists(willis_page13_fig27, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 10, Figure 2.2
 Graph for which the Cvetkovic bound is the best upper bound present in the thesis
 
-    sage: independence_number(willis_page10_fig23)
+    sage: independence_number(willis_page10_fig23) # doctest: +SKIP
     4
-    sage: willis_page10_fig23.order()
+    sage: willis_page10_fig23.order() # doctest: +SKIP
     10
-    sage: willis_page10_fig23.size()
+    sage: willis_page10_fig23.size() # doctest: +SKIP
     15
-    sage: max_degree(willis_page10_fig23)
+    sage: max_degree(willis_page10_fig23) # doctest: +SKIP
     3
-    sage: min_degree(willis_page10_fig23)
+    sage: min_degree(willis_page10_fig23) # doctest: +SKIP
     3
 """
-willis_page10_fig23 = Graph("G|eKHw")
-willis_page10_fig23.name(new = "willis_page10_fig23")
-add_to_lists(willis_page10_fig23, graph_objects, all_graphs)
+# willis_page10_fig23 = Graph("G|eKHw")
+# willis_page10_fig23.name(new = "willis_page10_fig23")
+# add_to_lists(willis_page10_fig23, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 10, Figure 2.4
@@ -1564,20 +1564,20 @@ add_to_lists(willis_page13_fig26, graph_objects, all_graphs)
 From Willis's thesis, page 21, Figure 3.1
 Graph for which n/chi is the best lower bound present in the thesis
 
-    sage: independence_number(willis_page21)
+    sage: independence_number(willis_page21) # doctest: +SKIP
     4
-    sage: willis_page21.order()
+    sage: willis_page21.order() # doctest: +SKIP
     12
-    sage: willis_page21.size()
+    sage: willis_page21.size() # doctest: +SKIP
     20
-    sage: max_degree(willis_page21)
+    sage: max_degree(willis_page21) # doctest: +SKIP
     4
-    sage: chromatic_num(willis_page21)
+    sage: chromatic_num(willis_page21) # doctest: +SKIP
     3
 """
-willis_page21 = Graph("KoD?Xb?@HBBB")
-willis_page21.name(new = "willis_page21")
-add_to_lists(willis_page21, graph_objects, all_graphs)
+# willis_page21 = Graph("KoD?Xb?@HBBB")
+# willis_page21.name(new = "willis_page21")
+# add_to_lists(willis_page21, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 25, Figure 3.2
@@ -1626,20 +1626,20 @@ add_to_lists(lemke, graph_objects, all_graphs)
 From Willis's thesis, page 29, Figure 3.6
 Graph for which the Harant Bound is the best lower bound present in the thesis
 
-    sage: independence_number(willis_page29)
+    sage: independence_number(willis_page29) # doctest: +SKIP
     4
-    sage: willis_page29.order()
+    sage: willis_page29.order() # doctest: +SKIP
     14
-    sage: willis_page29.size()
+    sage: willis_page29.size() # doctest: +SKIP
     28
-    sage: max_degree(willis_page29)
+    sage: max_degree(willis_page29) # doctest: +SKIP
     4
-    sage: chromatic_num(willis_page29)
+    sage: chromatic_num(willis_page29) # doctest: +SKIP
     4
 """
-willis_page29 = Graph("[HCGGC@?G?_@?@_?_?M?@o??_?G_?GO?CC?@?_?GA??_C?@?C?@?A??_?_?G?D?@")
-willis_page29.name(new = "willis_page29")
-add_to_lists(willis_page29, graph_objects, all_graphs)
+# willis_page29 = Graph("[HCGGC@?G?_@?@_?_?M?@o??_?G_?GO?CC?@?_?GA??_C?@?C?@?A??_?_?G?D?@")
+# willis_page29.name(new = "willis_page29")
+# add_to_lists(willis_page29, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 35, Figure 5.1
@@ -1684,16 +1684,16 @@ add_to_lists(willis_page36_fig53, graph_objects, all_graphs)
 From Willis's thesis, page 36, Figure 5.4
 A graph where none of the upper bounds in the thesis give the exact value for alpha
 
-    sage: independence_number(willis_page36_fig54)
+    sage: independence_number(willis_page36_fig54) # doctest: +SKIP
     2
-    sage: willis_page36_fig54.order()
+    sage: willis_page36_fig54.order() # doctest: +SKIP
     9
-    sage: willis_page36_fig54.size()
+    sage: willis_page36_fig54.size() # doctest: +SKIP
     24
 """
-willis_page36_fig54 = Graph("H~`HW~~")
-willis_page36_fig54.name(new = "willis_page36_fig54")
-add_to_lists(willis_page36_fig54, graph_objects, all_graphs)
+# willis_page36_fig54 = Graph("H~`HW~~")
+# willis_page36_fig54.name(new = "willis_page36_fig54")
+# add_to_lists(willis_page36_fig54, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 36, Figure 5.5
@@ -1729,16 +1729,16 @@ add_to_lists(willis_page37_fig56, graph_objects, all_graphs)
 From Willis's thesis, page 37, Figure 5.8
 A graph where none of the lower bounds in the thesis give the exact value for alpha
 
-    sage: independence_number(willis_page37_fig58)
+    sage: independence_number(willis_page37_fig58) # doctest: +SKIP
     3
-    sage: willis_page37_fig58.order()
+    sage: willis_page37_fig58.order() # doctest: +SKIP
     9
-    sage: willis_page37_fig58.size()
+    sage: willis_page37_fig58.size() # doctest: +SKIP
     16
 """
-willis_page37_fig58 = Graph("H?iYbC~")
-willis_page37_fig58.name(new = "willis_page37_fig58")
-add_to_lists(willis_page37_fig58, graph_objects, all_graphs)
+# willis_page37_fig58 = Graph("H?iYbC~")
+# willis_page37_fig58.name(new = "willis_page37_fig58")
+# add_to_lists(willis_page37_fig58, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 38, Figure 5.9
