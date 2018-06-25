@@ -86,7 +86,7 @@ def precomputed_properties_for_conjecture(database=None):
     """
     return (properties_as_dict(database), (lambda g: g.canonical_label(algorithm='sage').graph6_string()), (lambda f: f.__name__))
 
-def compute_invariant_value(invariant, graph, g_key, computation_results):
+def compute_invariant_value(invariant, graph, g_key):
     """
     Computes the value of invariant for graph and stores the result in the
     dictionary computation_results. This method is not intended to be called
@@ -94,8 +94,7 @@ def compute_invariant_value(invariant, graph, g_key, computation_results):
     separate process.
     """
     try:
-        value = float(invariant(graph))
-        computation_results[(invariant.__name__, g_key)] = value
+        return float(invariant(graph))
     except Exception as e:
         print "Error while computing {} for {}".format(invariant.__name__, graph.name())
         print type(e), e.message
@@ -109,17 +108,11 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
     minute). If no database name is provided, this method will default to the
     default database of get_connection().
     """
-    import multiprocessing
-
     # get the values which are already in the database
     current = invariants_as_dict(database)
 
     # open a connection with the database
     conn = get_connection(database)
-
-    # create a manager to get the results from the worker thread to the main thread
-    manager = multiprocessing.Manager()
-    computation_results = manager.dict()
 
     for inv in invariants:
         for g in graphs:
@@ -129,24 +122,18 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
                 if inv.__name__ in current[g_key]:
                     continue
 
-            # start a worker thread to compute the value
-            p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, g_key, computation_results))
-            p.start()
-
-            # give the worker thread some time to calculate the value
-            p.join(timeout)
-
-            # if the worker thread is not finished we kill it. Otherwise we store the value in the database
-            if p.is_alive():
+            result = None
+            try:
+                alarm(timeout)
+                result = compute_invariant_value(inv, g, g_key)
+            except AlarmInterrupt:
+                # Computation did not end. We interrupt/kill it.
                 print "Computation of {} for {} did not end in time... killing!".format(inv.__name__, g.name())
-
-                p.terminate()
-                p.join()
             else:
                 #computation did end, so we add the value to the database
-                if (inv.__name__, g_key) in computation_results:
-                    value = computation_results[(inv.__name__, g_key)]
-                    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(inv.__name__, g_key, value))
+                cancel_alarm()
+                if result != None:
+                    conn.execute("INSERT INTO inv_values(invariant, graph, value) VALUES (?,?,?)",(inv.__name__, g_key, result))
                     # commit the data so we don't lose anything if we abort early
                     conn.commit()
                 else:
@@ -209,7 +196,7 @@ def list_missing_invariants(invariants, graphs, database=None):
                     continue
             print "{} for {} is missing.".format(inv.__name__, g.name())
 
-def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60, database=None):
+def verify_invariant_values(invariants, graphs, epsilon= 0.00000001, timeout=60, database=None):
     """
     Tries to compute the invariant value of each invariant in invariants for each
     graph in graphs and compares it to the value stored in the database. If the
@@ -217,46 +204,35 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001 ,timeout=60,
     default value for the timeout is 60 (one minute). If no database name is
     provided, this method will default to the default database of get_connection().
     """
-    import multiprocessing
-
     # get the values which are already in the database
     current = invariants_as_dict(database)
 
     # create a manager to get the results from the worker thread to the main thread
-    manager = multiprocessing.Manager()
-    computation_results = manager.dict()
-
     for inv in invariants:
         for g in graphs:
             # first we check to see if the value is already known
             g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if inv.__name__ in current[g_key]:
-                     # start a worker thread to compute the value
-                     p = multiprocessing.Process(target=compute_invariant_value, args=(inv, g, g_key, computation_results))
-                     p.start()
-
-                     # give the worker thread some time to calculate the value
-                     p.join(timeout)
-
-                     # if the worker thread is not finished we kill it. Otherwise we store the value in the database
-                     if p.is_alive():
-                         print "Computation of {} for {} did not end in time... killing!".format(inv.__name__, g.name())
-
-                         p.terminate()
-                         p.join()
-                     else:
-                         #computation did end, so we verify the value
-                         if (inv.__name__, g_key) in computation_results:
-                             value = computation_results[(inv.__name__, g_key)]
-                             if value != current[g_key][inv.__name__] and abs(value - current[g_key][inv.__name__]) > epsilon:
-                                 print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
-                                            inv.__name__, g.name(),
-                                            current[g_key][inv.__name__],
-                                            value)
-                         else:
-                             # the computation might have crashed
-                             print "Computation of {} for {} failed!".format(inv.__name__, g.name())
+                    result = None
+                    try:
+                        alarm(timeout)
+                        result = compute_invariant_value(inv, g, g_key)
+                    except AlarmInterrupt:
+                        # Computation did not end. We interrupt/kill it.
+                        print "Computation of {} for {} did not end in time... killing!".format(inv.__name__, g.name())
+                    else:
+                        #computation did end, so we verify the value
+                        cancel_alarm()
+                        if result:
+                            if result != current[g_key][inv.__name__] and abs(value - current[g_key][inv.__name__]) > epsilon:
+                                print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
+                                           inv.__name__, g.name(),
+                                           current[g_key][inv.__name__],
+                                           result)
+                        else:
+                            # the computation might have crashed
+                            print "Computation of {} for {} failed!".format(inv.__name__, g.name())
 
 def compute_property_value(property, graph, g_key):
     """
@@ -293,7 +269,7 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
             if g_key in current:
                 if prop.__name__ in current[g_key]:
                     continue
-            
+
             result = None
             try:
                 alarm(timeout)
@@ -376,14 +352,8 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
     default value for the timeout is 60 (one minute). If no database name is
     provided, this method will default to the default database of get_connection().
     """
-    import multiprocessing
-
     # get the values which are already in the database
     current = properties_as_dict(database)
-
-    # create a manager to get the results from the worker thread to the main thread
-    manager = multiprocessing.Manager()
-    computation_results = manager.dict()
 
     for prop in properties:
         for g in graphs:
@@ -391,31 +361,25 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
             g_key = g.canonical_label(algorithm='sage').graph6_string()
             if g_key in current:
                 if prop.__name__ in current[g_key]:
-                     # start a worker thread to compute the value
-                     p = multiprocessing.Process(target=compute_property_value, args=(prop, g, g_key, computation_results))
-                     p.start()
-
-                     # give the worker thread some time to calculate the value
-                     p.join(timeout)
-
-                     # if the worker thread is not finished we kill it. Otherwise we store the value in the database
-                     if p.is_alive():
-                         print "Computation of {} for {} did not end in time... killing!".format(prop.__name__, g.name())
-
-                         p.terminate()
-                         p.join()
-                     else:
-                         #computation did end, so we verify the value
-                         if (prop.__name__, g_key) in computation_results:
-                             value = computation_results[(prop.__name__, g_key)]
-                             if value != current[g_key][prop.__name__]:
-                                 print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
-                                            prop.__name__, g.name(),
-                                            current[g_key][prop.__name__],
-                                            value)
-                         else:
-                             # the computation might have crashed
-                             print "Computation of {} for {} failed!".format(prop.__name__, g.name())
+                    result = None
+                    try:
+                        alarm(timeout)
+                        result = compute_property_value(prop, g, g_key)
+                    except AlarmInterrupt:
+                        # Computation did not end. We interrupt/kill it.
+                        print "Computation of {} for {} did not end in time... killing!".format(prop.__name__, g.name())
+                    else:
+                        #computation did end, so we verify the value
+                        cancel_alarm()
+                        if result:
+                            if result != current[g_key][prop.__name__]:
+                                print "Stored value of {} for {} differs from computed value: {} vs. {}".format(
+                                           prop.__name__, g.name(),
+                                           current[g_key][prop.__name__],
+                                           result)
+                        else:
+                            # the computation might have crashed
+                            print "Computation of {} for {} failed!".format(prop.__name__, g.name())
 
 def dump_database(folder="db", database=None):
     """
