@@ -114,10 +114,10 @@ mathon_strongly_regular2.name(new = "Mathon Strongly Regular Graph 2")
 janko_kharaghani936 = graphs.JankoKharaghaniGraph(936)
 janko_kharaghani936.name(new = "Janko-Kharaghani 936")
 
-janko_kharaghani1800 = graphs.JankoKharaghaniGraph(1800)
-janko_kharaghani1800.name(new = "Janko-Kharagani 1800")
+# janko_kharaghani1800 = graphs.JankoKharaghaniGraph(1800) # Causes memory error when doctesting. Waiting for fix in Sage.
+# janko_kharaghani1800.name(new = "Janko-Kharagani 1800")
 
-for graph in sage_graphs + [mathon_strongly_regular0, mathon_strongly_regular1, mathon_strongly_regular2, janko_kharaghani936, janko_kharaghani1800]:
+for graph in sage_graphs + [mathon_strongly_regular0, mathon_strongly_regular1, mathon_strongly_regular2, janko_kharaghani936]:
     add_to_lists(graph, graph_objects, all_graphs)
 
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
