@@ -1568,6 +1568,17 @@ def hamiltonian_index(g):
         line_graph_i = line_graph_i.line_graph()
 add_to_lists(hamiltonian_index, intractable_invariants, all_invariants)
 
+def friendship_number(g):
+    """
+    The friendship number of a graph is the number of pairs of vertices that have a unique common neighbour.
+
+    sage: friendship_number(graphs.FriendshipGraph(7))
+    21
+    sage: friendship_number(graphs.CompleteGraph(7))
+    0
+    """
+    from itertools import combinations
+    return sum((1 if len(common_neighbors(g, u, v))==1 else 0) for (u,v) in combinations(g.vertices(), 2))
 
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
