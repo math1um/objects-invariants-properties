@@ -1155,7 +1155,7 @@ has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
-is_weakly_pancyclic, is_pancyclic, has_two_walk]
+is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering]
 
 removed_properties = [is_pebbling_class0]
 
