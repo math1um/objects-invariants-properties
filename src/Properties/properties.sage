@@ -91,7 +91,7 @@ def is_ore(g):
 
 #sufficient condition for hamiltonicity
 def is_haggkvist_nicoghossian(g):
-    k = vertex_con(g)
+    k = g.vertex_connectivity()
     n = g.order()
     delta = min(g.degree())
     if k >= 2 and delta >= (1.0/3)*(n+k):
@@ -101,7 +101,7 @@ def is_haggkvist_nicoghossian(g):
 
 #sufficient condition for hamiltonicity
 def is_genghua_fan(g):
-    k = vertex_con(g)
+    k = g.vertex_connectivity()
     if k < 2:
         return False
     D = g.degree()
@@ -131,7 +131,7 @@ def neighbors_set(g,S):
 #sufficient condition for hamiltonicity
 def is_generalized_dirac(g):
     n = g.order()
-    k = vertex_con(g)
+    k = g.vertex_connectivity()
     if k < 2:
         return False
     for p in Subsets(g.vertices(),2):
@@ -242,7 +242,7 @@ def is_four_connected(g):
 
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
-    k = vertex_con(g)
+    k = g.vertex_connectivity()
     if k < 2:
         return False
     D = g.distance_all_pairs()
@@ -433,7 +433,7 @@ def has_lovasz_theta_equals_cc(g):
 
 #sufficient condition for hamiltonicity
 def is_chvatal_erdos(g):
-    return independence_number(g) <= vertex_con(g)
+    return independence_number(g) <= g.vertex_connectivity()
 
 
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
@@ -651,9 +651,6 @@ def iterative_neighbor_twins(g, T):
         T2 = copy(T)
         find_neighbor_twin(g, T)
     return T
-
-def is_cycle(g):
-    return g.is_isomorphic(graphs.CycleGraph(g.order()))
 
 
 #can't compute membership in this class directly. instead testing isomorhism for 400 known class0 graphs
@@ -1164,7 +1161,7 @@ is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
 is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
-has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, is_cycle,
+has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, Graph.is_cycle
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal,
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
@@ -1172,7 +1169,7 @@ has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
-has_odd_order, has_even_order]
+has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
@@ -1182,9 +1179,17 @@ has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
-is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering]
+is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
+Graph.is_transitively_reduced, Graph.is_self_complementary]
 
 removed_properties = [is_pebbling_class0]
+
+# Last checked Sage 8.2
+sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
+Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
+Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
+Graph.is_transitively_reduced, Graph.is_self_complementary, Graphs.is_connected,
+Graph.has_loops]
 
 #speed notes
 #FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive,
@@ -1200,7 +1205,6 @@ invariants_from_properties = [make_invariant_from_property(property) for propert
 invariants_plus = all_invariants + invariants_from_properties
 
 # Graph.is_prime removed as faulty 9/2014
-# built in Graph.is_transitively_reduced removed 9/2014
 # is_line_graph is theoretically efficient - but Sage's implementation is not 9/2014
 
 # weakly_chordal = weakly chordal, i.e., the graph and its complement have no induced cycle of length at least 5

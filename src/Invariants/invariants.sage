@@ -6,6 +6,16 @@ intractable_invariants = []
 theorem_invariants = []
 broken_invariants = []
 
+# Last checked Sage 8.2
+sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
+Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
+Graph.average_distance, Graph.connected_components_number,
+Graph.maximum_average_degree, Graph.lovasz_theta, Graph.clustering_average, Graph.spanning_trees_count,
+Graph.cluster_transitivity, Graph.edge_connectivity, Graph.vertex_connectivity, Graph.genus, 
+Graph.crossing_number]
+for i in sage_invariants:
+    add_to_lists(i, efficient_invariants, all_invariants)
+
 def distinct_degrees(g):
     """
     returns the number of distinct degrees of a graph
@@ -517,14 +527,6 @@ add_to_lists(card_connectors, efficient_invariants, all_invariants)
 def card_pendants(g):
     return sum([x for x in g.degree() if x == 1])
 add_to_lists(card_pendants, efficient_invariants, all_invariants)
-
-def vertex_con(g):
-    return g.vertex_connectivity()
-add_to_lists(vertex_con, efficient_invariants, all_invariants)
-
-def edge_con(g):
-    return g.edge_connectivity()
-add_to_lists(edge_con, efficient_invariants, all_invariants)
 
 #returns number of bridges in graph
 def card_bridges(g):
@@ -1155,14 +1157,6 @@ def homo_lumo_index(g):
     else:
         return eigenvalues[floor(order/2)]
 add_to_lists(homo_lumo_index, efficient_invariants, all_invariants)
-
-sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
-Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
-Graph.average_distance, Graph.connected_components_number,
-Graph.maximum_average_degree, Graph.lovasz_theta, Graph.clustering_average, Graph.spanning_trees_count]
-
-for i in sage_invariants:
-    add_to_lists(i, efficient_invariants, all_invariants)
 
 def neighborhood_union_nonadjacent(g):
     # Define that for copmlete graphs (i.e. nothing to minimize over later), return n, which is trivial upper bound.
