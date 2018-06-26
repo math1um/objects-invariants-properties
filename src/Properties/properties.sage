@@ -1028,7 +1028,7 @@ def has_even_order(g):
     sage: has_even_order(Graph(2))
     True
     sage: has_even_order(Graph(0))
-    False
+    True
     """
     return g.order() % 2 == 0
     
