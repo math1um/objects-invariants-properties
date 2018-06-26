@@ -1176,11 +1176,13 @@ Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph]
 removed_properties = [is_pebbling_class0]
 
 """
-    Last checked Sage 8.2
+    Last version of graphs packaged checked: Sage 8.2
+    sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 
+                                                            and sage.misc.banner.version_dict()['minor'] <= 2)
+    True
     
     Skip Graph.is_biconnected() in favor of our is_two_connected().
-    Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient 
-        algorithm existing.
+    Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient algorithm existing.
 """
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
 Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
