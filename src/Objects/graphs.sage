@@ -1504,23 +1504,23 @@ willis_page13_fig27.name(new = "willis_page13_fig27")
 add_to_lists(willis_page13_fig27, graph_objects, all_graphs)
 
 """
-From Willis's thesis, page 10, Figure 2.2
+From Willis's thesis, page 10, Figure 2.3
 Graph for which the Cvetkovic bound is the best upper bound present in the thesis
 
-    sage: independence_number(willis_page10_fig23) # doctest: +SKIP
-    4
-    sage: willis_page10_fig23.order() # doctest: +SKIP
-    10
-    sage: willis_page10_fig23.size() # doctest: +SKIP
+    sage: independence_number(willis_page10_fig23)
+    3
+    sage: willis_page10_fig23.order()
+    8
+    sage: willis_page10_fig23.size()
     15
-    sage: max_degree(willis_page10_fig23) # doctest: +SKIP
-    3
-    sage: min_degree(willis_page10_fig23) # doctest: +SKIP
-    3
+    sage: max_degree(willis_page10_fig23)
+    6
+    sage: min_degree(willis_page10_fig23)
+    2
 """
-# willis_page10_fig23 = Graph("G|eKHw")
-# willis_page10_fig23.name(new = "willis_page10_fig23")
-# add_to_lists(willis_page10_fig23, graph_objects, all_graphs)
+willis_page10_fig23 = Graph("G|eKHw")
+willis_page10_fig23.name(new = "willis_page10_fig23")
+add_to_lists(willis_page10_fig23, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 10, Figure 2.4
