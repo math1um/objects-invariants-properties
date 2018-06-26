@@ -1006,6 +1006,32 @@ def is_matching(g):
     """
     return min(g.degree())==1 and max(g.degree())==1
 
+def has_odd_order(g):
+    """
+    True if the number of vertices in g is odd
+
+    sage: has_odd_order(Graph(5))
+    True
+    sage: has_odd_order(Graph(2))
+    False
+    sage: has_odd_order(Graph(0))
+    False
+    """
+    return g.order() % 2 == 1
+
+def has_even_order(g):
+    """
+    True if the number of vertices in g is even
+
+    sage: has_even_order(Graph(5))
+    False
+    sage: has_even_order(Graph(2))
+    True
+    sage: has_even_order(Graph(0))
+    False
+    """
+    return g.order() % 2 == 0
+    
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
@@ -1145,7 +1171,8 @@ is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex
 has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
-is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching]
+is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
+has_odd_order, has_even_order]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
