@@ -1468,14 +1468,14 @@ add_to_lists(trig_antiprism_capped, graph_objects, all_graphs)
 From Willis's thesis, page 4
 Alpha = Fractional Alpha = 4
 
-    sage: independence_number(willis_page4) # doctest: +SKIP
+    sage: independence_number(willis_page4)
     4
-    sage: fractional_alpha(willis_page4) # doctest: +SKIP
-    4
+    sage: fractional_alpha(willis_page4)
+    4.0
 """
-# willis_page4 = Graph("GlCKIS")
-# willis_page4.name(new = "willis_page4")
-# add_to_lists(willis_page4, graph_objects, all_graphs)
+willis_page4 = Graph("GlCKIS")
+willis_page4.name(new = "willis_page4")
+add_to_lists(willis_page4, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 7
