@@ -1177,8 +1177,7 @@ removed_properties = [is_pebbling_class0]
 
 """
     Last version of graphs packaged checked: Sage 8.2
-    sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 
-                                                            and sage.misc.banner.version_dict()['minor'] <= 2)
+    sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
     True
     
     Skip Graph.is_biconnected() in favor of our is_two_connected().
