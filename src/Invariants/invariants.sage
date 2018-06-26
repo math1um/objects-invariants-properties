@@ -6,6 +6,25 @@ intractable_invariants = []
 theorem_invariants = []
 broken_invariants = []
 
+"""
+    Last version of graphs packaged checked: Sage 8.2
+    sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
+    True
+"""
+sage_efficient_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
+Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
+Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta, 
+Graph.spanning_trees_count, Graph.odd_girth, Graph.clustering_average, Graph.cluster_transitivity]
+
+sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth, 
+Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, Graph.edge_connectivity, 
+Graph.vertex_connectivity, Graph.genus, Graph.crossing_number]
+
+for i in sage_efficient_invariants:
+    add_to_lists(i, efficient_invariants, all_invariants)
+for i in sage_intractable_invariants:
+    add_to_lists(i, intractable_invariants, all_invariants)
+
 def distinct_degrees(g):
     """
     returns the number of distinct degrees of a graph
@@ -517,14 +536,6 @@ add_to_lists(card_connectors, efficient_invariants, all_invariants)
 def card_pendants(g):
     return sum([x for x in g.degree() if x == 1])
 add_to_lists(card_pendants, efficient_invariants, all_invariants)
-
-def vertex_con(g):
-    return g.vertex_connectivity()
-add_to_lists(vertex_con, efficient_invariants, all_invariants)
-
-def edge_con(g):
-    return g.edge_connectivity()
-add_to_lists(edge_con, efficient_invariants, all_invariants)
 
 #returns number of bridges in graph
 def card_bridges(g):
@@ -1156,14 +1167,6 @@ def homo_lumo_index(g):
         return eigenvalues[floor(order/2)]
 add_to_lists(homo_lumo_index, efficient_invariants, all_invariants)
 
-sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
-Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
-Graph.average_distance, Graph.connected_components_number,
-Graph.maximum_average_degree, Graph.lovasz_theta, Graph.clustering_average, Graph.spanning_trees_count]
-
-for i in sage_invariants:
-    add_to_lists(i, efficient_invariants, all_invariants)
-
 def neighborhood_union_nonadjacent(g):
     # Define that for copmlete graphs (i.e. nothing to minimize over later), return n, which is trivial upper bound.
     all_dist = g.distance_all_pairs()
@@ -1277,17 +1280,6 @@ add_to_lists(domination_number, intractable_invariants, all_invariants)
 def independence_number(g):
     return g.independent_set(value_only=True)
 add_to_lists(independence_number, intractable_invariants, all_invariants)
-
-def chromatic_index(g):
-    if g.size() == 0:
-        return 0
-    import sage.graphs.graph_coloring
-    return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
-add_to_lists(chromatic_index, intractable_invariants, all_invariants)
-
-def chromatic_num(g):
-    return g.chromatic_number()
-add_to_lists(chromatic_num, intractable_invariants, all_invariants)
 
 def clique_covering_number(g):
     # Finding the chromatic number of the complement of a fullerene
@@ -1423,9 +1415,6 @@ add_to_lists(tr, intractable_invariants, all_invariants)
 def total_domination_number(g):
     return g.dominating_set(total=True, value_only=True)
 add_to_lists(total_domination_number, intractable_invariants, all_invariants)
-
-add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
-add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
 # A graph G is t-tough for real t if for every integer k>1, G cannot be split into k connected components by removal of fewer than tk vertices
 # Returns Infinity if g is complete
