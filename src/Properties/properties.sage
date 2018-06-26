@@ -1187,7 +1187,7 @@ removed_properties = [is_pebbling_class0]
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
 Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
 Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
-Graph.is_transitively_reduced, Graph.is_self_complementary, Graphs.is_connected,
+Graph.is_transitively_reduced, Graph.is_self_complementary, Graph.is_connected,
 Graph.has_loops, Graph.is_asteroidal_triple_free, Graph.is_bipartite,
 Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product, Graph.is_circumscribable,
 Graph.is_cograph, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free,
