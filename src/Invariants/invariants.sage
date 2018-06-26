@@ -1572,7 +1572,7 @@ def friendship_number(g):
     """
     The friendship number of a graph is the number of pairs of vertices that have a unique common neighbour.
 
-    sage: friendship_number(graphs.FriendshipGraph(7))
+    sage: friendship_number(graphs.FriendshipGraph(3))
     21
     sage: friendship_number(graphs.CompleteGraph(7))
     0
