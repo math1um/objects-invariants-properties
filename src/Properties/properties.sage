@@ -1147,7 +1147,7 @@ is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
 is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
 alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
-has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, Graph.is_cycle
+has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, Graph.is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal,
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
 is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
