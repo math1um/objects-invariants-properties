@@ -1626,20 +1626,20 @@ add_to_lists(lemke, graph_objects, all_graphs)
 From Willis's thesis, page 29, Figure 3.6
 Graph for which the Harant Bound is the best lower bound present in the thesis
 
-    sage: independence_number(willis_page29) # doctest: +SKIP
-    4
-    sage: willis_page29.order() # doctest: +SKIP
-    14
-    sage: willis_page29.size() # doctest: +SKIP
+    sage: independence_number(willis_page29)
+    13
+    sage: willis_page29.order()
     28
-    sage: max_degree(willis_page29) # doctest: +SKIP
-    4
-    sage: chromatic_num(willis_page29) # doctest: +SKIP
-    4
+    sage: willis_page29.size()
+    42
+    sage: max_degree(willis_page29)
+    3
+    sage: chromatic_num(willis_page29)
+    3
 """
-# willis_page29 = Graph("[HCGGC@?G?_@?@_?_?M?@o??_?G_?GO?CC?@?_?GA??_C?@?C?@?A??_?_?G?D?@")
-# willis_page29.name(new = "willis_page29")
-# add_to_lists(willis_page29, graph_objects, all_graphs)
+willis_page29 = Graph("[HCGGC@?G?_@?@_?_?M?@o??_?G_?GO?CC?@?_?GA??_C?@?C?@?A??_?_?G?D?@")
+willis_page29.name(new = "willis_page29")
+add_to_lists(willis_page29, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 35, Figure 5.1
