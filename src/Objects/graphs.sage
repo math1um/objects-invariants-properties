@@ -1610,7 +1610,7 @@ Graph for which residue is the best lower bound present in the thesis
     28
     sage: max_degree(willis_page25_fig33)
     4
-    sage: chromatic_num(willis_page25_fig33)
+    sage: willis_page25_fig33.chromatic_number()
     4
 """
 willis_page25_fig33 = Graph("Mts?GKE@QDCIQIKD?")
