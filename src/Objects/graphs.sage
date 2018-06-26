@@ -1480,14 +1480,14 @@ add_to_lists(willis_page4, graph_objects, all_graphs)
 """
 From Willis's thesis, page 7
 
-    sage: willis_page7.radius() # doctest: +SKIP
+    sage: willis_page7.radius()
     2
-    sage: average_distance(willis_page7) # doctest: +SKIP
-    1.467
+    sage: willis_page7.average_distance()
+    22/15
 """
-# willis_page7 = Graph("ELRW")
-# willis_page7.name(new = "willis_page7")
-# add_to_lists(willis_page7, graph_objects, all_graphs)
+willis_page7 = Graph("ELRW")
+willis_page7.name(new = "willis_page7")
+add_to_lists(willis_page7, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 13, Fig. 2.7
