@@ -180,6 +180,8 @@ def is_van_den_heuvel(g):
 #necessary condition for hamiltonicity
 def is_two_connected(g):
     """
+    Equivalent to Graph.is_biconnected(), but we prefer our name
+    
     Returns True if the graph is 2-connected and False otherwise. A graph is
     2-connected if the removal of any single vertex gives a connected graph.
     By definition a graph on 2 or less vertices is not 2-connected.
@@ -193,13 +195,7 @@ def is_two_connected(g):
         sage: is_two_connected(graphs.CompleteGraph(1))
         False
     """
-    if g.order() <= 2:
-        return False
-    from itertools import combinations
-    for s in combinations(g.vertices(), g.order() - 1):
-        if not g.subgraph(s).is_connected():
-            return False
-    return True
+    return g.is_biconnected()
 
 #part of pebbling class0 sufficient condition
 def is_three_connected(g):
@@ -335,16 +331,6 @@ def is_biclique(g):
     """
     gc = g.complement()
     return gc.is_bipartite()
-
-def has_perfect_matching(g):
-    n = g.order()
-    if n%2 == 1:
-        return False
-    nu = g.matching(value_only=True)
-    if 2*nu == n:
-        return True
-    else:
-        return False
 
 #true if radius equals diameter
 def has_radius_equal_diameter(g):
@@ -576,7 +562,7 @@ def is_factor_critical(g):
     for v in g.vertices():
         gc = copy(g)
         gc.delete_vertex(v)
-        if not has_perfect_matching(gc):
+        if not gc.has_perfect_matching:
             return False
     return True
 
@@ -1154,7 +1140,7 @@ Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
 Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
 Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian,
 is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
-is_lindquester, is_claw_free, has_perfect_matching, has_radius_equal_diameter,
+is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
 is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
 diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac,
 is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
@@ -1169,7 +1155,11 @@ has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
-has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops]
+has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops, 
+Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
+Graph.is_circumscribable, Graph.is_cograph, Graph.is_inscribable, 
+Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube, 
+Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
@@ -1180,16 +1170,31 @@ is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
 is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
-Graph.is_transitively_reduced, Graph.is_self_complementary]
+Graph.is_transitively_reduced, Graph.is_self_complementary, Graph.is_half_transitive, 
+Graph.is_line_graph]
 
 removed_properties = [is_pebbling_class0]
 
-# Last checked Sage 8.2
+"""
+    Last checked Sage 8.2
+    
+    Skip Graph.is_biconnected() in favor of our is_two_connected().
+    Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient 
+        algorithm existing.
+"""
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
 Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
 Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
 Graph.is_transitively_reduced, Graph.is_self_complementary, Graphs.is_connected,
-Graph.has_loops]
+Graph.has_loops, Graph.is_asteroidal_triple_free, Graph.is_bipartite,
+Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product, Graph.is_circumscribable,
+Graph.is_cograph, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free,
+Graph.is_forest, Graph.is_half_transitive, Graph.is_inscribable, Graph.is_line_graph,
+Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_odd_hole_free,
+Graph.is_overfull, Graph.is_partial_cube, Graph.is_polyhedral, Graph.is_prime, 
+Graph.is_semi_symmetric, Graph.is_split, Graph.is_strongly_regular, Graph.is_tree,
+Graph.is_triangle_free, Graph.is_weakly_chordal, Graph.has_perfect_matching, Graph.is_apex,
+Graph.is_arc_transitive]
 
 #speed notes
 #FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive,
@@ -1203,8 +1208,5 @@ properties_plus = efficiently_computable_properties + intractable_properties + i
 
 invariants_from_properties = [make_invariant_from_property(property) for property in properties]
 invariants_plus = all_invariants + invariants_from_properties
-
-# Graph.is_prime removed as faulty 9/2014
-# is_line_graph is theoretically efficient - but Sage's implementation is not 9/2014
 
 # weakly_chordal = weakly chordal, i.e., the graph and its complement have no induced cycle of length at least 5
