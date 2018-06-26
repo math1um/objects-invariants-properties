@@ -524,7 +524,7 @@ ryan.name(new="ryan")
 add_to_lists(ryan, graph_objects, all_graphs)
 
 # Ryan Pepper
-# CE to independence_number(x) <= 2 * chromatic_number(x) + 2 * residue(x)
+# CE to independence_number(x) <= 2 * x.chromatic_number() + 2 * residue(x)
 # has alpha=25,chi=2,residue=10
 ryan2=graphs.CirculantGraph(50,[1,3])
 ryan2.name(new="circulant_50_1_3")
@@ -1572,7 +1572,7 @@ Graph for which n/chi is the best lower bound present in the thesis
     20
     sage: max_degree(willis_page21) # doctest: +SKIP
     4
-    sage: chromatic_num(willis_page21) # doctest: +SKIP
+    sage: willis_page21.chromatic_number() # doctest: +SKIP
     3
 """
 # willis_page21 = Graph("KoD?Xb?@HBBB")
@@ -1591,7 +1591,7 @@ Graph for which residue is the best lower bound present in the thesis
     15
     sage: max_degree(willis_page25_fig32)
     6
-    sage: chromatic_num(willis_page25_fig32)
+    sage: willis_page25_fig32.chromatic_number()
     4
 """
 willis_page25_fig32 = Graph("G@N@~w")

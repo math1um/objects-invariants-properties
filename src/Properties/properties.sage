@@ -184,17 +184,20 @@ def is_two_connected(g):
     
     Returns True if the graph is 2-connected and False otherwise. A graph is
     2-connected if the removal of any single vertex gives a connected graph.
-    By definition a graph on 2 or less vertices is not 2-connected.
+    
+    If a graph has fewer than 3 vertices, a ValueError is raised.
 
         sage: is_two_connected(graphs.CycleGraph(5))
         True
         sage: is_two_connected(graphs.PathGraph(5))
         False
         sage: is_two_connected(graphs.CompleteGraph(2))
-        False
-        sage: is_two_connected(graphs.CompleteGraph(1))
-        False
+        Traceback (most recent call last):
+            File "", line 20, in is_two_connected
+        ValueError: is_two_connected is only defined on graphs with at least 3 vertices.
     """
+    if g.order() < 3:
+        raise ValueError("is_two_connected is only defined on graphs with at least 3 vertices.")
     return g.is_biconnected()
 
 #part of pebbling class0 sufficient condition
@@ -455,7 +458,7 @@ def avg_distance_greater_than_girth(g):
 def chi_equals_min_theory(g):
     chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
     min_theory = min([f(g) for f in chromatic_upper_theory])
-    chi = chromatic_num(g)
+    chi = g.chromatic_number()
     if min_theory == chi:
         return True
     else:
