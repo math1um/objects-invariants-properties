@@ -7,14 +7,19 @@ theorem_invariants = []
 broken_invariants = []
 
 # Last checked Sage 8.2
-sage_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
+sage_efficient_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
-Graph.average_distance, Graph.connected_components_number,
-Graph.maximum_average_degree, Graph.lovasz_theta, Graph.clustering_average, Graph.spanning_trees_count,
-Graph.cluster_transitivity, Graph.edge_connectivity, Graph.vertex_connectivity, Graph.genus, 
-Graph.crossing_number]
-for i in sage_invariants:
+Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta, 
+Graph.spanning_trees_count, Graph.odd_girth, Graph.clustering_average, Graph.cluster_transitivity]
+
+sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth, 
+Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, , Graph.edge_connectivity, 
+Graph.vertex_connectivity, Graph.genus, Graph.crossing_number]
+
+for i in sage_efficient_invariants:
     add_to_lists(i, efficient_invariants, all_invariants)
+for i in sage_intractable_invariants:
+    add_to_lists(i, intractable_invariants, all_invariants)
 
 def distinct_degrees(g):
     """
@@ -1272,17 +1277,6 @@ def independence_number(g):
     return g.independent_set(value_only=True)
 add_to_lists(independence_number, intractable_invariants, all_invariants)
 
-def chromatic_index(g):
-    if g.size() == 0:
-        return 0
-    import sage.graphs.graph_coloring
-    return sage.graphs.graph_coloring.edge_coloring(g, value_only=True)
-add_to_lists(chromatic_index, intractable_invariants, all_invariants)
-
-def chromatic_num(g):
-    return g.chromatic_number()
-add_to_lists(chromatic_num, intractable_invariants, all_invariants)
-
 def clique_covering_number(g):
     # Finding the chromatic number of the complement of a fullerene
     # is extremely slow, even when using MILP as the algorithm.
@@ -1417,9 +1411,6 @@ add_to_lists(tr, intractable_invariants, all_invariants)
 def total_domination_number(g):
     return g.dominating_set(total=True, value_only=True)
 add_to_lists(total_domination_number, intractable_invariants, all_invariants)
-
-add_to_lists(Graph.treewidth, intractable_invariants, all_invariants)
-add_to_lists(Graph.clique_number, intractable_invariants, all_invariants)
 
 # A graph G is t-tough for real t if for every integer k>1, G cannot be split into k connected components by removal of fewer than tk vertices
 # Returns Infinity if g is complete
