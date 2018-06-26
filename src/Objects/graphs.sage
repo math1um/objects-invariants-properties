@@ -1684,16 +1684,16 @@ add_to_lists(willis_page36_fig53, graph_objects, all_graphs)
 From Willis's thesis, page 36, Figure 5.4
 A graph where none of the upper bounds in the thesis give the exact value for alpha
 
-    sage: independence_number(willis_page36_fig54) # doctest: +SKIP
+    sage: independence_number(willis_page36_fig54)
     2
-    sage: willis_page36_fig54.order() # doctest: +SKIP
+    sage: willis_page36_fig54.order()
     9
-    sage: willis_page36_fig54.size() # doctest: +SKIP
+    sage: willis_page36_fig54.size()
     24
 """
-# willis_page36_fig54 = Graph("H~`HW~~")
-# willis_page36_fig54.name(new = "willis_page36_fig54")
-# add_to_lists(willis_page36_fig54, graph_objects, all_graphs)
+willis_page36_fig54 = Graph("H~`HW~~")
+willis_page36_fig54.name(new = "willis_page36_fig54")
+add_to_lists(willis_page36_fig54, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 36, Figure 5.5
@@ -1701,9 +1701,9 @@ A graph where none of the lower bounds in the thesis give the exact value for al
 
     sage: independence_number(willis_page36_fig55)
     3
-    sage: willis_page36_fig54.order() # doctest: +SKIP
+    sage: willis_page36_fig55.order()
     7
-    sage: willis_page36_fig54.size() # doctest: +SKIP
+    sage: willis_page36_fig55.size()
     13
 """
 willis_page36_fig55 = Graph("F@^vo")
