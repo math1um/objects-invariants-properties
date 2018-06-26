@@ -1564,20 +1564,20 @@ add_to_lists(willis_page13_fig26, graph_objects, all_graphs)
 From Willis's thesis, page 21, Figure 3.1
 Graph for which n/chi is the best lower bound present in the thesis
 
-    sage: independence_number(willis_page21) # doctest: +SKIP
+    sage: independence_number(willis_page21)
     4
-    sage: willis_page21.order() # doctest: +SKIP
+    sage: willis_page21.order()
     12
-    sage: willis_page21.size() # doctest: +SKIP
+    sage: willis_page21.size()
     20
-    sage: max_degree(willis_page21) # doctest: +SKIP
+    sage: max_degree(willis_page21)
     4
-    sage: willis_page21.chromatic_number() # doctest: +SKIP
+    sage: willis_page21.chromatic_number()
     3
 """
-# willis_page21 = Graph("KoD?Xb?@HBBB")
-# willis_page21.name(new = "willis_page21")
-# add_to_lists(willis_page21, graph_objects, all_graphs)
+willis_page21 = Graph("KoD?Xb?@hBBB")
+willis_page21.name(new = "willis_page21")
+add_to_lists(willis_page21, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 25, Figure 3.2
