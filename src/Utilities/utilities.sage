@@ -540,6 +540,29 @@ def is_matching(s):
     else:
         return True
 
+def mobius_ladder(k):
+    """
+    A mobius ladder with parameter k is a cubic graph on 2k vertices which can
+    be constructed by taking a cycle on 2k vertices and connecting opposite
+    vertices.
+
+    sage: ml10 = mobius_ladder(10)
+    sage: ml10
+    mobius_ladder_10: Graph on 20 vertices
+    sage: ml10.order()
+    20
+    sage: ml10.degree()
+    [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+    sage: ml10.is_apex()
+    True
+    sage: ml10.is_vertex_transitive()
+    True
+    """
+    g = graphs.CycleGraph(2*k)
+    for i in range(k):
+        g.add_edge(i, i+k)
+    g.name(new = "mobius_ladder_{}".format(k))
+    return g
 
 #TESTING
 
