@@ -7,6 +7,6 @@ if [ "$TYPE" = "GT" ]; then
     rm -f SageMath.tar.bz2
     wget --progress=dot:giga $SAGE_ADDRESS$SAGE_IMAGE -O SageMath.tar.bz2
     echo "Extracting SageMath"
-    tar xf SageMath.tar.bz2 --checpoint=.1000
+    tar xf SageMath.tar.bz2 --checkpoint=.1000
   fi
 fi
