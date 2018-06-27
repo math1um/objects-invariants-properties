@@ -1634,7 +1634,7 @@ Graph for which the Harant Bound is the best lower bound present in the thesis
     42
     sage: max_degree(willis_page29)
     3
-    sage: chromatic_num(willis_page29)
+    sage: willis_page29.chromatic_number()
     3
 """
 willis_page29 = mobius_ladder(14)
