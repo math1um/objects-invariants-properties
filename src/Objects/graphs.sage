@@ -2908,7 +2908,50 @@ add_to_lists(Graham68, graph_objects, all_graphs)
 
 # Distance Regular Graphs:
 split_cayley_hex_2 = Graph("~??~{aSO???GA??????_?_???????G??_?????@???????_?_G??_A?@?C??CC??A?_??OO??A?_??@?O?@?GG?@?G?A?GC?O??O_?_?A?O?_?A@?A??O?_G??A@?O?ABo????O@w???D??]???A??Bo??H???GaO?_??@GQ?G???@h?H???D?BA@?_O_?_?C?c?_C??A?Q?CG??A?C_C?O??C@_?CO???_`?@O???CCG@??_??GAC?OA???a?AG@??C?G_?__O?@?CC?CC@??G?OO?S?C?G??W?AG?G?@??c?OA?G?C?@G?A?o???_?`?C?`???_?")
+split_cayley_hex_2.name(new = "split_cayley_hex_2")
 add_to_lists(split_cayley_hex_2, graph_objects, all_graphs)
+# Bipartite, not strongly regular
+distreg_not_stronglyreg1 = Graph("QKUalPTiaitSTTiiIilTSTTUii_")
+distreg_not_stronglyreg1.name(new = "distreg_not_stronglyreg1")
+distreg_not_stronglyreg2 = Graph("IKUalPTi_")
+distreg_not_stronglyreg2.name(new = "distreg_not_stronglyreg2")
+distreg_not_stronglyreg3 = Graph("KKUalPTiaitS")
+distreg_not_stronglyreg3.name(new = "distreg_not_stronglyreg3")
+distreg_not_stronglyreg4 = Graph("SKUalPTiaitSTTiiIilTSTTUiiaiilTTO")
+distreg_not_stronglyreg4.name(new = "distreg_not_stronglyreg4")
+distreg_not_stronglyreg5 = Graph("MKUalPTiaitSTTii?")
+distreg_not_stronglyreg5.name(new = "distreg_not_stronglyreg5")
+distreg_not_stronglyreg6 = Graph("OKUalPTiaitSTTiiIilTS")
+distreg_not_stronglyreg6.name(new = "distreg_not_stronglyreg6")
+graph_objects.extend([distreg_not_stronglyreg1, distreg_not_stronglyreg2, distreg_not_stronglyreg3, distreg_not_stronglyreg4, distreg_not_stronglyreg5,
+                   distreg_not_stronglyreg6])
+all_graphs.extend([distreg_not_stronglyreg1, distreg_not_stronglyreg2, distreg_not_stronglyreg3, distreg_not_stronglyreg4, distreg_not_stronglyreg5,
+                   distreg_not_stronglyreg6])
+# Not bipartite, not strongly regular
+distreg_not_stronglyreg7 = Graph("L~~~~~~~~~~~~~")
+distreg_not_stronglyreg7.name(new = "distreg_not_stronglyreg7")
+distreg_not_stronglyreg8 = Graph("N~~~~~~~~~~~~~~~~~w")
+distreg_not_stronglyreg8.name(new = "distreg_not_stronglyreg8")
+distreg_not_stronglyreg9 = Graph("P~~~~~~~~~~~~~~~~~~~~~~{")
+distreg_not_stronglyreg9.name(new = "distreg_not_stronglyreg9")
+distreg_not_stronglyreg10 = Graph("J~~~~~~~~~_")
+distreg_not_stronglyreg10.name(new = "distreg_not_stronglyreg10")
+distreg_not_stronglyreg11 = Graph("Q~~~~~~~~~~~~~~~~~~~~~~~~~w")
+distreg_not_stronglyreg11.name(new = "distreg_not_stronglyreg11")
+distreg_not_stronglyreg12 = Graph("M~~~~~~~~~~~~~~~_")
+distreg_not_stronglyreg12.name(new = "distreg_not_stronglyreg12")
+distreg_not_stronglyreg13 = Graph("R~~~~~~~~~~~~~~~~~~~~~~~~~~~~w")
+distreg_not_stronglyreg13.name(new = "distreg_not_stronglyreg13")
+distreg_not_stronglyreg14 = Graph("O~~~~~~~~~~~~~~~~~~~~")
+distreg_not_stronglyreg14.name(new = "distreg_not_stronglyreg14")
+distreg_not_stronglyreg15 = Graph("K~~~~~~~~~~~")
+distreg_not_stronglyreg15.name(new = "distreg_not_stronglyreg15")
+distreg_not_stronglyreg16 = Graph("S~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{")
+distreg_not_stronglyreg16.name(new = "distreg_not_stronglyreg16")
+graph_objects.extend([distreg_not_stronglyreg7, distreg_not_stronglyreg8, distreg_not_stronglyreg9, distreg_not_stronglyreg10, distreg_not_stronglyreg11,
+                   distreg_not_stronglyreg12, distreg_not_stronglyreg13, distreg_not_stronglyreg14, distreg_not_stronglyreg15, distreg_not_stronglyreg16])
+all_graphs.extend([distreg_not_stronglyreg7, distreg_not_stronglyreg8, distreg_not_stronglyreg9, distreg_not_stronglyreg10, distreg_not_stronglyreg11,
+                   distreg_not_stronglyreg12, distreg_not_stronglyreg13, distreg_not_stronglyreg14, distreg_not_stronglyreg15, distreg_not_stronglyreg16])
 
 ######  DISCONNECTED GRAPHS  ######
 
