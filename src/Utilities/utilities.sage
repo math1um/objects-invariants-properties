@@ -564,6 +564,44 @@ def mobius_ladder(k):
     g.name(new = "mobius_ladder_{}".format(k))
     return g
 
+def benoit_boyd_graphs(a, b, c):
+    """
+    Two triangles pointed at eachother, with opposite vertices connected by paths of a,b,c respective edges. Triangles weighted 0.5, paths 1.0.
+
+    Pg. 927 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems. 
+        Mathematics of Operations Research, 33(4): 921--931, 2008.
+    """
+    g = Graph(0, weighted = True)
+    for i in xrange(0, a):
+        g.add_edge(i, i + 1, 1)
+    for i in xrange(a + 1, a + b + 1):
+        g.add_edge(i, i + 1, 1)
+    for i in xrange(a + b + 2, a + b + c + 2):
+        g.add_edge(i, i + 1, 1)
+    g.add_edges([(0, a + 1, 0.5), (a + 1, a + b + 2, 0.5), (0, a + b + 2, 0.5)])
+    g.add_edges([(a, a + b + 1, 0.5), (a + b + 1, a + b + c + 2, 0.5), (a, a + b + c + 2, 0.5)])
+    return g
+    
+def benoit_boyd_graphs_2(a, b, c):
+    """
+    Two triangles pointed at eachother, with opposite vertices connected by paths of a,b,c respective edges. Weights more complicated.
+
+    Paths each weighted 1/a, 1/b, 1/c. The triangles are weighted with the sum of the paths they join, e.g. 1/a+1/b or 1/b+1/c.
+
+    Pg. 928 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems. 
+        Mathematics of Operations Research, 33(4): 921--931, 2008.
+    """
+    g = Graph(0, weighted = True)
+    for i in xrange(0, a):
+        g.add_edge(i, i + 1, 1/a)
+    for i in xrange(a + 1, a + b + 1):
+        g.add_edge(i, i + 1, 1/b)
+    for i in xrange(a + b + 2, a + b + c + 2):
+        g.add_edge(i, i + 1, 1/c)
+    g.add_edges([(0, a + 1, 1/a + 1/b), (a + 1, a + b + 2, 1/b + 1/c), (0, a + b + 2, 1/a + 1/c)])
+    g.add_edges([(a, a + b + 1, 1/a + 1/b), (a + b + 1, a + b + c + 2, 1/b + 1/c), (a, a + b + c + 2, 1/a + 1/c)])
+    return g
+    
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
