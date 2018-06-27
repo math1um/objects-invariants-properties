@@ -1045,6 +1045,33 @@ def has_equal_invariants(invar1, invar2, name=None):
 has_alpha_equals_clique_covering = has_equal_invariants(independence_number, clique_covering_number, name="has_alpha_equals_clique_covering")
 
 
+def has_invariant_equal_to(invar, value, name=None, documentation=None):
+    """
+    This function takes an invariant and a value as arguments and returns the property
+    that the invariant value for a graph is equal to the provided value.
+
+    Optionally a name and documentation for the new function can be provided.
+
+    sage: order_is_five = has_invariant_equal_to(Graph.order, 5)
+    sage: order_is_five(graphs.CycleGraph(5))
+    True
+    sage: order_is_five(graphs.CycleGraph(6))
+    False
+    """
+    def equality_checker(g):
+        return invar(g) == value
+
+    if name is not None:
+        equality_checker.__name__ = name
+    elif hasattr(invar, '__name__'):
+        equality_checker.__name__ = 'has_{}_equal_to_{}'.format(invar.__name__, value)
+    else:
+        raise ValueError('Please provide a name for the new function')
+
+    equality_checker.__doc__ = documentation
+
+    return equality_checker
+
 def has_leq_invariants(invar1, invar2, name=None):
     """
     This function takes two invariants as an argument and returns the property that the first invariant is
