@@ -1729,16 +1729,20 @@ add_to_lists(willis_page37_fig56, graph_objects, all_graphs)
 From Willis's thesis, page 37, Figure 5.8
 A graph where none of the lower bounds in the thesis give the exact value for alpha
 
-    sage: independence_number(willis_page37_fig58) # doctest: +SKIP
-    3
-    sage: willis_page37_fig58.order() # doctest: +SKIP
+    sage: independence_number(willis_page37_fig58)
+    4
+    sage: willis_page37_fig58.order()
     9
-    sage: willis_page37_fig58.size() # doctest: +SKIP
+    sage: willis_page37_fig58.size()
     16
+    sage: min_degree(willis_page37_fig58)
+    2
+    sage: max_degree(willis_page37_fig58)
+    6
 """
-# willis_page37_fig58 = Graph("H?iYbC~")
-# willis_page37_fig58.name(new = "willis_page37_fig58")
-# add_to_lists(willis_page37_fig58, graph_objects, all_graphs)
+willis_page37_fig58 = Graph("H?iYbC~")
+willis_page37_fig58.name(new = "willis_page37_fig58")
+add_to_lists(willis_page37_fig58, graph_objects, all_graphs)
 
 """
 From Willis's thesis, page 38, Figure 5.9
