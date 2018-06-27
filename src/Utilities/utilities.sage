@@ -30,7 +30,7 @@ def find_alpha_critical_graphs(order, save = False):
     the given order. A graph g is alpha critical if alpha(g-e) > alpha(g) for
     every edge e in g. This looks at every graph of the given order, so this
     will be slow for any order larger than 8.
-    If save = True (default False), then list will be saved to a file 
+    If save = True (default False), then list will be saved to a file
     named "alpha_critical_name_list_{order}".
 
     There is a unique alpha critical graph on 3 and 4 vertices::
@@ -400,7 +400,7 @@ def is_simplical_vertex(g, v):
     neighbors = g.neighbors(v)
     induced_neighborhood = g.subgraph(neighbors)
     return induced_neighborhood.is_clique()
-    
+
 # Defined by Sergey Norin at SIAM DM 2018
 def is_homogenous_set(g, s):
     """
@@ -415,7 +415,7 @@ def generalized_degree(g,S):
     """
     neighborhood_union = set(w for v in S for w in g.neighbors(v))
     return len(neighborhood_union)
-    
+
 def common_neighbors_of_set(g, s):
     """
     Returns the vertices in g adjacent to every vertex in s
@@ -441,7 +441,7 @@ def common_neighbors(g, v, w):
 
 def extremal_triangle_free_extension(g):
     """
-    Returns graph with edges added until no more possible without creating triangles. 
+    Returns graph with edges added until no more possible without creating triangles.
     If input is not triangle-free, raises RuntimeError.
 
     This function is not deterministic; the output may vary among any of possibly many extremal triangle-free extensions.
@@ -456,7 +456,7 @@ def extremal_triangle_free_extension(g):
         if not g2.has_edge(v, w) and all(u not in g2.neighbors(v) for u in g2.neighbors(w)):
             g2.add_edge(v, w)
     return g2
-    
+
 def pyramid_encapsulation(g):
     """
     Returns the pyramid encapsulation of graph g.
@@ -527,7 +527,7 @@ def max_induced_forest(g):
             sub_g.delete_vertices(subset)
             if sub_g.is_forest():
                 return sub_g
-                
+
 def is_matching(s):
     """
     True if set of edges s is a matching, i.e. no edges share a common vertex
