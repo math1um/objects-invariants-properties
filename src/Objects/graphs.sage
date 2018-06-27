@@ -1637,7 +1637,7 @@ Graph for which the Harant Bound is the best lower bound present in the thesis
     sage: chromatic_num(willis_page29)
     3
 """
-willis_page29 = Graph("[HCGGC@?G?_@?@_?_?M?@o??_?G_?GO?CC?@?_?GA??_C?@?C?@?A??_?_?G?D?@")
+willis_page29 = mobius_ladder(14)
 willis_page29.name(new = "willis_page29")
 add_to_lists(willis_page29, graph_objects, all_graphs)
 
