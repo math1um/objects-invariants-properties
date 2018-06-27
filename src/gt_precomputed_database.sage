@@ -126,7 +126,7 @@ def update_invariant_database(invariants, graphs, timeout=60, database=None, ver
             try:
                 alarm(timeout)
                 result = compute_invariant_value(inv, g, g_key)
-            except AlarmInterrupt:
+            except (AlarmInterrupt, KeyboardInterrupt):
                 # Computation did not end. We interrupt/kill it.
                 print "Computation of {} for {} did not end in time... killing!".format(inv.__name__, g.name())
             else:
@@ -236,8 +236,8 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001, timeout=60,
 
 def compute_property_value(property, graph, g_key):
     """
-    Computes the value of property for graph and returns it, if succesful. 
-    This method is not intended to be called directly. It will be called by the 
+    Computes the value of property for graph and returns it, if succesful.
+    This method is not intended to be called directly. It will be called by the
     method update_property_database as a separate process.
     """
     try:
@@ -274,7 +274,7 @@ def update_property_database(properties, graphs, timeout=60, database=None, verb
             try:
                 alarm(timeout)
                 result = compute_property_value(prop, g, g_key)
-            except AlarmInterrupt:
+            except (AlarmInterrupt, KeyboardInterrupt):
                 # Computation did not end. We interrupt/kill it.
                 print "Computation of {} for {} did not end in time... killing!".format(prop.__name__, g.name())
             else:
