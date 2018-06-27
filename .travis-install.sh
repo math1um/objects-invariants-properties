@@ -8,5 +8,7 @@ if [ "$TYPE" = "GT" ]; then
     wget --progress=dot:giga $SAGE_ADDRESS$SAGE_IMAGE -O SageMath.tar.bz2
     echo "Extracting SageMath"
     tar xf SageMath.tar.bz2 --checkpoint=.1000
+    #Run Sage once, so it fixes its paths as part of the installation
+    SageMath/sage -v
   fi
 fi
