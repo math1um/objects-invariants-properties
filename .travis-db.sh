@@ -26,23 +26,34 @@ print "Invariants"
 print "=========="
 print "Missing"
 print "-------"
-for inv in missing_invariants:
-    print "  {}".format(inv)
+if missing_invariants:
+    for inv in missing_invariants:
+        print "  {}".format(inv)
+else:
+    print "No missing invariants"
 print "Orphaned"
 print "--------"
-for inv in orphaned_invariants:
-    print "  {}".format(inv)
+if orphaned_invariants:
+    for inv in orphaned_invariants:
+        print "  {}".format(inv)
+else:
+    print "No orphaned invariants"
 print
 print "Properties"
 print "=========="
 print "Missing"
 print "-------"
-for prop in missing_properties:
-    print "  {}".format(prop)
+if missing_properties:
+    for prop in missing_properties:
+        print "  {}".format(prop)
+else:
+    print "No missing properties"
 print "Orphaned"
 print "--------"
-for prop in orphaned_properties:
-    print "  {}".format(prop)
+    for prop in orphaned_properties:
+        print "  {}".format(prop)
+else:
+    print "No orphaned properties"
 if len(orphaned_invariants) + len(orphaned_properties):
     print "There are orphaned invariants and/or properties!"
     exit(1)
