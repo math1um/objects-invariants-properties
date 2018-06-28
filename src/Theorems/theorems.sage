@@ -119,7 +119,7 @@ def alpha_AGX_lower_bound(g):
 add_to_lists(alpha_AGX_lower_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_max_degree_minus_triangles_bound(g):
-    return max_degree(g) - number_of_triangles(g)
+    return max_degree(g) - g.triangles_count()
 add_to_lists(alpha_max_degree_minus_triangles_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_order_brooks_bound(g):
@@ -170,7 +170,7 @@ alpha_critical_independence_number_bound = critical_independence_number
 add_to_lists(alpha_critical_independence_number_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_max_degree_minus_number_of_triangles_bound(g):
-    return max_degree(g) - number_of_triangles(g)
+    return max_degree(g) - g.triangles_count()
 add_to_lists(alpha_max_degree_minus_number_of_triangles_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_HHRS_bound(g):
