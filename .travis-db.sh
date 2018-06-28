@@ -7,7 +7,7 @@ for inv in all_invariants:
     print inv.__name__
 print "INVARIANT_END"
 print "PROPERTY_START"
-for prop in properties:
+for prop in properties + removed_properties:
     print prop.__name__
 print "PROPERTY_END"
 SAGESCRIPT
