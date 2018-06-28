@@ -30,7 +30,7 @@ def find_alpha_critical_graphs(order, save = False):
     the given order. A graph g is alpha critical if alpha(g-e) > alpha(g) for
     every edge e in g. This looks at every graph of the given order, so this
     will be slow for any order larger than 8.
-    If save = True (default False), then list will be saved to a file 
+    If save = True (default False), then list will be saved to a file
     named "alpha_critical_name_list_{order}".
 
     There is a unique alpha critical graph on 3 and 4 vertices::
@@ -400,7 +400,7 @@ def is_simplical_vertex(g, v):
     neighbors = g.neighbors(v)
     induced_neighborhood = g.subgraph(neighbors)
     return induced_neighborhood.is_clique()
-    
+
 # Defined by Sergey Norin at SIAM DM 2018
 def is_homogenous_set(g, s):
     """
@@ -415,7 +415,7 @@ def generalized_degree(g,S):
     """
     neighborhood_union = set(w for v in S for w in g.neighbors(v))
     return len(neighborhood_union)
-    
+
 def common_neighbors_of_set(g, s):
     """
     Returns the vertices in g adjacent to every vertex in s
@@ -441,7 +441,7 @@ def common_neighbors(g, v, w):
 
 def extremal_triangle_free_extension(g):
     """
-    Returns graph with edges added until no more possible without creating triangles. 
+    Returns graph with edges added until no more possible without creating triangles.
     If input is not triangle-free, raises RuntimeError.
 
     This function is not deterministic; the output may vary among any of possibly many extremal triangle-free extensions.
@@ -456,7 +456,7 @@ def extremal_triangle_free_extension(g):
         if not g2.has_edge(v, w) and all(u not in g2.neighbors(v) for u in g2.neighbors(w)):
             g2.add_edge(v, w)
     return g2
-    
+
 def pyramid_encapsulation(g):
     """
     Returns the pyramid encapsulation of graph g.
@@ -527,7 +527,7 @@ def max_induced_forest(g):
             sub_g.delete_vertices(subset)
             if sub_g.is_forest():
                 return sub_g
-                
+
 def is_matching(s):
     """
     True if set of edges s is a matching, i.e. no edges share a common vertex
@@ -540,7 +540,68 @@ def is_matching(s):
     else:
         return True
 
+def mobius_ladder(k):
+    """
+    A mobius ladder with parameter k is a cubic graph on 2k vertices which can
+    be constructed by taking a cycle on 2k vertices and connecting opposite
+    vertices.
 
+    sage: ml10 = mobius_ladder(10)
+    sage: ml10
+    mobius_ladder_10: Graph on 20 vertices
+    sage: ml10.order()
+    20
+    sage: ml10.degree()
+    [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+    sage: ml10.is_apex()
+    True
+    sage: ml10.is_vertex_transitive()
+    True
+    """
+    g = graphs.CycleGraph(2*k)
+    for i in range(k):
+        g.add_edge(i, i+k)
+    g.name(new = "mobius_ladder_{}".format(k))
+    return g
+
+def benoit_boyd_graphs(a, b, c):
+    """
+    Two triangles pointed at eachother, with opposite vertices connected by paths of a,b,c respective edges. Triangles weighted 0.5, paths 1.0.
+
+    Pg. 927 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems. 
+        Mathematics of Operations Research, 33(4): 921--931, 2008.
+    """
+    g = Graph(0, weighted = True)
+    for i in xrange(0, a):
+        g.add_edge(i, i + 1, 1)
+    for i in xrange(a + 1, a + b + 1):
+        g.add_edge(i, i + 1, 1)
+    for i in xrange(a + b + 2, a + b + c + 2):
+        g.add_edge(i, i + 1, 1)
+    g.add_edges([(0, a + 1, 0.5), (a + 1, a + b + 2, 0.5), (0, a + b + 2, 0.5)])
+    g.add_edges([(a, a + b + 1, 0.5), (a + b + 1, a + b + c + 2, 0.5), (a, a + b + c + 2, 0.5)])
+    return g
+    
+def benoit_boyd_graphs_2(a, b, c):
+    """
+    Two triangles pointed at eachother, with opposite vertices connected by paths of a,b,c respective edges. Weights more complicated.
+
+    Paths each weighted 1/a, 1/b, 1/c. The triangles are weighted with the sum of the paths they join, e.g. 1/a+1/b or 1/b+1/c.
+
+    Pg. 928 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems. 
+        Mathematics of Operations Research, 33(4): 921--931, 2008.
+    """
+    g = Graph(0, weighted = True)
+    for i in xrange(0, a):
+        g.add_edge(i, i + 1, 1/a)
+    for i in xrange(a + 1, a + b + 1):
+        g.add_edge(i, i + 1, 1/b)
+    for i in xrange(a + b + 2, a + b + c + 2):
+        g.add_edge(i, i + 1, 1/c)
+    g.add_edges([(0, a + 1, 1/a + 1/b), (a + 1, a + b + 2, 1/b + 1/c), (0, a + b + 2, 1/a + 1/c)])
+    g.add_edges([(a, a + b + 1, 1/a + 1/b), (a + b + 1, a + b + c + 2, 1/b + 1/c), (a, a + b + c + 2, 1/a + 1/c)])
+    return g
+    
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property

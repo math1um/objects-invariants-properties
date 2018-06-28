@@ -181,10 +181,10 @@ def is_van_den_heuvel(g):
 def is_two_connected(g):
     """
     Equivalent to Graph.is_biconnected(), but we prefer our name
-    
+
     Returns True if the graph is 2-connected and False otherwise. A graph is
     2-connected if the removal of any single vertex gives a connected graph.
-    
+
     If a graph has fewer than 3 vertices, a ValueError is raised.
 
         sage: is_two_connected(graphs.CycleGraph(5))
@@ -1017,7 +1017,7 @@ def has_even_order(g):
     True
     """
     return g.order() % 2 == 0
-    
+
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
@@ -1044,6 +1044,33 @@ def has_equal_invariants(invar1, invar2, name=None):
 """
 has_alpha_equals_clique_covering = has_equal_invariants(independence_number, clique_covering_number, name="has_alpha_equals_clique_covering")
 
+
+def has_invariant_equal_to(invar, value, name=None, documentation=None):
+    """
+    This function takes an invariant and a value as arguments and returns the property
+    that the invariant value for a graph is equal to the provided value.
+
+    Optionally a name and documentation for the new function can be provided.
+
+    sage: order_is_five = has_invariant_equal_to(Graph.order, 5)
+    sage: order_is_five(graphs.CycleGraph(5))
+    True
+    sage: order_is_five(graphs.CycleGraph(6))
+    False
+    """
+    def equality_checker(g):
+        return invar(g) == value
+
+    if name is not None:
+        equality_checker.__name__ = name
+    elif hasattr(invar, '__name__'):
+        equality_checker.__name__ = 'has_{}_equal_to_{}'.format(invar.__name__, value)
+    else:
+        raise ValueError('Please provide a name for the new function')
+
+    equality_checker.__doc__ = documentation
+
+    return equality_checker
 
 def has_leq_invariants(invar1, invar2, name=None):
     """
@@ -1158,10 +1185,10 @@ has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
-has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops, 
+has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
 Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
-Graph.is_circumscribable, Graph.is_cograph, Graph.is_inscribable, 
-Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube, 
+Graph.is_circumscribable, Graph.is_cograph, Graph.is_inscribable,
+Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
 Graph.is_self_complementary]
 
@@ -1182,7 +1209,7 @@ removed_properties = [is_pebbling_class0]
     Last version of graphs packaged checked: Sage 8.2
     sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
     True
-    
+
     Skip Graph.is_biconnected() in favor of our is_two_connected().
     Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient algorithm existing.
 """
@@ -1195,7 +1222,7 @@ Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product, Graph.is_circ
 Graph.is_cograph, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free,
 Graph.is_forest, Graph.is_half_transitive, Graph.is_inscribable, Graph.is_line_graph,
 Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_odd_hole_free,
-Graph.is_overfull, Graph.is_partial_cube, Graph.is_polyhedral, Graph.is_prime, 
+Graph.is_overfull, Graph.is_partial_cube, Graph.is_polyhedral, Graph.is_prime,
 Graph.is_semi_symmetric, Graph.is_split, Graph.is_strongly_regular, Graph.is_tree,
 Graph.is_triangle_free, Graph.is_weakly_chordal, Graph.has_perfect_matching, Graph.is_apex,
 Graph.is_arc_transitive]
