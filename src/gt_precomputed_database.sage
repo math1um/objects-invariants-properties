@@ -244,7 +244,7 @@ def compute_property_value(property, graph, g_key):
         value = bool(property(graph))
         return value
     except Exception as e:
-        print "Error while computing {} for {}".format(invariant.__name__, graph.name())
+        print "Error while computing {} for {}".format(property.__name__, graph.name())
         print type(e), e.message
 
 def update_property_database(properties, graphs, timeout=60, database=None, verbose=False):
