@@ -50,6 +50,7 @@ else:
     print "No missing properties"
 print "Orphaned"
 print "--------"
+if orphaned_properties:
     for prop in orphaned_properties:
         print "  {}".format(prop)
 else:
