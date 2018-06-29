@@ -13,11 +13,11 @@ broken_invariants = []
 """
 sage_efficient_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
-Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta, 
+Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta,
 Graph.spanning_trees_count, Graph.odd_girth, Graph.clustering_average, Graph.cluster_transitivity]
 
-sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth, 
-Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, Graph.edge_connectivity, 
+sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth,
+Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, Graph.edge_connectivity,
 Graph.vertex_connectivity, Graph.genus, Graph.crossing_number]
 
 for i in sage_efficient_invariants:
@@ -719,7 +719,7 @@ def make_invariant_from_property(property, name=None):
 
 # defined by R. Pepper in an unpublished paper on graph irregularity
 def geometric_length_of_degree_sequence(g):
-    return sqrt(sum(d^2 for d in g.degree()))
+    return sqrt(sum(d**2 for d in g.degree()))
 add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_invariants)
 
 # Two Stability Theta Bound
@@ -727,7 +727,7 @@ add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_inva
 # lovasz_theta <= 2^(2/3)*n^(1/3)
 # The Sandwich Theorem by Knuth p. 47
 def two_stability_theta_bound(g):
-    return 2^(2/3)*g.order()^(1/3)
+    return 2**(2/3)*g.order()**(1/3)
 add_to_lists(two_stability_theta_bound, efficient_invariants, all_invariants)
 
 # Lovasz Theta over Root N
@@ -822,7 +822,7 @@ def transmission(g):
         return Infinity
     if g.is_tree() and max(g.degree()) == 2:
         summation = 0
-        for i in [1..(g.order()-1)]:
+        for i in range(1,g.order()):
             summation += (i*(i+1))/2
         return summation * 2
     else:
@@ -1400,7 +1400,7 @@ def cheeger_constant(g):
     temp = g.order()
     best = n
 
-    for i in [1..upper]:
+    for i in range(1, upper+1):
         for s in SetV.subsets(i):
             count = 0
             for u in s:
@@ -1570,6 +1570,6 @@ def hamiltonian_index(g):
         line_graph_i = line_graph_i.line_graph()
 add_to_lists(hamiltonian_index, intractable_invariants, all_invariants)
 
-    
+
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs
