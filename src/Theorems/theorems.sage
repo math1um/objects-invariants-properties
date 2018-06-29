@@ -142,7 +142,7 @@ def alpha_staton_girth_bound(g):
         return 1
     else:
         d = max_degree(g)
-        return order(g) * (2* d - 1) / (d^2 + 2 * d - 1)
+        return order(g) * (2* d - 1) / (d*d + 2 * d - 1)
 add_to_lists(alpha_staton_girth_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_staton_triangle_free_bound(g):
