@@ -481,16 +481,16 @@ def precomputed_only_property_conjecture(objects, properties, mainProperty, prec
     runs of conjecturing, it would be best to use precomputed_graphs_by_properties() in gt_precomputed_database.sage to generate your own
     list of precomputed graphs and then use that with the standard propertyBasedConjecture() method.
     """
-    import time
-    if verbose: print time.asctime(time.localtime(time.time())) + " Filtering start."
+    import time as clock
+    if verbose: print clock.asctime(clock.localtime(clock.time())) + " Filtering start."
     fully_precomputed_graphs = precomputed_graphs_by_properties(objects, properties, precomputed_db)
     if verbose:
-        print time.asctime(time.localtime(time.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
-        print time.asctime(time.localtime(time.time())) + " Conjecturing start."
+        print clock.asctime(clock.localtime(clock.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
+        print clock.asctime(clock.localtime(clock.time())) + " Conjecturing start."
     conjectures = propertyBasedConjecture(fully_precomputed_graphs, properties, mainProperty, time = time, debug = debug, verbose = verbose,
                                           sufficient = sufficient, operators = operators, theory = theory,
                                           precomputed = precomputed_properties_for_conjecture(precomputed_db) )
-    if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
+    if verbose: print clock.asctime(clock.localtime(clock.time())) + " Conjecturing finished."
     return conjectures
     
 def precomputed_only_invariant_conjecture(objects, invariants, mainInvariant, precomputed_db = None,
@@ -509,14 +509,14 @@ def precomputed_only_invariant_conjecture(objects, invariants, mainInvariant, pr
     runs of conjecturing, it would be best to use precomputed_graphs_by_properties() in gt_precomputed_database.sage to generate your own
     list of precomputed graphs and then use that with the standard conjecture() method.
     """
-    import time
-    if verbose: print time.asctime(time.localtime(time.time())) + " Filtering start."
+    import time as clock
+    if verbose: print clock.asctime(clock.localtime(clock.time())) + " Filtering start."
     fully_precomputed_graphs = precomputed_graphs_by_invariants(objects, invariants, precomputed_db)
     if verbose:
-        print time.asctime(time.localtime(time.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
-        print time.asctime(time.localtime(time.time())) + " Conjecturing start."
+        print clock.asctime(clock.localtime(clock.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
+        print clock.asctime(clock.localtime(clock.time())) + " Conjecturing start."
     conjectures = conjecture(fully_precomputed_graphs, invariants, mainInvariant, variableName = variableName, time = time, debug = debug, 
                                           verbose = verbose, upperBound = upperBound, operators = operators, theory = theory,
                                           precomputed = precomputed_invariants_for_conjecture(precomputed_db) )
-    if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
+    if verbose: print clock.asctime(clock.localtime(clock.time())) + " Conjecturing finished."
     return conjectures
