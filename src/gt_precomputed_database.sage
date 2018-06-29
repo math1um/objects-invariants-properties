@@ -489,7 +489,7 @@ def precomputed_only_property_conjecture(objects, properties, mainProperty, prec
         print time.asctime(time.localtime(time.time())) + " Conjecturing start."
     conjectures = propertyBasedConjecture(fully_precomputed_graphs, properties, mainProperty, time = time, debug = debug, verbose = verbose,
                                           sufficient = sufficient, operators = operators, theory = theory,
-                                          precomputed = properties_as_dict(precomputed_db) )
+                                          precomputed = precomputed_properties_for_conjecture(precomputed_db) )
     if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
     return conjectures
     
@@ -517,6 +517,6 @@ def precomputed_only_invariant_conjecture(objects, invariants, mainInvariant, pr
         print time.asctime(time.localtime(time.time())) + " Conjecturing start."
     conjectures = conjecture(fully_precomputed_graphs, invariants, mainInvariant, variableName = variableName, time = time, debug = debug, 
                                           verbose = verbose, upperBound = upperBound, operators = operators, theory = theory,
-                                          precomputed = properties_as_dict(precomputed_db) )
+                                          precomputed = precomputed_invariants_for_conjecture(precomputed_db) )
     if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
     return conjectures
