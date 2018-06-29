@@ -123,11 +123,11 @@ def alpha_max_degree_minus_triangles_bound(g):
 add_to_lists(alpha_max_degree_minus_triangles_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_order_brooks_bound(g):
-    return ceil(order(x)/brooks(x))
+    return ceil(g.order()/brooks(g))
 add_to_lists(alpha_order_brooks_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_szekeres_wilf_bound(g):
-    return ceil(order(x)/szekeres_wilf(x))
+    return ceil(g.order()/szekeres_wilf(g))
 add_to_lists(alpha_szekeres_wilf_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_welsh_powell_bound(g):
