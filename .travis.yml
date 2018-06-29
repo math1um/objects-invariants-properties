@@ -5,6 +5,7 @@ env:
   - SAGE_ADDRESS=http://mirrors.xmission.com/sage/linux/64bit/
   matrix:
   - TYPE=GT SAGE_IMAGE=sage-8.2-Ubuntu_14.04-x86_64.tar.bz2
+  - TYPE=DB SAGE_IMAGE=sage-8.2-Ubuntu_14.04-x86_64.tar.bz2
   - TYPE=LINT
 matrix:
   allow_failures:

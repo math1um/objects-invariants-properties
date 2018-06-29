@@ -1,7 +1,7 @@
 #! /bin/sh
 set -e
 make
-if [ "$TYPE" = "GT" ]; then
+if [ "$TYPE" = "GT" ] || [ "$TYPE" = "DB" ] ; then
   cd $HOME
   if [ ! -x SageMath/sage ] ; then
     rm -f SageMath.tar.bz2

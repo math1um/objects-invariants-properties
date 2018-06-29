@@ -101,8 +101,7 @@ def is_haggkvist_nicoghossian(g):
 
 #sufficient condition for hamiltonicity
 def is_genghua_fan(g):
-    k = g.vertex_connectivity()
-    if k < 2:
+    if not is_two_connected(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
@@ -241,8 +240,7 @@ def is_four_connected(g):
 
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
-    k = g.vertex_connectivity()
-    if k < 2:
+    if not is_two_connected(g):
         return False
     D = g.distance_all_pairs()
     n = g.order()
@@ -1168,7 +1166,7 @@ Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite,
 Graph.is_cartesian_product,Graph.is_distance_regular,  Graph.is_even_hole_free,
 Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
 Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
-Graph.is_weakly_chordal, is_dirac, is_ore, is_haggkvist_nicoghossian,
+Graph.is_weakly_chordal, is_dirac, is_ore,
 is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
 is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
 is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
@@ -1190,7 +1188,7 @@ Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
 Graph.is_circumscribable, Graph.is_cograph, Graph.is_inscribable,
 Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary]
+Graph.is_self_complementary, is_biclique]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
@@ -1201,7 +1199,8 @@ is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
 has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
 is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
-Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph]
+Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph,
+is_haggkvist_nicoghossian]
 
 removed_properties = [is_pebbling_class0]
 
