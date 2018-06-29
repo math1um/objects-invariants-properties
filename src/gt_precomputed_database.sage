@@ -234,6 +234,22 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001, timeout=60,
                             # the computation might have crashed
                             print "Computation of {} for {} failed!".format(inv.__name__, g.name())
 
+def precomputed_graphs_by_invariants(graphs, invariants, database = None):
+    """
+    Returns a copy of graphs filtered to only graphs with values precomputed for all invariants in invariants
+
+    If no database name is provided, this method will default to the default database of get_connection().
+    """
+    # get the values which are already in the database
+    precomputed = invariants_as_dict(database)
+
+    fully_precomputed_graphs = []
+    for g in graphs:
+        g_key = g.canonical_label(algorithm='sage').graph6_string()
+        if all(g_key in precomputed and inv.__name__ in precomputed[g_key] for inv in inv):
+            fully_precomputed_graphs.append(g)
+    return fully_precomputed_graphs
+
 def compute_property_value(property, graph, g_key):
     """
     Computes the value of property for graph and returns it, if succesful.
@@ -381,6 +397,22 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
                             # the computation might have crashed
                             print "Computation of {} for {} failed!".format(prop.__name__, g.name())
 
+def precomputed_graphs_by_properties(graphs, properties, database = None):
+    """
+    Returns a copy of graphs filtered to only graphs with values precomputed for all properties in properties
+
+    If no database name is provided, this method will default to the default database of get_connection().
+    """
+    # get the values which are already in the database
+    precomputed = properties_as_dict(database)
+
+    fully_precomputed_graphs = []
+    for g in graphs:
+        g_key = g.canonical_label(algorithm='sage').graph6_string()
+        if all(g_key in precomputed and prop.__name__ in precomputed[g_key] for prop in properties):
+            fully_precomputed_graphs.append(g)
+    return fully_precomputed_graphs
+
 def dump_database(folder="db", database=None):
     """
     Writes the specified database to a series of SQL files in the specified folder.
@@ -432,3 +464,61 @@ def dump_database(folder="db", database=None):
         for row in query_res:
             f.write("{};\n".format(row[0]))
         f.close()
+
+### Conjecturing ###
+def precomputed_only_property_conjecture(objects, properties, mainProperty, precomputed_db = None,
+                                         time = 5, debug = False, verbosity = 0, sufficient = True, operators = None, theory = None):
+    """
+    Runs the conjecturing program for given properties using only the objects with precomputed values for all properties
+
+    Requires the package conjecturing and the file gt_precomputed_database.sage to be loaded.
+
+    If no database name is provided, precomputed_db will default to the default database of get_connection().
+    See documentation for propertyBasedConjecture in conjecturing for details on other parameters.
+    If verbosity >= 1 (default 0), we print when filtering is complete and how many graphs remain.
+        If verbosity >= 2, also pass verbose = True to conjecturing.
+
+    The slowest part of this function is finding the graphs' canonical labels when generating the filtered list. If planning to make multiple
+    runs of conjecturing, it would be best to use precomputed_graphs_by_properties() in gt_precomputed_database.sage to generate your own
+    list of precomputed graphs and then use that with the standard propertyBasedConjecture() method.
+    """
+    import time as clock
+    if verbosity >= 1: print clock.asctime(clock.localtime(clock.time())) + " Filtering start."
+    fully_precomputed_graphs = precomputed_graphs_by_properties(objects, properties, precomputed_db)
+    if verbosity >= 1:
+        print clock.asctime(clock.localtime(clock.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
+        print clock.asctime(clock.localtime(clock.time())) + " Conjecturing start."
+    conjectures = propertyBasedConjecture(fully_precomputed_graphs, properties, mainProperty, time = time, debug = debug, verbose = (verbosity >= 2),
+                                          sufficient = sufficient, operators = operators, theory = theory,
+                                          precomputed = precomputed_properties_for_conjecture(precomputed_db) )
+    if verbosity >= 1: print clock.asctime(clock.localtime(clock.time())) + " Conjecturing finished."
+    return conjectures
+    
+def precomputed_only_invariant_conjecture(objects, invariants, mainInvariant, precomputed_db = None,
+                                         variableName = 'x', time = 5, debug = False, verbosity = 0, upperBound = True, 
+                                         operators = None, theory = None):
+    """
+    Runs the conjecturing program for given invariants using only the objects with precomputed values for all invariants
+
+    Requires the package conjecturing and the file gt_precomputed_database.sage to be loaded.
+
+    If no database name is provided, precomputed_db will default to the default database of get_connection().
+    See documentation for conjecture in conjecturing for details on other parameters.
+    If verbosity >= 1 (default 0), we print when filtering is complete and how many graphs remain.
+        If verbosity >= 2, also pass verbose = True to conjecturing.
+
+    The slowest part of this function is finding the graphs' canonical labels when generating the filtered list. If planning to make multiple
+    runs of conjecturing, it would be best to use precomputed_graphs_by_properties() in gt_precomputed_database.sage to generate your own
+    list of precomputed graphs and then use that with the standard conjecture() method.
+    """
+    import time as clock
+    if verbosity >= 1: print clock.asctime(clock.localtime(clock.time())) + " Filtering start."
+    fully_precomputed_graphs = precomputed_graphs_by_invariants(objects, invariants, precomputed_db)
+    if verbosity >= 1:
+        print clock.asctime(clock.localtime(clock.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
+        print clock.asctime(clock.localtime(clock.time())) + " Conjecturing start."
+    conjectures = conjecture(fully_precomputed_graphs, invariants, mainInvariant, variableName = variableName, time = time, debug = debug, 
+                                          verbose = (verbosity >= 2), upperBound = upperBound, operators = operators, theory = theory,
+                                          precomputed = precomputed_invariants_for_conjecture(precomputed_db) )
+    if verbosity >= 1: print clock.asctime(clock.localtime(clock.time())) + " Conjecturing finished."
+    return conjectures
