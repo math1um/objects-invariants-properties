@@ -862,7 +862,7 @@ def is_weakly_pancyclic(g):
     if not lengths: # acyclic
         raise ValueError("Graph is acyclic. Property undefined.")
     else:
-        return lengths == set([min(lengths)..max(lengths)])
+        return lengths == set(range(min(lengths),max(lengths)+1))
 
 def is_pancyclic(g):
     """
@@ -874,7 +874,7 @@ def is_pancyclic(g):
     False
     """
     lengths = cycle_lengths(g)
-    return lengths == set([3..g.order()])
+    return lengths == set(range(3, g.order()+1))
 
 def has_two_walk(g):
     """
@@ -1217,7 +1217,7 @@ Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant
 Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
 Graph.is_transitively_reduced, Graph.is_self_complementary, Graph.is_connected,
 Graph.has_loops, Graph.is_asteroidal_triple_free, Graph.is_bipartite,
-Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product, 
+Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product,
 Graph.is_cograph, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free,
 Graph.is_forest, Graph.is_half_transitive, Graph.is_line_graph,
 Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_odd_hole_free,
