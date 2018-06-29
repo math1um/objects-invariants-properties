@@ -656,7 +656,7 @@ def precomputed_only_property_conjecture(objects, properties, mainProperty, prec
     if verbose:
         print time.asctime(time.localtime(time.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
         print time.asctime(time.localtime(time.time())) + " Conjecturing start."
-    conjectures = propertyBasedConjecture(objects, properties, mainProperty, time = time, debug = debug, verbose = verbose,
+    conjectures = propertyBasedConjecture(fully_precomputed_graphs, properties, mainProperty, time = time, debug = debug, verbose = verbose,
                                           sufficient = sufficient, operators = operators, theory = theory,
                                           precomputed = properties_as_dict(precomputed_db) )
     if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
