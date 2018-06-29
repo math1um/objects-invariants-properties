@@ -156,7 +156,7 @@ def is_van_den_heuvel(g):
 
         if A.is_sparse():
             row_sums = {}
-            for (i,j), entry in A.dict().iteritems():
+            for (i,_), entry in A.dict().iteritems():
                 row_sums[i] = row_sums.get(i, 0) + entry
             for i in range(A.nrows()):
                 D[i,i] += row_sums.get(i, 0)
@@ -622,7 +622,6 @@ def find_neighbor_twin(g, T):
         for w in Nv:
             NwT = set(g.neighbors(w)).intersection(set(T))
             if w not in T and NvT.issubset(NwT):
-                twin = w
                 T.append(w)
                 condition = True
                 #print "TWINS: v = {}, w = {}, sp3 = {}".format(v,w,sp3)
@@ -771,7 +770,7 @@ def has_two_ham_cycles(gIn):
         ham1 = g.hamiltonian_cycle()
     except EmptySetError:
         return False
-    n = g.order()
+
     for e in ham1.edges():
         h = copy(g)
         h.delete_edge(e)

@@ -51,11 +51,9 @@ def find_alpha_critical_graphs(order, save = False):
         ['E|OW', 'E~~w']
     """
     graphgen = graphs(order)
-    count = 0
     alpha_critical_name_list = []
     for g in graphgen:
         if g.is_connected():
-            count += 1
             if is_alpha_critical(g):
                 alpha_critical_name_list.append(g.graph6_string())
     s = "alpha_critical_name_list_{}".format(order)
@@ -115,8 +113,6 @@ def find_lower_bound_sets(g, i):
     return lowersets
 
 def alpha_lower_approximation(g, i):
-    n = g.order()
-
     LP = MixedIntegerLinearProgram(maximization=False)
     x = LP.new_variable(nonnegative=True)
 
@@ -145,7 +141,6 @@ def alpha_lower_approximation(g, i):
 #same as cartesian product with k2, but output labeling is guarnateed to be integers
 def make_bidouble_graph(g):
     n = g.order()
-    V = g.vertices()
     gdub = Graph(2*n)
     #print "gdub order = {}".format(gdub.order())
 

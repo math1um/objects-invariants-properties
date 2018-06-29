@@ -460,7 +460,6 @@ def max_even_minus_even_horizontal_component(g):
 
     distances = g.distance_all_pairs()
     mx=0
-    n=g.order()
     for v in g.vertices():
         Even=[]
         for w in g.vertices():
@@ -1170,7 +1169,7 @@ add_to_lists(homo_lumo_index, efficient_invariants, all_invariants)
 def neighborhood_union_nonadjacent(g):
     # Define that for copmlete graphs (i.e. nothing to minimize over later), return n, which is trivial upper bound.
     all_dist = g.distance_all_pairs()
-    nonadj = [(v,w) for v in g for w in g if dist[v][w] > 1]
+    nonadj = [(v,w) for v in g for w in g if all_dist[v][w] > 1]
     if not nonadj:
         return g.order()
     else:
@@ -1180,7 +1179,7 @@ add_to_lists(neighborhood_union_nonadjacent, efficient_invariants, all_invariant
 def neighborhood_union_dist2(g):
     # Define that for graphs with no dist 2 (i.e. nothing to minimize over later), return n, which is trivial upper bound.
     all_dist = g.distance_all_pairs()
-    dist2 = [(v,w) for v in g for w in g if dist[v][w] == 2]
+    dist2 = [(v,w) for v in g for w in g if all_dist[v][w] == 2]
     if not dist2:
         return g.order()
     else:
