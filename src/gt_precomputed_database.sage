@@ -234,6 +234,22 @@ def verify_invariant_values(invariants, graphs, epsilon= 0.00000001, timeout=60,
                             # the computation might have crashed
                             print "Computation of {} for {} failed!".format(inv.__name__, g.name())
 
+def precomputed_graphs_by_invariants(graphs, invariants, database = None):
+    """
+    Returns a copy of graphs filtered to only graphs with values precomputed for all invariants in invariants
+
+    If no database name is provided, this method will default to the default database of get_connection().
+    """
+    # get the values which are already in the database
+    precomputed = invariants_as_dict(database)
+
+    fully_precomputed_graphs = []
+    for g in graphs:
+        g_key = g.canonical_label(algorithm='sage').graph6_string()
+        if all(g_key in precomputed and inv.__name__ in precomputed[g_key] for inv in inv):
+            fully_precomputed_graphs.append(g)
+    return fully_precomputed_graphs
+
 def compute_property_value(property, graph, g_key):
     """
     Computes the value of property for graph and returns it, if succesful.
@@ -380,6 +396,22 @@ def verify_property_values(properties, graphs, timeout=60, database=None):
                         else:
                             # the computation might have crashed
                             print "Computation of {} for {} failed!".format(prop.__name__, g.name())
+
+def precomputed_graphs_by_properties(graphs, properties, database = None):
+    """
+    Returns a copy of graphs filtered to only graphs with values precomputed for all properties in properties
+
+    If no database name is provided, this method will default to the default database of get_connection().
+    """
+    # get the values which are already in the database
+    precomputed = properties_as_dict(database)
+
+    fully_precomputed_graphs = []
+    for g in graphs:
+        g_key = g.canonical_label(algorithm='sage').graph6_string()
+        if all(g_key in precomputed and prop.__name__ in precomputed[g_key] for prop in properties):
+            fully_precomputed_graphs.append(g)
+    return fully_precomputed_graphs
 
 def dump_database(folder="db", database=None):
     """
