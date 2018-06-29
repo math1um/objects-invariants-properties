@@ -633,3 +633,31 @@ def find_coextensive_properties(objects, properties):
              if p1 != p2 and all(p1(g) == p2(g) for g in objects):
                  print p1.__name__, p2.__name__
      print "DONE!"
+
+### Conjecturing ###
+def precomputed_only_property_conjecture(objects, properties, mainProperty, precomputed_db = None,
+                                         time = 5, debug = False, verbose = False, sufficient = True, operators = None, theory = None):
+    """
+    Runs the conjecturing program for given properties using only the objects with precomputed values for all properties
+
+    Requires the package conjecturing and the file gt_precomputed_database.sage to be loaded.
+
+    If no database name is provided, precomputed_db will default to the default database of get_connection().
+    See documentation for propertyBasedConjecture in conjecturing for details on other parameters.
+    If verbose = True (default False), we also print when filtering is complete and control is passed to conjecturing.
+
+    The slowest part of this function is finding the graphs' canonical labels when generating the filtered list. If planning to make multiple
+    runs of conjecturing, it would be best to use precomputed_graphs_by_properties() in gt_precomputed_database.sage to generate your own
+    list of precomputed graphs and then use that with the standard propertyBasedConjecture() method.
+    """
+    import time
+    if verbose: print time.asctime(time.localtime(time.time())) + " Filtering start."
+    fully_precomputed_graphs = precomputed_graphs_by_properties(objects, properties, precomputed_db)
+    if verbose:
+        print time.asctime(time.localtime(time.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
+        print time.asctime(time.localtime(time.time())) + " Conjecturing start."
+    conjectures = propertyBasedConjecture(objects, properties, mainProperty, time = time, debug = debug, verbose = verbose,
+                                          sufficient = sufficient, operators = operators, theory = theory,
+                                          precomputed = properties_as_dict(precomputed_db) )
+    if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
+    return conjectures
