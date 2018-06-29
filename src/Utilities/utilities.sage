@@ -661,3 +661,31 @@ def precomputed_only_property_conjecture(objects, properties, mainProperty, prec
                                           precomputed = properties_as_dict(precomputed_db) )
     if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
     return conjectures
+    
+def precomputed_only_invariant_conjecture(objects, invariants, mainInvariant, precomputed_db = None,
+                                         variableName = 'x', time = 5, debug = False, verbose = False, upperBound = True, 
+                                         operators = None, theory = None):
+    """
+    Runs the conjecturing program for given invariants using only the objects with precomputed values for all invariants
+
+    Requires the package conjecturing and the file gt_precomputed_database.sage to be loaded.
+
+    If no database name is provided, precomputed_db will default to the default database of get_connection().
+    See documentation for conjecture in conjecturing for details on other parameters.
+    If verbose = True (default False), we also print when filtering is complete and control is passed to conjecturing.
+
+    The slowest part of this function is finding the graphs' canonical labels when generating the filtered list. If planning to make multiple
+    runs of conjecturing, it would be best to use precomputed_graphs_by_properties() in gt_precomputed_database.sage to generate your own
+    list of precomputed graphs and then use that with the standard conjecture() method.
+    """
+    import time
+    if verbose: print time.asctime(time.localtime(time.time())) + " Filtering start."
+    fully_precomputed_graphs = precomputed_graphs_by_invariants(objects, invariants, precomputed_db)
+    if verbose:
+        print time.asctime(time.localtime(time.time())) + " Filtering finished. " + str(len(fully_precomputed_graphs)) + " graphs remaining for conjecture."
+        print time.asctime(time.localtime(time.time())) + " Conjecturing start."
+    conjectures = conjecture(fully_precomputed_graphs, invariants, mainInvariant, variableName = variableName, time = time, debug = debug, 
+                                          verbose = verbose, upperBound = upperBound, operators = operators, theory = theory,
+                                          precomputed = properties_as_dict(precomputed_db) )
+    if verbose: print time.asctime(time.localtime(time.time())) + " Conjecturing finished."
+    return conjectures
