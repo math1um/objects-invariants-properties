@@ -1,7 +1,5 @@
 # Graph Lists
 
-import pickle, os
-
 graph_objects = []
 alpha_critical_easy = []
 alpha_critical_hard = []
