@@ -101,8 +101,7 @@ def is_haggkvist_nicoghossian(g):
 
 #sufficient condition for hamiltonicity
 def is_genghua_fan(g):
-    k = g.vertex_connectivity()
-    if k < 2:
+    if not is_two_connected(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
@@ -241,8 +240,7 @@ def is_four_connected(g):
 
 #sufficient condition for hamiltonicity
 def is_lindquester(g):
-    k = g.vertex_connectivity()
-    if k < 2:
+    if not is_two_connected(g):
         return False
     D = g.distance_all_pairs()
     n = g.order()
@@ -1170,7 +1168,7 @@ Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
 Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
 Graph.is_weakly_chordal, is_dirac, is_ore,
 is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
-is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
+is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
 is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
 diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac,
 is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
@@ -1202,7 +1200,7 @@ has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
 is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
 Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph,
-is_haggkvist_nicoghossian, is_lindquester]
+is_haggkvist_nicoghossian]
 
 removed_properties = [is_pebbling_class0]
 
