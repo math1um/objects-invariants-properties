@@ -130,6 +130,14 @@ def max_degree(g):
 add_to_lists(max_degree, efficient_invariants, all_invariants)
 
 def median_degree(g):
+    """
+    Return the median of the list of vertex degrees
+
+    sage: median_degree(p4)
+    3/2
+    sage: median_degree(p3)
+    1    
+    """
     return median(g.degree())
 add_to_lists(median_degree, efficient_invariants, all_invariants)
 
