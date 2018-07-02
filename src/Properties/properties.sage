@@ -88,7 +88,7 @@ def is_dirac(g):
     True
     sage: is_dirac(graphs.CompleteGraph(2))
     False    
-    sage: is_dirac(graphs.CycleGraph(6))
+    sage: is_dirac(graphs.CycleGraph(5))
     False
     """
     n = g.order()
@@ -115,15 +115,23 @@ def is_ore(g):
                     return False
     return True
 
-#sufficient condition for hamiltonicity
 def is_haggkvist_nicoghossian(g):
+    """
+    True if g is 2-connected and min. degree >= (n + vertex_connectivity)/3
+    
+    R. Häggkvist and G. Nicoghossian, A remark on Hamiltonian cycles. Journal of Combinatorial 
+    Theory, Series B 30(1): 118--120. 1981.
+    If is_haggkvist_nicoghossian, then is hamiltonian.
+    
+    sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
+    True
+    sage: is_haggkvist_nicoghossian(graphs.CycleGraph(5))
+    False
+    sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3)
+    False
+    """
     k = g.vertex_connectivity()
-    n = g.order()
-    delta = min(g.degree())
-    if k >= 2 and delta >= (1.0/3)*(n+k):
-        return True
-    else:
-        return False
+    return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
 
 #sufficient condition for hamiltonicity
 def is_genghua_fan(g):
