@@ -246,7 +246,7 @@ def precomputed_graphs_by_invariants(graphs, invariants, database = None):
     fully_precomputed_graphs = []
     for g in graphs:
         g_key = g.canonical_label(algorithm='sage').graph6_string()
-        if all(g_key in precomputed and inv.__name__ in precomputed[g_key] for inv in inv):
+        if all(g_key in precomputed and inv.__name__ in precomputed[g_key] for inv in invariants):
             fully_precomputed_graphs.append(g)
     return fully_precomputed_graphs
 
