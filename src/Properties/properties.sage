@@ -108,8 +108,8 @@ def is_ore(g):
     A = g.adjacency_matrix()
     n = g.order()
     D = g.degree()
-    for i in range(n):
-        for j in range(i):
+    for i in xrange(n):
+        for j in xrange(i):
             if A[i][j]==0:
                 if D[i] + D[j] < n:
                     return False
@@ -120,7 +120,7 @@ def is_haggkvist_nicoghossian(g):
     True if g is 2-connected and min. degree >= (n + vertex_connectivity)/3
     
     R. Häggkvist and G. Nicoghossian, A remark on Hamiltonian cycles. Journal of Combinatorial 
-    Theory, Series B 30(1): 118--120. 1981.
+    Theory, Series B, 30(1): 118--120, 1981.
     If is_haggkvist_nicoghossian, then is hamiltonian.
     
     sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
@@ -133,43 +133,73 @@ def is_haggkvist_nicoghossian(g):
     k = g.vertex_connectivity()
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
 
-#sufficient condition for hamiltonicity
 def is_genghua_fan(g):
+    """
+    True if g is 2-connected and s.t. dist(u,v)=2 implies max(deg(u), deg(v)) >= n/2 for all u,v
+    
+    Geng-Hua Fan, New sufficient conditions for cycles in graphs. Journal of Combinatorial Theory,
+    Series B, 37(3): 221--227, 1984.
+    If a graph is_genghua_fan, then it is Hamiltonian.
+    
+    sage: is_genghua_fan(graphs.DiamondGraph())
+    True
+    sage: is_genghua_fan(graphs.CycleGraph(4))
+    False
+    sage: is_genghua_fan(graphs.ButterflyGraph())
+    False
+    """
     if not is_two_connected(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
     V = g.vertices()
     n = g.order()
-    for i in range(n):
-        for j in range (i):
-            if Dist[V[i]][V[j]]==2 and max(D[i],D[j]) < n/2.0:
+    for i in xrange(n):
+        for j in xrange(i):
+            if Dist[V[i]][V[j]] == 2 and max(D[i], D[j]) < n / 2.0:
                 return False
     return True
 
-#sufficient condition for hamiltonicity
 def is_planar_transitive(g):
-    if g.order() > 2 and g.is_planar() and g.is_vertex_transitive():
-        return True
-    else:
-        return False
+    """
+    True if g is planar and is vertex-transitive
+    
+    sage: is_planar_transitive(graphs.HexahedralGraph())
+    True
+    sage: is_planar_transitive(graphs.CompleteGraph(2))
+    True
+    sage: is_planar_transitive(graphs.FranklinGraph())
+    False
+    sage: is_planar_transitive(graphs.BullGraph()) 
+    False
+    """
+    return g.is_planar() and g.is_vertex_transitive():
 
-def neighbors_set(g,S):
-    N = set()
-    for v in S:
-        for n in g.neighbors(v):
-            N.add(n)
-    return list(N)
-
-#sufficient condition for hamiltonicity
 def is_generalized_dirac(g):
-    n = g.order()
-    k = g.vertex_connectivity()
-    if k < 2:
+    """
+    True if g 2-connected and for all non-adjacent u,v, |union of neighborhoods(u,v)| >= (2n-1)/3
+    
+    R.J Faudree, Ronald Gould, Michael Jacobson, and R.H. Schelp, Neighborhood unions and 
+    hamiltonian properties in graphs. Journal of Combinatorial Theory, Series B, 47(1): 1--9, 1989.
+    If graph g is_generalized, then it is Hamiltonian.
+    
+    sage: 
+    True
+    sage:
+    False
+    """
+    from itertools import combinations
+
+    
+            if dist_dict[u].get(v, +Infinity) == d: # By default, no entry if disconnected. We substitute +Infinity.
+                sameDistPairs.append(Set([u,v]))
+                
+                
+    if not is_two_connected(g):
         return False
-    for p in Subsets(g.vertices(),2):
-        if g.is_independent_set(p):
-            if len(neighbors_set(g,p)) < (2.0*n-1)/3:
+    for (u,v) in combinations(g.vertices(), 2):
+        if not g.has_edge(u,v):
+            if len(neighbors_set((u, v)) < (2.0 * g.order() - 1) / 3:
                 return False
     return True
 
@@ -1238,6 +1268,7 @@ removed_properties = [is_pebbling_class0]
 
 """
     Last version of graphs packaged checked: Sage 8.2
+    This means checked for new functions, and for any errors in old functions!
     sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
     True
 
