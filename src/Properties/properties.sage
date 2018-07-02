@@ -1,16 +1,15 @@
-#GRAPH PROPERTIES
+# GRAPH PROPERTIES
 
 def has_star_center(g):
     """
-    tests if graph has vertex adjacent to all others, also known as "universal vertex"
-        sage: has_star_center(flower_with_3_petals)
-        True
-        sage: has_star_center(c4)
-        False
+    True if graph has a vertex adjacent to all others, also known as "universal vertex"
+    
+    sage: has_star_center(flower_with_3_petals)
+    True
+    sage: has_star_center(c4)
+    False
     """
-    n = g.order()
-    return max_degree(g) == (n-1)
-
+    return (g.order() - 1) in g.degree()
 
 #split graphs have the property that their complements are chordal
 def is_complement_of_chordal(g):
