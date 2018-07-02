@@ -133,15 +133,27 @@ def median_degree(g):
     """
     Return the median of the list of vertex degrees
 
-    sage: median_degree(p4)
-    3/2
-    sage: median_degree(p3)
-    1    
+        sage: median_degree(p4)
+        3/2
+        sage: median_degree(p3)
+        1    
     """
     return median(g.degree())
 add_to_lists(median_degree, efficient_invariants, all_invariants)
 
 def inverse_degree(g):
+    """
+    Return the sum of the reciprocals of the non-zero degrees
+
+    Return 0 if the graph has no edges. 
+
+        sage: inverse_degree(p4)
+        3
+        sage: inverse_degree(graphs.CompleteGraph(1))
+        0
+    """
+    if g.size() == 0:
+        return 0
     return sum([(1.0/d) for d in g.degree() if d!= 0])
 add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 
