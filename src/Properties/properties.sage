@@ -8,33 +8,36 @@ def has_star_center(g):
     True
     sage: has_star_center(c4)
     False
+    sage: has_star_center(Graph(1))
+    True
     """
     return (g.order() - 1) in g.degree()
 
-#split graphs have the property that their complements are chordal
 def is_complement_of_chordal(g):
     """
-    tests is a graph is a complement of a chordal graph
-        sage: is_complement_of_chordal(p4)
-        True
-        sage: is_complement_of_chordal(p5)
-        False
+    True if graph g is a complement of a chordal graph
+    
+    sage: is_complement_of_chordal(p4)
+    True
+    sage: is_complement_of_chordal(p5)
+    False
     """
-    h = g.complement()
-    return h.is_chordal()
+    return g.complement().is_chordal()
 
 def pairs_have_unique_common_neighbor(g):
     """
-    True if each pair of vertices in g has exactly one common neighbor.
+    True if each pair of vertices in g has exactly one common neighbor
 
-    Related to the Friendship Theorem: the only connected graphs where every pair of vertices
-    has a unique neighbor are flowers.
+    Also known as the friendship property. 
+    By the Friendship Theorem, the only connected graphs with the friendship property are flowers.
 
     sage: pairs_have_unique_common_neighbor(flower(5))
     True
     sage: pairs_have_unique_common_neighbor(k3)
     True
     sage: pairs_have_unique_common_neighbor(k4)
+    False
+    sage: pairs_have_unique_common_neighbor(graphs.CompleteGraph(2))
     False
     """
     from itertools import combinations
@@ -45,11 +48,20 @@ def pairs_have_unique_common_neighbor(g):
 
 def is_distance_transitive(g):
     """
-    True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there is an automorphism sending a->u and b->v
+    True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there's an automorphism with a->u and b->v
 
-    sage: is_distance_transitive(graphs.Tutte12Cage())
+    Note that this method calls, via the automorphism group, the Gap package. This package behaves
+    badly with most threading or multiprocessing tools.
+    
+    sage: is_distance_transitive(graphs.CompleteGraph(4))
+    True
+    sage: is_distance_transitive(graphs.PetersenGraph())
+    True
+    sage: is_distance_transitive(graphs.ShrikhandeGraph())
     False
-    sage: is_distance_transitive(graphs.FosterGraph())
+    
+    This method accepts disconnected graphs:
+    sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
     True
     """
     from itertools import combinations
@@ -66,18 +78,33 @@ def is_distance_transitive(g):
                 return False
     return True
 
-#sufficient condition for hamiltonicity
 def is_dirac(g):
+    """
+    True if g has order at least 3 and min. degree at least n/2
+    
+    See Dirac's Theorem: If graph is_dirac, then it is hamiltonian.
+    
+    sage: is_dirac(graphs.CompleteGraph(6))
+    True
+    sage: is_dirac(graphs.CompleteGraph(2))
+    False    
+    sage: is_dirac(graphs.CycleGraph(6))
+    False
+    """
     n = g.order()
-    deg = g.degree()
-    delta=min(deg)
-    if n/2 <= delta and n > 2:
-        return True
-    else:
-        return False
+    return n > 2 and min(g.degree()) >= n/2
 
-#sufficient condition for hamiltonicity
 def is_ore(g):
+    """
+    True if deg(v) + deg(w) >= n for all non-adjacent pairs v,w in graph g
+
+    See Ore's Theorem: If graph is_ore, then it is hamiltonian.
+
+    sage: is_ore(graphs.CompleteGraph(5))
+    True
+    sage: is_ore(dart)
+    False
+    """
     A = g.adjacency_matrix()
     n = g.order()
     D = g.degree()
