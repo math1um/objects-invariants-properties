@@ -852,8 +852,8 @@ add_to_lists(transmission, efficient_invariants, all_invariants)
 
 def harmonic_index(g):
     sum = 0
-    for edge in g.edges(labels = false):
-        sum += (2 / (g.degree()[edge[0]] + g.degree()[edge[1]]))
+    for (u,v) in g.edges(labels = false):
+        sum += (2 / (g.degree(u) + g.degree(v)))
     return sum
 add_to_lists(harmonic_index, efficient_invariants, all_invariants)
 
