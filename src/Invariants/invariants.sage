@@ -362,11 +362,11 @@ def card_periphery(g):
 add_to_lists(card_periphery, efficient_invariants, all_invariants)
 
 def max_eigenvalue(g):
-    return max(g.adjacency_matrix().change_ring(RDF).eigenvalues())
+    return max(g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric"))
 add_to_lists(max_eigenvalue, efficient_invariants, all_invariants)
 
 def min_eigenvalue(g):
-    return min(g.adjacency_matrix().change_ring(RDF).eigenvalues())
+    return min(g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric"))
 add_to_lists(min_eigenvalue, efficient_invariants, all_invariants)
 
 def resistance_distance_matrix(g):
@@ -543,7 +543,7 @@ def max_even_minus_even_horizontal_component(g):
     return mx
 
 def laplacian_energy(g):
-     L = g.laplacian_matrix().change_ring(RDF).eigenvalues()
+     L = g.laplacian_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")
      Ls = [1/lam**2 for lam in L if lam > 0]
      return 1 + sum(Ls)
 add_to_lists(laplacian_energy, efficient_invariants, all_invariants)
@@ -554,12 +554,12 @@ def laplacian_energy_like(g):
 
     Liu, Jianping, and Bolian Liu. "A Laplacian-energy-like invariant of a graph." MATCH-COMMUNICATIONS IN MATHEMATICAL AND IN COMPUTER CHEMISTRY 59.2 (2008): 355-372.
     """
-    return sum([sqrt(x) for x in g.spectrum(laplacian = True)])
+    return sum([sqrt(x) for x in g.laplacian_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")])
 add_to_lists(laplacian_energy_like, efficient_invariants, all_invariants)
 
 #sum of the positive eigenvalues of a graph
 def gutman_energy(g):
-     L = g.adjacency_matrix().change_ring(RDF).eigenvalues()
+     L = g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")
      Ls = [lam for lam in L if lam > 0]
      return sum(Ls)
 add_to_lists(gutman_energy, efficient_invariants, all_invariants)
