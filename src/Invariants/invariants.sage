@@ -292,6 +292,16 @@ def fractional_alpha(g):
 add_to_lists(fractional_alpha, efficient_invariants, all_invariants)
 
 def fractional_covering(g):
+    """
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of covering number
+
+    For ILP formulation see: https://en.wikipedia.org/wiki/Vertex_cover
+
+        sage: fractional_covering(k3)
+        1.5
+        sage: fractional_covering(p5)
+        2.0
+    """
     if len(g.vertices()) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=False)
@@ -299,7 +309,7 @@ def fractional_covering(g):
     p.set_objective(sum(x[v] for v in g.vertices()))
 
     for v in g.vertices():
-        p.add_constraint(x[v], min=1)
+        p.add_constraint(x[v], max=1)
 
     for (u,v) in g.edge_iterator(labels=False):
         p.add_constraint(x[u] + x[v], min=1)
