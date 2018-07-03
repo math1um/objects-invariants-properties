@@ -193,12 +193,14 @@ add_to_lists(barrus_q, efficient_invariants, all_invariants)
 
 def barrus_bound(g):
     """
-    returns n - barrus q
+    Returns n - barrus q
+    
     defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    sage: barrus_bound(k4)
-    1
-    sage: barrus_bound(graphs.OctahedralGraph())
-    2
+    
+        sage: barrus_bound(k4)
+        1
+        sage: barrus_bound(graphs.OctahedralGraph())
+        2
     """
     return g.order() - barrus_q(g)
 add_to_lists(barrus_bound, efficient_invariants, all_invariants)
@@ -206,7 +208,9 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
-    matching. A matching is a set of independent edges.
+    matching. 
+
+    A matching is a set of independent edges.
 
         sage: matching_number(graphs.CompleteGraph(5))
         2
@@ -242,6 +246,16 @@ def residue(g):
 add_to_lists(residue, efficient_invariants, all_invariants)
 
 def annihilation_number(g):
+    """
+    Given the degree sequence in non-degreasing order, the annihilation number is the largest index k so the sum of the first k degrees is no more than the sum of the remaining degrees
+
+    See: Larson, Craig E., and Ryan Pepper. "Graphs with equal independence and annihilation numbers." the electronic journal of combinatorics 18.1 (2011): 180.
+
+        sage: annihilation_number(c4)
+        2
+        sage: annihilation_number(p5)
+        3
+    """
     seq = sorted(g.degree())
 
     a = 0
