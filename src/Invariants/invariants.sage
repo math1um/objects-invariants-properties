@@ -38,7 +38,8 @@ add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 
 def max_common_neighbors(g):
     """
-    returns the maximum number of common neighbors of any pair of distinct vertices in g
+    Returns the maximum number of common neighbors of any pair of distinct vertices in g.
+
         sage: max_common_neighbors(p4)
         1
         sage: max_common_neighbors(k4)
@@ -58,8 +59,9 @@ add_to_lists(max_common_neighbors, efficient_invariants, all_invariants)
 
 def min_common_neighbors(g):
     """
-    returns the minimum number of common neighbors of any pair of distinct vertices in g,
-    which is necessarily 0 for disconnected graphs
+    Returns the minimum number of common neighbors of any pair of distinct vertices in g,
+    which is necessarily 0 for disconnected graphs.
+
         sage: min_common_neighbors(p4)
         0
         sage: min_common_neighbors(k4)
@@ -81,7 +83,7 @@ add_to_lists(min_common_neighbors, efficient_invariants, all_invariants)
 
 def mean_common_neighbors(g):
     """
-    returns the average number of common neighbors of any pair of distinct vertices in g
+    Returns the average number of common neighbors of any pair of distinct vertices in g.
         sage: mean_common_neighbors(p4)
         1/3
         sage: mean_common_neighbors(k4)
@@ -131,7 +133,7 @@ add_to_lists(max_degree, efficient_invariants, all_invariants)
 
 def median_degree(g):
     """
-    Return the median of the list of vertex degrees
+    Return the median of the list of vertex degrees.
 
         sage: median_degree(p4)
         3/2
@@ -143,7 +145,7 @@ add_to_lists(median_degree, efficient_invariants, all_invariants)
 
 def inverse_degree(g):
     """
-    Return the sum of the reciprocals of the non-zero degrees
+    Return the sum of the reciprocals of the non-zero degrees.
 
     Return 0 if the graph has no edges. 
 
@@ -160,7 +162,7 @@ add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 def eulerian_faces(g):
     """
     Returns 2 - order + size, which is the number of faces if the graph is planar,
-    a consequence of Euler's Formula
+    a consequence of Euler's Formula.
 
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
@@ -183,7 +185,6 @@ def barrus_q(g):
         4
         sage: barrus_q(graphs.StarGraph(3))
         1
-
     """
     Degrees = g.degree()
     Degrees.sort()
@@ -195,7 +196,7 @@ def barrus_bound(g):
     """
     Returns n - barrus q
     
-    defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
+    Defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
     
         sage: barrus_bound(k4)
         1
@@ -210,7 +211,9 @@ def matching_number(g):
     Returns the matching number of the graph g, i.e., the size of a maximum
     matching. 
 
-    A matching is a set of independent edges.
+    A matching is a set of independent edges. 
+
+    See: https://en.wikipedia.org/wiki/Matching_(graph_theory)
 
         sage: matching_number(graphs.CompleteGraph(5))
         2
@@ -229,11 +232,12 @@ def residue(g):
     If the Havel-Hakimi process is iterated until a sequence of 0s is returned,
     residue is defined to be the number of zeros of this sequence.
 
+    See: Favaron, Odile, Maryvonne Mahéo, and J‐F. Saclé. "On the residue of a graph." Journal of Graph Theory 15.1 (1991): 39-64.
+
         sage: residue(k4)
         1
         sage: residue(p4)
         2
-
     """
     seq = g.degree_sequence()
 
@@ -247,7 +251,7 @@ add_to_lists(residue, efficient_invariants, all_invariants)
 
 def annihilation_number(g):
     """
-    Given the degree sequence in non-degreasing order, the annihilation number is the largest index k so the sum of the first k degrees is no more than the sum of the remaining degrees
+    Given the degree sequence in non-degreasing order, with indices starting at 1, the annihilation number is the largest index k so the sum of the first k degrees is no more than the sum of the remaining degrees
 
     See: Larson, Craig E., and Ryan Pepper. "Graphs with equal independence and annihilation numbers." the electronic journal of combinatorics 18.1 (2011): 180.
 
@@ -267,7 +271,7 @@ add_to_lists(annihilation_number, efficient_invariants, all_invariants)
 
 def fractional_alpha(g):
     """
-    This is the optimal solution of the linear programming relaxation of the integer programming formulation of independence number (alpha)
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of independence number (alpha).
 
     See: Nemhauser, George L., and Leslie Earl Trotter. "Vertex packings: structural properties and algorithms." Mathematical Programming 8.1 (1975): 232-248.
 
@@ -293,7 +297,7 @@ add_to_lists(fractional_alpha, efficient_invariants, all_invariants)
 
 def fractional_covering(g):
     """
-    This is the optimal solution of the linear programming relaxation of the integer programming formulation of covering number
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of covering number.
 
     For ILP formulation see: https://en.wikipedia.org/wiki/Vertex_cover
 
@@ -318,6 +322,18 @@ def fractional_covering(g):
 add_to_lists(fractional_covering, efficient_invariants, all_invariants)
 
 def cvetkovic(g):
+    """
+    This in the minimum of the number of nonnegative and nonpositive eigenvalues of the adjacency matrix.
+
+    Cvetkovic's theorem says that this number is an upper bound for the independence number of a graph.
+
+    See: Cvetković, Dragoš M., Michael Doob, and Horst Sachs. Spectra of graphs: theory and application. Vol. 87. Academic Pr, 1980.
+
+        sage: cvetkovic(p5)
+        3
+        sage: cvetkovic(graphs.PetersenGraph())
+        4
+    """
     eigenvalues = g.spectrum()
     positive = 0
     negative = 0
