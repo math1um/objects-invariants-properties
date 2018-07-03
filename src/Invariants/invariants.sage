@@ -193,12 +193,14 @@ add_to_lists(barrus_q, efficient_invariants, all_invariants)
 
 def barrus_bound(g):
     """
-    returns n - barrus q
+    Returns n - barrus q
+    
     defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    sage: barrus_bound(k4)
-    1
-    sage: barrus_bound(graphs.OctahedralGraph())
-    2
+    
+        sage: barrus_bound(k4)
+        1
+        sage: barrus_bound(graphs.OctahedralGraph())
+        2
     """
     return g.order() - barrus_q(g)
 add_to_lists(barrus_bound, efficient_invariants, all_invariants)
@@ -206,7 +208,9 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
-    matching. A matching is a set of independent edges.
+    matching. 
+
+    A matching is a set of independent edges.
 
         sage: matching_number(graphs.CompleteGraph(5))
         2
@@ -242,6 +246,16 @@ def residue(g):
 add_to_lists(residue, efficient_invariants, all_invariants)
 
 def annihilation_number(g):
+    """
+    Given the degree sequence in non-degreasing order, the annihilation number is the largest index k so the sum of the first k degrees is no more than the sum of the remaining degrees
+
+    See: Larson, Craig E., and Ryan Pepper. "Graphs with equal independence and annihilation numbers." the electronic journal of combinatorics 18.1 (2011): 180.
+
+        sage: annihilation_number(c4)
+        2
+        sage: annihilation_number(p5)
+        3
+    """
     seq = sorted(g.degree())
 
     a = 0
@@ -252,6 +266,16 @@ def annihilation_number(g):
 add_to_lists(annihilation_number, efficient_invariants, all_invariants)
 
 def fractional_alpha(g):
+    """
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of independence number (alpha)
+
+    See: Nemhauser, George L., and Leslie Earl Trotter. "Vertex packings: structural properties and algorithms." Mathematical Programming 8.1 (1975): 232-248.
+
+        sage: fractional_alpha(k3)
+        1.5
+        sage: fractional_alpha(p5)
+        3.0
+    """
     if len(g.vertices()) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=True)
@@ -268,6 +292,16 @@ def fractional_alpha(g):
 add_to_lists(fractional_alpha, efficient_invariants, all_invariants)
 
 def fractional_covering(g):
+    """
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of covering number
+
+    For ILP formulation see: https://en.wikipedia.org/wiki/Vertex_cover
+
+        sage: fractional_covering(k3)
+        1.5
+        sage: fractional_covering(p5)
+        2.0
+    """
     if len(g.vertices()) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=False)
@@ -275,7 +309,7 @@ def fractional_covering(g):
     p.set_objective(sum(x[v] for v in g.vertices()))
 
     for v in g.vertices():
-        p.add_constraint(x[v], min=1)
+        p.add_constraint(x[v], max=1)
 
     for (u,v) in g.edge_iterator(labels=False):
         p.add_constraint(x[u] + x[v], min=1)
