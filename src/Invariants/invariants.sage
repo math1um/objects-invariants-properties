@@ -337,7 +337,7 @@ def kirchhoff_index(g):
 add_to_lists(kirchhoff_index, efficient_invariants, all_invariants)
 
 def largest_singular_value(g):
-    A = matrix(RDF,g.adjacency_matrix())
+    A = matrix(RDF,g.adjacency_matrix(sparse=False))
     svd = A.SVD()
     sigma = svd[1]
     return sigma[0,0]
