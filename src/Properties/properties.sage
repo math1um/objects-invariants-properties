@@ -173,7 +173,7 @@ def is_planar_transitive(g):
     sage: is_planar_transitive(graphs.BullGraph()) 
     False
     """
-    return g.is_planar() and g.is_vertex_transitive():
+    return g.is_planar() and g.is_vertex_transitive()
 
 def is_generalized_dirac(g):
     """
