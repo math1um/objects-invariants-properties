@@ -321,7 +321,7 @@ def find_all_triangles(g):
 
     for e in E:
         v,w = (e[0], e[1]) if pos[e[0]] < pos[e[1]] else (e[1], e[0])
-        S = [u for u in g.vertices() if A[u][v] == 1 and A[u][w] == 1 and pos[u] > pos[w]]
+        S = [u for u in g.vertices() if g.has_edge(u,v) and g.has_edge(u,v) and pos[u] > pos[w]]
         for u in S:
             s = Set([u,v,w])
             triangles.append(s)
