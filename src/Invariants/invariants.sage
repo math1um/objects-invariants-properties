@@ -266,6 +266,16 @@ def annihilation_number(g):
 add_to_lists(annihilation_number, efficient_invariants, all_invariants)
 
 def fractional_alpha(g):
+    """
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of independence number (alpha)
+
+    See: Nemhauser, George L., and Leslie Earl Trotter. "Vertex packings: structural properties and algorithms." Mathematical Programming 8.1 (1975): 232-248.
+
+        sage: fractional_alpha(k3)
+        1.5
+        sage: fractional_alpha(p5)
+        3.0
+    """
     if len(g.vertices()) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=True)
