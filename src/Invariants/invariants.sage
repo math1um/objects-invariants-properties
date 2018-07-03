@@ -350,6 +350,19 @@ def cvetkovic(g):
 add_to_lists(cvetkovic, efficient_invariants, all_invariants)
 
 def cycle_space_dimension(g):
+    """
+    Returns the dimension of the cycle space (also called the circuit rank).
+
+    See: https://en.wikipedia.org/wiki/Cycle_space
+    And: https://en.wikipedia.org/wiki/Circuit_rank
+
+        sage: cycle_space_dimension(k3)
+        1
+        sage: cycle_space_dimension(c4c4)
+        2
+        sage: cycle_space_dimension(glasses_5_5)
+        2
+    """
     return g.size()-g.order()+g.connected_components_number()
 add_to_lists(cycle_space_dimension, efficient_invariants, all_invariants)
 
@@ -362,11 +375,11 @@ def card_periphery(g):
 add_to_lists(card_periphery, efficient_invariants, all_invariants)
 
 def max_eigenvalue(g):
-    return max(g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric"))
+    return max(g.adjacency_matrix().change_ring(RDF).eigenvalues())
 add_to_lists(max_eigenvalue, efficient_invariants, all_invariants)
 
 def min_eigenvalue(g):
-    return min(g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric"))
+    return min(g.adjacency_matrix().change_ring(RDF).eigenvalues())
 add_to_lists(min_eigenvalue, efficient_invariants, all_invariants)
 
 def resistance_distance_matrix(g):
@@ -543,7 +556,7 @@ def max_even_minus_even_horizontal_component(g):
     return mx
 
 def laplacian_energy(g):
-     L = g.laplacian_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")
+     L = g.laplacian_matrix().change_ring(RDF).eigenvalues()
      Ls = [1/lam**2 for lam in L if lam > 0]
      return 1 + sum(Ls)
 add_to_lists(laplacian_energy, efficient_invariants, all_invariants)
@@ -554,12 +567,12 @@ def laplacian_energy_like(g):
 
     Liu, Jianping, and Bolian Liu. "A Laplacian-energy-like invariant of a graph." MATCH-COMMUNICATIONS IN MATHEMATICAL AND IN COMPUTER CHEMISTRY 59.2 (2008): 355-372.
     """
-    return sum([sqrt(x) for x in g.laplacian_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")])
+    return sum([sqrt(x) for x in g.spectrum(laplacian = True)])
 add_to_lists(laplacian_energy_like, efficient_invariants, all_invariants)
 
 #sum of the positive eigenvalues of a graph
 def gutman_energy(g):
-     L = g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")
+     L = g.adjacency_matrix().change_ring(RDF).eigenvalues()
      Ls = [lam for lam in L if lam > 0]
      return sum(Ls)
 add_to_lists(gutman_energy, efficient_invariants, all_invariants)
