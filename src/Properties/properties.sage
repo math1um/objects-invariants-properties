@@ -177,16 +177,33 @@ def is_planar_transitive(g):
 
 def is_generalized_dirac(g):
     """
-    True if g 2-connected and for all non-adjacent u,v, |union of neighborhoods(u,v)| >= (2n-1)/3
+    Tests whether a graph g satisfies a condition in a generalization of Dirac's Theorem.
     
-    R.J Faudree, Ronald Gould, Michael Jacobson, and R.H. Schelp, Neighborhood unions and 
-    hamiltonian properties in graphs. Journal of Combinatorial Theory, Series B, 47(1): 1--9, 1989.
-    If graph g is_generalized, then it is Hamiltonian.
+    OUTPUT:
     
-    sage: 
-    True
-    sage:
-    False
+    Returns ``True`` if g is 2-connected and for all non-adjacent u,v, the cardinality of the 
+    union of neighborhood(u) and neighborhood(v) is `>= (2n-1)/3`.
+    
+    REFERENCES:
+    
+    Theorem: If graph g is_generalized_dirac, then it is Hamiltonian.
+    
+    .. [FGJS1989]   \R.J. Faudree, Ronald Gould, Michael Jacobson, and R.H. Schelp, 
+                    "Neighborhood unions and hamiltonian properties in graphs". 
+                    Journal of Combinatorial Theory, Series B, 47(1): 1--9, 1989.
+
+    EXAMPLES:
+    
+    This example illustrates ::
+        
+        sage: 
+        True
+        sage:
+        False
+        
+    We now ::
+    
+        sage:
     """
     from itertools import combinations
 
