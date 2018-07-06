@@ -1,7 +1,5 @@
 # Graph Lists
 
-import pickle, os
-
 graph_objects = []
 alpha_critical_easy = []
 alpha_critical_hard = []
@@ -231,7 +229,7 @@ From:
 Brimkov, Valentin. "Algorithmic and explicit determination of the Lovasz number for certain circulant graphs." Discrete Applied Mathematics 155.14 (2007): 1812-1825.
 """
 c13_2 = graphs.CirculantGraph(13, 2)
-c13_2.add_cycle([0..12])
+c13_2.add_cycle(range(13))
 c13_2.name(new = "c13_2")
 add_to_lists(c13_2, graph_objects, all_graphs)
 
@@ -1294,7 +1292,7 @@ add_to_lists(k5pendant, graph_objects, counter_examples, all_graphs)
 #alon_seymour graph:
 # CE to the rank-coloring conjecture,
 # 56-regular, vertex_trans, alpha=2, omega=22, chi=chi'=edge_connect=56
-alon_seymour=Graph([[0..63], lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16,32,63)])
+alon_seymour=Graph([range(64), lambda x,y : operator.xor(x,y) not in (0,1,2,4,8,16,32,63)])
 alon_seymour.name(new="alon_seymour")
 add_to_lists(alon_seymour, problem_graphs, counter_examples, all_graphs)
 
@@ -2592,7 +2590,7 @@ add_to_lists(henning_14, graph_objects, all_graphs)
 henning_15 = graphs.CycleGraph(4)
 for v in henning_15.vertices():
     count = len(henning_15.vertices())
-    henning_15.add_cycle([count..count+9])
+    henning_15.add_cycle(range(count,count+10))
     henning_15.add_edge((v, count))
 henning_15.name(new = "henning fig 15")
 add_to_lists(henning_15, graph_objects, all_graphs)
@@ -2697,7 +2695,7 @@ def kite_necklace(k):
     if k == 1:
         return Graph('DJk')
     g = graphs.CycleGraph(2*k)
-    for i in [0..k-1]:
+    for i in range(k):
         g.subdivide_edge((2*i, 1 + 2*i), 1)
         g.add_edge(2*i, 1 + 2*i)
         g.subdivide_edge((2*i, 1 + 2*i), 1)

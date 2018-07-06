@@ -156,7 +156,7 @@ def is_van_den_heuvel(g):
 
         if A.is_sparse():
             row_sums = {}
-            for (i,j), entry in A.dict().iteritems():
+            for (i,_), entry in A.dict().iteritems():
                 row_sums[i] = row_sums.get(i, 0) + entry
             for i in range(A.nrows()):
                 D[i,i] += row_sums.get(i, 0)
@@ -622,7 +622,6 @@ def find_neighbor_twin(g, T):
         for w in Nv:
             NwT = set(g.neighbors(w)).intersection(set(T))
             if w not in T and NvT.issubset(NwT):
-                twin = w
                 T.append(w)
                 condition = True
                 #print "TWINS: v = {}, w = {}, sp3 = {}".format(v,w,sp3)
@@ -771,7 +770,7 @@ def has_two_ham_cycles(gIn):
         ham1 = g.hamiltonian_cycle()
     except EmptySetError:
         return False
-    n = g.order()
+
     for e in ham1.edges():
         h = copy(g)
         h.delete_edge(e)
@@ -862,7 +861,7 @@ def is_weakly_pancyclic(g):
     if not lengths: # acyclic
         raise ValueError("Graph is acyclic. Property undefined.")
     else:
-        return lengths == set([min(lengths)..max(lengths)])
+        return lengths == set(range(min(lengths),max(lengths)+1))
 
 def is_pancyclic(g):
     """
@@ -874,7 +873,7 @@ def is_pancyclic(g):
     False
     """
     lengths = cycle_lengths(g)
-    return lengths == set([3..g.order()])
+    return lengths == set(range(3, g.order()+1))
 
 def has_two_walk(g):
     """
@@ -1185,8 +1184,7 @@ is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bul
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
 has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
 Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
-Graph.is_circumscribable, Graph.is_cograph, Graph.is_inscribable,
-Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
+Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
 Graph.is_self_complementary, is_biclique]
 
@@ -1209,7 +1207,8 @@ removed_properties = [is_pebbling_class0]
     sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
     True
 
-    Skip Graph.is_biconnected() in favor of our is_two_connected().
+    Skip Graph.is_circumscribable() and Graph.is_inscribable() because they throw errors for the vast majority of our graphs.
+    Skip Graph.is_biconnected() in favor of our name is_two_connected().
     Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient algorithm existing.
 """
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
@@ -1217,9 +1216,9 @@ Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant
 Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
 Graph.is_transitively_reduced, Graph.is_self_complementary, Graph.is_connected,
 Graph.has_loops, Graph.is_asteroidal_triple_free, Graph.is_bipartite,
-Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product, Graph.is_circumscribable,
+Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product,
 Graph.is_cograph, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free,
-Graph.is_forest, Graph.is_half_transitive, Graph.is_inscribable, Graph.is_line_graph,
+Graph.is_forest, Graph.is_half_transitive, Graph.is_line_graph,
 Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_odd_hole_free,
 Graph.is_overfull, Graph.is_partial_cube, Graph.is_polyhedral, Graph.is_prime,
 Graph.is_semi_symmetric, Graph.is_split, Graph.is_strongly_regular, Graph.is_tree,

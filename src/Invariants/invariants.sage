@@ -13,11 +13,11 @@ broken_invariants = []
 """
 sage_efficient_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
-Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta, 
+Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta,
 Graph.spanning_trees_count, Graph.odd_girth, Graph.clustering_average, Graph.cluster_transitivity]
 
-sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth, 
-Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, Graph.edge_connectivity, 
+sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth,
+Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, Graph.edge_connectivity,
 Graph.vertex_connectivity, Graph.genus, Graph.crossing_number]
 
 for i in sage_efficient_invariants:
@@ -38,7 +38,8 @@ add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 
 def max_common_neighbors(g):
     """
-    returns the maximum number of common neighbors of any pair of distinct vertices in g
+    Returns the maximum number of common neighbors of any pair of distinct vertices in g.
+
         sage: max_common_neighbors(p4)
         1
         sage: max_common_neighbors(k4)
@@ -58,8 +59,9 @@ add_to_lists(max_common_neighbors, efficient_invariants, all_invariants)
 
 def min_common_neighbors(g):
     """
-    returns the minimum number of common neighbors of any pair of distinct vertices in g,
-    which is necessarily 0 for disconnected graphs
+    Returns the minimum number of common neighbors of any pair of distinct vertices in g,
+    which is necessarily 0 for disconnected graphs.
+
         sage: min_common_neighbors(p4)
         0
         sage: min_common_neighbors(k4)
@@ -81,7 +83,7 @@ add_to_lists(min_common_neighbors, efficient_invariants, all_invariants)
 
 def mean_common_neighbors(g):
     """
-    returns the average number of common neighbors of any pair of distinct vertices in g
+    Returns the average number of common neighbors of any pair of distinct vertices in g.
         sage: mean_common_neighbors(p4)
         1/3
         sage: mean_common_neighbors(k4)
@@ -130,17 +132,37 @@ def max_degree(g):
 add_to_lists(max_degree, efficient_invariants, all_invariants)
 
 def median_degree(g):
+    """
+    Return the median of the list of vertex degrees.
+
+        sage: median_degree(p4)
+        3/2
+        sage: median_degree(p3)
+        1    
+    """
     return median(g.degree())
 add_to_lists(median_degree, efficient_invariants, all_invariants)
 
 def inverse_degree(g):
+    """
+    Return the sum of the reciprocals of the non-zero degrees.
+
+    Return 0 if the graph has no edges. 
+
+        sage: inverse_degree(p4)
+        3
+        sage: inverse_degree(graphs.CompleteGraph(1))
+        0
+    """
+    if g.size() == 0:
+        return 0
     return sum([(1.0/d) for d in g.degree() if d!= 0])
 add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 
 def eulerian_faces(g):
     """
     Returns 2 - order + size, which is the number of faces if the graph is planar,
-    a consequence of Euler's Formula
+    a consequence of Euler's Formula.
 
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
@@ -163,7 +185,6 @@ def barrus_q(g):
         4
         sage: barrus_q(graphs.StarGraph(3))
         1
-
     """
     Degrees = g.degree()
     Degrees.sort()
@@ -173,12 +194,14 @@ add_to_lists(barrus_q, efficient_invariants, all_invariants)
 
 def barrus_bound(g):
     """
-    returns n - barrus q
-    defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    sage: barrus_bound(k4)
-    1
-    sage: barrus_bound(graphs.OctahedralGraph())
-    2
+    Returns n - barrus q
+    
+    Defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
+    
+        sage: barrus_bound(k4)
+        1
+        sage: barrus_bound(graphs.OctahedralGraph())
+        2
     """
     return g.order() - barrus_q(g)
 add_to_lists(barrus_bound, efficient_invariants, all_invariants)
@@ -186,7 +209,11 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
-    matching. A matching is a set of independent edges.
+    matching. 
+
+    A matching is a set of independent edges. 
+
+    See: https://en.wikipedia.org/wiki/Matching_(graph_theory)
 
         sage: matching_number(graphs.CompleteGraph(5))
         2
@@ -205,11 +232,12 @@ def residue(g):
     If the Havel-Hakimi process is iterated until a sequence of 0s is returned,
     residue is defined to be the number of zeros of this sequence.
 
+    See: Favaron, Odile, Maryvonne Mahéo, and J‐F. Saclé. "On the residue of a graph." Journal of Graph Theory 15.1 (1991): 39-64.
+
         sage: residue(k4)
         1
         sage: residue(p4)
         2
-
     """
     seq = g.degree_sequence()
 
@@ -222,6 +250,16 @@ def residue(g):
 add_to_lists(residue, efficient_invariants, all_invariants)
 
 def annihilation_number(g):
+    """
+    Given the degree sequence in non-degreasing order, with indices starting at 1, the annihilation number is the largest index k so the sum of the first k degrees is no more than the sum of the remaining degrees
+
+    See: Larson, Craig E., and Ryan Pepper. "Graphs with equal independence and annihilation numbers." the electronic journal of combinatorics 18.1 (2011): 180.
+
+        sage: annihilation_number(c4)
+        2
+        sage: annihilation_number(p5)
+        3
+    """
     seq = sorted(g.degree())
 
     a = 0
@@ -232,6 +270,16 @@ def annihilation_number(g):
 add_to_lists(annihilation_number, efficient_invariants, all_invariants)
 
 def fractional_alpha(g):
+    """
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of independence number (alpha).
+
+    See: Nemhauser, George L., and Leslie Earl Trotter. "Vertex packings: structural properties and algorithms." Mathematical Programming 8.1 (1975): 232-248.
+
+        sage: fractional_alpha(k3)
+        1.5
+        sage: fractional_alpha(p5)
+        3.0
+    """
     if len(g.vertices()) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=True)
@@ -248,6 +296,16 @@ def fractional_alpha(g):
 add_to_lists(fractional_alpha, efficient_invariants, all_invariants)
 
 def fractional_covering(g):
+    """
+    This is the optimal solution of the linear programming relaxation of the integer programming formulation of covering number.
+
+    For ILP formulation see: https://en.wikipedia.org/wiki/Vertex_cover
+
+        sage: fractional_covering(k3)
+        1.5
+        sage: fractional_covering(p5)
+        2.0
+    """
     if len(g.vertices()) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=False)
@@ -255,7 +313,7 @@ def fractional_covering(g):
     p.set_objective(sum(x[v] for v in g.vertices()))
 
     for v in g.vertices():
-        p.add_constraint(x[v], min=1)
+        p.add_constraint(x[v], max=1)
 
     for (u,v) in g.edge_iterator(labels=False):
         p.add_constraint(x[u] + x[v], min=1)
@@ -264,6 +322,18 @@ def fractional_covering(g):
 add_to_lists(fractional_covering, efficient_invariants, all_invariants)
 
 def cvetkovic(g):
+    """
+    This in the minimum of the number of nonnegative and nonpositive eigenvalues of the adjacency matrix.
+
+    Cvetkovic's theorem says that this number is an upper bound for the independence number of a graph.
+
+    See: Cvetković, Dragoš M., Michael Doob, and Horst Sachs. Spectra of graphs: theory and application. Vol. 87. Academic Pr, 1980.
+
+        sage: cvetkovic(p5)
+        3
+        sage: cvetkovic(graphs.PetersenGraph())
+        4
+    """
     eigenvalues = g.spectrum()
     positive = 0
     negative = 0
@@ -280,6 +350,19 @@ def cvetkovic(g):
 add_to_lists(cvetkovic, efficient_invariants, all_invariants)
 
 def cycle_space_dimension(g):
+    """
+    Returns the dimension of the cycle space (also called the circuit rank).
+
+    See: https://en.wikipedia.org/wiki/Cycle_space
+    And: https://en.wikipedia.org/wiki/Circuit_rank
+
+        sage: cycle_space_dimension(k3)
+        1
+        sage: cycle_space_dimension(c4c4)
+        2
+        sage: cycle_space_dimension(glasses_5_5)
+        2
+    """
     return g.size()-g.order()+g.connected_components_number()
 add_to_lists(cycle_space_dimension, efficient_invariants, all_invariants)
 
@@ -317,7 +400,7 @@ def kirchhoff_index(g):
 add_to_lists(kirchhoff_index, efficient_invariants, all_invariants)
 
 def largest_singular_value(g):
-    A = matrix(RDF,g.adjacency_matrix())
+    A = matrix(RDF,g.adjacency_matrix(sparse=False))
     svd = A.SVD()
     sigma = svd[1]
     return sigma[0,0]
@@ -460,7 +543,6 @@ def max_even_minus_even_horizontal_component(g):
 
     distances = g.distance_all_pairs()
     mx=0
-    n=g.order()
     for v in g.vertices():
         Even=[]
         for w in g.vertices():
@@ -719,7 +801,7 @@ def make_invariant_from_property(property, name=None):
 
 # defined by R. Pepper in an unpublished paper on graph irregularity
 def geometric_length_of_degree_sequence(g):
-    return sqrt(sum(d^2 for d in g.degree()))
+    return sqrt(sum(d**2 for d in g.degree()))
 add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_invariants)
 
 # Two Stability Theta Bound
@@ -727,7 +809,7 @@ add_to_lists(geometric_length_of_degree_sequence, efficient_invariants, all_inva
 # lovasz_theta <= 2^(2/3)*n^(1/3)
 # The Sandwich Theorem by Knuth p. 47
 def two_stability_theta_bound(g):
-    return 2^(2/3)*g.order()^(1/3)
+    return 2**(2/3)*g.order()**(1/3)
 add_to_lists(two_stability_theta_bound, efficient_invariants, all_invariants)
 
 # Lovasz Theta over Root N
@@ -822,7 +904,7 @@ def transmission(g):
         return Infinity
     if g.is_tree() and max(g.degree()) == 2:
         summation = 0
-        for i in [1..(g.order()-1)]:
+        for i in range(1,g.order()):
             summation += (i*(i+1))/2
         return summation * 2
     else:
@@ -833,8 +915,8 @@ add_to_lists(transmission, efficient_invariants, all_invariants)
 
 def harmonic_index(g):
     sum = 0
-    for edge in g.edges(labels = false):
-        sum += (2 / (g.degree()[edge[0]] + g.degree()[edge[1]]))
+    for (u,v) in g.edges(labels = false):
+        sum += (2 / (g.degree(u) + g.degree(v)))
     return sum
 add_to_lists(harmonic_index, efficient_invariants, all_invariants)
 
@@ -1159,7 +1241,7 @@ add_to_lists(homo_lumo_gap, efficient_invariants, all_invariants)
 
 def homo_lumo_index(g):
     order = g.order()
-    eigenvalues = g.spectrum()
+    eigenvalues = g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")
     if order%2 == 0:
         # Minus 1 accounts for the 0 indexing of a list
         return max(abs(eigenvalues[floor((order+1)/2) - 1]), abs(eigenvalues[ceil((order+1)/2) - 1]))
@@ -1170,7 +1252,7 @@ add_to_lists(homo_lumo_index, efficient_invariants, all_invariants)
 def neighborhood_union_nonadjacent(g):
     # Define that for copmlete graphs (i.e. nothing to minimize over later), return n, which is trivial upper bound.
     all_dist = g.distance_all_pairs()
-    nonadj = [(v,w) for v in g for w in g if dist[v][w] > 1]
+    nonadj = [(v,w) for v in g for w in g if all_dist[v][w] > 1]
     if not nonadj:
         return g.order()
     else:
@@ -1180,7 +1262,7 @@ add_to_lists(neighborhood_union_nonadjacent, efficient_invariants, all_invariant
 def neighborhood_union_dist2(g):
     # Define that for graphs with no dist 2 (i.e. nothing to minimize over later), return n, which is trivial upper bound.
     all_dist = g.distance_all_pairs()
-    dist2 = [(v,w) for v in g for w in g if dist[v][w] == 2]
+    dist2 = [(v,w) for v in g for w in g if all_dist[v][w] == 2]
     if not dist2:
         return g.order()
     else:
@@ -1400,7 +1482,7 @@ def cheeger_constant(g):
     temp = g.order()
     best = n
 
-    for i in [1..upper]:
+    for i in range(1, upper+1):
         for s in SetV.subsets(i):
             count = 0
             for u in s:
@@ -1570,6 +1652,6 @@ def hamiltonian_index(g):
         line_graph_i = line_graph_i.line_graph()
 add_to_lists(hamiltonian_index, intractable_invariants, all_invariants)
 
-    
+
 #FAST ENOUGH (tested for graphs on 140921): lovasz_theta, clique_covering_number, all efficiently_computable
 #SLOW but FIXED for SpecialGraphs

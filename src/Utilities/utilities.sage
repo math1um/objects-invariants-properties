@@ -51,11 +51,9 @@ def find_alpha_critical_graphs(order, save = False):
         ['E|OW', 'E~~w']
     """
     graphgen = graphs(order)
-    count = 0
     alpha_critical_name_list = []
     for g in graphgen:
         if g.is_connected():
-            count += 1
             if is_alpha_critical(g):
                 alpha_critical_name_list.append(g.graph6_string())
     s = "alpha_critical_name_list_{}".format(order)
@@ -115,8 +113,6 @@ def find_lower_bound_sets(g, i):
     return lowersets
 
 def alpha_lower_approximation(g, i):
-    n = g.order()
-
     LP = MixedIntegerLinearProgram(maximization=False)
     x = LP.new_variable(nonnegative=True)
 
@@ -145,7 +141,6 @@ def alpha_lower_approximation(g, i):
 #same as cartesian product with k2, but output labeling is guarnateed to be integers
 def make_bidouble_graph(g):
     n = g.order()
-    V = g.vertices()
     gdub = Graph(2*n)
     #print "gdub order = {}".format(gdub.order())
 
@@ -294,7 +289,7 @@ def Ciliate(q, r):
         return graphs.CycleGraph(2*q)
     g = graphs.CycleGraph(2*q)
     for v in g.vertices():
-        g.add_path([v]+[g.add_vertex() for i in [1..r-q]])
+        g.add_path([v]+[g.add_vertex() for _ in range(r-q)])
     return g
 
 def Antihole(n):
@@ -311,7 +306,7 @@ def Caro_Roditty(n):
     iters = 1
     while iters < n:
         len_v = len(g.vertices())
-        g.add_cycle([len_v..len_v+3])
+        g.add_cycle(range(len_v, len_v + 4))
         last_cycle = g.vertices()[-4:]
         for v in last_cycle:
             g.add_edge(v, v-4)
@@ -326,7 +321,7 @@ def find_all_triangles(g):
 
     for e in E:
         v,w = (e[0], e[1]) if pos[e[0]] < pos[e[1]] else (e[1], e[0])
-        S = [u for u in g.vertices() if A[u][v] == 1 and A[u][w] == 1 and pos[u] > pos[w]]
+        S = [u for u in g.vertices() if g.has_edge(u,v) and g.has_edge(u,v) and pos[u] > pos[w]]
         for u in S:
             s = Set([u,v,w])
             triangles.append(s)
@@ -469,11 +464,11 @@ def pyramid_encapsulation(g):
     The pyramid encapuslation always yields a Class1 graph.
     """
     pyramid = graphs.CompleteGraph(3)
-    pyramid.add_vertices([3..5])
+    pyramid.add_vertices([3, 4, 5])
     pyramid.add_edges([[3,1], [3,0], [4,1], [4,2], [5,0], [5,2]])
 
     pe = pyramid.disjoint_union(g)
-    for v in [0..2]:
+    for v in [0, 1, 2]:
         for w in g.vertices():
             pe.add_edge((0, v), (1,w))
     return pe
@@ -568,7 +563,7 @@ def benoit_boyd_graphs(a, b, c):
     """
     Two triangles pointed at eachother, with opposite vertices connected by paths of a,b,c respective edges. Triangles weighted 0.5, paths 1.0.
 
-    Pg. 927 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems. 
+    Pg. 927 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems.
         Mathematics of Operations Research, 33(4): 921--931, 2008.
     """
     g = Graph(0, weighted = True)
@@ -581,14 +576,14 @@ def benoit_boyd_graphs(a, b, c):
     g.add_edges([(0, a + 1, 0.5), (a + 1, a + b + 2, 0.5), (0, a + b + 2, 0.5)])
     g.add_edges([(a, a + b + 1, 0.5), (a + b + 1, a + b + c + 2, 0.5), (a, a + b + c + 2, 0.5)])
     return g
-    
+
 def benoit_boyd_graphs_2(a, b, c):
     """
     Two triangles pointed at eachother, with opposite vertices connected by paths of a,b,c respective edges. Weights more complicated.
 
     Paths each weighted 1/a, 1/b, 1/c. The triangles are weighted with the sum of the paths they join, e.g. 1/a+1/b or 1/b+1/c.
 
-    Pg. 928 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems. 
+    Pg. 928 of Geneviève Benoit and Sylvia Boyd, Finding the Exact Integrality Gap for Small Traveling Salesman Problems.
         Mathematics of Operations Research, 33(4): 921--931, 2008.
     """
     g = Graph(0, weighted = True)
@@ -601,7 +596,7 @@ def benoit_boyd_graphs_2(a, b, c):
     g.add_edges([(0, a + 1, 1/a + 1/b), (a + 1, a + b + 2, 1/b + 1/c), (0, a + b + 2, 1/a + 1/c)])
     g.add_edges([(a, a + b + 1, 1/a + 1/b), (a + b + 1, a + b + c + 2, 1/b + 1/c), (a, a + b + c + 2, 1/a + 1/c)])
     return g
-    
+
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
