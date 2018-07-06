@@ -1241,7 +1241,7 @@ add_to_lists(homo_lumo_gap, efficient_invariants, all_invariants)
 
 def homo_lumo_index(g):
     order = g.order()
-    eigenvalues = g.spectrum()
+    eigenvalues = g.adjacency_matrix(sparse=False).change_ring(RDF).eigenvalues(algorithm="symmetric")
     if order%2 == 0:
         # Minus 1 accounts for the 0 indexing of a list
         return max(abs(eigenvalues[floor((order+1)/2) - 1]), abs(eigenvalues[ceil((order+1)/2) - 1]))
