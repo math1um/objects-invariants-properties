@@ -205,12 +205,16 @@ def is_generalized_dirac(g):
 
         sage: is_generalized_dirac(graphs.PathGraph(5))
         False
+
         sage: is_generalized_dirac(graphs.DiamondGraph())
         False
 
     TESTS::
 
         sage: is_generalized_dirac(Graph(0))
+        True
+
+        sage: is_generalized_dirac(Graph(1))
         True
     """
     from itertools import combinations
@@ -223,39 +227,69 @@ def is_generalized_dirac(g):
                 return False
     return True
 
-#necessary condition for hamiltonicity
 def is_van_den_heuvel(g):
-    n = g.order()
-    lc = sorted(graphs.CycleGraph(n).laplacian_matrix().eigenvalues())
-    lg = sorted(g.laplacian_matrix().eigenvalues())
+    """
+    Evaluates if g meets an eigenvalue condition related to Hamiltonicity.
 
-    for lci, lgi in zip(lc, lg):
-        if lci > lgi:
+    INPUT:
+
+    - ``g`` -- graph
+
+    OUTPUT:
+
+    Let ``g`` be of order `n`.
+    Let `A_H` denote the adjacency matrix of a graph `H`, and `D_H` denote
+    the matrix with the degrees of the vertices of `H` on the diagonal.
+    Define `Q_H = D_H + A_H` and `L_H = D_H - A_H` (i.e. the Laplacian).
+    Finally, let `C` be the cycle graph on `n` vertices.
+
+    Returns ``True`` if the `i`-th eigenvalue of `L_C` is at most the `i`-th
+    eigenvalue of `L_g` and the `i`-th eigenvalue of `Q_C` is at most the
+    `i`-th eigenvalue of `Q_g for all `i`.
+
+    REFERENCES:
+
+    Theorem: If a graph is Hamiltonian, then it ``is_van_den_heuvel``.
+
+    .. [Heu1995]    \J.van den Heuvel, "Hamilton cycles and eigenvalues of
+                    graphs". Linear Algebra and its Applications, 226--228:
+                    723--730, 1995.
+
+    EXAMPLES:
+
+        sage: is_van_den_heuvel(graphs.CycleGraph(5))
+        True
+
+        sage: is_van_den_heuvel(graphs.PetersenGraph())
+        False
+
+    TESTS::
+
+        sage: is_van_den_heuvel(Graph(0))
+        True
+
+        sage: is_van_den_heuvel(Graph(1))
+        True
+    """
+    cycle_n = graphs.CycleGraph(g.order())
+
+    cycle_laplac_eigen = sorted(cycle_n.laplacian_matrix().eigenvalues())
+    g_laplac_eigen = sorted(g.laplacian_matrix().eigenvalues())
+    for cycle_lambda_i, g_lambda_i in zip(cycle_laplac_eigen, g_laplac_eigen):
+        if cycle_lambda_i > g_lambda_i:
             return False
 
     def Q(g):
-        A = g.adjacency_matrix()
-
-        D = A.parent(0)
-
-        if A.is_sparse():
-            row_sums = {}
-            for (i,_), entry in A.dict().iteritems():
-                row_sums[i] = row_sums.get(i, 0) + entry
-            for i in range(A.nrows()):
-                D[i,i] += row_sums.get(i, 0)
-        else:
-            row_sums=[sum(v) for v in A.rows()]
-            for i in range(A.nrows()):
-                D[i,i] += row_sums[i]
-
+        A = g.adjacency_matrix(sparse=False)
+        D = matrix(g.order(), sparse=False)
+        row_sums = [sum(r) for r in A.rows()]
+        for i in xrange(A.nrows()):
+            D[i,i] = row_sums[i]
         return D + A
-
-    qc = sorted(Q(graphs.CycleGraph(n)).eigenvalues())
-    qg = sorted(Q(g).eigenvalues())
-
-    for qci, qgi in zip(qc, qg):
-        if qci > qgi:
+    cycle_q_matrix = sorted(Q(cycle_n).eigenvalues())
+    g_q_matrix = sorted(Q(g).eigenvalues())
+    for cycle_q_lambda_i, g_q_lambda_i in zip(cycle_q_matrix, g_q_matrix):
+        if cycle_q_lambda_i > g_q_lambda_i:
             return False
 
     return True
