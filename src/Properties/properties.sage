@@ -3,7 +3,7 @@
 def has_star_center(g):
     """
     True if graph has a vertex adjacent to all others, also known as "universal vertex"
-    
+
     sage: has_star_center(flower_with_3_petals)
     True
     sage: has_star_center(c4)
@@ -16,7 +16,7 @@ def has_star_center(g):
 def is_complement_of_chordal(g):
     """
     True if graph g is a complement of a chordal graph
-    
+
     sage: is_complement_of_chordal(p4)
     True
     sage: is_complement_of_chordal(p5)
@@ -28,7 +28,7 @@ def pairs_have_unique_common_neighbor(g):
     """
     True if each pair of vertices in g has exactly one common neighbor
 
-    Also known as the friendship property. 
+    Also known as the friendship property.
     By the Friendship Theorem, the only connected graphs with the friendship property are flowers.
 
     sage: pairs_have_unique_common_neighbor(flower(5))
@@ -52,14 +52,14 @@ def is_distance_transitive(g):
 
     Note that this method calls, via the automorphism group, the Gap package. This package behaves
     badly with most threading or multiprocessing tools.
-    
+
     sage: is_distance_transitive(graphs.CompleteGraph(4))
     True
     sage: is_distance_transitive(graphs.PetersenGraph())
     True
     sage: is_distance_transitive(graphs.ShrikhandeGraph())
     False
-    
+
     This method accepts disconnected graphs:
     sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
     True
@@ -81,13 +81,13 @@ def is_distance_transitive(g):
 def is_dirac(g):
     """
     True if g has order at least 3 and min. degree at least n/2
-    
+
     See Dirac's Theorem: If graph is_dirac, then it is hamiltonian.
-    
+
     sage: is_dirac(graphs.CompleteGraph(6))
     True
     sage: is_dirac(graphs.CompleteGraph(2))
-    False    
+    False
     sage: is_dirac(graphs.CycleGraph(5))
     False
     """
@@ -118,11 +118,11 @@ def is_ore(g):
 def is_haggkvist_nicoghossian(g):
     """
     True if g is 2-connected and min. degree >= (n + vertex_connectivity)/3
-    
-    R. Häggkvist and G. Nicoghossian, A remark on Hamiltonian cycles. Journal of Combinatorial 
+
+    R. Häggkvist and G. Nicoghossian, A remark on Hamiltonian cycles. Journal of Combinatorial
     Theory, Series B, 30(1): 118--120, 1981.
     If is_haggkvist_nicoghossian, then is hamiltonian.
-    
+
     sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
     True
     sage: is_haggkvist_nicoghossian(graphs.CycleGraph(5))
@@ -136,11 +136,11 @@ def is_haggkvist_nicoghossian(g):
 def is_genghua_fan(g):
     """
     True if g is 2-connected and s.t. dist(u,v)=2 implies max(deg(u), deg(v)) >= n/2 for all u,v
-    
+
     Geng-Hua Fan, New sufficient conditions for cycles in graphs. Journal of Combinatorial Theory,
     Series B, 37(3): 221--227, 1984.
     If a graph is_genghua_fan, then it is Hamiltonian.
-    
+
     sage: is_genghua_fan(graphs.DiamondGraph())
     True
     sage: is_genghua_fan(graphs.CycleGraph(4))
@@ -163,55 +163,58 @@ def is_genghua_fan(g):
 def is_planar_transitive(g):
     """
     True if g is planar and is vertex-transitive
-    
+
     sage: is_planar_transitive(graphs.HexahedralGraph())
     True
     sage: is_planar_transitive(graphs.CompleteGraph(2))
     True
     sage: is_planar_transitive(graphs.FranklinGraph())
     False
-    sage: is_planar_transitive(graphs.BullGraph()) 
+    sage: is_planar_transitive(graphs.BullGraph())
     False
     """
     return g.is_planar() and g.is_vertex_transitive()
 
 def is_generalized_dirac(g):
     """
-    Tests whether a graph g satisfies a condition in a generalization of Dirac's Theorem.
-    
+    Tests if g meets condition in a generalization of Dirac's Theorem.
+
+    INPUT:
+
+    - ``g`` -- graph
+
     OUTPUT:
-    
-    Returns ``True`` if g is 2-connected and for all non-adjacent u,v, the cardinality of the 
-    union of neighborhood(u) and neighborhood(v) is `>= (2n-1)/3`.
-    
+
+    Returns ``True`` if g is 2-connected and for all non-adjacent u,v,
+    the cardinality of the union of neighborhood(u) and neighborhood(v)
+    is `>= (2n-1)/3`.
+
     REFERENCES:
-    
+
     Theorem: If graph g is_generalized_dirac, then it is Hamiltonian.
-    
-    .. [FGJS1989]   \R.J. Faudree, Ronald Gould, Michael Jacobson, and R.H. Schelp, 
-                    "Neighborhood unions and hamiltonian properties in graphs". 
-                    Journal of Combinatorial Theory, Series B, 47(1): 1--9, 1989.
+
+    .. [FGJS1989]   \R.J. Faudree, Ronald Gould, Michael Jacobson, and
+                    R.H. Schelp, "Neighborhood unions and hamiltonian
+                    properties in graphs". Journal of Combinatorial
+                    Theory, Series B, 47(1): 1--9, 1989.
 
     EXAMPLES:
-    
-    This example illustrates ::
-        
-        sage: 
+
+        sage: is_generalized_dirac(graphs.HouseGraph())
         True
-        sage:
+
+        sage: is_generalized_dirac(graphs.PathGraph(5))
         False
-        
-    We now ::
-    
-        sage:
+        sage: is_generalized_dirac(graphs.DiamondGraph())
+        False
+
+    TESTS::
+
+        sage: is_generalized_dirac(Graph(0))
+        True
     """
     from itertools import combinations
 
-    
-            if dist_dict[u].get(v, +Infinity) == d: # By default, no entry if disconnected. We substitute +Infinity.
-                sameDistPairs.append(Set([u,v]))
-                
-                
     if not is_two_connected(g):
         return False
     for (u,v) in combinations(g.vertices(), 2):
