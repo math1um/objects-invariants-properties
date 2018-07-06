@@ -130,8 +130,7 @@ def neighbors_set(g,S):
 #sufficient condition for hamiltonicity
 def is_generalized_dirac(g):
     n = g.order()
-    k = g.vertex_connectivity()
-    if k < 2:
+    if not is_two_connected(g):
         return False
     for p in Subsets(g.vertices(),2):
         if g.is_independent_set(p):
