@@ -1006,6 +1006,16 @@ def edge_clustering_centrality(g, edge = None):
            edge - (default: None) An edge in g. If given, will compute centrality for given edge, otherwise all edges. See Graph.has_Edge for acceptable input.
     From:
     An Application of Edge Clustering Centrality to Brain Connectivity by Joy Lind, Frank Garcea, Bradford Mahon, Roger Vargas, Darren A. Narayan
+
+    TESTS:
+        sage: edge_clustering_centrality(graphs.CompleteGraph(5))
+        [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        sage: edge_clustering_centrality(graphs.CompleteBipartiteGraph(3,4))
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+        sage: edge_clustering_centrality(graphs.PetersenGraph())
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+        sage: edge_clustering_centrality(graphs.BullGraph())
+        [3, 3, 3, 2, 2]
     """
     if edge == None:
         edge_clusering_centralities = []
