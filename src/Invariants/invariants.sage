@@ -1017,21 +1017,13 @@ def edge_clustering_centrality(g, edge = None):
         sage: edge_clustering_centrality(graphs.BullGraph())
         [3, 3, 3, 2, 2]
     """
-    if edge == None:
+    if edge is None:
         edge_clusering_centralities = []
         for e in g.edges(labels = False):
-            sum = 0
-            for v in g.vertices():
-                if g.subgraph(g.neighbors(v) + [v]).has_edge(e):
-                    sum += 1
-            edge_clusering_centralities.append(sum)
+            edge_clusering_centralities.append(len(set(g.neighbors(e[0])) & set(g.neighbors(e[1]))) + 2) # +2 for the two vertices in e
         return edge_clusering_centralities
     else:
-        for v in g.vertices():
-            sum = 0
-            if g.subgraph(g.neighbors(v) + [v]).has_edge(edge):
-                sum += 1
-        return sum
+        return len(set(g.neighbors(edge[0])) & set(g.neighbors(edge[1]))) + 2 # +2 for the two vertices in e
 
 def max_edge_clustering_centrality(g):
     """
