@@ -138,7 +138,7 @@ def median_degree(g):
         sage: median_degree(p4)
         3/2
         sage: median_degree(p3)
-        1    
+        1
     """
     return median(g.degree())
 add_to_lists(median_degree, efficient_invariants, all_invariants)
@@ -147,7 +147,7 @@ def inverse_degree(g):
     """
     Return the sum of the reciprocals of the non-zero degrees.
 
-    Return 0 if the graph has no edges. 
+    Return 0 if the graph has no edges.
 
         sage: inverse_degree(p4)
         3
@@ -195,9 +195,9 @@ add_to_lists(barrus_q, efficient_invariants, all_invariants)
 def barrus_bound(g):
     """
     Returns n - barrus q
-    
+
     Defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    
+
         sage: barrus_bound(k4)
         1
         sage: barrus_bound(graphs.OctahedralGraph())
@@ -209,9 +209,9 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
-    matching. 
+    matching.
 
-    A matching is a set of independent edges. 
+    A matching is a set of independent edges.
 
     See: https://en.wikipedia.org/wiki/Matching_(graph_theory)
 
