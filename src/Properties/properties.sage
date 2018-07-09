@@ -1014,6 +1014,18 @@ def has_even_order(g):
     """
     return g.order() % 2 == 0
 
+def is_locally_two_connected(g):
+    """
+
+    ALGORITHM:
+
+    We modify the algorithm from our ``localise`` factory method to stop at
+    subgraphs of 2 vertices, since ``is_two_connected`` is undefined on smaller
+    subgraphs.
+    """
+    return all((f(g.subgraph(g.neighbors(v))) if len(g.neighbors(v)) >= 2
+                                              else True) for v in g.vertices())
+
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
@@ -1119,7 +1131,6 @@ def localise(f, name=None, documentation=None):
 
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
-is_locally_two_connected = localise(is_two_connected)
 is_locally_planar = localise(Graph.is_planar, documentation="True if the open neighborhood of each vertex v is planar")
 """
 Tests:
