@@ -401,45 +401,45 @@ def is_four_connected(g):
     return g.vertex_connectivity(k = 4)
 
 def is_lindquester(g):
-        """
-        Tests if ``g`` meets a neighborhood union condition for Hamiltonicity.
+    """
+    Tests if ``g`` meets a neighborhood union condition for Hamiltonicity.
 
-        INPUT:
+    INPUT:
 
-        - ``g`` -- graph
+    - ``g`` -- graph
 
-        OUTPUT:
+    OUTPUT:
 
-        Let ``g`` be of order `n`.
+    Let ``g`` be of order `n`.
 
-        Returns ``True`` if ``g`` is 2-connected and for all vertices `u,v`,
-        `dist(u,v) = 2` implies that the cardinality of the union of
-        neighborhood(`u`) and neighborhood(`v`) is `\geq (2n-1)/3`.
-        Returns ``False`` otherwise.
+    Returns ``True`` if ``g`` is 2-connected and for all vertices `u,v`,
+    `dist(u,v) = 2` implies that the cardinality of the union of
+    neighborhood(`u`) and neighborhood(`v`) is `\geq (2n-1)/3`.
+    Returns ``False`` otherwise.
 
-        REFERENCES:
+    REFERENCES:
 
-        Theorem: If a graph ``is_lindquester``, then it is Hamiltonian.
+    Theorem: If a graph ``is_lindquester``, then it is Hamiltonian.
 
-        .. [Lin1989]    \T.E. Lindquester, "The effects of distance and
-                        neighborhood union conditions on hamiltonian properties
-                        in graphs". Journal of Graph Theory, 13(3): 335-352,
-                        1989.
+    .. [Lin1989]    \T.E. Lindquester, "The effects of distance and
+                    neighborhood union conditions on hamiltonian properties
+                    in graphs". Journal of Graph Theory, 13(3): 335-352,
+                    1989.
 
-        EXAMPLES:
+    EXAMPLES:
 
-            sage: is_lindquester(graphs.HouseGraph())
-            True
+        sage: is_lindquester(graphs.HouseGraph())
+        True
 
-            sage: is_lindquester(graphs.OctahedralGraph())
-            True
+        sage: is_lindquester(graphs.OctahedralGraph())
+        True
 
-            sage: is_lindquester(graphs.PathGraph(3))
-            False
+        sage: is_lindquester(graphs.PathGraph(3))
+        False
 
-            sage: is_lindquester(graphs.DiamondGraph())
-            False
-        """
+        sage: is_lindquester(graphs.DiamondGraph())
+        False
+    """
     if not is_two_connected(g):
         return False
     D = g.distance_all_pairs()
