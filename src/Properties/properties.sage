@@ -495,6 +495,23 @@ def is_complete(g):
     return True
 
 def has_c4(g):
+    """
+    Tests whether graph ``g`` contains Cycle_4 as an *induced* subgraph.
+
+    EXAMPLES:
+
+        sage: has_c4(graphs.CycleGraph(4))
+        True
+
+        sage: has_c4(graphs.HouseGraph())
+        True
+
+        sage: has_c4(graphs.CycleGraph(5))
+        False
+
+        sage: has_c4(graphs.DiamondGraph())
+        False
+    """
     return g.subgraph_search(c4, induced=True) is not None
 
 def is_c4_free(g):
