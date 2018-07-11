@@ -647,6 +647,25 @@ def is_p4_free(g):
     return not has_p4(g)
 
 def has_p4(g):
+    """
+    Tests whether graph ``g`` contains a Path_4 as an *induced* subgraph.
+
+    Might also be known as "is not a cograph".
+
+    EXAMPLES:
+
+    sage: has_p4(graphs.PathGraph(4))
+    True
+
+    sage: has_p4(graphs.CycleGraph(5))
+    True
+
+    sage: has_p4(graphs.CycleGraph(4))
+    False
+
+    sage: has_p4(graphs.CompleteGraph(5))
+    False
+    """
     return g.subgraph_search(p4, induced=True) is not None
 
 def has_kite(g):
