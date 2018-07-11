@@ -297,24 +297,35 @@ def is_van_den_heuvel(g):
 #necessary condition for hamiltonicity
 def is_two_connected(g):
     """
-    Equivalent to Graph.is_biconnected(), but we prefer our name
+    Evaluate whether graph is 2-connected. Equivalent to Graph.is_biconnected().
+
+    INPUT:
+
+    - ``g`` -- graph
+
+    OUTPUT:
 
     Returns True if the graph is 2-connected and False otherwise. A graph is
     2-connected if the removal of any single vertex gives a connected graph.
 
     If a graph has fewer than 3 vertices, a ValueError is raised.
 
+    EXAMPLES:
+
         sage: is_two_connected(graphs.CycleGraph(5))
         True
+
         sage: is_two_connected(graphs.PathGraph(5))
         False
+
         sage: is_two_connected(graphs.CompleteGraph(2))
         Traceback (most recent call last):
             File "", line 20, in is_two_connected
         ValueError: is_two_connected is only defined on graphs with at least 3 vertices.
     """
     if g.order() < 3:
-        raise ValueError("is_two_connected is only defined on graphs with at least 3 vertices.")
+        raise ValueError("is_two_connected is only defined on graphs with at"
+                            + " least 3 vertices.")
     return g.is_biconnected()
 
 #part of pebbling class0 sufficient condition
