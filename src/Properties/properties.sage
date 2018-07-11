@@ -415,16 +415,45 @@ def is_lindquester(g):
     return True
 
 def is_complete(g):
+    """
+    Tests whether ``g`` is a complete graph.
+
+    OUTPUT:
+
+    Returns ``True`` if ``g`` is a complete graph; returns ``False`` otherwise.
+    A complete graph is one where every vertex is connected to every others
+    vertex.
+
+    EXAMPLES:
+
+        sage: is_complete(graphs.CompleteGraph(0))
+        True
+
+        sage: is_complete(graphs.CompleteGraph(1))
+        True
+
+        sage: is_complete(graphs.CycleGraph(3))
+        True
+
+        sage: is_complete(graphs.CompleteGraph(6))
+        True
+
+        sage: is_complete(graphs.PathGraph(5))
+        False
+
+        sage: is_complete(graphs.CycleGraph(4))
+        False
+    """
     n = g.order()
     e = g.size()
     if not g.has_multiple_edges():
         return e == n*(n-1)/2
-
-    D = g.distance_all_pairs()
-    for i in range(n):
-        for j in range(i):
-            if D[V[i]][V[j]] != 1:
-                return False
+    else:
+        D = g.distance_all_pairs()
+        for i in range(n):
+            for j in range(i):
+                if D[V[i]][V[j]] != 1:
+                    return False
     return True
 
 def has_c4(g):
