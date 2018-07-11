@@ -366,10 +366,10 @@ def is_bicritical(g):
 
 # Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
-    return chromatic_index(g) == max(g.degree())
+    return g.chromatic_index() == max(g.degree())
 
 def is_class2(g):
-    return not(chromatic_index(g) == max(g.degree()))
+    return not(g.chromatic_index() == max(g.degree()))
 
 def is_cubic(g):
     D = g.degree()
@@ -503,7 +503,7 @@ def is_chromatic_index_critical(g):
     if not g.is_connected():
         return False
     Delta = max(g.degree())
-    chi_e = chromatic_index(g)
+    chi_e = g.chromatic_index()
     if chi_e != Delta + 1:
         return False
 
@@ -514,7 +514,7 @@ def is_chromatic_index_critical(g):
     for e in equiv_lines_representatives:
         gc = copy(g)
         gc.delete_edge(e)
-        chi_e_prime = chromatic_index(gc)
+        chi_e_prime = gc.chromatic_index()
         if not chi_e_prime < chi_e:
             return False
     return True
@@ -1014,6 +1014,18 @@ def has_even_order(g):
     """
     return g.order() % 2 == 0
 
+def is_locally_two_connected(g):
+    """
+
+    ALGORITHM:
+
+    We modify the algorithm from our ``localise`` factory method to stop at
+    subgraphs of 2 vertices, since ``is_two_connected`` is undefined on smaller
+    subgraphs.
+    """
+    return all((f(g.subgraph(g.neighbors(v))) if len(g.neighbors(v)) >= 2
+                                              else True) for v in g.vertices())
+
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
@@ -1119,7 +1131,6 @@ def localise(f, name=None, documentation=None):
 
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
-is_locally_two_connected = localise(is_two_connected)
 is_locally_planar = localise(Graph.is_planar, documentation="True if the open neighborhood of each vertex v is planar")
 """
 Tests:
