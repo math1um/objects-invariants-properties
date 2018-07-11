@@ -366,10 +366,10 @@ def is_bicritical(g):
 
 # Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
-    return chromatic_index(g) == max(g.degree())
+    return g.chromatic_index() == max(g.degree())
 
 def is_class2(g):
-    return not(chromatic_index(g) == max(g.degree()))
+    return not(g.chromatic_index() == max(g.degree()))
 
 def is_cubic(g):
     D = g.degree()
@@ -503,7 +503,7 @@ def is_chromatic_index_critical(g):
     if not g.is_connected():
         return False
     Delta = max(g.degree())
-    chi_e = chromatic_index(g)
+    chi_e = g.chromatic_index()
     if chi_e != Delta + 1:
         return False
 
@@ -514,7 +514,7 @@ def is_chromatic_index_critical(g):
     for e in equiv_lines_representatives:
         gc = copy(g)
         gc.delete_edge(e)
-        chi_e_prime = chromatic_index(gc)
+        chi_e_prime = gc.chromatic_index()
         if not chi_e_prime < chi_e:
             return False
     return True
