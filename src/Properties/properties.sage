@@ -363,13 +363,7 @@ def is_three_connected(g):
         sage: is_three_connected(graphs.CompleteGraph(1))
         False
     """
-    if g.order() <= 3:
-        return False
-    from itertools import combinations
-    for s in combinations(g.vertices(), g.order() - 2):
-        if not g.subgraph(s).is_connected():
-            return False
-    return True
+    return g.vertex_connectivity(k = 3)
 
 def is_four_connected(g):
     """
