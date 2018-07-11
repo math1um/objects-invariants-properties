@@ -561,6 +561,29 @@ def has_paw(g):
     return g.subgraph_search(paw, induced=True) is not None
 
 def is_paw_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Paw as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Paw to be a 4-vertex graph formed by a triangle and a pendant.
+    Returns ``False`` if ``g`` contains a Paw as an induced subgraph.
+    Returns ``True`` otherwise.
+
+    EXAMPLES:
+
+        sage: is_paw_free(paw)
+        False
+
+        sage: is_paw_free(graphs.BullGraph())
+        False
+
+        sage: is_paw_free(graphs.ClawGraph())
+        True
+
+        sage: is_paw_free(graphs.DiamondGraph())
+        True
+    """
     return not has_paw(g)
 
 def has_dart(g):
