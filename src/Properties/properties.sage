@@ -515,6 +515,23 @@ def has_c4(g):
     return g.subgraph_search(c4, induced=True) is not None
 
 def is_c4_free(g):
+    """
+    Tests whether graph ``g`` does not contain Cycle_4 as an *induced* subgraph.
+
+    EXAMPLES:
+
+        sage: is_c4_free(graphs.CycleGraph(4))
+        False
+
+        sage: is_c4_free(graphs.HouseGraph())
+        False
+
+        sage: is_c4_free(graphs.CycleGraph(5))
+        True
+
+        sage: is_c4_free(graphs.DiamondGraph())
+        True
+    """
     return not has_c4(g)
 
 def has_paw(g):
