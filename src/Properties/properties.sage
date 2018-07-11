@@ -331,23 +331,35 @@ def is_two_connected(g):
 #part of pebbling class0 sufficient condition
 def is_three_connected(g):
     """
+    Evaluates whether graph ``g`` is 3-connected.
+
+    OUTPUT:
+
     Returns True if the graph is 3-connected and False otherwise. A graph is
     3-connected if the removal of any single vertex or any pair of vertices
     gives a connected graph. By definition a graph on 3 or less vertices is
     not 3-connected.
 
+    EXAMPLES:
+
         sage: is_three_connected(graphs.PetersenGraph())
         True
+
         sage: is_three_connected(graphs.CompleteGraph(4))
         True
+
         sage: is_three_connected(graphs.CycleGraph(5))
         False
+
         sage: is_three_connected(graphs.PathGraph(5))
         False
+
         sage: is_three_connected(graphs.CompleteGraph(3))
         False
+
         sage: is_three_connected(graphs.CompleteGraph(2))
         False
+
         sage: is_three_connected(graphs.CompleteGraph(1))
         False
     """
