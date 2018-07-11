@@ -587,6 +587,30 @@ def is_paw_free(g):
     return not has_paw(g)
 
 def has_dart(g):
+    """
+    Tests whether graph ``g`` contains a Dart as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Dart to be a 5-vertex graph formed by ``graphs.DiamondGraph()``
+    with and a pendant added to one of the degree-3 vertices.
+    Returns ``True`` if ``g`` contains a Dart as an induced subgraph.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: has_dart(dart)
+        True
+
+        sage: has_dart(umbrella_4)
+        True
+
+        sage: has_dart(graphs.DiamondGraph())
+        False
+
+        sage: has_dart(bridge)
+        False
+    """
     return g.subgraph_search(dart, induced=True) is not None
 
 def is_dart_free(g):
