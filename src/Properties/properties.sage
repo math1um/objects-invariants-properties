@@ -535,6 +535,29 @@ def is_c4_free(g):
     return not has_c4(g)
 
 def has_paw(g):
+    """
+    Tests whether graph ``g`` contains a Paw as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Paw to be a 4-vertex graph formed by a triangle and a pendant.
+    Returns ``True`` if ``g`` contains a Paw as an induced subgraph.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: has_paw(paw)
+        True
+
+        sage: has_paw(graphs.BullGraph())
+        True
+
+        sage: has_paw(graphs.ClawGraph())
+        False
+
+        sage: has_paw(graphs.DiamondGraph())
+        False
+    """
     return g.subgraph_search(paw, induced=True) is not None
 
 def is_paw_free(g):
