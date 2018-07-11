@@ -362,6 +362,10 @@ def is_three_connected(g):
 
         sage: is_three_connected(graphs.CompleteGraph(1))
         False
+
+    .. WARNING::
+
+        Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 3)
 
@@ -369,7 +373,9 @@ def is_four_connected(g):
     """
     True if g is at least four connected, i.e. must remove at least 4 vertices to disconnect graph
 
-    Implementation requires Sage 8.2+.
+    .. WARNING::
+
+        Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 4)
 
