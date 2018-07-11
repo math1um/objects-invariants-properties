@@ -371,7 +371,28 @@ def is_three_connected(g):
 
 def is_four_connected(g):
     """
-    True if g is at least four connected, i.e. must remove at least 4 vertices to disconnect graph
+    Evaluates whether ``g`` is 4-connected.
+
+    OUTPUT:
+
+    Returns True if the graph is 4-connected and False otherwise. A graph is
+    4-connected if the removal of any four vertices still gives a connected
+    graph.
+    By definition a graph on 4 or less vertices is not 4-connected.
+
+    EXAMPLES:
+
+
+        sage: is_four_connected(graphs.CompleteGraph(5))
+        True
+
+        sage: is_four_connected(graphs.PathGraph(5))
+        False
+
+    A graph on four or fewer vertices is not four-connected. ::
+
+        sage: is_four_connected(graphs.CompleteGraph(4))
+        False
 
     .. WARNING::
 
