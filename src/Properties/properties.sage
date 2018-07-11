@@ -2,43 +2,56 @@
 
 def has_star_center(g):
     """
-    True if graph has a vertex adjacent to all others, also known as "universal vertex"
+    Evalutes whether graph ``g`` has a vertex adjacent to all others.
 
-    sage: has_star_center(flower_with_3_petals)
-    True
-    sage: has_star_center(c4)
-    False
-    sage: has_star_center(Graph(1))
-    True
+    EXAMPLES:
+
+        sage: has_star_center(flower_with_3_petals)
+        True
+
+        sage: has_star_center(c4)
+        False
+
+        sage: has_star_center(Graph(1))
+        True
     """
     return (g.order() - 1) in g.degree()
 
 def is_complement_of_chordal(g):
     """
-    True if graph g is a complement of a chordal graph
+    Evaluates whether graph ``g`` is a complement of a chordal graph.
 
-    sage: is_complement_of_chordal(p4)
-    True
-    sage: is_complement_of_chordal(p5)
-    False
+    EXAMPLES:
+
+        sage: is_complement_of_chordal(p4)
+        True
+
+        sage: is_complement_of_chordal(p5)
+        False
     """
     return g.complement().is_chordal()
 
 def pairs_have_unique_common_neighbor(g):
     """
-    True if each pair of vertices in g has exactly one common neighbor
+    Evalautes if each pair of vertices in ``g`` has exactly one common neighbor.
 
     Also known as the friendship property.
-    By the Friendship Theorem, the only connected graphs with the friendship property are flowers.
+    By the Friendship Theorem, the only connected graphs with the friendship
+    property are flowers.
 
-    sage: pairs_have_unique_common_neighbor(flower(5))
-    True
-    sage: pairs_have_unique_common_neighbor(k3)
-    True
-    sage: pairs_have_unique_common_neighbor(k4)
-    False
-    sage: pairs_have_unique_common_neighbor(graphs.CompleteGraph(2))
-    False
+    EXAMPLES:
+
+        sage: pairs_have_unique_common_neighbor(flower(5))
+        True
+
+        sage: pairs_have_unique_common_neighbor(k3)
+        True
+
+        sage: pairs_have_unique_common_neighbor(k4)
+        False
+
+        sage: pairs_have_unique_common_neighbor(graphs.CompleteGraph(2))
+        False
     """
     from itertools import combinations
     for (u,v) in combinations(g.vertices(), 2):
@@ -48,21 +61,31 @@ def pairs_have_unique_common_neighbor(g):
 
 def is_distance_transitive(g):
     """
-    True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there's an automorphism with a->u and b->v
+    Evaluates if graph ``g`` is distance transitive.
 
-    Note that this method calls, via the automorphism group, the Gap package. This package behaves
-    badly with most threading or multiprocessing tools.
+    A graph is distance transitive if all a,b,u,v satisfy that
+    dist(a,b) = dist(u,v) implies there's an automorphism with a->u and b->v.
 
-    sage: is_distance_transitive(graphs.CompleteGraph(4))
-    True
-    sage: is_distance_transitive(graphs.PetersenGraph())
-    True
-    sage: is_distance_transitive(graphs.ShrikhandeGraph())
-    False
+    EXAMPLES:
 
-    This method accepts disconnected graphs:
-    sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
-    True
+        sage: is_distance_transitive(graphs.CompleteGraph(4))
+        True
+
+        sage: is_distance_transitive(graphs.PetersenGraph())
+        True
+
+        sage: is_distance_transitive(graphs.ShrikhandeGraph())
+        False
+
+    This method accepts disconnected graphs. ::
+
+        sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
+        True
+
+    ... WARNING ::
+
+        This method calls, via the automorphism group, the Gap package. This
+        package behaves badly with most threading or multiprocessing tools.
     """
     from itertools import combinations
     dist_dict = g.distance_all_pairs()
@@ -71,39 +94,47 @@ def is_distance_transitive(g):
     for d in g.distances_distribution():
         sameDistPairs = []
         for (u,v) in combinations(g.vertices(), 2):
-            if dist_dict[u].get(v, +Infinity) == d: # By default, no entry if disconnected. We substitute +Infinity.
+            # By default, no entry if disconnected. We substitute +Infinity.
+            if dist_dict[u].get(v, +Infinity) == d:
                 sameDistPairs.append(Set([u,v]))
         if len(sameDistPairs) >= 2:
-            if not(len(sameDistPairs) == len(auto_group.orbit(sameDistPairs[0], action = "OnSets"))):
+            if len(sameDistPairs) != len(auto_group.orbit(sameDistPairs[0], action = "OnSets")):
                 return False
     return True
 
 def is_dirac(g):
     """
-    True if g has order at least 3 and min. degree at least n/2
+    Evaluates if graph ``g`` has order at least 3 and min. degree at least n/2.
 
     See Dirac's Theorem: If graph is_dirac, then it is hamiltonian.
 
-    sage: is_dirac(graphs.CompleteGraph(6))
-    True
-    sage: is_dirac(graphs.CompleteGraph(2))
-    False
-    sage: is_dirac(graphs.CycleGraph(5))
-    False
+    EXAMPLES:
+
+        sage: is_dirac(graphs.CompleteGraph(6))
+        True
+
+        sage: is_dirac(graphs.CompleteGraph(2))
+        False
+
+        sage: is_dirac(graphs.CycleGraph(5))
+        False
     """
     n = g.order()
     return n > 2 and min(g.degree()) >= n/2
 
 def is_ore(g):
     """
-    True if deg(v) + deg(w) >= n for all non-adjacent pairs v,w in graph g
+    Evaluates if deg(v)+deg(w)>=n for all non-adjacent pairs v,w in graph ``g``.
 
     See Ore's Theorem: If graph is_ore, then it is hamiltonian.
 
-    sage: is_ore(graphs.CompleteGraph(5))
-    True
-    sage: is_ore(dart)
-    False
+    EXAMPLES:
+
+        sage: is_ore(graphs.CompleteGraph(5))
+        True
+
+        sage: is_ore(dart)
+        False
     """
     A = g.adjacency_matrix()
     n = g.order()
@@ -117,36 +148,63 @@ def is_ore(g):
 
 def is_haggkvist_nicoghossian(g):
     """
-    True if g is 2-connected and min. degree >= (n + vertex_connectivity)/3
+    Evaluates if g is 2-connected and min degree >= (n + vertex_connectivity)/3.
 
-    R. Häggkvist and G. Nicoghossian, A remark on Hamiltonian cycles. Journal of Combinatorial
-    Theory, Series B, 30(1): 118--120, 1981.
-    If is_haggkvist_nicoghossian, then is hamiltonian.
+    INPUT:
 
-    sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
-    True
-    sage: is_haggkvist_nicoghossian(graphs.CycleGraph(5))
-    False
-    sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3)
-    False
+    - ``g`` -- graph
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_haggkvist_nicoghossian``, then it is Hamiltonian.
+
+    .. [HN1981]     \R. Häggkvist and G. Nicoghossian, "A remark on Hamiltonian
+                    cycles". Journal of Combinatorial Theory, Series B, 30(1):
+                    118--120, 1981.
+
+    EXAMPLES:
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
+        True
+
+        sage: is_haggkvist_nicoghossian(graphs.CycleGraph(5))
+        False
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3)
+        False
     """
     k = g.vertex_connectivity()
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
 
 def is_genghua_fan(g):
     """
-    True if g is 2-connected and s.t. dist(u,v)=2 implies max(deg(u), deg(v)) >= n/2 for all u,v
+    Evaluates if graph ``g`` satisfies a condition for Hamiltonicity by G. Fan.
 
-    Geng-Hua Fan, New sufficient conditions for cycles in graphs. Journal of Combinatorial Theory,
-    Series B, 37(3): 221--227, 1984.
-    If a graph is_genghua_fan, then it is Hamiltonian.
+    OUTPUT:
 
-    sage: is_genghua_fan(graphs.DiamondGraph())
-    True
-    sage: is_genghua_fan(graphs.CycleGraph(4))
-    False
-    sage: is_genghua_fan(graphs.ButterflyGraph())
-    False
+    Returns ``True`` if ``g`` is 2-connected and satisfies that
+    `dist(u,v)=2` implies `\max(deg(u), deg(v)) \geq n/2` for all
+    vertices `u,v`.
+    Returns ``False`` otherwise.
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_genghua_fan``, then it is Hamiltonian.
+
+    .. [Fan1984]    Geng-Hua Fan, "New sufficient conditions for cycles in
+                    graphs". Journal of Combinatorial Theory, Series B, 37(3):
+                    221--227, 1984.
+
+    EXAMPLES:
+
+        sage: is_genghua_fan(graphs.DiamondGraph())
+        True
+
+        sage: is_genghua_fan(graphs.CycleGraph(4))
+        False
+
+        sage: is_genghua_fan(graphs.ButterflyGraph())
+        False
     """
     if not is_two_connected(g):
         return False
@@ -162,16 +220,21 @@ def is_genghua_fan(g):
 
 def is_planar_transitive(g):
     """
-    True if g is planar and is vertex-transitive
+    Evaluates whether graph ``g`` is planar and is vertex-transitive.
 
-    sage: is_planar_transitive(graphs.HexahedralGraph())
-    True
-    sage: is_planar_transitive(graphs.CompleteGraph(2))
-    True
-    sage: is_planar_transitive(graphs.FranklinGraph())
-    False
-    sage: is_planar_transitive(graphs.BullGraph())
-    False
+    EXAMPLES:
+
+        sage: is_planar_transitive(graphs.HexahedralGraph())
+        True
+
+        sage: is_planar_transitive(graphs.CompleteGraph(2))
+        True
+
+        sage: is_planar_transitive(graphs.FranklinGraph())
+        False
+
+        sage: is_planar_transitive(graphs.BullGraph())
+        False
     """
     return g.is_planar() and g.is_vertex_transitive()
 
