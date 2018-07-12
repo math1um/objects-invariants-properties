@@ -978,8 +978,30 @@ def is_biclique(g):
     gc = g.complement()
     return gc.is_bipartite()
 
-#true if radius equals diameter
 def has_radius_equal_diameter(g):
+    """
+    Evaluates whether the raidus of graph ``g`` equals its diameter.
+
+    Recall the radius of a graph is the minimum eccentricity over all vertices,
+    or the minimum over all longest distances from a vertex to any other vertex.
+    Diameter is the maximum eccentricity over all vertices.
+    Both radius and diamter are defined to be `+Infinity` for disconnected
+    graphs.
+
+    EXAMPLES:
+
+        sage: has_radius_equal_diameter(Graph(4))
+        True
+
+        sage: has_radius_equal_diameter(graphs.HouseGraph())
+        True
+
+        sage: has_radius_equal_diameter(graphs.ClawGraph())
+        False
+
+        sage: has_radius_equal_diameter(graphs.BullGraph())
+        False
+    """
     return g.radius() == g.diameter()
 
 #true if residue equals independence number
