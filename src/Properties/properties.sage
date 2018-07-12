@@ -870,9 +870,57 @@ def is_H_free(g):
     return not has_H(g)
 
 def has_fork(g):
+    """
+    Tests if graph ``g`` contains a Fork graph as an *induced* subgraph.
+
+    A Fork graph may also be known as a Star_1_1_3. It is a 6-vertex graph
+    formed by a Path_4 with two pendants connected to one end.
+    It is stored as `star_1_1_3`.
+
+    EXAMPLES:
+
+        sage: has_fork(star_1_1_3)
+        True
+
+        sage: has_fork(graphs.PetersenGraph())
+        True
+
+        sage: has_fork(graphs.LollipopGraph(3, 2))
+        False
+
+        sage: has_fork(graphs.HouseGraph())
+        False
+
+        sage: has_fork(graphs.ClawGraph())
+        False
+    """
     return g.subgraph_search(star_1_1_3, induced=True) is not None
 
 def is_fork_free(g):
+    """
+    Tests if graph ``g`` does not contain Fork graph as an *induced* subgraph.
+
+    A Fork graph may also be known as a Star_1_1_3. It is a 6-vertex graph
+    formed by a Path_4 with two pendants connected to one end.
+    It is stored as `star_1_1_3`.
+
+    EXAMPLES:
+
+        sage: is_fork_free(star_1_1_3)
+        False
+
+        sage: is_fork_free(graphs.PetersenGraph())
+        False
+
+        sage: is_fork_free(graphs.LollipopGraph(3, 2))
+        True
+
+        sage: is_fork_free(graphs.HouseGraph())
+        True
+
+        sage: is_fork_free(graphs.ClawGraph())
+        True
+    """
     return not has_fork(g)
 
 def has_k4(g):
