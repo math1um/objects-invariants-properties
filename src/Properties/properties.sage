@@ -876,9 +876,47 @@ def is_fork_free(g):
     return not has_fork(g)
 
 def has_k4(g):
+    """
+    Tests if graph ``g`` contains a `K_4` as an *induced* subgraph.
+
+    `K_4` is the complete graph on 4 vertices.
+
+    EXAMPLES:
+
+        sage: has_k4(graphs.CompleteGraph(4))
+        True
+
+        sage: has_k4(graphs.CompleteGraph(5))
+        True
+
+        sage: has_k4(graphs.CompleteGraph(3))
+        False
+
+        sage: has_k4(graphs.PetersenGraph())
+        False
+    """
     return g.subgraph_search(alpha_critical_easy[2], induced=True) is not None
 
 def is_k4_free(g):
+    """
+    Tests if graph ``g`` does not contain a `K_4` as an *induced* subgraph.
+
+    `K_4` is the complete graph on 4 vertices.
+
+    EXAMPLES:
+
+        sage: is_k4_free(graphs.CompleteGraph(4))
+        False
+
+        sage: is_k4_free(graphs.CompleteGraph(5))
+        False
+
+        sage: is_k4_free(graphs.CompleteGraph(3))
+        True
+
+        sage: is_k4_free(graphs.PetersenGraph())
+        True
+    """
     return not has_k4(g)
 
 def is_biclique(g):
