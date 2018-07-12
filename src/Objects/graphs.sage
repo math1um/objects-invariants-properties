@@ -1326,11 +1326,11 @@ sylvester = Graph('Olw?GCD@o??@?@?A_@o`A')
 sylvester.name(new="sylvester")
 add_to_lists(sylvester, graph_objects, all_graphs)
 
-fork = graphs.PathGraph(4)
-fork.add_vertex()
-fork.add_edge(1,4)
-fork.name(new="fork")
-add_to_lists(fork, graph_objects, all_graphs)
+star_1_1_3 = graphs.PathGraph(4)
+star_1_1_3.add_vertex()
+star_1_1_3.add_edge(1,4)
+star_1_1_3.name(new="fork")
+add_to_lists(star_1_1_3, graph_objects, all_graphs)
 
 # one of the 2 order 11 chromatic edge-critical graphs discovered by brinkmann and steffen
 edge_critical_11_1 = graphs.CycleGraph(11)

@@ -138,7 +138,7 @@ def median_degree(g):
         sage: median_degree(p4)
         3/2
         sage: median_degree(p3)
-        1    
+        1
     """
     return median(g.degree())
 add_to_lists(median_degree, efficient_invariants, all_invariants)
@@ -147,7 +147,7 @@ def inverse_degree(g):
     """
     Return the sum of the reciprocals of the non-zero degrees.
 
-    Return 0 if the graph has no edges. 
+    Return 0 if the graph has no edges.
 
         sage: inverse_degree(p4)
         3
@@ -195,9 +195,9 @@ add_to_lists(barrus_q, efficient_invariants, all_invariants)
 def barrus_bound(g):
     """
     Returns n - barrus q
-    
+
     Defined in: Barrus, Michael D. "Havel–Hakimi residues of unigraphs." Information Processing Letters 112.1 (2012): 44-48.
-    
+
         sage: barrus_bound(k4)
         1
         sage: barrus_bound(graphs.OctahedralGraph())
@@ -209,9 +209,9 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Returns the matching number of the graph g, i.e., the size of a maximum
-    matching. 
+    matching.
 
-    A matching is a set of independent edges. 
+    A matching is a set of independent edges.
 
     See: https://en.wikipedia.org/wiki/Matching_(graph_theory)
 
@@ -1006,22 +1006,24 @@ def edge_clustering_centrality(g, edge = None):
            edge - (default: None) An edge in g. If given, will compute centrality for given edge, otherwise all edges. See Graph.has_Edge for acceptable input.
     From:
     An Application of Edge Clustering Centrality to Brain Connectivity by Joy Lind, Frank Garcea, Bradford Mahon, Roger Vargas, Darren A. Narayan
+
+    TESTS:
+        sage: edge_clustering_centrality(graphs.CompleteGraph(5))
+        [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        sage: edge_clustering_centrality(graphs.CompleteBipartiteGraph(3,4))
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+        sage: edge_clustering_centrality(graphs.PetersenGraph())
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+        sage: edge_clustering_centrality(graphs.BullGraph())
+        [3, 3, 3, 2, 2]
     """
-    if edge == None:
+    if edge is None:
         edge_clusering_centralities = []
         for e in g.edges(labels = False):
-            sum = 0
-            for v in g.vertices():
-                if g.subgraph(g.neighbors(v) + [v]).has_edge(e):
-                    sum += 1
-            edge_clusering_centralities.append(sum)
+            edge_clusering_centralities.append(len(set(g.neighbors(e[0])) & set(g.neighbors(e[1]))) + 2) # +2 for the two vertices in e
         return edge_clusering_centralities
     else:
-        for v in g.vertices():
-            sum = 0
-            if g.subgraph(g.neighbors(v) + [v]).has_edge(edge):
-                sum += 1
-        return sum
+        return len(set(g.neighbors(edge[0])) & set(g.neighbors(edge[1]))) + 2 # +2 for the two vertices in e
 
 def max_edge_clustering_centrality(g):
     """

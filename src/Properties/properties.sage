@@ -870,7 +870,7 @@ def is_H_free(g):
     return not has_H(g)
 
 def has_fork(g):
-    return g.subgraph_search(fork, induced=True) is not None
+    return g.subgraph_search(star_1_1_3, induced=True) is not None
 
 def is_fork_free(g):
     return not has_fork(g)
@@ -964,10 +964,10 @@ def is_bicritical(g):
 
 # Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
-    return chromatic_index(g) == max(g.degree())
+    return g.chromatic_index() == max(g.degree())
 
 def is_class2(g):
-    return not(chromatic_index(g) == max(g.degree()))
+    return not(g.chromatic_index() == max(g.degree()))
 
 def is_cubic(g):
     D = g.degree()
@@ -1101,7 +1101,7 @@ def is_chromatic_index_critical(g):
     if not g.is_connected():
         return False
     Delta = max(g.degree())
-    chi_e = chromatic_index(g)
+    chi_e = g.chromatic_index()
     if chi_e != Delta + 1:
         return False
 
@@ -1112,7 +1112,7 @@ def is_chromatic_index_critical(g):
     for e in equiv_lines_representatives:
         gc = copy(g)
         gc.delete_edge(e)
-        chi_e_prime = chromatic_index(gc)
+        chi_e_prime = gc.chromatic_index()
         if not chi_e_prime < chi_e:
             return False
     return True
@@ -1612,6 +1612,18 @@ def has_even_order(g):
     """
     return g.order() % 2 == 0
 
+def is_locally_two_connected(g):
+    """
+
+    ALGORITHM:
+
+    We modify the algorithm from our ``localise`` factory method to stop at
+    subgraphs of 2 vertices, since ``is_two_connected`` is undefined on smaller
+    subgraphs.
+    """
+    return all((f(g.subgraph(g.neighbors(v))) if len(g.neighbors(v)) >= 2
+                                              else True) for v in g.vertices())
+
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
@@ -1717,7 +1729,6 @@ def localise(f, name=None, documentation=None):
 
 is_locally_dirac = localise(is_dirac)
 is_locally_bipartite = localise(Graph.is_bipartite)
-is_locally_two_connected = localise(is_two_connected)
 is_locally_planar = localise(Graph.is_planar, documentation="True if the open neighborhood of each vertex v is planar")
 """
 Tests:
@@ -1783,11 +1794,11 @@ has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
 Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
 Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary, is_biclique]
+Graph.is_self_complementary, is_biclique, has_fork, is_fork_free]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
-Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
+Graph.is_semi_symmetric, is_planar_transitive, is_class1,
 is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
