@@ -1067,6 +1067,24 @@ def is_not_forest(g):
     return not g.is_forest()
 
 def bipartite_double_cover(g):
+    """
+    Returns the bipatite double cover of a graph ``g``.
+
+    From :wikipedia:`Bipartite double cover`:
+    The bipartite double cover of ``g`` may also be known as the
+    Kronecker double cover, canonical double cover or the bipartite double of G.
+    For every vertex `v_i` of ``g``, there are two vertices `u_i` and `w_i`.
+    Two vertices `u_i` and `w_j` are connected by an edge in the double cover if
+    and only if `v_i` and `v_j` are connected by an edge in ``g``.
+
+    EXAMPLES:
+
+        sage: bipartite_double_cover(graphs.PetersenGraph()).is_isomorphic(graphs.DesarguesGraph())
+        True
+
+        sage: bipartite_double_cover(graphs.CycleGraph(4)).is_isomorphic(graphs.CycleGraph(4).disjoint_union(graphs.CycleGraph(4)))
+        True
+    """
     return g.tensor_product(graphs.CompleteGraph(2))
 
 #replaced with faster LP-solver is_independence_irreducible
