@@ -717,17 +717,17 @@ def has_p4(g):
 
     EXAMPLES:
 
-    sage: has_p4(graphs.PathGraph(4))
-    True
+        sage: has_p4(graphs.PathGraph(4))
+        True
 
-    sage: has_p4(graphs.CycleGraph(5))
-    True
+        sage: has_p4(graphs.CycleGraph(5))
+        True
 
-    sage: has_p4(graphs.CycleGraph(4))
-    False
+        sage: has_p4(graphs.CycleGraph(4))
+        False
 
-    sage: has_p4(graphs.CompleteGraph(5))
-    False
+        sage: has_p4(graphs.CompleteGraph(5))
+        False
     """
     return g.subgraph_search(p4, induced=True) is not None
 
