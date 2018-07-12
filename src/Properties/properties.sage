@@ -1103,12 +1103,52 @@ def has_empty_KE_part(g):
 def is_bicritical(g):
     return has_empty_KE_part(g)
 
-
-# Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
+    """
+    Evaluates whether the chomatic index of graph ``g`` equals its max degree.
+
+    Let `D` be the maximum degree. By Vizing's Thoerem, all graphs can be
+    edge-colored in either `D` or `D+1` colors. The case of `D` colors is
+    called "class 1".
+
+    EXAMPLES:
+
+        is_class1(graphs.CompleteGraph(4))
+        True
+
+        is_class1(graphs.WindmillGraph(4,3))
+        True
+
+        is_class1(graphs.CompleteGraph(3))
+        False
+
+        is_class1(graphs.PetersenGraph())
+        False
+    """
     return g.chromatic_index() == max(g.degree())
 
 def is_class2(g):
+    """
+    Evaluates whether the chomatic index of graph ``g`` equals max degree + 1.
+
+    Let `D` be the maximum degree. By Vizing's Thoerem, all graphs can be
+    edge-colored in either `D` or `D+1` colors. The case of `D+1` colors is
+    called "class 2".
+
+    EXAMPLES:
+
+        is_class2(graphs.CompleteGraph(4))
+        False
+
+        is_class2(graphs.WindmillGraph(4,3))
+        False
+
+        is_class2(graphs.CompleteGraph(3))
+        True
+
+        is_class2(graphs.PetersenGraph())
+        True
+    """
     return not(g.chromatic_index() == max(g.degree()))
 
 def is_cubic(g):
