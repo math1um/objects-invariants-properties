@@ -1004,8 +1004,44 @@ def has_radius_equal_diameter(g):
     """
     return g.radius() == g.diameter()
 
-#true if residue equals independence number
 def has_residue_equals_alpha(g):
+    """
+    Evaluates whether the residue of graph ``g`` equals its independence number.
+
+    The independence number is the cardinality of the largest independent set of
+    vertices in ``g``.
+    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
+    is found iteratively. First, remove `d_1` from consideration and subtract
+    `d_1` from the following `d_1` number of elements. Repeat this process for
+    `d_2,d_3, ...` until only 0s remain. The number of elements, i.e. the number
+    of 0s, is the residue of ``g``.
+
+    EXAMPLES:
+
+        sage: has_residue_equals_alpha(graphs.HouseGraph())
+        True
+
+        sage: has_residue_equals_alpha(graphs.ClawGraph())
+        True
+
+        sage: has_residue_equals_alpha(graphs.CompleteGraph(4))
+        True
+
+        sage: has_residue_equals_alpha(graphs.PetersenGraph())
+        False
+
+        sage: has_residue_equals_alpha(graphs.PathGraph(5))
+        False
+
+    TESTS::
+
+        sage: has_residue_equals_alpha(Graph(1))
+        True
+
+        sage: has_residue_equals_alpha(Graph(0))
+        Traceback (most recent call last):
+        IndexError: list index out of range
+    """
     return residue(g) == independence_number(g)
 
 def is_not_forest(g):
@@ -1026,7 +1062,7 @@ def is_not_forest(g):
         True
 
         sage: is_not_forest(graphs.HouseGraph())
-        True        
+        True
     """
     return not g.is_forest()
 
