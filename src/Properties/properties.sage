@@ -1009,8 +1009,26 @@ def has_residue_equals_alpha(g):
     return residue(g) == independence_number(g)
 
 def is_not_forest(g):
-    return not g.is_forest()
+    """
+    Evaluates if graph ``g`` is not a forest.
 
+    A forest is a disjoint union of trees. Equivalently, a forest is any acylic
+    graph, which may or may not be connected.
+
+    EXAMPLES:
+        sage: is_not_forest(graphs.BalancedTree(2,3))
+        False
+
+        sage: is_not_forest(graphs.BalancedTree(2,3).disjoint_union(graphs.BalancedTree(3,3)))
+        False
+
+        sage: is_not_forest(graphs.CycleGraph(5))
+        True
+
+        sage: is_not_forest(graphs.HouseGraph())
+        True        
+    """
+    return not g.is_forest()
 
 def bipartite_double_cover(g):
     return g.tensor_product(graphs.CompleteGraph(2))
