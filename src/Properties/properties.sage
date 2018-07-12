@@ -310,7 +310,7 @@ def is_H_free(g):
     return not has_H(g)
 
 def has_fork(g):
-    return g.subgraph_search(fork, induced=True) is not None
+    return g.subgraph_search(star_1_1_3, induced=True) is not None
 
 def is_fork_free(g):
     return not has_fork(g)
@@ -1196,7 +1196,7 @@ has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
 Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
 Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary, is_biclique]
+Graph.is_self_complementary, is_biclique, has_fork, is_fork_free]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
