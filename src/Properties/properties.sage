@@ -824,9 +824,49 @@ def is_claw_free(g):
     return not has_claw(g)
 
 def has_H(g):
+    """
+    Tests whether graph ``g`` contains an H graph as an *induced* subgraph.
+
+    An H graph may also be known as a double fork. It is a 6-vertex graph
+    formed by two Path_3s with their midpoints joined by a bridge.
+
+    EXAMPLES:
+
+        sage: has_H(double_fork)
+        True
+
+        sage: has_H(graphs.PetersenGraph())
+        True
+
+        sage: has_H(ce71) # double_fork with extra edge
+        False
+
+        sage: has_H(graphs.BullGraph())
+        False
+    """
     return g.subgraph_search(double_fork, induced=True) is not None
 
 def is_H_free(g):
+    """
+    Tests if graph ``g`` does not contain a H graph as an *induced* subgraph.
+
+    An H graph may also be known as a double fork. It is a 6-vertex graph
+    formed by two Path_3s with their midpoints joined by a bridge.
+
+    EXAMPLES:
+
+        sage: is_H_free(double_fork)
+        False
+
+        sage: is_H_free(graphs.PetersenGraph())
+        False
+
+        sage: is_H_free(ce71) # double_fork with extra edge
+        True
+
+        sage: is_H_free(graphs.BullGraph())
+        True
+    """
     return not has_H(g)
 
 def has_fork(g):
