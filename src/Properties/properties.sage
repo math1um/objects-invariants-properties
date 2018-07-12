@@ -778,9 +778,49 @@ def is_kite_free(g):
     return not has_kite(g)
 
 def has_claw(g):
+    """
+    Tests whether graph ``g`` contains a Claw as an *induced* subgraph.
+
+    A Claw is a 4-vertex graph with one central vertex and 3 pendants.
+    This is encoded as ``graphs.ClawGraph()``.
+
+    EXAMPLES:
+
+        sage: has_claw(graphs.ClawGraph())
+        True
+
+        sage: has_claw(graphs.PetersenGraph())
+        True
+
+        sage: has_claw(graphs.BullGraph())
+        False
+
+        sage: has_claw(graphs.HouseGraph())
+        False
+    """
     return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
 
 def is_claw_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Claw as an *induced* subgraph.
+
+    A Claw is a 4-vertex graph with one central vertex and 3 pendants.
+    This is encoded as ``graphs.ClawGraph()``.
+
+    EXAMPLES:
+
+        sage: is_claw_free(graphs.ClawGraph())
+        False
+
+        sage: is_claw_free(graphs.PetersenGraph())
+        False
+
+        sage: is_claw_free(graphs.BullGraph())
+        True
+
+        sage: is_claw_free(graphs.HouseGraph())
+        True
+    """
     return not has_claw(g)
 
 def has_H(g):
