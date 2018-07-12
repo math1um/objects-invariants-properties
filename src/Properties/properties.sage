@@ -732,9 +732,49 @@ def has_p4(g):
     return g.subgraph_search(p4, induced=True) is not None
 
 def has_kite(g):
+    """
+    Tests whether graph ``g`` contains a Kite as an *induced* subgraph.
+
+    A Kite is a 5-vertex graph formed by a ``graphs.DiamondGraph()`` with a
+    pendant attached to one of the degree-2 vertices.
+
+    EXAMPLES:
+
+        sage: has_kite(kite_with_tail)
+        True
+
+        sage: has_kite(graphs.KrackhardtKiteGraph())
+        True
+
+        sage: has_kite(graphs.DiamondGraph())
+        False
+
+        sage: has_kite(bridge)
+        False
+    """
     return g.subgraph_search(kite_with_tail, induced=True) is not None
 
 def is_kite_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Kite as an *induced* subgraph.
+
+    A Kite is a 5-vertex graph formed by a ``graphs.DiamondGraph()`` with a
+    pendant attached to one of the degree-2 vertices.
+
+    EXAMPLES:
+
+        sage: is_kite_free(kite_with_tail)
+        False
+
+        sage: is_kite_free(graphs.KrackhardtKiteGraph())
+        False
+
+        sage: is_kite_free(graphs.DiamondGraph())
+        True
+
+        sage: is_kite_free(bridge)
+        True
+    """
     return not has_kite(g)
 
 def has_claw(g):
