@@ -967,12 +967,12 @@ def is_k4_free(g):
     """
     return not has_k4(g)
 
-def is_biclique(g):
+def is_double_clique(g):
     """
-    a graph is a biclique if the vertices can be partitioned into 2 sets that induce cliques
-    sage: is_biclique(p4)
+    a graph is a double clique if the vertices can be partitioned into 2 sets that induce cliques
+    sage: is_double_clique(p4)
     True
-    sage: is_biclique(graphs.ButterflyGraph())
+    sage: is_double_clique(graphs.ButterflyGraph())
     True
     """
     gc = g.complement()
@@ -1976,7 +1976,7 @@ has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
 Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
 Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary, is_biclique, has_fork, is_fork_free]
+Graph.is_self_complementary, is_double_clique, has_fork, is_fork_free]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
