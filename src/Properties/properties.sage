@@ -969,11 +969,21 @@ def is_k4_free(g):
 
 def is_double_clique(g):
     """
-    a graph is a double clique if the vertices can be partitioned into 2 sets that induce cliques
-    sage: is_double_clique(p4)
-    True
-    sage: is_double_clique(graphs.ButterflyGraph())
-    True
+    Tests if graph ``g`` can be partitioned into 2 sets which induce cliques.
+
+    EXAMPLE:
+
+        sage: is_double_clique(p4)
+        True
+
+        sage: is_double_clique(graphs.ButterflyGraph())
+        True
+
+        sage: is_double_clique(graphs.CompleteBipartiteGraph(3,4))
+        False
+
+        sage: is_double_clique(graphs.ClawGraph())
+        False
     """
     gc = g.complement()
     return gc.is_bipartite()
