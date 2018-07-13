@@ -1097,9 +1097,76 @@ def bipartite_double_cover(g):
     """
     return g.tensor_product(graphs.CompleteGraph(2))
 
-#replaced with faster LP-solver is_independence_irreducible
-#has no non-empty critical independent set (<=> the only solution to the LP independence number relaxation is all 1/2's)
 def has_empty_KE_part(g):
+    """
+    Evaluates whether graph ``g`` has an empty Konig-Egervary subgraph.
+
+    A Konig-Egervary graph satisfies
+        independence number + matching number = order.
+    By [Lar2011]_, every graph contains a unique induced subgraph which is a
+    Konig-Egervary graph.
+
+    EXAMPLES:
+
+        sage: has_empty_KE_part(graphs.PetersenGraph())
+        True
+
+        sage: has_empty_KE_part(graphs.CycleGraph(5))
+        True
+
+        sage: has_empty_KE_part(graphs.CompleteBipartiteGraph(3,4))
+        False
+
+        sage: has_empty_KE_part(graphs.CycleGraph(6))
+        False
+
+    ALGORITHM:
+
+    This function is implemented using the Maximum Critical Independent
+    Set (MCIS) algorithm of [DL2013]_ and applying a Theorem of [Lar2011]_.
+
+    Define that an independent set `I` is a critical independent set if
+    `|I|−|N(I)| \geq |J|−|N(J)|` for any independent set J. Define that a
+    maximum critical independent set is a critical independent set of maximum
+    cardinality.
+
+    By a Theorem of [Lar2011]_, for every maximum critical independent set `J`
+    of `G`, the unique Konig-Egervary inducing set `X` is `X = J \cup N(J)`,
+    where `N(J)` is the neighborhood of `J`.
+    Therefore, the ``g`` has an empty Konig-Egervary induced subgraph if and
+    only if the MCIS `J = \emptyset`.
+
+    Next, we describe the MCIS algorithm.
+    Let `B(G) = K_2 \ times G`, i.e. `B(G)` is the bipartite double cover
+    of `G`. Let `v' \in B(G)` denote the new "twin" of vertex `v \in G`.
+    Let `a` be the independence number of `B(G)`.
+    For each vertex `v` in `B(G)`, calculate
+        `t := independence number(B(G) - \{v,v'\} - N(\{v,v'\})) + 2`.
+    If `t = a`, then `v` is in the MCIS.
+        Since we only care about whether the MCIS is empty, if `t = a`,
+        we return ``False`` and terminate.
+
+    Finally, use the Gallai identities to show matching
+
+    Finally, we apply the Konig-Egervary Theorem (1931) that for all bipartite
+    graphs, matching number = vertex cover number. We substitute this into
+    one of the Gallai identities, that
+        independence number + covering number = order,
+    yielding,
+        independence number = order - matching number.
+    Since matching number is efficient to compute, our final algorithm is
+    in fact efficient.
+
+    REFERENCES:
+
+    .. [DL2013]     \Ermelinda DeLaVina and Craig Larson, "A parallel ALGORITHM
+                    for computing the critical independence number and related
+                    sets". ARS Mathematica Contemporanea 6: 237--245, 2013.
+
+    .. [Lar2011]    \C.E. Larson, "Critical Independent Sets and an
+                    Independence Decomposition Theorem". European Journal of
+                    Combinatorics 32: 294--300, 2011.
+    """
     b = bipartite_double_cover(g)
     alpha = b.order() - b.matching(value_only=True)
     for v in g.vertices():
