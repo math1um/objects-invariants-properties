@@ -1182,8 +1182,27 @@ def is_cubic(g):
     D = g.degree()
     return min(D) == 3 and max(D) == 3
 
-#a property that applied to all entered hamiltonian graphs (before c60) but not the tutte graph, false for tutte graph
 def is_anti_tutte(g):
+    """
+    Evalutes if graph ``g`` is connected and indep. number <= diameter + girth.
+
+    This property is satisfied by many Hamiltonian graphs, but notably not by
+    the Tutte graph ``graphs.TutteGraph()``.
+
+    EXAMPLES:
+
+        sage: is_anti_tutte(graphs.CompleteBipartiteGraph(4, 5))
+        True
+
+        sage: is_anti_tutte(graphs.PetersenGraph())
+        True
+
+        sage: is_anti_tutte(graphs.TutteGraph())
+        False
+
+        sage: is_anti_tutte(graphs.TutteCoxeterGraph())
+        False
+    """
     if not g.is_connected():
         return False
     return independence_number(g) <= g.diameter() + g.girth()
