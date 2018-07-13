@@ -1123,16 +1123,16 @@ def is_class1(g):
 
     EXAMPLES:
 
-        is_class1(graphs.CompleteGraph(4))
+        sage: is_class1(graphs.CompleteGraph(4))
         True
 
-        is_class1(graphs.WindmillGraph(4,3))
+        sage: is_class1(graphs.WindmillGraph(4,3))
         True
 
-        is_class1(graphs.CompleteGraph(3))
+        sage: is_class1(graphs.CompleteGraph(3))
         False
 
-        is_class1(graphs.PetersenGraph())
+        sage: is_class1(graphs.PetersenGraph())
         False
     """
     return g.chromatic_index() == max(g.degree())
@@ -1147,16 +1147,16 @@ def is_class2(g):
 
     EXAMPLES:
 
-        is_class2(graphs.CompleteGraph(4))
+        sage: is_class2(graphs.CompleteGraph(4))
         False
 
-        is_class2(graphs.WindmillGraph(4,3))
+        sage: is_class2(graphs.WindmillGraph(4,3))
         False
 
-        is_class2(graphs.CompleteGraph(3))
+        sage: is_class2(graphs.CompleteGraph(3))
         True
 
-        is_class2(graphs.PetersenGraph())
+        sage: is_class2(graphs.PetersenGraph())
         True
     """
     return not(g.chromatic_index() == max(g.degree()))
