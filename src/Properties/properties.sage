@@ -1162,6 +1162,23 @@ def is_class2(g):
     return not(g.chromatic_index() == max(g.degree()))
 
 def is_cubic(g):
+    """
+    Evalutes whether graph ``g`` is cubic, i.e. is 3-regular.
+
+    EXAMPLES:
+
+        sage: is_cubic(graphs.CompleteGraph(4))
+        True
+
+        sage: is_cubic(graphs.PetersenGraph())
+        True
+
+        sage: is_cubic(graphs.CompleteGraph(3))
+        False
+
+        sage: is_cubic(graphs.HouseGraph())
+        False
+    """
     D = g.degree()
     return min(D) == 3 and max(D) == 3
 
