@@ -1110,9 +1110,6 @@ def has_empty_KE_part(g):
             return False
     return True
 
-def is_bicritical(g):
-    return has_empty_KE_part(g)
-
 def is_class1(g):
     """
     Evaluates whether the chomatic index of graph ``g`` equals its max degree.
