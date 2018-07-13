@@ -1207,8 +1207,28 @@ def is_anti_tutte(g):
         return False
     return independence_number(g) <= g.diameter() + g.girth()
 
-#a property that applied to all entered hamiltonian graphs upto c6cc6 but not the tutte graph, false for tutte graph
 def is_anti_tutte2(g):
+    """
+    Tests if graph ``g`` has indep. number <= domination number + radius - 1.
+
+    ``g`` must also be connected.
+    This property is satisfied by many Hamiltonian graphs, but notably not by
+    the Tutte graph ``graphs.TutteGraph()``.
+
+    EXAMPLES:
+
+        sage: is_anti_tutte2(graphs.CompleteGraph(5))
+        True
+
+        sage: is_anti_tutte2(graphs.PetersenGraph())
+        True
+
+        sage: is_anti_tutte2(graphs.TutteGraph())
+        False
+
+        sage: is_anti_tutte2(graphs.TutteCoxeterGraph())
+        False
+    """
     if not g.is_connected():
         return False
     return independence_number(g) <=  domination_number(g) + g.radius()- 1
