@@ -1421,10 +1421,39 @@ def is_anti_tutte2(g):
         return False
     return independence_number(g) <=  domination_number(g) + g.radius()- 1
 
-#for any graph diam <= 2*radius. this property is true in the extremal case
 def diameter_equals_twice_radius(g):
-    if not g.is_connected():
-        return False
+    """
+    Evaluates whether the diameter of graph ``g`` is equal to twice its radius.
+
+    Diameter and radius are undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: has_radius_equal_diameter(graphs.ClawGraph())
+        True
+
+        sage: has_radius_equal_diameter(graphs.KrackhardtKiteGraph())
+        True
+
+        sage: diameter_equals_twice_radius(Graph(4))
+        False
+
+        sage: diameter_equals_twice_radius(graphs.HouseGraph())
+        False
+
+        sage: has_radius_equal_diameter(graphs.BullGraph())
+        False
+
+    The radius and diamter of ``Graph(1)`` are both 1. ::
+
+        sage: diameter_equals_twice_radius(Graph(1))
+        True
+
+    Disconnected graphs have both diameter and radius equal infinity.
+
+        sage: diameter_equals_twice_radius(Graph(4))
+        True
+    """
     return g.diameter() == 2*g.radius()
 
 #for any graph diam >= radius. this property is true in the extremal case
