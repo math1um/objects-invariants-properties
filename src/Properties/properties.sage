@@ -1517,10 +1517,38 @@ def has_lovasz_theta_equals_alpha(g):
     return g.lovasz_theta() == independence_number(g):
 
 def has_lovasz_theta_equals_cc(g):
-    if g.lovasz_theta() == clique_covering_number(g):
-        return True
-    else:
-        return False
+    """
+    Test if the Lovasz number of graph ``g`` equals its clique covering number.
+
+    Examples:
+
+        sage: has_lovasz_theta_equals_cc(graphs.CompleteGraph(12))
+        True
+
+        sage: has_lovasz_theta_equals_cc(double_fork)
+        True
+
+        sage: has_lovasz_theta_equals_cc(graphs.PetersenGraph())
+        True
+        
+        sage: has_lovasz_theta_equals_cc(Graph(12))
+        True
+
+        sage: has_lovasz_theta_equals_cc(graphs.ClebschGraph())
+        False
+
+        has_lovasz_theta_equals_alpha(graphs.BuckyBall())
+        False
+
+    Edge cases ::
+
+        sage: has_lovasz_theta_equals_cc(Graph(0))
+        True
+
+        sage: has_lovasz_theta_equals_cc(Graph(1))
+        True
+    """
+    return g.lovasz_theta() == clique_covering_number(g):
 
 #sufficient condition for hamiltonicity
 def is_chvatal_erdos(g):
