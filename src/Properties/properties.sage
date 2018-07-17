@@ -1454,8 +1454,30 @@ def diameter_equals_twice_radius(g):
     return g.diameter() == 2*g.radius()
 
 def diameter_equals_two(g):
-    if not g.is_connected():
-        return False
+    """
+    Evaluates whether the diameter of graph ``g`` equals 2.
+
+    Diameter is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: diameter_equals_two(graphs.ClawGraph())
+        True
+
+        sage: diameter_equals_two(graphs.HouseGraph())
+        True
+
+        sage: diameter_equals_two(graphs.KrackhardtKiteGraph())
+        False
+
+        sage: diameter_equals_two(graphs.BullGraph())
+        False
+
+    Disconnected graphs have diameter equals infinity.
+
+        sage: diameter_equals_two(Graph(4))
+        False
+    """
     return g.diameter() == 2
 
 def has_lovasz_theta_equals_alpha(g):
