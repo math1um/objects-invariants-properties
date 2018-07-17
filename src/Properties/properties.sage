@@ -1444,7 +1444,7 @@ def diameter_equals_twice_radius(g):
         sage: has_radius_equal_diameter(graphs.BullGraph())
         False
 
-    The radius and diamter of ``Graph(1)`` are both 1. ::
+    The radius and diameter of ``Graph(1)`` are both 1. ::
 
         sage: diameter_equals_twice_radius(Graph(1))
         True
@@ -1456,7 +1456,6 @@ def diameter_equals_twice_radius(g):
     """
     return g.diameter() == 2*g.radius()
 
-#almost all graphs have diameter equals 2
 def diameter_equals_two(g):
     if not g.is_connected():
         return False
