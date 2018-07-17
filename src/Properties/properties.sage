@@ -1503,7 +1503,7 @@ def has_lovasz_theta_equals_alpha(g):
 
     True for all graphs with no edges ::
 
-        sage: has_lovasz_theta_equals_alpha(graph(12))
+        sage: has_lovasz_theta_equals_alpha(Graph(12))
         True
 
     Edge cases ::
@@ -1530,7 +1530,7 @@ def has_lovasz_theta_equals_cc(g):
 
         sage: has_lovasz_theta_equals_cc(graphs.PetersenGraph())
         True
-        
+
         sage: has_lovasz_theta_equals_cc(Graph(12))
         True
 
