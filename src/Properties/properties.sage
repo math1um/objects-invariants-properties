@@ -440,53 +440,53 @@ def is_van_den_heuvel(g):
 
 def is_two_connected(g):
     """
-    Evaluate whether graph is 2-connected. Equivalent to Graph.is_biconnected().
+    Evaluates whether graph ``g`` is 2-connected.
 
-    INPUT:
+    A 2-connected graph is a connected graph on at least 3 vertices such that
+    the removal of any single vertex still gives a connected graph.
+    Follows convention that complete graph `K_n` is `n-1`-connected.
 
-    - ``g`` -- graph
-
-    OUTPUT:
-
-    Returns True if the graph is 2-connected and False otherwise. A graph is
-    2-connected if the removal of any single vertex gives a connected graph.
-
-    If a graph has fewer than 3 vertices, a ValueError is raised.
-    A disconnected graph has connectivity 0.
+    Almost equivalent to ``Graph.is_biconnected()``. We prefer our name. AND,
+    while that method defines that ``graphs.CompleteGraph(2)`` is biconnected,
+    we follow the convention that `K_n` is `n-1`-connected, so `K_2` is
+    only 1-connected.
 
     EXAMPLES:
 
         sage: is_two_connected(graphs.CycleGraph(5))
         True
 
+        sage: is_two_connected(graphs.CompleteGraph(3))
+        True
+
         sage: is_two_connected(graphs.PathGraph(5))
         False
 
         sage: is_two_connected(graphs.CompleteGraph(2))
-        Traceback (most recent call last):
-            File "", line 20, in is_two_connected
-        ValueError: is_two_connected is only defined on graphs with at least 3 vertices.
+        False
 
         sage: is_two_connected(Graph(3))
         False
+
+    Edge cases ::
+
+        sage: is_two_connected(Graph(0))
+        False
+
+        sage: is_two_connected(Graph(1))
+        False
     """
-    if g.order() < 3:
-        raise ValueError("is_two_connected is only defined on graphs with at"
-                            + " least 3 vertices.")
+    if g.is_isomorphic(graphs.CompleteGraph(2)):
+        return False
     return g.is_biconnected()
 
-#part of pebbling class0 sufficient condition
 def is_three_connected(g):
     """
     Evaluates whether graph ``g`` is 3-connected.
 
-    OUTPUT:
-
-    Returns True if the graph is 3-connected and False otherwise. A graph is
-    3-connected if the removal of any single vertex or any pair of vertices
-    gives a connected graph. By definition a graph on 3 or less vertices is
-    not 3-connected.
-    A disconnected graph has connectivity 0.
+    A 3-connected graph is a connected graph on at least 4 vertices such that
+    the removal of any two vertices still gives a connected graph.
+    Follows convention that complete graph `K_n` is `n-1`-connected.
 
     EXAMPLES:
 
@@ -508,10 +508,15 @@ def is_three_connected(g):
         sage: is_three_connected(graphs.CompleteGraph(2))
         False
 
-        sage: is_three_connected(graphs.CompleteGraph(1))
+        sage: is_three_connected(Graph(4))
         False
 
-        sage: is_three_connected(Graph(4))
+    Edge cases ::
+
+        sage: is_three_connected(Graph(0))
+        False
+
+        sage: is_three_connected(Graph(1))
         False
 
     .. WARNING::
@@ -524,13 +529,9 @@ def is_four_connected(g):
     """
     Evaluates whether ``g`` is 4-connected.
 
-    OUTPUT:
-
-    Returns True if the graph is 4-connected and False otherwise. A graph is
-    4-connected if the removal of any four vertices still gives a connected
-    graph.
-    By definition a graph on 4 or less vertices is not 4-connected.
-    A disconnected graph has connectivity 0.
+    A 4-connected graph is a connected graph on at least 5 vertices such that
+    the removal of any three vertices still gives a connected graph.
+    Follows convention that complete graph `K_n` is `n-1`-connected.
 
     EXAMPLES:
 
@@ -544,9 +545,15 @@ def is_four_connected(g):
         sage: is_four_connected(Graph(5))
         False
 
-    A graph on four or fewer vertices is not four-connected. ::
-
         sage: is_four_connected(graphs.CompleteGraph(4))
+        False
+
+    Edge cases ::
+
+        sage: is_four_connected(Graph(0))
+        False
+
+        sage: is_four_connected(Graph(1))
         False
 
     .. WARNING::
@@ -2238,12 +2245,15 @@ removed_properties = [is_pebbling_class0]
 
 """
     Last version of graphs packaged checked: Sage 8.2
-    This means checked for new functions, and for any errors in old functions!
+    This means checked for new functions, and for any errors/changes in old functions!
     sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
     True
 
-    Skip Graph.is_circumscribable() and Graph.is_inscribable() because they throw errors for the vast majority of our graphs.
-    Skip Graph.is_biconnected() in favor of our name is_two_connected().
+    Skip Graph.is_circumscribable() and Graph.is_inscribable() because they
+        throw errors for the vast majority of our graphs.
+    Skip Graph.is_biconnected() in favor of our is_two_connected(), because we
+        prefer our name, and because we disagree with their definition on K2.
+        We define that K2 is NOT 2-connected, it is n-1 = 1 connected.
     Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient algorithm existing.
 """
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
