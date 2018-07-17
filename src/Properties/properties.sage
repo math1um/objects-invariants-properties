@@ -12,8 +12,13 @@ def has_star_center(g):
         sage: has_star_center(c4)
         False
 
+    Edge cases ::
+
         sage: has_star_center(Graph(1))
         True
+
+        sage: has_star_center(Graph(0))
+        False
     """
     return (g.order() - 1) in g.degree()
 
@@ -21,19 +26,37 @@ def is_complement_of_chordal(g):
     """
     Evaluates whether graph ``g`` is a complement of a chordal graph.
 
+    A chordal graph is one in which all cycles of four or more vertices have a
+    chord, which is an edge that is not part of the cycle but connects two
+    vertices of the cycle.
+
     EXAMPLES:
 
         sage: is_complement_of_chordal(p4)
         True
 
+        sage: is_complement_of_chordal(Graph(4))
+        True
+
         sage: is_complement_of_chordal(p5)
         False
+
+    Any graph without a 4-or-more cycle is vacuously chordal. ::
+
+        sage: is_complement_of_chordal(graphs.CompleteGraph(4))
+        True
+
+        sage: is_complement_of_chordal(Graph(3))
+        True
+
+        sage: is_complement_of_chordal(Graph(0))
+        True
     """
     return g.complement().is_chordal()
 
 def pairs_have_unique_common_neighbor(g):
     """
-    Evalautes if each pair of vertices in ``g`` has exactly one common neighbor.
+    Evalaute if each pair of vertices in ``g`` has exactly one common neighbor.
 
     Also known as the friendship property.
     By the Friendship Theorem, the only connected graphs with the friendship
@@ -52,6 +75,14 @@ def pairs_have_unique_common_neighbor(g):
 
         sage: pairs_have_unique_common_neighbor(graphs.CompleteGraph(2))
         False
+
+    Vacuous cases ::
+
+        sage: pairs_have_unique_common_neighbor(Graph(1))
+        True
+
+        sage: pairs_have_unique_common_neighbor(Graph(0))
+        True
     """
     from itertools import combinations
     for (u,v) in combinations(g.vertices(), 2):
@@ -74,12 +105,29 @@ def is_distance_transitive(g):
         sage: is_distance_transitive(graphs.PetersenGraph())
         True
 
+        sage: is_distance_transitive(Graph(3))
+        True
+
         sage: is_distance_transitive(graphs.ShrikhandeGraph())
         False
 
     This method accepts disconnected graphs. ::
 
         sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
+        True
+
+        sage: is_distance_transitive(graphs.CompleteGraph(2).disjoint_union(Graph(2)))
+        False
+
+    Vacuous cases ::
+
+        sage: is_distance_transitive(Graph(0))
+        True
+
+        sage: is_distance_transitive(Graph(1))
+        True
+
+        sage: is_distance_transitive(Graph(2))
         True
 
     ... WARNING ::
@@ -113,6 +161,9 @@ def is_dirac(g):
         sage: is_dirac(graphs.CompleteGraph(6))
         True
 
+        sage: is_dirac(graphs.CompleteGraph(3))
+        True
+
         sage: is_dirac(graphs.CompleteGraph(2))
         False
 
@@ -124,7 +175,7 @@ def is_dirac(g):
 
 def is_ore(g):
     """
-    Evaluates if deg(v)+deg(w)>=n for all non-adjacent pairs v,w in graph ``g``.
+    Evaluate if deg(v)+deg(w)>=n for all non-adjacent pairs v,w in graph ``g``.
 
     See Ore's Theorem: If graph is_ore, then it is hamiltonian.
 
@@ -133,8 +184,25 @@ def is_ore(g):
         sage: is_ore(graphs.CompleteGraph(5))
         True
 
+        sage: is_ore(graphs.CompleteGraph(2))
+        True
+
         sage: is_ore(dart)
         False
+
+        sage: is_ore(Graph(2))
+        False
+
+        sage: is_ore(graphs.CompleteGraph(2).disjoint_union(Graph(1)))
+        False
+
+    Vacous cases ::
+
+        sage: is_ore(Graph(0))
+        True
+
+        sage: is_ore(Graph(1))
+        True
     """
     A = g.adjacency_matrix()
     n = g.order()
@@ -164,6 +232,9 @@ def is_haggkvist_nicoghossian(g):
 
     EXAMPLES:
 
+        sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(3))
+        True
+
         sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
         True
 
@@ -171,6 +242,12 @@ def is_haggkvist_nicoghossian(g):
         False
 
         sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3)
+        False
+
+        sage: is_haggkvist_nicoghossian(Graph(1))
+        False
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(2))
         False
     """
     k = g.vertex_connectivity()
@@ -205,6 +282,9 @@ def is_genghua_fan(g):
 
         sage: is_genghua_fan(graphs.ButterflyGraph())
         False
+
+        sage: is_genghua_fan(Graph(1))
+        False
     """
     if not is_two_connected(g):
         return False
@@ -235,16 +315,22 @@ def is_planar_transitive(g):
 
         sage: is_planar_transitive(graphs.BullGraph())
         False
+
+    Vacuous cases ::
+
+        sage: is_planar_transitive(Graph(1))
+        True
+
+    Sage defines `Graph(0).is_vertex_transitive() == False``. ::
+
+        sage: is_planar_transitive(Graph(0))
+        False
     """
     return g.is_planar() and g.is_vertex_transitive()
 
 def is_generalized_dirac(g):
     """
-    Tests if g meets condition in a generalization of Dirac's Theorem.
-
-    INPUT:
-
-    - ``g`` -- graph
+    Test if ``graph`` g meets condition in a generalization of Dirac's Theorem.
 
     OUTPUT:
 
@@ -272,13 +358,8 @@ def is_generalized_dirac(g):
         sage: is_generalized_dirac(graphs.DiamondGraph())
         False
 
-    TESTS::
-
-        sage: is_generalized_dirac(Graph(0))
-        True
-
         sage: is_generalized_dirac(Graph(1))
-        True
+        False
     """
     from itertools import combinations
 
@@ -329,7 +410,7 @@ def is_van_den_heuvel(g):
     TESTS::
 
         sage: is_van_den_heuvel(Graph(0))
-        True
+        False
 
         sage: is_van_den_heuvel(Graph(1))
         True
@@ -357,7 +438,6 @@ def is_van_den_heuvel(g):
 
     return True
 
-#necessary condition for hamiltonicity
 def is_two_connected(g):
     """
     Evaluate whether graph is 2-connected. Equivalent to Graph.is_biconnected().
@@ -372,6 +452,7 @@ def is_two_connected(g):
     2-connected if the removal of any single vertex gives a connected graph.
 
     If a graph has fewer than 3 vertices, a ValueError is raised.
+    A disconnected graph has connectivity 0.
 
     EXAMPLES:
 
@@ -385,6 +466,9 @@ def is_two_connected(g):
         Traceback (most recent call last):
             File "", line 20, in is_two_connected
         ValueError: is_two_connected is only defined on graphs with at least 3 vertices.
+
+        sage: is_two_connected(Graph(3))
+        False
     """
     if g.order() < 3:
         raise ValueError("is_two_connected is only defined on graphs with at"
@@ -402,6 +486,7 @@ def is_three_connected(g):
     3-connected if the removal of any single vertex or any pair of vertices
     gives a connected graph. By definition a graph on 3 or less vertices is
     not 3-connected.
+    A disconnected graph has connectivity 0.
 
     EXAMPLES:
 
@@ -426,6 +511,9 @@ def is_three_connected(g):
         sage: is_three_connected(graphs.CompleteGraph(1))
         False
 
+        sage: is_three_connected(Graph(4))
+        False
+
     .. WARNING::
 
         Implementation requires Sage 8.2+.
@@ -442,6 +530,7 @@ def is_four_connected(g):
     4-connected if the removal of any four vertices still gives a connected
     graph.
     By definition a graph on 4 or less vertices is not 4-connected.
+    A disconnected graph has connectivity 0.
 
     EXAMPLES:
 
@@ -450,6 +539,9 @@ def is_four_connected(g):
         True
 
         sage: is_four_connected(graphs.PathGraph(5))
+        False
+
+        sage: is_four_connected(Graph(5))
         False
 
     A graph on four or fewer vertices is not four-connected. ::
@@ -465,11 +557,7 @@ def is_four_connected(g):
 
 def is_lindquester(g):
     """
-    Tests if ``g`` meets a neighborhood union condition for Hamiltonicity.
-
-    INPUT:
-
-    - ``g`` -- graph
+    Test if graph ``g`` meets a neighborhood union condition for Hamiltonicity.
 
     OUTPUT:
 
@@ -527,9 +615,6 @@ def is_complete(g):
 
     EXAMPLES:
 
-        sage: is_complete(graphs.CompleteGraph(0))
-        True
-
         sage: is_complete(graphs.CompleteGraph(1))
         True
 
@@ -537,6 +622,9 @@ def is_complete(g):
         True
 
         sage: is_complete(graphs.CompleteGraph(6))
+        True
+
+        sage: is_complete(Graph(0))
         True
 
         sage: is_complete(graphs.PathGraph(5))
@@ -984,13 +1072,27 @@ def is_double_clique(g):
 
         sage: is_double_clique(graphs.ClawGraph())
         False
+
+        sage: is_double_clique(Graph(3))
+        False
+
+    Edge cases ::
+
+        sage: is_double_clique(Graph(0))
+        True
+
+        sage: is_double_clique(Graph(1))
+        True
+
+        sage: is_double_clique(Graph(2))
+        True
     """
     gc = g.complement()
     return gc.is_bipartite()
 
 def has_radius_equal_diameter(g):
     """
-    Evaluates whether the raidus of graph ``g`` equals its diameter.
+    Evaluates whether the radius of graph ``g`` equals its diameter.
 
     Recall the radius of a graph is the minimum eccentricity over all vertices,
     or the minimum over all longest distances from a vertex to any other vertex.
@@ -998,12 +1100,17 @@ def has_radius_equal_diameter(g):
     Both radius and diamter are defined to be `+Infinity` for disconnected
     graphs.
 
+    Both radius and diameter are undefined for the empty graph.
+
     EXAMPLES:
 
         sage: has_radius_equal_diameter(Graph(4))
         True
 
         sage: has_radius_equal_diameter(graphs.HouseGraph())
+        True
+
+        sage: has_radius_equal_diameter(Graph(1))
         True
 
         sage: has_radius_equal_diameter(graphs.ClawGraph())
@@ -1016,15 +1123,17 @@ def has_radius_equal_diameter(g):
 
 def has_residue_equals_alpha(g):
     """
-    Evaluates whether the residue of graph ``g`` equals its independence number.
+    Evaluate whether the residue of graph ``g`` equals its independence number.
 
-    The independence number is the cardinality of the largest independent set of
-    vertices in ``g``.
+    The independence number is the cardinality of the largest independent set
+    of vertices in ``g``.
     The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
     is found iteratively. First, remove `d_1` from consideration and subtract
-    `d_1` from the following `d_1` number of elements. Repeat this process for
-    `d_2,d_3, ...` until only 0s remain. The number of elements, i.e. the number
-    of 0s, is the residue of ``g``.
+    `d_1` from the following `d_1` number of elements. Sort. Repeat this
+    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
+    i.e. the number of 0s, is the residue of ``g``.
+
+    Residue is undefined on the empty graph.
 
     EXAMPLES:
 
@@ -1037,20 +1146,14 @@ def has_residue_equals_alpha(g):
         sage: has_residue_equals_alpha(graphs.CompleteGraph(4))
         True
 
+        sage: has_residue_equals_alpha(Graph(1))
+        True
+
         sage: has_residue_equals_alpha(graphs.PetersenGraph())
         False
 
         sage: has_residue_equals_alpha(graphs.PathGraph(5))
         False
-
-    TESTS::
-
-        sage: has_residue_equals_alpha(Graph(1))
-        True
-
-        sage: has_residue_equals_alpha(Graph(0))
-        Traceback (most recent call last):
-        IndexError: list index out of range
     """
     return residue(g) == independence_number(g)
 
@@ -1073,6 +1176,14 @@ def is_not_forest(g):
 
         sage: is_not_forest(graphs.HouseGraph())
         True
+
+    Edge cases ::
+
+        sage: is_not_forest(Graph(1))
+        False
+
+        sage: is_not_forest(Graph(0))
+        False
     """
     return not g.is_forest()
 
@@ -1119,6 +1230,14 @@ def has_empty_KE_part(g):
 
         sage: has_empty_KE_part(graphs.CycleGraph(6))
         False
+
+    Edge cases ::
+
+        sage: has_empty_KE_part(Graph(1))
+        False
+
+        sage: has_empty_KE_part(Graph(0))
+        True
 
     ALGORITHM:
 
@@ -1185,12 +1304,17 @@ def is_class1(g):
     edge-colored in either `D` or `D+1` colors. The case of `D` colors is
     called "class 1".
 
+    Max degree is undefined for the empty graph.
+
     EXAMPLES:
 
         sage: is_class1(graphs.CompleteGraph(4))
         True
 
         sage: is_class1(graphs.WindmillGraph(4,3))
+        True
+
+        sage: is_class1(Graph(1))
         True
 
         sage: is_class1(graphs.CompleteGraph(3))
@@ -1209,12 +1333,17 @@ def is_class2(g):
     edge-colored in either `D` or `D+1` colors. The case of `D+1` colors is
     called "class 2".
 
+    Max degree is undefined for the empty graph.
+
     EXAMPLES:
 
         sage: is_class2(graphs.CompleteGraph(4))
         False
 
         sage: is_class2(graphs.WindmillGraph(4,3))
+        False
+
+        sage: is_class2(Graph(1))
         False
 
         sage: is_class2(graphs.CompleteGraph(3))
@@ -1253,6 +1382,8 @@ def is_anti_tutte(g):
     This property is satisfied by many Hamiltonian graphs, but notably not by
     the Tutte graph ``graphs.TutteGraph()``.
 
+    Diameter is undefined for the empty graph.
+
     EXAMPLES:
 
         sage: is_anti_tutte(graphs.CompleteBipartiteGraph(4, 5))
@@ -1260,6 +1391,8 @@ def is_anti_tutte(g):
 
         sage: is_anti_tutte(graphs.PetersenGraph())
         True
+
+        sage: is_anti_tutte(Graph(1))
 
         sage: is_anti_tutte(graphs.TutteGraph())
         False
@@ -1279,6 +1412,8 @@ def is_anti_tutte2(g):
     This property is satisfied by many Hamiltonian graphs, but notably not by
     the Tutte graph ``graphs.TutteGraph()``.
 
+    Radius is undefined for the empty graph.
+
     EXAMPLES:
 
         sage: is_anti_tutte2(graphs.CompleteGraph(5))
@@ -1291,6 +1426,9 @@ def is_anti_tutte2(g):
         False
 
         sage: is_anti_tutte2(graphs.TutteCoxeterGraph())
+        False
+
+        sage: is_anti_tutte2(Graph(1))
         False
     """
     if not g.is_connected():
@@ -1906,8 +2044,6 @@ def has_odd_order(g):
     True
     sage: has_odd_order(Graph(2))
     False
-    sage: has_odd_order(Graph(0))
-    False
     """
     return g.order() % 2 == 1
 
@@ -1918,8 +2054,6 @@ def has_even_order(g):
     sage: has_even_order(Graph(5))
     False
     sage: has_even_order(Graph(2))
-    True
-    sage: has_even_order(Graph(0))
     True
     """
     return g.order() % 2 == 0
