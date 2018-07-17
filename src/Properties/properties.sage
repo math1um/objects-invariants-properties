@@ -1481,10 +1481,40 @@ def diameter_equals_two(g):
     return g.diameter() == 2
 
 def has_lovasz_theta_equals_alpha(g):
-    if g.lovasz_theta() == independence_number(g):
-        return True
-    else:
-        return False
+    """
+    Tests if the Lovasz number of graph ``g`` equals its independence number.
+
+    Examples:
+
+        sage: has_lovasz_theta_equals_alpha(graphs.CompleteGraph(12))
+        True
+
+        sage: has_lovasz_theta_equals_alpha(double_fork)
+        True
+
+        sage: has_lovasz_theta_equals_alpha(graphs.PetersenGraph())
+        True
+
+        sage: has_lovasz_theta_equals_alpha(graphs.ClebschGraph())
+        False
+
+        sage: has_lovasz_theta_equals_alpha(graphs.CycleGraph(24))
+        False
+
+    True for all graphs with no edges ::
+
+        sage: has_lovasz_theta_equals_alpha(graph(12))
+        True
+
+    Edge cases ::
+
+        sage: has_lovasz_theta_equals_alpha(Graph(0))
+        True
+
+        sage: has_lovasz_theta_equals_alpha(Graph(1))
+        True
+    """
+    return g.lovasz_theta() == independence_number(g):
 
 def has_lovasz_theta_equals_cc(g):
     if g.lovasz_theta() == clique_covering_number(g):
