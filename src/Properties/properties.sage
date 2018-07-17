@@ -1456,12 +1456,6 @@ def diameter_equals_twice_radius(g):
     """
     return g.diameter() == 2*g.radius()
 
-#for any graph diam >= radius. this property is true in the extremal case
-def diameter_equals_radius(g):
-    if not g.is_connected():
-        return False
-    return g.diameter() == g.radius()
-
 #almost all graphs have diameter equals 2
 def diameter_equals_two(g):
     if not g.is_connected():
@@ -2238,7 +2232,7 @@ Graph.is_weakly_chordal, is_dirac, is_ore,
 is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
 is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
 is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
-diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac,
+is_locally_connected, matching_covered, is_locally_dirac,
 is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
 is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
