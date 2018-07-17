@@ -1435,9 +1435,6 @@ def diameter_equals_twice_radius(g):
         sage: has_radius_equal_diameter(graphs.KrackhardtKiteGraph())
         True
 
-        sage: diameter_equals_twice_radius(Graph(4))
-        False
-
         sage: diameter_equals_twice_radius(graphs.HouseGraph())
         False
 
