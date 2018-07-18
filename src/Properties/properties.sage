@@ -1643,13 +1643,38 @@ def radius_greater_than_center(g):
     """
     return g.is_connected() and g.radius() > card_center(g)
 
-#a property that separates tutte from known hamiltonian examples, must be connected
-#avg_dist(tutte) > girth(tutte)
 def avg_distance_greater_than_girth(g):
-    if not g.is_connected() or g.average_distance() <= g.girth():
-        return False
-    else:
-        return True
+    """
+    Tests if graph ``g`` is connected and avg. distance greater than the girth.
+
+    Average distance is undefined for 1- and 0- vertex graphs.
+
+    EXAMPLES:
+
+        sage: avg_distance_greater_than_girth(graphs.TutteGraph())
+        True
+
+        sage: avg_distance_greater_than_girth(graphs.HarborthGraph())
+        True
+
+        sage: avg_distance_greater_than_girth(graphs.HortonGraph())
+        True
+
+        sage: avg_distance_greater_than_girth(graphs.BullGraph())
+        False
+
+        sage: avg_distance_greater_than_girth(Graph("NC`@A?_C?@_JA??___W"))
+        False
+
+        sage: avg_distance_greater_than_girth(Graph(2))
+        False
+
+    Acyclic graphs have girth equals infinity. ::
+
+        sage: avg_distance_greater_than_girth(graphs.CompleteGraph(2))
+        False
+    """
+    return g.is_connected() and g.average_distance() > g.girth()
 
 #chromatic number equals min of known chi upper bounds
 def chi_equals_min_theory(g):
