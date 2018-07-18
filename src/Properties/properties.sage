@@ -1599,8 +1599,10 @@ def is_chvatal_erdos(g):
     """
     return independence_number(g) <= g.vertex_connectivity()
 
-#matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
+    """
+    Skipping because broken. See Issue #585
+    """
     g = g.copy()
     nu = matching_number(g)
     E = g.edges()
