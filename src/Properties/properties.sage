@@ -1676,15 +1676,40 @@ def avg_distance_greater_than_girth(g):
     """
     return g.is_connected() and g.average_distance() > g.girth()
 
-#chromatic number equals min of known chi upper bounds
 def chi_equals_min_theory(g):
+    """
+    Evaluate if chromatic num. of graph ``g`` equals min. of some upper bounds.
+
+    Some known upper bounds on the chromatic number Chi (`\chi`) include
+    our invariants `[brooks, wilf, welsh_powell, szekeres_wilf]`.
+    Returns ``True`` if the actual chromatic number of ``g`` equals the minimum
+    of / "the best of" these known upper bounds.
+
+    Some of these invariants are undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: chi_equals_min_theory(Graph(1))
+        True
+
+        sage: chi_equals_min_theory(graphs.PetersenGraph())
+        True
+
+        sage: chi_equals_min_theory(double_fork)
+        True
+
+        sage: chi_equals_min_theory(Graph(3))
+        False
+
+        chi_equals_min_theory(graphs.CompleteBipartiteGraph(3,5))
+        False
+
+        chi_equals_min_theory(graphs.IcosahedralGraph())
+        False
+    """
     chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
     min_theory = min([f(g) for f in chromatic_upper_theory])
-    chi = g.chromatic_number()
-    if min_theory == chi:
-        return True
-    else:
-        return False
+    return min_theory == g.chromatic_number()
 
 def is_heliotropic_plant(g):
     return (independence_number(g) == card_positive_eigenvalues(g))
