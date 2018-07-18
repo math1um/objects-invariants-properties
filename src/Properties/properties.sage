@@ -1601,7 +1601,7 @@ def is_chvatal_erdos(g):
 
 def matching_covered(g):
     """
-    Skipping because broken. See Issue #585
+    Skipping because broken. See Issue #585.
     """
     g = g.copy()
     nu = matching_number(g)
@@ -1614,13 +1614,34 @@ def matching_covered(g):
         g.add_edge(e)
     return True
 
-#a property that separates tutte from known hamiltonian examples, must be connected
-#radius(tutte) > center(tutte)
 def radius_greater_than_center(g):
-    if not g.is_connected() or g.radius() <= card_center(g):
-        return False
-    else:
-        return True
+    """
+    Test if connected graph ``g`` has radius greater than num. of center verts.
+
+    If ``g`` is not connected, returns ``False``.
+    Radius is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: radius_greater_than_center(graphs.TutteGraph())
+        True
+
+        sage: radius_greater_than_center(graphs.KrackhardtKiteGraph())
+        True
+
+        sage: radius_greater_than_center(graphs.SousselierGraph())
+        True
+
+        sage: radius_greater_than_center(graphs.PetersenGraph())
+        False
+
+        sage: radius_greater_than_center(graphs.DiamondGraph())
+        False
+
+        sage: radius_greater_than_center(Graph(1))
+        False
+    """
+    return g.is_connected() and g.radius() > card_center(g)
 
 #a property that separates tutte from known hamiltonian examples, must be connected
 #avg_dist(tutte) > girth(tutte)
