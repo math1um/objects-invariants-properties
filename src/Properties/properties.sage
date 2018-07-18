@@ -1552,10 +1552,52 @@ def has_lovasz_theta_equals_cc(g):
     """
     return g.lovasz_theta() == clique_covering_number(g)
 
-#sufficient condition for hamiltonicity
 def is_chvatal_erdos(g):
-    return independence_number(g) <= g.vertex_connectivity()
+    """
+    Evaluates whether graph ``g`` meets a Hamiltonicity condition of [CV1972]_.
 
+    OUTPUT:
+
+    Returns ``True`` if the independence number of ``g`` is less than or equal
+    to the vertex connectivity of ``g``.
+    Returns ``False`` otherwise.
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_chvatal_erdos``, then it is Hamiltonian.
+
+    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian cycles".
+                    Discrete Mathematics, 2(2): 111--113, 1972.
+
+    EXAMPLES:
+
+        sage: is_chvatal_erdos(graphs.CompleteGraph(5))
+        True
+
+        sage: is_chvatal_erdos(graphs.CycleGraph(5))
+        True
+
+        sage: is_chvatal_erdos(graphs.CompleteGraph(2))
+        True
+
+        sage: is_chvatal_erdos(graphs.PetersenGraph())
+        False
+
+        sage: is_chvatal_erdos(graphs.ClawGraph())
+        False
+
+        sage: is_chvatal_erdos(graphs.DodecahedralGraph())
+        False
+
+    Edge cases ::
+
+        sage: is_chvatal_erdos(Graph(1))
+        False
+
+        sage: is_chvatal_erdos(Graph(0))
+        True
+    """
+    return independence_number(g) <= g.vertex_connectivity()
 
 #matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
