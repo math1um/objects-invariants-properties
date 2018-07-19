@@ -1892,6 +1892,40 @@ def is_chordal_or_not_perfect(g):
         return not g.is_perfect()
 
 def has_alpha_residue_equal_two(g):
+    """
+    Tests if both the residue and independence number of graphs ``g`` equal 2.
+
+    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
+    is found iteratively. First, remove `d_1` from consideration and subtract
+    `d_1` from the following `d_1` number of elements. Sort. Repeat this
+    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
+    i.e. the number of 0s, is the residue of ``g``.
+
+    Residue is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: has_alpha_residue_equal_two(graphs.DiamondGraph())
+        True
+
+        sage: has_alpha_residue_equal_two(Graph(2))
+        True
+
+        sage: has_alpha_residue_equal_two(graphs.OctahedralGraph())
+        True
+
+        sage: has_alpha_residue_equal_two(graphs.BullGraph())
+        False
+
+        sage: has_alpha_residue_equal_two(graphs.BidiakisCube())
+        False
+
+        sage: has_alpha_residue_equal_two(Graph(3))
+        False
+
+        sage: has_alpha_residue_equal_two(Graph(1))
+        False
+    """
     if residue(g) != 2:
         return false
     else:
