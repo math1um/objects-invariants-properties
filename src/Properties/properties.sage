@@ -1962,8 +1962,32 @@ def alpha_leq_order_over_two(g):
     """
     return (2*independence_number(g) <= g.order())
 
-#in a luo-zhao sufficient condition for alpha <= n/2 (vizing's ind number conj)
 def order_leq_twice_max_degree(g):
+    """
+    Tests if the order of graph ``g`` is at most twice the max of its degrees.
+
+    Undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: order_leq_twice_max_degree(graphs.BullGraph())
+        True
+
+        sage: order_leq_twice_max_degree(graphs.ThomsenGraph())
+        True
+
+        sage: order_leq_twice_max_degree(graphs.CycleGraph(4))
+        True
+
+        sage: order_leq_twice_max_degree(graphs.BidiakisCube())
+        False
+
+        sage: order_leq_twice_max_degree(graphs.CycleGraph(5))
+        False
+
+        sage: order_leq_twice_max_degree(Graph(1))
+        False
+    """
     return (g.order() <= 2*max(g.degree()))
 
 #not in properties list until meredith graph is computed
