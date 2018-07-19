@@ -222,14 +222,6 @@ def is_haggkvist_nicoghossian(g):
 
     - ``g`` -- graph
 
-    REFERENCES:
-
-    Theorem: If a graph ``is_haggkvist_nicoghossian``, then it is Hamiltonian.
-
-    .. [HN1981]     \R. Häggkvist and G. Nicoghossian, "A remark on Hamiltonian
-                    cycles". Journal of Combinatorial Theory, Series B, 30(1):
-                    118--120, 1981.
-
     EXAMPLES:
 
         sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(3))
@@ -249,6 +241,14 @@ def is_haggkvist_nicoghossian(g):
 
         sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(2))
         False
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_haggkvist_nicoghossian``, then it is Hamiltonian.
+
+    .. [HN1981]     \R. Häggkvist and G. Nicoghossian, "A remark on Hamiltonian
+                    cycles". Journal of Combinatorial Theory, Series B, 30(1):
+                    118--120, 1981.
     """
     k = g.vertex_connectivity()
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
@@ -264,14 +264,6 @@ def is_genghua_fan(g):
     vertices `u,v`.
     Returns ``False`` otherwise.
 
-    REFERENCES:
-
-    Theorem: If a graph ``is_genghua_fan``, then it is Hamiltonian.
-
-    .. [Fan1984]    Geng-Hua Fan, "New sufficient conditions for cycles in
-                    graphs". Journal of Combinatorial Theory, Series B, 37(3):
-                    221--227, 1984.
-
     EXAMPLES:
 
         sage: is_genghua_fan(graphs.DiamondGraph())
@@ -285,6 +277,14 @@ def is_genghua_fan(g):
 
         sage: is_genghua_fan(Graph(1))
         False
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_genghua_fan``, then it is Hamiltonian.
+
+    .. [Fan1984]    Geng-Hua Fan, "New sufficient conditions for cycles in
+                    graphs". Journal of Combinatorial Theory, Series B, 37(3):
+                    221--227, 1984.
     """
     if not is_two_connected(g):
         return False
@@ -338,15 +338,6 @@ def is_generalized_dirac(g):
     the cardinality of the union of neighborhood(u) and neighborhood(v)
     is `>= (2n-1)/3`.
 
-    REFERENCES:
-
-    Theorem: If graph g is_generalized_dirac, then it is Hamiltonian.
-
-    .. [FGJS1989]   \R.J. Faudree, Ronald Gould, Michael Jacobson, and
-                    R.H. Schelp, "Neighborhood unions and hamiltonian
-                    properties in graphs". Journal of Combinatorial
-                    Theory, Series B, 47(1): 1--9, 1989.
-
     EXAMPLES:
 
         sage: is_generalized_dirac(graphs.HouseGraph())
@@ -360,6 +351,15 @@ def is_generalized_dirac(g):
 
         sage: is_generalized_dirac(Graph(1))
         False
+
+    REFERENCES:
+
+    Theorem: If graph g is_generalized_dirac, then it is Hamiltonian.
+
+    .. [FGJS1989]   \R.J. Faudree, Ronald Gould, Michael Jacobson, and
+                    R.H. Schelp, "Neighborhood unions and hamiltonian
+                    properties in graphs". Journal of Combinatorial
+                    Theory, Series B, 47(1): 1--9, 1989.
     """
     from itertools import combinations
 
@@ -391,14 +391,6 @@ def is_van_den_heuvel(g):
     eigenvalue of `L_g` and the `i`-th eigenvalue of `Q_C` is at most the
     `i`-th eigenvalue of `Q_g for all `i`.
 
-    REFERENCES:
-
-    Theorem: If a graph is Hamiltonian, then it ``is_van_den_heuvel``.
-
-    .. [Heu1995]    \J.van den Heuvel, "Hamilton cycles and eigenvalues of
-                    graphs". Linear Algebra and its Applications, 226--228:
-                    723--730, 1995.
-
     EXAMPLES:
 
         sage: is_van_den_heuvel(graphs.CycleGraph(5))
@@ -406,6 +398,14 @@ def is_van_den_heuvel(g):
 
         sage: is_van_den_heuvel(graphs.PetersenGraph())
         False
+
+    REFERENCES:
+
+    Theorem: If a graph is Hamiltonian, then it ``is_van_den_heuvel``.
+
+    .. [Heu1995]    \J.van den Heuvel, "Hamilton cycles and eigenvalues of
+                    graphs". Linear Algebra and its Applications, 226--228:
+                    723--730, 1995.
 
     TESTS::
 
@@ -575,15 +575,6 @@ def is_lindquester(g):
     neighborhood(`u`) and neighborhood(`v`) is `\geq (2n-1)/3`.
     Returns ``False`` otherwise.
 
-    REFERENCES:
-
-    Theorem: If a graph ``is_lindquester``, then it is Hamiltonian.
-
-    .. [Lin1989]    \T.E. Lindquester, "The effects of distance and
-                    neighborhood union conditions on hamiltonian properties
-                    in graphs". Journal of Graph Theory, 13(3): 335-352,
-                    1989.
-
     EXAMPLES:
 
         sage: is_lindquester(graphs.HouseGraph())
@@ -597,6 +588,15 @@ def is_lindquester(g):
 
         sage: is_lindquester(graphs.DiamondGraph())
         False
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_lindquester``, then it is Hamiltonian.
+
+    .. [Lin1989]    \T.E. Lindquester, "The effects of distance and
+                    neighborhood union conditions on hamiltonian properties
+                    in graphs". Journal of Graph Theory, 13(3): 335-352,
+                    1989.
     """
     if not is_two_connected(g):
         return False
@@ -1562,13 +1562,6 @@ def is_chvatal_erdos(g):
     to the vertex connectivity of ``g``.
     Returns ``False`` otherwise.
 
-    REFERENCES:
-
-    Theorem: If a graph ``is_chvatal_erdos``, then it is Hamiltonian.
-
-    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian cycles".
-                    Discrete Mathematics, 2(2): 111--113, 1972.
-
     EXAMPLES:
 
         sage: is_chvatal_erdos(graphs.CompleteGraph(5))
@@ -1596,6 +1589,13 @@ def is_chvatal_erdos(g):
 
         sage: is_chvatal_erdos(Graph(0))
         True
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_chvatal_erdos``, then it is Hamiltonian.
+
+    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian cycles".
+                    Discrete Mathematics, 2(2): 111--113, 1972.
     """
     return independence_number(g) <= g.vertex_connectivity()
 
@@ -1724,15 +1724,14 @@ def is_heliotropic_plant(g):
     See [BDF1995]_ for a definition and some related conjectures, where
     [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
 
+    EXAMPLES:
+
     REFERENCES:
 
     .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
                     computational attack on the conjectures of Graffiti: New
                     counterexamples and proofs". Discrete Mathematics,
                     147(1--3): 35--55, 1995.
-
-    EXAMPLES:
-
     """
     return (independence_number(g) == card_positive_eigenvalues(g))
 
@@ -1749,15 +1748,14 @@ def is_geotropic_plant(g):
     See [BDF1995]_ for a definition and some related conjectures, where
     [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
 
+    EXAMPLES:
+
     REFERENCES:
 
     .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
                     computational attack on the conjectures of Graffiti: New
                     counterexamples and proofs". Discrete Mathematics,
                     147(1--3): 35--55, 1995.
-
-    EXAMPLES:
-
     """
     return (independence_number(g) == card_negative_eigenvalues(g))
 
