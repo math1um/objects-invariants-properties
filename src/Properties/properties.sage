@@ -1712,9 +1712,53 @@ def chi_equals_min_theory(g):
     return min_theory == g.chromatic_number()
 
 def is_heliotropic_plant(g):
+    """
+    Evaluates whether graph ``g`` is a heliotropic plant. BROKEN
+
+    BROKEN: code should be nonnegative eigen, not just positive eigen.
+    See Issue #586
+
+    A graph is heliotropic iff the independence number equals the number of
+    nonnegative eigenvalues.
+
+    See [BDF1995]_ for a definition and some related conjectures, where
+    [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
+
+    REFERENCES:
+
+    .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
+                    computational attack on the conjectures of Graffiti: New
+                    counterexamples and proofs". Discrete Mathematics,
+                    147(1--3): 35--55, 1995.
+
+    EXAMPLES:
+
+    """
     return (independence_number(g) == card_positive_eigenvalues(g))
 
 def is_geotropic_plant(g):
+    """
+    Evaluates whether graph ``g`` is a heliotropic plant. BROKEN
+
+    BROKEN: code should be nonpositive eigen, not just negative eigen.
+    See Issue #586
+
+    A graph is geotropic iff the independence number equals the number of
+    nonnegative eigenvalues.
+
+    See [BDF1995]_ for a definition and some related conjectures, where
+    [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
+
+    REFERENCES:
+
+    .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
+                    computational attack on the conjectures of Graffiti: New
+                    counterexamples and proofs". Discrete Mathematics,
+                    147(1--3): 35--55, 1995.
+
+    EXAMPLES:
+
+    """
     return (independence_number(g) == card_negative_eigenvalues(g))
 
 #means has hamiltonian path, true iff g join a single vertex has hamiltonian cycle
