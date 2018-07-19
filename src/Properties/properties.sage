@@ -1814,6 +1814,37 @@ def is_traceable(g):
     return gadd.is_hamiltonian()
 
 def has_residue_equals_two(g):
+    """
+    Evaluates whether the residue of graph ``g`` equals 2.
+
+    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
+    is found iteratively. First, remove `d_1` from consideration and subtract
+    `d_1` from the following `d_1` number of elements. Sort. Repeat this
+    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
+    i.e. the number of 0s, is the residue of ``g``.
+
+    Residue is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: has_residue_equals_two(graphs.ButterflyGraph())
+        True
+
+        sage: has_residue_equals_two(graphs.IcosahedralGraph())
+        True
+
+        sage: has_residue_equals_two(graphs.OctahedralGraph())
+        True
+
+        sage: has_residue_equals_two(Graph(1))
+        False
+
+        sage: has_residue_equals_two(graphs.BullGraph())
+        False
+
+        sage: has_residue_equals_two(graphs.BrinkmannGraph())
+        False
+    """
     return residue(g) == 2
 
 #a necessary condition for being even hole free
