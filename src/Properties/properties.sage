@@ -1847,8 +1847,45 @@ def has_residue_equals_two(g):
     """
     return residue(g) == 2
 
-#a necessary condition for being even hole free
 def is_chordal_or_not_perfect(g):
+    """
+    Evaluates if graph ``g`` is either chordal or not perfect.
+
+    There is a known theorem that every chordal graph is perfect.
+
+    OUTPUT:
+
+    Returns ``True`` iff ``g`` is chordal OR (inclusive or) ``g`` is not
+    perfect.
+
+    EXAMPLES:
+
+        sage: is_chordal_or_not_perfect(graphs.DiamondGraph())
+        True
+
+        sage: is_chordal_or_not_perfect(graphs.CycleGraph(5))
+        True
+
+        sage: is_chordal_or_not_perfect(graphs.LollipopGraph(5,3))
+        True
+
+        sage: is_chordal_or_not_perfect(graphs.CycleGraph(4))
+        False
+
+        sage: is_chordal_or_not_perfect(graphs.HexahedralGraph())
+        False
+
+    Vacuously chordal cases ::
+
+        sage: is_chordal_or_not_perfect(Graph(0))
+        True
+
+        sage: is_chordal_or_not_perfect(Graph(1))
+        True
+
+        sage: is_complement_of_chordal(Graph(4))
+        True
+    """
     if g.is_chordal():
         return true
     else:
