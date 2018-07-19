@@ -1761,10 +1761,59 @@ def is_geotropic_plant(g):
     """
     return (independence_number(g) == card_negative_eigenvalues(g))
 
-#means has hamiltonian path, true iff g join a single vertex has hamiltonian cycle
 def is_traceable(g):
-     gadd = g.join(Graph(1),labels="integers")
-     return gadd.is_hamiltonian()
+    """
+    Evaluates whether graph ``g`` is traceable.
+
+    A graph ``g`` is traceable iff there exists a Hamiltonian path, i.e. a path
+    which visits all vertices in ``g`` once.
+    This is different from ``is_hamiltonian``, since that checks if there
+    exists a Hamiltonian *cycle*, i.e. a path which then connects backs to
+    its starting point.
+
+    EXAMPLES:
+
+        sage: is_traceable(graphs.CompleteGraph(5))
+        True
+
+        sage: is_traceable(graphs.PathGraph(5))
+        True
+
+        sage: is_traceable(graphs.PetersenGraph())
+        True
+
+        sage: is_traceable(graphs.CompleteGraphs(2))
+        True
+
+        sage: is_traceable(Graph(3))
+        False
+
+        sage: is_traceable(graphs.ClawGraph())
+        False
+
+        sage: is_traceable(graphs.ButterflyGraph())
+        False
+
+    Edge cases ::
+
+        sage: is_traceable(Graph(0))
+        False
+
+        sage: is_traceable(Graph(1))
+        False
+
+    ALGORITHM:
+
+    A graph `G` is traceable iff the join `G'` of `G` with a single new vertex
+    `v` is Hamiltonian, where join means to connect every vertex of `G` to the
+    new vertex `v`.
+    Why? Suppose there exists a Hamiltonian path between `u` and `w` in `G`.
+    Then, in `G'`, make a cycle from `v` to `u` to `w` and back to `v`.
+    For the reverse direction, just note that the additional vertex `v` cannot
+    "help" since Hamiltonian paths can only visit any vertex once.
+    """
+    gadd = g.join(Graph(1),labels="integers")
+    return gadd.is_hamiltonian()
 
 def has_residue_equals_two(g):
     return residue(g) == 2
