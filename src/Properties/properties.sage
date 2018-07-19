@@ -1931,10 +1931,36 @@ def has_alpha_residue_equal_two(g):
     else:
         return independence_number(g) == 2
 
-    # for vizing's independence number conjecture
 def alpha_leq_order_over_two(g):
-    return (2*independence_number(g) <= g.order())
+    """
+    Tests if the independence number of graph ``g`` is at most half its order.
 
+    EXAMPLES:
+
+        sage: alpha_leq_order_over_two(graphs.ButterflyGraph())
+        True
+
+        sage: alpha_leq_order_over_two(graphs.DiamondGraph())
+        True
+
+        sage: alpha_leq_order_over_two(graphs.CoxeterGraph())
+        True
+
+        sage: alpha_leq_order_over_two(Graph(4))
+        False
+
+        sage: alpha_leq_order_over_two(graphs.BullGraph())
+        False
+
+    Edge cases ::
+
+        sage: alpha_leq_order_over_two(Graph(0))
+        True
+
+        sage: alpha_leq_order_over_two(Graph(1))
+        False
+    """
+    return (2*independence_number(g) <= g.order())
 
 #in a luo-zhao sufficient condition for alpha <= n/2 (vizing's ind number conj)
 def order_leq_twice_max_degree(g):
