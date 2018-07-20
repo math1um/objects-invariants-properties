@@ -2775,7 +2775,7 @@ has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
 is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
 Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph,
-is_haggkvist_nicoghossian]
+is_haggkvist_nicoghossian, is_chromatic_index_critical]
 
 removed_properties = [is_pebbling_class0]
 
