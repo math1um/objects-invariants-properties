@@ -1991,6 +1991,84 @@ def order_leq_twice_max_degree(g):
     return (g.order() <= 2*max(g.degree()))
 
 def is_chromatic_index_critical(g):
+    """
+    Evaluates whether graph ``g`` is chromatic index critical.
+
+    Let `\chi(G)` denote the chromatic index of a graph `G`.
+    Then `G` is chromatic index critical if `\chi(G-e) < \chi(G)` (strictly
+    less than) for all `e \in G` AND if (by definition) `G` is class 2.
+
+    See [FW1977]_ for a more extended definition and discussion.
+
+    We initially found it surprising that `G` is required to be class 2; for
+    example, the Star Graph is a class 1 graph which satisfies the rest of
+    the definition. We have found articles which equivalently define critical
+    graphs as class 2 graphs which become class 1 when any edge is removed.
+    Perhaps this latter definition inspired the one we state above?
+
+    Max degree is undefined on the empty graph, so ``is_class`` is also
+    undefined. Therefore this property is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: is_chromatic_index_critical(Graph('Djk'))
+        True
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(3))
+        True
+
+        sage: is_chromatic_index_critical(graphs.CycleGraph(5))
+        True
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(5))
+        False
+
+        sage: is_chromatic_index_critical(graphs.PetersenGraph())
+        False
+
+        sage: is_chromatic_index_critical(graphs.FlowerSnark())
+        False
+
+    Non-trivially disconnected graphs ::
+
+        sage: is_chromatic_index_critical(graphs.CycleGraph(4).disjoint_union(graphs.CompleteGraph(4)))
+        False
+
+    Class 1 graphs ::
+
+        sage: is_chromatic_index_critical(Graph(1))
+        False
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(4))
+        False
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(2))
+        False
+
+        sage: is_chromatic_index_critical(graphs.StarGraph(4))
+        False
+
+    ALGORITHM:
+
+    This function uses a series of tricks to reduce the number of cases that
+    need to be considered, before finally checking in the obvious way.
+
+    First, if a graph has more than 1 non-trivial connected component, then
+    return ``False``. This is because in a graph with multiple such components,
+    removing any edges from the smaller component cannot affect the chromatic
+    index.
+
+    Second, check if the graph is class 2. If not, stop and return ``False``.
+
+    Finally, identify isomorphic edges using the line graph and its orbits.
+    We then need only check the non-equivalent edges to see that they reduce
+    the chromatic index when deleted.
+
+    REFERENCES:
+
+    .. [FW1977]     \S. Fiorini and R.J. Wilson, "Edge-colourings of graphs".
+                    Pitman Publishing, London, UK, 1977.
+    """
     component_sizes = g.connected_components_sizes()
     if len(component_sizes) > 1:
         if component_sizes[1] > 1:
