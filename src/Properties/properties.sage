@@ -1990,29 +1990,28 @@ def order_leq_twice_max_degree(g):
     """
     return (g.order() <= 2*max(g.degree()))
 
-#not in properties list until meredith graph is computed
-#critical if connected, class 2, and removal of any edge decreases chromatic number
 def is_chromatic_index_critical(g):
-    if not g.is_connected():
-        return False
-    Delta = max(g.degree())
-    chi_e = g.chromatic_index()
-    if chi_e != Delta + 1:
+    component_sizes = g.connected_components_sizes()
+    if len(component_sizes) > 1:
+        if component_sizes[1] > 1:
+            return False
+
+    if chi == max_degree(g):
         return False
 
-    lg=g.line_graph()
-    equiv_lines = lg.automorphism_group(return_group=False,orbits=true)
+    lg = g.line_graph()
+    equiv_lines = lg.automorphism_group(return_group=False, orbits=true)
     equiv_lines_representatives = [orb[0] for orb in equiv_lines]
 
+    gc = g.copy()
     for e in equiv_lines_representatives:
-        gc = copy(g)
         gc.delete_edge(e)
-        chi_e_prime = gc.chromatic_index()
-        if not chi_e_prime < chi_e:
+        chi_prime = gc.chromatic_index()
+        if chi_prime == chi:
             return False
+        gc.add_edge(e)
     return True
 
-#not in properties list
 #alpha(g-e) > alpha(g) for *every* edge g
 def is_alpha_critical(g):
     #if not g.is_connected():
