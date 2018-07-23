@@ -1014,6 +1014,59 @@ def has_even_order(g):
     """
     return g.order() % 2 == 0
 
+def is_maximal_triangle_free(g):
+    """
+    Evaluates whether graphs ``g`` is a maximal triangle-free graph
+
+    Maximal triangle-free means that adding any edge to ``g`` will create a
+    triangle.
+    If ``g`` is not triangle-free, then returns ``False``.
+
+    EXAMPLES:
+
+        sage: is_maximal_triangle_free(graphs.CompleteGraph(2))
+        True
+
+        sage: is_maximal_triangle_free(graphs.CycleGraph(5))
+        True
+
+        sage: is_maximal_triangle_free(Graph('Esa?'))
+        True
+
+        sage: is_maximal_triangle_free(Graph('KsaCCA?_C?O?'))
+        True
+
+        sage: is_maximal_triangle_free(graphs.PathGraph(5))
+        False
+
+        sage: is_maximal_triangle_free(Graph('LQY]?cYE_sBOE_'))
+        False
+
+        sage: is_maximal_triangle_free(graphs.HouseGraph())
+        False
+
+    Edge cases ::
+
+        sage: is_maximal_triangle_free(Graph(0))
+        False
+
+        sage: is_maximal_triangle_free(Graph(1))
+        False
+
+        sage: is_maximal_triangle_free(Graph(3))
+        False
+    """
+    if not g.is_triangle_free():
+        return False
+    g_comp = g.complement()
+    g_copy = g.copy()
+    for e in g_comp.edges():
+        g_copy.add_edge(e)
+        if g.is_triangle_free():
+            return False
+        g_copy.delete_edge(e)
+    return True
+
 def is_locally_two_connected(g):
     """
 
