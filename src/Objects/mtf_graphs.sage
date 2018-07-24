@@ -1,10 +1,16 @@
-# Maximal triangle-free graphs
-# File built from graph6 string at https://hog.grinvin.org/MTF
-# Pulled graphs up to 16 vertices. Up to 18 are available online.
+"""
+    Maximal triangle-free graphs
+    File built from graph6 string at https://hog.grinvin.org/MTF
+    Pulled graphs up to 16 vertices. Up to 18 are available online.
+
+    To use, call the function ``load_mtf_graphs(n)``.
+"""
 
 def load_mtf_graphs(n):
     """
     Returns a nested list of all maximal triangle-free graphs up to ``n`` vertices.
+
+    If ``n == 17``, then pulls from mtf_graphs_n17.sage.
 
     OUTPUT:
 
@@ -19,8 +25,13 @@ def load_mtf_graphs(n):
     graphs = []
     for i in xrange(0, n + 1):
         graphs_i = []
-        for g6str in mtf_strings[i]:
-            graphs_i.append(Graph(g6str))
+        if i == 17:
+            load("mtf_graphs_n17.sage")
+            for g6str in mtf_string_n17:
+                graphs_i.append(Graph(g6str))
+        else:
+            for g6str in mtf_strings[i]:
+                graphs_i.append(Graph(g6str))
         graphs.append(graphs_i)
     return graphs
 
