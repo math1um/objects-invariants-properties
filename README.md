@@ -20,9 +20,9 @@ Conjecturing also creates a feedback loop, since once proved/disproved they can 
 
 We note that GitHub has proven a valuable tool for this project. For one, it enables us to share this repository with a growing community of researchers. Second, it enables us to recruit students (many with interests in Computer Science, Math, or both) to contribute to OIP at a much faster rate than we could alone. These contributions are often organized as part of summer workshops.
 
-See https://arxiv.org/abs/1801.01814 for a more extensive introduction to the motivations for this project, past workshops, some of the results produced with OIP, and a history of efforts in automated conjecturing.
+📚 See https://arxiv.org/abs/1801.01814 for a more extensive introduction to the motivations for this project, past workshops, some of the results produced with OIP, and a history of efforts in automated conjecturing.
 
-## Getting started
+## Getting started :bowtie: 🔰
 
 The below instructions should enable anyone to start using OIP-GT. If you are unable to get started, please submit an Issue if there's a specific problem, or contact us (see "Maintained by" below) otherwise.
 
@@ -49,30 +49,7 @@ program [CONJECTURING (available on GitHub)](http://nvcleemp.github.io/conjectur
 
 ### Tutorials for Python / Sage / git
 
-## More documentation
-
-## How to use / Examples
-
-## Contributing
-
-Instructions for novices...
-
-Guidelines for not...
-
-## Maintained by:
- - Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
- - Nick Van Cleemput (@nvcleemp).
-
-Other significant contributors include:
- - Reid Barden (@rbarden), Summery 2017. Web: https://reidbarden.com/
- - Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
-
-
-
-#########################
-# Old stuff below.
-
-
+## Examples / how to use
 
 During development the project is split over multiple file, but during the build process everything from the objects (graphs), invariants and properties part will be compiled into a single file.
 
@@ -85,8 +62,6 @@ $ cd path/to/project
 $ git clone https://github.com/math1um/objects-invariants-properties
 ```
 
-NOTE ON BRANCHES: The master branch is known to load with no issues on Mac running Mac OSX v10.11.6 using a bare bones installation of SageMath version 7.6, Release Date: 2017-03-25. However, it is known to throw some errors on RHELS 7.3 with the gap_packages installed. The compile_server branch will be used to test this issue.
-
 This should create a subdirectory called `objects-invariants-properties`. You can cd to this directory and run the make script.
 
 ```sh
@@ -95,13 +70,6 @@ $ make build
 ```
 
 This should create a subdirectory called `build` containing some Sage files and a database file. Copy these files to the root of your project, or to the location from which you want to run Sage.
-
-
-##### Setup
-
-```
-##### Loading the file
-
 Either get the files using the way described in Setup, or download the zip file on our website. Make sure that the files are located in the directory from which you will run Sage, and not in a subdirectory. Note that to use these files on CoCalc within a Sagemath worksheet, this means that the files should be placed in the home directory of the project. Now you can load `gt.sage`. GT all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs, Sloane Graphs, or the database utilities. Use the utility methods to load the DIMACS and Sloane graphs. This populates the `dimacs_graphs` list.
 
 ```sage
@@ -129,6 +97,55 @@ sage: precomputed_invs = precomputed_invariants_for_conjecture()
 sage: conjecture(graph_objects, efficiently_computable_invariants, 0, precomputed = precomputed_invs)
 ```
 
-##### Known Issues
+## Where to find more documentation 📜
 
-The graphs McLaughlinGraph and LocalMcLaughlinGraph, that are built in to sage, cannot be created on a barebones installation of Sage. They require extra packages. This is not an issue on Cocalc/SageMathCloud.
+## Contributing
+
+Note: Please don't file an issue to ask a question. See "Maintained by" below for contact information.
+
+### Reporting bugs 🐞🐛 and Suggesting improvements 👍
+
+Have you found a bug / problem with OIP-GT 🐞🐛? Do you have a suggestion for an improvement? We track both as [GitHub issues](https://github.com/math1um/objects-invariants-properties/issues).
+
+Note that improvements / enhancements may include requests for new functions, requests for additional graphs, suggestions for improving usability, documentation, or reliability, and more.
+
+ 1. Before submitting a report, please make sure you're using the [latest release of OIP-GT](https://github.com/math1um/objects-invariants-properties/releases). Maybe your bug/suggestion has already been resolved.
+
+ 2. Next, search the list of issues for related reports to see if the problem has already been reported / feature has already been suggested. If it has and the issue is still open, you can add any new information as a comment to the existing issue instead of opening a new one.
+
+ 3. If you've reached this step, then you should open an issue! See our [Contributing Guidelines](CONTRIBUTING.md) for details on what information to provide. In general, the more information, the better.
+
+Keep in mind that we have a small team, so be sure to describe the impact of your bug (is it critical, or just bothersome?) / why your suggestion is important (how many Fields Medals will this result in?). If you'd like things done sooner than later, see below to see how YOU can contribute the code.
+
+### Submitting code (via pull requests) 🎁💘
+
+Contributions can include resolving any open [issue](https://github.com/math1um/objects-invariants-properties/issues), such as programming a new property, adding some precomputed values to the database, or improving documentation.
+
+Anybody is welcome to contribute! If you're not sure where to start, please, please contact us. We want to get more researchers/developers involved in contributing to OIP-GT. There are plenty of "beginner" issues available.
+
+To contribute, you'll need to be familiar with GitHub, Pull requests, and probably with programming sage. You can find some Sage tutorials linked above. Here are some guides to help with GitHub:
+ - [GitHub Hello World](https://guides.github.com/activities/hello-world/)
+ - [Forking Projects and Pull Requests](https://guides.github.com/activities/forking/)
+ - [Mastering issues and working with other devs](https://guides.github.com/features/issues/)
+
+The summarized version of the process includes:
+ 1. Find an issue you'd like to help with. If you have a bug or feature request you'd like to resolve, then you should still begin by following the steps above to create an issue (that way we understand what bug or feature you're resolving!). Otherwise, you should check out the list of issues to find something that interests you.
+ 2. Clone OIP-GT so that you can edit the source code.
+ 3. Make changes. See our [Contributing Guidelines](CONTRIBUTING.md) for code requirements and expectations!
+ 4. Submit a pull request.
+ 5. Work with us to answer any questions and make any improvements as we review your pull request.
+ 6. Party! 🎉
+
+See our [Contributing Guidelines](CONTRIBUTING.md) for code requirements and expectations, and for a more detailed description of our review process.
+
+## Maintained by 😎
+Contact:
+- Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
+
+Current maintainers:
+ - Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
+ - Nico Van Cleemput (@nvcleemp).
+ - Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
+
+Past significant contributions by:
+ - Reid Barden (@rbarden), Summery 2017. Web: https://reidbarden.com/
