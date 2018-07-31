@@ -1,42 +1,88 @@
-#GRAPH PROPERTIES
+# GRAPH PROPERTIES
 
 def has_star_center(g):
     """
-    tests if graph has vertex adjacent to all others, also known as "universal vertex"
+    Evalutes whether graph ``g`` has a vertex adjacent to all others.
+
+    EXAMPLES:
+
         sage: has_star_center(flower_with_3_petals)
         True
+
         sage: has_star_center(c4)
         False
-    """
-    n = g.order()
-    return max_degree(g) == (n-1)
 
+    Edge cases ::
 
-#split graphs have the property that their complements are chordal
-def is_complement_of_chordal(g):
-    """
-    tests is a graph is a complement of a chordal graph
-        sage: is_complement_of_chordal(p4)
+        sage: has_star_center(Graph(1))
         True
-        sage: is_complement_of_chordal(p5)
+
+        sage: has_star_center(Graph(0))
         False
     """
-    h = g.complement()
-    return h.is_chordal()
+    return (g.order() - 1) in g.degree()
+
+def is_complement_of_chordal(g):
+    """
+    Evaluates whether graph ``g`` is a complement of a chordal graph.
+
+    A chordal graph is one in which all cycles of four or more vertices have a
+    chord, which is an edge that is not part of the cycle but connects two
+    vertices of the cycle.
+
+    EXAMPLES:
+
+        sage: is_complement_of_chordal(p4)
+        True
+
+        sage: is_complement_of_chordal(Graph(4))
+        True
+
+        sage: is_complement_of_chordal(p5)
+        False
+
+    Any graph without a 4-or-more cycle is vacuously chordal. ::
+
+        sage: is_complement_of_chordal(graphs.CompleteGraph(4))
+        True
+
+        sage: is_complement_of_chordal(Graph(3))
+        True
+
+        sage: is_complement_of_chordal(Graph(0))
+        True
+    """
+    return g.complement().is_chordal()
 
 def pairs_have_unique_common_neighbor(g):
     """
-    True if each pair of vertices in g has exactly one common neighbor.
+    Evalaute if each pair of vertices in ``g`` has exactly one common neighbor.
 
-    Related to the Friendship Theorem: the only connected graphs where every pair of vertices
-    has a unique neighbor are flowers.
+    Also known as the friendship property.
+    By the Friendship Theorem, the only connected graphs with the friendship
+    property are flowers.
 
-    sage: pairs_have_unique_common_neighbor(flower(5))
-    True
-    sage: pairs_have_unique_common_neighbor(k3)
-    True
-    sage: pairs_have_unique_common_neighbor(k4)
-    False
+    EXAMPLES:
+
+        sage: pairs_have_unique_common_neighbor(flower(5))
+        True
+
+        sage: pairs_have_unique_common_neighbor(k3)
+        True
+
+        sage: pairs_have_unique_common_neighbor(k4)
+        False
+
+        sage: pairs_have_unique_common_neighbor(graphs.CompleteGraph(2))
+        False
+
+    Vacuous cases ::
+
+        sage: pairs_have_unique_common_neighbor(Graph(1))
+        True
+
+        sage: pairs_have_unique_common_neighbor(Graph(0))
+        True
     """
     from itertools import combinations
     for (u,v) in combinations(g.vertices(), 2):
@@ -46,12 +92,48 @@ def pairs_have_unique_common_neighbor(g):
 
 def is_distance_transitive(g):
     """
-    True if all a,b,u,v satisfy dist(a,b) = dist(u,v) => there is an automorphism sending a->u and b->v
+    Evaluates if graph ``g`` is distance transitive.
 
-    sage: is_distance_transitive(graphs.Tutte12Cage())
-    False
-    sage: is_distance_transitive(graphs.FosterGraph())
-    True
+    A graph is distance transitive if all a,b,u,v satisfy that
+    dist(a,b) = dist(u,v) implies there's an automorphism with a->u and b->v.
+
+    EXAMPLES:
+
+        sage: is_distance_transitive(graphs.CompleteGraph(4))
+        True
+
+        sage: is_distance_transitive(graphs.PetersenGraph())
+        True
+
+        sage: is_distance_transitive(Graph(3))
+        True
+
+        sage: is_distance_transitive(graphs.ShrikhandeGraph())
+        False
+
+    This method accepts disconnected graphs. ::
+
+        sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
+        True
+
+        sage: is_distance_transitive(graphs.CompleteGraph(2).disjoint_union(Graph(2)))
+        False
+
+    Vacuous cases ::
+
+        sage: is_distance_transitive(Graph(0))
+        True
+
+        sage: is_distance_transitive(Graph(1))
+        True
+
+        sage: is_distance_transitive(Graph(2))
+        True
+
+    ... WARNING ::
+
+        This method calls, via the automorphism group, the Gap package. This
+        package behaves badly with most threading or multiprocessing tools.
     """
     from itertools import combinations
     dist_dict = g.distance_all_pairs()
@@ -60,185 +142,462 @@ def is_distance_transitive(g):
     for d in g.distances_distribution():
         sameDistPairs = []
         for (u,v) in combinations(g.vertices(), 2):
-            if dist_dict[u].get(v, +Infinity) == d: # By default, no entry if disconnected. We substitute +Infinity.
+            # By default, no entry if disconnected. We substitute +Infinity.
+            if dist_dict[u].get(v, +Infinity) == d:
                 sameDistPairs.append(Set([u,v]))
         if len(sameDistPairs) >= 2:
-            if not(len(sameDistPairs) == len(auto_group.orbit(sameDistPairs[0], action = "OnSets"))):
+            if len(sameDistPairs) != len(auto_group.orbit(sameDistPairs[0], action = "OnSets")):
                 return False
     return True
 
-#sufficient condition for hamiltonicity
 def is_dirac(g):
-    n = g.order()
-    deg = g.degree()
-    delta=min(deg)
-    if n/2 <= delta and n > 2:
-        return True
-    else:
-        return False
+    """
+    Evaluates if graph ``g`` has order at least 3 and min. degree at least n/2.
 
-#sufficient condition for hamiltonicity
+    See Dirac's Theorem: If graph is_dirac, then it is hamiltonian.
+
+    EXAMPLES:
+
+        sage: is_dirac(graphs.CompleteGraph(6))
+        True
+
+        sage: is_dirac(graphs.CompleteGraph(3))
+        True
+
+        sage: is_dirac(graphs.CompleteGraph(2))
+        False
+
+        sage: is_dirac(graphs.CycleGraph(5))
+        False
+    """
+    n = g.order()
+    return n > 2 and min(g.degree()) >= n/2
+
 def is_ore(g):
+    """
+    Evaluate if deg(v)+deg(w)>=n for all non-adjacent pairs v,w in graph ``g``.
+
+    See Ore's Theorem: If graph is_ore, then it is hamiltonian.
+
+    EXAMPLES:
+
+        sage: is_ore(graphs.CompleteGraph(5))
+        True
+
+        sage: is_ore(graphs.CompleteGraph(2))
+        True
+
+        sage: is_ore(dart)
+        False
+
+        sage: is_ore(Graph(2))
+        False
+
+        sage: is_ore(graphs.CompleteGraph(2).disjoint_union(Graph(1)))
+        False
+
+    Vacous cases ::
+
+        sage: is_ore(Graph(0))
+        True
+
+        sage: is_ore(Graph(1))
+        True
+    """
     A = g.adjacency_matrix()
     n = g.order()
     D = g.degree()
-    for i in range(n):
-        for j in range(i):
+    for i in xrange(n):
+        for j in xrange(i):
             if A[i][j]==0:
                 if D[i] + D[j] < n:
                     return False
     return True
 
-#sufficient condition for hamiltonicity
 def is_haggkvist_nicoghossian(g):
-    k = g.vertex_connectivity()
-    n = g.order()
-    delta = min(g.degree())
-    if k >= 2 and delta >= (1.0/3)*(n+k):
-        return True
-    else:
-        return False
+    """
+    Evaluates if g is 2-connected and min degree >= (n + vertex_connectivity)/3.
 
-#sufficient condition for hamiltonicity
+    INPUT:
+
+    - ``g`` -- graph
+
+    EXAMPLES:
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(3))
+        True
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(5))
+        True
+
+        sage: is_haggkvist_nicoghossian(graphs.CycleGraph(5))
+        False
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3)
+        False
+
+        sage: is_haggkvist_nicoghossian(Graph(1))
+        False
+
+        sage: is_haggkvist_nicoghossian(graphs.CompleteGraph(2))
+        False
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_haggkvist_nicoghossian``, then it is Hamiltonian.
+
+    .. [HN1981]     \R. Häggkvist and G. Nicoghossian, "A remark on Hamiltonian
+                    cycles". Journal of Combinatorial Theory, Series B, 30(1):
+                    118--120, 1981.
+    """
+    k = g.vertex_connectivity()
+    return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
+
 def is_genghua_fan(g):
+    """
+    Evaluates if graph ``g`` satisfies a condition for Hamiltonicity by G. Fan.
+
+    OUTPUT:
+
+    Returns ``True`` if ``g`` is 2-connected and satisfies that
+    `dist(u,v)=2` implies `\max(deg(u), deg(v)) \geq n/2` for all
+    vertices `u,v`.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: is_genghua_fan(graphs.DiamondGraph())
+        True
+
+        sage: is_genghua_fan(graphs.CycleGraph(4))
+        False
+
+        sage: is_genghua_fan(graphs.ButterflyGraph())
+        False
+
+        sage: is_genghua_fan(Graph(1))
+        False
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_genghua_fan``, then it is Hamiltonian.
+
+    .. [Fan1984]    Geng-Hua Fan, "New sufficient conditions for cycles in
+                    graphs". Journal of Combinatorial Theory, Series B, 37(3):
+                    221--227, 1984.
+    """
     if not is_two_connected(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
     V = g.vertices()
     n = g.order()
-    for i in range(n):
-        for j in range (i):
-            if Dist[V[i]][V[j]]==2 and max(D[i],D[j]) < n/2.0:
+    for i in xrange(n):
+        for j in xrange(i):
+            if Dist[V[i]][V[j]] == 2 and max(D[i], D[j]) < n / 2.0:
                 return False
     return True
 
-#sufficient condition for hamiltonicity
 def is_planar_transitive(g):
-    if g.order() > 2 and g.is_planar() and g.is_vertex_transitive():
-        return True
-    else:
-        return False
+    """
+    Evaluates whether graph ``g`` is planar and is vertex-transitive.
 
-def neighbors_set(g,S):
-    N = set()
-    for v in S:
-        for n in g.neighbors(v):
-            N.add(n)
-    return list(N)
+    EXAMPLES:
 
-#sufficient condition for hamiltonicity
+        sage: is_planar_transitive(graphs.HexahedralGraph())
+        True
+
+        sage: is_planar_transitive(graphs.CompleteGraph(2))
+        True
+
+        sage: is_planar_transitive(graphs.FranklinGraph())
+        False
+
+        sage: is_planar_transitive(graphs.BullGraph())
+        False
+
+    Vacuous cases ::
+
+        sage: is_planar_transitive(Graph(1))
+        True
+
+    Sage defines `Graph(0).is_vertex_transitive() == False``. ::
+
+        sage: is_planar_transitive(Graph(0))
+        False
+    """
+    return g.is_planar() and g.is_vertex_transitive()
+
 def is_generalized_dirac(g):
-    n = g.order()
+    """
+    Test if ``graph`` g meets condition in a generalization of Dirac's Theorem.
+
+    OUTPUT:
+
+    Returns ``True`` if g is 2-connected and for all non-adjacent u,v,
+    the cardinality of the union of neighborhood(u) and neighborhood(v)
+    is `>= (2n-1)/3`.
+
+    EXAMPLES:
+
+        sage: is_generalized_dirac(graphs.HouseGraph())
+        True
+
+        sage: is_generalized_dirac(graphs.PathGraph(5))
+        False
+
+        sage: is_generalized_dirac(graphs.DiamondGraph())
+        False
+
+        sage: is_generalized_dirac(Graph(1))
+        False
+
+    REFERENCES:
+
+    Theorem: If graph g is_generalized_dirac, then it is Hamiltonian.
+
+    .. [FGJS1989]   \R.J. Faudree, Ronald Gould, Michael Jacobson, and
+                    R.H. Schelp, "Neighborhood unions and hamiltonian
+                    properties in graphs". Journal of Combinatorial
+                    Theory, Series B, 47(1): 1--9, 1989.
+    """
+    from itertools import combinations
+
     if not is_two_connected(g):
         return False
-    for p in Subsets(g.vertices(),2):
-        if g.is_independent_set(p):
-            if len(neighbors_set(g,p)) < (2.0*n-1)/3:
+    for (u,v) in combinations(g.vertices(), 2):
+        if not g.has_edge(u,v):
+            if len(neighbors_set(u, v)) < (2.0 * g.order() - 1) / 3:
                 return False
     return True
 
-#necessary condition for hamiltonicity
 def is_van_den_heuvel(g):
-    n = g.order()
-    lc = sorted(graphs.CycleGraph(n).laplacian_matrix().eigenvalues())
-    lg = sorted(g.laplacian_matrix().eigenvalues())
+    """
+    Evaluates if g meets an eigenvalue condition related to Hamiltonicity.
 
-    for lci, lgi in zip(lc, lg):
-        if lci > lgi:
+    INPUT:
+
+    - ``g`` -- graph
+
+    OUTPUT:
+
+    Let ``g`` be of order `n`.
+    Let `A_H` denote the adjacency matrix of a graph `H`, and `D_H` denote
+    the matrix with the degrees of the vertices of `H` on the diagonal.
+    Define `Q_H = D_H + A_H` and `L_H = D_H - A_H` (i.e. the Laplacian).
+    Finally, let `C` be the cycle graph on `n` vertices.
+
+    Returns ``True`` if the `i`-th eigenvalue of `L_C` is at most the `i`-th
+    eigenvalue of `L_g` and the `i`-th eigenvalue of `Q_C` is at most the
+    `i`-th eigenvalue of `Q_g for all `i`.
+
+    EXAMPLES:
+
+        sage: is_van_den_heuvel(graphs.CycleGraph(5))
+        True
+
+        sage: is_van_den_heuvel(graphs.PetersenGraph())
+        False
+
+    REFERENCES:
+
+    Theorem: If a graph is Hamiltonian, then it ``is_van_den_heuvel``.
+
+    .. [Heu1995]    \J.van den Heuvel, "Hamilton cycles and eigenvalues of
+                    graphs". Linear Algebra and its Applications, 226--228:
+                    723--730, 1995.
+
+    TESTS::
+
+        sage: is_van_den_heuvel(Graph(0))
+        False
+
+        sage: is_van_den_heuvel(Graph(1))
+        True
+    """
+    cycle_n = graphs.CycleGraph(g.order())
+
+    cycle_laplac_eigen = sorted(cycle_n.laplacian_matrix().eigenvalues())
+    g_laplac_eigen = sorted(g.laplacian_matrix().eigenvalues())
+    for cycle_lambda_i, g_lambda_i in zip(cycle_laplac_eigen, g_laplac_eigen):
+        if cycle_lambda_i > g_lambda_i:
             return False
 
     def Q(g):
-        A = g.adjacency_matrix()
-
-        D = A.parent(0)
-
-        if A.is_sparse():
-            row_sums = {}
-            for (i,_), entry in A.dict().iteritems():
-                row_sums[i] = row_sums.get(i, 0) + entry
-            for i in range(A.nrows()):
-                D[i,i] += row_sums.get(i, 0)
-        else:
-            row_sums=[sum(v) for v in A.rows()]
-            for i in range(A.nrows()):
-                D[i,i] += row_sums[i]
-
+        A = g.adjacency_matrix(sparse=False)
+        D = matrix(g.order(), sparse=False)
+        row_sums = [sum(r) for r in A.rows()]
+        for i in xrange(A.nrows()):
+            D[i,i] = row_sums[i]
         return D + A
-
-    qc = sorted(Q(graphs.CycleGraph(n)).eigenvalues())
-    qg = sorted(Q(g).eigenvalues())
-
-    for qci, qgi in zip(qc, qg):
-        if qci > qgi:
+    cycle_q_matrix = sorted(Q(cycle_n).eigenvalues())
+    g_q_matrix = sorted(Q(g).eigenvalues())
+    for cycle_q_lambda_i, g_q_lambda_i in zip(cycle_q_matrix, g_q_matrix):
+        if cycle_q_lambda_i > g_q_lambda_i:
             return False
 
     return True
 
-#necessary condition for hamiltonicity
 def is_two_connected(g):
     """
-    Equivalent to Graph.is_biconnected(), but we prefer our name
+    Evaluates whether graph ``g`` is 2-connected.
 
-    Returns True if the graph is 2-connected and False otherwise. A graph is
-    2-connected if the removal of any single vertex gives a connected graph.
+    A 2-connected graph is a connected graph on at least 3 vertices such that
+    the removal of any single vertex still gives a connected graph.
+    Follows convention that complete graph `K_n` is `n-1`-connected.
 
-    If a graph has fewer than 3 vertices, a ValueError is raised.
+    Almost equivalent to ``Graph.is_biconnected()``. We prefer our name. AND,
+    while that method defines that ``graphs.CompleteGraph(2)`` is biconnected,
+    we follow the convention that `K_n` is `n-1`-connected, so `K_2` is
+    only 1-connected.
+
+    EXAMPLES:
 
         sage: is_two_connected(graphs.CycleGraph(5))
         True
+
+        sage: is_two_connected(graphs.CompleteGraph(3))
+        True
+
         sage: is_two_connected(graphs.PathGraph(5))
         False
+
         sage: is_two_connected(graphs.CompleteGraph(2))
-        Traceback (most recent call last):
-            File "", line 20, in is_two_connected
-        ValueError: is_two_connected is only defined on graphs with at least 3 vertices.
+        False
+
+        sage: is_two_connected(Graph(3))
+        False
+
+    Edge cases ::
+
+        sage: is_two_connected(Graph(0))
+        False
+
+        sage: is_two_connected(Graph(1))
+        False
     """
-    if g.order() < 3:
-        raise ValueError("is_two_connected is only defined on graphs with at least 3 vertices.")
+    if g.is_isomorphic(graphs.CompleteGraph(2)):
+        return False
     return g.is_biconnected()
 
-#part of pebbling class0 sufficient condition
 def is_three_connected(g):
     """
-    Returns True if the graph is 3-connected and False otherwise. A graph is
-    3-connected if the removal of any single vertex or any pair of vertices
-    gives a connected graph. By definition a graph on 3 or less vertices is
-    not 3-connected.
+    Evaluates whether graph ``g`` is 3-connected.
+
+    A 3-connected graph is a connected graph on at least 4 vertices such that
+    the removal of any two vertices still gives a connected graph.
+    Follows convention that complete graph `K_n` is `n-1`-connected.
+
+    EXAMPLES:
 
         sage: is_three_connected(graphs.PetersenGraph())
         True
+
         sage: is_three_connected(graphs.CompleteGraph(4))
         True
+
         sage: is_three_connected(graphs.CycleGraph(5))
         False
+
         sage: is_three_connected(graphs.PathGraph(5))
         False
+
         sage: is_three_connected(graphs.CompleteGraph(3))
         False
+
         sage: is_three_connected(graphs.CompleteGraph(2))
         False
-        sage: is_three_connected(graphs.CompleteGraph(1))
+
+        sage: is_three_connected(Graph(4))
         False
+
+    Edge cases ::
+
+        sage: is_three_connected(Graph(0))
+        False
+
+        sage: is_three_connected(Graph(1))
+        False
+
+    .. WARNING::
+
+        Implementation requires Sage 8.2+.
     """
-    if g.order() <= 3:
-        return False
-    from itertools import combinations
-    for s in combinations(g.vertices(), g.order() - 2):
-        if not g.subgraph(s).is_connected():
-            return False
-    return True
+    return g.vertex_connectivity(k = 3)
 
 def is_four_connected(g):
     """
-    True if g is at least four connected, i.e. must remove at least 4 vertices to disconnect graph
+    Evaluates whether ``g`` is 4-connected.
 
-    Implementation requires Sage 8.2+.
+    A 4-connected graph is a connected graph on at least 5 vertices such that
+    the removal of any three vertices still gives a connected graph.
+    Follows convention that complete graph `K_n` is `n-1`-connected.
+
+    EXAMPLES:
+
+
+        sage: is_four_connected(graphs.CompleteGraph(5))
+        True
+
+        sage: is_four_connected(graphs.PathGraph(5))
+        False
+
+        sage: is_four_connected(Graph(5))
+        False
+
+        sage: is_four_connected(graphs.CompleteGraph(4))
+        False
+
+    Edge cases ::
+
+        sage: is_four_connected(Graph(0))
+        False
+
+        sage: is_four_connected(Graph(1))
+        False
+
+    .. WARNING::
+
+        Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 4)
 
-#sufficient condition for hamiltonicity
 def is_lindquester(g):
+    """
+    Test if graph ``g`` meets a neighborhood union condition for Hamiltonicity.
+
+    OUTPUT:
+
+    Let ``g`` be of order `n`.
+
+    Returns ``True`` if ``g`` is 2-connected and for all vertices `u,v`,
+    `dist(u,v) = 2` implies that the cardinality of the union of
+    neighborhood(`u`) and neighborhood(`v`) is `\geq (2n-1)/3`.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: is_lindquester(graphs.HouseGraph())
+        True
+
+        sage: is_lindquester(graphs.OctahedralGraph())
+        True
+
+        sage: is_lindquester(graphs.PathGraph(3))
+        False
+
+        sage: is_lindquester(graphs.DiamondGraph())
+        False
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_lindquester``, then it is Hamiltonian.
+
+    .. [Lin1989]    \T.E. Lindquester, "The effects of distance and
+                    neighborhood union conditions on hamiltonian properties
+                    in graphs". Journal of Graph Theory, 13(3): 335-352,
+                    1989.
+    """
     if not is_two_connected(g):
         return False
     D = g.distance_all_pairs()
@@ -252,34 +611,191 @@ def is_lindquester(g):
     return True
 
 def is_complete(g):
+    """
+    Tests whether ``g`` is a complete graph.
+
+    OUTPUT:
+
+    Returns ``True`` if ``g`` is a complete graph; returns ``False`` otherwise.
+    A complete graph is one where every vertex is connected to every others
+    vertex.
+
+    EXAMPLES:
+
+        sage: is_complete(graphs.CompleteGraph(1))
+        True
+
+        sage: is_complete(graphs.CycleGraph(3))
+        True
+
+        sage: is_complete(graphs.CompleteGraph(6))
+        True
+
+        sage: is_complete(Graph(0))
+        True
+
+        sage: is_complete(graphs.PathGraph(5))
+        False
+
+        sage: is_complete(graphs.CycleGraph(4))
+        False
+    """
     n = g.order()
     e = g.size()
     if not g.has_multiple_edges():
         return e == n*(n-1)/2
-
-    D = g.distance_all_pairs()
-    for i in range(n):
-        for j in range(i):
-            if D[V[i]][V[j]] != 1:
-                return False
+    else:
+        D = g.distance_all_pairs()
+        for i in range(n):
+            for j in range(i):
+                if D[V[i]][V[j]] != 1:
+                    return False
     return True
 
 def has_c4(g):
+    """
+    Tests whether graph ``g`` contains Cycle_4 as an *induced* subgraph.
+
+    EXAMPLES:
+
+        sage: has_c4(graphs.CycleGraph(4))
+        True
+
+        sage: has_c4(graphs.HouseGraph())
+        True
+
+        sage: has_c4(graphs.CycleGraph(5))
+        False
+
+        sage: has_c4(graphs.DiamondGraph())
+        False
+    """
     return g.subgraph_search(c4, induced=True) is not None
 
 def is_c4_free(g):
+    """
+    Tests whether graph ``g`` does not contain Cycle_4 as an *induced* subgraph.
+
+    EXAMPLES:
+
+        sage: is_c4_free(graphs.CycleGraph(4))
+        False
+
+        sage: is_c4_free(graphs.HouseGraph())
+        False
+
+        sage: is_c4_free(graphs.CycleGraph(5))
+        True
+
+        sage: is_c4_free(graphs.DiamondGraph())
+        True
+    """
     return not has_c4(g)
 
 def has_paw(g):
+    """
+    Tests whether graph ``g`` contains a Paw as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Paw to be a 4-vertex graph formed by a triangle and a pendant.
+    Returns ``True`` if ``g`` contains a Paw as an induced subgraph.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: has_paw(paw)
+        True
+
+        sage: has_paw(graphs.BullGraph())
+        True
+
+        sage: has_paw(graphs.ClawGraph())
+        False
+
+        sage: has_paw(graphs.DiamondGraph())
+        False
+    """
     return g.subgraph_search(paw, induced=True) is not None
 
 def is_paw_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Paw as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Paw to be a 4-vertex graph formed by a triangle and a pendant.
+    Returns ``False`` if ``g`` contains a Paw as an induced subgraph.
+    Returns ``True`` otherwise.
+
+    EXAMPLES:
+
+        sage: is_paw_free(paw)
+        False
+
+        sage: is_paw_free(graphs.BullGraph())
+        False
+
+        sage: is_paw_free(graphs.ClawGraph())
+        True
+
+        sage: is_paw_free(graphs.DiamondGraph())
+        True
+    """
     return not has_paw(g)
 
 def has_dart(g):
+    """
+    Tests whether graph ``g`` contains a Dart as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Dart to be a 5-vertex graph formed by ``graphs.DiamondGraph()``
+    with and a pendant added to one of the degree-3 vertices.
+    Returns ``True`` if ``g`` contains a Dart as an induced subgraph.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: has_dart(dart)
+        True
+
+        sage: has_dart(umbrella_4)
+        True
+
+        sage: has_dart(graphs.DiamondGraph())
+        False
+
+        sage: has_dart(bridge)
+        False
+    """
     return g.subgraph_search(dart, induced=True) is not None
 
 def is_dart_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Dart as an *induced* subgraph.
+
+    OUTPUT:
+
+    Define a Dart to be a 5-vertex graph formed by ``graphs.DiamondGraph()``
+    with and a pendant added to one of the degree-3 vertices.
+    Returns ``False`` if ``g`` contains a Dart as an induced subgraph.
+    Returns ``True`` otherwise.
+
+    EXAMPLES:
+
+        sage: is_dart_free(dart)
+        False
+
+        sage: is_dart_free(umbrella_4)
+        False
+
+        sage: is_dart_free(graphs.DiamondGraph())
+        True
+
+        sage: is_dart_free(bridge)
+        True
+    """
     return not has_dart(g)
 
 def is_p4_free(g):
@@ -289,67 +805,473 @@ def is_p4_free(g):
     return not has_p4(g)
 
 def has_p4(g):
+    """
+    Tests whether graph ``g`` contains a Path_4 as an *induced* subgraph.
+
+    Might also be known as "is not a cograph".
+
+    EXAMPLES:
+
+        sage: has_p4(graphs.PathGraph(4))
+        True
+
+        sage: has_p4(graphs.CycleGraph(5))
+        True
+
+        sage: has_p4(graphs.CycleGraph(4))
+        False
+
+        sage: has_p4(graphs.CompleteGraph(5))
+        False
+    """
     return g.subgraph_search(p4, induced=True) is not None
 
 def has_kite(g):
+    """
+    Tests whether graph ``g`` contains a Kite as an *induced* subgraph.
+
+    A Kite is a 5-vertex graph formed by a ``graphs.DiamondGraph()`` with a
+    pendant attached to one of the degree-2 vertices.
+
+    EXAMPLES:
+
+        sage: has_kite(kite_with_tail)
+        True
+
+        sage: has_kite(graphs.KrackhardtKiteGraph())
+        True
+
+        sage: has_kite(graphs.DiamondGraph())
+        False
+
+        sage: has_kite(bridge)
+        False
+    """
     return g.subgraph_search(kite_with_tail, induced=True) is not None
 
 def is_kite_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Kite as an *induced* subgraph.
+
+    A Kite is a 5-vertex graph formed by a ``graphs.DiamondGraph()`` with a
+    pendant attached to one of the degree-2 vertices.
+
+    EXAMPLES:
+
+        sage: is_kite_free(kite_with_tail)
+        False
+
+        sage: is_kite_free(graphs.KrackhardtKiteGraph())
+        False
+
+        sage: is_kite_free(graphs.DiamondGraph())
+        True
+
+        sage: is_kite_free(bridge)
+        True
+    """
     return not has_kite(g)
 
 def has_claw(g):
+    """
+    Tests whether graph ``g`` contains a Claw as an *induced* subgraph.
+
+    A Claw is a 4-vertex graph with one central vertex and 3 pendants.
+    This is encoded as ``graphs.ClawGraph()``.
+
+    EXAMPLES:
+
+        sage: has_claw(graphs.ClawGraph())
+        True
+
+        sage: has_claw(graphs.PetersenGraph())
+        True
+
+        sage: has_claw(graphs.BullGraph())
+        False
+
+        sage: has_claw(graphs.HouseGraph())
+        False
+    """
     return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
 
 def is_claw_free(g):
+    """
+    Tests whether graph ``g`` does not contain a Claw as an *induced* subgraph.
+
+    A Claw is a 4-vertex graph with one central vertex and 3 pendants.
+    This is encoded as ``graphs.ClawGraph()``.
+
+    EXAMPLES:
+
+        sage: is_claw_free(graphs.ClawGraph())
+        False
+
+        sage: is_claw_free(graphs.PetersenGraph())
+        False
+
+        sage: is_claw_free(graphs.BullGraph())
+        True
+
+        sage: is_claw_free(graphs.HouseGraph())
+        True
+    """
     return not has_claw(g)
 
 def has_H(g):
+    """
+    Tests whether graph ``g`` contains an H graph as an *induced* subgraph.
+
+    An H graph may also be known as a double fork. It is a 6-vertex graph
+    formed by two Path_3s with their midpoints joined by a bridge.
+
+    EXAMPLES:
+
+        sage: has_H(double_fork)
+        True
+
+        sage: has_H(graphs.PetersenGraph())
+        True
+
+        sage: has_H(ce71) # double_fork with extra edge
+        False
+
+        sage: has_H(graphs.BullGraph())
+        False
+    """
     return g.subgraph_search(double_fork, induced=True) is not None
 
 def is_H_free(g):
+    """
+    Tests if graph ``g`` does not contain a H graph as an *induced* subgraph.
+
+    An H graph may also be known as a double fork. It is a 6-vertex graph
+    formed by two Path_3s with their midpoints joined by a bridge.
+
+    EXAMPLES:
+
+        sage: is_H_free(double_fork)
+        False
+
+        sage: is_H_free(graphs.PetersenGraph())
+        False
+
+        sage: is_H_free(ce71) # double_fork with extra edge
+        True
+
+        sage: is_H_free(graphs.BullGraph())
+        True
+    """
     return not has_H(g)
 
 def has_fork(g):
-    return g.subgraph_search(fork, induced=True) is not None
+    """
+    Tests if graph ``g`` contains a Fork graph as an *induced* subgraph.
+
+    A Fork graph may also be known as a Star_1_1_3. It is a 6-vertex graph
+    formed by a Path_4 with two pendants connected to one end.
+    It is stored as `star_1_1_3`.
+
+    EXAMPLES:
+
+        sage: has_fork(star_1_1_3)
+        True
+
+        sage: has_fork(graphs.PetersenGraph())
+        True
+
+        sage: has_fork(graphs.LollipopGraph(3, 2))
+        False
+
+        sage: has_fork(graphs.HouseGraph())
+        False
+
+        sage: has_fork(graphs.ClawGraph())
+        False
+    """
+    return g.subgraph_search(star_1_1_3, induced=True) is not None
 
 def is_fork_free(g):
+    """
+    Tests if graph ``g`` does not contain Fork graph as an *induced* subgraph.
+
+    A Fork graph may also be known as a Star_1_1_3. It is a 6-vertex graph
+    formed by a Path_4 with two pendants connected to one end.
+    It is stored as `star_1_1_3`.
+
+    EXAMPLES:
+
+        sage: is_fork_free(star_1_1_3)
+        False
+
+        sage: is_fork_free(graphs.PetersenGraph())
+        False
+
+        sage: is_fork_free(graphs.LollipopGraph(3, 2))
+        True
+
+        sage: is_fork_free(graphs.HouseGraph())
+        True
+
+        sage: is_fork_free(graphs.ClawGraph())
+        True
+    """
     return not has_fork(g)
 
 def has_k4(g):
+    """
+    Tests if graph ``g`` contains a `K_4` as an *induced* subgraph.
+
+    `K_4` is the complete graph on 4 vertices.
+
+    EXAMPLES:
+
+        sage: has_k4(graphs.CompleteGraph(4))
+        True
+
+        sage: has_k4(graphs.CompleteGraph(5))
+        True
+
+        sage: has_k4(graphs.CompleteGraph(3))
+        False
+
+        sage: has_k4(graphs.PetersenGraph())
+        False
+    """
     return g.subgraph_search(alpha_critical_easy[2], induced=True) is not None
 
 def is_k4_free(g):
+    """
+    Tests if graph ``g`` does not contain a `K_4` as an *induced* subgraph.
+
+    `K_4` is the complete graph on 4 vertices.
+
+    EXAMPLES:
+
+        sage: is_k4_free(graphs.CompleteGraph(4))
+        False
+
+        sage: is_k4_free(graphs.CompleteGraph(5))
+        False
+
+        sage: is_k4_free(graphs.CompleteGraph(3))
+        True
+
+        sage: is_k4_free(graphs.PetersenGraph())
+        True
+    """
     return not has_k4(g)
 
-def is_biclique(g):
+def is_double_clique(g):
     """
-    a graph is a biclique if the vertices can be partitioned into 2 sets that induce cliques
-    sage: is_biclique(p4)
-    True
-    sage: is_biclique(graphs.ButterflyGraph())
-    True
+    Tests if graph ``g`` can be partitioned into 2 sets which induce cliques.
+
+    EXAMPLE:
+
+        sage: is_double_clique(p4)
+        True
+
+        sage: is_double_clique(graphs.ButterflyGraph())
+        True
+
+        sage: is_double_clique(graphs.CompleteBipartiteGraph(3,4))
+        False
+
+        sage: is_double_clique(graphs.ClawGraph())
+        False
+
+        sage: is_double_clique(Graph(3))
+        False
+
+    Edge cases ::
+
+        sage: is_double_clique(Graph(0))
+        True
+
+        sage: is_double_clique(Graph(1))
+        True
+
+        sage: is_double_clique(Graph(2))
+        True
     """
     gc = g.complement()
     return gc.is_bipartite()
 
-#true if radius equals diameter
 def has_radius_equal_diameter(g):
+    """
+    Evaluates whether the radius of graph ``g`` equals its diameter.
+
+    Recall the radius of a graph is the minimum eccentricity over all vertices,
+    or the minimum over all longest distances from a vertex to any other vertex.
+    Diameter is the maximum eccentricity over all vertices.
+    Both radius and diamter are defined to be `+Infinity` for disconnected
+    graphs.
+
+    Both radius and diameter are undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: has_radius_equal_diameter(Graph(4))
+        True
+
+        sage: has_radius_equal_diameter(graphs.HouseGraph())
+        True
+
+        sage: has_radius_equal_diameter(Graph(1))
+        True
+
+        sage: has_radius_equal_diameter(graphs.ClawGraph())
+        False
+
+        sage: has_radius_equal_diameter(graphs.BullGraph())
+        False
+    """
     return g.radius() == g.diameter()
 
-#true if residue equals independence number
 def has_residue_equals_alpha(g):
+    """
+    Evaluate whether the residue of graph ``g`` equals its independence number.
+
+    The independence number is the cardinality of the largest independent set
+    of vertices in ``g``.
+    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
+    is found iteratively. First, remove `d_1` from consideration and subtract
+    `d_1` from the following `d_1` number of elements. Sort. Repeat this
+    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
+    i.e. the number of 0s, is the residue of ``g``.
+
+    Residue is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: has_residue_equals_alpha(graphs.HouseGraph())
+        True
+
+        sage: has_residue_equals_alpha(graphs.ClawGraph())
+        True
+
+        sage: has_residue_equals_alpha(graphs.CompleteGraph(4))
+        True
+
+        sage: has_residue_equals_alpha(Graph(1))
+        True
+
+        sage: has_residue_equals_alpha(graphs.PetersenGraph())
+        False
+
+        sage: has_residue_equals_alpha(graphs.PathGraph(5))
+        False
+    """
     return residue(g) == independence_number(g)
 
 def is_not_forest(g):
+    """
+    Evaluates if graph ``g`` is not a forest.
+
+    A forest is a disjoint union of trees. Equivalently, a forest is any acylic
+    graph, which may or may not be connected.
+
+    EXAMPLES:
+        sage: is_not_forest(graphs.BalancedTree(2,3))
+        False
+
+        sage: is_not_forest(graphs.BalancedTree(2,3).disjoint_union(graphs.BalancedTree(3,3)))
+        False
+
+        sage: is_not_forest(graphs.CycleGraph(5))
+        True
+
+        sage: is_not_forest(graphs.HouseGraph())
+        True
+
+    Edge cases ::
+
+        sage: is_not_forest(Graph(1))
+        False
+
+        sage: is_not_forest(Graph(0))
+        False
+    """
     return not g.is_forest()
 
-
-def bipartite_double_cover(g):
-    return g.tensor_product(graphs.CompleteGraph(2))
-
-#replaced with faster LP-solver is_independence_irreducible
-#has no non-empty critical independent set (<=> the only solution to the LP independence number relaxation is all 1/2's)
 def has_empty_KE_part(g):
+    """
+    Evaluates whether graph ``g`` has an empty Konig-Egervary subgraph.
+
+    A Konig-Egervary graph satisfies
+        independence number + matching number = order.
+    By [Lar2011]_, every graph contains a unique induced subgraph which is a
+    Konig-Egervary graph.
+
+    EXAMPLES:
+
+        sage: has_empty_KE_part(graphs.PetersenGraph())
+        True
+
+        sage: has_empty_KE_part(graphs.CycleGraph(5))
+        True
+
+        sage: has_empty_KE_part(graphs.CompleteBipartiteGraph(3,4))
+        False
+
+        sage: has_empty_KE_part(graphs.CycleGraph(6))
+        False
+
+    Edge cases ::
+
+        sage: has_empty_KE_part(Graph(1))
+        False
+
+        sage: has_empty_KE_part(Graph(0))
+        True
+
+    ALGORITHM:
+
+    This function is implemented using the Maximum Critical Independent
+    Set (MCIS) algorithm of [DL2013]_ and applying a Theorem of [Lar2011]_.
+
+    Define that an independent set `I` is a critical independent set if
+    `|I|−|N(I)| \geq |J|−|N(J)|` for any independent set J. Define that a
+    maximum critical independent set is a critical independent set of maximum
+    cardinality.
+
+    By a Theorem of [Lar2011]_, for every maximum critical independent set `J`
+    of `G`, the unique Konig-Egervary inducing set `X` is `X = J \cup N(J)`,
+    where `N(J)` is the neighborhood of `J`.
+    Therefore, the ``g`` has an empty Konig-Egervary induced subgraph if and
+    only if the MCIS `J = \emptyset`.
+
+    Next, we describe the MCIS algorithm.
+    Let `B(G) = K_2 \ times G`, i.e. `B(G)` is the bipartite double cover
+    of `G`. Let `v' \in B(G)` denote the new "twin" of vertex `v \in G`.
+    Let `a` be the independence number of `B(G)`.
+    For each vertex `v` in `B(G)`, calculate
+        `t := independence number(B(G) - \{v,v'\} - N(\{v,v'\})) + 2`.
+    If `t = a`, then `v` is in the MCIS.
+        Since we only care about whether the MCIS is empty, if `t = a`,
+        we return ``False`` and terminate.
+
+    Finally, use the Gallai identities to show matching
+
+    Finally, we apply the Konig-Egervary Theorem (1931) that for all bipartite
+    graphs, matching number = vertex cover number. We substitute this into
+    one of the Gallai identities, that
+        independence number + covering number = order,
+    yielding,
+        independence number = order - matching number.
+    Since matching number is efficient to compute, our final algorithm is
+    in fact efficient.
+
+    REFERENCES:
+
+    .. [DL2013]     \Ermelinda DeLaVina and Craig Larson, "A parallel ALGORITHM
+                    for computing the critical independence number and related
+                    sets". ARS Mathematica Contemporanea 6: 237--245, 2013.
+
+    .. [Lar2011]    \C.E. Larson, "Critical Independent Sets and an
+                    Independence Decomposition Theorem". European Journal of
+                    Combinatorics 32: 294--300, 2011.
+    """
     b = bipartite_double_cover(g)
     alpha = b.order() - b.matching(value_only=True)
     for v in g.vertices():
@@ -360,70 +1282,327 @@ def has_empty_KE_part(g):
             return False
     return True
 
-def is_bicritical(g):
-    return has_empty_KE_part(g)
-
-
-# Vizing's Theorem: chromatic index of any graph is either Delta or Delta+1
 def is_class1(g):
+    """
+    Evaluates whether the chomatic index of graph ``g`` equals its max degree.
+
+    Let `D` be the maximum degree. By Vizing's Thoerem, all graphs can be
+    edge-colored in either `D` or `D+1` colors. The case of `D` colors is
+    called "class 1".
+
+    Max degree is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: is_class1(graphs.CompleteGraph(4))
+        True
+
+        sage: is_class1(graphs.WindmillGraph(4,3))
+        True
+
+        sage: is_class1(Graph(1))
+        True
+
+        sage: is_class1(graphs.CompleteGraph(3))
+        False
+
+        sage: is_class1(graphs.PetersenGraph())
+        False
+    """
     return g.chromatic_index() == max(g.degree())
 
 def is_class2(g):
+    """
+    Evaluates whether the chomatic index of graph ``g`` equals max degree + 1.
+
+    Let `D` be the maximum degree. By Vizing's Thoerem, all graphs can be
+    edge-colored in either `D` or `D+1` colors. The case of `D+1` colors is
+    called "class 2".
+
+    Max degree is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: is_class2(graphs.CompleteGraph(4))
+        False
+
+        sage: is_class2(graphs.WindmillGraph(4,3))
+        False
+
+        sage: is_class2(Graph(1))
+        False
+
+        sage: is_class2(graphs.CompleteGraph(3))
+        True
+
+        sage: is_class2(graphs.PetersenGraph())
+        True
+    """
     return not(g.chromatic_index() == max(g.degree()))
 
 def is_cubic(g):
+    """
+    Evalutes whether graph ``g`` is cubic, i.e. is 3-regular.
+
+    EXAMPLES:
+
+        sage: is_cubic(graphs.CompleteGraph(4))
+        True
+
+        sage: is_cubic(graphs.PetersenGraph())
+        True
+
+        sage: is_cubic(graphs.CompleteGraph(3))
+        False
+
+        sage: is_cubic(graphs.HouseGraph())
+        False
+    """
     D = g.degree()
     return min(D) == 3 and max(D) == 3
 
-#a property that applied to all entered hamiltonian graphs (before c60) but not the tutte graph, false for tutte graph
 def is_anti_tutte(g):
+    """
+    Evalutes if graph ``g`` is connected and indep. number <= diameter + girth.
+
+    This property is satisfied by many Hamiltonian graphs, but notably not by
+    the Tutte graph ``graphs.TutteGraph()``.
+
+    Diameter is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: is_anti_tutte(graphs.CompleteBipartiteGraph(4, 5))
+        True
+
+        sage: is_anti_tutte(graphs.PetersenGraph())
+        True
+
+        sage: is_anti_tutte(Graph(1))
+
+        sage: is_anti_tutte(graphs.TutteGraph())
+        False
+
+        sage: is_anti_tutte(graphs.TutteCoxeterGraph())
+        False
+    """
     if not g.is_connected():
         return False
     return independence_number(g) <= g.diameter() + g.girth()
 
-#a property that applied to all entered hamiltonian graphs upto c6cc6 but not the tutte graph, false for tutte graph
 def is_anti_tutte2(g):
+    """
+    Tests if graph ``g`` has indep. number <= domination number + radius - 1.
+
+    ``g`` must also be connected.
+    This property is satisfied by many Hamiltonian graphs, but notably not by
+    the Tutte graph ``graphs.TutteGraph()``.
+
+    Radius is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: is_anti_tutte2(graphs.CompleteGraph(5))
+        True
+
+        sage: is_anti_tutte2(graphs.PetersenGraph())
+        True
+
+        sage: is_anti_tutte2(graphs.TutteGraph())
+        False
+
+        sage: is_anti_tutte2(graphs.TutteCoxeterGraph())
+        False
+
+        sage: is_anti_tutte2(Graph(1))
+        False
+    """
     if not g.is_connected():
         return False
     return independence_number(g) <=  domination_number(g) + g.radius()- 1
 
-#for any graph diam <= 2*radius. this property is true in the extremal case
 def diameter_equals_twice_radius(g):
-    if not g.is_connected():
-        return False
+    """
+    Evaluates whether the diameter of graph ``g`` is equal to twice its radius.
+
+    Diameter and radius are undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: has_radius_equal_diameter(graphs.ClawGraph())
+        True
+
+        sage: has_radius_equal_diameter(graphs.KrackhardtKiteGraph())
+        True
+
+        sage: diameter_equals_twice_radius(graphs.HouseGraph())
+        False
+
+        sage: has_radius_equal_diameter(graphs.BullGraph())
+        False
+
+    The radius and diameter of ``Graph(1)`` are both 1. ::
+
+        sage: diameter_equals_twice_radius(Graph(1))
+        True
+
+    Disconnected graphs have both diameter and radius equal infinity.
+
+        sage: diameter_equals_twice_radius(Graph(4))
+        True
+    """
     return g.diameter() == 2*g.radius()
 
-#for any graph diam >= radius. this property is true in the extremal case
-def diameter_equals_radius(g):
-    if not g.is_connected():
-        return False
-    return g.diameter() == g.radius()
-
-#almost all graphs have diameter equals 2
 def diameter_equals_two(g):
-    if not g.is_connected():
-        return False
+    """
+    Evaluates whether the diameter of graph ``g`` equals 2.
+
+    Diameter is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: diameter_equals_two(graphs.ClawGraph())
+        True
+
+        sage: diameter_equals_two(graphs.HouseGraph())
+        True
+
+        sage: diameter_equals_two(graphs.KrackhardtKiteGraph())
+        False
+
+        sage: diameter_equals_two(graphs.BullGraph())
+        False
+
+    Disconnected graphs have diameter equals infinity.
+
+        sage: diameter_equals_two(Graph(4))
+        False
+    """
     return g.diameter() == 2
 
 def has_lovasz_theta_equals_alpha(g):
-    if g.lovasz_theta() == independence_number(g):
-        return True
-    else:
-        return False
+    """
+    Tests if the Lovasz number of graph ``g`` equals its independence number.
+
+    Examples:
+
+        sage: has_lovasz_theta_equals_alpha(graphs.CompleteGraph(12))
+        True
+
+        sage: has_lovasz_theta_equals_alpha(double_fork)
+        True
+
+        sage: has_lovasz_theta_equals_alpha(graphs.PetersenGraph())
+        True
+
+        sage: has_lovasz_theta_equals_alpha(graphs.ClebschGraph())
+        False
+
+        sage: has_lovasz_theta_equals_alpha(graphs.CycleGraph(24))
+        False
+
+    True for all graphs with no edges ::
+
+        sage: has_lovasz_theta_equals_alpha(Graph(12))
+        True
+
+    Edge cases ::
+
+        sage: has_lovasz_theta_equals_alpha(Graph(0))
+        True
+
+        # Broken. Issue #584
+        sage: has_lovasz_theta_equals_alpha(Graph(1)) # doctest: +SKIP
+        True
+    """
+    return g.lovasz_theta() == independence_number(g)
 
 def has_lovasz_theta_equals_cc(g):
-    if g.lovasz_theta() == clique_covering_number(g):
-        return True
-    else:
-        return False
+    """
+    Test if the Lovasz number of graph ``g`` equals its clique covering number.
 
-#sufficient condition for hamiltonicity
+    Examples:
+
+        sage: has_lovasz_theta_equals_cc(graphs.CompleteGraph(12))
+        True
+
+        sage: has_lovasz_theta_equals_cc(double_fork)
+        True
+
+        sage: has_lovasz_theta_equals_cc(graphs.PetersenGraph())
+        True
+
+        sage: has_lovasz_theta_equals_cc(Graph(12))
+        True
+
+        sage: has_lovasz_theta_equals_cc(graphs.ClebschGraph())
+        False
+
+        has_lovasz_theta_equals_alpha(graphs.BuckyBall())
+        False
+
+    Edge cases ::
+
+        sage: has_lovasz_theta_equals_cc(Graph(0))
+        True
+
+        # Broken. Issue #584
+        sage: has_lovasz_theta_equals_cc(Graph(1)) # doctest: +SKIP
+        True
+    """
+    return g.lovasz_theta() == clique_covering_number(g)
+
 def is_chvatal_erdos(g):
+    """
+    Evaluates whether graph ``g`` meets a Hamiltonicity condition of [CV1972]_.
+
+    OUTPUT:
+
+    Returns ``True`` if the independence number of ``g`` is less than or equal
+    to the vertex connectivity of ``g``.
+    Returns ``False`` otherwise.
+
+    EXAMPLES:
+
+        sage: is_chvatal_erdos(graphs.CompleteGraph(5))
+        True
+
+        sage: is_chvatal_erdos(graphs.CycleGraph(5))
+        True
+
+        sage: is_chvatal_erdos(graphs.CompleteGraph(2))
+        True
+
+        sage: is_chvatal_erdos(graphs.PetersenGraph())
+        False
+
+        sage: is_chvatal_erdos(graphs.ClawGraph())
+        False
+
+        sage: is_chvatal_erdos(graphs.DodecahedralGraph())
+        False
+
+    Edge cases ::
+
+        sage: is_chvatal_erdos(Graph(1))
+        False
+
+        sage: is_chvatal_erdos(Graph(0))
+        True
+
+    REFERENCES:
+
+    Theorem: If a graph ``is_chvatal_erdos``, then it is Hamiltonian.
+
+    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian cycles".
+                    Discrete Mathematics, 2(2): 111--113, 1972.
+    """
     return independence_number(g) <= g.vertex_connectivity()
 
-
-#matching_covered if every edge is in a maximum matching (generalization of factor-covered which requires perfect matching)
 def matching_covered(g):
+    """
+    Skipping because broken. See Issue #585.
+    """
     g = g.copy()
     nu = matching_number(g)
     E = g.edges()
@@ -435,91 +1614,482 @@ def matching_covered(g):
         g.add_edge(e)
     return True
 
-#a property that separates tutte from known hamiltonian examples, must be connected
-#radius(tutte) > center(tutte)
 def radius_greater_than_center(g):
-    if not g.is_connected() or g.radius() <= card_center(g):
-        return False
-    else:
-        return True
+    """
+    Test if connected graph ``g`` has radius greater than num. of center verts.
 
-#a property that separates tutte from known hamiltonian examples, must be connected
-#avg_dist(tutte) > girth(tutte)
+    If ``g`` is not connected, returns ``False``.
+    Radius is undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: radius_greater_than_center(graphs.TutteGraph())
+        True
+
+        sage: radius_greater_than_center(graphs.KrackhardtKiteGraph())
+        True
+
+        sage: radius_greater_than_center(graphs.SousselierGraph())
+        True
+
+        sage: radius_greater_than_center(graphs.PetersenGraph())
+        False
+
+        sage: radius_greater_than_center(graphs.DiamondGraph())
+        False
+
+        sage: radius_greater_than_center(Graph(1))
+        False
+    """
+    return g.is_connected() and g.radius() > card_center(g)
+
 def avg_distance_greater_than_girth(g):
-    if not g.is_connected() or g.average_distance() <= g.girth():
-        return False
-    else:
-        return True
+    """
+    Tests if graph ``g`` is connected and avg. distance greater than the girth.
 
-#chromatic number equals min of known chi upper bounds
+    Average distance is undefined for 1- and 0- vertex graphs.
+
+    EXAMPLES:
+
+        sage: avg_distance_greater_than_girth(graphs.TutteGraph())
+        True
+
+        sage: avg_distance_greater_than_girth(graphs.HarborthGraph())
+        True
+
+        sage: avg_distance_greater_than_girth(graphs.HortonGraph())
+        True
+
+        sage: avg_distance_greater_than_girth(graphs.BullGraph())
+        False
+
+        sage: avg_distance_greater_than_girth(Graph("NC`@A?_C?@_JA??___W"))
+        False
+
+        sage: avg_distance_greater_than_girth(Graph(2))
+        False
+
+    Acyclic graphs have girth equals infinity. ::
+
+        sage: avg_distance_greater_than_girth(graphs.CompleteGraph(2))
+        False
+    """
+    return g.is_connected() and g.average_distance() > g.girth()
+
 def chi_equals_min_theory(g):
+    """
+    Evaluate if chromatic num. of graph ``g`` equals min. of some upper bounds.
+
+    Some known upper bounds on the chromatic number Chi (`\chi`) include
+    our invariants `[brooks, wilf, welsh_powell, szekeres_wilf]`.
+    Returns ``True`` if the actual chromatic number of ``g`` equals the minimum
+    of / "the best of" these known upper bounds.
+
+    Some of these invariants are undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: chi_equals_min_theory(Graph(1))
+        True
+
+        sage: chi_equals_min_theory(graphs.PetersenGraph())
+        True
+
+        sage: chi_equals_min_theory(double_fork)
+        True
+
+        sage: chi_equals_min_theory(Graph(3))
+        False
+
+        chi_equals_min_theory(graphs.CompleteBipartiteGraph(3,5))
+        False
+
+        chi_equals_min_theory(graphs.IcosahedralGraph())
+        False
+    """
     chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
     min_theory = min([f(g) for f in chromatic_upper_theory])
-    chi = g.chromatic_number()
-    if min_theory == chi:
-        return True
-    else:
-        return False
+    return min_theory == g.chromatic_number()
 
 def is_heliotropic_plant(g):
+    """
+    Evaluates whether graph ``g`` is a heliotropic plant. BROKEN
+
+    BROKEN: code should be nonnegative eigen, not just positive eigen.
+    See Issue #586
+
+    A graph is heliotropic iff the independence number equals the number of
+    nonnegative eigenvalues.
+
+    See [BDF1995]_ for a definition and some related conjectures, where
+    [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
+
+    EXAMPLES:
+
+    REFERENCES:
+
+    .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
+                    computational attack on the conjectures of Graffiti: New
+                    counterexamples and proofs". Discrete Mathematics,
+                    147(1--3): 35--55, 1995.
+    """
     return (independence_number(g) == card_positive_eigenvalues(g))
 
 def is_geotropic_plant(g):
+    """
+    Evaluates whether graph ``g`` is a heliotropic plant. BROKEN
+
+    BROKEN: code should be nonpositive eigen, not just negative eigen.
+    See Issue #586
+
+    A graph is geotropic iff the independence number equals the number of
+    nonnegative eigenvalues.
+
+    See [BDF1995]_ for a definition and some related conjectures, where
+    [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
+
+    EXAMPLES:
+
+    REFERENCES:
+
+    .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
+                    computational attack on the conjectures of Graffiti: New
+                    counterexamples and proofs". Discrete Mathematics,
+                    147(1--3): 35--55, 1995.
+    """
     return (independence_number(g) == card_negative_eigenvalues(g))
 
-#means has hamiltonian path, true iff g join a single vertex has hamiltonian cycle
 def is_traceable(g):
-     gadd = g.join(Graph(1),labels="integers")
-     return gadd.is_hamiltonian()
+    """
+    Evaluates whether graph ``g`` is traceable.
+
+    A graph ``g`` is traceable iff there exists a Hamiltonian path, i.e. a path
+    which visits all vertices in ``g`` once.
+    This is different from ``is_hamiltonian``, since that checks if there
+    exists a Hamiltonian *cycle*, i.e. a path which then connects backs to
+    its starting point.
+
+    EXAMPLES:
+
+        sage: is_traceable(graphs.CompleteGraph(5))
+        True
+
+        sage: is_traceable(graphs.PathGraph(5))
+        True
+
+        sage: is_traceable(graphs.PetersenGraph())
+        True
+
+        sage: is_traceable(graphs.CompleteGraphs(2))
+        True
+
+        sage: is_traceable(Graph(3))
+        False
+
+        sage: is_traceable(graphs.ClawGraph())
+        False
+
+        sage: is_traceable(graphs.ButterflyGraph())
+        False
+
+    Edge cases ::
+
+        sage: is_traceable(Graph(0))
+        False
+
+        sage: is_traceable(Graph(1))
+        False
+
+    ALGORITHM:
+
+    A graph `G` is traceable iff the join `G'` of `G` with a single new vertex
+    `v` is Hamiltonian, where join means to connect every vertex of `G` to the
+    new vertex `v`.
+    Why? Suppose there exists a Hamiltonian path between `u` and `w` in `G`.
+    Then, in `G'`, make a cycle from `v` to `u` to `w` and back to `v`.
+    For the reverse direction, just note that the additional vertex `v` cannot
+    "help" since Hamiltonian paths can only visit any vertex once.
+    """
+    gadd = g.join(Graph(1),labels="integers")
+    return gadd.is_hamiltonian()
 
 def has_residue_equals_two(g):
+    """
+    Evaluates whether the residue of graph ``g`` equals 2.
+
+    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
+    is found iteratively. First, remove `d_1` from consideration and subtract
+    `d_1` from the following `d_1` number of elements. Sort. Repeat this
+    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
+    i.e. the number of 0s, is the residue of ``g``.
+
+    Residue is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: has_residue_equals_two(graphs.ButterflyGraph())
+        True
+
+        sage: has_residue_equals_two(graphs.IcosahedralGraph())
+        True
+
+        sage: has_residue_equals_two(graphs.OctahedralGraph())
+        True
+
+        sage: has_residue_equals_two(Graph(1))
+        False
+
+        sage: has_residue_equals_two(graphs.BullGraph())
+        False
+
+        sage: has_residue_equals_two(graphs.BrinkmannGraph())
+        False
+    """
     return residue(g) == 2
 
-#a necessary condition for being even hole free
 def is_chordal_or_not_perfect(g):
+    """
+    Evaluates if graph ``g`` is either chordal or not perfect.
+
+    There is a known theorem that every chordal graph is perfect.
+
+    OUTPUT:
+
+    Returns ``True`` iff ``g`` is chordal OR (inclusive or) ``g`` is not
+    perfect.
+
+    EXAMPLES:
+
+        sage: is_chordal_or_not_perfect(graphs.DiamondGraph())
+        True
+
+        sage: is_chordal_or_not_perfect(graphs.CycleGraph(5))
+        True
+
+        sage: is_chordal_or_not_perfect(graphs.LollipopGraph(5,3))
+        True
+
+        sage: is_chordal_or_not_perfect(graphs.CycleGraph(4))
+        False
+
+        sage: is_chordal_or_not_perfect(graphs.HexahedralGraph())
+        False
+
+    Vacuously chordal cases ::
+
+        sage: is_chordal_or_not_perfect(Graph(0))
+        True
+
+        sage: is_chordal_or_not_perfect(Graph(1))
+        True
+
+        sage: is_complement_of_chordal(Graph(4))
+        True
+    """
     if g.is_chordal():
         return true
     else:
         return not g.is_perfect()
 
 def has_alpha_residue_equal_two(g):
+    """
+    Tests if both the residue and independence number of graphs ``g`` equal 2.
+
+    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
+    is found iteratively. First, remove `d_1` from consideration and subtract
+    `d_1` from the following `d_1` number of elements. Sort. Repeat this
+    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
+    i.e. the number of 0s, is the residue of ``g``.
+
+    Residue is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: has_alpha_residue_equal_two(graphs.DiamondGraph())
+        True
+
+        sage: has_alpha_residue_equal_two(Graph(2))
+        True
+
+        sage: has_alpha_residue_equal_two(graphs.OctahedralGraph())
+        True
+
+        sage: has_alpha_residue_equal_two(graphs.BullGraph())
+        False
+
+        sage: has_alpha_residue_equal_two(graphs.BidiakisCube())
+        False
+
+        sage: has_alpha_residue_equal_two(Graph(3))
+        False
+
+        sage: has_alpha_residue_equal_two(Graph(1))
+        False
+    """
     if residue(g) != 2:
         return false
     else:
         return independence_number(g) == 2
 
-    # for vizing's independence number conjecture
 def alpha_leq_order_over_two(g):
+    """
+    Tests if the independence number of graph ``g`` is at most half its order.
+
+    EXAMPLES:
+
+        sage: alpha_leq_order_over_two(graphs.ButterflyGraph())
+        True
+
+        sage: alpha_leq_order_over_two(graphs.DiamondGraph())
+        True
+
+        sage: alpha_leq_order_over_two(graphs.CoxeterGraph())
+        True
+
+        sage: alpha_leq_order_over_two(Graph(4))
+        False
+
+        sage: alpha_leq_order_over_two(graphs.BullGraph())
+        False
+
+    Edge cases ::
+
+        sage: alpha_leq_order_over_two(Graph(0))
+        True
+
+        sage: alpha_leq_order_over_two(Graph(1))
+        False
+    """
     return (2*independence_number(g) <= g.order())
 
-
-#in a luo-zhao sufficient condition for alpha <= n/2 (vizing's ind number conj)
 def order_leq_twice_max_degree(g):
+    """
+    Tests if the order of graph ``g`` is at most twice the max of its degrees.
+
+    Undefined for the empty graph.
+
+    EXAMPLES:
+
+        sage: order_leq_twice_max_degree(graphs.BullGraph())
+        True
+
+        sage: order_leq_twice_max_degree(graphs.ThomsenGraph())
+        True
+
+        sage: order_leq_twice_max_degree(graphs.CycleGraph(4))
+        True
+
+        sage: order_leq_twice_max_degree(graphs.BidiakisCube())
+        False
+
+        sage: order_leq_twice_max_degree(graphs.CycleGraph(5))
+        False
+
+        sage: order_leq_twice_max_degree(Graph(1))
+        False
+    """
     return (g.order() <= 2*max(g.degree()))
 
-#not in properties list until meredith graph is computed
-#critical if connected, class 2, and removal of any edge decreases chromatic number
 def is_chromatic_index_critical(g):
-    if not g.is_connected():
-        return False
-    Delta = max(g.degree())
-    chi_e = g.chromatic_index()
-    if chi_e != Delta + 1:
+    """
+    Evaluates whether graph ``g`` is chromatic index critical.
+
+    Let `\chi(G)` denote the chromatic index of a graph `G`.
+    Then `G` is chromatic index critical if `\chi(G-e) < \chi(G)` (strictly
+    less than) for all `e \in G` AND if (by definition) `G` is class 2.
+
+    See [FW1977]_ for a more extended definition and discussion.
+
+    We initially found it surprising that `G` is required to be class 2; for
+    example, the Star Graph is a class 1 graph which satisfies the rest of
+    the definition. We have found articles which equivalently define critical
+    graphs as class 2 graphs which become class 1 when any edge is removed.
+    Perhaps this latter definition inspired the one we state above?
+
+    Max degree is undefined on the empty graph, so ``is_class`` is also
+    undefined. Therefore this property is undefined on the empty graph.
+
+    EXAMPLES:
+
+        sage: is_chromatic_index_critical(Graph('Djk'))
+        True
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(3))
+        True
+
+        sage: is_chromatic_index_critical(graphs.CycleGraph(5))
+        True
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(5))
+        False
+
+        sage: is_chromatic_index_critical(graphs.PetersenGraph())
+        False
+
+        sage: is_chromatic_index_critical(graphs.FlowerSnark())
+        False
+
+    Non-trivially disconnected graphs ::
+
+        sage: is_chromatic_index_critical(graphs.CycleGraph(4).disjoint_union(graphs.CompleteGraph(4)))
+        False
+
+    Class 1 graphs ::
+
+        sage: is_chromatic_index_critical(Graph(1))
+        False
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(4))
+        False
+
+        sage: is_chromatic_index_critical(graphs.CompleteGraph(2))
+        False
+
+        sage: is_chromatic_index_critical(graphs.StarGraph(4))
+        False
+
+    ALGORITHM:
+
+    This function uses a series of tricks to reduce the number of cases that
+    need to be considered, before finally checking in the obvious way.
+
+    First, if a graph has more than 1 non-trivial connected component, then
+    return ``False``. This is because in a graph with multiple such components,
+    removing any edges from the smaller component cannot affect the chromatic
+    index.
+
+    Second, check if the graph is class 2. If not, stop and return ``False``.
+
+    Finally, identify isomorphic edges using the line graph and its orbits.
+    We then need only check the non-equivalent edges to see that they reduce
+    the chromatic index when deleted.
+
+    REFERENCES:
+
+    .. [FW1977]     \S. Fiorini and R.J. Wilson, "Edge-colourings of graphs".
+                    Pitman Publishing, London, UK, 1977.
+    """
+    component_sizes = g.connected_components_sizes()
+    if len(component_sizes) > 1:
+        if component_sizes[1] > 1:
+            return False
+
+    if chi == max_degree(g):
         return False
 
-    lg=g.line_graph()
-    equiv_lines = lg.automorphism_group(return_group=False,orbits=true)
+    lg = g.line_graph()
+    equiv_lines = lg.automorphism_group(return_group=False, orbits=true)
     equiv_lines_representatives = [orb[0] for orb in equiv_lines]
 
+    gc = g.copy()
     for e in equiv_lines_representatives:
-        gc = copy(g)
         gc.delete_edge(e)
-        chi_e_prime = gc.chromatic_index()
-        if not chi_e_prime < chi_e:
+        chi_prime = gc.chromatic_index()
+        if chi_prime == chi:
             return False
+        gc.add_edge(e)
     return True
 
-#not in properties list
 #alpha(g-e) > alpha(g) for *every* edge g
 def is_alpha_critical(g):
     #if not g.is_connected():
@@ -996,8 +2566,6 @@ def has_odd_order(g):
     True
     sage: has_odd_order(Graph(2))
     False
-    sage: has_odd_order(Graph(0))
-    False
     """
     return g.order() % 2 == 1
 
@@ -1009,10 +2577,61 @@ def has_even_order(g):
     False
     sage: has_even_order(Graph(2))
     True
-    sage: has_even_order(Graph(0))
-    True
     """
     return g.order() % 2 == 0
+
+def is_maximal_triangle_free(g):
+    """
+    Evaluates whether graphs ``g`` is a maximal triangle-free graph
+
+    Maximal triangle-free means that adding any edge to ``g`` will create a
+    triangle.
+    If ``g`` is not triangle-free, then returns ``False``.
+
+    EXAMPLES:
+
+        sage: is_maximal_triangle_free(graphs.CompleteGraph(2))
+        True
+
+        sage: is_maximal_triangle_free(graphs.CycleGraph(5))
+        True
+
+        sage: is_maximal_triangle_free(Graph('Esa?'))
+        True
+
+        sage: is_maximal_triangle_free(Graph('KsaCCA?_C?O?'))
+        True
+
+        sage: is_maximal_triangle_free(graphs.PathGraph(5))
+        False
+
+        sage: is_maximal_triangle_free(Graph('LQY]?cYE_sBOE_'))
+        False
+
+        sage: is_maximal_triangle_free(graphs.HouseGraph())
+        False
+
+    Edge cases ::
+
+        sage: is_maximal_triangle_free(Graph(0))
+        False
+
+        sage: is_maximal_triangle_free(Graph(1))
+        False
+
+        sage: is_maximal_triangle_free(Graph(3))
+        False
+    """
+    if not g.is_triangle_free():
+        return False
+    g_comp = g.complement()
+    g_copy = g.copy()
+    for e in g_comp.edges():
+        g_copy.add_edge(e)
+        if g.is_triangle_free():
+            return False
+        g_copy.delete_edge(e)
+    return True
 
 def is_locally_two_connected(g):
     """
@@ -1179,7 +2798,7 @@ Graph.is_weakly_chordal, is_dirac, is_ore,
 is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
 is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
 is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
-diameter_equals_radius, is_locally_connected, matching_covered, is_locally_dirac,
+is_locally_connected, matching_covered, is_locally_dirac,
 is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
 is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
 has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
@@ -1196,11 +2815,12 @@ has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
 Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
 Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary, is_biclique]
+Graph.is_self_complementary, is_double_clique, has_fork, is_fork_free,
+has_empty_KE_part]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
 Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
-Graph.is_semi_symmetric, Graph.is_line_graph, is_planar_transitive, is_class1,
+Graph.is_semi_symmetric, is_planar_transitive, is_class1,
 is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
 has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
 is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
@@ -1208,17 +2828,21 @@ has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
 has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
 is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
 Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph,
-is_haggkvist_nicoghossian]
+is_haggkvist_nicoghossian, is_chromatic_index_critical]
 
 removed_properties = [is_pebbling_class0]
 
 """
     Last version of graphs packaged checked: Sage 8.2
+    This means checked for new functions, and for any errors/changes in old functions!
     sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
     True
 
-    Skip Graph.is_circumscribable() and Graph.is_inscribable() because they throw errors for the vast majority of our graphs.
-    Skip Graph.is_biconnected() in favor of our name is_two_connected().
+    Skip Graph.is_circumscribable() and Graph.is_inscribable() because they
+        throw errors for the vast majority of our graphs.
+    Skip Graph.is_biconnected() in favor of our is_two_connected(), because we
+        prefer our name, and because we disagree with their definition on K2.
+        We define that K2 is NOT 2-connected, it is n-1 = 1 connected.
     Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient algorithm existing.
 """
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,

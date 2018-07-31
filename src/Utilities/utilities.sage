@@ -597,6 +597,27 @@ def benoit_boyd_graphs_2(a, b, c):
     g.add_edges([(a, a + b + 1, 1/a + 1/b), (a + b + 1, a + b + c + 2, 1/b + 1/c), (a, a + b + c + 2, 1/a + 1/c)])
     return g
 
+def bipartite_double_cover(g):
+    """
+    Returns the bipatite double cover of a graph ``g``.
+
+    From :wikipedia:`Bipartite double cover`:
+    The bipartite double cover of ``g`` may also be known as the
+    Kronecker double cover, canonical double cover or the bipartite double of G.
+    For every vertex `v_i` of ``g``, there are two vertices `u_i` and `w_i`.
+    Two vertices `u_i` and `w_j` are connected by an edge in the double cover if
+    and only if `v_i` and `v_j` are connected by an edge in ``g``.
+
+    EXAMPLES:
+
+        sage: bipartite_double_cover(graphs.PetersenGraph()).is_isomorphic(graphs.DesarguesGraph())
+        True
+
+        sage: bipartite_double_cover(graphs.CycleGraph(4)).is_isomorphic(graphs.CycleGraph(4).disjoint_union(graphs.CycleGraph(4)))
+        True
+    """
+    return g.tensor_product(graphs.CompleteGraph(2))
+
 #TESTING
 
 #check for invariant relation that separtates G from class defined by property
