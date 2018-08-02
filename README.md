@@ -1,4 +1,30 @@
 # Objects-Invariants-Properties
+
+## Contents
+ 1. [Intro](#contents)
+ 2. [Getting Started :bowtie: 🔰](#getting-started-bowtie-)
+   1. [Required Knowledge 💭❓](#required-knowledge-)
+   2. [Tutorials 🐍:octocat:🐧](#tutorials)
+   3. [What computing environment are you using? 💻](#what-computing-environment-are-you-using-)
+     - [CoCalc](#cocalc)
+   4. [Install Sage 1️⃣](#install-sage-1️⃣)
+   5. [Install CONJECTURING 2️⃣](#install-conjecturing-2️⃣)
+   6. [Install OIP-GT 3️⃣](#install-oip-gt-3️⃣)
+ 3. [Examples / Tutorial 🎓](#examples--tutorial-)
+   1. [Load OIP-GT](#load-oip-gt)
+   2. [Graphs](#graphs)
+   3. [Properties](#properties)
+   4. [Invariants](#invariants)
+   5. [Conjecturing](#conjecturing)
+     - [Add theorems to conjecturing](#add-theorems-to-conjecturing)
+     - [Add precomputed values to conjecturing](#add-precomputed-values-to-conjecturing)
+   6. [Precompute additional values](#precompute-additional-values)
+ 4. [Where to find more examples and documentation 📜](#where-to-find-more-examples-and-documentation-)
+ 5. [Contributing](#contributing)
+   1. [Reporting bugs 🐞🐛 and suggesting improvements ✨](#reporting-bugs--and-suggesting-improvements-)
+   2. [Submitting code (via pull requests) ❤️🎁](#submitting-code-via-pull-requests-️)
+ 6. [Maintained by 😎](#maintained-by-)
+
 **Objects, Invariants, and Properties for Graph Theory (OIP-GT)**
 
 OIP-GT is a set of files that contain:
@@ -56,7 +82,7 @@ Users may also find it helpful to know about git, GitHub, and working in the she
    - [Ryan's Tutorials](https://ryanstutorials.net/linuxtutorial/)
    - [Code Academy](https://www.codecademy.com/learn/learn-the-command-line)
 
-### What computing environment / type of machine are you using? 💻
+### What computing environment are you using? 💻
 
 You can run Sage and OIP-GT on any machine and in any environment you'd like! - with the following caveats and advice:
 
@@ -176,7 +202,7 @@ TO DO
 
 TO DO
 
-### Where to find more examples and documentation 📜
+## Where to find more examples and documentation 📜
 
 Sage and OIP-GT, from the command prompt:
  - In Sage, typing `?` or `??` after any command will display documentation and examples. For example,
