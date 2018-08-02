@@ -7,18 +7,18 @@ OIP-GT is a set of files that contain:
  - Theorems relating to those invariants and graphs
  - Precomputed values of those functions for those graphs
 
-The ostensible goal of this project is to encode all known graph theory in a usable, accessible way. Why?:
- 1. To act as a library, where researchers can find past results in a standard format.
- 2. To aid students, educators, and researchers in combining modern computational resources with their study of graph theory.
+The ostensible goal of this project is to encode all of graph theory in an accessible repository. Why?:
+ 1. To act as a library, where researchers can easily find past results.
+ 2. To help researchers, educators, and students to combine computational resources with their study of graph theory.
  3. **For use in conjecturing new knowledge and testing those conjectures.**
 
-The final point above is the primary concern of this project's maintainers. Combining a growing repository of graph theory knowledge with automated conjecturing software (in particular, [CONJECTURING](http://nvcleemp.github.io/conjecturing/), described later) has proven effective in generating interesting conjectures.
+The final point above is the most exciting one! Combining our growing repository of graph theory knowledge with automated conjecturing software has shown promise as a tool to develop potential new theorems which might not otherwise be found (see below section for examples and references).
 
-Conjecturing also creates a feedback loop, since once proved/disproved they can themselves be added to OIP as theorems/counterexamples!
+##### More information (especially for researchers):
 
-###### More information (especially for researchers):
+We note that GitHub has proven a valuable tool for this project. For one, it enables us to share this repository with a growing community of researchers. Ideally, researchers can use this repository to generate and test new conjectures. Then, researchers will contribute their findings either as counterexamples (graphs not previously in OIP-GT), or as theorems (with citations, when a conjecture is proven).
 
-We note that GitHub has proven a valuable tool for this project. For one, it enables us to share this repository with a growing community of researchers. Second, it enables us to recruit students (many with interests in Computer Science, Math, or both) to contribute to OIP at a much faster rate than we could alone. These contributions are often organized as part of summer workshops.
+Second, it enables us to recruit students. Some of these students have interests in computer science, rather than math, and this project is a tool to bridge these fields. We have organized several summer workshops, each with a particular focus in graph theory, where students program, conjecture, and prove/disprove as a group. These efforts spur growth in OIP-GT much faster than we could produce alone.
 
 📚 See https://arxiv.org/abs/1801.01814 for a more extensive introduction to the motivations for this project, past workshops, some of the results produced with OIP, and a history of efforts in automated conjecturing.
 
@@ -55,17 +55,21 @@ However, for first-time users (and in fact for all users on CoCalc, where admin 
  3. Copy `conjecturing.py` out of the directory `sage`. Put the copy into whatever directory you plan to work in later.
  4. `make` the contents of the directory `c`. For more help:
    1. This step requires a terminal window. On CoCalc, just select "New" and "Terminal".
-   2. Use the command `ls` to list files in your current folder. Use the command `cd someFolderName` to change into someFolder. Repeat this until you're in the `c` folder.
+   2. Use the command `ls` to list files in your current folder. Use the command `cd someFolderName` to change into `someFolder`. Repeat this until you're in the `c` folder.
    3. Now, run `make`.
  5. This should create a new directory `build` inside of `c`. Copy the file `expressions` from `build` into whatever directory you plan to work in later.
 
 And that's it! You've installed Sage and CONJECTURING. You're now ready to install OIP-GT.
 
-### Install OIP-GT (without git)
+### Install OIP-GT
 
  1. Download and unzip the [latest release](https://github.com/math1um/objects-invariants-properties/releases).
  2. Copy the files out of the folder and into the directory you plan to work in.
  3. You're done. 🎉
+
+#### Note for users which install OIP-GT by cloning the repository:
+
+To build the source files, open a terminal and `cd` to the root OIP directory. Then, run `make`. This should create a new directory named `build`. Copy all of the files from `build` into the directory you plan to work in. You can do this by running `cp build/* someDirectory`, where `someDirectory` is wherever you plan to work.
 
 ### Tutorials for Python / Sage
 
@@ -77,6 +81,47 @@ Python:
  - [Code Academy](https://www.codecademy.com/learn/learn-python)
 
 ## Examples / how to use
+
+After completing the installation instructions above, you are ready to use OIP-GT. Note that all of the files (ex. `conjecturing.py`, `gt.sage`, ...) are assumed to be in your current working directory. In CoCalc, this is by default whatever folder your current Sage worksheet is saved in.
+
+If you need to change your current working directory, you can run
+```sh
+os.chdir("someDirectory")
+```
+from within Sage or Python.
+
+To start, load the different components:
+```sage
+load("conjecturing.py")
+load("gt.sage")
+load("gt_precomputed_database.sage")
+```
+
+Note that the OIP-GT GitHub repository contains lists of graphs that are not by default included in the release download. You can download some additional lists (ex. a list of all maximal triangle-free graphs up to order 16) from the [Objects directory on GitHub](https://github.com/math1um/objects-invariants-properties/tree/master/src/Objects). These are either loaded by
+```sage
+load("dimacsgraphs.sage")
+```
+or by following the instructions in the file, as in the case of `mtf_graphs.sage`.
+
+Once you've loaded these modules, you are ready to work.
+
+The graphs included by default are all in the list `all_graphs`. So, you can find certain graphs which meet some criteria by running something like
+```sage
+myGraphs = [g for g in all_graphs if g.order() < 20 and g.is_hamiltonian()]
+myGraphs2 = [g for g in all_graphs if is_two_connected(g)]
+```
+
+If you have in mind a particular graph, ...
+
+The properties...
+
+The invariants...
+
+Theorems...
+
+Precomputed...
+
+Conjecturing...
 
 ## Where to find more documentation 📜
 
