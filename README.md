@@ -30,15 +30,15 @@
 **Objects, Invariants, and Properties for Graph Theory (OIP-GT)**
 
 OIP-GT is a set of files that contain:
- - Objects (graphs)
- - Functions which compute invariants and properties of graphs
- - Theorems relating to those invariants and graphs
- - Precomputed values of those functions for those graphs
+- Objects (graphs)
+- Functions which compute invariants and properties of graphs
+- Theorems relating to those invariants and graphs
+- Precomputed values of those functions for those graphs
 
 The ostensible goal of this project is to encode all of graph theory in an accessible repository. Why?:
- 1. To act as a library, where researchers can easily find past results.
- 2. To help researchers, educators, and students to combine computational resources with their study of graph theory.
- 3. **For use in conjecturing new knowledge and testing those conjectures.**
+1. To act as a library, where researchers can easily find past results.
+2. To help researchers, educators, and students to combine computational resources with their study of graph theory.
+3. **For use in conjecturing new knowledge and testing those conjectures.**
 
 The final point above is the most exciting one! Combining our growing repository of graph theory knowledge with automated conjecturing software has shown promise as a tool to develop potential new theorems which might not otherwise be found (see below section for examples and references).
 
@@ -70,19 +70,19 @@ Users may also find it helpful to know about git, GitHub, and working in the she
 
 #### Tutorials
 
- - Sage:
-   - [The Sage Tutorial](http://doc.sagemath.org/html/en/tutorial/)
- - Python 🐍:
-   - [The Python Tutorial](https://docs.python.org/3/tutorial/)
-   - [Code Academy](https://www.codecademy.com/learn/learn-python)
- - GitHub and git :octocat::
-   - [GitHub Hello World](https://guides.github.com/activities/hello-world/)
-   - [Forking Projects and Pull Requests](https://guides.github.com/activities/forking/)
-   - [Mastering issues and working with other developers](https://guides.github.com/features/issues/)
-   - [Code Academy](https://www.codecademy.com/learn/learn-git)
- - Terminal / shell / Unix 🐧:
-   - [Ryan's Tutorials](https://ryanstutorials.net/linuxtutorial/)
-   - [Code Academy](https://www.codecademy.com/learn/learn-the-command-line)
+- Sage:
+    - [The Sage Tutorial](http://doc.sagemath.org/html/en/tutorial/)
+- Python 🐍:
+    - [The Python Tutorial](https://docs.python.org/3/tutorial/)
+    - [Code Academy](https://www.codecademy.com/learn/learn-python)
+- GitHub and git :octocat::
+    - [GitHub Hello World](https://guides.github.com/activities/hello-world/)
+    - [Forking Projects and Pull Requests](https://guides.github.com/activities/forking/)
+    - [Mastering issues and working with other developers](https://guides.github.com/features/issues/)
+    - [Code Academy](https://www.codecademy.com/learn/learn-git)
+- Terminal / shell / Unix 🐧:
+    - [Ryan's Tutorials](https://ryanstutorials.net/linuxtutorial/)
+    - [Code Academy](https://www.codecademy.com/learn/learn-the-command-line)
 
 ### What computing environment are you using? 💻
 
@@ -109,8 +109,8 @@ which draws a picture of given graph object. In this case, a combination of runn
 ### Install Sage 1️⃣
 
 To set up Sage, either:
- - Create an account on [CoCalc](https://cocalc.com/), create a Sage worksheet, and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/).
- - Or, [download and install Sage](), and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/). For Windows users, be sure to skim the [additional instructions](https://wiki.sagemath.org/SageWindows).
+- Create an account on [CoCalc](https://cocalc.com/), create a Sage worksheet, and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/).
+- Or, [download and install Sage](), and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/). For Windows users, be sure to skim the [additional instructions](https://wiki.sagemath.org/SageWindows).
 
 ### Install CONJECTURING 2️⃣
 
@@ -121,20 +121,20 @@ We designed OIP-GT with the program [CONJECTURING (available on GitHub)](https:/
 To install CONJECTURING, you can follow their [instructions](https://github.com/nvcleemp/conjecturing/tree/master/spkg) for installing CONJECTURING as a Sage package. This installs the program as a package for all users on the machine, accessible from any working directory, and will probably require admin privileges (you cannot get admin privileges on CoCalc).
 
 For CoCalc users and for first-time users who would prefer a simpler process, you can set up CONJECTURING by following these steps:
- 1. Download the [latest release of CONJECTURING](https://github.com/nvcleemp/conjecturing/releases) (choose the "CoCalc" version whether you are using CoCalc or not).
- 2. Extract / unzip the package. If you're using CoCalc, upload the zipped file to CoCalc first, then unzip after uploading by clicking on the file and selecting "Extract Files".
- 3. In the new folder / directory, there should be a directory named `sage`. Copy `conjecturing.py` out of `sage` into whatever directory you plan to work in later.
- 4. Now, build the contents of the directory `c`. As described above, this may not be simple to do on Windows. For Unix (including CoCalc) users:
-   1. This step requires a terminal window. On CoCalc, select "New" and "Terminal".
-   2. Use the command `ls` to list files in your current folder. Use the command `cd someFolderName` to change into `someFolder`. Repeat this until you're in the `c` folder.
-   3. Now, run the command `make`.
- 5. This should create a new directory `build` inside of `c`. Copy the file `expressions` from `build` into whatever directory you plan to work in later.
+1. Download the [latest release of CONJECTURING](https://github.com/nvcleemp/conjecturing/releases) (choose the "CoCalc" version whether you are using CoCalc or not).
+2. Extract / unzip the package. If you're using CoCalc, upload the zipped file to CoCalc first, then unzip after uploading by clicking on the file and selecting "Extract Files".
+3. In the new folder / directory, there should be a directory named `sage`. Copy `conjecturing.py` out of `sage` into whatever directory you plan to work in later.
+4. Now, build the contents of the directory `c`. As described above, this may not be simple to do on Windows. For Unix (including CoCalc) users:
+    1. This step requires a terminal window. On CoCalc, select "New" and "Terminal".
+    2. Use the command `ls` to list files in your current folder. Use the command `cd someFolderName` to change into `someFolder`. Repeat this until you're in the `c` folder.
+    3. Now, run the command `make`.
+5. This should create a new directory `build` inside of `c`. Copy the file `expressions` from `build` into whatever directory you plan to work in later.
 
 ### Install OIP-GT 3️⃣
 
- 1. Download and unzip the [latest release](https://github.com/math1um/objects-invariants-properties/releases).
- 2. Copy the files each of the files into the directory you plan to work in.
- 3. You're done. 🎉
+1. Download and unzip the [latest release](https://github.com/math1um/objects-invariants-properties/releases).
+2. Copy the files each of the files into the directory you plan to work in.
+3. You're done. 🎉
 
 #### Note for users who install OIP-GT by cloning the repository :octocat::
 
@@ -207,30 +207,30 @@ TO DO
 ## Where to find more examples and documentation 📜
 
 Sage and OIP-GT, from the command prompt:
- - In Sage, typing `?` or `??` after any command will display documentation and examples. For example,
- ```sage
- has_star_center?
- ```
- or
- ```sage
- Graph.is_hamiltonian?
- ```
+- In Sage, typing `?` or `??` after any command will display documentation and examples. For example,
+```sage
+has_star_center?
+```
+or
+```sage
+Graph.is_hamiltonian?
+```
 
 Python, from the command prompt (see links to tutorials above for other questions):
- - Run the command `help(object)` to get information on any Python object (the single `?` above is just a shorthand version of `help`). For example,
- ```python
- help(print)
- help([1,2,3])
- ```
+- Run the command `help(object)` to get information on any Python object (the single `?` above is just a shorthand version of `help`). For example,
+```python
+help(print)
+help([1,2,3])
+```
 
 Sage, online documentation:
- - List of built-in Sage graphs, called as `graphs.SomeGraph()`: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_generators.html.
- - The Sage `Graph` package, with a list of built-in properties and invariants called as `someGraph.is_some_property()`: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/generic_graph.html
- - Even more built-in Sage properties and invariants for undirected graphs, called the same as above: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph.html
+- List of built-in Sage graphs, called as `graphs.SomeGraph()`: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_generators.html.
+- The Sage `Graph` package, with a list of built-in properties and invariants called as `someGraph.is_some_property()`: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/generic_graph.html
+- Even more built-in Sage properties and invariants for undirected graphs, called the same as above: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph.html
 
 OIP-GT, online:
- - Using the search bar on [our GitHub](https://github.com/math1um/objects-invariants-properties) will search for any mentions of a phrase in the source code, issues, commit messages, and more.
- - You can view and download the source code from [our GitHub](https://github.com/math1um/objects-invariants-properties). **This can be useful if you're wondering what lists or graphs or functions are already built-in to OIP-GT.**
+- Using the search bar on [our GitHub](https://github.com/math1um/objects-invariants-properties) will search for any mentions of a phrase in the source code, issues, commit messages, and more.
+- You can view and download the source code from [our GitHub](https://github.com/math1um/objects-invariants-properties). **This can be useful if you're wondering what lists or graphs or functions are already built-in to OIP-GT.**
 
 ## Contributing
 
@@ -242,11 +242,9 @@ Have you found a bug / problem with OIP-GT 🐞🐛? Do you have a suggestion fo
 
 Note that improvements / enhancements may include requests for new functions, requests to add graphs, suggestions for improving usability, documentation, or reliability, and more.
 
- 1. Before submitting a report, please make sure you're using the [latest release of OIP-GT](https://github.com/math1um/objects-invariants-properties/releases). Maybe your bug/suggestion has already been resolved.
-
- 2. Next, search the list of issues for related reports to see if the problem has already been reported / feature has already been suggested. If it has and the issue is still open, you can add any new information as a comment to the existing issue instead of opening a new one.
-
- 3. If you've reached this step, then you should open an issue! See our [Contributing Guidelines](CONTRIBUTING.md) for details on what information to provide. In general, the more information, the better.
+1. Before submitting a report, please make sure you're using the [latest release of OIP-GT](https://github.com/math1um/objects-invariants-properties/releases). Maybe your bug/suggestion has already been resolved.
+2. Next, search the list of issues for related reports to see if the problem has already been reported / feature has already been suggested. If it has and the issue is still open, you can add any new information as a comment to the existing issue instead of opening a new one.
+3. If you've reached this step, then you should open an issue! See our [Contributing Guidelines](CONTRIBUTING.md) for details on what information to provide. In general, the more information, the better.
 
 Keep in mind that we have a small team, so be sure to describe the impact of your bug (is it critical, or just bothersome?) / why your suggestion is important (how many Fields Medals will this result in?). If you'd like things done more quickly, see below to see how YOU can contribute the code.
 
@@ -259,21 +257,21 @@ Everybody is welcome to contribute! If you're not sure where to start, please co
 To contribute, you'll need to be familiar with GitHub pull requests and with programming - although the amount and type of programming may be minimal, depending on the issue. You can use the tutorials linked to above in "Getting Started".
 
 The basic process is (more details in our [Contributing Guidelines](CONTRIBUTING.md)):
- 1. Find an issue you'd like to help with. If you have a bug or feature request you'd like to resolve, then you should still begin by following the steps above to create an issue (that way we understand what bug or feature you're resolving!). Otherwise, you should check out the list of issues to find something that interests you.
- 2. Clone OIP-GT so that you can edit the source code.
- 3. Make changes to the code / database. See our [Contributing Guidelines](CONTRIBUTING.md) for code requirements and expectations, and maybe for some helpful tips.
- 4. Submit a pull request.
- 5. Work with us to answer any questions and make any improvements as we review your pull request.
- 6. Your contribution gets approved and added to OIP-GT! 🎉
+1. Find an issue you'd like to help with. If you have a bug or feature request you'd like to resolve, then you should still begin by following the steps above to create an issue (that way we understand what bug or feature you're resolving!). Otherwise, you should check out the list of issues to find something that interests you.
+2. Clone OIP-GT so that you can edit the source code.
+3. Make changes to the code / database. See our [Contributing Guidelines](CONTRIBUTING.md) for code requirements and expectations, and maybe for some helpful tips.
+4. Submit a pull request.
+5. Work with us to answer any questions and make any improvements as we review your pull request.
+6. Your contribution gets approved and added to OIP-GT! 🎉
 
 ## Maintained by 😎
 Contact ✉️:
 - Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
 
 Current maintainers 🔨🔧🔩:
- - Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
- - Nico Van Cleemput (@nvcleemp).
- - Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
+- Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
+- Nico Van Cleemput (@nvcleemp).
+- Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
 
 Past significant contributions by 👻:
- - Reid Barden (@rbarden), Summery 2017. Web: https://reidbarden.com/
+- Reid Barden (@rbarden), Summery 2017. Web: https://reidbarden.com/
