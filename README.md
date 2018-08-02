@@ -1,5 +1,5 @@
 # Objects-Invariants-Properties
-Objects, Invariants, and Properties for Graph Theory (OIP-GT)
+**Objects, Invariants, and Properties for Graph Theory (OIP-GT)**
 
 OIP-GT is a set of files that contain:
  - Objects (graphs)
@@ -34,70 +34,63 @@ Thus, after finishing initial setup, users will need to have some basic knowledg
 
 ### Installing Sage and CONJECTURING
 
-For users less-experienced with setting up programming environements, we suggest considering use of [CoCalc](https://cocalc.com/), an online computing environment. CoCalc comes preinstalled with Sage, making setup easier.
+For users less experienced with setting up programming environments, we suggest considering use of [CoCalc](https://cocalc.com/), an online computing environment. CoCalc comes preinstalled with Sage, making setup easier.
 
 However, CoCalc is far from perfect. For example, it may not be the best choice for large-scale computations. Also, CoCalc's free tier has limited resources. In particular, CoCalc's free tier does not allow remote internet resources, so you won't be able to pull from GitHub to CoCalc, which would make contributing to OIP-GT difficult. But, these shouldn't affect you if you're just getting started for the first time.
 
 At this point, you should either:
- - Create an account on [CoCalc](https://cocalc.com/), create a Sage worksheet, and then possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/).
- - Or, [install Sage](), and then possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/). For Windows users, be sure to fully read the [additional instructions](https://wiki.sagemath.org/SageWindows).
+ - Create an account on [CoCalc](https://cocalc.com/), create a Sage worksheet, and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/).
+ - Or, [install Sage](), and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/). For Windows users, be sure to fully read the [additional instructions](https://wiki.sagemath.org/SageWindows).
 
+As mentioned above, a primary purpose for OIP-GT is automated conjecturing. We use the program [CONJECTURING (available on GitHub)](https://github.com/nvcleemp/conjecturing) by Nico Van Cleemput. Of course, you're free to use the data in OIP-GT in other ways too.
 
-program [CONJECTURING (available on GitHub)](http://nvcleemp.github.io/conjecturing/).
+To install CONJECTURING, you can follow their [instructions](http://nvcleemp.github.io/conjecturing/). They describe how to install CONJECTURING as a Sage package, callable from any working directory.
+
+However, for first-time users (and in fact for all users on CoCalc, where admin rights are limited), you can setup CONJECTURING locally by following these simplified steps:
+
+######### CAN you make conjecturing on windows? Assuming you have Sage installed.
+
+ 1. Download the [latest release](https://github.com/nvcleemp/conjecturing/archive/0.12-CoCalc.zip) (or, you can use tools like `git` or `wget`).
+ 2. Extract / unzip the package. If you're using CoCalc, you can either unzip before you upload to CoCalc, or afterwards. To unzip after uploading to CoCalc, just click on the file and select "Extract Files".
+ 3. Copy `conjecturing.py` out of the directory `sage`. Put the copy into whatever directory you plan to work in later.
+ 4. `make` the contents of the directory `c`. For more help:
+   1. This step requires a terminal window. On CoCalc, just select "New" and "Terminal".
+   2. Use the command `ls` to list files in your current folder. Use the command `cd someFolderName` to change into someFolder. Repeat this until you're in the `c` folder.
+   3. Now, run `make`.
+ 5. This should create a new directory `build` inside of `c`. Copy the file `expressions` from `build` into whatever directory you plan to work in later.
+
+And that's it! You've installed Sage and CONJECTURING. You're now ready to install OIP-GT.
 
 ### Install OIP-GT (without git)
 
-### Tutorials for Python / Sage / git
+ 1. Download and unzip the [latest release](https://github.com/math1um/objects-invariants-properties/releases).
+ 2. Copy the files out of the folder and into the directory you plan to work in.
+ 3. You're done. 🎉
+
+### Tutorials for Python / Sage
+
+Sage:
+ - [The Sage Tutorial](http://doc.sagemath.org/html/en/tutorial/)
+
+Python:
+ - [The Python Tutorial](https://docs.python.org/3/tutorial/)
+ - [Code Academy](https://www.codecademy.com/learn/learn-python)
 
 ## Examples / how to use
 
-During development the project is split over multiple file, but during the build process everything from the objects (graphs), invariants and properties part will be compiled into a single file.
-
-Currently, it is set up to be saved and loaded a specific way and will not function without it being this way. Note that the development version CANNOT directly be loaded into Sage. Below we describe the process of to build and use the project. If you are not interested in contributing to the project, and just want to use the final result, then you can just skip over this part, and download the built files from our website.
-
-First cd to the root of your project, then clone the oip-gt repo from Github there.
-
-```sh
-$ cd path/to/project
-$ git clone https://github.com/math1um/objects-invariants-properties
-```
-
-This should create a subdirectory called `objects-invariants-properties`. You can cd to this directory and run the make script.
-
-```sh
-$ cd objects-invariants-properties
-$ make build
-```
-
-This should create a subdirectory called `build` containing some Sage files and a database file. Copy these files to the root of your project, or to the location from which you want to run Sage.
-Either get the files using the way described in Setup, or download the zip file on our website. Make sure that the files are located in the directory from which you will run Sage, and not in a subdirectory. Note that to use these files on CoCalc within a Sagemath worksheet, this means that the files should be placed in the home directory of the project. Now you can load `gt.sage`. GT all coded graphs, invariants, properties, and theorems. It does not load the DIMACS graphs, Sloane Graphs, or the database utilities. Use the utility methods to load the DIMACS and Sloane graphs. This populates the `dimacs_graphs` list.
-
-```sage
-sage: load("gt.sage")
-sage: load_dimacs_graphs()
-sage: load_sloane_graphs()
-```
-
-If you want to use the database with precomputed invariant and property values, then you need to load another file.
-sage
-sage: load("gt_precomputed_database.sage")
-##### Use
-
-Assuming you have CONJECTURING setup here as well, you can easily get conjectures using these new objects.
-
-```sage
-sage: load("conjecturing.py")
-sage: conjecture(graph_objects, efficiently_computable_invariants, 0)
-```
-
-If you have also loaded the database with precomputed invariant values, you can make use of them as shown below.
-
-```sage
-sage: precomputed_invs = precomputed_invariants_for_conjecture()
-sage: conjecture(graph_objects, efficiently_computable_invariants, 0, precomputed = precomputed_invs)
-```
-
 ## Where to find more documentation 📜
+
+From the command prompt:
+ - In Sage, typing `??` after any command will display the included docstring. For example, typing `has_star_center??` will display documentation and examples for the functions `has_star_center(g)`.
+
+Sage, online:
+ - Built-in Sage graphs, accessible as `graphs.SomeGraph()`: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_generators.html.
+ - Sage `Graph` package, with built-in properties and invariants: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/generic_graph.html
+ - Even more built-in Sage properties and invariants, just for undirected graphs: http://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph.html
+
+OIP-GT, online:
+ - Using the search bar on [our GitHub](https://github.com/math1um/objects-invariants-properties) will search for any mentions of a phrase in the source code, Issues, commit messages, and more.
+ - You can view and download the source code from [our GitHub](https://github.com/math1um/objects-invariants-properties).
 
 ## Contributing
 
