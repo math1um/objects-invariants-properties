@@ -1,7 +1,5 @@
 # Objects-Invariants-Properties
 
-
-
 ## Contents
 1. [Intro](#contents)
 2. [Getting Started :bowtie: 🔰](#getting-started-bowtie-)
@@ -58,7 +56,7 @@ Second, it enables us to recruit students. Some of these students have interests
 
 We've written the below instructions so that **anybody** can use OIP-GT. This is a math project. We hope to recruit mathematicians, no matter how programming-phobic they are!
 
-If you have trouble getting started, please contact us (see "Maintained by" at the end). If you find a specific problem that means OIP-GT doesn't work on your system, please submit an Issue (see "Reporting bugs" below).
+If you have trouble getting started, please contact us (see [Maintained by](#maintained-by-) at the end). If you find a specific problem that means OIP-GT doesn't work on your system, please submit an Issue (see [Reporting bugs](#maintained-by-) below).
 
 ### Required knowledge 💭❓
 
@@ -110,7 +108,7 @@ which draws a picture of given graph object. In this case, a combination of runn
 
 To set up Sage, either:
 - Create an account on [CoCalc](https://cocalc.com/), create a Sage worksheet, and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/).
-- Or, [download and install Sage](), and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/). For Windows users, be sure to skim the [additional instructions](https://wiki.sagemath.org/SageWindows).
+- Or, [download and install Sage](http://www.sagemath.org/index.html), and possibly work through a [Sage tour](http://doc.sagemath.org/html/en/a_tour_of_sage/)/[tutorial](http://doc.sagemath.org/html/en/tutorial/). For Windows users, be sure to skim the [additional instructions](https://wiki.sagemath.org/SageWindows).
 
 ### Install CONJECTURING 2️⃣
 
@@ -144,6 +142,8 @@ The above process takes the individual files containing graphs / Objects, Proper
 
 ## Examples / Tutorial 🎓
 
+See the links to [additional examples and documentation](#where-to-find-more-examples-and-documentation-) after this section for more help.
+
 The below examples assume that `gt.sage` and the other files you downloaded above are located in your current working directory. If not, then either copy the files, use `cd`, or use `os.chdir("dirName")`.
 
 ### Load OIP-GT
@@ -155,7 +155,7 @@ load("gt.sage")
 load("gt_precomputed_database.sage")
 ```
 
-Note that the OIP-GT GitHub repository contains lists of graphs that are not by default included in the release download. You can download some additional lists (ex. a list of all maximal triangle-free graphs up to order 16) from the [Objects directory on GitHub](https://github.com/math1um/objects-invariants-properties/tree/master/src/Objects). These are either loaded by
+Note that the OIP-GT GitHub repository contains lists of graphs that are not by default included in the release download. You can download some additional lists (ex. a list of all maximal triangle-free graphs up to order 16) from the [Objects directory on GitHub](https://github.com/math1um/objects-invariants-properties/tree/master/src/Objects). These are either loaded with a command like
 ```sage
 load("dimacsgraphs.sage")
 ```
@@ -170,39 +170,170 @@ You can find graphs which meet some criteria by running something like
 myGraphs = [g for g in all_graphs if g.order() < 20 and g.is_hamiltonian()] # All Hamiltonian graphs of order less than 20.
 myGraphs2 = [g for g in all_graphs if is_two_connected(g)] # All the 2-connected graphs
 ```
-Note, when we say "All the 2-connected graphs", we do not mean "all of the 2-connected graphs in the universe"; we only mean a subset of the graphs that we have programmed into `gt.sage`.
+Note that when we say "All the 2-connected graphs", we do not mean "all of the 2-connected graphs in the universe"; we only mean a subset of the graphs that we have programmed into `gt.sage`.
 
-does_graph_exist(g, L)
-graph 6 string, and show
-Other lists
+To check whether a graph isomorphic to a particular graph is in some list, use the function
+```sage
+does_graph_exist(someGraphObject, someList)
+```
+which will print the names of any graphs isomorphic to `someGraphObject` and return a Boolean.
 
-TO DO
+You can find many graph generators built-in to the Sage `graphs` package. These work like
+```sage
+myGraph = graphs.BullGraph()
+myGraph2 = graphs.CompleteGraph(5)
+```
 
 ### Properties
 
-TO DO
+Graph properties are functions which take a graph as input and return `True` or `False`.
+
+Some properties are built-in to Sage. These are part of the `Graph` class and are called like
+```sage
+myGraph.is_hamiltonian()
+myGraph.is_planar()
+```
+
+We have many more properties built-in to `gt.sage`. These functions are called like
+```sage
+has_star_center(myGraph)
+is_two_connected(myGraph)
+```
+
+Here are some lists of properties built-in to `gt.sage`:
+```sage
+properties
+efficiently_computable_properties
+intractable_properties
+sage_properties
+```
+The list `properties` contains all the built-in properties, and these are the properties we have precomputed values for. The list `efficiently_computable_properties` are properties we have identified as "efficient", usually meaning polynomial-time complexity; `intractable_properties` are all other properties. The list `sage_properties` is the subset of `properties` which are functions from the `Graph` class.
 
 ### Invariants
 
-TO DO
+Graph invariants are functions which take a graph as input and return a number.
+
+Some invariants are in to Sage. These are part of the `Graph` class and are called like
+```sage
+myGraph.order()
+myGraph.size()
+```
+
+We have many more invariants built-in to `gt.sage`. These functions are called like
+```sage
+max_degree(myGraph)
+independence_number(myGraph)
+```
+
+Here are some lists of invariants in to `gt.sage`:
+```sage
+all_invariants
+efficient_invariants
+intractable_invariants
+sage_efficient_invariants
+sage_intractable_invariants
+```
+The list `all_invariants` contains all the built-in invariants, and these are the invariants we have precomputed values for. The list `efficient_invariants` are the invariants we have identified as "efficient", usually meaning polynomial-time complexity; `intractable_invariants` are all other invariants. The lists `sage_efficient_invariants` and `sage_intractable_invariants` are the subsets which are functions from the Sage `Graph` class.
 
 ### Conjecturing
 
-Bingos
+Running the conjecturing program is simple. Just make sure that you have loaded `conjecturing.py` and then run
+```sage
+myGraphs = [g for g in all_graphs[0:20] if g.order() < 40] # Picks a list of small graphs from the beginning of all_graphs
+conjs = propertyBasedConjecture(myGraphs, efficiently_computable_properties[0:10], 0, sufficient=True)
+for c in conjs:
+    print c
+```
 
-TO DO
+Any conjecture printed out will be true for all input graphs and properties. *But*, whether it's in general is left for you to prove or disprove.
+
+If you were conjecturing on invariants, the command would be
+```sage
+conjs = conjecture(someGraphs, someInvariants, mainInvariant, upperBound=True)
+```
+
+In the first command, `mainProperty` is set to 0. In the second command, `mainInvariant` is not yet set. You should set these values to the index of the property/invariant you are want conditions or bounds on. For example, the first command finds sufficient conditions for the first property in the list `efficiently_computable_properties[0:10]` (which was `is_regular` when I ran it). If you'd like conditions related to the second property in the list, whatever it happens to be, you would pass `1`.
+
+Note that in the above two commands, you can set the `sufficient` and `upperBound` parameters to `True` or `False`. They both default to `True`. If set to `False`, then conjectures will be made for necessary conditions or for lower bounds, respectively.
+
+Besides setting the list of functions to analyze and the function of interest, there is one other way to introduce a condition into your conjectures. For example, if I want a bound on the independence number of Hamiltonian graphs, it may not be immediately obvious how to make CONJECTURING consider both independence number (invariant) and Hamiltonicity (property). Here, if the list of `someGraphs` you pass contains *only* Hamiltonian graphs, then any conjecturing bounds will have the implicit qualifier "If the graph is Hamiltonian, then...".
+
+The process of conjecturing is relatively fast, with the bottleneck usually being the computation of each function on each graphs. See [Add precompute values to conjecturing](#add-precomputed-values-to-conjecturing) below for one way to speed things up. Another way to reduce the time to conjecture is to reduce the size of the inputs. One heuristic we have found useful is to conjecture on a relatively small list of graphs, select which conjectures we find interesting or viable, and then (usually, quickly) search for counterexamples in the full list of graphs.
+
+One final note concerning pedantic cases: we encourage you not to include the empty graph, `Graph(0)`, `Graph(1)`, or any other possibly frustrating graph in your conjecture input. We have attempted to consider these cases when defining the functions in `gt.sage`. However, since there is often a lot of disagreement in these cases (is the empty graph complete? Hamiltonian? 2-regular?), passing them as input may prevent CONJECTURING from making some otherwise viable conjectures.
+
+For more help with CONJECTURING, we encourage you to run the commands
+```sage
+conjecture?
+propertyBasedConjecture?
+```
+so you can see the full list of parameters to each function.
 
 #### Add theorems to conjecturing
 
-TO DO
+Conjectures are most interesting when they **improve** on already known results.
+
+The definition of "improve" is important here. First consider properties. If we are looking for sufficient conditions C that imply property P, the CONJECTURING program will only output a conjecture if the number of graphs implied to be P increases from what is already implied by other theory. Similarly, if we are looking for necessary conditions C that are implied by property P, a conjecture will be made only if the number of graphs with conditions necessary for P would decrease.
+
+In the case of invariants, the definition of "improve" is more obvious, as any inequality which is tighter/closer to the observed/known results than current theory is.
+
+So, as you add theorems to your conjecturing, be careful of what we call "bingos". If your property theorems already characterize all of the graphs, or your invariant theorems reach equality, then the program will not make any new conjectures. In these cases, you could add more graphs. You might also remove functions which are already well-described by theory, and focus on other relationships; for example, if looking for invariant conjectures with complete graphs, I would not include both `size` and `order` in my list of invariants.
+
+For properties, set the `theory` parameter to a list of properties which return a Boolean which imply the main property when `True` (are implied to be `True` when the main property is `True`) when when for sufficient (necessary):
+```sage
+propertyBasedConjecture(objects, properties, mainProperty, theory=listofThoerems)
+```
+
+For invariants, set the `theory` parameter to a list of functions which return known bounds on the main invariants:
+```sage
+conjecture(objects, invariants, mainInvariant, theory=listOfTheorems)
+```
+
+There are some theorems built-in to `gt.sage`. Again, these are just various functions, some sorted into various lists. Find a list of these theorems [here](src/Theorems/theorems.sage).
 
 #### Add precomputed values to conjecturing
 
-TO DO
+Make sure that you have loaded `gt_precomputed_database.sage` and that `gt_precomputed_database.db` is in the current working directory.
+
+For properties, run the conjecture as you normally would, but setting the `precomputed` parameter as:
+```sage
+precomputedDictionary = precomputed_properties_for_conjecture()
+propertyBasedConjecture(objects, properties, mainProperty, precomputed=precomputedDictionary)
+```
+
+For invariants, run the conjecture as you normally would, but setting the `precomputed` parameter as:
+```sage
+precomputedDictionary = precomputed_invariants_for_conjecture()
+conjecture(objects, invariants, mainInvariant, precomputed=precomputedDictionary)
+```
+
+If the values for the given graphs for the given functions exist, then this will help massively speed up the conjectures.
+
+Not all values for all graphs and functions have been precomputed, especially for larger graphs and slower functions. To check or filter by what has been computed, use commands like
+```sage
+precomputed = properties_as_dict()
+g_key = myGraph.canonical_label(algorithm='sage').graph6_string() # Values are stored according to graph's **canonical** graph6 string.
+print g_key in precomputed # Check if the graph exists at all in the precomputed database
+print someProperty.__name__ in precomputed[g_key] # Check if the value for some property has been computed for the graph.
+```
+The same commands will work for invariants, if `properties_as_dict` is replaced by `invariants_as_dict`.
 
 ### Precompute additional values
 
-TO DO
+If you would like to computed additional values, either for graphs and functions combinations we have neglected, or for graphs and functions you have added yourself, then use the following functions.
+
+In the below functions, you specify the list of functions and graphs to compute, and the number of seconds to spend on each combination before timing out and moving on.
+```sage
+update_invariant_database(someinvariants, graphs, timeout=60)
+update_property_database(someProperties, graphs, timeout=60)
+```
+
+Keep in mind that the graphs and functions passed to the update methods must be unique. In particular, the no graphs can be isomorphic to each other.
+
+If you would to contribute your computations to the OIP-GT repository, you will need to use the below command to dump the entire `gt_precomputed_database.db` file into a collection of individual `.sql` files. For further instructions on contributing, see [Contributing](#contributing) below.
+```sage
+dump_database("filePathWhereToDump")
+```
 
 ## Where to find more examples and documentation 📜
 
@@ -234,7 +365,7 @@ OIP-GT, online:
 
 ## Contributing
 
-Note: Please don't file an issue to ask a question. See "Maintained by" below for contact information.
+Note: Please don't file an issue to ask a question. See [Maintained by](#maintained-by-) below for contact information.
 
 ### Reporting bugs 🐞🐛 and Suggesting improvements ✨
 
@@ -254,7 +385,7 @@ Contributions can include resolving any open [issue](https://github.com/math1um/
 
 Everybody is welcome to contribute! If you're not sure where to start, please contact us. We want to get more researchers / developers involved in contributing to OIP-GT. There are plenty of "beginner" issues available.
 
-To contribute, you'll need to be familiar with GitHub pull requests and with programming - although the amount and type of programming may be minimal, depending on the issue. You can use the tutorials linked to above in "Getting Started".
+To contribute, you'll need to be familiar with GitHub pull requests and with programming - although the amount and type of programming may be minimal, depending on the issue. You can use the tutorials linked to above in [Getting Started](#getting-started-bowtie-).
 
 The basic process is (more details in our [Contributing Guidelines](CONTRIBUTING.md)):
 1. Find an issue you'd like to help with. If you have a bug or feature request you'd like to resolve, then you should still begin by following the steps above to create an issue (that way we understand what bug or feature you're resolving!). Otherwise, you should check out the list of issues to find something that interests you.
@@ -270,8 +401,8 @@ Contact ✉️:
 
 Current maintainers 🔨🔧🔩:
 - Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
-- Nico Van Cleemput (@nvcleemp).
-- Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
+- Nico Van Cleemput (@nvcleemp). Email:nico.vancleemput@gmail.com Web: http://nvcleemp.be/academic/index.html
 
 Past significant contributions by 👻:
+- Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
 - Reid Barden (@rbarden), Summery 2017. Web: https://reidbarden.com/
