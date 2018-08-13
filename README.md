@@ -401,7 +401,7 @@ Contact ✉️:
 
 Current maintainers 🔨🔧🔩:
 - Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
-- Nico Van Cleemput (@nvcleemp). Email:nico.vancleemput@gmail.com Web: http://nvcleemp.be/academic/index.html
+- Nico Van Cleemput (@nvcleemp). Email: nico.vancleemput@gmail.com Web: http://nvcleemp.be/academic/index.html
 
 Past significant contributions by 👻:
 - Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
