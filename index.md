@@ -2,9 +2,9 @@
 
 ## Contents
 1. [Intro](#contents)
-2. [Getting Started :bowtie: 🔰](#getting-started-bowtie-)
+2. [Getting Started 🔰](#getting-started-)
     1. [Required Knowledge 💭❓](#required-knowledge-)
-    2. [Tutorials 🐍:octocat:🐧](#tutorials)
+    2. [Tutorials 🐍🐧](#tutorials)
     3. [What computing environment are you using? 💻](#what-computing-environment-are-you-using-)
         - [CoCalc](#cocalc)
     4. [Install Sage 1️⃣](#install-sage-1️⃣)
@@ -48,11 +48,11 @@ For one, it enables us to share this repository with a growing community of rese
 
 Second, it enables us to recruit students. Some of these students have interests in computer science, rather than math, and this project is a tool to bridge these fields. We have organized several summer workshops, each with a particular focus in graph theory, where students program, conjecture, and prove/disprove as a group. These efforts spur growth in OIP-GT much faster than we could produce alone.
 
-📔 See https://arxiv.org/abs/1801.01814 for a more extensive introduction to the motivations for this project, past workshops, some of the results produced with OIP, and a history of efforts in automated conjecturing.
+📔 See [https://arxiv.org/abs/1801.01814](https://arxiv.org/abs/1801.01814) for a more extensive introduction to the motivations for this project, past workshops, some of the results produced with OIP, and a history of efforts in automated conjecturing.
 
-📔 See https://www.sciencedirect.com/science/article/pii/S0004370215001575 for a description of the CONJECTURING program's algorithm.
+📔 See [https://www.sciencedirect.com/science/article/pii/S0004370215001575](https://www.sciencedirect.com/science/article/pii/S0004370215001575) for a description of the CONJECTURING program's algorithm.
 
-## Getting started :bowtie: 🔰
+## Getting started 🔰
 
 We've written the below instructions so that **anybody** can use OIP-GT. This is a math project. We hope to recruit mathematicians, no matter how programming-phobic they are!
 
@@ -73,7 +73,7 @@ Users may also find it helpful to know about git, GitHub, and working in the she
 - Python 🐍:
     - [The Python Tutorial](https://docs.python.org/3/tutorial/)
     - [Code Academy](https://www.codecademy.com/learn/learn-python)
-- GitHub and git :octocat::
+- GitHub and git:
     - [GitHub Hello World](https://guides.github.com/activities/hello-world/)
     - [Forking Projects and Pull Requests](https://guides.github.com/activities/forking/)
     - [Mastering issues and working with other developers](https://guides.github.com/features/issues/)
@@ -134,7 +134,7 @@ For CoCalc users and for first-time users who would prefer a simpler process, yo
 2. Copy the files each of the files into the directory you plan to work in.
 3. You're done. 🎉
 
-#### Note for users who install OIP-GT by cloning the repository :octocat::
+#### Note for users who install OIP-GT by cloning the repository:
 
 To build the source files, open a terminal and `cd` to the root OIP directory. Then, run `make`. This should create a new directory named `build`. Copy all of the files from `build` into the directory you plan to work in. You can do this by running `cp build/* someDirectory`, where `someDirectory` is wherever you plan to work.
 
@@ -397,12 +397,12 @@ The basic process is (more details in our [Contributing Guidelines](CONTRIBUTING
 
 ## Maintained by 😎
 Contact ✉️:
-- Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
+- Craig Larson (@math1um). Email: clarson@vcu.edu  Web: [http://www.people.vcu.edu/~clarson/]
 
 Current maintainers 🔨🔧🔩:
-- Craig Larson (@math1um). Email: clarson@vcu.edu  Web: http://www.people.vcu.edu/~clarson/
-- Nico Van Cleemput (@nvcleemp). Email: nico.vancleemput@gmail.com Web: http://nvcleemp.be/academic/index.html
+- Craig Larson (@math1um). Email: clarson@vcu.edu  Web: [http://www.people.vcu.edu/~clarson/](http://www.people.vcu.edu/~clarson/)
+- Nico Van Cleemput (@nvcleemp). Email: nico.vancleemput@gmail.com Web: [http://nvcleemp.be/academic/index.html](http://nvcleemp.be/academic/index.html)
 
 Past significant contributions by 👻:
-- Justin Yirka (@yirkajk), Summer 2018. Web: https://www.justinyirka.com/
-- Reid Barden (@rbarden), Summery 2017. Web: https://reidbarden.com/
+- Justin Yirka (@yirkajk), Summer 2018. Web: [https://www.justinyirka.com/](https://www.justinyirka.com/)
+- Reid Barden (@rbarden), Summery 2017. Web: [https://reidbarden.com/](https://reidbarden.com/)
