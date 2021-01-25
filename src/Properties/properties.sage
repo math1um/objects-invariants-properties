@@ -2186,7 +2186,7 @@ def find_neighbor_twin(g, T):
     for v in T:
         condition = False
         Nv = set(g.neighbors(v))
-        #print "v = {}, Nv = {}".format(v,Nv)
+        #print("v = {}, Nv = {}".format(v,Nv))
         NvT = set(gT.neighbors(v))
         for w in Nv:
             NwT = set(g.neighbors(w)).intersection(set(T))
