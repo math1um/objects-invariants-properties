@@ -225,7 +225,7 @@ def does_graph_exist(g, L):
     success = False
     for gL in L:
         if g.is_isomorphic(gL):
-            print gL.name()
+            print(gL.name())
             success = True
     return success
 
