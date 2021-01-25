@@ -131,7 +131,7 @@ def alpha_lower_approximation(g, i):
     #return LP
 
     x_sol = LP.get_values(x)
-    print x_sol
+    print(x_sol)
     return sum(x_sol.values())
 
 #input = graph g
