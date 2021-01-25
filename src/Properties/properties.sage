@@ -2193,7 +2193,7 @@ def find_neighbor_twin(g, T):
             if w not in T and NvT.issubset(NwT):
                 T.append(w)
                 condition = True
-                #print "TWINS: v = {}, w = {}, sp3 = {}".format(v,w,sp3)
+                #print("TWINS: v = {}, w = {}, sp3 = {}".format(v,w,sp3))
                 break
         if condition == True:
             break
