@@ -1520,20 +1520,27 @@ add_to_lists(friendship_number, efficient_invariants, all_invariants)
 #####
 def domination_number(g):
     """
-    Returns the domination number of the graph g, i.e., the size of a maximum
-    dominating set.
+    Return the domination number of the graph g
+    
+    i.e., the size of a maximum dominating set.
 
-    A complete graph is dominated by any of its vertices::
+    A complete graph is dominated by any of its vertices, A star graph is dominated by its central vertex and The domination number of a cycle of length n is the ceil of n/3.
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    EXAMPLES:
 
         sage: domination_number(graphs.CompleteGraph(5))
         1
 
-    A star graph is dominated by its central vertex::
-
         sage: domination_number(graphs.StarGraph(5))
         1
-
-    The domination number of a cycle of length n is the ceil of n/3.
 
         sage: domination_number(graphs.CycleGraph(5))
         2
