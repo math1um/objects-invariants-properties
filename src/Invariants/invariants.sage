@@ -1581,14 +1581,24 @@ add_to_lists(independence_ratio, intractable_invariants, all_invariants)
 
 def min_degree_of_max_ind_set(g):
     """
-    Returns the minimum degree of any vertex that is a part of any maximum indepdendent set
+    Return the minimum degree of any vertex that is a part of any maximum indepdendent set
+
+    INPUT:
+    
+    -`g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    EXAMPLES:
 
     sage: min_degree_of_max_ind_set(c4)
     2
-    sage: min_degree_of_max_ind_set(graphs.PetersenGraph())
+    
+    sage: min_degree_of_max_ind_set(pete)
     3
     """
-
     low_degree = g.order()
     list_of_vertices = []
 
