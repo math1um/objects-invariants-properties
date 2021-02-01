@@ -29,11 +29,24 @@ for i in sage_intractable_invariants:
 
 def distinct_degrees(g):
     """
-    returns the number of distinct degrees of a graph
-        sage: distinct_degrees(p4)
-        2
-        sage: distinct_degrees(k4)
-        1
+    Return the number of distinct degrees of a graph
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer (distinct degree of a graph)
+    
+    EXAMPLES:
+    
+    
+    sage: distinct_degrees(p4)
+    2
+    
+    sage: distinct_degrees(k4)
+    1
     """
     return len(set(g.degree()))
 add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
