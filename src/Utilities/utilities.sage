@@ -265,6 +265,27 @@ Returns true if the given graph exists in the given list.
 It also prints out all graphs in the list that are isomorphic so that duplicates may also be found here.
 """
 def does_graph_exist(g, L):
+    """
+    Return true if the given graph exists in the given list.
+
+    It also prints out all graphs in the list that are isomorphic so that duplicates may also be found here.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    -``L``-- List
+
+    OUTPUT:
+
+    -Boolean; true if the given graph exists in the given list, false if not.
+
+    -String; name of graphs in the list that are isomorphic to the original graph.
+
+    EXAMPLES:
+
+
+    """
     success = False
     for gL in L:
         if g.is_isomorphic(gL):
