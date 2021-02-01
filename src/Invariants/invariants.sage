@@ -588,10 +588,22 @@ add_to_lists(different_degrees, efficient_invariants, all_invariants)
 
 def szekeres_wilf(g):
     """
-    Returns 1+ max of the minimum degrees for all subgraphs
-    Its an upper bound for chromatic number
+    Return 1+ max of the minimum degrees for all subgraphs.
+    
+    This is an upper bound for chromatic number.
 
-    sage: szekeres_wilf(graphs.CompleteGraph(5))
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    EXAMPLES:
+    
+    sage: szekeres_wilf(k5)
+    
     5
     """
     #removes a vertex, if possible, of degree <= i
