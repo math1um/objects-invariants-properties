@@ -73,12 +73,23 @@ def common_neighbors(g,v,w):
 
 def max_common_neighbors(g):
     """
-    Returns the maximum number of common neighbors of any pair of distinct vertices in g.
-
-        sage: max_common_neighbors(p4)
-        1
-        sage: max_common_neighbors(k4)
-        2
+    Return the maximum number of common neighbors of any pair of distinct vertices in g
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    - Integer
+    
+    EXAMPLES:
+    
+    sage: max_common_neighbors(p4)
+    1
+    
+    sage: max_common_neighbors(k4)
+    2
     """
     max = 0
     V = g.vertices()
