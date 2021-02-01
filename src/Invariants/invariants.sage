@@ -315,21 +315,25 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 
 def matching_number(g):
     """
-    Returns the matching number of the graph g, i.e., the size of a maximum
-    matching.
-
-    A matching is a set of independent edges.
-
-    See: https://en.wikipedia.org/wiki/Matching_(graph_theory)
-
-        sage: matching_number(graphs.CompleteGraph(5))
+    Return 2 - order + size of a Graph
+    
+    This is the number of faces if the graph is planar, a consequence of Euler's Formula
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    Examples:
+    
+        sage: eulerian_faces(graphs.CycleGraph(5))
         2
-        sage: matching_number(graphs.CycleGraph(5))
-        2
-        sage: matching_number(graphs.StarGraph(5))
-        1
-        sage: matching_number(graphs.CompleteBipartiteGraph(3,5))
-        3
+        
+        sage: eulerian_faces(graphs.DodecahedralGraph())
+        12
     """
     return int(g.matching(value_only=True, use_edge_labels=False))
 add_to_lists(matching_number, efficient_invariants, all_invariants)
