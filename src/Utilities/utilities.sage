@@ -315,7 +315,19 @@ def find_isomorphic_pairs(l):
 
 def find_all_max_ind_sets(g):
     """
-    Finds all the maximum independent sets and stores them in a list
+    Return a list of all the maximum independent sets
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    - List of all the maximum independent sets
+
+    EXAMPLES:
+
+
     """
     final_list = []
     V = Set(g.vertices())
