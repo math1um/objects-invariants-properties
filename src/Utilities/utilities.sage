@@ -39,29 +39,23 @@ def check_independence_extension(g,S):
 
 def find_alpha_critical_graphs(order, save = False):
     """
-    Returns a list of the graph6 string of each of the alpha critical graphs of
-    the given order. A graph g is alpha critical if alpha(g-e) > alpha(g) for
-    every edge e in g. This looks at every graph of the given order, so this
-    will be slow for any order larger than 8.
-    If save = True (default False), then list will be saved to a file
-    named "alpha_critical_name_list_{order}".
+    Return a list of the graph6 string of each of the alpha critical graphs of the given order.
 
-    There is a unique alpha critical graph on 3 and 4 vertices::
+    A graph g is alpha critical if alpha(g-e) > alpha(g) for every edge e in g. This looks at every graph of the given order, so this will be slow for any order larger than 8.
 
-        sage: find_alpha_critical_graphs(3)
-        ['Bw']
-        sage: find_alpha_critical_graphs(4)
-        ['C~']
+    INPUT:
 
-    There are two alpha critical graphs on 5 vertices::
+    -``order``-- integer; order of a graph
 
-        sage: find_alpha_critical_graphs(5)
-        ['Dhc', 'D~{']
+    OUTPUT:
 
-    There are two alpha critical graphs on 6 vertices::
+    -A list of the graph6 string of each of the alpha critical graphs of the given order (List).
 
-        sage: find_alpha_critical_graphs(6)
-        ['E|OW', 'E~~w']
+    EXAMPLES:
+
+    sage: find_alpha_critical_graphs(5)
+    ['DUW', 'D~{']
+
     """
     graphgen = graphs(order)
     alpha_critical_name_list = []
