@@ -105,13 +105,24 @@ add_to_lists(max_common_neighbors, efficient_invariants, all_invariants)
 
 def min_common_neighbors(g):
     """
-    Returns the minimum number of common neighbors of any pair of distinct vertices in g,
-    which is necessarily 0 for disconnected graphs.
-
-        sage: min_common_neighbors(p4)
-        0
-        sage: min_common_neighbors(k4)
-        2
+    Return the minimum number of common neighbors of any pair of distinct vertices in g.
+    
+    Will return 0 for disconnected graphs
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    - Integer
+    
+    EXAMPLES:
+    
+    sage: min_common_neighbors(p4)
+    0
+    sage: min_common_neighbors(k4)
+    2
     """
     n = g.order()
     min = n
