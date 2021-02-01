@@ -164,6 +164,25 @@ def alpha_lower_approximation(g, i):
 #assumes nodes in g are labeled [0..n-1]
 #same as cartesian product with k2, but output labeling is guarnateed to be integers
 def make_bidouble_graph(g):
+    """
+    Return a bipartite graph with twice as many nodes and edges
+
+    Assumes nodes in g are labeled [0..n-1], same as cartesian product with k2, but output labeling is guaranteed to be integers.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    - A Bipartite graph with twice as many nodes and edges (Sage Graph)
+
+    EXAMPLES:
+
+    sage: l=make_bidouble_graph(graphs.PetersenGraph())
+
+    sage: l.show()
+    """
     n = g.order()
     gdub = Graph(2*n)
     #print "gdub order = {}".format(gdub.order())
