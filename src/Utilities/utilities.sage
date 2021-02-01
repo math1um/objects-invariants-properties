@@ -70,19 +70,26 @@ def find_alpha_critical_graphs(order, save = False):
 
 def is_degree_sequence(L):
     """
-    Returns True if the list L is the degree sequence of some graph.
+    Return True if the list L is the degree sequence of some graph.
 
-    Since a graph always contains at least two vertices of the same degree, a
-    list containing no duplicates cannot be a degree sequence::
+    Since a graph always contains at least two vertices of the same degree, a list containing no duplicates cannot be a degree sequence.
+    A cycle has all degrees equal to two and exists for any order larger than 3, so a list of twos of length at least 3 is a degree sequence.
 
-        sage: is_degree_sequence([i for i in range(8)])
-        False
+    INPUT:
 
-    A cycle has all degrees equal to two and exists for any order larger than
-    3, so a list of twos of length at least 3 is a degree sequence::
+    -``L``--Integer; the possible degree sequence of some graph
 
-        sage: is_degree_sequence([2]*10)
-        True
+    OUTPUT:
+
+    -Boolean, True if the list L is the degree sequence of some graph, False if not.
+
+    EXAMPLES:
+
+    sage: is_degree_sequence([i for i in range(8)])
+    False
+
+    sage: is_degree_sequence([2]*10)
+    True
     """
     try:
         graphs.DegreeSequence(L)
