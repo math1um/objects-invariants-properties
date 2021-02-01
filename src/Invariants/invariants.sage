@@ -199,14 +199,27 @@ add_to_lists(min_degree, efficient_invariants, all_invariants)
 
 def max_degree(g):
     """
-    Returns the maximum of all degrees of the graph g.
+    Return the maximum of all degrees of the graph g.
 
+    INPUT:
+    
+    -``g``--Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    EXAMPLES:
+    
         sage: max_degree(graphs.CompleteGraph(5))
         4
+        
         sage: max_degree(graphs.CycleGraph(5))
         2
+        
         sage: max_degree(graphs.StarGraph(5))
         5
+        
         sage: max_degree(graphs.CompleteBipartiteGraph(3,5))
         5
     """
