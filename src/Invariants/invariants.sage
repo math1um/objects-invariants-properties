@@ -256,11 +256,23 @@ add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 
 def eulerian_faces(g):
     """
-    Returns 2 - order + size, which is the number of faces if the graph is planar,
-    a consequence of Euler's Formula.
-
+    Return 2 - order + size of a Graph
+    
+    This is the number of faces if the graph is planar, a consequence of Euler's Formula
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    Examples:
+    
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
+        
         sage: eulerian_faces(graphs.DodecahedralGraph())
         12
     """
