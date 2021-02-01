@@ -101,20 +101,30 @@ def is_degree_sequence(L):
 
 def find_lower_bound_sets(g, i):
     """
-    Returns a list of independent sets of size i unioned with their neighborhoods.
+    Return a list of independent sets of size i unioned with their neighborhoods.
+
     Since this checks all subsets of size i, this is a potentially slow method!
 
-        sage: l = find_lower_bound_sets(graphs.CycleGraph(6),2)
-        sage: l
-        [{0, 1, 2, 3, 5},
-         {0, 1, 2, 3, 4, 5},
-         {0, 1, 3, 4, 5},
-         {0, 1, 2, 3, 4},
-         {0, 1, 2, 4, 5},
-         {1, 2, 3, 4, 5},
-         {0, 2, 3, 4, 5}]
-        sage: type(l[0])
-        <class 'sage.sets.set.Set_object_enumerated_with_category'>
+    INPUT:
+
+    -``g``-- Sage Set
+
+    -``i``-- Integer
+
+    OUTPUT:
+
+    - A list of independent sets of size i unioned with their neighborhoods. (List of sets)
+
+    EXAMPLES:
+
+    sage: find_lower_bound_sets(graphs.CycleGraph(6),2)
+    [{0, 1, 2, 3, 5},
+     {0, 1, 2, 3, 4, 5},
+     {0, 1, 3, 4, 5},
+     {0, 1, 2, 3, 4},
+     {0, 1, 2, 4, 5},
+     {1, 2, 3, 4, 5},
+     {0, 2, 3, 4, 5}]
     """
     V = g.vertices()
     lowersets = []
