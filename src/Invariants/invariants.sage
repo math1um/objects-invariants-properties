@@ -340,13 +340,25 @@ add_to_lists(matching_number, efficient_invariants, all_invariants)
 
 def residue(g):
     """
-    If the Havel-Hakimi process is iterated until a sequence of 0s is returned,
-    residue is defined to be the number of zeros of this sequence.
+    Return the residue of a graph.
+
+    If the Havel-Hakimi process is iterated until a sequence of 0s is returned, residue is defined to be the number of zeros of this sequence.
 
     See: Favaron, Odile, Maryvonne Mahéo, and J‐F. Saclé. "On the residue of a graph." Journal of Graph Theory 15.1 (1991): 39-64.
 
+    INPUT:
+    
+    -``g``--Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    EXAMPLES:
+    
         sage: residue(k4)
         1
+        
         sage: residue(p4)
         2
     """
