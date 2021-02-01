@@ -627,7 +627,7 @@ def find_separating_invariant_relation(g, objects, property, invariants):
         for inv2 in invariants:
             if inv1(g) > inv2(g) and all(inv1(x) <= inv2(x) for x in L):
                 return inv1.__name__, inv2.__name__
-    print "no separating invariants"
+    print ("no separating invariants")
 
 
 
