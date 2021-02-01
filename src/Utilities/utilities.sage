@@ -289,11 +289,23 @@ def does_graph_exist(g, L):
             success = True
     return success
 
-"""
-Returns a list of all pairs of isomorphic graphs in the given list.
-"""
 import itertools
 def find_isomorphic_pairs(l):
+    """
+    Return a list of all pairs of isomorphic graphs in the given list.
+
+    INPUT:
+
+    -``l``-- List; list of graphs
+
+    OUTPUT:
+
+    - List of all pairs of isomorphic graphs in the given list.
+
+    EXAMPLES:
+
+
+    """
     pairs = []
     L = itertools.combinations(l, r = 2)
     for pair in L:
