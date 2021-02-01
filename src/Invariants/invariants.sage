@@ -140,9 +140,21 @@ add_to_lists(min_common_neighbors, efficient_invariants, all_invariants)
 
 def mean_common_neighbors(g):
     """
-    Returns the average number of common neighbors of any pair of distinct vertices in g.
+    Return the average number of common neighbors of any pair of distinct vertices in g
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Float
+    
+    EXAMPLES:
+    
         sage: mean_common_neighbors(p4)
         1/3
+        
         sage: mean_common_neighbors(k4)
         2
     """
