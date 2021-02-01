@@ -535,10 +535,22 @@ add_to_lists(card_max_cut, intractable_invariants, all_invariants)
 
 def welsh_powell(g):
     """
-    for degrees d_1 >= ... >= d_n
-    returns the maximum over all indices i of of the min(i,d_i + 1)
+    Return the maximum over all indices i of the min(i,d_i + 1)
 
-    sage: welsh_powell(k5) = 4
+    Degrees are assumed to be d_1 >= ... >= d_n
+
+    INPUT:
+
+    - ``g`` -- Sage Graph
+
+    OUTPUT:
+
+    - The maximum over all indices i of the min(i,d_i + 1) (Integer)
+
+    EXAMPLES:
+
+        sage: welsh_powell(k5_3)
+        4
     """
     n= g.order()
     D = g.degree()
