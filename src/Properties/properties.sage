@@ -2224,15 +2224,21 @@ def szekeres_wilf_equals_chromatic_number(g):
 
 def has_Havel_Hakimi_property(g, v):
     """
-    This function returns whether the vertex v in the graph g has the Havel-Hakimi
-    property as defined in [1]. A vertex has the Havel-Hakimi property if it has
-    maximum degree and the minimum degree of its neighbours is at least the maximum
-    degree of its non-neigbours.
-
-    [1] Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs
-        and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
-
-    Every vertex in a regular graph has the Havel-Hakimi property::
+    Return whether the vertex v in the graph g has the Havel-Hakimi property.
+    
+    A vertex has the Havel-Hakimi property if it has maximum degree and the minimum degree of its neighbours is at least the maximum degree of its non-neigbors. Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    -``v``-- Integer
+    
+    OUTPUT:
+    
+    -Boolean, True if the vertex v in the graph g has the Havel-Hakimi property, False otherwise.
+    
+    EXAMPLE:
 
         sage: P = graphs.PetersenGraph()
         sage: for v in range(10):
