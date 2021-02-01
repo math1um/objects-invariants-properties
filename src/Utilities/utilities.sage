@@ -635,7 +635,7 @@ def find_separating_invariant_relation(g, objects, property, invariants):
 def test_properties_upper_bound_theory(objects, property, theory):
      for g in objects:
          if not property(g) and all(f(g) for f in theory):
-             print g.name()
+             print (g.name())
 
 #finds "difficult" graphs for sufficient conditions, finds graphs which dont have any sufficient but do have property
 def test_properties_lower_bound_theory(objects, property, theory):
