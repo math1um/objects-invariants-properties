@@ -647,6 +647,26 @@ def sum_temperatures(g):
 add_to_lists(sum_temperatures, efficient_invariants, all_invariants)
 
 def randic(g):
+    """
+    Return the sum of the reciprocals of the square-root of the product of the degrees of the endpoints of that edge.
+
+    If there's an isolated vertex (a vertex with no incident edges), we define the value to be +Infinity
+
+    INPUT:
+
+    - ``g`` -- Sage Graph
+
+    OUTPUT:
+
+    - The sum of the reciprocals of the square-root of the product of the degrees of the endpoints of that edge (Float)
+
+    Examples:
+
+        sage: randic(graphs.PathGraph(2))
+        1.00000000000000
+
+    Randic, Milan. "Characterization of molecular branching." Journal of the American Chemical Society 97.23 (1975): 6609-6615.
+    """
      D = g.degree()
      V = g.vertices()
      if min(D) == 0:
