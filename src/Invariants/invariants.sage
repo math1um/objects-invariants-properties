@@ -170,14 +170,27 @@ add_to_lists(mean_common_neighbors, efficient_invariants, all_invariants)
 
 def min_degree(g):
     """
-    Returns the minimum of all degrees of the graph g.
+    Return the minimum of all degrees of the graph g.
 
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Integer
+    
+    EXAMPLES:
+    
         sage: min_degree(graphs.CompleteGraph(5))
         4
+        
         sage: min_degree(graphs.CycleGraph(5))
         2
+        
         sage: min_degree(graphs.StarGraph(5))
         1
+        
         sage: min_degree(graphs.CompleteBipartiteGraph(3,5))
         3
     """
