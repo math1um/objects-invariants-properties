@@ -2317,6 +2317,19 @@ def is_subcubic(g):
 
 # Max and min degree varies by at most 1
 def is_quasi_regular(g):
+    """
+    Return whether or not a graph is quasi-regular.
+    
+    A Graph is quasi-regular is its Max and min degree varies by at most 1.
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Boolean, True if the graph is quasi-regular, False if otherwise.
+    """
     if max_degree(g) - min_degree(g) < 2:
         return true
     return false
