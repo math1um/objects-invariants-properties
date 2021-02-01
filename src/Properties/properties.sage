@@ -2299,8 +2299,20 @@ def has_strong_Havel_Hakimi_property(g):
                 return False
     return True
 
-# Graph is subcubic is each vertex is at most degree 3
 def is_subcubic(g):
+    """
+    Return whether or not a Graph g is subcubic.
+    
+    A Graph is subcubic is each vertex is at most degree 3.
+    
+    INPUT:
+    
+    -``g``- Sage Graph
+    
+    OUTPUT:
+    
+    - Boolean, True if a graph is subcubic, False otherwise.
+    """
     return max_degree(g) <= 3
 
 # Max and min degree varies by at most 1
