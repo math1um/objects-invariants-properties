@@ -196,7 +196,7 @@ def MAXINE_independence_heuristic(g):
         V.remove(max_degree_vertex)
         h = g.subgraph(V)
         delta = max(h.degree())
-        print "delta = {}".format(delta)
+        print ("delta = {}".format(delta))
 
     return len(V)
 
