@@ -2271,13 +2271,19 @@ def has_Havel_Hakimi_property(g, v):
 
 def has_strong_Havel_Hakimi_property(g):
     """
-    This function returns whether the graph g has the strong Havel-Hakimi property
-    as defined in [1]. A graph has the strong Havel-Hakimi property if in every
-    induced subgraph H of G, every vertex of maximum degree has the Havel-Hakimi
-    property.
-
-    [1] Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs
-        and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
+    Return whether the graph g has the strong Havel-Hakimi property.
+    
+    A graph has the strong Havel-Hakimi property if in every induced subgraph H of G, every vertex of maximum degree has the Havel-Hakimi property. Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    -Boolean, True if the graph g has the strong Havel-Hakimi property, False if otherwise.
+    
+    EXAMPLE:
 
     The graph obtained by connecting two cycles of length 3 by a single edge has
     the strong Havel-Hakimi property::
