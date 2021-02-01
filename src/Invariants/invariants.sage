@@ -51,6 +51,26 @@ def distinct_degrees(g):
     return len(set(g.degree()))
 add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 
+def common_neighbors(g,v,w):
+    """
+    Return the Set of common neighbors of v and w in graph g
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    -``
+    
+    sage: common_neighbors(p4,0,3)
+    {}
+    
+    sage: common_neighbors(p4,0,2)
+    {1}
+    """
+    Nv = Set(g.neighbors(v))
+    Nw = Set(g.neighbors(w))
+    return (Nv.intersection(Nw))
+
 def max_common_neighbors(g):
     """
     Returns the maximum number of common neighbors of any pair of distinct vertices in g.
