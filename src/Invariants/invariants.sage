@@ -667,18 +667,18 @@ def randic(g):
 
     Randic, Milan. "Characterization of molecular branching." Journal of the American Chemical Society 97.23 (1975): 6609-6615.
     """
-     D = g.degree()
-     V = g.vertices()
-     if min(D) == 0:
-          return oo
-     sum = 0
-     for e in g.edges():
-         v = e[0]
-         i = V.index(v)
-         w = e[1]
-         j = V.index(w)
-         sum += 1.0/(D[i]*D[j])**0.5
-     return sum
+    D = g.degree()
+    V = g.vertices()
+    if min(D) == 0:
+         return oo
+    sum = 0
+    for e in g.edges():
+        v = e[0]
+        i = V.index(v)
+        w = e[1]
+        j = V.index(w)
+        sum += 1.0/(D[i]*D[j])**0.5
+    return sum
 add_to_lists(randic, efficient_invariants, all_invariants)
 
 #a very good lower bound for alpha
