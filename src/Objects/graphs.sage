@@ -3033,7 +3033,7 @@ def remove_duplicates_colours(seq, idfuns, verbose=False):
                         if colour1 == colour2:
                             if pos2 == len(remaining_idfuns) - 1:
                                 current[colour] = {colour1: prev_item}
-                                if verbose: (print "{} was already in the list. Previous version was {}.".format(item, prev_item))
+                                if verbose: print ("{} was already in the list. Previous version was {}.".format(item, prev_item))
                             else:
                                 current[colour] = {}
                                 current, colour = current[colour], colour1
