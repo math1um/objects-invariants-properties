@@ -3024,7 +3024,7 @@ def remove_duplicates_colours(seq, idfuns, verbose=False):
                 if type(current[colour]) == dict:
                     current = current[colour]
                 elif pos == len(idfuns) - 1:
-                    if verbose: print "{} was already in the list. Previous version was {}.".format(item, current[colour])
+                    if verbose: print ("{} was already in the list. Previous version was {}.".format(item, current[colour]))
                 else:
                     prev_item = current[colour]
                     remaining_idfuns = idfuns[pos+1:]
@@ -3033,7 +3033,7 @@ def remove_duplicates_colours(seq, idfuns, verbose=False):
                         if colour1 == colour2:
                             if pos2 == len(remaining_idfuns) - 1:
                                 current[colour] = {colour1: prev_item}
-                                if verbose: print "{} was already in the list. Previous version was {}.".format(item, prev_item)
+                                if verbose: (print "{} was already in the list. Previous version was {}.".format(item, prev_item))
                             else:
                                 current[colour] = {}
                                 current, colour = current[colour], colour1
