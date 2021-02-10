@@ -331,7 +331,7 @@ b2cbwSMUS40M8OH/Awl0aLwEVQEA
     dc1024 = Graph(dc1024_g6string)
     dc1024.name(new="dc1024")
     add_to_lists(dc1024, sloane_graphs, all_graphs)
-    print "loaded graph dc1024"
+    print ("loaded graph dc1024")
 
     dc2048_gzip = """
 H4sICB2mslkAA2RjMjA0OC50eHQAzb0Lexs3zjb800hqJI1lVx3Zcuxk5S0tO42apH6VrLvruH32
