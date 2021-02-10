@@ -1197,4 +1197,4 @@ eU9SBFicrz4T+vJJxJw+GRoyqRmi5cN/tTly+F/WNXa8GDKQtyZ5C7ry3wj56/8HsP2bR69UBQA=
     dc2048 = Graph(dc2048_g6string)
     dc2048.name(new="dc2048")
     add_to_lists(dc2048, sloane_graphs, all_graphs)
-    print "loaded graph dc2048"
+    print ("loaded graph dc2048")
