@@ -878,7 +878,7 @@ ce57.name(new = "ce57")
 add_to_lists(ce57, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number>= barrus_bound(x) - max(card_center(x), card_positive_eigenvalues(x))
-ce58 = Graph('Sj[{Eb~on~nls~NJWLVz~~^|{l]b\uFss')
+ce58 = Graph('Sj[{Eb~on~nls~NJWLVz~~^|{l]b\\uFss')
 ce58.name(new = "ce58")
 add_to_lists(ce58, graph_objects, counter_examples, all_graphs)
 
