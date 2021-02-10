@@ -1098,7 +1098,7 @@ ce100.name(new = "ce100")
 add_to_lists(ce100, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= matching_number(x) - order_automorphism_group(x) - 1
-ce101 = Graph('I~~Lt~\Nw')
+ce101 = Graph('I~~Lt~\\Nw')
 ce101.name(new = "ce101")
 add_to_lists(ce101, graph_objects, counter_examples, all_graphs)
 
