@@ -43527,4 +43527,4 @@ D12zT13z2wIA
         g = Graph(g6string)
         g.name(new = name)
         add_to_lists(g, dimacs_graphs, all_graphs)
-        print "loaded graph - ", g
+        print ("loaded graph - ", g)
