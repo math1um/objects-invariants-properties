@@ -245,7 +245,7 @@ def inverse_degree(g):
     Return 0 if the graph has no edges.
 
         sage: inverse_degree(p4)
-        3
+        3.00000000000000
         sage: inverse_degree(graphs.CompleteGraph(1))
         0
     """
