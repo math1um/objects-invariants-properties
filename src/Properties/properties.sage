@@ -233,7 +233,7 @@ def is_haggkvist_nicoghossian(g):
         sage: is_haggkvist_nicoghossian(graphs.CycleGraph(5))
         False
 
-        sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3)
+        sage: is_haggkvist_nicoghossian(graphs.CompleteBipartiteGraph(4,3))
         False
 
         sage: is_haggkvist_nicoghossian(Graph(1))
