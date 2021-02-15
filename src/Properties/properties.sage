@@ -215,7 +215,7 @@ def is_ore(g):
     return True
 
 def is_haggkvist_nicoghossian(g):
-    """
+    r"""
     Evaluates if g is 2-connected and min degree >= (n + vertex_connectivity)/3.
 
     INPUT:
