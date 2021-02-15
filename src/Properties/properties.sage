@@ -1780,7 +1780,7 @@ def is_traceable(g):
         sage: is_traceable(graphs.PetersenGraph())
         True
 
-        sage: is_traceable(graphs.CompleteGraphs(2))
+        sage: is_traceable(graphs.CompleteGraph(2))
         True
 
         sage: is_traceable(Graph(3))
