@@ -254,7 +254,7 @@ def is_haggkvist_nicoghossian(g):
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
 
 def is_genghua_fan(g):
-    """
+    r"""
     Evaluates if graph ``g`` satisfies a condition for Hamiltonicity by G. Fan.
 
     OUTPUT:
