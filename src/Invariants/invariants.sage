@@ -1595,7 +1595,7 @@ def min_degree_of_max_ind_set(g):
     sage: min_degree_of_max_ind_set(c4)
     2
     
-    sage: min_degree_of_max_ind_set(pete)
+    sage: min_degree_of_max_ind_set(graphs.PetersenGraph())
     3
     """
     low_degree = g.order()
