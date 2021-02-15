@@ -235,6 +235,7 @@ add_to_lists(c13_2, graph_objects, all_graphs)
 
 k3 = alpha_critical_easy[1]
 k4 = alpha_critical_easy[2]
+k5=graphs.CompleteGraph(5) #Jose Added this
 
 k10 = graphs.CompleteGraph(10)
 k10.name(new="k10")
