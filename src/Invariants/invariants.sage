@@ -602,8 +602,7 @@ def szekeres_wilf(g):
     
     EXAMPLES:
     
-    sage: szekeres_wilf(k5)
-    
+    sage: szekeres_wilf(k5) 
     5
     """
     #removes a vertex, if possible, of degree <= i
