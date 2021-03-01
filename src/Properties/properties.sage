@@ -563,7 +563,7 @@ def is_four_connected(g):
     return g.vertex_connectivity(k = 4)
 
 def is_lindquester(g):
-    """
+    r"""
     Test if graph ``g`` meets a neighborhood union condition for Hamiltonicity.
 
     OUTPUT:
