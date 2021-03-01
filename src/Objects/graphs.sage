@@ -1784,7 +1784,7 @@ A graph where none of the upper or lower bounds in the thesis give the exact val
     sage: willis_page40_fig512.size()
     21
 """
-willis_page40_fig512 = Graph("Ms???\?OGdAQJ?J??")
+willis_page40_fig512 = Graph(r"Ms???\?OGdAQJ?J??")
 willis_page40_fig512.name(new = "willis_page40_fig512")
 add_to_lists(willis_page40_fig512, graph_objects, all_graphs)
 
