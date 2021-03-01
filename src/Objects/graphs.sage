@@ -1129,7 +1129,7 @@ ce107.name(new = "ce107")
 add_to_lists(ce107, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) <= 10^cosh(log(residue(x)) - 1)
-ce108 = Graph("U??????g}yRozOzw\wBn?zoBv_FN?Bn?B|??vO??")
+ce108 = Graph(r"U??????g}yRozOzw\wBn?zoBv_FN?Bn?B|??vO??")
 ce108.name(new = "ce108")
 add_to_lists(ce108, graph_objects, counter_examples, all_graphs)
 
