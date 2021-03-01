@@ -949,7 +949,7 @@ ce71.name(new = "ce71")
 add_to_lists(ce71, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x)>=-1/2*x.diameter() + x.lovasz_theta()
-ce72 = Graph('fdSYkICGVs_m_TPs`Fmj_|pGhC@@_[@xWawsgEDe_@g`TC{P@pqGoocqOw?HBDS[R?CdG\e@kMCcgqr?G`NHGXgYpVGCoJdOKBJQAsG|ICE_BeMQGOwKqSd\W?CRg')
+ce72 = Graph(r'fdSYkICGVs_m_TPs`Fmj_|pGhC@@_[@xWawsgEDe_@g`TC{P@pqGoocqOw?HBDS[R?CdG\e@kMCcgqr?G`NHGXgYpVGCoJdOKBJQAsG|ICE_BeMQGOwKqSd\W?CRg')
 ce72.name(new = "ce72")
 add_to_lists(ce72, graph_objects, counter_examples, all_graphs)
 
