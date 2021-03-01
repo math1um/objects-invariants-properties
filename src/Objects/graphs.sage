@@ -1114,7 +1114,7 @@ ce103.name(new = "ce103")
 add_to_lists(ce103, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= minimum(min_degree(x), floor(lovasz_theta(x)))
-ce105 =  Graph('z@M@E?OYOSCPBTp?mOWaP_?W[OG[abE_?P[@?@REt?ggAAOH?N@?CATE\oE?WO@GOKu?LJ_??SDP@CIA?AFHCC?kZQMo@CkOGoiJSs`?g?oDJqC?S?qJSqA?GN]?OPd?cGHE?AOpE_c_O@kC_?DF@HGgJ?ygAACdcCMPA[d`SHE@?PqRE?CO_?CWO?H_b_EBoOKI@CWAadQ?eOO?oT_@STAWCCCMOK?A@?TsBoJa@?PGQ_CiKPC_@_iE_hL@ACAIJQDgOSG?G[cG_D[A_CbDKO[goBH_?S?')
+ce105 =  Graph(r'z@M@E?OYOSCPBTp?mOWaP_?W[OG[abE_?P[@?@REt?ggAAOH?N@?CATE\oE?WO@GOKu?LJ_??SDP@CIA?AFHCC?kZQMo@CkOGoiJSs`?g?oDJqC?S?qJSqA?GN]?OPd?cGHE?AOpE_c_O@kC_?DF@HGgJ?ygAACdcCMPA[d`SHE@?PqRE?CO_?CWO?H_b_EBoOKI@CWAadQ?eOO?oT_@STAWCCCMOK?A@?TsBoJa@?PGQ_CiKPC_@_iE_hL@ACAIJQDgOSG?G[cG_D[A_CbDKO[goBH_?S?')
 ce105.name(new = "ce105")
 add_to_lists(ce105, graph_objects, counter_examples, all_graphs)
 
