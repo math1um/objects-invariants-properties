@@ -1498,7 +1498,7 @@ From Willis's thesis, page 13, Fig. 2.7
     sage: willis_page13_fig27.size()
     15
 """
-willis_page13_fig27 = Graph("Fs\zw")
+willis_page13_fig27 = Graph(r"Fs\zw")
 willis_page13_fig27.name(new = "willis_page13_fig27")
 add_to_lists(willis_page13_fig27, graph_objects, all_graphs)
 
