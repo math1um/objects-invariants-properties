@@ -1553,7 +1553,7 @@ def has_lovasz_theta_equals_cc(g):
     return g.lovasz_theta() == clique_covering_number(g)
 
 def is_chvatal_erdos(g):
-    """
+    r"""
     Evaluates whether graph ``g`` meets a Hamiltonicity condition of [CV1972]_.
 
     OUTPUT:
