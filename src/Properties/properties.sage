@@ -1677,7 +1677,7 @@ def avg_distance_greater_than_girth(g):
     return g.is_connected() and g.average_distance() > g.girth()
 
 def chi_equals_min_theory(g):
-    """
+    r"""
     Evaluate if chromatic num. of graph ``g`` equals min. of some upper bounds.
 
     Some known upper bounds on the chromatic number Chi (`\chi`) include
