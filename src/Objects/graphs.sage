@@ -899,7 +899,7 @@ ce61.name(new = "ce61")
 add_to_lists(ce61, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= minimum(floor(lovasz_theta(x)), tan(spanning_trees_count(x)))
-ce62 = Graph("qWGh???BLQcAH`aBAGCScC@SoBAAFYAG?_T@@WOEBgRC`oSE`SG@IoRCK[_K@QaQq?c@?__G}ScHO{EcCa?K?o?E?@?C[F_@GpV?K_?_?CSW@D_OCr?b_XOag??C@gGOGh??QFoS?@OHDAKWIX_OBbHGOl??\Cb@?E`WehiP@IGAFC`GaCgC?JjQ???AGJgDJAGsdcqEA_a_q?")
+ce62 = Graph(r"qWGh???BLQcAH`aBAGCScC@SoBAAFYAG?_T@@WOEBgRC`oSE`SG@IoRCK[_K@QaQq?c@?__G}ScHO{EcCa?K?o?E?@?C[F_@GpV?K_?_?CSW@D_OCr?b_XOag??C@gGOGh??QFoS?@OHDAKWIX_OBbHGOl??\Cb@?E`WehiP@IGAFC`GaCgC?JjQ???AGJgDJAGsdcqEA_a_q?")
 ce62.name(new = "ce62")
 add_to_lists(ce62, graph_objects, counter_examples, all_graphs)
 
