@@ -889,7 +889,7 @@ ce59.name(new = "ce59")
 add_to_lists(ce59, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= -1/2*diameter(x) + lovasz_theta(x)
-ce60 = Graph('wSh[?GCfclJm?hmgA^We?Q_KIXbf\@SgDNxpwHTQIsIB?MIDZukArBAeXE`vqDLbHCwf{fD?bKSVLklQHspD`Lo@cQlEBFSheAH?yW\YOCeaqmOfsZ?rmOSM?}HwPCIAYLdFx?o[B?]ZYb~IK~Z`ol~Ux[B]tYUE`_gnVyHRQ?{cXG?k\BL?vVGGtCufY@JIQYjByg?Q?Qb`SKM`@[BVCKDcMxF|ADGGMBW`ANV_IKw??DRkY\KOCW??P_?ExJDSAg')
+ce60 = Graph(r'wSh[?GCfclJm?hmgA^We?Q_KIXbf\@SgDNxpwHTQIsIB?MIDZukArBAeXE`vqDLbHCwf{fD?bKSVLklQHspD`Lo@cQlEBFSheAH?yW\YOCeaqmOfsZ?rmOSM?}HwPCIAYLdFx?o[B?]ZYb~IK~Z`ol~Ux[B]tYUE`_gnVyHRQ?{cXG?k\BL?vVGGtCufY@JIQYjByg?Q?Qb`SKM`@[BVCKDcMxF|ADGGMBW`ANV_IKw??DRkY\KOCW??P_?ExJDSAg')
 ce60.name(new = "ce60")
 add_to_lists(ce60, graph_objects, counter_examples, all_graphs)
 
