@@ -1104,7 +1104,7 @@ ce101.name(new = "ce101")
 add_to_lists(ce101, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= card_positive_eigenvalues(x) - lovasz_theta(x)
-ce102 = Graph('N^nN~~}Z~|}~~\~]zzw')
+ce102 = Graph(r'N^nN~~}Z~|}~~\~]zzw')
 ce102.name(new = "ce102")
 add_to_lists(ce102, graph_objects, counter_examples, all_graphs)
 
