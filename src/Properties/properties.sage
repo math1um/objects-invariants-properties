@@ -1892,7 +1892,7 @@ def is_chordal_or_not_perfect(g):
         return not g.is_perfect()
 
 def has_alpha_residue_equal_two(g):
-    """
+    r"""
     Tests if both the residue and independence number of graphs ``g`` equal 2.
 
     The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
