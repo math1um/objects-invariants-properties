@@ -246,7 +246,7 @@ def is_haggkvist_nicoghossian(g):
 
     Theorem: If a graph ``is_haggkvist_nicoghossian``, then it is Hamiltonian.
 
-    .. [HN1981]     \R. Häggkvist and G. Nicoghossian, "A remark on Hamiltonian
+    .. [HN1981]     \\R. Häggkvist and G. Nicoghossian, "A remark on Hamiltonian
                     cycles". Journal of Combinatorial Theory, Series B, 30(1):
                     118--120, 1981.
     """
