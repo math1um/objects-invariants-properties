@@ -909,7 +909,7 @@ ce63.name(new = "ce63")
 add_to_lists(ce63, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= -max_common_neighbors(x) + min_degree(x)
-ce64 = Graph('`szvym|h~RMQLTNNiZzsgQynDR\p~~rTZXi~n`kVvKolVJfP}TVEN}Thj~tv^KJ}D~VqqsNy|NY|ybklZLnz~TfyG')
+ce64 = Graph(r'`szvym|h~RMQLTNNiZzsgQynDR\p~~rTZXi~n`kVvKolVJfP}TVEN}Thj~tv^KJ}D~VqqsNy|NY|ybklZLnz~TfyG')
 ce64.name(new = "ce64")
 add_to_lists(ce64, graph_objects, counter_examples, all_graphs)
 
