@@ -1129,7 +1129,7 @@ def has_radius_equal_diameter(g):
     return g.radius() == g.diameter()
 
 def has_residue_equals_alpha(g):
-    """
+    r"""
     Evaluate whether the residue of graph ``g`` equals its independence number.
 
     The independence number is the cardinality of the largest independent set
