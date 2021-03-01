@@ -372,7 +372,7 @@ def is_generalized_dirac(g):
     return True
 
 def is_van_den_heuvel(g):
-    """
+    r"""
     Evaluates if g meets an eigenvalue condition related to Hamiltonicity.
 
     INPUT:
@@ -403,7 +403,7 @@ def is_van_den_heuvel(g):
 
     Theorem: If a graph is Hamiltonian, then it ``is_van_den_heuvel``.
 
-    .. [Heu1995]    \J.van den Heuvel, "Hamilton cycles and eigenvalues of
+    .. [Heu1995]    \\J.van den Heuvel, "Hamilton cycles and eigenvalues of
                     graphs". Linear Algebra and its Applications, 226--228:
                     723--730, 1995.
 
