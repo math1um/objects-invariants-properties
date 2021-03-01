@@ -1991,7 +1991,7 @@ def order_leq_twice_max_degree(g):
     return (g.order() <= 2*max(g.degree()))
 
 def is_chromatic_index_critical(g):
-    """
+    r"""
     Evaluates whether graph ``g`` is chromatic index critical.
 
     Let `\chi(G)` denote the chromatic index of a graph `G`.
