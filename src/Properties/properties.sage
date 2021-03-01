@@ -329,7 +329,7 @@ def is_planar_transitive(g):
     return g.is_planar() and g.is_vertex_transitive()
 
 def is_generalized_dirac(g):
-    """
+    r"""
     Test if ``graph`` g meets condition in a generalization of Dirac's Theorem.
 
     OUTPUT:
