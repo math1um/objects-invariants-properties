@@ -1814,7 +1814,7 @@ def is_traceable(g):
     return gadd.is_hamiltonian()
 
 def has_residue_equals_two(g):
-    """
+    r"""
     Evaluates whether the residue of graph ``g`` equals 2.
 
     The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
