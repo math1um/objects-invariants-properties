@@ -1195,7 +1195,7 @@ def is_not_forest(g):
     return not g.is_forest()
 
 def has_empty_KE_part(g):
-    """
+    r"""
     Evaluates whether graph ``g`` has an empty Konig-Egervary subgraph.
 
     A Konig-Egervary graph satisfies
