@@ -490,6 +490,16 @@ def cycle_space_dimension(g):
 add_to_lists(cycle_space_dimension, efficient_invariants, all_invariants)
 
 def card_center(g):
+    """
+    Returns the cardinality of the center of the graph. 
+
+    See: https://en.wikipedia.org/wiki/Graph_center
+
+        sage: card_center(graphs.PathGraph(3))
+        1
+        sage: card_center(Graph(2))
+        2
+    """
     return len(g.center())
 add_to_lists(card_center, efficient_invariants, all_invariants)
 
