@@ -1051,7 +1051,7 @@ ce89.name(new = "ce89")
 add_to_lists(ce89, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= floor(arccosh(lovasz_theta(x)))^2
-ce90 = Graph("~?@Td|wi\\fbna~}wepkkbXcrW}\\~NvtLKpY\\J_Ub^~yM~^tHnM}jPffKkqnijvxD@xa{UOzzvr?L^PFi||yt@OQ\YU{Vh]tWzwzpj\\n|kR]`Y}RpCvxk{rEMRP\\}|}dNdNtbO~yrkgMxlOXr|FvQ{tvfKKnHrp^}jV\\B^n\\LvLZeyX}QSKN^sm~yl\\[NJZXqdk]O|^zHl~vC{w`Nsn}x]utqrJozKXV|eIUUPv~ydc}]xJNWZjW|lpYm}{Jf~JWMixb^t]e|S~B[vKc{K[Kjut~}Kj~iAl\\tVNgyZadvoA}rdTlr\\\\wNr^^kJzrp|qlVy]siKncI~`oNm|ul\\PxDRyzddDzrjUn~ciOgbR}p~Cz|~MlxYoEVnVuZkxJgvmtE]]}~PRp[He]oBQz]PVJ~gVnvSUR|QF|`lomFh[j|jIaS~vh~_rYiiK}FnEW}ovnntxtRFBakzvwn[biJhNvf|VDV?m~Y]ndmfJQ|M@QvnNf~MCyn~{HSU~fvEv~@}u|spOXzTVNY\\kjDNt\\zRMXxU|g|XrzFzDYiVvho}bQbyfI{{w[_~nrm}J~LhwH}TNmfM^}jqajl_ChY]M}unRK\\~ku")
+ce90 = Graph(r"~?@Td|wi\\fbna~}wepkkbXcrW}\\~NvtLKpY\\J_Ub^~yM~^tHnM}jPffKkqnijvxD@xa{UOzzvr?L^PFi||yt@OQ\YU{Vh]tWzwzpj\\n|kR]`Y}RpCvxk{rEMRP\\}|}dNdNtbO~yrkgMxlOXr|FvQ{tvfKKnHrp^}jV\\B^n\\LvLZeyX}QSKN^sm~yl\\[NJZXqdk]O|^zHl~vC{w`Nsn}x]utqrJozKXV|eIUUPv~ydc}]xJNWZjW|lpYm}{Jf~JWMixb^t]e|S~B[vKc{K[Kjut~}Kj~iAl\\tVNgyZadvoA}rdTlr\\\\wNr^^kJzrp|qlVy]siKncI~`oNm|ul\\PxDRyzddDzrjUn~ciOgbR}p~Cz|~MlxYoEVnVuZkxJgvmtE]]}~PRp[He]oBQz]PVJ~gVnvSUR|QF|`lomFh[j|jIaS~vh~_rYiiK}FnEW}ovnntxtRFBakzvwn[biJhNvf|VDV?m~Y]ndmfJQ|M@QvnNf~MCyn~{HSU~fvEv~@}u|spOXzTVNY\\kjDNt\\zRMXxU|g|XrzFzDYiVvho}bQbyfI{{w[_~nrm}J~LhwH}TNmfM^}jqajl_ChY]M}unRK\\~ku")
 ce90.name(new = "ce90")
 add_to_lists(ce90, graph_objects, counter_examples, all_graphs)
 
