@@ -292,8 +292,8 @@ def is_genghua_fan(g):
     Dist = g.distance_all_pairs()
     V = g.vertices()
     n = g.order()
-    for i in xrange(n):
-        for j in xrange(i):
+    for i in range(n):
+        for j in range(i):
             if Dist[V[i]][V[j]] == 2 and max(D[i], D[j]) < n / 2.0:
                 return False
     return True
