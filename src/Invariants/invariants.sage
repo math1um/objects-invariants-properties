@@ -1841,7 +1841,7 @@ def hamiltonian_index(g):
     if g.is_isomorphic(graphs.PathGraph(g.order())):
         raise ValueError("The input graph g is a simple path. The Hamiltonian index is not defined for path graphs.")
     line_graph_i = g
-    for index in xrange(0, (g.order() - 3) + 1): # [Chartrand, 68] proved index is upper bounded by n - 3.
+    for index in range(0, (g.order() - 3) + 1): # [Chartrand, 68] proved index is upper bounded by n - 3.
         if line_graph_i.is_hamiltonian():
             return index
         line_graph_i = line_graph_i.line_graph()
