@@ -207,8 +207,8 @@ def is_ore(g):
     A = g.adjacency_matrix()
     n = g.order()
     D = g.degree()
-    for i in xrange(n):
-        for j in xrange(i):
+    for i in range(n):
+        for j in range(i):
             if A[i][j]==0:
                 if D[i] + D[j] < n:
                     return False
