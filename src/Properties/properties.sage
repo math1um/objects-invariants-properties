@@ -427,7 +427,7 @@ def is_van_den_heuvel(g):
         A = g.adjacency_matrix(sparse=False)
         D = matrix(g.order(), sparse=False)
         row_sums = [sum(r) for r in A.rows()]
-        for i in xrange(A.nrows()):
+        for i in range(A.nrows()):
             D[i,i] = row_sums[i]
         return D + A
     cycle_q_matrix = sorted(Q(cycle_n).eigenvalues())
