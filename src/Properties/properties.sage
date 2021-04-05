@@ -2071,6 +2071,8 @@ def is_chromatic_index_critical(g):
                     Pitman Publishing, London, UK, 1977.
     """
     component_sizes = g.connected_components_sizes()
+    chi=g.chromatic_index()    
+
     if len(component_sizes) > 1:
         if component_sizes[1] > 1:
             return False
