@@ -1554,6 +1554,7 @@ def domination_number(g):
 add_to_lists(domination_number, intractable_invariants, all_invariants)
 
 def independence_number(g):
+    g.relabel()
     return g.independent_set(value_only=True)
 add_to_lists(independence_number, intractable_invariants, all_invariants)
 
