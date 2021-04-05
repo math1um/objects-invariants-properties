@@ -196,7 +196,7 @@ def make_bidouble_graph(g):
 def neighbors_set(g,S):
     N = []
     for v in S:
-        for n in g.neighbors(v):
+        for n in g[v]:
             if n not in N:
                 N.append(n)
     return N
