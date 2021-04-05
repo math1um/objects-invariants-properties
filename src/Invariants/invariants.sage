@@ -8,11 +8,7 @@ intractable_invariants = []
 theorem_invariants = []
 broken_invariants = []
 
-"""
-    Last version of graphs packaged checked: Sage 8.2
-    sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
-    True
-"""
+
 sage_efficient_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
 Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, Graph.lovasz_theta,
