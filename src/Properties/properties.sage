@@ -367,7 +367,7 @@ def is_generalized_dirac(g):
         return False
     for (u,v) in combinations(g.vertices(), 2):
         if not g.has_edge(u,v):
-            if len(neighbors_set(u, v)) < (2.0 * g.order() - 1) / 3:
+            if len(neighbors_set(g,[u,v])) < (2.0 * g.order() - 1) / 3:
                 return False
     return True
 
