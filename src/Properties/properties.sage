@@ -2872,19 +2872,7 @@ is_haggkvist_nicoghossian, is_chromatic_index_critical]
 
 removed_properties = [is_pebbling_class0]
 
-"""
-    Last version of graphs packaged checked: Sage 8.2
-    This means checked for new functions, and for any errors/changes in old functions!
-    sage: sage.misc.banner.version_dict()['major'] < 8 or (sage.misc.banner.version_dict()['major'] == 8 and sage.misc.banner.version_dict()['minor'] <= 2)
-    True
 
-    Skip Graph.is_circumscribable() and Graph.is_inscribable() because they
-        throw errors for the vast majority of our graphs.
-    Skip Graph.is_biconnected() in favor of our is_two_connected(), because we
-        prefer our name, and because we disagree with their definition on K2.
-        We define that K2 is NOT 2-connected, it is n-1 = 1 connected.
-    Implementation of Graph.is_line_graph() is intractable, despite a theoretically efficient algorithm existing.
-"""
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
 Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
 Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
