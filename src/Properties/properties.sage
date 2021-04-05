@@ -1379,6 +1379,7 @@ def is_anti_tutte(g):
         True
 
         sage: is_anti_tutte(Graph(1))
+        True
 
         sage: is_anti_tutte(graphs.TutteGraph())
         False
