@@ -194,11 +194,12 @@ def make_bidouble_graph(g):
     return gdub
 
 def neighbors_set(g,S):
-    N = set()
+    N = []
     for v in S:
         for n in g.neighbors(v):
-            N.add(n)
-    return list(N)
+            if n not in N:
+                N.append(n)
+    return N
 
 def closed_neighborhood(g, verts):
     if isinstance(verts, list):
