@@ -1430,16 +1430,16 @@ def diameter_equals_twice_radius(g):
 
     EXAMPLES:
 
-        sage: has_radius_equal_diameter(graphs.ClawGraph())
+        sage: diameter_equals_twice_radius(graphs.ClawGraph())
         True
 
-        sage: has_radius_equal_diameter(graphs.KrackhardtKiteGraph())
+        sage: diameter_equals_twice_radius(graphs.KrackhardtKiteGraph())
         True
 
         sage: diameter_equals_twice_radius(graphs.HouseGraph())
         False
 
-        sage: has_radius_equal_diameter(graphs.BullGraph())
+        sage: diameter_equals_twice_radius(graphs.BullGraph())
         False
 
     The radius and diameter of ``Graph(1)`` are both 1. ::
