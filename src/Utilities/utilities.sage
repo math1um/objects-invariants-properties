@@ -217,6 +217,31 @@ def neighbors_set(g,S):
                 N.append(n)
     return N
 
+def external_neighbors_set(g,S):
+    """
+    Return the set of external neighbors of the set of vertices S in a graph g.
+
+    This does not include vertices in S if there are neighbor vertices in such.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    -``S``-- Sage set, list or array
+
+    OUTPUT:
+
+    - Array
+
+    """
+    N = []
+    for v in S:
+        for n in g[v]:
+            if n not in S:
+                if n not in N:
+                    N.append(n)
+    return N
+
 def closed_neighborhood(g, verts):
     if isinstance(verts, list):
         neighborhood = []
