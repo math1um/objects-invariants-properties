@@ -1500,7 +1500,7 @@ def has_lovasz_theta_equals_alpha(g):
         False
 
         sage: has_lovasz_theta_equals_alpha(graphs.CycleGraph(24))
-        False
+        True
 
     True for all graphs with no edges ::
 
