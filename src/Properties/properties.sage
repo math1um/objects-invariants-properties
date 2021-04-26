@@ -1436,11 +1436,6 @@ def diameter_equals_twice_radius(g):
         sage: diameter_equals_twice_radius(graphs.BullGraph())
         False
 
-    The radius and diameter of ``Graph(1)`` are both 1. ::
-
-        sage: diameter_equals_twice_radius(Graph(1))
-        True
-
     Disconnected graphs have both diameter and radius equal infinity.
 
         sage: diameter_equals_twice_radius(Graph(4))
