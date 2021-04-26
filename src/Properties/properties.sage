@@ -1411,9 +1411,6 @@ def is_anti_tutte2(g):
 
         sage: is_anti_tutte2(graphs.TutteCoxeterGraph())
         False
-
-        sage: is_anti_tutte2(Graph(1))
-        False
     """
     if not g.is_connected():
         return False
