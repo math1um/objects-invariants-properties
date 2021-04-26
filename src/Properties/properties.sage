@@ -1117,9 +1117,6 @@ def has_radius_equal_diameter(g):
         sage: has_radius_equal_diameter(graphs.HouseGraph())
         True
 
-        sage: has_radius_equal_diameter(Graph(1))
-        True
-
         sage: has_radius_equal_diameter(graphs.ClawGraph())
         False
 
