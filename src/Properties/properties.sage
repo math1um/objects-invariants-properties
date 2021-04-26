@@ -1627,9 +1627,6 @@ def radius_greater_than_center(g):
 
         sage: radius_greater_than_center(graphs.DiamondGraph())
         False
-
-        sage: radius_greater_than_center(Graph(1))
-        False
     """
     return g.is_connected() and g.radius() > card_center(g)
 
