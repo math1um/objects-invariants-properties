@@ -270,7 +270,7 @@ def is_genghua_fan(g):
         True
 
         sage: is_genghua_fan(graphs.CycleGraph(4))
-        False
+        True
 
         sage: is_genghua_fan(graphs.ButterflyGraph())
         False
