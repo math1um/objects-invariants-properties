@@ -1774,7 +1774,7 @@ def is_traceable(g):
         False
 
         sage: is_traceable(graphs.ButterflyGraph())
-        False
+        True
 
     Edge cases ::
 
