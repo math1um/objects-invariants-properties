@@ -409,9 +409,6 @@ def is_van_den_heuvel(g):
 
     TESTS::
 
-        sage: is_van_den_heuvel(Graph(0))
-        False
-
         sage: is_van_den_heuvel(Graph(1))
         True
     """
