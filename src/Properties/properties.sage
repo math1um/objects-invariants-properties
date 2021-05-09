@@ -2636,9 +2636,6 @@ def is_maximal_triangle_free(g):
 
     Edge cases ::
 
-        sage: is_maximal_triangle_free(Graph(0))
-        False
-
         sage: is_maximal_triangle_free(Graph(1))
         False
 
