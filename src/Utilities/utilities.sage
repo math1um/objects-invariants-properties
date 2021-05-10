@@ -252,6 +252,18 @@ def closed_neighborhood(g, verts):
         return [verts] + g.neighbors(verts)
 
 def is_alpha_critical(g):
+    """
+    Return whether or not a graph g is alpha critical.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean value
+
+    """
     #if not g.is_connected():
         #return False
     alpha = g.independent_set(value_only=True)
