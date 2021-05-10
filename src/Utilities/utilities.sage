@@ -277,8 +277,20 @@ def is_alpha_critical(g):
 
 #HEURISTIC ALGORITHMS
 
-#takes vertex of max degree, deletes so long as degree > 0, returns remaining ind set
 def MAXINE_independence_heuristic(g):
+    """
+    Return the length of the independent set without the vertex of maximum degree.
+
+    Delets the vertex of maximum degree as long as the degree > 0.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Integer, length of independent set
+    """
     V = g.vertices()
     h = g.subgraph(V)
     delta = max(h.degree())
