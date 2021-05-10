@@ -1517,7 +1517,7 @@ def has_lovasz_theta_equals_cc(g):
         True
 
         sage: has_lovasz_theta_equals_cc(graphs.PetersenGraph())
-        True
+        False
 
         sage: has_lovasz_theta_equals_cc(Graph(12))
         True
