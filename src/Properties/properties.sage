@@ -1480,7 +1480,7 @@ def has_lovasz_theta_equals_alpha(g):
         True
 
         sage: has_lovasz_theta_equals_alpha(graphs.PetersenGraph())
-        False
+        True
 
         sage: has_lovasz_theta_equals_alpha(graphs.ClebschGraph())
         False
