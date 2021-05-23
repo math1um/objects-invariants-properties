@@ -2644,11 +2644,11 @@ def is_maximal_triangle_free(g):
     """
     if not g.is_triangle_free():
         return False
-    g_comp = g.complement()
+    g_comp = g.complement() #has edges which are non-edges in the original graph
     g_copy = g.copy()
     for e in g_comp.edges():
         g_copy.add_edge(e)
-        if g.is_triangle_free():
+        if g_copy.is_triangle_free():
             return False
         g_copy.delete_edge(e)
     return True
