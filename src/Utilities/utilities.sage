@@ -237,6 +237,17 @@ def razborovGraphs(n):
     
     - Sage Graph
     
+    EXAMPLES:
+
+    sage:razborovGraphs(2)
+    Graph on 32 vertices
+
+    sage:razborovGraphs(3)
+    Graph on 243 vertices
+
+    sage:razborovGraphs(4)
+    Graph on 1024 vertices
+
     REFERENCES:
     
     -Razborov AA, The gap between the chromatic number of a graph and the rank of its adjacency matrix is superlinear, Disc. Math. 108 (1992) pp393--396.
