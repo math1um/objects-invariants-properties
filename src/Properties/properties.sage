@@ -1,3 +1,4 @@
+
 # GRAPH PROPERTIES
 
 def has_star_center(g):
@@ -2107,11 +2108,29 @@ def is_independence_irreducible(g):
 
 def is_factor_critical(g):
     """
-    a graph is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
-        is_factor_critical(graphs.PathGraph(3))
+    Return whether or not a graph "g" is factor-critical.
+
+    A graph is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
+    
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Boolean value
+
+    EXAMPLES:
+
+        sage: is_factor_critical(graphs.PathGraph(3))
         False
+
         sage: is_factor_critical(graphs.CycleGraph(5))
         True
+
+    REFERENCES:
+
+    https://en.wikipedia.org/wiki/Factor-critical_graph
     """
     if g.order() % 2 == 0:
         return False
