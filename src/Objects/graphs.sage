@@ -512,6 +512,15 @@ bridge = Graph("DU{")
 bridge.name(new="bridge")
 add_to_lists(bridge, graph_objects, all_graphs)
 
+#Pineapple graphs
+pineapple_3_4 = pineappleGraph(3,4)
+pineapple_3_4.name(new = "pineapple_3_4")
+add_to_lists(pineapple_3_4, graph_objects, all_graphs)
+
+pineapple_4_2 =	pineappleGraph(4,2)
+pineapple_4_2.name(new = "pineapple_4_2")
+add_to_lists(pineapple_4_2, graph_objects, all_graphs)
+
 # nico found the smallest hamiltonian overfull graph
 non_ham_over = Graph("HCQRRQo")
 non_ham_over.name(new="non_ham_over")
