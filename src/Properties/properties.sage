@@ -1581,7 +1581,7 @@ def is_chvatal_erdos(g):
 
     Theorem: If a graph ``is_chvatal_erdos``, then it is Hamiltonian.
 
-    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian cycles".
+    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian circuits".
                     Discrete Mathematics, 2(2): 111--113, 1972.
     """
     return independence_number(g) <= g.vertex_connectivity()
