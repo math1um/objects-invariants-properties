@@ -193,6 +193,35 @@ def make_bidouble_graph(g):
         gdub.add_edge(j,i+n)
     return gdub
 
+def pineappleGraph(s,t):
+    """
+    Return a pineapple with an s vertex clique and t pendants.
+
+    INPUT:
+
+    -``s``-- Integer -- Complete graph with s vertex clique
+
+    -``t``-- Integer -- Number of pendants desired on pineapple graph
+
+    OUTPUT:
+
+    - Sage Graph
+
+    EXAMPLES:
+
+    sage:pineapple_3_4 = pineappleGraph(3,4)
+    sage:pineapple_3_4.graph6_string()
+    'F{aC?'
+    
+    sage:pineapple_4_2 = pineappleGraph(4,2)
+    sage:pineapple_4_2.graph6_string()
+    'E~a?'
+    """
+    G=graphs.CompleteGraph(s)
+    for i in range(t):
+        G.add_edge((0,i+s))
+    return G
+
 def neighbors_set(g,S):
     """
     Return the set of neighbors of the set of vertices S in a graph g.
