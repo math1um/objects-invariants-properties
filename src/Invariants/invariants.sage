@@ -557,6 +557,10 @@ def welsh_powell(g):
 
         sage: welsh_powell(k5_3)
         4
+
+    REFERENCES:
+
+    https://academic.oup.com/comjnl/article/10/1/85/376064
     """
     n= g.order()
     D = g.degree()
