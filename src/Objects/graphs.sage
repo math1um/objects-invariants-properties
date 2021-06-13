@@ -521,6 +521,19 @@ pineapple_4_2 =	pineappleGraph(4,2)
 pineapple_4_2.name(new = "pineapple_4_2")
 add_to_lists(pineapple_4_2, graph_objects, all_graphs)
 
+#Razborov Graphs
+razborov_2 = razborovGraphs(2)
+razborov_2.name(new = "razborov_2")
+add_to_lists(razborov_2, graph_objects, all_graphs)
+
+razborov_3 = razborovGraphs(3)
+razborov_3.name(new = "razborov_3")
+add_to_lists(razborov_3, graph_objects,	all_graphs)
+
+razborov_4 = razborovGraphs(4)
+razborov_4.name(new = "razborov_4")
+add_to_lists(razborov_4, graph_objects,	all_graphs)
+
 # nico found the smallest hamiltonian overfull graph
 non_ham_over = Graph("HCQRRQo")
 non_ham_over.name(new="non_ham_over")
