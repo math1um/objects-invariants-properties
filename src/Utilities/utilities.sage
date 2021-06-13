@@ -1,3 +1,4 @@
+
 #GRAPH UTILITIES
 
 def check_independence_extension(g,S):
@@ -220,6 +221,41 @@ def pineappleGraph(s,t):
     G=graphs.CompleteGraph(s)
     for i in range(t):
         G.add_edge((0,i+s))
+    return G
+
+def razborovGraphs(n):
+    """
+    Return the order n^5 Razborov graph
+    
+    These have chromatic number >= Theta(n^4) and rank <= O(n^3); as such, they have superlinear chromatic-rank gap, disproving a sequence of conjectures.
+    
+    INPUT:
+    
+    -``n``-- Integer
+    
+    OUTPUT:
+    
+    - Sage Graph
+    
+    REFERENCES:
+    
+    -Razborov AA, The gap between the chromatic number of a graph and the rank of its adjacency matrix is superlinear, Disc. Math. 108 (1992) pp393--396.
+    """
+    B = FiniteEnumeratedSet([1..n])
+    C=cartesian_product([B,B,B,B,B])
+    G=graphs.EmptyGraph()
+    for c in C:
+        G.add_vertex(c)
+    for a in C:
+        for b in C:
+            x=[]
+            for i in [0..4]:
+                if a[i]==b[i]:
+                    x.append(0)
+                else:
+                    x.append(1)
+            if not x in [[0,0,0,0,0],[1,1,1,0,0],[1,1,0,1,0],[1,1,0,0,1],[1,1,1,1,0],[1,1,1,0,1],[0,0,1,1,1]]:
+                G.add_edge(a,b)
     return G
 
 def neighbors_set(g,S):
