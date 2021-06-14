@@ -1,4 +1,5 @@
 
+
 # GRAPH PROPERTIES
 
 def has_star_center(g):
@@ -2845,8 +2846,8 @@ alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
 has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, Graph.is_cycle,
 pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal,
 has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
-is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplical_vertex,
-has_exactly_two_simplical_vertices, is_two_tree, is_locally_planar,
+is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplicial_vertex,
+has_exactly_two_simplicial_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
