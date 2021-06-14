@@ -1948,6 +1948,22 @@ def alpha_leq_order_over_two(g):
     """
     return (2*independence_number(g) <= g.order())
 
+def is_alpha_equals_two(g):
+    """
+    Return whether the independence number alpha is equal to 2.
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
+    
+    - Boolean Value
+    """
+    if independence_number(g) == 2:
+        return True
+    return False
+
 def order_leq_twice_max_degree(g):
     """
     Tests if the order of graph ``g`` is at most twice the max of its degrees.
