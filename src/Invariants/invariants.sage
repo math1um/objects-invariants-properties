@@ -1346,11 +1346,6 @@ def randic_irregularity(g):
     return order(g)/2 - randic(g)
 add_to_lists(randic_irregularity, efficient_invariants, all_invariants)
 
-def degree_variance(g):
-    avg_degree = g.average_degree()
-    return 1/order(g) * sum([d**2 - avg_degree for d in [g.degree(v) for v in g.vertices()]])
-add_to_lists(degree_variance, efficient_invariants, all_invariants)
-
 def sum_edges_degree_difference(g):
     return sum([abs(g.degree(e[0]) - g.degree(e[1])) for e in g.edges()])
 add_to_lists(sum_edges_degree_difference, efficient_invariants, all_invariants)
