@@ -2431,9 +2431,9 @@ def is_two_tree(g):
 
 def is_two_path(g):
     """
-    Graph g is a two_path if it is a two_tree and has exactly 2 simplical vertices
+    Graph g is a two_path if it is a two_tree and has exactly 2 simplicial vertices
     """
-    return has_exactly_two_simplical_vertices(g) and is_two_tree(g)
+    return has_exactly_two_simplicial_vertices(g) and is_two_tree(g)
 
 def is_prism_hamiltonian(g):
     """
