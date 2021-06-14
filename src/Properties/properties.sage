@@ -2398,11 +2398,11 @@ def has_simplicial_vertex(g):
             return True
     return False
 
-def has_exactly_two_simplical_vertices(g):
+def has_exactly_two_simplicial_vertices(g):
     """
-    v is a simplical vertex if induced neighborhood is a clique.
+    v is a simplicial vertex if induced neighborhood is a clique.
     """
-    return simplical_vertices(g) == 2
+    return simplicial_vertices(g) == 2
 
 def is_two_tree(g):
     """
