@@ -1,4 +1,5 @@
 
+
 #GRAPH UTILITIES
 
 def check_independence_extension(g,S):
@@ -628,9 +629,9 @@ def closure(graph):
             break
     return g
 
-def is_simplical_vertex(g, v):
+def is_simplicial_vertex(g, v):
     """
-    Vertex v is a simplical vertex in g if the induced neighborhood of v is a clique
+    Vertex v is a simplicial vertex in g if the induced neighborhood of v is a clique
     """
     neighbors = g.neighbors(v)
     induced_neighborhood = g.subgraph(neighbors)
