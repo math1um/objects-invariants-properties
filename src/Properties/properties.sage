@@ -2389,14 +2389,14 @@ def has_two_ham_cycles(gIn):
             return true
     return false
 
-def has_simplical_vertex(g):
+def has_simplicial_vertex(g):
     """
-    v is a simplical vertex if induced neighborhood is a clique.
+    v is a simplicial vertex if induced neighborhood is a clique.
     """
     for v in g.vertices():
-        if is_simplical_vertex(g, v):
-            return true
-    return false
+        if is_simplicial_vertex(g, v):
+            return True
+    return False
 
 def has_exactly_two_simplical_vertices(g):
     """
