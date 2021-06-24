@@ -1280,6 +1280,11 @@ ce135 = Graph('Nzx~VT}yzxNd^J^Jn~w')
 ce135.name(new = "ce135")
 add_to_lists(ce135, graph_objects, counter_examples, all_graphs)
 
+#CE to size<=(independence^2+1)+1
+ce136=Graph('OAYRKr?KGW_\k@HWW@GSd')
+ce136.name(new = "ce136")
+add_to_lists(ce136, graph_objects, counter_examples, all_graphs)
+
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
 paley_17.name(new = "paley_17")
