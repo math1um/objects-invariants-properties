@@ -1290,6 +1290,12 @@ ce136=Graph('OAYRKr?KGW_\k@HWW@GSd')
 ce136.name(new = "ce136")
 add_to_lists(ce136, graph_objects, counter_examples, all_graphs)
 
+#CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
+bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
+bipartite_5_5_minus_edge.delete_edge(0,5)
+bipartite_5_5_minus_edge.name(new = "bipartite_5_5_minus_edge")
+add_to_lists(bipartite_5_5_minus_edge, graph_objects, counter_examples, all_graphs)
+
 #CE to If a graph is not matching robust then the graph is maximal triangle-free
 tadpole_6_2 = graphs.TadpoleGraph(6,2)
 tadpole_6_2.name(new = "tadpole_6_2")
