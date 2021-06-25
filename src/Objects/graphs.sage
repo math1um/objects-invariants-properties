@@ -200,6 +200,7 @@ add_to_lists(p102, graph_objects, counter_examples, all_graphs)
 p6707 = graphs.PathGraph(6707)
 p6707.name(new = "p6707")
 
+
 c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 add_to_lists(c4, graph_objects, all_graphs)
@@ -1288,6 +1289,11 @@ add_to_lists(ce135, graph_objects, counter_examples, all_graphs)
 ce136=Graph('OAYRKr?KGW_\k@HWW@GSd')
 ce136.name(new = "ce136")
 add_to_lists(ce136, graph_objects, counter_examples, all_graphs)
+
+#CE to If a graph is not matching robust then the graph is maximal triangle-free
+tadpole_6_2 = graphs.TadpoleGraph(6,2)
+tadpole_6_2.name(new = "tadpole_6_2")
+add_to_lists(tadpole_6_2, graph_objects, counter_examples, all_graphs)
 
 # CE to independence_number(x) >= floor(lovasz_theta(x))*sin(gutman_energy(x))
 paley_17 = graphs.PaleyGraph(17)
