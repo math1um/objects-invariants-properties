@@ -1295,6 +1295,11 @@ ce137 = Graph('HnLk]My')
 ce137.name(new = "ce137")
 add_to_lists(ce137, graph_objects, counter_examples, all_graphs)
 
+#CE to ((matching_covered)^(is_not_forest))->(is_maximal_triangle_free)
+ce138 =	Graph('G@GQSK')
+ce138.name(new = "ce138")
+add_to_lists(ce138, graph_objects, counter_examples, all_graphs)
+
 #CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
 bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
 bipartite_5_5_minus_edge.delete_edge(0,5)
