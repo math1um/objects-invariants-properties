@@ -127,7 +127,7 @@ add_to_lists(graphs.SchlaefliGraph(), problem_graphs, all_graphs)
 
 # "E|OW" is CE to (has_alpha_residue_equal_two)->((is_perfect)|(is_regular))
 
-alpha_critical_graph_names = ['A_','Bw', 'C~', 'Dhc', 'D~{', 'E|OW', 'E~~w', 'FhCKG', 'F~[KG',
+alpha_critical_graph_names = ['A_','Bw', 'C~', 'Dhc', 'D~{', 'E|OW', 'E~~w', 'F~[KG',
 'FzEKW', 'Fn[kG', 'F~~~w', 'GbL|TS', 'G~?mvc', 'GbMmvG', 'Gb?kTG', 'GzD{Vg', 'Gb?kR_', 'GbqlZ_',
 'GbilZ_', 'G~~~~{', 'GbDKPG', 'HzCGKFo', 'H~|wKF{', 'HnLk]My', 'HhcWKF_', 'HhKWKF_', 'HhCW[F_',
 'HxCw}V`', 'HhcGKf_', 'HhKGKf_', 'Hh[gMEO', 'HhdGKE[', 'HhcWKE[', 'HhdGKFK', 'HhCGGE@', 'Hn[gGE@',
@@ -207,6 +207,10 @@ add_to_lists(c4, graph_objects, all_graphs)
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
 add_to_lists(c6, graph_objects, all_graphs)
+
+c7 = graphs.CycleGraph(7)
+c7.name(new = "c7")
+add_to_lists(c7, graph_objects, all_graphs)
 
 # CE to independence_number(x) <= (e^welsh_powell(x) - graph_rank(x))^2
 c22 = graphs.CycleGraph(22)
