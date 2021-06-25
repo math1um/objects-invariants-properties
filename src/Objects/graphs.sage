@@ -1310,6 +1310,11 @@ ce140 = Graph('JBIJKv_DMO_')
 ce140.name(new = "ce140")
 add_to_lists(ce140, graph_objects, counter_examples, all_graphs)
 
+#CE to g.size() <= (g.order()^2)/min_degree(g)-1, for maximal triangle-free graphs
+ce141 = Graph('GrYZKs')
+ce141.name(new = "ce141")
+add_to_lists(ce141, graph_objects, counter_examples, all_graphs)
+
 #CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
 bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
 bipartite_5_5_minus_edge.delete_edge(0,5)
