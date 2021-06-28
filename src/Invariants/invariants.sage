@@ -1028,7 +1028,7 @@ add_to_lists(depth, efficient_invariants, all_invariants)
 
 # Lovasz Theta of the complement of the given graph
 def lovasz_theta_complement(g):
-    return g.complement().lovasz_theta()
+    return lovasz_theta(g.complement())
 add_to_lists(lovasz_theta_complement, efficient_invariants, all_invariants)
 
 # N over lovasz_theta_complement
