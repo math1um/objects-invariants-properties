@@ -1017,7 +1017,7 @@ add_to_lists(lovasz_theta_over_root_n, efficient_invariants, all_invariants)
 # Theta * Theta-Complement
 # The Sandwich Theorem by Knuth, p. 27
 def theta_theta_complement(g):
-    return g.lovasz_theta() * g.complement().lovasz_theta()
+    return lovasz_theta(g) * lovasz_theta(g.complement())
 add_to_lists(theta_theta_complement, efficient_invariants, all_invariants)
 
 # Depth = Order - Residue
