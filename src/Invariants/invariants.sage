@@ -981,6 +981,8 @@ def lovasz_theta(g, epsilon = 0.00001):
 
     Sage has a built-in invariant but during numerical calculation, the lovasz theta number does not always return the expected value
     
+    The value of lovasz theta is a real number and thus admits the potential of numerical error in its computation. This hack introduces a different potential source of error in cases where the value is very close to an integer but not actually equal to that integer. The tradeoff is that it solves the problem of a conjecture like alpha<=theta to be counted as false when alpha=theta=7 but the computed value of theta is 6.99999. Pros and cons, as is always the case in life!
+
     INPUT:
 
     -``g``-- Sage Graph
