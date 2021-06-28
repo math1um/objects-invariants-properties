@@ -1504,7 +1504,7 @@ def has_lovasz_theta_equals_alpha(g):
         sage: has_lovasz_theta_equals_alpha(Graph(1)) # doctest: +SKIP
         True
     """
-    return g.lovasz_theta() == independence_number(g)
+    return lovasz_theta(g) == independence_number(g)
 
 def has_lovasz_theta_equals_cc(g):
     """
