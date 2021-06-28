@@ -1,4 +1,4 @@
-#GRAPH INVARIANTS
+w#GRAPH INVARIANTS
 #testing message - junk message
 
 all_invariants = []
@@ -974,6 +974,26 @@ def make_invariant_from_property(property, name=None):
         raise ValueError('Please provide a name for the new function')
 
     return boolean_valued_invariant
+
+def lovasz_theta(g, epsilon = 0.00001):
+    '''
+    Return the Lovesz theta number of a graph g.
+
+    Sage has a built-in invariant but during numerical calculation, the lovasz theta number does not always return the expected value
+    
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Integer
+    '''
+    initial = g.lovasz_theta()
+    if abs(initial - round(initial)) < epsilon:
+        return round(initial)
+    return initial
+
 
 # defined by R. Pepper in an unpublished paper on graph irregularity
 def geometric_length_of_degree_sequence(g):
