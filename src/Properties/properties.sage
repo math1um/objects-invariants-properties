@@ -1539,7 +1539,7 @@ def has_lovasz_theta_equals_cc(g):
         sage: has_lovasz_theta_equals_cc(Graph(1)) # doctest: +SKIP
         True
     """
-    return g.lovasz_theta() == clique_covering_number(g)
+    return lovasz_theta(g) == clique_covering_number(g)
 
 def is_chvatal_erdos(g):
     r"""
