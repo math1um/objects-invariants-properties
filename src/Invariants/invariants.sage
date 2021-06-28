@@ -1011,7 +1011,7 @@ add_to_lists(two_stability_theta_bound, efficient_invariants, all_invariants)
 # Lovasz Theta over Root N
 # The Sandwich Theorem by Knuth p. 45
 def lovasz_theta_over_root_n(g):
-    return g.lovasz_theta()/sqrt(g.order())
+    return lovasz_theta(g)/sqrt(g.order())
 add_to_lists(lovasz_theta_over_root_n, efficient_invariants, all_invariants)
 
 # Theta * Theta-Complement
