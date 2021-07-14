@@ -1,4 +1,4 @@
-w#GRAPH INVARIANTS
+#GRAPH INVARIANTS
 #testing message - junk message
 
 all_invariants = []
