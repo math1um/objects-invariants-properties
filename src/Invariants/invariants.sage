@@ -11,7 +11,7 @@ broken_invariants = []
 
 sage_efficient_invariants = [Graph.number_of_loops, Graph.density, Graph.order, Graph.size, Graph.average_degree,
 Graph.triangles_count, Graph.szeged_index, Graph.radius, Graph.diameter, Graph.girth, Graph.wiener_index,
-Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, lovasz_theta(g),
+Graph.average_distance, Graph.connected_components_number, Graph.maximum_average_degree, lovasz_theta,
 Graph.spanning_trees_count, Graph.odd_girth, Graph.clustering_average, Graph.cluster_transitivity]
 
 sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth,
