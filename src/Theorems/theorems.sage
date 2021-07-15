@@ -29,7 +29,7 @@ alpha_trivial_bound = Graph.order
 add_to_lists(alpha_trivial_bound, alpha_upper_bounds, all_invariant_theorems)
 
 # Lovasz Theta
-alpha_lovasz_theta_bound = lovasz_theta(g)
+alpha_lovasz_theta_bound = lovasz_theta
 add_to_lists(alpha_lovasz_theta_bound, alpha_upper_bounds, all_invariant_theorems)
 
 # R. Pepper. Binding independence. Ph. D. Dissertation. University of Houston. Houston, TX, 2004.
