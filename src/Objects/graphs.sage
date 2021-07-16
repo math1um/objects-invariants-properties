@@ -1321,6 +1321,14 @@ ce142=Graph('FwCZw')
 ce142.name(new = "ce142")
 add_to_lists(ce142, graph_objects, counter_examples, all_graphs)
 
+#CE to  is G and H are graphs with distance matrices Gd and Hd and (Gd)(Hd)(Gd) is similar to (Hd)(Gd)(Hd) then G and H are isomorphic. Conjectured by M. Dahir
+ce143_G = Graph(r"K?Bcvb[nBUNO")
+ce143_H = Graph(r"K?Bcv`\nFSNO")
+ce143_G.name(new="ce143_G")
+ce143_H.name(new="ce143_H")
+add_to_lists(ce143_G, graph_objects, counter_examples, all_graphs)
+add_to_lists(ce143_H, graph_objects, counter_examples, all_graphs)
+
 #CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
 bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
 bipartite_5_5_minus_edge.delete_edge(0,5)
