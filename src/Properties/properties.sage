@@ -2140,7 +2140,7 @@ def is_factor_critical(g):
     EXAMPLES:
 
         sage: is_factor_critical(graphs.PathGraph(3))
-        False
+        True
 
         sage: is_factor_critical(graphs.CycleGraph(5))
         True
