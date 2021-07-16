@@ -13,6 +13,7 @@ sloane_graphs = []
 non_connected_graphs = []
 dimacs_graphs = []
 all_graphs = []
+broken_graphs = []
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
@@ -1314,6 +1315,11 @@ add_to_lists(ce140, graph_objects, counter_examples, all_graphs)
 ce141 = Graph('GrYZKs')
 ce141.name(new = "ce141")
 add_to_lists(ce141, graph_objects, counter_examples, all_graphs)
+
+#CE to alpha=2 -> (either the graph is not chordal or the graph is a biclique)
+ce142=Graph('FwCZw')
+ce142.name(new = "ce142")
+add_to_lists(ce142, graph_objects, counter_examples, all_graphs)
 
 #CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
 bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
