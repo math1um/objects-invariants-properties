@@ -527,6 +527,10 @@ pineapple_4_2 =	pineappleGraph(4,2)
 pineapple_4_2.name(new = "pineapple_4_2")
 add_to_lists(pineapple_4_2, graph_objects, all_graphs)
 
+long_tail_kite = Graph('F~aGW')
+long_tail_kite.name(new = "long_tail_kite")
+add_to_lists(long_tail_kite, graph_objects, all_graphs)
+
 #Razborov Graphs
 razborov_2 = razborovGraphs(2)
 razborov_2.name(new = "razborov_2")
