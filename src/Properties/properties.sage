@@ -4,7 +4,7 @@
 
 def is_v_twin(g,v):
     """
-    Return whteher N[v]=N[w] for each neighbor w of v
+    Return whteher N[v]=N[w] for each neighbor w of v.
 
     INPUT:
 
@@ -24,6 +24,23 @@ def is_v_twin(g,v):
         if Set(Nvp) == Set(Nw):
             return True
     return False  
+
+def has_twin(g):
+    """
+    Return whether there are vertices v,w with N[v]=N[w].
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+    """
+    for v in g.vertices():
+        if is_v_twin(g,v):
+            return True
+    return False
 
 def has_star_center(g):
     """
