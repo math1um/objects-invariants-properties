@@ -2,6 +2,29 @@
 
 # GRAPH PROPERTIES
 
+def is_v_twin(g,v):
+    """
+    Return whteher N[v]=N[w] for each neighbor w of v
+
+    INPUT:
+
+    -``g``-- Sage Graph
+  
+    -``v``-- Integer
+
+    OUTPUT:
+
+    -Boolean
+    """
+    Nv=g.neighbors(v)
+    Nvp=Nv+[v]
+    for w in Nv:
+        Nw=g.neighbors(w)
+        Nw.append(w)
+        if Set(Nvp) == Set(Nw):
+            return True
+    return False  
+
 def has_star_center(g):
     """
     Evalutes whether graph ``g`` has a vertex adjacent to all others.
