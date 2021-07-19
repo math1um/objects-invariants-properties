@@ -42,6 +42,20 @@ def has_twin(g):
             return True
     return False
 
+def is_twin_free(g): 
+    """
+    Return True if there are no vertices v,w with N[v]=N[w].
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+    """
+    return not has_twin(g)
+
 def has_star_center(g):
     """
     Evalutes whether graph ``g`` has a vertex adjacent to all others.
