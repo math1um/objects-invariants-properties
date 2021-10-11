@@ -2,6 +2,28 @@
 
 # GRAPH PROPERTIES
 
+def is_ramanujan(g):
+    """
+    Returns whether a graph is a Ramanujan graph, that is, if it is k-regular and the absolute value of all non-k eigenvalues is no more than 2*sqrt(k-1)
+    
+    Definition from: Lubotzky, Alexander, Ralph Phillips, and Peter Sarnak. "Ramanujan graphs." Combinatorica 8, no. 3 (1988): 261-277.
+    
+    EXAMPLES:
+    
+        sage: is_ramanujan(graphs.PetersenGraph())
+        True
+    """
+    if not g.is_regular():
+        return False
+    d = g.degree()[0]
+    A = g.adjacency_matrix()
+    evals = A.eigenvalues()
+    evals.sort(reverse=True)
+    X = max(abs(evals[1]),abs(evals[-1]))
+    
+    return X <= numerical_approx(2*sqrt(d-1))
+
+
 def is_v_twin(g,v):
     """
     Return whteher N[v]=N[w] for each neighbor w of v.
