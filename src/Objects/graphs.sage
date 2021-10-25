@@ -3012,6 +3012,67 @@ Graham68 = Graph('GUZ~~{')
 Graham68.name(new = "Graham68")
 add_to_lists(Graham68, graph_objects, all_graphs)
 
+"""
+Dailly, Antoine, Florent Foucaud, and Adriana Hansberg. "Strengthening the Murty–Simon conjecture on diameter 2 critical graphs." Discrete Mathematics 342, no. 11 (2019): 3142-3159.
+
+D2C refers to diameter 2 critical graphs
+"""
+
+H_5=Graph('EySg')
+Graph(H_5).name(new = "H_5")
+add_to_lists(H_5, graph_objects, all_graphs)
+
+D2C_a=Graph('F^Ggg')
+Graph(D2C_a).name(new='D2C_a')
+add_to_lists(D2C_a, graph_objects, all_graphs)
+
+D2C_b=Graph('FyHXG')
+Graph(D2C_b).name(new='D2C_b')
+add_to_lists(D2C_b, graph_objects, all_graphs)
+
+D2C_c=Graph('FyPPW')
+Graph(D2C_c).name(new='D2C_c')
+add_to_lists(D2C_c, graph_objects, all_graphs)
+
+D2C_d=Graph('G{KgqK')
+Graph(D2C_d).name(new='D2C_d')
+add_to_lists(D2C_d, graph_objects, all_graphs)
+
+D2C_e=Graph('GjLOkS')
+Graph(D2C_e).name(new='D2C_e')
+add_to_lists(D2C_e, graph_objects, all_graphs)
+
+D2C_f=Graph('GMhPO{')
+Graph(D2C_f).name(new='D2C_f')
+add_to_lists(D2C_f, graph_objects, all_graphs)
+
+D2C_g=Graph('GyOihK')
+Graph(D2C_g).name(new='D2C_g')
+add_to_lists(D2C_g, graph_objects, all_graphs)
+
+D2C_h=Graph('GySi`K')
+Graph(D2C_h).name(new='D2C_h')
+add_to_lists(D2C_h, graph_objects, all_graphs)
+
+D2C_i=Graph('GyOihS')
+Graph(D2C_i).name(new='D2C_i')
+add_to_lists(D2C_i, graph_objects, all_graphs)
+
+D2C_j=Graph('GZcX?{')
+Graph(D2C_j).name(new='D2C_j')
+add_to_lists(D2C_j, graph_objects, all_graphs)
+
+D2C_k=Graph('G{Ox`S')
+Graph(D2C_k).name(new='D2C_k')
+add_to_lists(D2C_k, graph_objects, all_graphs)
+
+D2C_l=Graph('HrU@_UV')
+Graph(D2C_l).name(new='D2C_l')
+add_to_lists(D2C_l, graph_objects, all_graphs)
+
+D2C_m=Graph('H|`_HeN')
+Graph(D2C_m).name(new='D2C_m')
+add_to_lists(D2C_m, graph_objects, all_graphs)
 
 
 # Distance Regular Graphs:
