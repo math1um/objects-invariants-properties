@@ -5,11 +5,11 @@
 def is_ramanujan(g):
     """
     Returns whether a graph is a Ramanujan graph, that is, if it is k-regular and the absolute value of all non-k eigenvalues is no more than 2*sqrt(k-1)
-    
+
     Definition from: Lubotzky, Alexander, Ralph Phillips, and Peter Sarnak. "Ramanujan graphs." Combinatorica 8, no. 3 (1988): 261-277.
-    
+
     EXAMPLES:
-    
+
         sage: is_ramanujan(graphs.PetersenGraph())
         True
     """
@@ -20,9 +20,9 @@ def is_ramanujan(g):
     evals = A.eigenvalues()
     evals.sort(reverse=True)
     X = max(abs(evals[1]),abs(evals[-1]))
-    
-    return X <= numerical_approx(2*sqrt(d-1))
 
+    return X <= numerical_approx(2*sqrt(d-1))
+add_to_lists(is_ramanujan, efficiently_computable_properties)
 
 def is_v_twin(g,v):
     """
@@ -31,7 +31,7 @@ def is_v_twin(g,v):
     INPUT:
 
     -``g``-- Sage Graph
-  
+
     -``v``-- Integer
 
     OUTPUT:
@@ -45,7 +45,7 @@ def is_v_twin(g,v):
         Nw.append(w)
         if Set(Nvp) == Set(Nw):
             return True
-    return False  
+    return False
 
 def has_twin(g):
     """
@@ -64,7 +64,7 @@ def has_twin(g):
             return True
     return False
 
-def is_twin_free(g): 
+def is_twin_free(g):
     """
     Return True if there are no vertices v,w with N[v]=N[w].
 
@@ -2027,13 +2027,13 @@ def alpha_leq_order_over_two(g):
 def is_alpha_equals_two(g):
     """
     Return whether the independence number alpha is equal to 2.
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     - Boolean Value
     """
     if independence_number(g) == 2:
@@ -2148,7 +2148,7 @@ def is_chromatic_index_critical(g):
                     Pitman Publishing, London, UK, 1977.
     """
     component_sizes = g.connected_components_sizes()
-    chi=g.chromatic_index()    
+    chi=g.chromatic_index()
 
     if len(component_sizes) > 1:
         if component_sizes[1] > 1:
@@ -2204,7 +2204,7 @@ def is_factor_critical(g):
     Return whether or not a graph "g" is factor-critical.
 
     A graph is factor-critical if order is odd and removal of any vertex gives graph with perfect matching
-    
+
     INPUT:
 
     -``g``-- Sage graph
@@ -2323,19 +2323,19 @@ def szekeres_wilf_equals_chromatic_number(g):
 def has_Havel_Hakimi_property(g, v):
     """
     Return whether the vertex v in the graph g has the Havel-Hakimi property.
-    
+
     A vertex has the Havel-Hakimi property if it has maximum degree and the minimum degree of its neighbours is at least the maximum degree of its non-neigbors. Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     -``v``-- Integer
-    
+
     OUTPUT:
-    
+
     -Boolean, True if the vertex v in the graph g has the Havel-Hakimi property, False otherwise.
-    
+
     EXAMPLE:
 
         sage: P = graphs.PetersenGraph()
@@ -2370,17 +2370,17 @@ def has_Havel_Hakimi_property(g, v):
 def has_strong_Havel_Hakimi_property(g):
     """
     Return whether the graph g has the strong Havel-Hakimi property.
-    
+
     A graph has the strong Havel-Hakimi property if in every induced subgraph H of G, every vertex of maximum degree has the Havel-Hakimi property. Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Boolean, True if the graph g has the strong Havel-Hakimi property, False if otherwise.
-    
+
     EXAMPLE:
 
     The graph obtained by connecting two cycles of length 3 by a single edge has
@@ -2400,15 +2400,15 @@ def has_strong_Havel_Hakimi_property(g):
 def is_subcubic(g):
     """
     Return whether or not a Graph g is subcubic.
-    
+
     A Graph is subcubic is each vertex is at most degree 3.
-    
+
     INPUT:
-    
+
     -``g``- Sage Graph
-    
+
     OUTPUT:
-    
+
     - Boolean, True if a graph is subcubic, False otherwise.
     """
     return max_degree(g) <= 3
@@ -2417,15 +2417,15 @@ def is_subcubic(g):
 def is_quasi_regular(g):
     """
     Return whether or not a graph is quasi-regular.
-    
+
     A Graph is quasi-regular is its Max and min degree varies by at most 1.
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Boolean, True if the graph is quasi-regular, False if otherwise.
     """
     if max_degree(g) - min_degree(g) < 2:
@@ -2919,14 +2919,41 @@ Tests:
 """)
 
 ######################################################################################################################
+#PROPERTY LISTS
 
-efficiently_computable_properties = [Graph.is_regular, Graph.is_planar,
+#TO-DO: add every property above to one of the following lists (or more if appropriate):
+# efficiently_computable_properties
+# efficiently_computable_sage_properties
+# intractable_properties
+# intractable_sage_properties
+
+# Syntax: after each defined property, we need:
+# add_to_lists(just_defined_property_name, list1, list2, etc)
+
+efficiently_computable_properties = []
+
+#have any new Sage properties been defined?
+efficiently_computable_sage_properties = [Graph.is_regular, Graph.is_planar,
 Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique,
 Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite,
 Graph.is_cartesian_product,Graph.is_distance_regular,  Graph.is_even_hole_free,
 Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
 Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
-Graph.is_weakly_chordal, is_dirac, is_ore,
+Graph.is_weakly_chordal, Graph.is_circulant, Graph.has_loops,
+Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
+Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
+Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
+Graph.is_self_complementary]
+
+efficiently_computable_properties = efficiently_compuatable_properties + efficiently_computable_sage_properties
+
+intractable_properties = []
+
+#have any new Sage intractable properties been defined?
+intractable_properties = intractable_properties + intracable_sage_properties
+
+#to add to lists, then this list should be deleted
+efficiently_computable_properties = [is_dirac, is_ore,
 is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
 is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
 is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
@@ -2943,11 +2970,7 @@ has_exactly_two_simplicial_vertices, is_two_tree, is_locally_planar,
 is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
 is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
 is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
-has_odd_order, has_even_order, Graph.is_circulant, Graph.has_loops,
-Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
-Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
-Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary, is_double_clique, has_fork, is_fork_free,
+has_odd_order, has_even_order, is_double_clique, has_fork, is_fork_free,
 has_empty_KE_part]
 
 intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
@@ -2964,7 +2987,7 @@ is_haggkvist_nicoghossian, is_chromatic_index_critical]
 
 removed_properties = [is_pebbling_class0]
 
-
+#are all of these already in one of the Sage lists above?
 sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
 Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
 Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
@@ -2987,7 +3010,6 @@ Graph.is_arc_transitive]
 
 properties = efficiently_computable_properties + intractable_properties
 properties_plus = efficiently_computable_properties + intractable_properties + invariant_relation_properties
-
 
 invariants_from_properties = [make_invariant_from_property(property) for property in properties]
 invariants_plus = all_invariants + invariants_from_properties
