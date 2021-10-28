@@ -2949,8 +2949,10 @@ efficiently_computable_properties = efficiently_computable_properties + efficien
 
 intractable_properties = []
 
+intractable_sage_properties = []
+
 #have any new Sage intractable properties been defined?
-intractable_properties = intractable_properties + intracable_sage_properties
+intractable_properties = intractable_properties + intractable_sage_properties
 
 #to add to lists, then this list should be deleted
 efficiently_computable_properties = [is_dirac, is_ore,
