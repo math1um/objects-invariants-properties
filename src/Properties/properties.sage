@@ -2945,7 +2945,7 @@ Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is
 Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
 Graph.is_self_complementary]
 
-efficiently_computable_properties = efficiently_compuatable_properties + efficiently_computable_sage_properties
+efficiently_computable_properties = efficiently_computable_properties + efficiently_computable_sage_properties
 
 intractable_properties = []
 
