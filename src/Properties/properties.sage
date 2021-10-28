@@ -2,6 +2,8 @@
 
 # GRAPH PROPERTIES
 
+efficiently_computable_properties = []
+
 def is_ramanujan(g):
     """
     Returns whether a graph is a Ramanujan graph, that is, if it is k-regular and the absolute value of all non-k eigenvalues is no more than 2*sqrt(k-1)
@@ -2929,8 +2931,6 @@ Tests:
 
 # Syntax: after each defined property, we need:
 # add_to_lists(just_defined_property_name, list1, list2, etc)
-
-efficiently_computable_properties = []
 
 #have any new Sage properties been defined?
 efficiently_computable_sage_properties = [Graph.is_regular, Graph.is_planar,
