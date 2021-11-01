@@ -482,21 +482,21 @@ def find_all_max_ind_sets(g):
 
     return final_list
 
-def add_to_lists(graph, *L):
+def add_to_lists(x, *L):
     """
-    Return an arbitrary number of lists with the specified graph appended to all of them.
+    Return an arbitrary number of lists with the specified arbitrary object appended to all of them.
 
     Use this function to build the lists of graphs
 
     INPUT:
 
-    -``g``-- Sage Graph
+    -``x``-- any Sage object
 
-    -``L``-- List of lists
+    -``*L``-- List of lists
 
     OUTPUT:
 
-    - A list of lists with the specified graph appended to all of them.
+    - A list of lists with the specified object appended to all of them.
 
     EXAMPLES:
 
