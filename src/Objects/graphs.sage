@@ -3078,6 +3078,46 @@ Graph(D2C_m).name(new='D2C_m')
 add_to_lists(D2C_m, graph_objects, all_graphs)
 
 
+'''
+From:
+Plummer, Michael, Michael Stiebitz, and Bjarne Toft. 
+"On a special case of Hadwiger's conjecture." Discussiones Mathematicae Graph Theory 23, no. 2 (2003): 333-363.
+We call them for example:
+PST-6_1_a (this matches up with Figure 6.1(a))
+'''
+
+PST_6_1_a=Graph('Hlph{~o')
+Graph(PST_6_1_a).name(new='PST_6_1_a')
+add_to_lists(PST_6_1_a, graph_objects, all_graphs)
+
+PST_6_1_b=Graph('Hlphk~y')
+Graph(PST_6_1_b).name(new='PST_6_1_b')
+add_to_lists(PST_6_1_b, graph_objects, all_graphs)
+
+PST_6_1_c=Graph('Hlph{~y')
+Graph(PST_6_1_c).name(new='PST_6_1_c')
+add_to_lists(PST_6_1_c, graph_objects, all_graphs)
+
+PST_6_2_a=Graph('Khphk~yrPMa?')
+Graph(PST_6_2_a).name(new='PST_6_2_a')
+add_to_lists(PST_6_2_a, graph_objects, all_graphs)
+
+PST_6_2_c=Graph('Ilph{~y|O')
+Graph(PST_6_2_c).name(new='PST_6_2_c')
+add_to_lists(PST_6_2_c, graph_objects, all_graphs)
+
+PST_6_3_a=Graph('Ilph{~oLw')
+Graph(PST_6_3_a).name(new='PST_6_3_a')
+add_to_lists(PST_6_3_a, graph_objects, all_graphs)
+
+PST_6_4_a=Graph('Jlph{~orX\\_')
+Graph(PST_6_4_a).name(new='PST_6_4_a')
+add_to_lists(PST_6_4_a, graph_objects, all_graphs)
+
+PST_6_5=Graph('Jlph{~y|V`_')
+Graph(PST_6_5).name(new='PST_6_5')
+add_to_lists(PST_6_5, graph_objects, all_graphs)
+
 # Distance Regular Graphs:
 split_cayley_hex_2 = Graph("~??~{aSO???GA??????_?_???????G??_?????@???????_?_G??_A?@?C??CC??A?_??OO??A?_??@?O?@?GG?@?G?A?GC?O??O_?_?A?O?_?A@?A??O?_G??A@?O?ABo????O@w???D??]???A??Bo??H???GaO?_??@GQ?G???@h?H???D?BA@?_O_?_?C?c?_C??A?Q?CG??A?C_C?O??C@_?CO???_`?@O???CCG@??_??GAC?OA???a?AG@??C?G_?__O?@?CC?CC@??G?OO?S?C?G??W?AG?G?@??c?OA?G?C?@G?A?o???_?`?C?`???_?")
 split_cayley_hex_2.name(new = "split_cayley_hex_2")
