@@ -502,7 +502,7 @@ def add_to_lists(x, *L):
 
     """
     for list in L:
-            list.append(graph)
+            list.append(x)
 
 def MIR(n):
     if n < 2:
