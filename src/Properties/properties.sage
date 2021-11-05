@@ -2779,6 +2779,129 @@ def is_locally_two_connected(g):
     return all((f(g.subgraph(g.neighbors(v))) if len(g.neighbors(v)) >= 2
                                               else True) for v in g.vertices())
 
+def is_k_bootstrap_good(G,k):
+    """
+    Return whether or not there exists a set of k vertices such that G is fully infected.
+
+    Assumes G has at least k vertices.
+
+    If G has more than k vertices, it must be connected to be k_bootstrap_good.
+
+    INPUT:
+
+    -``g``--Sage Graph
+
+    -``k``-- Integer
+
+    OUTPUT:
+
+    -Boolean
+    """
+    G.relabel()
+    for s in itertools.combinations(G.vertices(), k):
+        if k_percolate(G,set(s),k):
+            return True
+    return False
+
+add_to_lists(is_k_bootstrap_good,efficiently_computable_properties)
+
+def k_percolate(G,infected,k):
+    """
+    Return True if the set 'infected' fully k-infects the graph G
+
+    INPUT:
+
+    -``G``--Sage Graph
+
+    -``infected``--List
+
+    -``k``--Integer
+
+    OUTPUT:
+
+    -Boolean
+    """
+    uninfected = set(G.vertices()) - set(infected)
+    newInfections = True
+    while newInfections:
+        newInfections = False
+        for v in uninfected:
+            if len(set(G.neighbors(v)).intersection(infected)) >= k:
+                infected.add(v)
+                uninfected-=set([v])
+                newInfections = True
+                break
+    return len(uninfected) == 0
+
+add_to_lists(k_percolate,efficiently_computable_properties)
+
+def is_2_bootstrap_good(G):
+    """
+    Return whether or not G contains a subset of 2 vertices which 2-infect the whole graph.
+
+    Assumes G has at least 2 vertices
+    
+    INPUT:
+
+    -``G``--Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
+    EXAMPLES:
+	sage: is_2_bootstrap_good(k4)
+	True
+	sage: is_2_bootstrap_good(graphs.ThomsenGraph())
+	True
+	sage: is_2_bootstrap_good(graphs.CycleGraph(4))
+	True
+	sage: is_2_bootstrap_good(graphs.CycleGraph(5))
+	False
+	sage: is_2_bootstrap_good(ce83)
+	True
+	sage: is_2_bootstrap_good(graphs.PetersenGraph())
+	False
+	sage: is_2_bootstrap_good(p4)
+	False
+    """
+    return is_k_bootstrap_good(G,2)
+
+add_to_lists(is_2_bootstrap_good,efficiently_computable_properties)
+
+def is_3_bootstrap_good(G):
+    """
+    Return whether or not G contains a subset of 3 vertices which 3-infect the whole graph.
+
+    Assumes G has at least 3 vertices.
+
+    INPUT:
+
+    -``G``--Sage Graph
+
+    OUPUT:
+
+    -Boolean
+
+    EXAMPLES:
+	sage: is_3_bootstrap_good(graphs.BullGraph())
+	False
+	sage: is_3_bootstrap_good(graphs.ThomsenGraph())
+	True
+	sage: is_3_bootstrap_good(graphs.CycleGraph(4))
+	False
+	sage: is_3_bootstrap_good(graphs.BidiakisCube())
+	False
+	sage: is_3_bootstrap_good(graphs.CycleGraph(5))
+	False
+	sage: is_3_bootstrap_good(willis_page35_fig52)
+	True
+	sage: is_3_bootstrap_good(ce68)
+	True
+    """
+    return is_k_bootstrap_good(G,3)
+
+add_to_lists(is_3_bootstrap_good,efficiently_computable_properties)
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
