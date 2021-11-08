@@ -2,6 +2,8 @@
 
 # GRAPH PROPERTIES
 
+all_properties = []
+
 efficiently_computable_properties = []
 
 def is_ramanujan(g):
@@ -24,7 +26,7 @@ def is_ramanujan(g):
     X = max(abs(evals[1]),abs(evals[-1]))
 
     return X <= numerical_approx(2*sqrt(d-1))
-add_to_lists(is_ramanujan, efficiently_computable_properties)
+add_to_lists(is_ramanujan, efficiently_computable_properties,all_properties)
 
 def is_v_twin(g,v):
     """
@@ -48,6 +50,7 @@ def is_v_twin(g,v):
         if Set(Nvp) == Set(Nw):
             return True
     return False
+add_to_lists(is_v_twin,all_properties)
 
 def has_twin(g):
     """
@@ -65,6 +68,7 @@ def has_twin(g):
         if is_v_twin(g,v):
             return True
     return False
+add_to_lists(has_twin,all_properties)
 
 def is_twin_free(g):
     """
@@ -79,6 +83,7 @@ def is_twin_free(g):
     -Boolean
     """
     return not has_twin(g)
+add_to_lists(is_twin_free ,all_properties)
 
 def has_star_center(g):
     """
@@ -101,6 +106,7 @@ def has_star_center(g):
         False
     """
     return (g.order() - 1) in g.degree()
+add_to_lists(has_star_center ,all_properties)
 
 def is_complement_of_chordal(g):
     """
@@ -133,6 +139,7 @@ def is_complement_of_chordal(g):
         True
     """
     return g.complement().is_chordal()
+add_to_lists(is_complement_of_chordal ,all_properties)
 
 def pairs_have_unique_common_neighbor(g):
     """
@@ -169,6 +176,7 @@ def pairs_have_unique_common_neighbor(g):
         if len(common_neighbors(g, u, v)) != 1:
             return False
     return True
+add_to_lists(pairs_have_unique_common_neighbor,all_properties)
 
 def is_distance_transitive(g):
     """
@@ -229,6 +237,7 @@ def is_distance_transitive(g):
             if len(sameDistPairs) != len(auto_group.orbit(sameDistPairs[0], action = "OnSets")):
                 return False
     return True
+add_to_lists(is_distance_transitive ,all_properties)
 
 def is_dirac(g):
     """
@@ -252,6 +261,7 @@ def is_dirac(g):
     """
     n = g.order()
     return n > 2 and min(g.degree()) >= n/2
+add_to_lists(is_dirac ,all_properties)
 
 def is_ore(g):
     """
@@ -293,6 +303,7 @@ def is_ore(g):
                 if D[i] + D[j] < n:
                     return False
     return True
+add_to_lists(is_ore ,all_properties)
 
 def is_haggkvist_nicoghossian(g):
     r"""
@@ -332,6 +343,7 @@ def is_haggkvist_nicoghossian(g):
     """
     k = g.vertex_connectivity()
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
+add_to_lists(is_haggkvist_nicoghossian ,all_properties)
 
 def is_genghua_fan(g):
     r"""
@@ -377,6 +389,7 @@ def is_genghua_fan(g):
             if Dist[V[i]][V[j]] == 2 and max(D[i], D[j]) < n / 2.0:
                 return False
     return True
+add_to_lists(is_genghua_fan ,all_properties)
 
 def is_planar_transitive(g):
     """
@@ -407,6 +420,7 @@ def is_planar_transitive(g):
         False
     """
     return g.is_planar() and g.is_vertex_transitive()
+add_to_lists(is_planar_transitive ,all_properties)
 
 def is_generalized_dirac(g):
     r"""
@@ -450,6 +464,7 @@ def is_generalized_dirac(g):
             if len(neighbors_set(g,[u,v])) < (2.0 * g.order() - 1) / 3:
                 return False
     return True
+add_to_lists(is_generalized_dirac ,all_properties)
 
 def is_van_den_heuvel(g):
     r"""
@@ -514,6 +529,7 @@ def is_van_den_heuvel(g):
             return False
 
     return True
+add_to_lists(is_van_den_heuvel ,all_properties)
 
 def is_two_connected(g):
     """
@@ -556,6 +572,7 @@ def is_two_connected(g):
     if g.is_isomorphic(graphs.CompleteGraph(2)):
         return False
     return g.is_biconnected()
+add_to_lists(is_two_connected ,all_properties)
 
 def is_three_connected(g):
     """
@@ -601,6 +618,7 @@ def is_three_connected(g):
         Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 3)
+add_to_lists(is_three_connected ,all_properties)
 
 def is_four_connected(g):
     """
@@ -638,6 +656,7 @@ def is_four_connected(g):
         Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 4)
+add_to_lists(is_four_connected ,all_properties)
 
 def is_lindquester(g):
     r"""
@@ -686,6 +705,7 @@ def is_lindquester(g):
                 if len(neighbors_set(g,[V[i],V[j]])) < (2*n-1)/3.0:
                     return False
     return True
+add_to_lists(is_lindquester,all_properties)
 
 def is_complete(g):
     """
@@ -728,6 +748,7 @@ def is_complete(g):
                 if D[V[i]][V[j]] != 1:
                     return False
     return True
+add_to_lists(is_complete,all_properties)
 
 def has_c4(g):
     """
@@ -748,6 +769,7 @@ def has_c4(g):
         False
     """
     return g.subgraph_search(c4, induced=True) is not None
+add_to_lists(has_c4,all_properties)
 
 def is_c4_free(g):
     """
@@ -768,6 +790,7 @@ def is_c4_free(g):
         True
     """
     return not has_c4(g)
+add_to_lists(is_c4_free,all_properties)
 
 def has_paw(g):
     """
@@ -794,6 +817,7 @@ def has_paw(g):
         False
     """
     return g.subgraph_search(paw, induced=True) is not None
+add_to_lists(has_paw,all_properties)
 
 def is_paw_free(g):
     """
@@ -820,6 +844,7 @@ def is_paw_free(g):
         True
     """
     return not has_paw(g)
+add_to_lists(is_paw_free,all_properties)
 
 def has_dart(g):
     """
@@ -847,6 +872,7 @@ def has_dart(g):
         False
     """
     return g.subgraph_search(dart, induced=True) is not None
+add_to_lists(has_dart,all_properties)
 
 def is_dart_free(g):
     """
@@ -874,12 +900,7 @@ def is_dart_free(g):
         True
     """
     return not has_dart(g)
-
-def is_p4_free(g):
-    """
-    Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
-    """
-    return not has_p4(g)
+add_to_lists(is_dart_free,all_properties)
 
 def has_p4(g):
     """
@@ -902,6 +923,14 @@ def has_p4(g):
         False
     """
     return g.subgraph_search(p4, induced=True) is not None
+add_to_lists(has_p4,all_properties)
+
+def is_p4_free(g):
+    """
+    Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
+    """
+    return not has_p4(g)
+add_to_lists(is_p4_free,all_properties)
 
 def has_kite(g):
     """
@@ -925,6 +954,7 @@ def has_kite(g):
         False
     """
     return g.subgraph_search(kite_with_tail, induced=True) is not None
+add_to_lists(has_kite,all_properties)
 
 def is_kite_free(g):
     """
@@ -948,6 +978,7 @@ def is_kite_free(g):
         True
     """
     return not has_kite(g)
+add_to_lists(is_kite_free,all_properties)
 
 def has_claw(g):
     """
@@ -971,6 +1002,7 @@ def has_claw(g):
         False
     """
     return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
+add_to_lists(has_claw,all_properties)
 
 def is_claw_free(g):
     """
@@ -994,6 +1026,7 @@ def is_claw_free(g):
         True
     """
     return not has_claw(g)
+add_to_lists(is_claw_free,all_properties)
 
 def has_H(g):
     """
@@ -1017,6 +1050,7 @@ def has_H(g):
         False
     """
     return g.subgraph_search(double_fork, induced=True) is not None
+add_to_lists(has_H,all_properties)
 
 def is_H_free(g):
     """
@@ -1040,6 +1074,7 @@ def is_H_free(g):
         True
     """
     return not has_H(g)
+add_to_lists(is_H_free,all_properties)
 
 def has_fork(g):
     """
@@ -1067,6 +1102,7 @@ def has_fork(g):
         False
     """
     return g.subgraph_search(star_1_1_3, induced=True) is not None
+add_to_lists(has_fork,all_properties)
 
 def is_fork_free(g):
     """
@@ -1094,6 +1130,7 @@ def is_fork_free(g):
         True
     """
     return not has_fork(g)
+add_to_lists(is_fork_free,all_properties)
 
 def has_k4(g):
     """
@@ -1116,6 +1153,7 @@ def has_k4(g):
         False
     """
     return g.subgraph_search(alpha_critical_easy[2], induced=True) is not None
+add_to_lists(has_k4,all_properties)
 
 def is_k4_free(g):
     """
@@ -1138,6 +1176,7 @@ def is_k4_free(g):
         True
     """
     return not has_k4(g)
+add_to_lists(is_k4_free,all_properties)
 
 def is_double_clique(g):
     """
@@ -1173,6 +1212,7 @@ def is_double_clique(g):
     """
     gc = g.complement()
     return gc.is_bipartite()
+add_to_lists(is_double_clique,all_properties)
 
 def has_radius_equal_diameter(g):
     """
@@ -1201,6 +1241,7 @@ def has_radius_equal_diameter(g):
         False
     """
     return g.radius() == g.diameter()
+add_to_lists(has_radius_equal_diameter,all_properties)
 
 def has_residue_equals_alpha(g):
     r"""
@@ -1237,6 +1278,7 @@ def has_residue_equals_alpha(g):
         False
     """
     return residue(g) == independence_number(g)
+add_to_lists(has_residue_equals_alpha,all_properties)
 
 def is_not_forest(g):
     """
@@ -1267,6 +1309,7 @@ def is_not_forest(g):
         False
     """
     return not g.is_forest()
+add_to_lists(is_not_forest,all_properties)
 
 def has_empty_KE_part(g):
     r"""
@@ -1355,6 +1398,7 @@ def has_empty_KE_part(g):
         if alpha_test == alpha:
             return False
     return True
+add_to_lists(has_empty_KE_part,all_properties)
 
 def is_class1(g):
     """
@@ -1384,6 +1428,7 @@ def is_class1(g):
         False
     """
     return g.chromatic_index() == max(g.degree())
+add_to_lists(is_class1,all_properties)
 
 def is_class2(g):
     """
@@ -1413,6 +1458,7 @@ def is_class2(g):
         True
     """
     return not(g.chromatic_index() == max(g.degree()))
+add_to_lists(is_class2,all_properties)
 
 def is_cubic(g):
     """
@@ -1434,6 +1480,7 @@ def is_cubic(g):
     """
     D = g.degree()
     return min(D) == 3 and max(D) == 3
+add_to_lists(is_cubic,all_properties)
 
 def is_anti_tutte(g):
     """
@@ -1464,6 +1511,7 @@ def is_anti_tutte(g):
     if not g.is_connected():
         return False
     return independence_number(g) <= g.diameter() + g.girth()
+add_to_lists(is_anti_tutte,all_properties)
 
 def is_anti_tutte2(g):
     """
@@ -1492,6 +1540,7 @@ def is_anti_tutte2(g):
     if not g.is_connected():
         return False
     return independence_number(g) <=  domination_number(g) + g.radius()- 1
+add_to_lists(is_anti_tutte2,all_properties)
 
 def diameter_equals_twice_radius(g):
     """
@@ -1519,6 +1568,7 @@ def diameter_equals_twice_radius(g):
         True
     """
     return g.diameter() == 2*g.radius()
+add_to_lists(diameter_equals_twice_radius,all_properties)
 
 def diameter_equals_two(g):
     """
@@ -1546,6 +1596,7 @@ def diameter_equals_two(g):
         False
     """
     return g.diameter() == 2
+add_to_lists(diameter_equals_two,all_properties)
 
 def has_lovasz_theta_equals_alpha(g):
     """
@@ -1583,6 +1634,7 @@ def has_lovasz_theta_equals_alpha(g):
         True
     """
     return lovasz_theta(g) == independence_number(g)
+add_to_lists(has_lovasz_theta_equals_alpha,all_properties)
 
 def has_lovasz_theta_equals_cc(g):
     """
