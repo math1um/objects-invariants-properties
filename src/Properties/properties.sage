@@ -50,7 +50,7 @@ def is_v_twin(g,v):
         if Set(Nvp) == Set(Nw):
             return True
     return False
-add_to_lists(is_v_twin,all_properties)
+#add_to_lists(is_v_twin,all_properties) #a test for single vertex, not a graph property
 
 def has_twin(g):
     """
@@ -68,7 +68,7 @@ def has_twin(g):
         if is_v_twin(g,v):
             return True
     return False
-add_to_lists(has_twin,all_properties)
+add_to_lists(has_twin,efficiently_computable_properties,all_properties)
 
 def is_twin_free(g):
     """
@@ -83,7 +83,7 @@ def is_twin_free(g):
     -Boolean
     """
     return not has_twin(g)
-add_to_lists(is_twin_free ,all_properties)
+add_to_lists(is_twin_free, efficiently_computable_properties, all_properties)
 
 def has_star_center(g):
     """
@@ -106,7 +106,7 @@ def has_star_center(g):
         False
     """
     return (g.order() - 1) in g.degree()
-add_to_lists(has_star_center ,all_properties)
+add_to_lists(has_star_center, efficiently_computable_properties, all_properties)
 
 def is_complement_of_chordal(g):
     """
@@ -139,7 +139,7 @@ def is_complement_of_chordal(g):
         True
     """
     return g.complement().is_chordal()
-add_to_lists(is_complement_of_chordal ,all_properties)
+add_to_lists(is_complement_of_chordal, efficiently_computable_properties, all_properties)
 
 def pairs_have_unique_common_neighbor(g):
     """
@@ -176,7 +176,7 @@ def pairs_have_unique_common_neighbor(g):
         if len(common_neighbors(g, u, v)) != 1:
             return False
     return True
-add_to_lists(pairs_have_unique_common_neighbor,all_properties)
+add_to_lists(pairs_have_unique_common_neighbor, efficiently_computable_properties, all_properties)
 
 def is_distance_transitive(g):
     """
@@ -237,7 +237,7 @@ def is_distance_transitive(g):
             if len(sameDistPairs) != len(auto_group.orbit(sameDistPairs[0], action = "OnSets")):
                 return False
     return True
-add_to_lists(is_distance_transitive ,all_properties)
+add_to_lists(is_distance_transitive, intractable_properties, all_properties)
 
 def is_dirac(g):
     """
@@ -2892,7 +2892,7 @@ def is_2_bootstrap_good(G):
     Return whether or not G contains a subset of 2 vertices which 2-infect the whole graph.
 
     Assumes G has at least 2 vertices
-    
+
     INPUT:
 
     -``G``--Sage Graph
