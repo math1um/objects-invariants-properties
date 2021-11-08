@@ -6,6 +6,8 @@ all_properties = []
 
 efficiently_computable_properties = []
 
+intractable_properties = []
+
 def is_ramanujan(g):
     """
     Returns whether a graph is a Ramanujan graph, that is, if it is k-regular and the absolute value of all non-k eigenvalues is no more than 2*sqrt(k-1)
