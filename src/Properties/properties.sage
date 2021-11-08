@@ -3,6 +3,7 @@
 # GRAPH PROPERTIES
 
 efficiently_computable_properties = []
+intractable_properties = []
 
 def is_ramanujan(g):
     """
