@@ -5,7 +5,6 @@
 all_properties = []
 
 efficiently_computable_properties = []
-intractable_properties = []
 
 intractable_properties = []
 
