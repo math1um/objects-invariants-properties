@@ -351,13 +351,19 @@ def is_genghua_fan(g):
     r"""
     Evaluates if graph ``g`` satisfies a condition for Hamiltonicity by G. Fan.
 
-    OUTPUT:
-
     Returns ``True`` if ``g`` is 2-connected and satisfies that
     `dist(u,v)=2` implies `\max(deg(u), deg(v)) \geq n/2` for all
     vertices `u,v`.
     Returns ``False`` otherwise.
+    
+    INPUT:
+    
+    -``g``-- Sage Graph
+    
+    OUTPUT:
 
+    -Boolean
+    
     EXAMPLES:
 
         sage: is_genghua_fan(graphs.DiamondGraph())
