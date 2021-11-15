@@ -263,7 +263,7 @@ def is_dirac(g):
     """
     n = g.order()
     return n > 2 and min(g.degree()) >= n/2
-add_to_lists(is_dirac ,all_properties)
+add_to_lists(is_dirac ,all_properties, efficiently_computable_properties)
 
 def is_ore(g):
     """
@@ -305,7 +305,7 @@ def is_ore(g):
                 if D[i] + D[j] < n:
                     return False
     return True
-add_to_lists(is_ore ,all_properties)
+add_to_lists(is_ore , effienctly_computable_properties, all_properties)
 
 def is_haggkvist_nicoghossian(g):
     r"""
@@ -345,7 +345,7 @@ def is_haggkvist_nicoghossian(g):
     """
     k = g.vertex_connectivity()
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
-add_to_lists(is_haggkvist_nicoghossian ,all_properties)
+add_to_lists(is_haggkvist_nicoghossian , efficiently_computable_properties, all_properties)
 
 def is_genghua_fan(g):
     r"""
