@@ -355,15 +355,15 @@ def is_genghua_fan(g):
     `dist(u,v)=2` implies `\max(deg(u), deg(v)) \geq n/2` for all
     vertices `u,v`.
     Returns ``False`` otherwise.
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
 
     -Boolean
-    
+
     EXAMPLES:
 
         sage: is_genghua_fan(graphs.DiamondGraph())
@@ -397,7 +397,7 @@ def is_genghua_fan(g):
             if Dist[V[i]][V[j]] == 2 and max(D[i], D[j]) < n / 2.0:
                 return False
     return True
-add_to_lists(is_genghua_fan ,all_properties)
+add_to_lists(is_genghua_fan, efficiently_computable_properties, all_properties)
 
 def is_planar_transitive(g):
     """
@@ -428,7 +428,7 @@ def is_planar_transitive(g):
         False
     """
     return g.is_planar() and g.is_vertex_transitive()
-add_to_lists(is_planar_transitive ,all_properties)
+add_to_lists(is_planar_transitive, intractable_properties, all_properties)
 
 def is_generalized_dirac(g):
     r"""
@@ -472,7 +472,7 @@ def is_generalized_dirac(g):
             if len(neighbors_set(g,[u,v])) < (2.0 * g.order() - 1) / 3:
                 return False
     return True
-add_to_lists(is_generalized_dirac ,all_properties)
+add_to_lists(is_generalized_dirac, efficiently_computable_properties, all_properties)
 
 def is_van_den_heuvel(g):
     r"""
@@ -537,7 +537,7 @@ def is_van_den_heuvel(g):
             return False
 
     return True
-add_to_lists(is_van_den_heuvel ,all_properties)
+add_to_lists(is_van_den_heuvel, efficiently_computable_properties, all_properties)
 
 def is_two_connected(g):
     """
@@ -580,7 +580,7 @@ def is_two_connected(g):
     if g.is_isomorphic(graphs.CompleteGraph(2)):
         return False
     return g.is_biconnected()
-add_to_lists(is_two_connected ,all_properties)
+add_to_lists(is_two_connected, efficiently_computable_properties, all_properties)
 
 def is_three_connected(g):
     """
@@ -626,7 +626,7 @@ def is_three_connected(g):
         Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 3)
-add_to_lists(is_three_connected ,all_properties)
+add_to_lists(is_three_connected, efficiently_computable_properties, all_properties)
 
 def is_four_connected(g):
     """
@@ -664,7 +664,7 @@ def is_four_connected(g):
         Implementation requires Sage 8.2+.
     """
     return g.vertex_connectivity(k = 4)
-add_to_lists(is_four_connected ,all_properties)
+add_to_lists(is_four_connected, efficiently_computable_properties, all_properties)
 
 def is_lindquester(g):
     r"""
