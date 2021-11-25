@@ -263,7 +263,7 @@ def is_dirac(g):
     """
     n = g.order()
     return n > 2 and min(g.degree()) >= n/2
-add_to_lists(is_dirac ,all_properties, efficiently_computable_properties)
+add_to_lists(is_dirac, efficiently_computable_properties, all_properties)
 
 def is_ore(g):
     """
@@ -305,7 +305,7 @@ def is_ore(g):
                 if D[i] + D[j] < n:
                     return False
     return True
-add_to_lists(is_ore , effienctly_computable_properties, all_properties)
+add_to_lists(is_ore, efficiently_computable_properties, all_properties)
 
 def is_haggkvist_nicoghossian(g):
     r"""
