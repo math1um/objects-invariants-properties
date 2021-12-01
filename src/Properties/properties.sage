@@ -713,7 +713,9 @@ def is_lindquester(g):
                 if len(neighbors_set(g,[V[i],V[j]])) < (2*n-1)/3.0:
                     return False
     return True
-add_to_lists(is_lindquester,all_properties)
+add_to_lists(is_lindquester, efficiently_computable_properties, all_properties)
+
+
 
 def is_complete(g):
     """
@@ -756,7 +758,7 @@ def is_complete(g):
                 if D[V[i]][V[j]] != 1:
                     return False
     return True
-add_to_lists(is_complete,all_properties)
+add_to_lists(is_complete, efficiently_computable_properties, all_properties)
 
 def has_c4(g):
     """
@@ -777,7 +779,7 @@ def has_c4(g):
         False
     """
     return g.subgraph_search(c4, induced=True) is not None
-add_to_lists(has_c4,all_properties)
+add_to_lists(has_c4, efficiently_computable_properties, all_properties)
 
 def is_c4_free(g):
     """
@@ -798,7 +800,7 @@ def is_c4_free(g):
         True
     """
     return not has_c4(g)
-add_to_lists(is_c4_free,all_properties)
+add_to_lists(is_c4_free, efficiently_computable_properties, all_properties)
 
 def has_paw(g):
     """
@@ -825,7 +827,7 @@ def has_paw(g):
         False
     """
     return g.subgraph_search(paw, induced=True) is not None
-add_to_lists(has_paw,all_properties)
+add_to_lists(has_paw, efficiently_computable_properties, all_properties)
 
 def is_paw_free(g):
     """
@@ -852,7 +854,7 @@ def is_paw_free(g):
         True
     """
     return not has_paw(g)
-add_to_lists(is_paw_free,all_properties)
+add_to_lists(is_paw_free, efficiently_computable_properties, all_properties)
 
 def has_dart(g):
     """
@@ -880,7 +882,7 @@ def has_dart(g):
         False
     """
     return g.subgraph_search(dart, induced=True) is not None
-add_to_lists(has_dart,all_properties)
+add_to_lists(has_dart, efficiently_computable_properties, all_properties)
 
 def is_dart_free(g):
     """
@@ -908,7 +910,7 @@ def is_dart_free(g):
         True
     """
     return not has_dart(g)
-add_to_lists(is_dart_free,all_properties)
+add_to_lists(is_dart_free, efficiently_computable_properties, all_properties)
 
 def has_p4(g):
     """
@@ -931,14 +933,14 @@ def has_p4(g):
         False
     """
     return g.subgraph_search(p4, induced=True) is not None
-add_to_lists(has_p4,all_properties)
+add_to_lists(has_p4, efficiently_computable_properties, all_properties)
 
 def is_p4_free(g):
     """
     Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
     """
     return not has_p4(g)
-add_to_lists(is_p4_free,all_properties)
+add_to_lists(is_p4_free, efficiently_computable_properties, all_properties)
 
 def has_kite(g):
     """
@@ -962,7 +964,7 @@ def has_kite(g):
         False
     """
     return g.subgraph_search(kite_with_tail, induced=True) is not None
-add_to_lists(has_kite,all_properties)
+add_to_lists(has_kite, efficiently_computable_properties, all_properties)
 
 def is_kite_free(g):
     """
@@ -986,7 +988,7 @@ def is_kite_free(g):
         True
     """
     return not has_kite(g)
-add_to_lists(is_kite_free,all_properties)
+add_to_lists(is_kite_free, efficiently_computable_properties, all_properties)
 
 def has_claw(g):
     """
@@ -1010,7 +1012,7 @@ def has_claw(g):
         False
     """
     return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
-add_to_lists(has_claw,all_properties)
+add_to_lists(has_claw, efficiently_computable_properties, all_properties)
 
 def is_claw_free(g):
     """
@@ -1034,7 +1036,7 @@ def is_claw_free(g):
         True
     """
     return not has_claw(g)
-add_to_lists(is_claw_free,all_properties)
+add_to_lists(is_claw_free, efficiently_computable_properties, all_properties)
 
 def has_H(g):
     """
@@ -1058,7 +1060,7 @@ def has_H(g):
         False
     """
     return g.subgraph_search(double_fork, induced=True) is not None
-add_to_lists(has_H,all_properties)
+add_to_lists(has_H, efficiently_computable_properties, all_properties)
 
 def is_H_free(g):
     """
@@ -1082,7 +1084,7 @@ def is_H_free(g):
         True
     """
     return not has_H(g)
-add_to_lists(is_H_free,all_properties)
+add_to_lists(is_H_free, efficiently_computable_properties, all_properties)
 
 def has_fork(g):
     """
@@ -1110,7 +1112,7 @@ def has_fork(g):
         False
     """
     return g.subgraph_search(star_1_1_3, induced=True) is not None
-add_to_lists(has_fork,all_properties)
+add_to_lists(has_fork, efficiently_computable_properties, all_properties)
 
 def is_fork_free(g):
     """
@@ -1138,7 +1140,7 @@ def is_fork_free(g):
         True
     """
     return not has_fork(g)
-add_to_lists(is_fork_free,all_properties)
+add_to_lists(is_fork_free, efficiently_computable_properties, all_properties)
 
 def has_k4(g):
     """
@@ -1161,7 +1163,7 @@ def has_k4(g):
         False
     """
     return g.subgraph_search(alpha_critical_easy[2], induced=True) is not None
-add_to_lists(has_k4,all_properties)
+add_to_lists(has_k4, efficiently_computable_properties, all_properties)
 
 def is_k4_free(g):
     """
@@ -1184,7 +1186,7 @@ def is_k4_free(g):
         True
     """
     return not has_k4(g)
-add_to_lists(is_k4_free,all_properties)
+add_to_lists(is_k4_free, efficiently_computable_properties, all_properties)
 
 def is_double_clique(g):
     """
@@ -1220,7 +1222,7 @@ def is_double_clique(g):
     """
     gc = g.complement()
     return gc.is_bipartite()
-add_to_lists(is_double_clique,all_properties)
+add_to_lists(is_double_clique, efficiently_computable_properties, all_properties)
 
 def has_radius_equal_diameter(g):
     """
@@ -1249,7 +1251,7 @@ def has_radius_equal_diameter(g):
         False
     """
     return g.radius() == g.diameter()
-add_to_lists(has_radius_equal_diameter,all_properties)
+add_to_lists(has_radius_equal_diameter, efficiently_computable_properties, all_properties)
 
 def has_residue_equals_alpha(g):
     r"""
