@@ -1288,7 +1288,7 @@ def has_residue_equals_alpha(g):
         False
     """
     return residue(g) == independence_number(g)
-add_to_lists(has_residue_equals_alpha,all_properties)
+add_to_lists(has_residue_equals_alpha, intractable_properties, all_properties)
 
 def is_not_forest(g):
     """
@@ -1319,7 +1319,7 @@ def is_not_forest(g):
         False
     """
     return not g.is_forest()
-add_to_lists(is_not_forest,all_properties)
+add_to_lists(is_not_forest, efficiently_computable_properties, all_properties)
 
 def has_empty_KE_part(g):
     r"""
@@ -1408,7 +1408,7 @@ def has_empty_KE_part(g):
         if alpha_test == alpha:
             return False
     return True
-add_to_lists(has_empty_KE_part,all_properties)
+add_to_lists(has_empty_KE_part, efficiently_computable_properties, all_properties)
 
 def is_class1(g):
     """
@@ -1438,7 +1438,7 @@ def is_class1(g):
         False
     """
     return g.chromatic_index() == max(g.degree())
-add_to_lists(is_class1,all_properties)
+add_to_lists(is_class1, intractable_properties, all_properties)
 
 def is_class2(g):
     """
@@ -1468,7 +1468,7 @@ def is_class2(g):
         True
     """
     return not(g.chromatic_index() == max(g.degree()))
-add_to_lists(is_class2,all_properties)
+add_to_lists(is_class2, intractable_properties, all_properties)
 
 def is_cubic(g):
     """
@@ -1490,11 +1490,11 @@ def is_cubic(g):
     """
     D = g.degree()
     return min(D) == 3 and max(D) == 3
-add_to_lists(is_cubic,all_properties)
+add_to_lists(is_cubic, efficiently_computable_properties, all_properties)
 
 def is_anti_tutte(g):
     """
-    Evalutes if graph ``g`` is connected and indep. number <= diameter + girth.
+    Evaluates if graph ``g`` is connected and independence number <= diameter + girth.
 
     This property is satisfied by many Hamiltonian graphs, but notably not by
     the Tutte graph ``graphs.TutteGraph()``.
@@ -1521,11 +1521,11 @@ def is_anti_tutte(g):
     if not g.is_connected():
         return False
     return independence_number(g) <= g.diameter() + g.girth()
-add_to_lists(is_anti_tutte,all_properties)
+add_to_lists(is_anti_tutte,  intractable_properties, all_properties)
 
 def is_anti_tutte2(g):
     """
-    Tests if graph ``g`` has indep. number <= domination number + radius - 1.
+    Tests if graph ``g`` has independence number <= domination number + radius - 1.
 
     ``g`` must also be connected.
     This property is satisfied by many Hamiltonian graphs, but notably not by
@@ -1550,7 +1550,7 @@ def is_anti_tutte2(g):
     if not g.is_connected():
         return False
     return independence_number(g) <=  domination_number(g) + g.radius()- 1
-add_to_lists(is_anti_tutte2,all_properties)
+add_to_lists(is_anti_tutte2, intractable_properties, all_properties)
 
 def diameter_equals_twice_radius(g):
     """
@@ -1578,7 +1578,7 @@ def diameter_equals_twice_radius(g):
         True
     """
     return g.diameter() == 2*g.radius()
-add_to_lists(diameter_equals_twice_radius,all_properties)
+add_to_lists(diameter_equals_twice_radius, efficiently_computable_properties, all_properties)
 
 def diameter_equals_two(g):
     """
@@ -1606,7 +1606,7 @@ def diameter_equals_two(g):
         False
     """
     return g.diameter() == 2
-add_to_lists(diameter_equals_two,all_properties)
+add_to_lists(diameter_equals_two, efficiently_computable_properties, all_properties)
 
 def has_lovasz_theta_equals_alpha(g):
     """
@@ -1644,7 +1644,7 @@ def has_lovasz_theta_equals_alpha(g):
         True
     """
     return lovasz_theta(g) == independence_number(g)
-add_to_lists(has_lovasz_theta_equals_alpha,all_properties)
+add_to_lists(has_lovasz_theta_equals_alpha, intractable_properties, all_properties)
 
 def has_lovasz_theta_equals_cc(g):
     """
@@ -1680,6 +1680,7 @@ def has_lovasz_theta_equals_cc(g):
         True
     """
     return lovasz_theta(g) == clique_covering_number(g)
+add_to_lists(has_lovasz_theta_equals_cc, intractable_properties, all_properties)
 
 def is_chvatal_erdos(g):
     r"""
@@ -1727,6 +1728,8 @@ def is_chvatal_erdos(g):
                     Discrete Mathematics, 2(2): 111--113, 1972.
     """
     return independence_number(g) <= g.vertex_connectivity()
+add_to_lists(is_chvatal_erdos, intractable_properties, all_properties)
+
 
 def matching_covered(g):
     """
