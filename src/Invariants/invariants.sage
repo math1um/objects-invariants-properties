@@ -26,21 +26,21 @@ for i in sage_intractable_invariants:
 def distinct_degrees(g):
     """
     Return the number of distinct degrees of a graph
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer (distinct degree of a graph)
-    
+
     EXAMPLES:
-    
-    
+
+
     sage: distinct_degrees(p4)
     2
-    
+
     sage: distinct_degrees(k4)
     1
     """
@@ -50,16 +50,16 @@ add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 def common_neighbors(g,v,w):
     """
     Return the Set of common neighbors of v and w in graph g
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     -``
-    
+
     sage: common_neighbors(p4,0,3)
     {}
-    
+
     sage: common_neighbors(p4,0,2)
     {1}
     """
@@ -70,20 +70,20 @@ def common_neighbors(g,v,w):
 def max_common_neighbors(g):
     """
     Return the maximum number of common neighbors of any pair of distinct vertices in g
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     - Integer
-    
+
     EXAMPLES:
-    
+
     sage: max_common_neighbors(p4)
     1
-    
+
     sage: max_common_neighbors(k4)
     2
     """
@@ -102,19 +102,19 @@ add_to_lists(max_common_neighbors, efficient_invariants, all_invariants)
 def min_common_neighbors(g):
     """
     Return the minimum number of common neighbors of any pair of distinct vertices in g.
-    
+
     Will return 0 for disconnected graphs
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     - Integer
-    
+
     EXAMPLES:
-    
+
     sage: min_common_neighbors(p4)
     0
     sage: min_common_neighbors(k4)
@@ -137,20 +137,20 @@ add_to_lists(min_common_neighbors, efficient_invariants, all_invariants)
 def mean_common_neighbors(g):
     """
     Return the average number of common neighbors of any pair of distinct vertices in g
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Float
-    
+
     EXAMPLES:
-    
+
         sage: mean_common_neighbors(p4)
         1/3
-        
+
         sage: mean_common_neighbors(k4)
         2
     """
@@ -169,24 +169,24 @@ def min_degree(g):
     Return the minimum of all degrees of the graph g.
 
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
+
         sage: min_degree(graphs.CompleteGraph(5))
         4
-        
+
         sage: min_degree(graphs.CycleGraph(5))
         2
-        
+
         sage: min_degree(graphs.StarGraph(5))
         1
-        
+
         sage: min_degree(graphs.CompleteBipartiteGraph(3,5))
         3
     """
@@ -198,24 +198,24 @@ def max_degree(g):
     Return the maximum of all degrees of the graph g.
 
     INPUT:
-    
+
     -``g``--Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
+
         sage: max_degree(graphs.CompleteGraph(5))
         4
-        
+
         sage: max_degree(graphs.CycleGraph(5))
         2
-        
+
         sage: max_degree(graphs.StarGraph(5))
         5
-        
+
         sage: max_degree(graphs.CompleteBipartiteGraph(3,5))
         5
     """
@@ -253,22 +253,22 @@ add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 def eulerian_faces(g):
     """
     Return 2 - order + size of a Graph
-    
+
     This is the number of faces if the graph is planar, a consequence of Euler's Formula
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     Examples:
-    
+
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
-        
+
         sage: eulerian_faces(graphs.DodecahedralGraph())
         12
     """
@@ -312,22 +312,22 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Return 2 - order + size of a Graph
-    
+
     This is the number of faces if the graph is planar, a consequence of Euler's Formula
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     Examples:
-    
+
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
-        
+
         sage: eulerian_faces(graphs.DodecahedralGraph())
         12
     """
@@ -343,18 +343,18 @@ def residue(g):
     See: Favaron, Odile, Maryvonne Mahéo, and J‐F. Saclé. "On the residue of a graph." Journal of Graph Theory 15.1 (1991): 39-64.
 
     INPUT:
-    
+
     -``g``--Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
+
         sage: residue(k4)
         1
-        
+
         sage: residue(p4)
         2
     """
@@ -487,7 +487,7 @@ add_to_lists(cycle_space_dimension, efficient_invariants, all_invariants)
 
 def card_center(g):
     """
-    Returns the cardinality of the center of the graph. 
+    Returns the cardinality of the center of the graph.
 
     See: https://en.wikipedia.org/wiki/Graph_center
 
@@ -599,20 +599,20 @@ add_to_lists(different_degrees, efficient_invariants, all_invariants)
 def szekeres_wilf(g):
     """
     Return 1+ max of the minimum degrees for all subgraphs.
-    
+
     This is an upper bound for chromatic number.
 
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
-    sage: szekeres_wilf(k5) 
+
+    sage: szekeres_wilf(k5)
     5
     """
     #removes a vertex, if possible, of degree <= i
@@ -980,7 +980,7 @@ def lovasz_theta(g, epsilon = 0.00001):
     Return the Lovesz theta number of a graph g.
 
     Sage has a built-in invariant but during numerical calculation, the lovasz theta number does not always return the expected value
-    
+
     The value of lovasz theta is a real number and thus admits the potential of numerical error in its computation. This hack introduces a different potential source of error in cases where the value is very close to an integer but not actually equal to that integer. The tradeoff is that it solves the problem of a conjecture like alpha<=theta to be counted as false when alpha=theta=7 but the computed value of theta is 6.99999. Pros and cons, as is always the case in life!
 
     INPUT:
@@ -1451,7 +1451,7 @@ def neighborhood_union_nonadjacent(g):
     if not nonadj:
         return g.order()
     else:
-        return min( len(union(g.neighbors(v), g.neighbors(w))) for (v,w) in nonadj)
+        return min( len((Set(g.neighbors(v)).union(Set(g.neighbors(w))))) for (v,w) in nonadj)
 add_to_lists(neighborhood_union_nonadjacent, efficient_invariants, all_invariants)
 
 def neighborhood_union_dist2(g):
@@ -1461,7 +1461,7 @@ def neighborhood_union_dist2(g):
     if not dist2:
         return g.order()
     else:
-        return min( len(union(g.neighbors(v), g.neighbors(w))) for (v, w) in dist2)
+        return min( len((Set(g.neighbors(v)).union(Set(g.neighbors(w))))) for (v, w) in dist2)
 add_to_lists(neighborhood_union_dist2, efficient_invariants, all_invariants)
 
 def simplicial_vertices(g):
@@ -1547,19 +1547,19 @@ add_to_lists(friendship_number, efficient_invariants, all_invariants)
 def domination_number(g):
     """
     Return the domination number of the graph g
-    
+
     i.e., the size of a maximum dominating set.
 
     A complete graph is dominated by any of its vertices, A star graph is dominated by its central vertex and The domination number of a cycle of length n is the ceil of n/3.
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
 
         sage: domination_number(graphs.CompleteGraph(5))
@@ -1611,18 +1611,18 @@ def min_degree_of_max_ind_set(g):
     Return the minimum degree of any vertex that is a part of any maximum indepdendent set
 
     INPUT:
-    
+
     -`g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
 
     sage: min_degree_of_max_ind_set(c4)
     2
-    
+
     sage: min_degree_of_max_ind_set(graphs.PetersenGraph())
     3
     """
