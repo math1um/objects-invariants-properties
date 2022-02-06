@@ -214,7 +214,7 @@ def pineappleGraph(s,t):
     sage:pineapple_3_4 = pineappleGraph(3,4)
     sage:pineapple_3_4.graph6_string()
     'F{aC?'
-    
+
     sage:pineapple_4_2 = pineappleGraph(4,2)
     sage:pineapple_4_2.graph6_string()
     'E~a?'
@@ -227,17 +227,17 @@ def pineappleGraph(s,t):
 def razborovGraphs(n):
     """
     Return the order n^5 Razborov graph
-    
+
     These have chromatic number >= Theta(n^4) and rank <= O(n^3); as such, they have superlinear chromatic-rank gap, disproving a sequence of conjectures.
-    
+
     INPUT:
-    
+
     -``n``-- Integer
-    
+
     OUTPUT:
-    
+
     - Sage Graph
-    
+
     EXAMPLES:
 
     sage:razborovGraphs(2)
@@ -250,7 +250,7 @@ def razborovGraphs(n):
     Graph on 1024 vertices
 
     REFERENCES:
-    
+
     -Razborov AA, The gap between the chromatic number of a graph and the rank of its adjacency matrix is superlinear, Disc. Math. 108 (1992) pp393--396.
     """
     B = FiniteEnumeratedSet([1..n])
@@ -743,7 +743,7 @@ def max_induced_tree(g):
         raise ValueError("Input graph is not connected")
 
     from itertools import combinations
-    for j in xrange(g.order()):
+    for j in range(g.order()):
         for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
             sub_g = g.copy()
             sub_g.delete_vertices(subset)
@@ -757,7 +757,7 @@ def max_induced_forest(g):
     Accepts both connected and disconnected graphs as input.
     """
     from itertools import combinations
-    for j in xrange(g.order()):
+    for j in range(g.order()):
         for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
             sub_g = g.copy()
             sub_g.delete_vertices(subset)
@@ -808,11 +808,11 @@ def benoit_boyd_graphs(a, b, c):
         Mathematics of Operations Research, 33(4): 921--931, 2008.
     """
     g = Graph(0, weighted = True)
-    for i in xrange(0, a):
+    for i in range(0, a):
         g.add_edge(i, i + 1, 1)
-    for i in xrange(a + 1, a + b + 1):
+    for i in range(a + 1, a + b + 1):
         g.add_edge(i, i + 1, 1)
-    for i in xrange(a + b + 2, a + b + c + 2):
+    for i in range(a + b + 2, a + b + c + 2):
         g.add_edge(i, i + 1, 1)
     g.add_edges([(0, a + 1, 0.5), (a + 1, a + b + 2, 0.5), (0, a + b + 2, 0.5)])
     g.add_edges([(a, a + b + 1, 0.5), (a + b + 1, a + b + c + 2, 0.5), (a, a + b + c + 2, 0.5)])
@@ -828,7 +828,7 @@ def benoit_boyd_graphs_2(a, b, c):
         Mathematics of Operations Research, 33(4): 921--931, 2008.
     """
     g = Graph(0, weighted = True)
-    for i in xrange(0, a):
+    for i in range(0, a):
         g.add_edge(i, i + 1, 1/a)
     for i in xrange(a + 1, a + b + 1):
         g.add_edge(i, i + 1, 1/b)
@@ -891,22 +891,22 @@ def find_coextensive_properties(objects, properties):
                  print (p1.__name__, p2.__name__)
      print ("DONE!")
 
-def make_alpha_critical(g): 
+def make_alpha_critical(g):
     """
     Return a connected alpha_critical_subgraph with same independence number as g.
-    
+
     Assumes g is connected.
-    
+
     INPUT:
-    
+
     -``g``--Sage Graph
-    
+
     OUTPUT:
-    
+
     -Sage Graph
     """
     alpha = independence_number(g)
-    
+
     E = g.edge_iterator(labels=False)
     for (v,w) in E:
         h = copy(g)
