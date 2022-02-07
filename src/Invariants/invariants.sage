@@ -1815,6 +1815,10 @@ def forest_number(g):
     return max_induced_forest(g).order()
 add_to_lists(forest_number, intractable_invariants, all_invariants)
 
+"""
+THIS version requires potential matchings to be SETS or LISTS of edges (non-graphs);
+code in GT sometimes requires a matching to be a GRAPH (regular of degree 1)
+
 def minimum_maximal_matching_size(g):
     """
     The minimum number of edges k s.t. there exists a matching of size k which is not extendable
@@ -1837,6 +1841,7 @@ def minimum_maximal_matching_size(g):
             if not extendable:
                 return len(matching)
 add_to_lists(minimum_maximal_matching_size, intractable_invariants, all_invariants)
+"""
 
 def hamiltonian_index(g):
     """
