@@ -1820,9 +1820,9 @@ THIS version requires potential matchings to be SETS or LISTS of edges (non-grap
 code in GT sometimes requires a matching to be a GRAPH (regular of degree 1)
 
 def minimum_maximal_matching_size(g):
-    """
+
     The minimum number of edges k s.t. there exists a matching of size k which is not extendable
-    """
+    
     if(g.size() == 0):
         return 0
 
