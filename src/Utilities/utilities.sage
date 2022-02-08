@@ -766,11 +766,11 @@ def max_induced_forest(g):
 
 """
 def is_matching(s): #this version works for SETS of edges. another version in GT tests if a GRAPH has only degree one edges
-    """
+
     True if set of edges s is a matching, i.e. no edges share a common vertex
 
     Ignores edges labels; only compares indices 0 and 1 in edge tuples.
-    """
+
     vertex_list = []
     for e in s:
         vertex_list.append(e[0])
@@ -779,7 +779,7 @@ def is_matching(s): #this version works for SETS of edges. another version in GT
         return False
     else:
         return True
-###
+"""
 
 def mobius_ladder(k):
     """

@@ -214,7 +214,7 @@ def pineappleGraph(s,t):
     sage:pineapple_3_4 = pineappleGraph(3,4)
     sage:pineapple_3_4.graph6_string()
     'F{aC?'
-    
+
     sage:pineapple_4_2 = pineappleGraph(4,2)
     sage:pineapple_4_2.graph6_string()
     'E~a?'
@@ -227,17 +227,17 @@ def pineappleGraph(s,t):
 def razborovGraphs(n):
     """
     Return the order n^5 Razborov graph
-    
+
     These have chromatic number >= Theta(n^4) and rank <= O(n^3); as such, they have superlinear chromatic-rank gap, disproving a sequence of conjectures.
-    
+
     INPUT:
-    
+
     -``n``-- Integer
-    
+
     OUTPUT:
-    
+
     - Sage Graph
-    
+
     EXAMPLES:
 
     sage:razborovGraphs(2)
@@ -250,7 +250,7 @@ def razborovGraphs(n):
     Graph on 1024 vertices
 
     REFERENCES:
-    
+
     -Razborov AA, The gap between the chromatic number of a graph and the rank of its adjacency matrix is superlinear, Disc. Math. 108 (1992) pp393--396.
     """
     B = FiniteEnumeratedSet([1..n])
@@ -743,7 +743,7 @@ def max_induced_tree(g):
         raise ValueError("Input graph is not connected")
 
     from itertools import combinations
-    for j in xrange(g.order()):
+    for j in range(g.order()):
         for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
             sub_g = g.copy()
             sub_g.delete_vertices(subset)
@@ -757,24 +757,29 @@ def max_induced_forest(g):
     Accepts both connected and disconnected graphs as input.
     """
     from itertools import combinations
-    for j in xrange(g.order()):
+    for j in range(g.order()):
         for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
             sub_g = g.copy()
             sub_g.delete_vertices(subset)
             if sub_g.is_forest():
                 return sub_g
 
-def is_matching(s):
-    """
+"""
+def is_matching(s): #this version works for SETS of edges. another version in GT tests if a GRAPH has only degree one edges
+
     True if set of edges s is a matching, i.e. no edges share a common vertex
 
     Ignores edges labels; only compares indices 0 and 1 in edge tuples.
-    """
-    vertex_list = [v for e in s for v in e[:2]] # Ignore any labels
+
+    vertex_list = []
+    for e in s:
+        vertex_list.append(e[0])
+        vertex_list.append(e[1])
     if len(vertex_list) != len(set(vertex_list)):
         return False
     else:
         return True
+"""
 
 def mobius_ladder(k):
     """
@@ -808,11 +813,11 @@ def benoit_boyd_graphs(a, b, c):
         Mathematics of Operations Research, 33(4): 921--931, 2008.
     """
     g = Graph(0, weighted = True)
-    for i in xrange(0, a):
+    for i in range(0, a):
         g.add_edge(i, i + 1, 1)
-    for i in xrange(a + 1, a + b + 1):
+    for i in range(a + 1, a + b + 1):
         g.add_edge(i, i + 1, 1)
-    for i in xrange(a + b + 2, a + b + c + 2):
+    for i in range(a + b + 2, a + b + c + 2):
         g.add_edge(i, i + 1, 1)
     g.add_edges([(0, a + 1, 0.5), (a + 1, a + b + 2, 0.5), (0, a + b + 2, 0.5)])
     g.add_edges([(a, a + b + 1, 0.5), (a + b + 1, a + b + c + 2, 0.5), (a, a + b + c + 2, 0.5)])
@@ -828,7 +833,7 @@ def benoit_boyd_graphs_2(a, b, c):
         Mathematics of Operations Research, 33(4): 921--931, 2008.
     """
     g = Graph(0, weighted = True)
-    for i in xrange(0, a):
+    for i in range(0, a):
         g.add_edge(i, i + 1, 1/a)
     for i in xrange(a + 1, a + b + 1):
         g.add_edge(i, i + 1, 1/b)
@@ -891,22 +896,22 @@ def find_coextensive_properties(objects, properties):
                  print (p1.__name__, p2.__name__)
      print ("DONE!")
 
-def make_alpha_critical(g): 
+def make_alpha_critical(g):
     """
     Return a connected alpha_critical_subgraph with same independence number as g.
-    
+
     Assumes g is connected.
-    
+
     INPUT:
-    
+
     -``g``--Sage Graph
-    
+
     OUTPUT:
-    
+
     -Sage Graph
     """
     alpha = independence_number(g)
-    
+
     E = g.edge_iterator(labels=False)
     for (v,w) in E:
         h = copy(g)
@@ -948,21 +953,21 @@ for i in sage_intractable_invariants:
 def distinct_degrees(g):
     """
     Return the number of distinct degrees of a graph
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer (distinct degree of a graph)
-    
+
     EXAMPLES:
-    
-    
+
+
     sage: distinct_degrees(p4)
     2
-    
+
     sage: distinct_degrees(k4)
     1
     """
@@ -972,16 +977,16 @@ add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 def common_neighbors(g,v,w):
     """
     Return the Set of common neighbors of v and w in graph g
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     -``
-    
+
     sage: common_neighbors(p4,0,3)
     {}
-    
+
     sage: common_neighbors(p4,0,2)
     {1}
     """
@@ -992,20 +997,20 @@ def common_neighbors(g,v,w):
 def max_common_neighbors(g):
     """
     Return the maximum number of common neighbors of any pair of distinct vertices in g
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     - Integer
-    
+
     EXAMPLES:
-    
+
     sage: max_common_neighbors(p4)
     1
-    
+
     sage: max_common_neighbors(k4)
     2
     """
@@ -1024,19 +1029,19 @@ add_to_lists(max_common_neighbors, efficient_invariants, all_invariants)
 def min_common_neighbors(g):
     """
     Return the minimum number of common neighbors of any pair of distinct vertices in g.
-    
+
     Will return 0 for disconnected graphs
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     - Integer
-    
+
     EXAMPLES:
-    
+
     sage: min_common_neighbors(p4)
     0
     sage: min_common_neighbors(k4)
@@ -1059,20 +1064,20 @@ add_to_lists(min_common_neighbors, efficient_invariants, all_invariants)
 def mean_common_neighbors(g):
     """
     Return the average number of common neighbors of any pair of distinct vertices in g
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Float
-    
+
     EXAMPLES:
-    
+
         sage: mean_common_neighbors(p4)
         1/3
-        
+
         sage: mean_common_neighbors(k4)
         2
     """
@@ -1091,24 +1096,24 @@ def min_degree(g):
     Return the minimum of all degrees of the graph g.
 
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
+
         sage: min_degree(graphs.CompleteGraph(5))
         4
-        
+
         sage: min_degree(graphs.CycleGraph(5))
         2
-        
+
         sage: min_degree(graphs.StarGraph(5))
         1
-        
+
         sage: min_degree(graphs.CompleteBipartiteGraph(3,5))
         3
     """
@@ -1120,24 +1125,24 @@ def max_degree(g):
     Return the maximum of all degrees of the graph g.
 
     INPUT:
-    
+
     -``g``--Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
+
         sage: max_degree(graphs.CompleteGraph(5))
         4
-        
+
         sage: max_degree(graphs.CycleGraph(5))
         2
-        
+
         sage: max_degree(graphs.StarGraph(5))
         5
-        
+
         sage: max_degree(graphs.CompleteBipartiteGraph(3,5))
         5
     """
@@ -1175,22 +1180,22 @@ add_to_lists(inverse_degree, efficient_invariants, all_invariants)
 def eulerian_faces(g):
     """
     Return 2 - order + size of a Graph
-    
+
     This is the number of faces if the graph is planar, a consequence of Euler's Formula
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     Examples:
-    
+
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
-        
+
         sage: eulerian_faces(graphs.DodecahedralGraph())
         12
     """
@@ -1234,22 +1239,22 @@ add_to_lists(barrus_bound, efficient_invariants, all_invariants)
 def matching_number(g):
     """
     Return 2 - order + size of a Graph
-    
+
     This is the number of faces if the graph is planar, a consequence of Euler's Formula
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     Examples:
-    
+
         sage: eulerian_faces(graphs.CycleGraph(5))
         2
-        
+
         sage: eulerian_faces(graphs.DodecahedralGraph())
         12
     """
@@ -1265,18 +1270,18 @@ def residue(g):
     See: Favaron, Odile, Maryvonne Mahéo, and J‐F. Saclé. "On the residue of a graph." Journal of Graph Theory 15.1 (1991): 39-64.
 
     INPUT:
-    
+
     -``g``--Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
+
         sage: residue(k4)
         1
-        
+
         sage: residue(p4)
         2
     """
@@ -1409,7 +1414,7 @@ add_to_lists(cycle_space_dimension, efficient_invariants, all_invariants)
 
 def card_center(g):
     """
-    Returns the cardinality of the center of the graph. 
+    Returns the cardinality of the center of the graph.
 
     See: https://en.wikipedia.org/wiki/Graph_center
 
@@ -1521,20 +1526,20 @@ add_to_lists(different_degrees, efficient_invariants, all_invariants)
 def szekeres_wilf(g):
     """
     Return 1+ max of the minimum degrees for all subgraphs.
-    
+
     This is an upper bound for chromatic number.
 
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
-    
-    sage: szekeres_wilf(k5) 
+
+    sage: szekeres_wilf(k5)
     5
     """
     #removes a vertex, if possible, of degree <= i
@@ -1902,7 +1907,7 @@ def lovasz_theta(g, epsilon = 0.00001):
     Return the Lovesz theta number of a graph g.
 
     Sage has a built-in invariant but during numerical calculation, the lovasz theta number does not always return the expected value
-    
+
     The value of lovasz theta is a real number and thus admits the potential of numerical error in its computation. This hack introduces a different potential source of error in cases where the value is very close to an integer but not actually equal to that integer. The tradeoff is that it solves the problem of a conjecture like alpha<=theta to be counted as false when alpha=theta=7 but the computed value of theta is 6.99999. Pros and cons, as is always the case in life!
 
     INPUT:
@@ -2373,7 +2378,7 @@ def neighborhood_union_nonadjacent(g):
     if not nonadj:
         return g.order()
     else:
-        return min( len(union(g.neighbors(v), g.neighbors(w))) for (v,w) in nonadj)
+        return min( len((Set(g.neighbors(v)).union(Set(g.neighbors(w))))) for (v,w) in nonadj)
 add_to_lists(neighborhood_union_nonadjacent, efficient_invariants, all_invariants)
 
 def neighborhood_union_dist2(g):
@@ -2383,7 +2388,7 @@ def neighborhood_union_dist2(g):
     if not dist2:
         return g.order()
     else:
-        return min( len(union(g.neighbors(v), g.neighbors(w))) for (v, w) in dist2)
+        return min( len((Set(g.neighbors(v)).union(Set(g.neighbors(w))))) for (v, w) in dist2)
 add_to_lists(neighborhood_union_dist2, efficient_invariants, all_invariants)
 
 def simplicial_vertices(g):
@@ -2469,19 +2474,19 @@ add_to_lists(friendship_number, efficient_invariants, all_invariants)
 def domination_number(g):
     """
     Return the domination number of the graph g
-    
+
     i.e., the size of a maximum dominating set.
 
     A complete graph is dominated by any of its vertices, A star graph is dominated by its central vertex and The domination number of a cycle of length n is the ceil of n/3.
-    
+
     INPUT:
-    
+
     -``g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
 
         sage: domination_number(graphs.CompleteGraph(5))
@@ -2533,18 +2538,18 @@ def min_degree_of_max_ind_set(g):
     Return the minimum degree of any vertex that is a part of any maximum indepdendent set
 
     INPUT:
-    
+
     -`g``-- Sage Graph
-    
+
     OUTPUT:
-    
+
     -Integer
-    
+
     EXAMPLES:
 
     sage: min_degree_of_max_ind_set(c4)
     2
-    
+
     sage: min_degree_of_max_ind_set(graphs.PetersenGraph())
     3
     """
@@ -2737,10 +2742,14 @@ def forest_number(g):
     return max_induced_forest(g).order()
 add_to_lists(forest_number, intractable_invariants, all_invariants)
 
+"""
+THIS version requires potential matchings to be SETS or LISTS of edges (non-graphs);
+code in GT sometimes requires a matching to be a GRAPH (regular of degree 1)
+
 def minimum_maximal_matching_size(g):
-    """
+
     The minimum number of edges k s.t. there exists a matching of size k which is not extendable
-    """
+    
     if(g.size() == 0):
         return 0
 
@@ -2759,6 +2768,7 @@ def minimum_maximal_matching_size(g):
             if not extendable:
                 return len(matching)
 add_to_lists(minimum_maximal_matching_size, intractable_invariants, all_invariants)
+"""
 
 def hamiltonian_index(g):
     """
@@ -4086,7 +4096,7 @@ def has_residue_equals_alpha(g):
         False
     """
     return residue(g) == independence_number(g)
-add_to_lists(has_residue_equals_alpha,all_properties)
+add_to_lists(has_residue_equals_alpha, intractable_properties, all_properties)
 
 def is_not_forest(g):
     """
@@ -4117,7 +4127,7 @@ def is_not_forest(g):
         False
     """
     return not g.is_forest()
-add_to_lists(is_not_forest,all_properties)
+add_to_lists(is_not_forest, efficiently_computable_properties, all_properties)
 
 def has_empty_KE_part(g):
     r"""
@@ -4206,7 +4216,7 @@ def has_empty_KE_part(g):
         if alpha_test == alpha:
             return False
     return True
-add_to_lists(has_empty_KE_part,all_properties)
+add_to_lists(has_empty_KE_part, efficiently_computable_properties, all_properties)
 
 def is_class1(g):
     """
@@ -4236,7 +4246,7 @@ def is_class1(g):
         False
     """
     return g.chromatic_index() == max(g.degree())
-add_to_lists(is_class1,all_properties)
+add_to_lists(is_class1, intractable_properties, all_properties)
 
 def is_class2(g):
     """
@@ -4266,7 +4276,7 @@ def is_class2(g):
         True
     """
     return not(g.chromatic_index() == max(g.degree()))
-add_to_lists(is_class2,all_properties)
+add_to_lists(is_class2, intractable_properties, all_properties)
 
 def is_cubic(g):
     """
@@ -4288,11 +4298,11 @@ def is_cubic(g):
     """
     D = g.degree()
     return min(D) == 3 and max(D) == 3
-add_to_lists(is_cubic,all_properties)
+add_to_lists(is_cubic, efficiently_computable_properties, all_properties)
 
 def is_anti_tutte(g):
     """
-    Evalutes if graph ``g`` is connected and indep. number <= diameter + girth.
+    Evaluates if graph ``g`` is connected and independence number <= diameter + girth.
 
     This property is satisfied by many Hamiltonian graphs, but notably not by
     the Tutte graph ``graphs.TutteGraph()``.
@@ -4319,11 +4329,11 @@ def is_anti_tutte(g):
     if not g.is_connected():
         return False
     return independence_number(g) <= g.diameter() + g.girth()
-add_to_lists(is_anti_tutte,all_properties)
+add_to_lists(is_anti_tutte,  intractable_properties, all_properties)
 
 def is_anti_tutte2(g):
     """
-    Tests if graph ``g`` has indep. number <= domination number + radius - 1.
+    Tests if graph ``g`` has independence number <= domination number + radius - 1.
 
     ``g`` must also be connected.
     This property is satisfied by many Hamiltonian graphs, but notably not by
@@ -4348,7 +4358,7 @@ def is_anti_tutte2(g):
     if not g.is_connected():
         return False
     return independence_number(g) <=  domination_number(g) + g.radius()- 1
-add_to_lists(is_anti_tutte2,all_properties)
+add_to_lists(is_anti_tutte2, intractable_properties, all_properties)
 
 def diameter_equals_twice_radius(g):
     """
@@ -4376,7 +4386,7 @@ def diameter_equals_twice_radius(g):
         True
     """
     return g.diameter() == 2*g.radius()
-add_to_lists(diameter_equals_twice_radius,all_properties)
+add_to_lists(diameter_equals_twice_radius, efficiently_computable_properties, all_properties)
 
 def diameter_equals_two(g):
     """
@@ -4404,7 +4414,7 @@ def diameter_equals_two(g):
         False
     """
     return g.diameter() == 2
-add_to_lists(diameter_equals_two,all_properties)
+add_to_lists(diameter_equals_two, efficiently_computable_properties, all_properties)
 
 def has_lovasz_theta_equals_alpha(g):
     """
@@ -4442,7 +4452,7 @@ def has_lovasz_theta_equals_alpha(g):
         True
     """
     return lovasz_theta(g) == independence_number(g)
-add_to_lists(has_lovasz_theta_equals_alpha,all_properties)
+add_to_lists(has_lovasz_theta_equals_alpha, intractable_properties, all_properties)
 
 def has_lovasz_theta_equals_cc(g):
     """
@@ -4478,6 +4488,7 @@ def has_lovasz_theta_equals_cc(g):
         True
     """
     return lovasz_theta(g) == clique_covering_number(g)
+add_to_lists(has_lovasz_theta_equals_cc, intractable_properties, all_properties)
 
 def is_chvatal_erdos(g):
     r"""
@@ -4525,6 +4536,8 @@ def is_chvatal_erdos(g):
                     Discrete Mathematics, 2(2): 111--113, 1972.
     """
     return independence_number(g) <= g.vertex_connectivity()
+add_to_lists(is_chvatal_erdos, intractable_properties, all_properties)
+
 
 def matching_covered(g):
     """
