@@ -5641,16 +5641,14 @@ def is_maximal_triangle_free(g):
     return True
 
 def is_locally_two_connected(g):
-    """
+    for v in g.vertices():
+        S=g.neighbors(v)
+        if len(S)>2: #not defined unless there are at least 3 neighbors
+            h=g.subgraph(S)
+            if not is_two_connected(h):
+                return False
+    return True #all neighborhoods are too small or are connected
 
-    ALGORITHM:
-
-    We modify the algorithm from our ``localise`` factory method to stop at
-    subgraphs of 2 vertices, since ``is_two_connected`` is undefined on smaller
-    subgraphs.
-    """
-    return all((f(g.subgraph(g.neighbors(v))) if len(g.neighbors(v)) >= 2
-                                              else True) for v in g.vertices())
 
 def is_k_bootstrap_good(G,k):
     """
