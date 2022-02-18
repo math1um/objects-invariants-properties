@@ -403,6 +403,14 @@ def is_planar_transitive(g):
     """
     Evaluates whether graph ``g`` is planar and is vertex-transitive.
 
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
     EXAMPLES:
 
         sage: is_planar_transitive(graphs.HexahedralGraph())
@@ -434,11 +442,17 @@ def is_generalized_dirac(g):
     r"""
     Test if ``graph`` g meets condition in a generalization of Dirac's Theorem.
 
-    OUTPUT:
-
     Returns ``True`` if g is 2-connected and for all non-adjacent u,v,
     the cardinality of the union of neighborhood(u) and neighborhood(v)
     is `>= (2n-1)/3`.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
 
     EXAMPLES:
 
@@ -483,6 +497,8 @@ def is_van_den_heuvel(g):
     - ``g`` -- graph
 
     OUTPUT:
+
+    - Boolean
 
     Let ``g`` be of order `n`.
     Let `A_H` denote the adjacency matrix of a graph `H`, and `D_H` denote
@@ -552,6 +568,12 @@ def is_two_connected(g):
     we follow the convention that `K_n` is `n-1`-connected, so `K_2` is
     only 1-connected.
 
+    INPUT:
+    - ``g`` -- graph
+
+    OUTPUT:
+    - Boolean
+
     EXAMPLES:
 
         sage: is_two_connected(graphs.CycleGraph(5))
@@ -589,6 +611,12 @@ def is_three_connected(g):
     A 3-connected graph is a connected graph on at least 4 vertices such that
     the removal of any two vertices still gives a connected graph.
     Follows convention that complete graph `K_n` is `n-1`-connected.
+
+    INPUT:
+    - ``g`` -- graph
+
+    OUTPUT:
+    - Boolean
 
     EXAMPLES:
 
@@ -1804,6 +1832,7 @@ def avg_distance_greater_than_girth(g):
         False
     """
     return g.is_connected() and g.average_distance() > g.girth()
+add_to_lists(avg_distance_greater_than_girth, efficiently_computable_properties, all_properties)
 
 def chi_equals_min_theory(g):
     r"""
@@ -2833,16 +2862,14 @@ def is_maximal_triangle_free(g):
     return True
 
 def is_locally_two_connected(g):
-    """
+    for v in g.vertices():
+        S=g.neighbors(v)
+        if len(S)>2: #not defined unless there are at least 3 neighbors
+            h=g.subgraph(S)
+            if not is_two_connected(h):
+                return False
+    return True #all neighborhoods are too small or are connected
 
-    ALGORITHM:
-
-    We modify the algorithm from our ``localise`` factory method to stop at
-    subgraphs of 2 vertices, since ``is_two_connected`` is undefined on smaller
-    subgraphs.
-    """
-    return all((f(g.subgraph(g.neighbors(v))) if len(g.neighbors(v)) >= 2
-                                              else True) for v in g.vertices())
 
 def is_k_bootstrap_good(G,k):
     """
