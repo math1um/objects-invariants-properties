@@ -44,8 +44,7 @@ graphs.PoussinGraph(), graphs.PerkelGraph(), graphs.PetersenGraph(), graphs.Robe
 graphs.ShrikhandeGraph(), graphs.SimsGewirtzGraph(),
 graphs.SousselierGraph(), graphs.SylvesterGraph(), graphs.SzekeresSnarkGraph(),
 graphs.ThomsenGraph(), graphs.TietzeGraph(),
-graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(),
-graphs.TutteGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
+graphs.TruncatedTetrahedralGraph(), graphs.Tutte12Cage(), graphs.TutteCoxeterGraph(), graphs.WagnerGraph(), graphs.WatkinsSnarkGraph(), graphs.WellsGraph(),
 graphs.WienerArayaGraph(),
 graphs.HexahedralGraph(), graphs.DodecahedralGraph(), graphs.OctahedralGraph(), graphs.IcosahedralGraph()]
 
@@ -100,6 +99,12 @@ try:
 except Exception as e:
     print("The graph of the 600-cell was not loaded. Caused by:")
     print(e)
+
+
+#built-in Sage Tutte graph is broken
+tutte_graph = Graph('mhCGGE@G??_@?@??o?G????S??i??G?_c?C??Ac?G?????@???H????_???G_??@?????????g????gO???C???GH???@Q?@?????????@???G?@??????_?????GC????@?????????????g??????gA?????C?????GH?????@Q?')
+tutte_graph.name(new = "Tutte graph")
+#see: https://en.wikipedia.org/wiki/Tutte_graph
 
 mathon_strongly_regular0 = graphs.MathonStronglyRegularGraph(0)
 mathon_strongly_regular0.name(new = "Mathon Strongly Regular Graph 0")
@@ -3080,7 +3085,7 @@ add_to_lists(D2C_m, graph_objects, all_graphs)
 
 '''
 From:
-Plummer, Michael, Michael Stiebitz, and Bjarne Toft. 
+Plummer, Michael, Michael Stiebitz, and Bjarne Toft.
 "On a special case of Hadwiger's conjecture." Discussiones Mathematicae Graph Theory 23, no. 2 (2003): 333-363.
 We call them for example:
 PST-6_1_a (this matches up with Figure 6.1(a))
