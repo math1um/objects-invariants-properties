@@ -1541,6 +1541,47 @@ def friendship_number(g):
     return sum((1 if len(common_neighbors(g, u, v))==1 else 0) for (u,v) in combinations(g.vertices(), 2))
 add_to_lists(friendship_number, efficient_invariants, all_invariants)
 
+
+#for each vertex v, finds the number of vertices at even distance, and odd distance, and calculates product
+#returns minimum of these products
+def min_even_times_odd(g):
+    from sage.graphs.distances_all_pairs import distances_all_pairs
+    D = distances_all_pairs(g)
+    product_list = []
+
+    for u in D:
+        evens = 0
+        odds=0
+        for v in D[u]:
+            if D[u][v] % 2 == 0:
+                evens += 1
+            else:
+                odds+=1
+
+        product_list.append(evens*odds)
+
+    return min(product_list)
+
+#for each vertex v, finds the number of vertices at even distance, and odd distance, and calculates product
+#returns maximum of these products
+def max_even_times_odd(g):
+    from sage.graphs.distances_all_pairs import distances_all_pairs
+    D = distances_all_pairs(g)
+    product_list = []
+
+    for u in D:
+        evens = 0
+        odds=0
+        for v in D[u]:
+            if D[u][v] % 2 == 0:
+                evens += 1
+            else:
+                odds+=1
+
+        product_list.append(evens*odds)
+
+    return max(product_list)
+
 #####
 # INTRACTABLE INVATIANTS
 #####
@@ -1822,7 +1863,7 @@ code in GT sometimes requires a matching to be a GRAPH (regular of degree 1)
 def minimum_maximal_matching_size(g):
 
     The minimum number of edges k s.t. there exists a matching of size k which is not extendable
-    
+
     if(g.size() == 0):
         return 0
 
