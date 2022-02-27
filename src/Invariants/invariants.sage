@@ -1561,6 +1561,8 @@ def min_even_times_odd(g):
         product_list.append(evens*odds)
 
     return min(product_list)
+add_to_lists(min_even_times_odd, efficient_invariants, all_invariants)
+
 
 #for each vertex v, finds the number of vertices at even distance, and odd distance, and calculates product
 #returns maximum of these products
@@ -1581,6 +1583,8 @@ def max_even_times_odd(g):
         product_list.append(evens*odds)
 
     return max(product_list)
+add_to_lists(max_even_times_odd, efficient_invariants, all_invariants)
+
 
 #####
 # INTRACTABLE INVATIANTS
