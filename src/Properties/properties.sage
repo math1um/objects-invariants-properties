@@ -1869,6 +1869,7 @@ def chi_equals_min_theory(g):
     chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
     min_theory = min([f(g) for f in chromatic_upper_theory])
     return min_theory == g.chromatic_number()
+add_to_lists(chi_equals_min_theory, intractable_properties, all_properties)
 
 def is_heliotropic_plant(g):
     """
