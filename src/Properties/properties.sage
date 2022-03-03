@@ -1773,6 +1773,7 @@ def matching_covered(g):
             return False
         g.add_edge(e)
     return True
+add_to_lists(matching_covered, efficiently_computable_properties, all_properties)
 
 def radius_greater_than_center(g):
     """
