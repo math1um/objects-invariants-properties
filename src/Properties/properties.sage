@@ -2289,6 +2289,7 @@ def is_alpha_critical(g):
         if alpha_prime <= alpha:
             return False
     return True
+add_to_lists(is_alpha_critical, intractable_properties, all)
 
 #graph is KE if matching number + independence number = n, test does *not* compute alpha
 def is_KE(g):
