@@ -2307,7 +2307,6 @@ def is_independence_irreducible(g):
     return g.order() == card_independence_irreducible_part(g)
 add_to_lists(is_independent_irreducible, efficiently_computable_properties, all_properties)
 
-
 def is_factor_critical(g):
     """
     Return whether or not a graph "g" is factor-critical.
@@ -2342,6 +2341,7 @@ def is_factor_critical(g):
         if not gc.has_perfect_matching:
             return False
     return True
+add_to_lists(is_factor_critical, efficiently_computable_properties, all_properties)
 
 #returns a list of (necessarily non-adjacent) vertices that have the same neighbors as v if a pair exists or None
 def find_twins_of_vertex(g,v):
