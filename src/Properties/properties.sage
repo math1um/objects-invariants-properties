@@ -2289,7 +2289,7 @@ def is_alpha_critical(g):
         if alpha_prime <= alpha:
             return False
     return True
-add_to_lists(is_alpha_critical, intractable_properties, all)
+add_to_lists(is_alpha_critical, intractable_properties, all_properties)
 
 #graph is KE if matching number + independence number = n, test does *not* compute alpha
 def is_KE(g):
@@ -2305,6 +2305,7 @@ def is_KE(g):
 
 def is_independence_irreducible(g):
     return g.order() == card_independence_irreducible_part(g)
+add_to_lists(is_independent_irreducible, efficiently_computable_properties, all_properties)
 
 
 def is_factor_critical(g):
