@@ -2009,6 +2009,7 @@ def has_residue_equals_two(g):
         False
     """
     return residue(g) == 2
+add_to_lists(has_residue_equals_two, efficiently_computable_properties)
 
 def is_chordal_or_not_perfect(g):
     """
