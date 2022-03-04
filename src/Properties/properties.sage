@@ -2009,7 +2009,7 @@ def has_residue_equals_two(g):
         False
     """
     return residue(g) == 2
-add_to_lists(has_residue_equals_two, efficiently_computable_properties)
+add_to_lists(has_residue_equals_two, efficiently_computable_properties, all_properties)
 
 def is_chordal_or_not_perfect(g):
     """
@@ -2055,6 +2055,7 @@ def is_chordal_or_not_perfect(g):
     else:
         return not g.is_perfect()
 
+
 def has_alpha_residue_equal_two(g):
     r"""
     Tests if both the residue and independence number of graphs ``g`` equal 2.
@@ -2094,6 +2095,7 @@ def has_alpha_residue_equal_two(g):
         return false
     else:
         return independence_number(g) == 2
+add_to_lists(has_alpha_residue_equals_two, )
 
 def alpha_leq_order_over_two(g):
     """
