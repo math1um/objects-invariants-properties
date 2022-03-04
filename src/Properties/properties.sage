@@ -1974,6 +1974,7 @@ def is_traceable(g):
     """
     gadd = g.join(Graph(1),labels="integers")
     return gadd.is_hamiltonian()
+add_to_lists(is_traceable, efficiently_computable_properties, all_properties)
 
 def has_residue_equals_two(g):
     r"""
