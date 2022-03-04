@@ -2173,6 +2173,7 @@ def order_leq_twice_max_degree(g):
         False
     """
     return (g.order() <= 2*max(g.degree()))
+add_to_lists(order_leq_twice_max_degree, efficiently_computable_properties, all_properties)
 
 def is_chromatic_index_critical(g):
     r"""
