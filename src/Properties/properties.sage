@@ -1800,6 +1800,7 @@ def radius_greater_than_center(g):
         False
     """
     return g.is_connected() and g.radius() > card_center(g)
+add_to_lists(radius_greater_than_center, efficiently_computable_properties, all_properties)
 
 def avg_distance_greater_than_girth(g):
     """
@@ -2054,6 +2055,7 @@ def is_chordal_or_not_perfect(g):
         return true
     else:
         return not g.is_perfect()
+add_to_lists(is_chordal_or_not_perfect, efficiently_computable_properties, all_properties)
 
 
 def has_alpha_residue_equal_two(g):
@@ -2141,10 +2143,12 @@ def is_alpha_equals_two(g):
 
     - Boolean Value
     """
-    if independence_number(g) == 2:
-        return True
+    gc = g.complement()
+    if gc.is_triangle_free():
+        if not is_complete(g):
+            return True
     return False
-add_to_lists(is_alpha_equals_two, intractable_properties, all_properties)
+add_to_lists(is_alpha_equals_two, efficiently_computable_properties, all_properties)
 
 def order_leq_twice_max_degree(g):
     """
