@@ -2353,6 +2353,7 @@ def find_twins_of_vertex(g,v):
         if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
                 L.append(w)
     return L
+add_to_lists(find_twins_of_vertex, efficiently_computable_properties, all_properties)
 
 def has_twin(g):
     t = find_twin(g)
