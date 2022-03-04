@@ -1894,6 +1894,7 @@ def is_heliotropic_plant(g):
                     147(1--3): 35--55, 1995.
     """
     return (independence_number(g) == card_positive_eigenvalues(g))
+add_to_lists(is_heliotropic_plant, intractable_properties, all_properties)
 
 def is_geotropic_plant(g):
     """
