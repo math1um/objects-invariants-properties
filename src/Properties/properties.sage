@@ -2127,6 +2127,7 @@ def alpha_leq_order_over_two(g):
         False
     """
     return (2*independence_number(g) <= g.order())
+add_to_lists(alpha_leq_order_over_two, intractable_properties, all_properties)
 
 def is_alpha_equals_two(g):
     """
@@ -2143,6 +2144,7 @@ def is_alpha_equals_two(g):
     if independence_number(g) == 2:
         return True
     return False
+add_to_lists(is_alpha_equals_two, intractable_properties, all_properties)
 
 def order_leq_twice_max_degree(g):
     """
