@@ -2095,7 +2095,7 @@ def has_alpha_residue_equal_two(g):
         return false
     else:
         return independence_number(g) == 2
-add_to_lists(has_alpha_residue_equals_two, )
+add_to_lists(has_alpha_residue_equals_two, intractable_properties, all_properties)
 
 def alpha_leq_order_over_two(g):
     """
