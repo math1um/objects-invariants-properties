@@ -1919,6 +1919,7 @@ def is_geotropic_plant(g):
                     147(1--3): 35--55, 1995.
     """
     return (independence_number(g) == card_negative_eigenvalues(g))
+add_to_lists(is_geotropic_plant, intractable_properties, all_properties)
 
 def is_traceable(g):
     """
