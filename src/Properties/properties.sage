@@ -2297,6 +2297,10 @@ add_to_lists(is_alpha_critical, intractable_properties, all_properties)
 
 #graph is KE if matching number + independence number = n, test does *not* compute alpha
 def is_KE(g):
+    """
+    A graph is KE if matching number + independence number is equal to n
+    Test does NOT compute alpha
+    """
     return g.order() == len(find_KE_part(g))
 
 #graph is KE if matching number + independence number = n, test comoutes alpha
@@ -2308,8 +2312,26 @@ def is_KE(g):
 #    return (independence_number(g) == critical_independence_number(g))
 
 def is_independence_irreducible(g):
+    """
+    Return whether or not a graph "g" is independence irreducible.
+
+    A graph is independence_irreducible if every non-empty independent set I has more than |I| neighbors
+
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Boolean value
+
+    REFERENCE:
+    G. Abay-Asmerom, R. Hammack, C. Larson, D. Taylor, "Notes on the independence number in the Cartesian product of graphs".
+    Discussiones Mathematicae Graph Theory, 2011
+"""
     return g.order() == card_independence_irreducible_part(g)
 add_to_lists(is_independent_irreducible, efficiently_computable_properties, all_properties)
+
 
 def is_factor_critical(g):
     """
@@ -2347,8 +2369,21 @@ def is_factor_critical(g):
     return True
 add_to_lists(is_factor_critical, efficiently_computable_properties, all_properties)
 
-#returns a list of (necessarily non-adjacent) vertices that have the same neighbors as v if a pair exists or None
+
 def find_twins_of_vertex(g,v):
+    """
+    Return a list of non-adjacent vertices that have the same neighbors as v, if a pair exists, or None.
+
+    INPUT:
+
+    -``g``-- Sage graph
+    -``v``-- a vertex
+
+    OUTPUT:
+
+    -List
+
+    """
     L = []
     V = g.vertices()
     D = g.distance_all_pairs()
@@ -2357,22 +2392,67 @@ def find_twins_of_vertex(g,v):
         if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
                 L.append(w)
     return L
-add_to_lists(find_twins_of_vertex, efficiently_computable_properties, all_properties)
+add_to_lists(find_twins_of_vertex, all_properties)
+
 
 def has_twin(g):
+    """
+    Return whether or not any vertices within "g" are twin.
+
+    Two vertices are twins if they are non-adjacent and have the same neighbors.
+
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Boolean value
+
+    """
     t = find_twin(g)
     if t == None:
         return False
     else:
         return True
+add_to_lists(has_twin, all_properties)
+
 
 def is_twin_free(g):
+    """
+    Return whether or not any vertices within "g" are twin.  Returns True if there are none.
+
+    Two vertices are twins if they are non-adjacent and have the same neighbors.
+
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Boolean value
+
+    """
     return not has_twin(g)
+add_to_lists(is_twin_free, all_properties)
 
-#returns twin pair (v,w) if one exists, else returns None
-#can't be adjacent
+
 def find_twin(g):
+    """
+    If twin vertices are found in graph g, return those vertices.
+    Note, this will return two vertices, not a complete set of twin vertices, should more than one set exist.
 
+    Two vertices are twins if they are non-adjacent and have the same neighbors.
+
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Pair of vertices or None
+
+    """
     V = g.vertices()
     for v in V:
         Nv = set(g.neighbors(v))
@@ -2381,8 +2461,24 @@ def find_twin(g):
             if v not in Nw and Nv == Nw:
                 return (v,w)
     return None
+add_to_lists(find_twin, all_properties)
 
+
+#update this description!
 def find_neighbor_twins(g):
+    """
+
+    Two vertices are twins if they are non-adjacent and have the same neighbors.
+
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Pair of vertices or None
+
+    """
     V = g.vertices()
     for v in V:
         Nv = g.neighbors(v)
@@ -2390,10 +2486,26 @@ def find_neighbor_twins(g):
             if set(closed_neighborhood(g,v)) == set(closed_neighborhood(g,w)):
                 return (v,w)
     return None
+add_to_lists(find_neighbor_twins, all_properties)
+
 
 #given graph g and subset S, looks for any neighbor twin of any vertex in T
 #if result = T, then no twins, else the result is maximal, but not necessarily unique
 def find_neighbor_twin(g, T):
+    """
+    Given a graph g, and a subset S, looks for any neighbor twin of any vertex in T.
+    If result equals T, no twins were found.  Otherwise, the result is maximal but not unique.
+
+    INPUT:
+
+    -``g``-- Sage graph
+    -``T``-- subset of g (?????????????????)
+
+    OUTPUT:
+
+    -none
+
+    """
     gT = g.subgraph(T)
     for v in T:
         condition = False
@@ -2409,6 +2521,8 @@ def find_neighbor_twin(g, T):
                 break
         if condition == True:
             break
+add_to_lists(find_neighbor_twin, all_properties)
+
 
 #if result = T, then no twins, else the result is maximal, but not necessarily unique
 def iterative_neighbor_twins(g, T):
@@ -2418,6 +2532,7 @@ def iterative_neighbor_twins(g, T):
         T2 = copy(T)
         find_neighbor_twin(g, T)
     return T
+add_to_lists(iterative_neighbor_twins, all_properties)
 
 
 #can't compute membership in this class directly. instead testing isomorhism for 400 known class0 graphs
@@ -2427,9 +2542,26 @@ def is_pebbling_class0(g):
         if g.is_isomorphic(h):
             return True
     return False
+add_to_lists(is_pebbling_class0, all_properties)
+
 
 def girth_greater_than_2log(g):
+    """
+    Determines if the girth of the graph g is greater than twice the log of the order of g
+    Returns true if greater, false if not.
+
+    INPUT:
+
+    -``g``-- Sage graph
+
+    OUTPUT:
+
+    -Boolean
+
+    """
     return bool(g.girth() > 2*log(g.order(),2))
+add_to_lists(girth_greater_than_2log, efficiently_computable_properties, all_properties)
+
 
 def szekeres_wilf_equals_chromatic_number(g):
     return szekeres_wilf(g) == g.chromatic_number()
@@ -2527,6 +2659,7 @@ def is_subcubic(g):
     """
     return max_degree(g) <= 3
 
+
 # Max and min degree varies by at most 1
 def is_quasi_regular(g):
     """
@@ -2543,8 +2676,8 @@ def is_quasi_regular(g):
     -Boolean, True if the graph is quasi-regular, False if otherwise.
     """
     if max_degree(g) - min_degree(g) < 2:
-        return true
-    return false
+        return True
+    return False
 
 # g is bad if a block is isomorphic to k3, c5, k4*, c5*
 def is_bad(g):
@@ -2565,6 +2698,18 @@ def is_complement_hamiltonian(g):
 # Equivalently, graph is connected and has exactly one cycle
 def is_unicyclic(g):
     """
+    Return whether the graph g is unicyclic.
+
+    A graph is unicyclic if it contains only one cycle.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
     Tests:
         sage: is_unicyclic(graphs.BullGraph())
         True
@@ -2593,8 +2738,8 @@ def has_two_ham_cycles(gIn):
         h = copy(g)
         h.delete_edge(e)
         if h.is_hamiltonian():
-            return true
-    return false
+            return True
+    return False
 
 def has_simplicial_vertex(g):
     """
@@ -2607,7 +2752,17 @@ def has_simplicial_vertex(g):
 
 def has_exactly_two_simplicial_vertices(g):
     """
-    v is a simplicial vertex if induced neighborhood is a clique.
+    Returns true if there are precisely two simplicial vertices within g, a graph.
+    A vertex is simplicial if the induced neighborhood is a clique.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
     """
     return simplicial_vertices(g) == 2
 
@@ -2666,14 +2821,25 @@ def is_jung(g):
 # Bela Bollobas and Andrew Thomason, Weakly Pancyclic Graphs. Journal of Combinatorial Theory 77: 121--137, 1999.
 def is_weakly_pancyclic(g):
     """
-    True if g contains cycles of every length k from k = girth to k = circumfrence
+    True if g contains cycles of every length k, from k = girth to k = circumference
 
     Returns False if g is acyclic (in which case girth = circumfrence = +Infinity).
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
+    EXAMPLES:
 
     sage: is_weakly_pancyclic(graphs.CompleteGraph(6))
     True
     sage: is_weakly_pancyclic(graphs.PetersenGraph())
     False
+
     """
     lengths = cycle_lengths(g)
     if not lengths: # acyclic
@@ -2695,9 +2861,20 @@ def is_pancyclic(g):
 
 def has_two_walk(g):
     """
-    A two-walk is a closed walk that visits every vertex and visits no vertex more than twice.
+    If the input graph g contains a two walk, returns true; otherwise false.
 
+    A two-walk is a closed walk that visits every vertex and visits no vertex more than twice.
     Two-walk is a generalization of Hamiltonian cycles. If a graph is Hamiltonian, then it has a two-walk.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
+    EXAMPLES:
 
     sage: has_two_walk(c4c4)
     True
@@ -2720,17 +2897,47 @@ def is_claw_free_paw_free(g):
 
 def has_bull(g):
     """
-    True if g has an induced subgraph isomorphic to graphs.BullGraph()
+    Returns true if a graph has an induced subgraph isomorphic to graphs.BullGraph()
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
     """
     return g.subgraph_search(graphs.BullGraph(), induced = True) != None
 
 def is_bull_free(g):
     """
-    True if g does not have an induced subgraph isomoprhic to graphs.BullGraph()
+    Returns true if g does not have an induced subgraph isomoprhic to graphs.BullGraph()
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
     """
     return not has_bull(g)
 
 def is_claw_free_bull_free(g):
+    """
+    Returns true if g does not have an induced subgraph isomoprhic to graphs.BullGraph()
+    and is claw free.
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
+    """
     return is_claw_free(g) and is_bull_free(g)
 
 def has_F(g):
@@ -2779,7 +2986,17 @@ def is_broersma_veldman_gould(g):
 
 def chvatals_condition(g):
     """
-    True if g.order()>=3 and given increasing degrees d_1,..,d_n, for all i, i>=n/2 or d_i>i or d_{n-i}>=n-1
+    Returns true if g.order()>=3 and given increasing degrees d_1,..,d_n, for all i, i>=n/2 or d_i>i or d_{n-i}>=n-1
+
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
+    REFERENCES:
 
     This condition is based on Thm 1 of
     Chvátal, Václav. "On Hamilton's ideals." Journal of Combinatorial Theory, Series B 12.2 (1972): 163-168.
@@ -2795,9 +3012,17 @@ def chvatals_condition(g):
 
 def is_matching(g):
     """
-    Returns True if this graph is the disjoint union of complete graphs of order 2.
+    Returns True if the graph g is the disjoint union of complete graphs of order 2.
 
-    Tests:
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
+
+    TESTS:
         sage: is_matching(graphs.CompleteGraph(2))
         True
         sage: is_matching(graphs.PathGraph(4))
@@ -2831,11 +3056,17 @@ def has_even_order(g):
 
 def is_maximal_triangle_free(g):
     """
-    Evaluates whether graphs ``g`` is a maximal triangle-free graph
+    Evaluates whether graph g is a maximal triangle-free graph.  A graph is maximal triangle-free if adding any edge to g
+    will create a triangle.
+    If g is not triangle-free, returns false.
 
-    Maximal triangle-free means that adding any edge to ``g`` will create a
-    triangle.
-    If ``g`` is not triangle-free, then returns ``False``.
+    INPUT:
+
+    -``g``-- Sage Graph
+
+    OUTPUT:
+
+    -Boolean
 
     EXAMPLES:
 
@@ -2913,7 +3144,7 @@ def is_k_bootstrap_good(G,k):
             return True
     return False
 
-add_to_lists(is_k_bootstrap_good,efficiently_computable_properties)
+add_to_lists(all_properties, is_k_bootstrap_good,efficiently_computable_properties)
 
 def k_percolate(G,infected,k):
     """
@@ -2943,7 +3174,7 @@ def k_percolate(G,infected,k):
                 break
     return len(uninfected) == 0
 
-add_to_lists(k_percolate,efficiently_computable_properties)
+add_to_lists(all_properties, k_percolate,efficiently_computable_properties)
 
 def is_2_bootstrap_good(G):
     """
@@ -2960,24 +3191,24 @@ def is_2_bootstrap_good(G):
     -Boolean
 
     EXAMPLES:
-	sage: is_2_bootstrap_good(k4)
-	True
-	sage: is_2_bootstrap_good(graphs.ThomsenGraph())
-	True
-	sage: is_2_bootstrap_good(graphs.CycleGraph(4))
-	True
-	sage: is_2_bootstrap_good(graphs.CycleGraph(5))
-	False
-	sage: is_2_bootstrap_good(ce83)
-	True
-	sage: is_2_bootstrap_good(graphs.PetersenGraph())
-	False
-	sage: is_2_bootstrap_good(p4)
-	False
+    sage: is_2_bootstrap_good(k4)
+    True
+    sage: is_2_bootstrap_good(graphs.ThomsenGraph())
+    True
+    sage: is_2_bootstrap_good(graphs.CycleGraph(4))
+    True
+    sage: is_2_bootstrap_good(graphs.CycleGraph(5))
+    False
+    sage: is_2_bootstrap_good(ce83)
+    True
+    sage: is_2_bootstrap_good(graphs.PetersenGraph())
+    False
+    sage: is_2_bootstrap_good(p4)
+    False
     """
     return is_k_bootstrap_good(G,2)
 
-add_to_lists(is_2_bootstrap_good,efficiently_computable_properties)
+add_to_lists(all_properties, is_2_bootstrap_good, efficiently_computable_properties)
 
 def is_3_bootstrap_good(G):
     """
@@ -2989,36 +3220,46 @@ def is_3_bootstrap_good(G):
 
     -``G``--Sage Graph
 
-    OUPUT:
+    OUTPUT:
 
     -Boolean
 
     EXAMPLES:
-	sage: is_3_bootstrap_good(graphs.BullGraph())
-	False
-	sage: is_3_bootstrap_good(graphs.ThomsenGraph())
-	True
-	sage: is_3_bootstrap_good(graphs.CycleGraph(4))
-	False
-	sage: is_3_bootstrap_good(graphs.BidiakisCube())
-	False
-	sage: is_3_bootstrap_good(graphs.CycleGraph(5))
-	False
-	sage: is_3_bootstrap_good(willis_page35_fig52)
-	True
-	sage: is_3_bootstrap_good(ce68)
-	True
+    sage: is_3_bootstrap_good(graphs.BullGraph())
+    False
+    sage: is_3_bootstrap_good(graphs.ThomsenGraph())
+    True
+    sage: is_3_bootstrap_good(graphs.CycleGraph(4))
+    False
+    sage: is_3_bootstrap_good(graphs.BidiakisCube())
+    False
+    sage: is_3_bootstrap_good(graphs.CycleGraph(5))
+    False
+    sage: is_3_bootstrap_good(willis_page35_fig52)
+    True
+    sage: is_3_bootstrap_good(ce68)
+    True
     """
     return is_k_bootstrap_good(G,3)
 
-add_to_lists(is_3_bootstrap_good,efficiently_computable_properties)
+add_to_lists(all_properties, is_3_bootstrap_good,efficiently_computable_properties)
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
 def has_equal_invariants(invar1, invar2, name=None):
     """
     This function takes two invariants as an argument and returns the property that these invariants are equal.
-    Optionally a name for the new function can be provided as a third argument.
+    Optionally, a name for the new function can be provided as a third argument.
+
+    INPUT:
+
+    -``invar1, invar2``-- Two mathematical invariants.  Not strictly typed.
+    -``name``-- Optional.  String
+
+    OUTPUT:
+
+    -Boolean
+
     """
     def equality_checker(g):
         return invar1(g) == invar2(g)
@@ -3046,6 +3287,19 @@ def has_invariant_equal_to(invar, value, name=None, documentation=None):
 
     Optionally a name and documentation for the new function can be provided.
 
+    INPUT:
+
+    -``invar``-- A mathematical invariants.  Not strictly typed.
+    -``value``-- Numerical value
+
+    -``name``-- Optional.  String
+    -``documentation``-- Optional.  String
+
+    OUTPUT:
+
+    -Boolean
+
+    EXAMPLES:
     sage: order_is_five = has_invariant_equal_to(Graph.order, 5)
     sage: order_is_five(graphs.CycleGraph(5))
     True
@@ -3068,9 +3322,19 @@ def has_invariant_equal_to(invar, value, name=None, documentation=None):
 
 def has_leq_invariants(invar1, invar2, name=None):
     """
-    This function takes two invariants as an argument and returns the property that the first invariant is
+     This function takes two invariants as an argument and returns the property that the first invariant is
     less than or equal to the second invariant.
     Optionally a name for the new function can be provided as a third argument.
+
+    INPUT:
+
+    -``invar1, invar2``-- Two mathematical invariants.  Not strictly typed.
+
+    -``name``-- Optional.  String
+
+    OUTPUT:
+
+    -Boolean
     """
     def comparator(g):
         return invar1(g) <= invar2(g)
