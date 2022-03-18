@@ -2330,7 +2330,7 @@ def is_independence_irreducible(g):
     Discussiones Mathematicae Graph Theory, 2011
 """
     return g.order() == card_independence_irreducible_part(g)
-add_to_lists(is_independent_irreducible, efficiently_computable_properties, all_properties)
+add_to_lists(is_independence_irreducible, efficiently_computable_properties, all_properties)
 
 
 def is_factor_critical(g):
@@ -3143,8 +3143,7 @@ def is_k_bootstrap_good(G,k):
         if k_percolate(G,set(s),k):
             return True
     return False
-
-add_to_lists(all_properties, is_k_bootstrap_good,efficiently_computable_properties)
+add_to_lists(is_k_bootstrap_good,efficiently_computable_properties,all_properties)
 
 def k_percolate(G,infected,k):
     """
@@ -3173,8 +3172,7 @@ def k_percolate(G,infected,k):
                 newInfections = True
                 break
     return len(uninfected) == 0
-
-add_to_lists(all_properties, k_percolate,efficiently_computable_properties)
+add_to_lists(k_percolate, efficiently_computable_properties, all_properties)
 
 def is_2_bootstrap_good(G):
     """
@@ -3208,7 +3206,7 @@ def is_2_bootstrap_good(G):
     """
     return is_k_bootstrap_good(G,2)
 
-add_to_lists(all_properties, is_2_bootstrap_good, efficiently_computable_properties)
+add_to_lists(is_2_bootstrap_good, efficiently_computable_properties,all_properties)
 
 def is_3_bootstrap_good(G):
     """
@@ -3242,7 +3240,7 @@ def is_3_bootstrap_good(G):
     """
     return is_k_bootstrap_good(G,3)
 
-add_to_lists(all_properties, is_3_bootstrap_good,efficiently_computable_properties)
+add_to_lists(is_3_bootstrap_good,efficiently_computable_properties,all_properties)
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
