@@ -183,6 +183,12 @@ joshua_CE=Graph('dEulJDp_YKF?K]MMjai[h`rEBmK??A??C_?BC??GO?@?_?I?_?U?O?f?C?Po?_B
 joshua_CE.name("new=joshua_CE")
 add_to_lists(joshua_CE, diameter_2_critical, all_graphs)
 
+#D2C graph with alpha<distinct degrees
+joshua_CE2=Graph('[?G?PGqMPxbQBqH|A]V??s?FG?MG?}C?v@?LoG@m?_Ew@?Ko@Clo?eEw?H_m?@kL')
+joshua_CE2.name("new=joshua_CE")
+add_to_lists(joshua_CE2, diameter_2_critical, all_graphs)
+
+
 pete = graphs.PetersenGraph()
 pete.name(new = "Petersen Graph")
 add_to_lists(pete, diameter_2_critical, all_graphs)
