@@ -3271,12 +3271,17 @@ def has_equal_invariants(invar1, invar2, name=None):
 
     return equality_checker
 
-"""
-    sage: has_alpha_equals_clique_covering(graphs.CycleGraph(5))
-    False
-"""
-has_alpha_equals_clique_covering = has_equal_invariants(independence_number, clique_covering_number, name="has_alpha_equals_clique_covering")
 
+def has_alpha_equals_clique_covering(g):
+    """
+    Return true if the independence number of graph g equals its clique covering
+
+    sage: has_alpha_equals_clique_covering(graphs.CycleGraph(5))
+        False
+    """
+    temp = has_equal_invariants(independence_number, clique_covering_number)
+    return temp(g)
+add_to_lists(has_alpha_equals_clique_covering, intractable_properties, all_properties)
 
 def has_invariant_equal_to(invar, value, name=None, documentation=None):
     """
