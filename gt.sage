@@ -5133,6 +5133,8 @@ def is_chromatic_index_critical(g):
             return False
         gc.add_edge(e)
     return True
+add_to_lists(is_chromatic_index_critical, intractable_properties, all_properties)
+
 
 #alpha(g-e) > alpha(g) for *every* edge g
 def is_alpha_critical(g):
@@ -5155,6 +5157,7 @@ def is_KE(g):
     Test does NOT compute alpha
     """
     return g.order() == len(find_KE_part(g))
+add_to_lists(is_KE, efficiently_computable_properties, all_properties)
 
 #graph is KE if matching number + independence number = n, test comoutes alpha
 #def is_KE(g):
@@ -5222,7 +5225,7 @@ def is_factor_critical(g):
     return True
 add_to_lists(is_factor_critical, efficiently_computable_properties, all_properties)
 
-
+#NOT a graph property (won't be added to property lists)
 def find_twins_of_vertex(g,v):
     """
     Return a list of non-adjacent vertices that have the same neighbors as v, if a pair exists, or None.
@@ -5245,7 +5248,6 @@ def find_twins_of_vertex(g,v):
         if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
                 L.append(w)
     return L
-add_to_lists(find_twins_of_vertex, all_properties)
 
 
 def has_twin(g):
@@ -5268,7 +5270,7 @@ def has_twin(g):
         return False
     else:
         return True
-add_to_lists(has_twin, all_properties)
+add_to_lists(has_twin, efficiently_computable_properties, all_properties)
 
 
 def is_twin_free(g):
@@ -5287,9 +5289,9 @@ def is_twin_free(g):
 
     """
     return not has_twin(g)
-add_to_lists(is_twin_free, all_properties)
+add_to_lists(is_twin_free, efficiently_computable_properties, all_properties)
 
-
+#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
 def find_twin(g):
     """
     If twin vertices are found in graph g, return those vertices.
@@ -5314,14 +5316,14 @@ def find_twin(g):
             if v not in Nw and Nv == Nw:
                 return (v,w)
     return None
-add_to_lists(find_twin, all_properties)
 
 
 #update this description!
+#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
 def find_neighbor_twins(g):
     """
 
-    Two vertices are twins if they are non-adjacent and have the same neighbors.
+    Two vertices are twins if they are non-adjacent and have the same neighbors. So same neighbors AND adjacent.
 
     INPUT:
 
@@ -5339,11 +5341,11 @@ def find_neighbor_twins(g):
             if set(closed_neighborhood(g,v)) == set(closed_neighborhood(g,w)):
                 return (v,w)
     return None
-add_to_lists(find_neighbor_twins, all_properties)
 
 
 #given graph g and subset S, looks for any neighbor twin of any vertex in T
 #if result = T, then no twins, else the result is maximal, but not necessarily unique
+#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
 def find_neighbor_twin(g, T):
     """
     Given a graph g, and a subset S, looks for any neighbor twin of any vertex in T.
@@ -5374,10 +5376,11 @@ def find_neighbor_twin(g, T):
                 break
         if condition == True:
             break
-add_to_lists(find_neighbor_twin, all_properties)
+
 
 
 #if result = T, then no twins, else the result is maximal, but not necessarily unique
+#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
 def iterative_neighbor_twins(g, T):
     T2 = copy(T)
     find_neighbor_twin(g, T)
@@ -5385,7 +5388,7 @@ def iterative_neighbor_twins(g, T):
         T2 = copy(T)
         find_neighbor_twin(g, T)
     return T
-add_to_lists(iterative_neighbor_twins, all_properties)
+
 
 
 #can't compute membership in this class directly. instead testing isomorhism for 400 known class0 graphs
@@ -5395,7 +5398,7 @@ def is_pebbling_class0(g):
         if g.is_isomorphic(h):
             return True
     return False
-add_to_lists(is_pebbling_class0, all_properties)
+add_to_lists(is_pebbling_class0,  intractable_properties, all_properties)
 
 
 def girth_greater_than_2log(g):
@@ -5418,7 +5421,9 @@ add_to_lists(girth_greater_than_2log, efficiently_computable_properties, all_pro
 
 def szekeres_wilf_equals_chromatic_number(g):
     return szekeres_wilf(g) == g.chromatic_number()
+add_to_lists(szekeres_wilf_equals_chromatic_number,  intractable_properties, all_properties)
 
+#NOTE: this requires a vertex as an input so its NOT a graph property, not in a property list
 def has_Havel_Hakimi_property(g, v):
     """
     Return whether the vertex v in the graph g has the Havel-Hakimi property.
@@ -5466,6 +5471,8 @@ def has_Havel_Hakimi_property(g, v):
     return (min(g.degree(nv) for nv in g.neighbors(v)) >=
         max(g.degree(nnv) for nnv in g.vertices() if nnv != v and nnv not in g.neighbors(v)))
 
+#NOTE: the relevant theorem is a forbidden subgraph characterization
+#its not clear if its theoretically efficient. we'll add to just all_properties list for now
 def has_strong_Havel_Hakimi_property(g):
     """
     Return whether the graph g has the strong Havel-Hakimi property.
@@ -5495,6 +5502,8 @@ def has_strong_Havel_Hakimi_property(g):
             if any(not has_Havel_Hakimi_property(H, v) for v in S if H.degree(v) == Delta):
                 return False
     return True
+add_to_lists(has_strong_Havel_Hakimi_property, all_properties)
+
 
 def is_subcubic(g):
     """
@@ -6862,6 +6871,12 @@ for s in D2C_min_3_names:
 joshua_CE=Graph('dEulJDp_YKF?K]MMjai[h`rEBmK??A??C_?BC??GO?@?_?I?_?U?O?f?C?Po?_B{?A?m[?CBFw?CE[G?AEMG??abi??CkYo??Rpf???naM~~~???')
 joshua_CE.name("new=joshua_CE")
 add_to_lists(joshua_CE, diameter_2_critical, all_graphs)
+
+#D2C graph with alpha<distinct degrees
+joshua_CE2=Graph('[?G?PGqMPxbQBqH|A]V??s?FG?MG?}C?v@?LoG@m?_Ew@?Ko@Clo?eEw?H_m?@kL')
+joshua_CE2.name("new=joshua_CE")
+add_to_lists(joshua_CE2, diameter_2_critical, all_graphs)
+
 
 pete = graphs.PetersenGraph()
 pete.name(new = "Petersen Graph")
