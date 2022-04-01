@@ -2701,6 +2701,8 @@ add_to_lists(total_domination_number, intractable_invariants, all_invariants)
 # Inefficient to calculate
 def toughness(g):
     """
+    See: https://en.wikipedia.org/wiki/Graph_toughness
+
     Tests:
         sage: toughness(graphs.PathGraph(3))
         0.5
@@ -5472,7 +5474,8 @@ def has_Havel_Hakimi_property(g, v):
         max(g.degree(nnv) for nnv in g.vertices() if nnv != v and nnv not in g.neighbors(v)))
 
 #NOTE: the relevant theorem is a forbidden subgraph characterization
-#its not clear if its theoretically efficient. we'll add to just all_properties list for now
+#its not clear if its theoretically efficient. the written code look at all subsets and is thus intractible
+#we'll add to inractable properties. is there an efficient algorithm???
 def has_strong_Havel_Hakimi_property(g):
     """
     Return whether the graph g has the strong Havel-Hakimi property.
@@ -5502,7 +5505,7 @@ def has_strong_Havel_Hakimi_property(g):
             if any(not has_Havel_Hakimi_property(H, v) for v in S if H.degree(v) == Delta):
                 return False
     return True
-add_to_lists(has_strong_Havel_Hakimi_property, all_properties)
+add_to_lists(has_strong_Havel_Hakimi_property, intractable_properties, all_properties)
 
 
 def is_subcubic(g):
@@ -5520,7 +5523,7 @@ def is_subcubic(g):
     - Boolean, True if a graph is subcubic, False otherwise.
     """
     return max_degree(g) <= 3
-
+add_to_lists(is_subcubic, efficiently_computable_properties, all_properties)
 
 # Max and min degree varies by at most 1
 def is_quasi_regular(g):
@@ -5540,8 +5543,11 @@ def is_quasi_regular(g):
     if max_degree(g) - min_degree(g) < 2:
         return True
     return False
+add_to_lists(is_quasi_regular, efficiently_computable_properties, all_properties)
 
 # g is bad if a block is isomorphic to k3, c5, k4*, c5*
+#the complexity will be no more than n/5 checks of small-graph isomorhism
+#where does this function/definition originate?
 def is_bad(g):
     blocks = g.blocks_and_cut_vertices()[0]
     # To make a subgraph of g from the ith block
@@ -5551,10 +5557,13 @@ def is_bad(g):
         if boolean == True:
             return True
     return False
+add_to_lists(is_bad, efficiently_computable_properties, all_properties)
 
 # Graph g is complement_hamiltonian if the complement of the graph is hamiltonian.
 def is_complement_hamiltonian(g):
     return g.complement().is_hamiltonian()
+add_to_lists(is_complement_hamiltonian, intractable_properties, all_properties)
+
 
 # A graph is unicyclic if it is connected and has order == size
 # Equivalently, graph is connected and has exactly one cycle
@@ -5562,7 +5571,7 @@ def is_unicyclic(g):
     """
     Return whether the graph g is unicyclic.
 
-    A graph is unicyclic if it contains only one cycle.
+    A graph is unicyclic if it is connected and contains only one cycle.
 
     INPUT:
 
@@ -5579,13 +5588,22 @@ def is_unicyclic(g):
         False
     """
     return g.is_connected() and g.order() == g.size()
+add_to_lists(is_unicyclic, efficiently_computable_properties, all_properties)
 
+#NOT a graph property (auxilliary function)
 def is_k_tough(g,k):
     return toughness(g) >= k # In invariants
+
 def is_1_tough(g):
+    """
+    See: https://en.wikipedia.org/wiki/Graph_toughness
+    """
     return is_k_tough(g, 1)
+add_to_lists(is_1_tough, intractable_properties, all_properties)
+
 def is_2_tough(g):
     return is_k_tough(g, 2)
+add_to_lists(is_2_tough, intractable_properties, all_properties)
 
 # True if graph has at least two hamiltonian cycles. The cycles may share some edges.
 def has_two_ham_cycles(gIn):
@@ -5602,6 +5620,7 @@ def has_two_ham_cycles(gIn):
         if h.is_hamiltonian():
             return True
     return False
+add_to_lists(has_two_ham_cycles, intractable_properties, all_properties)
 
 def has_simplicial_vertex(g):
     """
@@ -5611,6 +5630,7 @@ def has_simplicial_vertex(g):
         if is_simplicial_vertex(g, v):
             return True
     return False
+add_to_lists(has_simplicial_vertex, efficiently_computable_properties, all_properties)
 
 def has_exactly_two_simplicial_vertices(g):
     """
@@ -5627,6 +5647,7 @@ def has_exactly_two_simplicial_vertices(g):
 
     """
     return simplicial_vertices(g) == 2
+add_to_lists(has_exactly_two_simplicial_vertices, efficiently_computable_properties, all_properties)
 
 def is_two_tree(g):
     """
@@ -5652,12 +5673,14 @@ def is_two_tree(g):
     g2 = g.copy()
     g2.delete_vertex(v)
     return is_two_tree(g2)
+add_to_lists(is_two_tree, efficiently_computable_properties, all_properties)
 
 def is_two_path(g):
     """
     Graph g is a two_path if it is a two_tree and has exactly 2 simplicial vertices
     """
     return has_exactly_two_simplicial_vertices(g) and is_two_tree(g)
+add_to_lists(is_two_path, efficiently_computable_properties, all_properties)
 
 def is_prism_hamiltonian(g):
     """
