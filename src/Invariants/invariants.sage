@@ -1774,6 +1774,8 @@ add_to_lists(total_domination_number, intractable_invariants, all_invariants)
 # Inefficient to calculate
 def toughness(g):
     """
+    See: https://en.wikipedia.org/wiki/Graph_toughness
+
     Tests:
         sage: toughness(graphs.PathGraph(3))
         0.5
