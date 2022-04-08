@@ -2832,6 +2832,7 @@ def is_prism_hamiltonian(g):
     A graph G is prism hamiltonian if G x K2 (cartesian product) is hamiltonian
     """
     return g.cartesian_product(graphs.CompleteGraph(2)).is_hamiltonian()
+add_to_lists(is_prism_hamiltonian, intractable_properties, all_properties)
 
 # Bauer, Douglas, et al. "Long cycles in graphs with large degree sums." Discrete Mathematics 79.1 (1990): 59-70.
 def is_bauer(g):
@@ -2839,6 +2840,7 @@ def is_bauer(g):
     True if g is 2_tough and sigma_3 >= order
     """
     return is_2_tough(g) and sigma_k(g, 3) >= g.order()
+add_to_lists(is_bauer, intractable_properties, all_properties)
 
 # Jung, H. A. "On maximal circuits in finite graphs." Annals of Discrete Mathematics. Vol. 3. Elsevier, 1978. 129-144.
 def is_jung(g):
@@ -2847,6 +2849,7 @@ def is_jung(g):
     See functions toughness(g) and sigma_2(g) for more details.
     """
     return g.order() >= 11 and is_1_tough(g) and sigma_2(g) >= g.order() - 4
+add_to_lists(is_jung, intractable_properties, all_properties)
 
 # Bela Bollobas and Andrew Thomason, Weakly Pancyclic Graphs. Journal of Combinatorial Theory 77: 121--137, 1999.
 def is_weakly_pancyclic(g):
