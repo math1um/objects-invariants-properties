@@ -5687,6 +5687,7 @@ def is_prism_hamiltonian(g):
     A graph G is prism hamiltonian if G x K2 (cartesian product) is hamiltonian
     """
     return g.cartesian_product(graphs.CompleteGraph(2)).is_hamiltonian()
+add_to_lists(is_prism_hamiltonian, intractable_properties, all_properties)
 
 # Bauer, Douglas, et al. "Long cycles in graphs with large degree sums." Discrete Mathematics 79.1 (1990): 59-70.
 def is_bauer(g):
@@ -5694,6 +5695,7 @@ def is_bauer(g):
     True if g is 2_tough and sigma_3 >= order
     """
     return is_2_tough(g) and sigma_k(g, 3) >= g.order()
+add_to_lists(is_bauer, intractable_properties, all_properties)
 
 # Jung, H. A. "On maximal circuits in finite graphs." Annals of Discrete Mathematics. Vol. 3. Elsevier, 1978. 129-144.
 def is_jung(g):
@@ -5702,6 +5704,7 @@ def is_jung(g):
     See functions toughness(g) and sigma_2(g) for more details.
     """
     return g.order() >= 11 and is_1_tough(g) and sigma_2(g) >= g.order() - 4
+add_to_lists(is_jung, intractable_properties, all_properties)
 
 # Bela Bollobas and Andrew Thomason, Weakly Pancyclic Graphs. Journal of Combinatorial Theory 77: 121--137, 1999.
 def is_weakly_pancyclic(g):
@@ -5731,6 +5734,8 @@ def is_weakly_pancyclic(g):
         raise ValueError("Graph is acyclic. Property undefined.")
     else:
         return lengths == set(range(min(lengths),max(lengths)+1))
+add_to_lists(is_weakly_pancyclic, intractable_properties, all_properties)
+
 
 def is_pancyclic(g):
     """
@@ -5743,6 +5748,7 @@ def is_pancyclic(g):
     """
     lengths = cycle_lengths(g)
     return lengths == set(range(3, g.order()+1))
+add_to_lists(is_pancyclic, intractable_properties, all_properties)
 
 def has_two_walk(g):
     """
@@ -5776,9 +5782,11 @@ def has_two_walk(g):
                 elif path.count(neighbor) < 2:
                     path_stack.append(path + [neighbor])
     return False
+add_to_lists(has_two_walk, intractable_properties, all_properties)
 
 def is_claw_free_paw_free(g):
     return is_claw_free(g) and is_paw_free(g)
+add_to_lists(is_claw_free_paw_free, efficiently_computable_properties, all_properties)
 
 def has_bull(g):
     """
@@ -5793,6 +5801,8 @@ def has_bull(g):
     -Boolean
     """
     return g.subgraph_search(graphs.BullGraph(), induced = True) != None
+add_to_lists(has_bull, efficiently_computable_properties, all_properties)
+
 
 def is_bull_free(g):
     """
@@ -5808,6 +5818,7 @@ def is_bull_free(g):
 
     """
     return not has_bull(g)
+add_to_lists(is_bull_free, efficiently_computable_properties, all_properties)
 
 def is_claw_free_bull_free(g):
     """
@@ -5824,6 +5835,7 @@ def is_claw_free_bull_free(g):
 
     """
     return is_claw_free(g) and is_bull_free(g)
+add_to_lists(is_claw_free_bull_free, efficiently_computable_properties, all_properties)
 
 def has_F(g):
     """
@@ -5831,14 +5843,16 @@ def has_F(g):
     """
     F = graphs.CycleGraph(3)
     F.add_vertices([3,4,5])
-    F.add_edges([(0,3), [1,4], [2,5]])
+    F.add_edges([(0,3), (1,4), (2,5)])
     return g.subgraph_search(F, induced = True) != None
+add_to_lists(has_F, efficiently_computable_properties, all_properties)
 
 def is_F_free(g):
     """
     Let F be a triangle with 3 pendants. True if g has no induced F.
     """
     return not has_F(g)
+add_to_lists(is_F_free, efficiently_computable_properties, all_properties)
 
 # Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
 def is_oberly_sumner(g):
@@ -6820,6 +6834,8 @@ watkins_snark=Graph('qhCHGE@@?@HG?C??_?G?@??C?@G??G?_C??G???O?Cc???C?A?@?A??????
 tutte_graph = Graph('mhCGGE@G??_@?@??o?G????S??i??G?_c?C??Ac?G?????@???H????_???G_??@?????????g????gO???C???GH???@Q?@?????????@???G?@??????_?????GC????@?????????????g??????gA?????C?????GH?????@Q?')
 watkins_snark.name(new = "Watkins snark")
 #see: https://en.wikipedia.org/wiki/Watkins_snark
+
+
 
 mathon_strongly_regular0 = graphs.MathonStronglyRegularGraph(0)
 mathon_strongly_regular0.name(new = "Mathon Strongly Regular Graph 0")
@@ -8114,6 +8130,13 @@ ce143_G.name(new="ce143_G")
 ce143_H.name(new="ce143_H")
 add_to_lists(ce143_G, graph_objects, counter_examples, all_graphs)
 add_to_lists(ce143_H, graph_objects, counter_examples, all_graphs)
+
+#ryan pepper ce to conjecture that domination number <= (3/2) * residue
+#construction (from pepper): we have complete graph with 48 vertices, minus a matching. Group them into 16 sets of three. Then add 16 isolated vertices, and join each isolated vertex to each of the 3 vertices of the 16 distinct groups. It will have degree sequence of 48 terms that are 47, and 16 terms that are 3. The Residue = 5 while the 2-Residue= 7.5. The domination number is 16. For good measure, the independent domination number is 16 and the total domination number is also 16!! Actually, this is a useful family.
+ce144=Graph('~?@?~~~~~~~~~~~~}~v}~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~v~~~n~~~n~~z~~~|~~~~v~~~}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}~~~~~|~~~~~|~~~~~}~~~~}~~~~~~n~~~~~|~~~~~~v~~~~~v~~~~~~n~~~~~~^~~~~~~n~~~~~~~w???????F????????[????????w????????w????????[????????F?????????w????????B_????????F?????????F?????????B_?????????w?????????F??????????[??????????w??')
+ce144.name(new = "ce144")
+add_to_lists(ce144, graph_objects, counter_examples, all_graphs)
+
 
 #CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
 bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
