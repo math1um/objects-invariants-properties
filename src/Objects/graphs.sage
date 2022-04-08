@@ -109,6 +109,8 @@ tutte_graph = Graph('mhCGGE@G??_@?@??o?G????S??i??G?_c?C??Ac?G?????@???H????_???
 watkins_snark.name(new = "Watkins snark")
 #see: https://en.wikipedia.org/wiki/Watkins_snark
 
+
+
 mathon_strongly_regular0 = graphs.MathonStronglyRegularGraph(0)
 mathon_strongly_regular0.name(new = "Mathon Strongly Regular Graph 0")
 
@@ -1402,6 +1404,13 @@ ce143_G.name(new="ce143_G")
 ce143_H.name(new="ce143_H")
 add_to_lists(ce143_G, graph_objects, counter_examples, all_graphs)
 add_to_lists(ce143_H, graph_objects, counter_examples, all_graphs)
+
+#ryan pepper ce to conjecture that domination number <= (3/2) * residue
+#construction (from pepper): we have complete graph with 48 vertices, minus a matching. Group them into 16 sets of three. Then add 16 isolated vertices, and join each isolated vertex to each of the 3 vertices of the 16 distinct groups. It will have degree sequence of 48 terms that are 47, and 16 terms that are 3. The Residue = 5 while the 2-Residue= 7.5. The domination number is 16. For good measure, the independent domination number is 16 and the total domination number is also 16!! Actually, this is a useful family.
+ce144=Graph('~?@?~~~~~~~~~~~~}~v}~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~v~~~n~~~n~~z~~~|~~~~v~~~}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}~~~~~|~~~~~|~~~~~}~~~~}~~~~~~n~~~~~|~~~~~~v~~~~~v~~~~~~n~~~~~~^~~~~~~n~~~~~~~w???????F????????[????????w????????w????????[????????F?????????w????????B_????????F?????????F?????????B_?????????w?????????F??????????[??????????w??')
+ce144.name(new = "ce144")
+add_to_lists(ce144, graph_objects, counter_examples, all_graphs)
+
 
 #CE to For any graph g, ((is_four_connected)^(is_strongly_regular))->(is_maximal_triangle_free)
 bipartite_5_5_minus_edge = graphs.CompleteBipartiteGraph(5,5)
