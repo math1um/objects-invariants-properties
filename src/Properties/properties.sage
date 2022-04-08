@@ -2879,6 +2879,8 @@ def is_weakly_pancyclic(g):
         raise ValueError("Graph is acyclic. Property undefined.")
     else:
         return lengths == set(range(min(lengths),max(lengths)+1))
+add_to_lists(is_weakly_pancyclic, intractable_properties, all_properties)
+
 
 def is_pancyclic(g):
     """
@@ -2891,6 +2893,7 @@ def is_pancyclic(g):
     """
     lengths = cycle_lengths(g)
     return lengths == set(range(3, g.order()+1))
+add_to_lists(is_pancyclic, intractable_properties, all_properties)
 
 def has_two_walk(g):
     """
@@ -2924,9 +2927,11 @@ def has_two_walk(g):
                 elif path.count(neighbor) < 2:
                     path_stack.append(path + [neighbor])
     return False
+add_to_lists(has_two_walk, intractable_properties, all_properties)
 
 def is_claw_free_paw_free(g):
     return is_claw_free(g) and is_paw_free(g)
+add_to_lists(is_claw_free_paw_free, efficiently_computable_properties, all_properties)
 
 def has_bull(g):
     """
@@ -2941,6 +2946,8 @@ def has_bull(g):
     -Boolean
     """
     return g.subgraph_search(graphs.BullGraph(), induced = True) != None
+add_to_lists(has_bull, efficiently_computable_properties, all_properties)
+
 
 def is_bull_free(g):
     """
@@ -2956,6 +2963,7 @@ def is_bull_free(g):
 
     """
     return not has_bull(g)
+add_to_lists(is_bull_free, efficiently_computable_properties, all_properties)
 
 def is_claw_free_bull_free(g):
     """
@@ -2972,6 +2980,7 @@ def is_claw_free_bull_free(g):
 
     """
     return is_claw_free(g) and is_bull_free(g)
+add_to_lists(is_claw_free_bull_free, efficiently_computable_properties, all_properties)
 
 def has_F(g):
     """
@@ -2979,14 +2988,16 @@ def has_F(g):
     """
     F = graphs.CycleGraph(3)
     F.add_vertices([3,4,5])
-    F.add_edges([(0,3), [1,4], [2,5]])
+    F.add_edges([(0,3), (1,4), (2,5)])
     return g.subgraph_search(F, induced = True) != None
+add_to_lists(has_F, efficiently_computable_properties, all_properties)
 
 def is_F_free(g):
     """
     Let F be a triangle with 3 pendants. True if g has no induced F.
     """
     return not has_F(g)
+add_to_lists(is_F_free, efficiently_computable_properties, all_properties)
 
 # Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
 def is_oberly_sumner(g):
