@@ -737,6 +737,8 @@ def laplacian_energy(g):
      return 1 + sum(Ls)
 add_to_lists(laplacian_energy, efficient_invariants, all_invariants)
 
+#sometimes returns imaginary numbers!?!?
+#laplacian spectrum is all non-negative, so sqrts should be OK...
 def laplacian_energy_like(g):
     """
     Returns the sum of the square roots of the laplacian eigenvalues
@@ -744,7 +746,7 @@ def laplacian_energy_like(g):
     Liu, Jianping, and Bolian Liu. "A Laplacian-energy-like invariant of a graph." MATCH-COMMUNICATIONS IN MATHEMATICAL AND IN COMPUTER CHEMISTRY 59.2 (2008): 355-372.
     """
     return sum([sqrt(x) for x in g.spectrum(laplacian = True)])
-add_to_lists(laplacian_energy_like, efficient_invariants, all_invariants)
+add_to_lists(laplacian_energy_like, broken_invariants, all_invariants)
 
 #sum of the positive eigenvalues of a graph
 def gutman_energy(g):
