@@ -3005,16 +3005,22 @@ def is_oberly_sumner(g):
     g is_oberly_sumner if order >= 3, is_two_connected, is_claw_free, AND is_F_free
     """
     return g.order() >= 3 and is_two_connected(g) and is_claw_free(g) and is_F_free(g)
+add_to_lists(is_oberly_sumner, efficiently_computable_properties, all_properties)
+
+
 def is_oberly_sumner_bull(g):
     """
     True if g is 2-connected, claw-free, and bull-free
     """
     return is_two_connected(g) and is_claw_free_bull_free(g)
+add_to_lists(is_oberly_sumner_bull, efficiently_computable_properties, all_properties)
+
 def is_oberly_sumner_p4(g):
     """
     True if g is 2-connected, claw-free, and p4-free
     """
     return is_two_connected(g) and is_claw_free(g) and is_p4_free(g)
+add_to_lists(is_oberly_sumner_p4, efficiently_computable_properties, all_properties)
 
 # Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
 def is_matthews_sumner(g):
@@ -3022,11 +3028,15 @@ def is_matthews_sumner(g):
     True if g is 2-connected, claw-free, and minimum-degree >= (order-1) / 3
     """
     return is_two_connected(g) and is_claw_free(g) and min_degree(g) >= (g.order() - 1) / 3
+add_to_lists(is_matthews_sumner, efficiently_computable_properties, all_properties)
+
 def is_broersma_veldman_gould(g):
     """
     True if g is 2-connected, claw-free, and diameter <= 2
     """
     return is_two_connected(g) and is_claw_free(g) and g.diameter() <= 2
+add_to_lists(is_broersma_veldman_gould, efficiently_computable_properties, all_properties)
+
 
 def chvatals_condition(g):
     """
@@ -3053,6 +3063,7 @@ def chvatals_condition(g):
     degrees.sort()
     n = g.order()
     return all(degrees[i] > i or i >= n/2 or degrees[n-i] >= n-i for i in range(0, len(degrees)))
+add_to_lists(chvatals_condition, efficiently_computable_properties, all_properties)
 
 def is_matching(g):
     """
@@ -3075,6 +3086,8 @@ def is_matching(g):
         True
     """
     return min(g.degree())==1 and max(g.degree())==1
+add_to_lists(is_matching, efficiently_computable_properties, all_properties)
+
 
 def has_odd_order(g):
     """
@@ -3086,6 +3099,7 @@ def has_odd_order(g):
     False
     """
     return g.order() % 2 == 1
+add_to_lists(has_odd_order, efficiently_computable_properties, all_properties)
 
 def has_even_order(g):
     """
@@ -3097,6 +3111,7 @@ def has_even_order(g):
     True
     """
     return g.order() % 2 == 0
+add_to_lists(has_even_order, efficiently_computable_properties, all_properties)
 
 def is_maximal_triangle_free(g):
     """
@@ -3153,6 +3168,7 @@ def is_maximal_triangle_free(g):
             return False
         g_copy.delete_edge(e)
     return True
+add_to_lists(is_maximal_triangle_free, efficiently_computable_properties, all_properties)
 
 def is_locally_two_connected(g):
     for v in g.vertices():
@@ -3162,8 +3178,9 @@ def is_locally_two_connected(g):
             if not is_two_connected(h):
                 return False
     return True #all neighborhoods are too small or are connected
+add_to_lists(is_locally_two_connected, efficiently_computable_properties, all_properties)
 
-
+#NOT a graph property (for any fixed k, this IS a graph property)
 def is_k_bootstrap_good(G,k):
     """
     Return whether or not there exists a set of k vertices such that G is fully infected.
@@ -3187,8 +3204,8 @@ def is_k_bootstrap_good(G,k):
         if k_percolate(G,set(s),k):
             return True
     return False
-add_to_lists(is_k_bootstrap_good,efficiently_computable_properties,all_properties)
 
+#NOT a graph property (requires other parameters)
 def k_percolate(G,infected,k):
     """
     Return True if the set 'infected' fully k-infects the graph G
@@ -3216,7 +3233,6 @@ def k_percolate(G,infected,k):
                 newInfections = True
                 break
     return len(uninfected) == 0
-add_to_lists(k_percolate, efficiently_computable_properties, all_properties)
 
 def is_2_bootstrap_good(G):
     """
@@ -3249,7 +3265,6 @@ def is_2_bootstrap_good(G):
     False
     """
     return is_k_bootstrap_good(G,2)
-
 add_to_lists(is_2_bootstrap_good, efficiently_computable_properties,all_properties)
 
 def is_3_bootstrap_good(G):
@@ -3283,8 +3298,8 @@ def is_3_bootstrap_good(G):
     True
     """
     return is_k_bootstrap_good(G,3)
-
 add_to_lists(is_3_bootstrap_good,efficiently_computable_properties,all_properties)
+
 ######################################################################################################################
 #Below are some factory methods which create properties based on invariants or other properties
 
@@ -3327,6 +3342,7 @@ def has_alpha_equals_clique_covering(g):
     return temp(g)
 add_to_lists(has_alpha_equals_clique_covering, intractable_properties, all_properties)
 
+#NOT a graph property
 def has_invariant_equal_to(invar, value, name=None, documentation=None):
     """
     This function takes an invariant and a value as arguments and returns the property
@@ -3367,6 +3383,7 @@ def has_invariant_equal_to(invar, value, name=None, documentation=None):
 
     return equality_checker
 
+#NOT a graph property
 def has_leq_invariants(invar1, invar2, name=None):
     """
      This function takes two invariants as an argument and returns the property that the first invariant is
@@ -3398,7 +3415,7 @@ def has_leq_invariants(invar1, invar2, name=None):
 #add all properties derived from pairs of invariants
 invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
 
-
+#NOT a graph property
 def localise(f, name=None, documentation=None):
     """
     This function takes a property (i.e., a function taking only a graph as an argument) and
@@ -3426,7 +3443,13 @@ def localise(f, name=None, documentation=None):
 
     return localised_function
 
-is_locally_dirac = localise(is_dirac)
+#any localized property for an efficient property is itself efficient
+def is_locally_dirac(g):
+    f=localise(is_dirac)
+    return f(g)
+add_to_lists(is_locally_dirac,efficiently_computable_properties,all_properties)
+
+
 is_locally_bipartite = localise(Graph.is_bipartite)
 is_locally_planar = localise(Graph.is_planar, documentation="True if the open neighborhood of each vertex v is planar")
 """
