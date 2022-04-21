@@ -278,6 +278,10 @@ c4 = graphs.CycleGraph(4)
 c4.name(new="c4")
 add_to_lists(c4, graph_objects, all_graphs)
 
+c5 = graphs.CycleGraph(5)
+c5.name(new="c5")
+add_to_lists(c5, graph_objects, all_graphs)
+
 c6 = graphs.CycleGraph(6)
 c6.name(new = "c6")
 add_to_lists(c6, graph_objects, all_graphs)

@@ -110,6 +110,19 @@ def has_star_center(g):
     return (g.order() - 1) in g.degree()
 add_to_lists(has_star_center, efficiently_computable_properties, all_properties)
 
+#a graph has a pair of vertices who dominate the remaining vertices
+#remove each vertex and see if the remaining graph has a star center
+def has_double_star_center(g):
+    V=g.vertices()
+    for v in V:
+        Hv=copy(V)
+        Hv.remove(v)
+        H=g.subgraph(Hv)
+        if has_star_center(H):
+            return True
+    return False
+add_to_lists(has_double_star_center, efficiently_computable_properties, all_properties)
+
 def is_complement_of_chordal(g):
     """
     Evaluates whether graph ``g`` is a complement of a chordal graph.
@@ -829,6 +842,16 @@ def is_c4_free(g):
     """
     return not has_c4(g)
 add_to_lists(is_c4_free, efficiently_computable_properties, all_properties)
+
+#contains an induced 5-cycle
+def has_c5(g):
+    return g.subgraph_search(c5, induced=True) is not None
+add_to_lists(has_c5, efficiently_computable_properties, all_properties)
+
+#has no induced 5-cycle
+def is_c4_free(g):
+    return not has_c5(g)
+add_to_lists(is_c5_free, efficiently_computable_properties, all_properties)
 
 def has_paw(g):
     """
