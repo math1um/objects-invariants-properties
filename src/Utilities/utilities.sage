@@ -1,13 +1,13 @@
 #OTHER UTILITIES
 
 #mean, median and mode were deprecated from the Sage root
-#we import them from Numby as a (hopefully temporary) gack
+#we import them from Numpy as a (hopefully temporary) gack
 
 from numpy import mean
 
 from numpy import median
 
-from numpy import mode
+from statistics import mode
 
 #GRAPH UTILITIES
 
