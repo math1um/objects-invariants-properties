@@ -849,7 +849,7 @@ def has_c5(g):
 add_to_lists(has_c5, efficiently_computable_properties, all_properties)
 
 #has no induced 5-cycle
-def is_c4_free(g):
+def is_c5_free(g):
     return not has_c5(g)
 add_to_lists(is_c5_free, efficiently_computable_properties, all_properties)
 
