@@ -959,6 +959,16 @@ for i in sage_efficient_invariants:
 for i in sage_intractable_invariants:
     add_to_lists(i, intractable_invariants, all_invariants)
 
+from sage.graphs.independent_sets import IndependentSets
+def bae_morton(g):
+    I=IndependentSets(g) #an iterator
+    icount=0
+    for Iset in I:
+        icount += (-1)^len(Iset)
+    return icount
+add_to_lists(bae_morton, intractable_invariants, all_invariants)
+
+
 def distinct_degrees(g):
     """
     Return the number of distinct degrees of a graph
@@ -983,6 +993,7 @@ def distinct_degrees(g):
     return len(set(g.degree()))
 add_to_lists(distinct_degrees, efficient_invariants, all_invariants)
 
+#NOT a graph invariant
 def common_neighbors(g,v,w):
     """
     Return the Set of common neighbors of v and w in graph g
