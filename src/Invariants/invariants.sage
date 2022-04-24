@@ -23,8 +23,12 @@ for i in sage_efficient_invariants:
 for i in sage_intractable_invariants:
     add_to_lists(i, intractable_invariants, all_invariants)
 
+
 from sage.graphs.independent_sets import IndependentSets
 def bae_morton(g):
+    """
+    from: Bae, Yongju, and Hugh R. Morton. "The spread and extreme terms of Jones polynomials." Journal of Knot Theory and its ramifications 12, no. 03 (2003): 359-373.
+    """
     I=IndependentSets(g) #an iterator
     icount=0
     for Iset in I:
