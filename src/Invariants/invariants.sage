@@ -23,6 +23,14 @@ for i in sage_efficient_invariants:
 for i in sage_intractable_invariants:
     add_to_lists(i, intractable_invariants, all_invariants)
 
+#MEMOIZE UTILITY
+def memoize(f):
+    memo = {}
+    def helper(x):
+        if x not in memo:
+            memo[x] = f(x)
+        return memo[x]
+    return helper
 
 from sage.graphs.independent_sets import IndependentSets
 def bae_morton(g):
