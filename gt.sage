@@ -11,6 +11,106 @@ from statistics import mode
 
 #GRAPH UTILITIES
 
+def anti_degree(g,v): #the number of non-neighbors of v
+    n=g.order()
+    d=g.degree(v)
+    return (n-1)-d
+
+def remove_low_anti_degree_vertices(g,Lbound):
+    """
+    remove all vertices with anti-degree less than lower bound-1
+
+    if bound is an upper bound for independence number, any vertex v in a
+    maximum independent set must have at least lower bound-1 anti-neighbors
+    """
+    V=g.vertices()
+    for v in g.vertices():
+        if anti_degree(g,v) < Lbound-1:
+            V.remove(v)
+    H=g.subgraph(V)
+    return H
+
+def non_neighbors(g, v ,w):
+    """
+    return the vertices that are not v, w nor any neighbor of them
+
+    these are the only vertices that could be in an independent set that contains v and w
+    """
+    Nv = Set(g.neighbors(v))
+    Nw = Set(g.neighbors(w))
+    U = Nv.union(Nw)
+    V = Set(g.vertices())
+
+    return list(V.difference(U))
+
+def add_non_independent_edges(g, Lbound):
+    """
+    if v and w don't have lower bound-2 non-neighbors (potential independent set vertices)
+    then v and w can't both be an an independent set with bound vertices, so can be made adjacent
+
+    #add v-w edge for each such pair
+    """
+    h=copy(g)
+    V=g.vertices()
+    n=g.order()
+    for i in srange(n):
+        for j in srange(n):
+            if i>j: #avoid duplication
+                v=V[i]
+                w=V[j]
+                U = non_neighbors(g,v,w) #a list
+                if len(U) < Lbound - 2: #so v,w can't be in an independent set with bound vertices
+                    h.add_edge(v,w)
+    return h
+
+def find_2_bicritical_part(g):
+    """
+    returns unique 2-bicritical (=independence irreducible) subgraph
+
+    from Larson, Independence Decomposition Theorem
+    """
+    X = find_KE_part(g)
+    SX = Set(X)
+    Vertices = Set(g.vertices())
+
+    return g.subgraph(Vertices.difference(SX))
+
+
+def independent_set_preprocesser(g, Lbound=1): #default initialization of 1<-alpha<=Infinity
+    """
+    returns a graph that will have the same independence number
+
+    1. finds maximum critical independent set and removes neighbors
+    2. removes vertices that can't be in a maximum independent set because they don't have enough anti-neighbors
+    3. adds edges between pairs of vertices that can't both be in a maximum indendent set because they don't have enough common anti-neighbors
+
+    NOTE: this will return just an independent set for a KE graph
+
+    Steps (2) and (3) are discussed in Walteros & Buchanan, 2020, "Why is a Maximum Clique Often Easy in Practice?"
+    """
+
+    h = copy(g)
+
+    I=find_max_critical_independent_set(h)
+    X=closed_neighborhood(h,I) #the vertices I plus their neighbors (is a KE subgraph)
+    SX = Set(X)
+    SV = Set(h.vertices())
+    SXc = SV.difference(SX) #vertices in the complement Xc of X
+    Sh = SXc.union(Set(I)) # critical independent set vertices I plus 2-bicritcal subgraph vertices Xc
+    h=g.subgraph(list(Sh)) #this is the 2-bicritical part of g unioned with maximum critical independent set
+
+    while True:
+
+        beginning_loop_order = h.order()
+        h = remove_low_anti_degree_vertices(h, Lbound)
+
+        beginning_loop_size = h.size()
+        h = add_non_independent_edges(h, Lbound)
+
+        if beginning_loop_order == h.order() and beginning_loop_size == h.size():
+            break
+    return h
+
 def check_independence_extension(g,S):
     """
     Return True if the set S extends to a maximum independent set of the graph g.
