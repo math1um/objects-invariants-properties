@@ -2483,7 +2483,7 @@ def find_twin(g):
         Nv = set(g.neighbors(v))
         for w in V:
             Nw = set(g.neighbors(w))
-            if v not in Nw and Nv == Nw:
+            if v!=w and v not in Nw and Nv == Nw:
                 return (v,w)
     return None
 
