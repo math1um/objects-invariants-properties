@@ -9,7 +9,9 @@ from numpy import median
 
 from statistics import mode
 
+
 #GRAPH UTILITIES
+
 
 def anti_degree(g,v): #the number of non-neighbors of v
     n=g.order()
@@ -1028,3 +1030,498 @@ def make_alpha_critical(g):
         if h.is_connected() and (alpha == independence_number(h)):
             g = h
     return g
+
+###DEMING DECOMPOSITION
+
+def make_deming_subgraph(H,Blossom1,Blossom2): #don't want induced edges - just blossom edges
+    V1 = Blossom1.vertices()
+    S1 = Set(V1)
+    V2 = Blossom2.vertices()
+    S2 = Set(V2)
+    S = S1.union(S2)
+
+    E1 = Blossom1.edges()
+    E1 = [(e[0],e[1]) for e in E1]
+    SE1 = Set(E1)
+    E2 = Blossom2.edges()
+    E2 = [(e[0],e[1]) for e in E2]
+    SE2 = Set(E2)
+    SE = SE1.union(SE2)
+
+    V = list(S)
+    E = list(SE)
+    return H.subgraph(vertices=V, edges=E)
+
+def make_deming_subgraph_induced(H,Blossom1,Blossom2): #want induced edges - just blossom edges
+    V1 = Blossom1.vertices()
+    S1 = Set(V1)
+    V2 = Blossom2.vertices()
+    S2 = Set(V2)
+    S = S1.union(S2)
+    V = list(S)
+    return H.subgraph(vertices=V)
+
+def deming_main(g):
+    if not g.has_perfect_matching():
+        #print("graph does not have perfect matching!")
+        return
+
+    M=[(e[0],e[1]) for e in g.matching()] #M is a perfect matching, with no edge labels
+
+    #print("in deming_main, M = {}".format(M))
+
+    return deming_decomposition(g,M)
+
+def deming_decomposition(g,M):
+
+    Deming_subgraphs = []
+    h = copy(g) #g never changes in this function, M never changes either
+
+    S,BlossomTip1,Blossom1,Blossom2 = demings_algorithm(h,M)
+    #if Blossom1 = empty, or |S|=n/2 then g must be KE
+
+    while Blossom1.order() != 0: #so there IS a deming subgraph
+        V = h.vertices()
+        D = make_deming_subgraph_induced(g,Blossom1,Blossom2) #should have perfect matching with M edges
+
+        minD = get_min_deming_subgraph(D)
+        Deming_subgraphs.append(minD)
+
+        newV = [v for v in V if v not in minD.vertices()] #remove the vertices in just-found deming subgraph
+        #print("in deming_decomposition main loop: newV = {}".format(newV))
+
+        h = g.subgraph(newV) #h may be empty graph here
+        newM = [(v,w) for (v,w,u) in h.matching()] #OK if h is empty
+        S,BlossomTip1,Blossom1,Blossom2 = demings_algorithm(h,newM) #OK if h is empty (Blossom1 = Graph(0)
+        #print("in deming_decomposition main loop: got to end of loop")
+
+    #done with while loop, remaining graph must be KE
+    K = g.subgraph(h.vertices()) #the h from the last loop, should be KE with perfect matching
+    return Deming_subgraphs, K
+
+def demings_algorithm(g,M):
+    #assume g has a perfect matching (if not STOP)
+    #1. find perfect matching M
+    #2. choose any matching edge xy. let x be red, y be blue
+    #3. look for uncolored neighbors of x, color one red and continue
+    #4. if no uncolored neighbors then go to any uncolored vertex and continue
+    #5. every time you color a red vertex, see if it has a red neighbor. if it does there is blossom
+    #6. keep track of prdecessors, trace it back and find the blossow tip z.
+    #7. now we'll try to find another blossom in the graph, starting at z, but with z blue
+    #7. z was red. now color it blue, color its matched neighbor red
+    #8. continue. keep track of the path. if another blossom is found, that's it
+    #9. the vertices from the two blossoms and the path must either be an even K4 sub or an even T-sub
+
+    def find_blossom(H,Pred,x,x_end): #find all edges including stem, union them, return graph,
+
+        #print("in find_blossom: Pred = {}, x = {}, x_end = {}".format(Pred,x,x_end))
+
+        BV = [x_end] #blossom vertices,
+        BE = [(x,x_end)] #blossom edges, these are the adjacent red vertices
+
+        z = x_end
+        while Pred[z] != -1: #adding the blossom "stem"
+            y = Pred[z] #x is red, so *some* pred y *must* exist (namely matched blue vertex)
+            BV.append(y)
+            BE.append((z,y))
+            z = y
+
+        BV.append(x) #may be doubles
+        z = x
+        while Pred[z] != -1: #adding the blossom loop,
+            y = Pred[z]
+            BV.append(y)
+            BE.append((z,y))
+            z = y
+
+        newBE = []
+        for (v,w) in BE:
+            if not (v,w) in newBE and not (w,v) in newBE:
+                newBE.append((v,w))
+
+        #print("in find_blossom: Blossom edges = {}".format(newBE))
+
+        return H.subgraph(vertices=list(Set(BV)),edges=newBE)
+
+    def find_blossom_tip(Blossom): #must be degree 1 vertices - or there is a problem
+
+        #print("In Find_BlossomTip: Blossom vertices = {}".format(Blossom.vertices()))
+
+        E = [(v,w) for (v,w,u) in Blossom.edges()]
+
+        g = copy(Blossom)
+        gV = g.vertices()
+
+        #print("in find_blossom_tip: min(g.degree())={}".format(min(g.degree())))
+        while min(g.degree())<2: #there must be one or PROBLEM
+            for v in gV:
+                N = g.neighbors(v) #should only be one vertex wtih degree 1
+                if len(N)==1:
+                    tip = N[0]
+                    gV.remove(v) #keep removing degree 1 vertices, keep track of neighbor
+                    g = g.subgraph(gV)
+                    break
+
+        return tip
+
+    def step1(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2): #finished, or pick heavy edge and extend coloring
+
+        #print("in Step 1")
+        #print(H.vertices())
+
+        if len(H.vertices())==0: #no vertices left, S is a maximum independent set
+            #print("done!, S = {}".format(S))
+            return M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2
+
+        else:
+            EH = H.edges(labels=False)
+            heavy_H = [e for e in M if ((e[0],e[1]) in EH or (e[1],e[0]) in EH)]
+
+            #print("Step 1: heavy_H = {}".format(heavy_H))
+
+            e = heavy_H[0] #just first heavy edge
+            x = e[0] #x is random endpoint of heavy edge
+            y = e[1]
+            Colors[x] = "red" #arbitrary endpoint choice
+            Colors[y] = "blue"
+            Pred[x]=y #this will be part of stem of Blossom 1, and guarantee a degree 1 vertex
+
+            #print("Step 1: Colors = {}".format(Colors))
+
+            FLAG = 0 #if FLAG = 2, there is one discovered blossom tip
+
+            #GOTO
+            return step2(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2)
+
+    def step2(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2): #look at current coloring
+
+        #print("in Step 2")
+        #print(H.vertices())
+        #print("Step2: Colors = {}".format(Colors))
+
+        VH = H.vertices() #v/
+        Red = [u for u in VH if Colors[u]=="red"] #v/
+        Uncolored = [v for v in VH if Colors[v]=="uncolored"] #what happens if Uncolored is empty??
+        #print("Step2: Uncolored = {}".format(Uncolored))
+
+        EH = H.edges(labels=False)
+        RedUncov = [(u,v) for u in Red for v in Uncolored if ((u,v) in EH or (v,u) in EH)] #light edges
+        RedRed = [(v,w) for v in Red for w in Red if (v,w) in EH]
+
+        #print("Step 2: RedRed = {}".format(RedRed))
+        #print("Step 2: RedUncov = {}".format(RedUncov))
+
+        if len(RedUncov)==0: #if red vertices adjacent only to colored vertices, add them to S. ONLY reduction step
+
+            S = S + Red
+            VH = [v for v in VH if Colors[v]=="uncolored"] #new VH, resetting by uncoloring everything
+            H = H.subgraph(VH) #new REDUCED H
+            # RESET PRED?
+            Pred = {v:-1 for v in VH} #initialization of Pred for smaller subgraph
+
+            #GOTO
+            return step1(M,H,S,FLAG,Colors,Pred,-1, Graph(0), Graph(0))
+
+        if len(RedUncov) > 0: #so red u is adjacent to uncovered v, uv is a light edge
+
+            e = RedUncov[0] #e is a light edge
+
+            #print("in Step 2, RedUncov > 0, Colors = {}, e = {}".format(Colors, e))
+
+            u = e[0] #u is Red, v is uncolored
+            v = e[1] #must exist, as RedUncov is not empty
+            #print("in Step 2: u={}, v = {}".format(u,v))
+            #there must be a heavy edge v-w where w is uncolored
+            heavy_H = [e for e in EH if ((e[0],e[1]) in M or (e[1],e[0]) in M)]
+
+            #print("Step 2: heavy_H = {}".format(heavy_H))
+            for e in heavy_H: #find a heavy edge with v as endpoint, set w = other end
+                #must exist, as M is perfect matching, v must have matched vertex
+                #print(e)
+                if e[0] == v:
+                    w = e[1]
+                if e[1] == v:
+                    w = e[0]
+            #print("Step 2: w is {}".format(w)) #wait till for loop is finished!
+
+            Colors[v] = "blue" #extend the coloring
+
+            #is this the "w" referenced in the error?? YES. CHECKED!
+            #print("Step 2: step before w is referenced. w = {}".format(w))
+
+            Colors[w] = "red"
+
+            #print("Step 2: extending coloring. Colors = {}".format(Colors))
+
+            # RESET PRED?
+            #Pred = {v:-1 for v in VH} #initialization
+
+            Pred[v] = u
+            Pred[w] = v
+
+            #GOTO
+            return step3(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2)
+
+    def step3(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2): #is there a blossom?
+
+        #print("in Step 3: H.vertices = {}".format(H.vertices()))
+
+        VH = H.vertices()
+        EH = H.edges(labels=False)
+        Red = [v for v in VH if Colors[v]=="red"]
+        Uncolored = [v for v in VH if Colors[v]=="uncolored"]
+        RedUncov = [(u,v) for u in Red for v in Uncolored if ((u,v) in EH or (v,u) in EH)]
+        RedRed = [(v,w) for v in Red for w in Red if (v,w) in EH]
+
+        if len(RedRed) == 0: #no blossom yet, extend S or keep coloring
+
+            #GOTO
+            return step2(M,H,S,FLAG,Colors,Pred, BlossomTip1, Blossom1, Blossom2)
+
+        if len(RedRed) > 0: #so THERE IS a blossom
+
+            #print("Step 3: RedRed > 0")
+
+            if FLAG == 0: #we now have FIRST tip
+
+                #print("Step 3: FLAG == 0")
+
+                e = RedRed[0] #first edge in RedRed
+                x = e[0] #just names for the endpoints of this edge
+                x_end = e[1]
+
+                Blossom1 = find_blossom(H,Pred,x,x_end)
+                BlossomTip1 = find_blossom_tip(Blossom1)
+
+                #find BlossomTip1 matched vertex
+                #if there is a perfect matching, BlossomTip1 has a heavy edge neighbor - which shouldn't be in blossom
+
+                matched_edges = [(BlossomTip1,w) for w in VH if ((BlossomTip1,w) in M or (w,BlossomTip1) in M)]
+                e = matched_edges[0] #matched edegs should have exactly on member
+                if e[0]==BlossomTip1:
+                    y = e[1]
+                else:
+                    y = e[0]
+
+                # RESET PRED.? YES, new BlossomTip, going backwards now
+                Pred = {v:-1 for v in VH} #initialization
+                Pred[y] = BlossomTip1
+
+                #reset Colors
+                Colors = {v:"uncolored" for v in VH}
+                Colors[BlossomTip1] = "blue"
+                Colors[y] = "red"
+
+                FLAG = 2 #1st blossom flag!
+                #BlossomTip1 = x
+
+                #GOTO
+                return step2(M,H,S,FLAG,Colors,Pred, BlossomTip1, Blossom1, Blossom2)
+
+            if FLAG == 2: #there IS a 2nd blossom - already had one blossom tip, now find the other
+
+                #print("Step 3: FLAG == 2")
+
+                #should be able to just count back from RED NEIGHBOR of other blossom tip
+
+                e = RedRed[0] #this edge will be included in the blossom
+                x = e[0]
+                x_far = e[1]
+
+                #print("To find_Blossom2: Colors = {}".format(Colors))
+
+                Blossom2 = find_blossom(H,Pred,x,x_far) #we're done now!
+
+                #BlossomTip2 = x
+
+                return M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2
+
+
+
+
+
+    #g may be empty, handling this case
+    if g.order() == 0:
+        return [],-1,Graph(0),Graph(0)
+
+    V = g.vertices()
+    E = g.edges(labels=False)
+    M = [(e[0],e[1]) for e in M]
+    #print(M)
+    M_vertices = get_vertices_from_edges(M) #a list
+
+    S = [] #initialize
+    H = g.subgraph(V) #H = G at beginning
+    VH = H.vertices()
+    EH = H.edges(labels=False)
+
+    heavy_H = [e for e in EH if ((e[0],e[1]) in M or (e[1],e[0]) in M)]
+    #light_H = [e for e in EH if not e in M]
+    FLAG = -1 #initialization
+    Colors = {v:"uncolored" for v in V} #initialization
+    #print("in Demings_algorithms: Colors = {}".format(Colors))
+
+    Pred = {v:-1 for v in V} #initialization
+
+    BlossomTip1 = -1 #initialization
+
+    Blossom1 = Graph(0)
+    Blossom2 = Graph(0)
+
+    #step1 - start flowing through flow diagram
+    #print("in MAIN: ")
+    #print(M,H,S,FLAG,Colors,Pred,BlossomTip1,Blossom1,Blossom2)
+    M,H,S,FLAG,Colors,Pred,BlossomTip1,Blossom1,Blossom2=step1(M,H,S,FLAG,Colors,Pred,BlossomTip1,Blossom1,Blossom2)
+
+    #print("S,BlossomTip1,Blossom1,Blossom2 = ")
+    return S,BlossomTip1,Blossom1,Blossom2
+
+#DEMING AUXILLIARY
+
+def deming_subgraph_min_test(g): #if g is a deming or blossom block, must have for every perfect matching edge xy, that g-{x,y} is KE
+    M = g.matching()
+    nu = len(M)
+
+    if 2*nu != g.order():
+        #print("deming_subgraph_min_test: graph has no perfect matching!")
+        return None
+
+    pm_edges = perfect_matching_edges(g)
+    for e in pm_edges:
+        #print("in deming_subgraph_min_test: e = {}".format(e))
+
+        x = e[0] # xy in perfect matching iff G-{x,y} has perfect matching
+        y = e[1]
+        V = g.vertices()
+        V.remove(x)
+        V.remove(y)
+        h = g.subgraph(V)
+        if not is_KE(h):
+            return e #return edge e such that G-e is NOT KE, and we can reapply Deming's algorithm to g-e
+
+    #print("in deming_subgraph_min_test: returning NONE")
+
+    return None #in this case g can't be reduced
+
+def get_min_deming_subgraph(g): #takes deming subgraph as input, keeps reducing
+
+    xy = deming_subgraph_min_test(g)
+    #print("in get_min_deming_subgraph, xy = {}".format(xy))
+    h = copy(g)
+
+    #if xy == None, then g is reduced
+    while xy != None:
+        #print("in get_min_deming_subgraph: xy = {}".format(xy))
+
+        V = h.vertices()
+        x = xy[0]
+        y = xy[1]
+        V.remove(x)
+        V.remove(y)
+        #now we need a Deming subgraph component
+        #can use Deming algorithm on D-{x,y} even if its not connected
+        h = g.subgraph(V)
+        M = [(v,w) for (v,w,u) in h.matching()]
+        S,BlossomTip1,Blossom1,Blossom2 = demings_algorithm(h,M)
+        h = make_deming_subgraph_induced(g,Blossom1,Blossom2)
+        xy = deming_subgraph_min_test(h)
+
+    #print("in get_min_deming_subgraph: h.vertices = {}".format(h.vertices()))
+
+    return h
+
+def is_deming_blossom_pair_graph(g): #has perfect matching, spanning blossom, is min_deming (also alpha = nu-1)
+
+    M = g.matching()
+    nu = len(M)
+
+    if 2*nu != g.order():
+        #print("in is_deming_blossom_pair: graph has no perfect matching!")
+        return None
+
+    #get deming subgraph, make blossom, check that it has cut edge
+    S,BlossomTip,Blossom1,Blossom2 = demings_algorithm(g,M)
+    h = make_deming_subgraph(g,Blossom1,Blossom2) #not induced, just what you get from the matching
+
+    if not has_cut_vertex(h): #a blossom pair must have a cut vertex
+        return False
+    if h.order() != g.order(): #the blossom pair must *span* g
+        return False
+
+    xy = deming_subgraph_min_test(g) #will be None if g is not reducible
+    if xy != None:
+        return False
+
+    return True #all tests passed
+
+def is_deming_K4_graph(g): #has perfect matching, spanning but not spanning blossom, is min deming (also alpha = nu-1)
+
+    M = g.matching()
+    nu = len(M)
+
+    if 2*nu != g.order():
+        #print("in is_deming_blossom_pair: graph has no perfect matching!")
+        return None
+
+    #get deming subgraph, make blossom, check that it has cut edge
+    S,BlossomTip,Blossom1,Blossom2 = demings_algorithm(g,M)
+    h = make_deming_subgraph(g,Blossom1,Blossom2) #not induced, just what you get from the matching
+
+    if h.edge_connectivity() == 1: #in this case deming subgraph is blossom, not K4
+        return False
+    if h.order() != g.order(): #the blossom pair must *span* g
+        return False
+
+    xy = deming_subgraph_min_test(g) #will be None if g is not reducible
+    if xy != None:
+        return False
+
+    return True #all tests passed
+
+###INDEPENDENCE and MATCHING THEORY
+
+def perfect_matching_edges(g): #if g has a perfect matching, output a list of all edges in *some* perfect matching
+
+    pm_edges = [] #perfect matching edges
+    test_edges = [(e[0],e[1]) for e in g.edges()]
+
+    M = g.matching()
+    nu = len(M)
+
+    if 2*nu == g.order():
+        pm_edges = [(e[0],e[1]) for e in M]
+    else:
+        #print("in perfect_matching_edges: graph has no perfect matching!")
+        return pm_edges #which will still be empty
+
+    test_edges = [(e[0],e[1]) for e in test_edges if ((e[0],e[1]) not in pm_edges and (e[1],e[0]) not in pm_edges)]
+    for e in test_edges:
+        x = e[0] # xy in perfect matching iff G-{x,y} has perfect matching
+        y = e[1]
+        V = g.vertices()
+        V.remove(x)
+        V.remove(y)
+        h = g.subgraph(V)
+        Mh = h.matching()
+        nuh = len(Mh)
+        if 2*nuh == h.order():
+            pm_edges.append(e)
+
+    return pm_edges
+
+
+###AUXILLIARY FUNCTIONS
+
+#given deming subgraph D with perfect matching, look for edge xy so that D-{x,y} is not KE
+#return None if no xy
+#else return xy
+
+def get_vertices_from_edges(edge_set):
+    S = Set([])
+    for e in edge_set:
+        #print e
+        if e[0] not in S:
+            S = S.union(Set([e[0]]))
+        if e[1] not in S:
+            S = S.union(Set([e[1]]))
+    return list(S)
