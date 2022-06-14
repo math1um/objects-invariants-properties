@@ -1033,6 +1033,11 @@ def make_alpha_critical(g):
 
 ###DEMING DECOMPOSITION
 
+#for description, see:
+# https://arxiv.org/abs/2205.10598
+# Egerváry graphs: Deming decompositions and independence structure
+# P. Mark Kayll, C. E. Larson
+
 def make_deming_subgraph(H,Blossom1,Blossom2): #don't want induced edges - just blossom edges
     V1 = Blossom1.vertices()
     S1 = Set(V1)
