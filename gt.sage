@@ -1554,7 +1554,9 @@ Graph.spanning_trees_count, Graph.odd_girth, Graph.clustering_average, Graph.clu
 
 sage_intractable_invariants = [Graph.chromatic_number, Graph.chromatic_index, Graph.treewidth,
 Graph.clique_number, Graph.pathwidth, Graph.fractional_chromatic_index, Graph.edge_connectivity,
-Graph.vertex_connectivity, Graph.genus, Graph.crossing_number]
+Graph.vertex_connectivity]
+
+#removed: too slow: , Graph.genus, Graph.crossing_number
 
 for i in sage_efficient_invariants:
     add_to_lists(i, efficient_invariants, all_invariants)
