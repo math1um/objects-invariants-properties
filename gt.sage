@@ -7590,14 +7590,22 @@ for s in D2C_min_3_names:
     g.name(new="diameter_2_critical_" + s)
     add_to_lists(g, diameter_2_critical, all_graphs)
 
+
+#from p.1084 of:
+#Lick, Don R., and Arthur T. White. "k-Degenerate graphs." Canadian Journal of Mathematics 22, no. 5 (1970): 1082-1096.
+lick_white = Graph('H}KGGKJ')
+lick_white.name(new="lick_white")
+add_to_lists(lick_white, graph_objects, all_graphs)
+
+
 #D2Cgraph with alpha<delta
 joshua_CE=Graph('dEulJDp_YKF?K]MMjai[h`rEBmK??A??C_?BC??GO?@?_?I?_?U?O?f?C?Po?_B{?A?m[?CBFw?CE[G?AEMG??abi??CkYo??Rpf???naM~~~???')
-joshua_CE.name("new=joshua_CE")
+joshua_CE.name(new="joshua_CE")
 add_to_lists(joshua_CE, diameter_2_critical, all_graphs)
 
 #D2C graph with alpha<distinct degrees
 joshua_CE2=Graph('[?G?PGqMPxbQBqH|A]V??s?FG?MG?}C?v@?LoG@m?_Ew@?Ko@Clo?eEw?H_m?@kL')
-joshua_CE2.name("new=joshua_CE")
+joshua_CE2.name(new="joshua_CE")
 add_to_lists(joshua_CE2, diameter_2_critical, all_graphs)
 
 
