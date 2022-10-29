@@ -7571,38 +7571,37 @@ A2C_min_size1 = Graph('K~~zwCB?wFoN')
 A2C_min_size1.name(new="A2C_min_size1")
 add_to_lists(A2C_min_size1, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
 
-A2C_min_size2 = Graph()
+A2C_min_size2 = Graph('K~~zwCB?wFoN')
 A2C_min_size2.name(new="A2C_min_size2")
-add_to_lists(A2C_min_size2, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size2, graph_objects, all_graphs)
 
-A2C_min_size3 = Graph()
+A2C_min_size3 = Graph('I~|wGMB_w')
 A2C_min_size3.name(new="A2C_min_size3")
-add_to_lists(A2C_min_size3, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size3, graph_objects, all_graphs)
 
-A2C_min_size4 = Graph()
+A2C_min_size4 = Graph('K~~x}?B?wF_^')
 A2C_min_size4.name(new="A2C_min_size4")
-add_to_lists(A2C_min_size4, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size4, graph_objects, all_graphs)
 
-A2C_min_size5 = Graph()
+A2C_min_size5 = Graph('K~~w~?B?wF_^')
 A2C_min_size5.name(new="A2C_min_size5")
-add_to_lists(A2C_min_size5, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size5, graph_objects, all_graphs)
 
-A2C_min_size6 = Graph()
+A2C_min_size6 = Graph('J~|wGKF_wN_')
 A2C_min_size6.name(new="A2C_min_size6")
-add_to_lists(A2C_min_size6, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size6, graph_objects, all_graphs)
 
-A2C_min_size7 = Graph()
+A2C_min_size7 = Graph('J~{}?KF@wN_')
 A2C_min_size7.name(new="A2C_min_size2")
-add_to_lists(A2C_min_size7, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size7, graph_objects, all_graphs)
 
-A2C_min_size8 = Graph()
+A2C_min_size8 = Graph('I~|wGKF_w')
 A2C_min_size8.name(new="A2C_min_size2")
-add_to_lists(A2C_min_size8, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+add_to_lists(A2C_min_size8, graph_objects, all_graphs)
 
-A2C_min_size9 = Graph()
+A2C_min_size9 = Graph('I~{}?KF@w')
 A2C_min_size9.name(new="A2C_min_size9")
-add_to_lists(A2C_min_size9, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
-
+add_to_lists(A2C_min_size9, graph_objects, all_graphs)
 
 # All order-7 chromatic_index_critical_graphs (and all are overfull)
 n7_chromatic_index_critical_names = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G',
