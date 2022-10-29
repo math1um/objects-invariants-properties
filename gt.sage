@@ -7560,6 +7560,50 @@ for s in alpha_critical_graph_names:
     g.name(new="alpha_critical_"+ s)
     add_to_lists(g, alpha_critical_easy, graph_objects, all_graphs)
 
+#the following 16 graphs have the minimum number of edges for all alpha_2_critical graphs with n=5..12 edges:
+# minimum_edge_A2C_graph_names = ["K~~zwCB?wFoN", "K~~zwCB?{BoN", "K~~x}?B?wF_^", "K~~w~?B?wF_^", "J~|wGKF_wN_", "J~{}?KF@wN_", "I~|wGKF_w", "I~|wGMB_w", "I~{}?KF@w", "H~[G[KN", "H~N?W[N", "G~[G[K", "G~N?W[", "FzEGw", "EzEG", "Dhc"]
+
+#7 of these are already in GT,
+alpha_2_critical_min_size_graphs = [Graph(s) for s in ["Hn_k[^o", "HxCw}V`", "GbilZ_", "FzEKW", "FzEKW", "E|OW", "Dhc"]]
+
+#adding the other 9
+A2C_min_size1 = Graph('K~~zwCB?wFoN')
+A2C_min_size1.name(new="A2C_min_size1")
+add_to_lists(A2C_min_size1, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size2 = Graph()
+A2C_min_size2.name(new="A2C_min_size2")
+add_to_lists(A2C_min_size2, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size3 = Graph()
+A2C_min_size3.name(new="A2C_min_size3")
+add_to_lists(A2C_min_size3, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size4 = Graph()
+A2C_min_size4.name(new="A2C_min_size4")
+add_to_lists(A2C_min_size4, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size5 = Graph()
+A2C_min_size5.name(new="A2C_min_size5")
+add_to_lists(A2C_min_size5, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size6 = Graph()
+A2C_min_size6.name(new="A2C_min_size6")
+add_to_lists(A2C_min_size6, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size7 = Graph()
+A2C_min_size7.name(new="A2C_min_size2")
+add_to_lists(A2C_min_size7, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size8 = Graph()
+A2C_min_size8.name(new="A2C_min_size2")
+add_to_lists(A2C_min_size8, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+A2C_min_size9 = Graph()
+A2C_min_size9.name(new="A2C_min_size9")
+add_to_lists(A2C_min_size9, alpha_2_critical_min_size_graphs, graph_objects, all_graphs)
+
+
 # All order-7 chromatic_index_critical_graphs (and all are overfull)
 n7_chromatic_index_critical_names = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G',
 'FnNLG', 'F~^LW', 'Fll\\G', 'FllNG', 'F~l^G', 'F~|^w', 'F~~^W', 'Fnl^W', 'FlNNG', 'F|\\Kg',
