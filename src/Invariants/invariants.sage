@@ -548,6 +548,8 @@ def resistance_distance_matrix(g):
             R[i,j] = X[i,i] + X[j,j] - 2*X[i,j]
     return R
 
+#the following definition agrees (via computational experiments) with the definition in:
+#Zhou, Bo, and Nenad Trinajstić. "On resistance-distance and Kirchhoff index." Journal of mathematical chemistry 46, no. 1 (2009).
 def kirchhoff_index(g):
     R = resistance_distance_matrix(g)
     return .5*sum(sum(R))
