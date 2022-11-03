@@ -7414,6 +7414,7 @@ print("loaded theorems")
 
 graph_objects = []
 alpha_2_critical_graphs = []
+alpha_2_clique_covering_3_graphs = []
 alpha_critical_easy = []
 alpha_critical_hard = []
 chromatic_index_critical = []
@@ -7429,7 +7430,7 @@ all_graphs = []
 broken_graphs = []
 diameter_2_critical = []
 
-print("graph lists include: graph_objects, all_graphs, alpha_2_critical_graphs, alpha_critical_easy, alpha_critical_hard, chromatic_index_critical, chromatic_index_critical_7, class0graphs, class0small, counter_examples, problem_graphs, sloane_graphs, non_connected_graphs, dimacs_graphs, diameter_2_critical \n")
+print("graph lists include: graph_objects, all_graphs, sage_graphs, alpha_2_critical_graphs, alpha_2_clique_covering_3_graphs, alpha_critical_easy, alpha_critical_hard, chromatic_index_critical, chromatic_index_critical_7, class0graphs, class0small, counter_examples, problem_graphs, sloane_graphs, non_connected_graphs, dimacs_graphs, diameter_2_critical \n")
 
 # HexahedralGraph is CE to (((is_planar)&(is_regular))&(is_bipartite))->(has_residue_equals_alpha)
 # WagnerGraph is a graph for which the Cvetkovic bound is the best upper bound present in the Willis Thesis
@@ -7617,6 +7618,15 @@ add_to_lists(A2C_min_size8, graph_objects, all_graphs)
 A2C_min_size9 = Graph('I~{}?KF@w')
 A2C_min_size9.name(new="A2C_min_size9")
 add_to_lists(A2C_min_size9, graph_objects, all_graphs)
+
+#graphs of order n=5..12 with alpha =2 and clicue_covering number cc = 3
+
+alpha_2_clique_covering_3_names = ['Dhc', 'EzEG', 'F~[KG', 'F~N?W', 'FzEGw', 'G~|wKC', 'G~{}?K', 'G~[G[K', 'G~Kw]C', 'G~N?W[', 'GzK[]K', 'H~~zwE@', 'H~~x}?B', 'H~~w~?B', 'H~|wGMB', 'H~{xwN@', 'H~{}?KF', 'H~{}ECF', 'H~[w]EF', 'H~[G[KN', 'H~Kw]CN', 'H~L]LSN', 'H~N?W[N', 'I~~~z{@_G', 'I~~~x~??W', 'I~~~w~_?W', 'I~~zwCB_W', 'I~~xx{BoG', 'I~~x}?B?w', 'I~~x}B@?w', 'I~~ww~_?w', 'I~~w~?B?w', 'I~|xwN@_w', 'I~|w~?F_w', 'I~|wGKF_w', 'I~|wGMB_w', 'I~{xwN@@w', 'I~{y}Ed@w', 'I~{}UCt@w', 'I~{}?KF@w', 'I~{}ECF@w', 'I~{Ww{FwG', 'I~]w{LJwW', 'I~[w]EFBw', 'I~[w]EF`w', 'I~]ZO}Fwg', 'I~KwW^Bow', 'I~L]LSNBw', 'IznW}Mj[w', 'J~~~~|~?K?_', 'J~~~~{~o?@_', 'J~~~~{^w?@_', 'J~~~~{N{?@_', 'J~~~z{@?[@_', 'J~~~x{~?]?_', 'J~~~x~??WB_', 'J~~~x~?oGB_', 'J~~~w{^w?B_', 'J~~~w~_?WB_', 'J~~~w~_wGB_', 'J~~zx{BoKB_', 'J~~zw~__WF_', 'J~~zwCB?{B_', 'J~~zwCB_[B_', 'J~~xx{BoGF_', 'J~~xy~@ggF_', 'J~~xw~@wGF_', 'J~~xy]qoWF_', 'J~~x}Z@KgF_', 'J~~x}?B?wF_', 'J~~x}B@?wF_', 'J~~x}B@oWF_', 'J~~ww{^?~?_', 'J~~ww~_?wF_', 'J~~ww~_wGF_', 'J~~wzN`egF_', 'J~~w~?B?wF_', 'J~||w~__yJ_', 'J~||wN@_yJ_', 'J~|xwKFo[F_', 'J~|xwN@_{F_', 'J~|x|sF_}H_', 'J~|{w|dwKF_', 'J~|{zZ`cgN_', 'J~|{zJ`@{F_', 'J~|ww~__wN_', 'J~|wzN`egN_', 'J~|w~?F@{F_', 'J~|wGKF_wN_', 'J~{xwN@@}B_', 'J~{y{~BhZL_', 'J~{y}FBhWN_', 'J~{y}Ed@wN_', 'J~{y~BBhWN_', 'J~{ww~B@~@_', 'J~{}UCt@wN_', 'J~{}?KF@wN_', 'J~{}ECF@wN_', 'J~{Ww{FwGN_', 'J~]w~AFQw^_', 'J~]w~AFQ{N_', 'J~[ww]Fo~B_', 'J~]ZO}F`~D_', 'JznW}Mj[~B_', 'K~~~~~~^w?o@', 'K~~~~~~N}??B', 'K~~~~~~F~??B', 'K~~~~~~B~_?B', 'K~~~~|~?G@oB', 'K~~~~{~Nw@w@', 'K~~~~{~o?@_F', 'K~~~~{~oE?_F', 'K~~~~{^F~??F', 'K~~~~{^w?@_F', 'K~~~~{^wF?_F', 'K~~~~{NB~_?F', 'K~~~~{N{?@_F', 'K~~~z{~?]?oF', 'K~~~z{^wC@_N', 'K~~~z{N{?BoF', 'K~~~z{@?WBoF', 'K~~~z{@?[@oF', 'K~~~x{~?]?_N', 'K~~~x|^oLA_N', 'K~~~x{^oN?_N', 'K~~~x|NkU@_N', 'K~~~x~MoHa_N', 'K~~~x~EMU@_N', 'K~~~x~??WB_N', 'K~~~x~?oGB_N', 'K~~~x~?oM@_N', 'K~~~w{^FwB{@', 'K~~~w{^w?B_N', 'K~~~w{^wF?_N', 'K~~~w{nwMa_N', 'K~~~w|fwKq_N', 'K~~~w~awGy_N', 'K~~~w~_?WB_N', 'K~~~w~_wGB_N', 'K~~~w[NB~_?N', 'K~~z|{^wCBgV', 'K~~z|{N{CBgV', 'K~~z|{BoKBgV', 'K~~zx{B?}@oN', 'K~~zx{BoKBoN', 'K~~zx}|?{BwR', 'K~~zx}\\WoFwF', 'K~~z{{^Wn?oN', 'K~~z{|mwKa_^', 'K~~z{|eeV@_^', 'K~~z{|awGFoN', 'K~~zw{^wCB_^', 'K~~zw|fwKq_^', 'K~~zw}\\wJE_^', 'K~~zw}\\wNC_^', 'K~~zw}\\w_FoN', 'K~~zw~__WF_^', 'K~~zw~__[B_^', 'K~~zw~_wKB_^', 'K~~zwCB?wFoN', 'K~~zwCB?{BoN', 'K~~xx{N{?FwF', 'K~~xx{BoGF_^', 'K~~xx{BoGFwF', 'K~~xy}^o\\DkZ', 'K~~xy~@o\\D_^', 'K~~xy~@ggF_^', 'K~~xy~_o\\D_^', 'K~~xw{^oWF{B', 'K~~xw{nwMa_^', 'K~~xw~@wGF_^', 'K~~xw~@wMB_^', 'K~~xw~_wMB_^', 'K~~x}^L{Hc_^', 'K~~x}^opXt?^', 'K~~x}^ooXd_^', 'K~~x}^ooXd`z', 'K~~xy\\NkeB_^', 'K~~xy\\rkk]wN', 'K~~xy]qoWF_^', 'K~~xy]qo]B_^', 'K~~x}W^wPd_^', 'K~~x}Z@oXd_^', 'K~~x}Z@KgF_^', 'K~~x}?B?wF_^', 'K~~x}B@?wF_^', 'K~~x}B@oWF_^', 'K~~ww{^?~?_^', 'K~~ww|fev@_^', 'K~~ww~_?wF_^', 'K~~ww~_wGF_^', 'K~~wzN`egF_^', 'K~~w~?B?wF_^', 'K~~wW[NBwF}@', 'K~||}{Fo\\Dkf', 'K~||w{FwKFgn', 'K~||w~__{Fgn', 'K~||w~__yJwN', 'K~||}[u{KFgn', 'K~||w[N_yJ}B', 'K~|xw{FwKFwN', 'K~|xw}Z@~GwN', 'K~|xyLFp[FvP', 'K~|xwKFo[F_~', 'K~|xwN@_{Fo^', 'K~|x|sF_}HwN', 'K~|x|sF_}Hwf', 'K~|{{{NXKF}B', 'K~|{{{FXKF{F', 'K~|{w}Z@~@kj', 'K~|{w|dwGNo^', 'K~|{w|dwKFo^', 'K~|{w|dwKF{F', 'K~|{zZ`cgN_~', 'K~|{zZ`ckF_~', 'K~|{zGNB{F}H', 'K~|ww~__wN_~', 'K~|ww~__wN{F', 'K~|wx^`sgNo^', 'K~|wzN`egNo^', 'K~|w~?F@{F_~', 'K~|w~?F@{Fo^', 'K~{x}[uB}B}D', 'K~{x}[u{GNwN', 'K~{xwN@@}B_~', 'K~{y{~BhZL_~', 'K~{y{~BhZLw^', 'K~{yw~BhWN{F', 'K~{y}V`hXl_~', 'K~{y}FBhWN_~', 'K~{y}Ed@wN_~', 'K~{y~BBhWN_~', 'K~{ww~B@~@_~', 'K~{}]CNBxj}H', 'K~{}UCt@wN_~', 'K~]}w}FQxZ{F', 'K~]}w~BhZR{F', 'K~]yw|Jo|J{F', 'K~]wx]FQ~ByV', 'K~K}][No~_fd']
+
+for s in alpha_2_clique_covering_3_names:
+    g = Graph(s)
+    g.name(new="alpha_2_cc_3_"+ s)
+    add_to_lists(g, alpha_2_clique_covering_3_graphs, all_graphs)
 
 # All order-7 chromatic_index_critical_graphs (and all are overfull)
 n7_chromatic_index_critical_names = ['FhCKG', 'FzCKW', 'FzNKW', 'FlSkG', 'Fn]kG', 'FlLKG', 'FnlkG', 'F~|{G', 'FnlLG', 'F~|\\G',
