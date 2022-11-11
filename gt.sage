@@ -1651,7 +1651,7 @@ def max_common_neighbors(g):
     2
     """
     max = 0
-    V = g.vertices()
+    V = g.vertices(sort=True)
     n = g.order()
     for i in range(n):
         for j in range(n):
@@ -1685,7 +1685,7 @@ def min_common_neighbors(g):
     """
     n = g.order()
     min = n
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for i in range(n):
         for j in range(n):
             if i < j:
@@ -1717,7 +1717,7 @@ def mean_common_neighbors(g):
         sage: mean_common_neighbors(k4)
         2
     """
-    V = g.vertices()
+    V = g.vertices(sort=True)
     n = g.order()
     sum = 0
     for i in range(n):
@@ -1962,13 +1962,13 @@ def fractional_alpha(g):
         sage: fractional_alpha(p5)
         3.0
     """
-    if len(g.vertices()) == 0:
+    if len(g.vertices(sort=True)) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=True)
     x = p.new_variable(nonnegative=True)
-    p.set_objective(sum(x[v] for v in g.vertices()))
+    p.set_objective(sum(x[v] for v in g.vertices(sort=True)))
 
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         p.add_constraint(x[v], max=1)
 
     for (u,v) in g.edge_iterator(labels=False):
@@ -1988,13 +1988,13 @@ def fractional_covering(g):
         sage: fractional_covering(p5)
         2.0
     """
-    if len(g.vertices()) == 0:
+    if len(g.vertices(sort=True)) == 0:
         return 0
     p = MixedIntegerLinearProgram(maximization=False)
     x = p.new_variable(nonnegative=True)
-    p.set_objective(sum(x[v] for v in g.vertices()))
+    p.set_objective(sum(x[v] for v in g.vertices(sort=True)))
 
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         p.add_constraint(x[v], max=1)
 
     for (u,v) in g.edge_iterator(labels=False):
@@ -2183,7 +2183,7 @@ def szekeres_wilf(g):
     #removes a vertex, if possible, of degree <= i
     def remove_vertex_of_degree(gc,i):
         Dc = gc.degree()
-        V = gc.vertices()
+        V = gc.vertices(sort=True)
         #print "Dc is %s, V is %s" %(Dc,V)
         mind = min(Dc)
         #print "mind is %s" %mind
@@ -2242,7 +2242,7 @@ def randic(g):
     Randic, Milan. "Characterization of molecular branching." Journal of the American Chemical Society 97.23 (1975): 6609-6615.
     """
     D = g.degree()
-    V = g.vertices()
+    V = g.vertices(sort=True)
     if min(D) == 0:
          return oo
     sum = 0
@@ -2284,9 +2284,9 @@ def max_even_minus_even_horizontal_component(g):
 
     distances = g.distance_all_pairs()
     mx=0
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         Even=[]
-        for w in g.vertices():
+        for w in g.vertices(sort=True):
             if distances[v][w]%2==0:
                 Even.append(w)
 
@@ -2414,7 +2414,7 @@ add_to_lists(brinkmann_steffen, efficient_invariants, all_invariants)
 def alpha_critical_optimum(g, alpha_critical_names):
 
     n = g.order()
-    V = g.vertices()
+    V = g.vertices(sort=True)
     #g.show()
 
     alpha_critical_graph_names = []
@@ -2478,7 +2478,7 @@ def alpha_critical_optimum(g, alpha_critical_names):
 def find_stable_ones_vertices(g):
     F = []
     alpha_f = fractional_alpha(g)
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         gc = copy(g)
         gc.delete_vertices(closed_neighborhood(gc, v))
         alpha_f_prime = fractional_alpha(gc)
@@ -2502,7 +2502,7 @@ add_to_lists(card_independence_irreducible_part, efficient_invariants, all_invar
 def find_independence_irreducible_part(g):
     X = find_KE_part(g)
     SX = Set(X)
-    Vertices = Set(g.vertices())
+    Vertices = Set(g.vertices(sort=True))
     return list(Vertices.difference(SX))
 
 #returns KE part guaranteed by Independence Decomposition Theorem
@@ -2673,7 +2673,7 @@ def transmission(g):
             summation += (i*(i+1))/2
         return summation * 2
     else:
-        V = g.vertices()
+        V = g.vertices(sort=True)
         D = g.distance_all_pairs()
         return sum([D[v][w] for v in V for w in V if v != w])
 add_to_lists(transmission, efficient_invariants, all_invariants)
@@ -2702,7 +2702,7 @@ def bavelas_index(g):
         computes sum of distances from v to all other vertices
         """
         sum = 0
-        for w in g.vertices():
+        for w in g.vertices(sort=True):
             sum += D[v][w]
         return sum
 
@@ -2742,13 +2742,13 @@ def beauchamp_index(g):
 
     def s_aux(v): #computes sum of distances from v to all other vertices
         sum = 0
-        for w in g.vertices():
+        for w in g.vertices(sort=True):
             sum += D[v][w]
         return sum
 
     sum_final = 0
 
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         sum_final += 1/s_aux(v)
     return sum_final
 
@@ -2831,7 +2831,7 @@ def local_density(g, vertex = None):
     """
     if vertex == None:
         densities = []
-        for v in g.vertices():
+        for v in g.vertices(sort=True):
             densities.append(g.subgraph(g[v] + [v]).density())
         return densities
     return g.subgraph(g[vertex] + [vertex]).density()
@@ -2959,7 +2959,7 @@ add_to_lists(max_betweenness_centrality, efficient_invariants, all_invariants)
 
 def mean_betweenness_centrality(g):
     centralities = g.centrality_betweenness(exact=True)
-    return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
+    return sum([centralities[vertex] for vertex in g.vertices(sort=True)]) / g.order()
 add_to_lists(mean_betweenness_centrality, efficient_invariants, all_invariants)
 
 def min_centrality_closeness(g):
@@ -2974,7 +2974,7 @@ add_to_lists(max_centrality_closeness, efficient_invariants, all_invariants)
 
 def mean_centrality_closeness(g):
     centralities = g.centrality_closeness()
-    return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
+    return sum([centralities[vertex] for vertex in g.vertices(sort=True)]) / g.order()
 add_to_lists(mean_centrality_closeness, efficient_invariants, all_invariants)
 
 def min_centrality_degree(g):
@@ -2989,7 +2989,7 @@ add_to_lists(max_centrality_degree, efficient_invariants, all_invariants)
 
 def mean_centrality_degree(g):
     centralities = g.centrality_degree()
-    return sum([centralities[vertex] for vertex in g.vertices()]) / g.order()
+    return sum([centralities[vertex] for vertex in g.vertices(sort=True)]) / g.order()
 add_to_lists(mean_centrality_degree, efficient_invariants, all_invariants)
 
 def homo_lumo_gap(g):
@@ -3036,14 +3036,14 @@ def simplicial_vertices(g):
     The number of simplicial vertices in g.
     v is simplicial if the induced nieghborhood is a clique.
     """
-    return sum( is_simplicial_vertex(g,v) for v in g.vertices() )
+    return sum( is_simplicial_vertex(g,v) for v in g.vertices(sort=True) )
 add_to_lists(simplicial_vertices, efficient_invariants, all_invariants)
 
 def first_zagreb_index(g):
     """
     The sume of squares of the degrees
     """
-    return sum(g.degree(v)**2 for v in g.vertices())
+    return sum(g.degree(v)**2 for v in g.vertices(sort=True))
 add_to_lists(first_zagreb_index, efficient_invariants, all_invariants)
 
 def degree_two_vertices(g):
@@ -3092,7 +3092,7 @@ def lanzhou_index(g):
     1000
     """
     n = g.order()
-    return sum( ((n-1) - g.degree(v)) * (g.degree(v) ** 2) for v in g.vertices() )
+    return sum( ((n-1) - g.degree(v)) * (g.degree(v) ** 2) for v in g.vertices(sort=True) )
 add_to_lists(lanzhou_index, efficient_invariants, all_invariants)
 
 def friendship_number(g):
@@ -3105,7 +3105,7 @@ def friendship_number(g):
     0
     """
     from itertools import combinations
-    return sum((1 if len(common_neighbors(g, u, v))==1 else 0) for (u,v) in combinations(g.vertices(), 2))
+    return sum((1 if len(common_neighbors(g, u, v))==1 else 0) for (u,v) in combinations(g.vertices(sort=True), 2))
 add_to_lists(friendship_number, efficient_invariants, all_invariants)
 
 
@@ -3269,7 +3269,7 @@ def bipartite_number(g):
     """
     if g.is_bipartite():
         return g.order()
-    return len(max_bipartite_set(g, [], g.vertices()))
+    return len(max_bipartite_set(g, [], g.vertices(sort=True)))
 add_to_lists(bipartite_number, intractable_invariants, all_invariants)
 
 # Needs Enhancement
@@ -3284,7 +3284,7 @@ def edge_bipartite_number(g):
         sage: edge_bipartite_number(graphs.ButterflyGraph())
         2
     """
-    return g.subgraph(max_bipartite_set(g, [], g.vertices())).size()
+    return g.subgraph(max_bipartite_set(g, [], g.vertices(sort=True))).size()
 add_to_lists(edge_bipartite_number, intractable_invariants, all_invariants)
 
 def cheeger_constant(g):
@@ -3301,7 +3301,7 @@ def cheeger_constant(g):
     n = g.order()
     upper = floor(n/2)
 
-    v = g.vertices()
+    v = g.vertices(sort=True)
     SetV = Set(v)
 
     temp = g.order()
@@ -3353,7 +3353,7 @@ def toughness(g):
     """
     order = g.order()
     t = Infinity
-    for x in Subsets(g.vertices()):
+    for x in Subsets(g.vertices(sort=True)):
         if x and len(x) != order: # Proper, non-empty subset
             H = copy(g)
             H.delete_vertices(x)
@@ -3374,7 +3374,7 @@ def sigma_k(g,k):
         2
     """
     sigma = Infinity
-    for S in Subsets(g.vertices(), k):
+    for S in Subsets(g.vertices(sort=True), k):
         if g.is_independent_set(S):
             sigma = min(sigma, sum([g.degree(x) for x in S]) )
     return sigma
@@ -3561,7 +3561,7 @@ def has_twin(g):
 
     -Boolean
     """
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         if is_v_twin(g,v):
             return True
     return False
@@ -3608,7 +3608,7 @@ add_to_lists(has_star_center, efficiently_computable_properties, all_properties)
 #a graph has a pair of vertices who dominate the remaining vertices
 #remove each vertex and see if the remaining graph has a star center
 def has_double_star_center(g):
-    V=g.vertices()
+    V=g.vertices(sort=True)
     for v in V:
         Hv=copy(V)
         Hv.remove(v)
@@ -3682,7 +3682,7 @@ def pairs_have_unique_common_neighbor(g):
         True
     """
     from itertools import combinations
-    for (u,v) in combinations(g.vertices(), 2):
+    for (u,v) in combinations(g.vertices(sort=True), 2):
         if len(common_neighbors(g, u, v)) != 1:
             return False
     return True
@@ -3739,7 +3739,7 @@ def is_distance_transitive(g):
 
     for d in g.distances_distribution():
         sameDistPairs = []
-        for (u,v) in combinations(g.vertices(), 2):
+        for (u,v) in combinations(g.vertices(sort=True), 2):
             # By default, no entry if disconnected. We substitute +Infinity.
             if dist_dict[u].get(v, +Infinity) == d:
                 sameDistPairs.append(Set([u,v]))
@@ -3898,7 +3898,7 @@ def is_genghua_fan(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
-    V = g.vertices()
+    V = g.vertices(sort=True)
     n = g.order()
     for i in range(n):
         for j in range(i):
@@ -3989,7 +3989,7 @@ def is_generalized_dirac(g):
 
     if not is_two_connected(g):
         return False
-    for (u,v) in combinations(g.vertices(), 2):
+    for (u,v) in combinations(g.vertices(sort=True), 2):
         if not g.has_edge(u,v):
             if len(neighbors_set(g,[u,v])) < (2.0 * g.order() - 1) / 3:
                 return False
@@ -4242,7 +4242,7 @@ def is_lindquester(g):
         return False
     D = g.distance_all_pairs()
     n = g.order()
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for i in range(n):
         for j in range(i):
             if D[V[i]][V[j]] == 2:
@@ -4947,7 +4947,7 @@ def has_empty_KE_part(g):
     """
     b = bipartite_double_cover(g)
     alpha = b.order() - b.matching(value_only=True)
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         test = b.copy()
         test.delete_vertices(closed_neighborhood(b,[(v,0), (v,1)]))
         alpha_test = test.order() - test.matching(value_only=True) + 2
@@ -5882,7 +5882,7 @@ def is_factor_critical(g):
     """
     if g.order() % 2 == 0:
         return False
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         gc = copy(g)
         gc.delete_vertex(v)
         if not gc.has_perfect_matching:
@@ -5906,7 +5906,7 @@ def find_twins_of_vertex(g,v):
 
     """
     L = []
-    V = g.vertices()
+    V = g.vertices(sort=True)
     D = g.distance_all_pairs()
     for i in range(g.order()):
         w = V[i]
@@ -5973,7 +5973,7 @@ def find_twin(g):
     -Pair of vertices or None
 
     """
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for v in V:
         Nv = set(g.neighbors(v))
         for w in V:
@@ -5999,7 +5999,7 @@ def find_neighbor_twins(g):
     -Pair of vertices or None
 
     """
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for v in V:
         Nv = g.neighbors(v)
         for w in Nv:
@@ -6131,10 +6131,10 @@ def has_Havel_Hakimi_property(g, v):
     if len(g.neighbors(v)) == 0: return True
 
     #handle the case where v is adjacent with all vertices
-    if len(g.neighbors(v)) == len(g.vertices()) - 1: return True
+    if len(g.neighbors(v)) == len(g.vertices(sort=True)) - 1: return True
 
     return (min(g.degree(nv) for nv in g.neighbors(v)) >=
-        max(g.degree(nnv) for nnv in g.vertices() if nnv != v and nnv not in g.neighbors(v)))
+        max(g.degree(nnv) for nnv in g.vertices(sort=True) if nnv != v and nnv not in g.neighbors(v)))
 
 #NOTE: the relevant theorem is a forbidden subgraph characterization
 #its not clear if its theoretically efficient. the written code look at all subsets and is thus intractible
@@ -6161,7 +6161,7 @@ def has_strong_Havel_Hakimi_property(g):
         sage: has_strong_Havel_Hakimi_property(Graph('E{CW'))
         True
     """
-    for S in Subsets(g.vertices()):
+    for S in Subsets(g.vertices(sort=True)):
         if len(S)>2:
             H = g.subgraph(S)
             Delta = max_degree(H)
@@ -6289,7 +6289,7 @@ def has_simplicial_vertex(g):
     """
     v is a simplicial vertex if induced neighborhood is a clique.
     """
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         if is_simplicial_vertex(g, v):
             return True
     return False
@@ -6325,7 +6325,7 @@ def is_two_tree(g):
     # We can just recurse from any degree-2 vertex; no need to test is_two_tree(g-w) if is_two_tree(g-v) returns False.
     # Intuition why: if neighborhood of a degree-2 v is not a triangle, it won't become one if we remove w (so clique check OK),
     # and, removing a degree-2 vertex of one triangle cannot destroy another triangle (so recursion OK).
-    degree_two_vertices = (v for v in g.vertices() if g.degree(v) == 2)
+    degree_two_vertices = (v for v in g.vertices(sort=True) if g.degree(v) == 2)
     try:
         v = next(degree_two_vertices)
     except StopIteration: # Empty list. No degree 2 vertices.
@@ -6435,12 +6435,12 @@ def has_two_walk(g):
     sage: has_two_walk(graphs.WindmillGraph(3,3))
     False
     """
-    for init_vertex in g.vertices():
+    for init_vertex in g.vertices(sort=True):
         path_stack = [[init_vertex]]
         while path_stack:
             path = path_stack.pop()
             for neighbor in g.neighbors(path[-1]):
-                if neighbor == path[0] and all(v in path for v in g.vertices()):
+                if neighbor == path[0] and all(v in path for v in g.vertices(sort=True)):
                     return True
                 elif path.count(neighbor) < 2:
                     path_stack.append(path + [neighbor])
@@ -6689,7 +6689,7 @@ def is_maximal_triangle_free(g):
 add_to_lists(is_maximal_triangle_free, efficiently_computable_properties, all_properties)
 
 def is_locally_two_connected(g):
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         S=g.neighbors(v)
         if len(S)>2: #not defined unless there are at least 3 neighbors
             h=g.subgraph(S)
@@ -6718,7 +6718,7 @@ def is_k_bootstrap_good(G,k):
     -Boolean
     """
     G.relabel()
-    for s in itertools.combinations(G.vertices(), k):
+    for s in itertools.combinations(G.vertices(sort=True), k):
         if k_percolate(G,set(s),k):
             return True
     return False
@@ -6740,7 +6740,7 @@ def k_percolate(G,infected,k):
 
     -Boolean
     """
-    uninfected = set(G.vertices()) - set(infected)
+    uninfected = set(G.vertices(sort=True)) - set(infected)
     newInfections = True
     while newInfections:
         newInfections = False
@@ -6942,7 +6942,7 @@ def localise(f, name=None, documentation=None):
     """
     #create a local version of f
     def localised_function(g):
-        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices())
+        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices(sort=True))
 
     #we set a nice name for the new function
     if name is not None:

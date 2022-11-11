@@ -66,7 +66,7 @@ def has_twin(g):
 
     -Boolean
     """
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         if is_v_twin(g,v):
             return True
     return False
@@ -113,7 +113,7 @@ add_to_lists(has_star_center, efficiently_computable_properties, all_properties)
 #a graph has a pair of vertices who dominate the remaining vertices
 #remove each vertex and see if the remaining graph has a star center
 def has_double_star_center(g):
-    V=g.vertices()
+    V=g.vertices(sort=True)
     for v in V:
         Hv=copy(V)
         Hv.remove(v)
@@ -187,7 +187,7 @@ def pairs_have_unique_common_neighbor(g):
         True
     """
     from itertools import combinations
-    for (u,v) in combinations(g.vertices(), 2):
+    for (u,v) in combinations(g.vertices(sort=True), 2):
         if len(common_neighbors(g, u, v)) != 1:
             return False
     return True
@@ -244,7 +244,7 @@ def is_distance_transitive(g):
 
     for d in g.distances_distribution():
         sameDistPairs = []
-        for (u,v) in combinations(g.vertices(), 2):
+        for (u,v) in combinations(g.vertices(sort=True), 2):
             # By default, no entry if disconnected. We substitute +Infinity.
             if dist_dict[u].get(v, +Infinity) == d:
                 sameDistPairs.append(Set([u,v]))
@@ -403,7 +403,7 @@ def is_genghua_fan(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
-    V = g.vertices()
+    V = g.vertices(sort=True)
     n = g.order()
     for i in range(n):
         for j in range(i):
@@ -494,7 +494,7 @@ def is_generalized_dirac(g):
 
     if not is_two_connected(g):
         return False
-    for (u,v) in combinations(g.vertices(), 2):
+    for (u,v) in combinations(g.vertices(sort=True), 2):
         if not g.has_edge(u,v):
             if len(neighbors_set(g,[u,v])) < (2.0 * g.order() - 1) / 3:
                 return False
@@ -747,7 +747,7 @@ def is_lindquester(g):
         return False
     D = g.distance_all_pairs()
     n = g.order()
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for i in range(n):
         for j in range(i):
             if D[V[i]][V[j]] == 2:
@@ -1452,7 +1452,7 @@ def has_empty_KE_part(g):
     """
     b = bipartite_double_cover(g)
     alpha = b.order() - b.matching(value_only=True)
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         test = b.copy()
         test.delete_vertices(closed_neighborhood(b,[(v,0), (v,1)]))
         alpha_test = test.order() - test.matching(value_only=True) + 2
@@ -2387,7 +2387,7 @@ def is_factor_critical(g):
     """
     if g.order() % 2 == 0:
         return False
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         gc = copy(g)
         gc.delete_vertex(v)
         if not gc.has_perfect_matching:
@@ -2411,7 +2411,7 @@ def find_twins_of_vertex(g,v):
 
     """
     L = []
-    V = g.vertices()
+    V = g.vertices(sort=True)
     D = g.distance_all_pairs()
     for i in range(g.order()):
         w = V[i]
@@ -2478,7 +2478,7 @@ def find_twin(g):
     -Pair of vertices or None
 
     """
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for v in V:
         Nv = set(g.neighbors(v))
         for w in V:
@@ -2504,7 +2504,7 @@ def find_neighbor_twins(g):
     -Pair of vertices or None
 
     """
-    V = g.vertices()
+    V = g.vertices(sort=True)
     for v in V:
         Nv = g.neighbors(v)
         for w in Nv:
@@ -2636,10 +2636,10 @@ def has_Havel_Hakimi_property(g, v):
     if len(g.neighbors(v)) == 0: return True
 
     #handle the case where v is adjacent with all vertices
-    if len(g.neighbors(v)) == len(g.vertices()) - 1: return True
+    if len(g.neighbors(v)) == len(g.vertices(sort=True)) - 1: return True
 
     return (min(g.degree(nv) for nv in g.neighbors(v)) >=
-        max(g.degree(nnv) for nnv in g.vertices() if nnv != v and nnv not in g.neighbors(v)))
+        max(g.degree(nnv) for nnv in g.vertices(sort=True) if nnv != v and nnv not in g.neighbors(v)))
 
 #NOTE: the relevant theorem is a forbidden subgraph characterization
 #its not clear if its theoretically efficient. the written code look at all subsets and is thus intractible
@@ -2666,7 +2666,7 @@ def has_strong_Havel_Hakimi_property(g):
         sage: has_strong_Havel_Hakimi_property(Graph('E{CW'))
         True
     """
-    for S in Subsets(g.vertices()):
+    for S in Subsets(g.vertices(sort=True)):
         if len(S)>2:
             H = g.subgraph(S)
             Delta = max_degree(H)
@@ -2794,7 +2794,7 @@ def has_simplicial_vertex(g):
     """
     v is a simplicial vertex if induced neighborhood is a clique.
     """
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         if is_simplicial_vertex(g, v):
             return True
     return False
@@ -2830,7 +2830,7 @@ def is_two_tree(g):
     # We can just recurse from any degree-2 vertex; no need to test is_two_tree(g-w) if is_two_tree(g-v) returns False.
     # Intuition why: if neighborhood of a degree-2 v is not a triangle, it won't become one if we remove w (so clique check OK),
     # and, removing a degree-2 vertex of one triangle cannot destroy another triangle (so recursion OK).
-    degree_two_vertices = (v for v in g.vertices() if g.degree(v) == 2)
+    degree_two_vertices = (v for v in g.vertices(sort=True) if g.degree(v) == 2)
     try:
         v = next(degree_two_vertices)
     except StopIteration: # Empty list. No degree 2 vertices.
@@ -2940,12 +2940,12 @@ def has_two_walk(g):
     sage: has_two_walk(graphs.WindmillGraph(3,3))
     False
     """
-    for init_vertex in g.vertices():
+    for init_vertex in g.vertices(sort=True):
         path_stack = [[init_vertex]]
         while path_stack:
             path = path_stack.pop()
             for neighbor in g.neighbors(path[-1]):
-                if neighbor == path[0] and all(v in path for v in g.vertices()):
+                if neighbor == path[0] and all(v in path for v in g.vertices(sort=True)):
                     return True
                 elif path.count(neighbor) < 2:
                     path_stack.append(path + [neighbor])
@@ -3194,7 +3194,7 @@ def is_maximal_triangle_free(g):
 add_to_lists(is_maximal_triangle_free, efficiently_computable_properties, all_properties)
 
 def is_locally_two_connected(g):
-    for v in g.vertices():
+    for v in g.vertices(sort=True):
         S=g.neighbors(v)
         if len(S)>2: #not defined unless there are at least 3 neighbors
             h=g.subgraph(S)
@@ -3223,7 +3223,7 @@ def is_k_bootstrap_good(G,k):
     -Boolean
     """
     G.relabel()
-    for s in itertools.combinations(G.vertices(), k):
+    for s in itertools.combinations(G.vertices(sort=True), k):
         if k_percolate(G,set(s),k):
             return True
     return False
@@ -3245,7 +3245,7 @@ def k_percolate(G,infected,k):
 
     -Boolean
     """
-    uninfected = set(G.vertices()) - set(infected)
+    uninfected = set(G.vertices(sort=True)) - set(infected)
     newInfections = True
     while newInfections:
         newInfections = False
@@ -3447,7 +3447,7 @@ def localise(f, name=None, documentation=None):
     """
     #create a local version of f
     def localised_function(g):
-        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices())
+        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices(sort=True))
 
     #we set a nice name for the new function
     if name is not None:
