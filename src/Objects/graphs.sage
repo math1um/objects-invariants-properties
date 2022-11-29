@@ -1646,7 +1646,7 @@ sequence [3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1] which has residue equal to 5.
 pepper_residue_graph = graphs.CompleteGraph(3)
 pepper_residue_graph.add_edges([(i,i+3) for i in range(3)])
 pepper_residue_graph = pepper_residue_graph.disjoint_union(pepper_residue_graph)
-pepper_residue_graph.add_edges([(0,v) for v in pepper_residue_graph.vertices() if pepper_residue_graph.degree(v)==1])
+pepper_residue_graph.add_edges([(0,v) for v in pepper_residue_graph.vertices(sort=true) if pepper_residue_graph.degree(v)==1])
 pepper_residue_graph.relabel()
 pepper_residue_graph.name(new="pepper_residue_graph")
 add_to_lists(pepper_residue_graph, graph_objects, all_graphs)
@@ -2838,8 +2838,8 @@ henning_14.name(new = "henning fig 14")
 add_to_lists(henning_14, graph_objects, all_graphs)
 
 henning_15 = graphs.CycleGraph(4)
-for v in henning_15.vertices():
-    count = len(henning_15.vertices())
+for v in henning_15.vertices(sort=true):
+    count = len(henning_15.vertices(sort=true))
     henning_15.add_cycle(range(count,count+10))
     henning_15.add_edge((v, count))
 henning_15.name(new = "henning fig 15")

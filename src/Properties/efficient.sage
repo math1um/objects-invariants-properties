@@ -1,12 +1,5 @@
-
-
-# GRAPH PROPERTIES
-
-all_properties = []
-
 efficiently_computable_properties = []
 
-intractable_properties = []
 
 def is_ramanujan(g):
     """
@@ -30,29 +23,6 @@ def is_ramanujan(g):
     return X <= numerical_approx(2*sqrt(d-1))
 add_to_lists(is_ramanujan, efficiently_computable_properties,all_properties)
 
-def is_v_twin(g,v):
-    """
-    Return whteher N[v]=N[w] for each neighbor w of v.
-
-    INPUT:
-
-    -``g``-- Sage Graph
-
-    -``v``-- Integer
-
-    OUTPUT:
-
-    -Boolean
-    """
-    Nv=g.neighbors(v)
-    Nvp=Nv+[v]
-    for w in Nv:
-        Nw=g.neighbors(w)
-        Nw.append(w)
-        if Set(Nvp) == Set(Nw):
-            return True
-    return False
-#add_to_lists(is_v_twin,all_properties) #a test for single vertex, not a graph property
 
 def has_twin(g):
     """
@@ -66,11 +36,12 @@ def has_twin(g):
 
     -Boolean
     """
-    for v in g.vertices(sort=True):
+    for v in g.vertices(sort=true):
         if is_v_twin(g,v):
             return True
     return False
 add_to_lists(has_twin,efficiently_computable_properties,all_properties)
+
 
 def is_twin_free(g):
     """
@@ -86,6 +57,7 @@ def is_twin_free(g):
     """
     return not has_twin(g)
 add_to_lists(is_twin_free, efficiently_computable_properties, all_properties)
+
 
 def has_star_center(g):
     """
@@ -110,10 +82,11 @@ def has_star_center(g):
     return (g.order() - 1) in g.degree()
 add_to_lists(has_star_center, efficiently_computable_properties, all_properties)
 
+
 #a graph has a pair of vertices who dominate the remaining vertices
 #remove each vertex and see if the remaining graph has a star center
 def has_double_star_center(g):
-    V=g.vertices(sort=True)
+    V=g.vertices(sort=true)
     for v in V:
         Hv=copy(V)
         Hv.remove(v)
@@ -122,6 +95,7 @@ def has_double_star_center(g):
             return True
     return False
 add_to_lists(has_double_star_center, efficiently_computable_properties, all_properties)
+
 
 def is_complement_of_chordal(g):
     """
@@ -156,6 +130,7 @@ def is_complement_of_chordal(g):
     return g.complement().is_chordal()
 add_to_lists(is_complement_of_chordal, efficiently_computable_properties, all_properties)
 
+
 def pairs_have_unique_common_neighbor(g):
     """
     Evalaute if each pair of vertices in ``g`` has exactly one common neighbor.
@@ -187,72 +162,12 @@ def pairs_have_unique_common_neighbor(g):
         True
     """
     from itertools import combinations
-    for (u,v) in combinations(g.vertices(sort=True), 2):
+    for (u,v) in combinations(g.vertices(sort=true), 2):
         if len(common_neighbors(g, u, v)) != 1:
             return False
     return True
 add_to_lists(pairs_have_unique_common_neighbor, efficiently_computable_properties, all_properties)
 
-def is_distance_transitive(g):
-    """
-    Evaluates if graph ``g`` is distance transitive.
-
-    A graph is distance transitive if all a,b,u,v satisfy that
-    dist(a,b) = dist(u,v) implies there's an automorphism with a->u and b->v.
-
-    EXAMPLES:
-
-        sage: is_distance_transitive(graphs.CompleteGraph(4))
-        True
-
-        sage: is_distance_transitive(graphs.PetersenGraph())
-        True
-
-        sage: is_distance_transitive(Graph(3))
-        True
-
-        sage: is_distance_transitive(graphs.ShrikhandeGraph())
-        False
-
-    This method accepts disconnected graphs. ::
-
-        sage: is_distance_transitive(graphs.CompleteGraph(3).disjoint_union(graphs.CompleteGraph(3)))
-        True
-
-        sage: is_distance_transitive(graphs.CompleteGraph(2).disjoint_union(Graph(2)))
-        False
-
-    Vacuous cases ::
-
-        sage: is_distance_transitive(Graph(0))
-        True
-
-        sage: is_distance_transitive(Graph(1))
-        True
-
-        sage: is_distance_transitive(Graph(2))
-        True
-
-    ... WARNING ::
-
-        This method calls, via the automorphism group, the Gap package. This
-        package behaves badly with most threading or multiprocessing tools.
-    """
-    from itertools import combinations
-    dist_dict = g.distance_all_pairs()
-    auto_group = g.automorphism_group()
-
-    for d in g.distances_distribution():
-        sameDistPairs = []
-        for (u,v) in combinations(g.vertices(sort=True), 2):
-            # By default, no entry if disconnected. We substitute +Infinity.
-            if dist_dict[u].get(v, +Infinity) == d:
-                sameDistPairs.append(Set([u,v]))
-        if len(sameDistPairs) >= 2:
-            if len(sameDistPairs) != len(auto_group.orbit(sameDistPairs[0], action = "OnSets")):
-                return False
-    return True
-add_to_lists(is_distance_transitive, intractable_properties, all_properties)
 
 def is_dirac(g):
     """
@@ -277,6 +192,7 @@ def is_dirac(g):
     n = g.order()
     return n > 2 and min(g.degree()) >= n/2
 add_to_lists(is_dirac, efficiently_computable_properties, all_properties)
+
 
 def is_ore(g):
     """
@@ -320,6 +236,7 @@ def is_ore(g):
     return True
 add_to_lists(is_ore, efficiently_computable_properties, all_properties)
 
+
 def is_haggkvist_nicoghossian(g):
     r"""
     Evaluates if g is 2-connected and min degree >= (n + vertex_connectivity)/3.
@@ -359,6 +276,7 @@ def is_haggkvist_nicoghossian(g):
     k = g.vertex_connectivity()
     return k >= 2 and min(g.degree()) >= (1.0/3) * (g.order() + k)
 add_to_lists(is_haggkvist_nicoghossian , efficiently_computable_properties, all_properties)
+
 
 def is_genghua_fan(g):
     r"""
@@ -403,7 +321,7 @@ def is_genghua_fan(g):
         return False
     D = g.degree()
     Dist = g.distance_all_pairs()
-    V = g.vertices(sort=True)
+    V = g.vertices(sort=true)
     n = g.order()
     for i in range(n):
         for j in range(i):
@@ -412,44 +330,6 @@ def is_genghua_fan(g):
     return True
 add_to_lists(is_genghua_fan, efficiently_computable_properties, all_properties)
 
-def is_planar_transitive(g):
-    """
-    Evaluates whether graph ``g`` is planar and is vertex-transitive.
-
-    INPUT:
-
-    -``g``-- Sage Graph
-
-    OUTPUT:
-
-    -Boolean
-
-    EXAMPLES:
-
-        sage: is_planar_transitive(graphs.HexahedralGraph())
-        True
-
-        sage: is_planar_transitive(graphs.CompleteGraph(2))
-        True
-
-        sage: is_planar_transitive(graphs.FranklinGraph())
-        False
-
-        sage: is_planar_transitive(graphs.BullGraph())
-        False
-
-    Vacuous cases ::
-
-        sage: is_planar_transitive(Graph(1))
-        True
-
-    Sage defines `Graph(0).is_vertex_transitive() == False``. ::
-
-        sage: is_planar_transitive(Graph(0))
-        False
-    """
-    return g.is_planar() and g.is_vertex_transitive()
-add_to_lists(is_planar_transitive, intractable_properties, all_properties)
 
 def is_generalized_dirac(g):
     r"""
@@ -494,12 +374,13 @@ def is_generalized_dirac(g):
 
     if not is_two_connected(g):
         return False
-    for (u,v) in combinations(g.vertices(sort=True), 2):
+    for (u,v) in combinations(g.vertices(sort=true), 2):
         if not g.has_edge(u,v):
             if len(neighbors_set(g,[u,v])) < (2.0 * g.order() - 1) / 3:
                 return False
     return True
 add_to_lists(is_generalized_dirac, efficiently_computable_properties, all_properties)
+
 
 def is_van_den_heuvel(g):
     r"""
@@ -568,6 +449,7 @@ def is_van_den_heuvel(g):
     return True
 add_to_lists(is_van_den_heuvel, efficiently_computable_properties, all_properties)
 
+
 def is_two_connected(g):
     """
     Evaluates whether graph ``g`` is 2-connected.
@@ -616,6 +498,7 @@ def is_two_connected(g):
         return False
     return g.is_biconnected()
 add_to_lists(is_two_connected, efficiently_computable_properties, all_properties)
+
 
 def is_three_connected(g):
     """
@@ -669,6 +552,7 @@ def is_three_connected(g):
     return g.vertex_connectivity(k = 3)
 add_to_lists(is_three_connected, efficiently_computable_properties, all_properties)
 
+
 def is_four_connected(g):
     """
     Evaluates whether ``g`` is 4-connected.
@@ -706,6 +590,7 @@ def is_four_connected(g):
     """
     return g.vertex_connectivity(k = 4)
 add_to_lists(is_four_connected, efficiently_computable_properties, all_properties)
+
 
 def is_lindquester(g):
     r"""
@@ -747,7 +632,7 @@ def is_lindquester(g):
         return False
     D = g.distance_all_pairs()
     n = g.order()
-    V = g.vertices(sort=True)
+    V = g.vertices(sort=true)
     for i in range(n):
         for j in range(i):
             if D[V[i]][V[j]] == 2:
@@ -755,7 +640,6 @@ def is_lindquester(g):
                     return False
     return True
 add_to_lists(is_lindquester, efficiently_computable_properties, all_properties)
-
 
 
 def is_complete(g):
@@ -801,6 +685,7 @@ def is_complete(g):
     return True
 add_to_lists(is_complete, efficiently_computable_properties, all_properties)
 
+
 def has_c4(g):
     """
     Tests whether graph ``g`` contains Cycle_4 as an *induced* subgraph.
@@ -821,6 +706,7 @@ def has_c4(g):
     """
     return g.subgraph_search(c4, induced=True) is not None
 add_to_lists(has_c4, efficiently_computable_properties, all_properties)
+
 
 def is_c4_free(g):
     """
@@ -843,15 +729,18 @@ def is_c4_free(g):
     return not has_c4(g)
 add_to_lists(is_c4_free, efficiently_computable_properties, all_properties)
 
-#contains an induced 5-cycle
+
+# contains an induced 5-cycle
 def has_c5(g):
     return g.subgraph_search(c5, induced=True) is not None
 add_to_lists(has_c5, efficiently_computable_properties, all_properties)
 
-#has no induced 5-cycle
+
+# has no induced 5-cycle
 def is_c5_free(g):
     return not has_c5(g)
 add_to_lists(is_c5_free, efficiently_computable_properties, all_properties)
+
 
 def has_paw(g):
     """
@@ -880,6 +769,7 @@ def has_paw(g):
     return g.subgraph_search(paw, induced=True) is not None
 add_to_lists(has_paw, efficiently_computable_properties, all_properties)
 
+
 def is_paw_free(g):
     """
     Tests whether graph ``g`` does not contain a Paw as an *induced* subgraph.
@@ -906,6 +796,7 @@ def is_paw_free(g):
     """
     return not has_paw(g)
 add_to_lists(is_paw_free, efficiently_computable_properties, all_properties)
+
 
 def has_dart(g):
     """
@@ -935,6 +826,7 @@ def has_dart(g):
     return g.subgraph_search(dart, induced=True) is not None
 add_to_lists(has_dart, efficiently_computable_properties, all_properties)
 
+
 def is_dart_free(g):
     """
     Tests whether graph ``g`` does not contain a Dart as an *induced* subgraph.
@@ -963,6 +855,7 @@ def is_dart_free(g):
     return not has_dart(g)
 add_to_lists(is_dart_free, efficiently_computable_properties, all_properties)
 
+
 def has_p4(g):
     """
     Tests whether graph ``g`` contains a Path_4 as an *induced* subgraph.
@@ -986,12 +879,14 @@ def has_p4(g):
     return g.subgraph_search(p4, induced=True) is not None
 add_to_lists(has_p4, efficiently_computable_properties, all_properties)
 
+
 def is_p4_free(g):
     """
     Equivalent to is a cograph - https://en.wikipedia.org/wiki/Cograph
     """
     return not has_p4(g)
 add_to_lists(is_p4_free, efficiently_computable_properties, all_properties)
+
 
 def has_kite(g):
     """
@@ -1017,6 +912,7 @@ def has_kite(g):
     return g.subgraph_search(kite_with_tail, induced=True) is not None
 add_to_lists(has_kite, efficiently_computable_properties, all_properties)
 
+
 def is_kite_free(g):
     """
     Tests whether graph ``g`` does not contain a Kite as an *induced* subgraph.
@@ -1040,6 +936,7 @@ def is_kite_free(g):
     """
     return not has_kite(g)
 add_to_lists(is_kite_free, efficiently_computable_properties, all_properties)
+
 
 def has_claw(g):
     """
@@ -1065,6 +962,7 @@ def has_claw(g):
     return g.subgraph_search(graphs.ClawGraph(), induced=True) is not None
 add_to_lists(has_claw, efficiently_computable_properties, all_properties)
 
+
 def is_claw_free(g):
     """
     Tests whether graph ``g`` does not contain a Claw as an *induced* subgraph.
@@ -1088,6 +986,7 @@ def is_claw_free(g):
     """
     return not has_claw(g)
 add_to_lists(is_claw_free, efficiently_computable_properties, all_properties)
+
 
 def has_H(g):
     """
@@ -1113,6 +1012,7 @@ def has_H(g):
     return g.subgraph_search(double_fork, induced=True) is not None
 add_to_lists(has_H, efficiently_computable_properties, all_properties)
 
+
 def is_H_free(g):
     """
     Tests if graph ``g`` does not contain a H graph as an *induced* subgraph.
@@ -1136,6 +1036,7 @@ def is_H_free(g):
     """
     return not has_H(g)
 add_to_lists(is_H_free, efficiently_computable_properties, all_properties)
+
 
 def has_fork(g):
     """
@@ -1165,6 +1066,7 @@ def has_fork(g):
     return g.subgraph_search(star_1_1_3, induced=True) is not None
 add_to_lists(has_fork, efficiently_computable_properties, all_properties)
 
+
 def is_fork_free(g):
     """
     Tests if graph ``g`` does not contain Fork graph as an *induced* subgraph.
@@ -1193,6 +1095,7 @@ def is_fork_free(g):
     return not has_fork(g)
 add_to_lists(is_fork_free, efficiently_computable_properties, all_properties)
 
+
 def has_k4(g):
     """
     Tests if graph ``g`` contains a `K_4` as an *induced* subgraph.
@@ -1216,6 +1119,7 @@ def has_k4(g):
     return g.subgraph_search(alpha_critical_easy[2], induced=True) is not None
 add_to_lists(has_k4, efficiently_computable_properties, all_properties)
 
+
 def is_k4_free(g):
     """
     Tests if graph ``g`` does not contain a `K_4` as an *induced* subgraph.
@@ -1238,6 +1142,7 @@ def is_k4_free(g):
     """
     return not has_k4(g)
 add_to_lists(is_k4_free, efficiently_computable_properties, all_properties)
+
 
 def is_double_clique(g):
     """
@@ -1275,6 +1180,7 @@ def is_double_clique(g):
     return gc.is_bipartite()
 add_to_lists(is_double_clique, efficiently_computable_properties, all_properties)
 
+
 def has_radius_equal_diameter(g):
     """
     Evaluates whether the radius of graph ``g`` equals its diameter.
@@ -1304,42 +1210,6 @@ def has_radius_equal_diameter(g):
     return g.radius() == g.diameter()
 add_to_lists(has_radius_equal_diameter, efficiently_computable_properties, all_properties)
 
-def has_residue_equals_alpha(g):
-    r"""
-    Evaluate whether the residue of graph ``g`` equals its independence number.
-
-    The independence number is the cardinality of the largest independent set
-    of vertices in ``g``.
-    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
-    is found iteratively. First, remove `d_1` from consideration and subtract
-    `d_1` from the following `d_1` number of elements. Sort. Repeat this
-    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
-    i.e. the number of 0s, is the residue of ``g``.
-
-    Residue is undefined on the empty graph.
-
-    EXAMPLES:
-
-        sage: has_residue_equals_alpha(graphs.HouseGraph())
-        True
-
-        sage: has_residue_equals_alpha(graphs.ClawGraph())
-        True
-
-        sage: has_residue_equals_alpha(graphs.CompleteGraph(4))
-        True
-
-        sage: has_residue_equals_alpha(Graph(1))
-        True
-
-        sage: has_residue_equals_alpha(graphs.PetersenGraph())
-        False
-
-        sage: has_residue_equals_alpha(graphs.PathGraph(5))
-        False
-    """
-    return residue(g) == independence_number(g)
-add_to_lists(has_residue_equals_alpha, intractable_properties, all_properties)
 
 def is_not_forest(g):
     """
@@ -1371,6 +1241,7 @@ def is_not_forest(g):
     """
     return not g.is_forest()
 add_to_lists(is_not_forest, efficiently_computable_properties, all_properties)
+
 
 def has_empty_KE_part(g):
     r"""
@@ -1452,7 +1323,7 @@ def has_empty_KE_part(g):
     """
     b = bipartite_double_cover(g)
     alpha = b.order() - b.matching(value_only=True)
-    for v in g.vertices(sort=True):
+    for v in g.vertices(sort=true):
         test = b.copy()
         test.delete_vertices(closed_neighborhood(b,[(v,0), (v,1)]))
         alpha_test = test.order() - test.matching(value_only=True) + 2
@@ -1461,65 +1332,6 @@ def has_empty_KE_part(g):
     return True
 add_to_lists(has_empty_KE_part, efficiently_computable_properties, all_properties)
 
-def is_class1(g):
-    """
-    Evaluates whether the chomatic index of graph ``g`` equals its max degree.
-
-    Let `D` be the maximum degree. By Vizing's Thoerem, all graphs can be
-    edge-colored in either `D` or `D+1` colors. The case of `D` colors is
-    called "class 1".
-
-    Max degree is undefined for the empty graph.
-
-    EXAMPLES:
-
-        sage: is_class1(graphs.CompleteGraph(4))
-        True
-
-        sage: is_class1(graphs.WindmillGraph(4,3))
-        True
-
-        sage: is_class1(Graph(1))
-        True
-
-        sage: is_class1(graphs.CompleteGraph(3))
-        False
-
-        sage: is_class1(graphs.PetersenGraph())
-        False
-    """
-    return g.chromatic_index() == max(g.degree())
-add_to_lists(is_class1, intractable_properties, all_properties)
-
-def is_class2(g):
-    """
-    Evaluates whether the chomatic index of graph ``g`` equals max degree + 1.
-
-    Let `D` be the maximum degree. By Vizing's Thoerem, all graphs can be
-    edge-colored in either `D` or `D+1` colors. The case of `D+1` colors is
-    called "class 2".
-
-    Max degree is undefined for the empty graph.
-
-    EXAMPLES:
-
-        sage: is_class2(graphs.CompleteGraph(4))
-        False
-
-        sage: is_class2(graphs.WindmillGraph(4,3))
-        False
-
-        sage: is_class2(Graph(1))
-        False
-
-        sage: is_class2(graphs.CompleteGraph(3))
-        True
-
-        sage: is_class2(graphs.PetersenGraph())
-        True
-    """
-    return not(g.chromatic_index() == max(g.degree()))
-add_to_lists(is_class2, intractable_properties, all_properties)
 
 def is_cubic(g):
     """
@@ -1543,65 +1355,6 @@ def is_cubic(g):
     return min(D) == 3 and max(D) == 3
 add_to_lists(is_cubic, efficiently_computable_properties, all_properties)
 
-def is_anti_tutte(g):
-    """
-    Evaluates if graph ``g`` is connected and independence number <= diameter + girth.
-
-    This property is satisfied by many Hamiltonian graphs, but notably not by
-    the Tutte graph ``graphs.TutteGraph()``.
-
-    Diameter is undefined for the empty graph.
-
-    EXAMPLES:
-
-        sage: is_anti_tutte(graphs.CompleteBipartiteGraph(4, 5))
-        True
-
-        sage: is_anti_tutte(graphs.PetersenGraph())
-        True
-
-        sage: is_anti_tutte(Graph(1))
-        True
-
-        sage: is_anti_tutte(graphs.TutteGraph())
-        False
-
-        sage: is_anti_tutte(graphs.TutteCoxeterGraph())
-        False
-    """
-    if not g.is_connected():
-        return False
-    return independence_number(g) <= g.diameter() + g.girth()
-add_to_lists(is_anti_tutte,  intractable_properties, all_properties)
-
-def is_anti_tutte2(g):
-    """
-    Tests if graph ``g`` has independence number <= domination number + radius - 1.
-
-    ``g`` must also be connected.
-    This property is satisfied by many Hamiltonian graphs, but notably not by
-    the Tutte graph ``graphs.TutteGraph()``.
-
-    Radius is undefined for the empty graph.
-
-    EXAMPLES:
-
-        sage: is_anti_tutte2(graphs.CompleteGraph(5))
-        True
-
-        sage: is_anti_tutte2(graphs.PetersenGraph())
-        True
-
-        sage: is_anti_tutte2(graphs.TutteGraph())
-        False
-
-        sage: is_anti_tutte2(graphs.TutteCoxeterGraph())
-        False
-    """
-    if not g.is_connected():
-        return False
-    return independence_number(g) <=  domination_number(g) + g.radius()- 1
-add_to_lists(is_anti_tutte2, intractable_properties, all_properties)
 
 def diameter_equals_twice_radius(g):
     """
@@ -1631,6 +1384,7 @@ def diameter_equals_twice_radius(g):
     return g.diameter() == 2*g.radius()
 add_to_lists(diameter_equals_twice_radius, efficiently_computable_properties, all_properties)
 
+
 def diameter_equals_two(g):
     """
     Evaluates whether the diameter of graph ``g`` equals 2.
@@ -1659,128 +1413,6 @@ def diameter_equals_two(g):
     return g.diameter() == 2
 add_to_lists(diameter_equals_two, efficiently_computable_properties, all_properties)
 
-def has_lovasz_theta_equals_alpha(g):
-    """
-    Tests if the Lovasz number of graph ``g`` equals its independence number.
-
-    Examples:
-
-        sage: has_lovasz_theta_equals_alpha(graphs.CompleteGraph(12))
-        True
-
-        sage: has_lovasz_theta_equals_alpha(double_fork)
-        True
-
-        sage: has_lovasz_theta_equals_alpha(graphs.PetersenGraph())
-        True
-
-        sage: has_lovasz_theta_equals_alpha(graphs.ClebschGraph())
-        False
-
-        sage: has_lovasz_theta_equals_alpha(graphs.CycleGraph(24))
-        True
-
-    True for all graphs with no edges ::
-
-        sage: has_lovasz_theta_equals_alpha(Graph(12))
-        True
-
-    Edge cases ::
-
-        sage: has_lovasz_theta_equals_alpha(Graph(0))
-        True
-
-        # Broken. Issue #584
-        sage: has_lovasz_theta_equals_alpha(Graph(1)) # doctest: +SKIP
-        True
-    """
-    return lovasz_theta(g) == independence_number(g)
-add_to_lists(has_lovasz_theta_equals_alpha, intractable_properties, all_properties)
-
-def has_lovasz_theta_equals_cc(g):
-    """
-    Test if the Lovasz number of graph ``g`` equals its clique covering number.
-
-    Examples:
-
-        sage: has_lovasz_theta_equals_cc(graphs.CompleteGraph(12))
-        True
-
-        sage: has_lovasz_theta_equals_cc(double_fork)
-        True
-
-        sage: has_lovasz_theta_equals_cc(graphs.PetersenGraph())
-        False
-
-        sage: has_lovasz_theta_equals_cc(Graph(12))
-        True
-
-        sage: has_lovasz_theta_equals_cc(graphs.ClebschGraph())
-        False
-
-        has_lovasz_theta_equals_alpha(graphs.BuckyBall())
-        False
-
-    Edge cases ::
-
-        sage: has_lovasz_theta_equals_cc(Graph(0))
-        True
-
-        # Broken. Issue #584
-        sage: has_lovasz_theta_equals_cc(Graph(1)) # doctest: +SKIP
-        True
-    """
-    return lovasz_theta(g) == clique_covering_number(g)
-add_to_lists(has_lovasz_theta_equals_cc, intractable_properties, all_properties)
-
-def is_chvatal_erdos(g):
-    r"""
-    Evaluates whether graph ``g`` meets a Hamiltonicity condition of [CV1972]_.
-
-    OUTPUT:
-
-    Returns ``True`` if the independence number of ``g`` is less than or equal
-    to the vertex connectivity of ``g``.
-    Returns ``False`` otherwise.
-
-    EXAMPLES:
-
-        sage: is_chvatal_erdos(graphs.CompleteGraph(5))
-        True
-
-        sage: is_chvatal_erdos(graphs.CycleGraph(5))
-        True
-
-        sage: is_chvatal_erdos(graphs.CompleteGraph(2))
-        True
-
-        sage: is_chvatal_erdos(graphs.PetersenGraph())
-        False
-
-        sage: is_chvatal_erdos(graphs.ClawGraph())
-        False
-
-        sage: is_chvatal_erdos(graphs.DodecahedralGraph())
-        False
-
-    Edge cases ::
-
-        sage: is_chvatal_erdos(Graph(1))
-        False
-
-        sage: is_chvatal_erdos(Graph(0))
-        True
-
-    REFERENCES:
-
-    Theorem: If a graph ``is_chvatal_erdos``, then it is Hamiltonian.
-
-    .. [CV1972]     \V. Chvatal and P. Erdos, "A note on hamiltonian circuits".
-                    Discrete Mathematics, 2(2): 111--113, 1972.
-    """
-    return independence_number(g) <= g.vertex_connectivity()
-add_to_lists(is_chvatal_erdos, intractable_properties, all_properties)
-
 
 def matching_covered(g):
     """
@@ -1797,6 +1429,7 @@ def matching_covered(g):
         g.add_edge(e)
     return True
 add_to_lists(matching_covered, efficiently_computable_properties, all_properties)
+
 
 def radius_greater_than_center(g):
     """
@@ -1824,6 +1457,7 @@ def radius_greater_than_center(g):
     """
     return g.is_connected() and g.radius() > card_center(g)
 add_to_lists(radius_greater_than_center, efficiently_computable_properties, all_properties)
+
 
 def avg_distance_greater_than_girth(g):
     """
@@ -1859,91 +1493,6 @@ def avg_distance_greater_than_girth(g):
     return g.is_connected() and g.average_distance() > g.girth()
 add_to_lists(avg_distance_greater_than_girth, efficiently_computable_properties, all_properties)
 
-def chi_equals_min_theory(g):
-    r"""
-    Evaluate if chromatic num. of graph ``g`` equals min. of some upper bounds.
-
-    Some known upper bounds on the chromatic number Chi (`\chi`) include
-    our invariants `[brooks, wilf, welsh_powell, szekeres_wilf]`.
-    Returns ``True`` if the actual chromatic number of ``g`` equals the minimum
-    of / "the best of" these known upper bounds.
-
-    Some of these invariants are undefined on the empty graph.
-
-    EXAMPLES:
-
-        sage: chi_equals_min_theory(Graph(1))
-        True
-
-        sage: chi_equals_min_theory(graphs.PetersenGraph())
-        True
-
-        sage: chi_equals_min_theory(double_fork)
-        True
-
-        sage: chi_equals_min_theory(Graph(3))
-        False
-
-        chi_equals_min_theory(graphs.CompleteBipartiteGraph(3,5))
-        False
-
-        chi_equals_min_theory(graphs.IcosahedralGraph())
-        False
-    """
-    chromatic_upper_theory = [brooks, wilf, welsh_powell, szekeres_wilf]
-    min_theory = min([f(g) for f in chromatic_upper_theory])
-    return min_theory == g.chromatic_number()
-add_to_lists(chi_equals_min_theory, intractable_properties, all_properties)
-
-def is_heliotropic_plant(g):
-    """
-    Evaluates whether graph ``g`` is a heliotropic plant. BROKEN
-
-    BROKEN: code should be nonnegative eigen, not just positive eigen.
-    See Issue #586
-
-    A graph is heliotropic iff the independence number equals the number of
-    nonnegative eigenvalues.
-
-    See [BDF1995]_ for a definition and some related conjectures, where
-    [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
-
-    EXAMPLES:
-
-    REFERENCES:
-
-    .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
-                    computational attack on the conjectures of Graffiti: New
-                    counterexamples and proofs". Discrete Mathematics,
-                    147(1--3): 35--55, 1995.
-    """
-    return (independence_number(g) == card_positive_eigenvalues(g))
-add_to_lists(is_heliotropic_plant, intractable_properties, all_properties)
-
-def is_geotropic_plant(g):
-    """
-    Evaluates whether graph ``g`` is a heliotropic plant. BROKEN
-
-    BROKEN: code should be nonpositive eigen, not just negative eigen.
-    See Issue #586
-
-    A graph is geotropic iff the independence number equals the number of
-    nonnegative eigenvalues.
-
-    See [BDF1995]_ for a definition and some related conjectures, where
-    [BDF1995]_ builds on the conjecturing work of Siemion Fajtlowicz.
-
-    EXAMPLES:
-
-    REFERENCES:
-
-    .. [BDF1995]    Tony Brewster, Michael J.Dinneen, and Vance Faber, "A
-                    computational attack on the conjectures of Graffiti: New
-                    counterexamples and proofs". Discrete Mathematics,
-                    147(1--3): 35--55, 1995.
-    """
-    return (independence_number(g) == card_negative_eigenvalues(g))
-add_to_lists(is_geotropic_plant, intractable_properties, all_properties)
 
 def is_traceable(g):
     """
@@ -2000,6 +1549,7 @@ def is_traceable(g):
     return gadd.is_hamiltonian()
 add_to_lists(is_traceable, efficiently_computable_properties, all_properties)
 
+
 def has_residue_equals_two(g):
     r"""
     Evaluates whether the residue of graph ``g`` equals 2.
@@ -2034,6 +1584,7 @@ def has_residue_equals_two(g):
     """
     return residue(g) == 2
 add_to_lists(has_residue_equals_two, efficiently_computable_properties, all_properties)
+
 
 def is_chordal_or_not_perfect(g):
     """
@@ -2081,79 +1632,6 @@ def is_chordal_or_not_perfect(g):
 add_to_lists(is_chordal_or_not_perfect, efficiently_computable_properties, all_properties)
 
 
-def has_alpha_residue_equal_two(g):
-    r"""
-    Tests if both the residue and independence number of graphs ``g`` equal 2.
-
-    The residue of a graph ``g`` with degrees `d_1 \geq d_2 \geq ... \geq d_n`
-    is found iteratively. First, remove `d_1` from consideration and subtract
-    `d_1` from the following `d_1` number of elements. Sort. Repeat this
-    process for `d_2,d_3, ...` until only 0s remain. The number of elements,
-    i.e. the number of 0s, is the residue of ``g``.
-
-    Residue is undefined on the empty graph.
-
-    EXAMPLES:
-
-        sage: has_alpha_residue_equal_two(graphs.DiamondGraph())
-        True
-
-        sage: has_alpha_residue_equal_two(Graph(2))
-        True
-
-        sage: has_alpha_residue_equal_two(graphs.OctahedralGraph())
-        True
-
-        sage: has_alpha_residue_equal_two(graphs.BullGraph())
-        False
-
-        sage: has_alpha_residue_equal_two(graphs.BidiakisCube())
-        False
-
-        sage: has_alpha_residue_equal_two(Graph(3))
-        False
-
-        sage: has_alpha_residue_equal_two(Graph(1))
-        False
-    """
-    if residue(g) != 2:
-        return false
-    else:
-        return independence_number(g) == 2
-add_to_lists(has_alpha_residue_equal_two, intractable_properties, all_properties)
-
-def alpha_leq_order_over_two(g):
-    """
-    Tests if the independence number of graph ``g`` is at most half its order.
-
-    EXAMPLES:
-
-        sage: alpha_leq_order_over_two(graphs.ButterflyGraph())
-        True
-
-        sage: alpha_leq_order_over_two(graphs.DiamondGraph())
-        True
-
-        sage: alpha_leq_order_over_two(graphs.CoxeterGraph())
-        True
-
-        sage: alpha_leq_order_over_two(Graph(4))
-        False
-
-        sage: alpha_leq_order_over_two(graphs.BullGraph())
-        False
-
-    Edge cases ::
-
-        sage: alpha_leq_order_over_two(Graph(0))
-        True
-
-        sage: alpha_leq_order_over_two(Graph(1))
-        False
-    """
-    return (2*independence_number(g) <= g.order())
-add_to_lists(alpha_leq_order_over_two, intractable_properties, all_properties)
-
 def is_alpha_equals_two(g):
     """
     Return whether the independence number alpha is equal to 2.
@@ -2172,6 +1650,7 @@ def is_alpha_equals_two(g):
             return True
     return False
 add_to_lists(is_alpha_equals_two, efficiently_computable_properties, all_properties)
+
 
 def order_leq_twice_max_degree(g):
     """
@@ -2202,125 +1681,8 @@ def order_leq_twice_max_degree(g):
     return (g.order() <= 2*max(g.degree()))
 add_to_lists(order_leq_twice_max_degree, efficiently_computable_properties, all_properties)
 
-def is_chromatic_index_critical(g):
-    r"""
-    Evaluates whether graph ``g`` is chromatic index critical.
 
-    Let `\chi(G)` denote the chromatic index of a graph `G`.
-    Then `G` is chromatic index critical if `\chi(G-e) < \chi(G)` (strictly
-    less than) for all `e \in G` AND if (by definition) `G` is class 2.
-
-    See [FW1977]_ for a more extended definition and discussion.
-
-    We initially found it surprising that `G` is required to be class 2; for
-    example, the Star Graph is a class 1 graph which satisfies the rest of
-    the definition. We have found articles which equivalently define critical
-    graphs as class 2 graphs which become class 1 when any edge is removed.
-    Perhaps this latter definition inspired the one we state above?
-
-    Max degree is undefined on the empty graph, so ``is_class`` is also
-    undefined. Therefore this property is undefined on the empty graph.
-
-    EXAMPLES:
-
-        sage: is_chromatic_index_critical(Graph('Djk'))
-        True
-
-        sage: is_chromatic_index_critical(graphs.CompleteGraph(3))
-        True
-
-        sage: is_chromatic_index_critical(graphs.CycleGraph(5))
-        True
-
-        sage: is_chromatic_index_critical(graphs.CompleteGraph(5))
-        False
-
-        sage: is_chromatic_index_critical(graphs.PetersenGraph())
-        False
-
-        sage: is_chromatic_index_critical(graphs.FlowerSnark())
-        False
-
-    Non-trivially disconnected graphs ::
-
-        sage: is_chromatic_index_critical(graphs.CycleGraph(4).disjoint_union(graphs.CompleteGraph(4)))
-        False
-
-    Class 1 graphs ::
-
-        sage: is_chromatic_index_critical(Graph(1))
-        False
-
-        sage: is_chromatic_index_critical(graphs.CompleteGraph(4))
-        False
-
-        sage: is_chromatic_index_critical(graphs.CompleteGraph(2))
-        False
-
-        sage: is_chromatic_index_critical(graphs.StarGraph(4))
-        False
-
-    ALGORITHM:
-
-    This function uses a series of tricks to reduce the number of cases that
-    need to be considered, before finally checking in the obvious way.
-
-    First, if a graph has more than 1 non-trivial connected component, then
-    return ``False``. This is because in a graph with multiple such components,
-    removing any edges from the smaller component cannot affect the chromatic
-    index.
-
-    Second, check if the graph is class 2. If not, stop and return ``False``.
-
-    Finally, identify isomorphic edges using the line graph and its orbits.
-    We then need only check the non-equivalent edges to see that they reduce
-    the chromatic index when deleted.
-
-    REFERENCES:
-
-    .. [FW1977]     \S. Fiorini and R.J. Wilson, "Edge-colourings of graphs".
-                    Pitman Publishing, London, UK, 1977.
-    """
-    component_sizes = g.connected_components_sizes()
-    chi=g.chromatic_index()
-
-    if len(component_sizes) > 1:
-        if component_sizes[1] > 1:
-            return False
-
-    if chi == max_degree(g):
-        return False
-
-    lg = g.line_graph()
-    equiv_lines = lg.automorphism_group(return_group=False, orbits=true)
-    equiv_lines_representatives = [orb[0] for orb in equiv_lines]
-
-    gc = g.copy()
-    for e in equiv_lines_representatives:
-        gc.delete_edge(e)
-        chi_prime = gc.chromatic_index()
-        if chi_prime == chi:
-            return False
-        gc.add_edge(e)
-    return True
-add_to_lists(is_chromatic_index_critical, intractable_properties, all_properties)
-
-
-#alpha(g-e) > alpha(g) for *every* edge g
-def is_alpha_critical(g):
-    #if not g.is_connected():
-        #return False
-    alpha = independence_number(g)
-    for e in g.edges(sort=true):
-        gc = copy(g)
-        gc.delete_edge(e)
-        alpha_prime = independence_number(gc)
-        if alpha_prime <= alpha:
-            return False
-    return True
-add_to_lists(is_alpha_critical, intractable_properties, all_properties)
-
-#graph is KE if matching number + independence number = n, test does *not* compute alpha
+# graph is KE if matching number + independence number = n, test does *not* compute alpha
 def is_KE(g):
     """
     A graph is KE if matching number + independence number is equal to n
@@ -2329,13 +1691,14 @@ def is_KE(g):
     return g.order() == len(find_KE_part(g))
 add_to_lists(is_KE, efficiently_computable_properties, all_properties)
 
-#graph is KE if matching number + independence number = n, test comoutes alpha
-#def is_KE(g):
+# graph is KE if matching number + independence number = n, test comoutes alpha
+# def is_KE(g):
 #    return (g.matching(value_only = True) + independence_number(g) == g.order())
 
-#possibly faster version of is_KE (not currently in invariants)
-#def is_KE2(g):
+# possibly faster version of is_KE (not currently in invariants)
+# def is_KE2(g):
 #    return (independence_number(g) == critical_independence_number(g))
+
 
 def is_independence_irreducible(g):
     """
@@ -2387,37 +1750,13 @@ def is_factor_critical(g):
     """
     if g.order() % 2 == 0:
         return False
-    for v in g.vertices(sort=True):
+    for v in g.vertices(sort=true):
         gc = copy(g)
         gc.delete_vertex(v)
         if not gc.has_perfect_matching:
             return False
     return True
 add_to_lists(is_factor_critical, efficiently_computable_properties, all_properties)
-
-#NOT a graph property (won't be added to property lists)
-def find_twins_of_vertex(g,v):
-    """
-    Return a list of non-adjacent vertices that have the same neighbors as v, if a pair exists, or None.
-
-    INPUT:
-
-    -``g``-- Sage graph
-    -``v``-- a vertex
-
-    OUTPUT:
-
-    -List
-
-    """
-    L = []
-    V = g.vertices(sort=True)
-    D = g.distance_all_pairs()
-    for i in range(g.order()):
-        w = V[i]
-        if  D[v][w] == 2 and g.neighbors(v) == g.neighbors(w):
-                L.append(w)
-    return L
 
 
 def has_twin(g):
@@ -2461,115 +1800,6 @@ def is_twin_free(g):
     return not has_twin(g)
 add_to_lists(is_twin_free, efficiently_computable_properties, all_properties)
 
-#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
-def find_twin(g):
-    """
-    If twin vertices are found in graph g, return those vertices.
-    Note, this will return two vertices, not a complete set of twin vertices, should more than one set exist.
-
-    Two vertices are twins if they are non-adjacent and have the same neighbors.
-
-    INPUT:
-
-    -``g``-- Sage graph
-
-    OUTPUT:
-
-    -Pair of vertices or None
-
-    """
-    V = g.vertices(sort=True)
-    for v in V:
-        Nv = set(g.neighbors(v))
-        for w in V:
-            Nw = set(g.neighbors(w))
-            if v!=w and v not in Nw and Nv == Nw:
-                return (v,w)
-    return None
-
-
-#update this description!
-#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
-def find_neighbor_twins(g):
-    """
-
-    Two vertices are twins if they are non-adjacent and have the same neighbors. So same neighbors AND adjacent.
-
-    INPUT:
-
-    -``g``-- Sage graph
-
-    OUTPUT:
-
-    -Pair of vertices or None
-
-    """
-    V = g.vertices(sort=True)
-    for v in V:
-        Nv = g.neighbors(v)
-        for w in Nv:
-            if set(closed_neighborhood(g,v)) == set(closed_neighborhood(g,w)):
-                return (v,w)
-    return None
-
-
-#given graph g and subset S, looks for any neighbor twin of any vertex in T
-#if result = T, then no twins, else the result is maximal, but not necessarily unique
-#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
-def find_neighbor_twin(g, T):
-    """
-    Given a graph g, and a subset S, looks for any neighbor twin of any vertex in T.
-    If result equals T, no twins were found.  Otherwise, the result is maximal but not unique.
-
-    INPUT:
-
-    -``g``-- Sage graph
-    -``T``-- subset of g (?????????????????)
-
-    OUTPUT:
-
-    -none
-
-    """
-    gT = g.subgraph(T)
-    for v in T:
-        condition = False
-        Nv = set(g.neighbors(v))
-        #print("v = {}, Nv = {}".format(v,Nv))
-        NvT = set(gT.neighbors(v))
-        for w in Nv:
-            NwT = set(g.neighbors(w)).intersection(set(T))
-            if w not in T and NvT.issubset(NwT):
-                T.append(w)
-                condition = True
-                #print("TWINS: v = {}, w = {}, sp3 = {}".format(v,w,sp3))
-                break
-        if condition == True:
-            break
-
-
-
-#if result = T, then no twins, else the result is maximal, but not necessarily unique
-#NOTE: this function returns vertices, not True/False, so its NOT a property, and not added to lists
-def iterative_neighbor_twins(g, T):
-    T2 = copy(T)
-    find_neighbor_twin(g, T)
-    while T2 != T:
-        T2 = copy(T)
-        find_neighbor_twin(g, T)
-    return T
-
-
-
-#can't compute membership in this class directly. instead testing isomorhism for 400 known class0 graphs
-def is_pebbling_class0(g):
-    for hkey in class0graphs_dict:
-        h = Graph(class0graphs_dict[hkey])
-        if g.is_isomorphic(h):
-            return True
-    return False
-add_to_lists(is_pebbling_class0,  intractable_properties, all_properties)
-
 
 def girth_greater_than_2log(g):
     """
@@ -2589,93 +1819,6 @@ def girth_greater_than_2log(g):
 add_to_lists(girth_greater_than_2log, efficiently_computable_properties, all_properties)
 
 
-def szekeres_wilf_equals_chromatic_number(g):
-    return szekeres_wilf(g) == g.chromatic_number()
-add_to_lists(szekeres_wilf_equals_chromatic_number,  intractable_properties, all_properties)
-
-#NOTE: this requires a vertex as an input so its NOT a graph property, not in a property list
-def has_Havel_Hakimi_property(g, v):
-    """
-    Return whether the vertex v in the graph g has the Havel-Hakimi property.
-
-    A vertex has the Havel-Hakimi property if it has maximum degree and the minimum degree of its neighbours is at least the maximum degree of its non-neigbors. Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
-
-    INPUT:
-
-    -``g``-- Sage Graph
-
-    -``v``-- Integer
-
-    OUTPUT:
-
-    -Boolean, True if the vertex v in the graph g has the Havel-Hakimi property, False otherwise.
-
-    EXAMPLE:
-
-        sage: P = graphs.PetersenGraph()
-        sage: for v in range(10):
-        ....:     has_Havel_Hakimi_property(P,v)
-        True
-        True
-        True
-        True
-        True
-        True
-        True
-        True
-        True
-        True
-        sage: has_Havel_Hakimi_property(Graph([[0,1,2,3],lambda x,y: False]),0)
-        True
-        sage: has_Havel_Hakimi_property(graphs.CompleteGraph(5),0)
-        True
-    """
-    if max_degree(g) > g.degree(v): return False
-
-    #handle the case where the graph is an independent set
-    if len(g.neighbors(v)) == 0: return True
-
-    #handle the case where v is adjacent with all vertices
-    if len(g.neighbors(v)) == len(g.vertices(sort=True)) - 1: return True
-
-    return (min(g.degree(nv) for nv in g.neighbors(v)) >=
-        max(g.degree(nnv) for nnv in g.vertices(sort=True) if nnv != v and nnv not in g.neighbors(v)))
-
-#NOTE: the relevant theorem is a forbidden subgraph characterization
-#its not clear if its theoretically efficient. the written code look at all subsets and is thus intractible
-#we'll add to inractable properties. is there an efficient algorithm???
-def has_strong_Havel_Hakimi_property(g):
-    """
-    Return whether the graph g has the strong Havel-Hakimi property.
-
-    A graph has the strong Havel-Hakimi property if in every induced subgraph H of G, every vertex of maximum degree has the Havel-Hakimi property. Graphs with the strong Havel-Hakimi property, M. Barrus, G. Molnar, Graphs and Combinatorics, 2016, http://dx.doi.org/10.1007/s00373-015-1674-7
-
-    INPUT:
-
-    -``g``-- Sage Graph
-
-    OUTPUT:
-
-    -Boolean, True if the graph g has the strong Havel-Hakimi property, False if otherwise.
-
-    EXAMPLE:
-
-    The graph obtained by connecting two cycles of length 3 by a single edge has
-    the strong Havel-Hakimi property::
-
-        sage: has_strong_Havel_Hakimi_property(Graph('E{CW'))
-        True
-    """
-    for S in Subsets(g.vertices(sort=True)):
-        if len(S)>2:
-            H = g.subgraph(S)
-            Delta = max_degree(H)
-            if any(not has_Havel_Hakimi_property(H, v) for v in S if H.degree(v) == Delta):
-                return False
-    return True
-add_to_lists(has_strong_Havel_Hakimi_property, intractable_properties, all_properties)
-
-
 def is_subcubic(g):
     """
     Return whether or not a Graph g is subcubic.
@@ -2692,6 +1835,7 @@ def is_subcubic(g):
     """
     return max_degree(g) <= 3
 add_to_lists(is_subcubic, efficiently_computable_properties, all_properties)
+
 
 # Max and min degree varies by at most 1
 def is_quasi_regular(g):
@@ -2713,6 +1857,7 @@ def is_quasi_regular(g):
     return False
 add_to_lists(is_quasi_regular, efficiently_computable_properties, all_properties)
 
+
 # g is bad if a block is isomorphic to k3, c5, k4*, c5*
 #the complexity will be no more than n/5 checks of small-graph isomorhism
 #where does this function/definition originate?
@@ -2726,11 +1871,6 @@ def is_bad(g):
             return True
     return False
 add_to_lists(is_bad, efficiently_computable_properties, all_properties)
-
-# Graph g is complement_hamiltonian if the complement of the graph is hamiltonian.
-def is_complement_hamiltonian(g):
-    return g.complement().is_hamiltonian()
-add_to_lists(is_complement_hamiltonian, intractable_properties, all_properties)
 
 
 # A graph is unicyclic if it is connected and has order == size
@@ -2758,47 +1898,17 @@ def is_unicyclic(g):
     return g.is_connected() and g.order() == g.size()
 add_to_lists(is_unicyclic, efficiently_computable_properties, all_properties)
 
-#NOT a graph property (auxilliary function)
-def is_k_tough(g,k):
-    return toughness(g) >= k # In invariants
-
-def is_1_tough(g):
-    """
-    See: https://en.wikipedia.org/wiki/Graph_toughness
-    """
-    return is_k_tough(g, 1)
-add_to_lists(is_1_tough, intractable_properties, all_properties)
-
-def is_2_tough(g):
-    return is_k_tough(g, 2)
-add_to_lists(is_2_tough, intractable_properties, all_properties)
-
-# True if graph has at least two hamiltonian cycles. The cycles may share some edges.
-def has_two_ham_cycles(gIn):
-    g = gIn.copy()
-    g.relabel()
-    try:
-        ham1 = g.hamiltonian_cycle()
-    except EmptySetError:
-        return False
-
-    for e in ham1.edges(sort=true):
-        h = copy(g)
-        h.delete_edge(e)
-        if h.is_hamiltonian():
-            return True
-    return False
-add_to_lists(has_two_ham_cycles, intractable_properties, all_properties)
 
 def has_simplicial_vertex(g):
     """
     v is a simplicial vertex if induced neighborhood is a clique.
     """
-    for v in g.vertices(sort=True):
+    for v in g.vertices(sort=true):
         if is_simplicial_vertex(g, v):
             return True
     return False
 add_to_lists(has_simplicial_vertex, efficiently_computable_properties, all_properties)
+
 
 def has_exactly_two_simplicial_vertices(g):
     """
@@ -2817,6 +1927,7 @@ def has_exactly_two_simplicial_vertices(g):
     return simplicial_vertices(g) == 2
 add_to_lists(has_exactly_two_simplicial_vertices, efficiently_computable_properties, all_properties)
 
+
 def is_two_tree(g):
     """
     Define k-tree recursively:
@@ -2830,7 +1941,7 @@ def is_two_tree(g):
     # We can just recurse from any degree-2 vertex; no need to test is_two_tree(g-w) if is_two_tree(g-v) returns False.
     # Intuition why: if neighborhood of a degree-2 v is not a triangle, it won't become one if we remove w (so clique check OK),
     # and, removing a degree-2 vertex of one triangle cannot destroy another triangle (so recursion OK).
-    degree_two_vertices = (v for v in g.vertices(sort=True) if g.degree(v) == 2)
+    degree_two_vertices = (v for v in g.vertices(sort=true) if g.degree(v) == 2)
     try:
         v = next(degree_two_vertices)
     except StopIteration: # Empty list. No degree 2 vertices.
@@ -2843,6 +1954,7 @@ def is_two_tree(g):
     return is_two_tree(g2)
 add_to_lists(is_two_tree, efficiently_computable_properties, all_properties)
 
+
 def is_two_path(g):
     """
     Graph g is a two_path if it is a two_tree and has exactly 2 simplicial vertices
@@ -2850,111 +1962,11 @@ def is_two_path(g):
     return has_exactly_two_simplicial_vertices(g) and is_two_tree(g)
 add_to_lists(is_two_path, efficiently_computable_properties, all_properties)
 
-def is_prism_hamiltonian(g):
-    """
-    A graph G is prism hamiltonian if G x K2 (cartesian product) is hamiltonian
-    """
-    return g.cartesian_product(graphs.CompleteGraph(2)).is_hamiltonian()
-add_to_lists(is_prism_hamiltonian, intractable_properties, all_properties)
-
-# Bauer, Douglas, et al. "Long cycles in graphs with large degree sums." Discrete Mathematics 79.1 (1990): 59-70.
-def is_bauer(g):
-    """
-    True if g is 2_tough and sigma_3 >= order
-    """
-    return is_2_tough(g) and sigma_k(g, 3) >= g.order()
-add_to_lists(is_bauer, intractable_properties, all_properties)
-
-# Jung, H. A. "On maximal circuits in finite graphs." Annals of Discrete Mathematics. Vol. 3. Elsevier, 1978. 129-144.
-def is_jung(g):
-    """
-    True if graph has n >= 11, if graph is 1-tough, and sigma_2 >= n - 4.
-    See functions toughness(g) and sigma_2(g) for more details.
-    """
-    return g.order() >= 11 and is_1_tough(g) and sigma_2(g) >= g.order() - 4
-add_to_lists(is_jung, intractable_properties, all_properties)
-
-# Bela Bollobas and Andrew Thomason, Weakly Pancyclic Graphs. Journal of Combinatorial Theory 77: 121--137, 1999.
-def is_weakly_pancyclic(g):
-    """
-    True if g contains cycles of every length k, from k = girth to k = circumference
-
-    Returns False if g is acyclic (in which case girth = circumfrence = +Infinity).
-
-    INPUT:
-
-    -``g``-- Sage Graph
-
-    OUTPUT:
-
-    -Boolean
-
-    EXAMPLES:
-
-    sage: is_weakly_pancyclic(graphs.CompleteGraph(6))
-    True
-    sage: is_weakly_pancyclic(graphs.PetersenGraph())
-    False
-
-    """
-    lengths = cycle_lengths(g)
-    if not lengths: # acyclic
-        raise ValueError("Graph is acyclic. Property undefined.")
-    else:
-        return lengths == set(range(min(lengths),max(lengths)+1))
-add_to_lists(is_weakly_pancyclic, intractable_properties, all_properties)
-
-
-def is_pancyclic(g):
-    """
-    True if g contains cycles of every length from 3 to g.order()
-
-    sage: is_pancyclic(graphs.OctahedralGraph())
-    True
-    sage: is_pancyclic(graphs.CycleGraph(10))
-    False
-    """
-    lengths = cycle_lengths(g)
-    return lengths == set(range(3, g.order()+1))
-add_to_lists(is_pancyclic, intractable_properties, all_properties)
-
-def has_two_walk(g):
-    """
-    If the input graph g contains a two walk, returns true; otherwise false.
-
-    A two-walk is a closed walk that visits every vertex and visits no vertex more than twice.
-    Two-walk is a generalization of Hamiltonian cycles. If a graph is Hamiltonian, then it has a two-walk.
-
-    INPUT:
-
-    -``g``-- Sage Graph
-
-    OUTPUT:
-
-    -Boolean
-
-    EXAMPLES:
-
-    sage: has_two_walk(c4c4)
-    True
-    sage: has_two_walk(graphs.WindmillGraph(3,3))
-    False
-    """
-    for init_vertex in g.vertices(sort=True):
-        path_stack = [[init_vertex]]
-        while path_stack:
-            path = path_stack.pop()
-            for neighbor in g.neighbors(path[-1]):
-                if neighbor == path[0] and all(v in path for v in g.vertices(sort=True)):
-                    return True
-                elif path.count(neighbor) < 2:
-                    path_stack.append(path + [neighbor])
-    return False
-add_to_lists(has_two_walk, intractable_properties, all_properties)
 
 def is_claw_free_paw_free(g):
     return is_claw_free(g) and is_paw_free(g)
 add_to_lists(is_claw_free_paw_free, efficiently_computable_properties, all_properties)
+
 
 def has_bull(g):
     """
@@ -2988,6 +2000,7 @@ def is_bull_free(g):
     return not has_bull(g)
 add_to_lists(is_bull_free, efficiently_computable_properties, all_properties)
 
+
 def is_claw_free_bull_free(g):
     """
     Returns true if g does not have an induced subgraph isomoprhic to graphs.BullGraph()
@@ -3005,6 +2018,7 @@ def is_claw_free_bull_free(g):
     return is_claw_free(g) and is_bull_free(g)
 add_to_lists(is_claw_free_bull_free, efficiently_computable_properties, all_properties)
 
+
 def has_F(g):
     """
     Let F be a triangle with 3 pendants. True if g has an induced F.
@@ -3015,12 +2029,14 @@ def has_F(g):
     return g.subgraph_search(F, induced = True) != None
 add_to_lists(has_F, efficiently_computable_properties, all_properties)
 
+
 def is_F_free(g):
     """
     Let F be a triangle with 3 pendants. True if g has no induced F.
     """
     return not has_F(g)
 add_to_lists(is_F_free, efficiently_computable_properties, all_properties)
+
 
 # Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
 def is_oberly_sumner(g):
@@ -3038,12 +2054,14 @@ def is_oberly_sumner_bull(g):
     return is_two_connected(g) and is_claw_free_bull_free(g)
 add_to_lists(is_oberly_sumner_bull, efficiently_computable_properties, all_properties)
 
+
 def is_oberly_sumner_p4(g):
     """
     True if g is 2-connected, claw-free, and p4-free
     """
     return is_two_connected(g) and is_claw_free(g) and is_p4_free(g)
 add_to_lists(is_oberly_sumner_p4, efficiently_computable_properties, all_properties)
+
 
 # Ronald Gould, Updating the Hamiltonian problem — a survey. Journal of Graph Theory 15.2: 121-157, 1991.
 def is_matthews_sumner(g):
@@ -3052,6 +2070,7 @@ def is_matthews_sumner(g):
     """
     return is_two_connected(g) and is_claw_free(g) and min_degree(g) >= (g.order() - 1) / 3
 add_to_lists(is_matthews_sumner, efficiently_computable_properties, all_properties)
+
 
 def is_broersma_veldman_gould(g):
     """
@@ -3087,6 +2106,7 @@ def chvatals_condition(g):
     n = g.order()
     return all(degrees[i] > i or i >= n/2 or degrees[n-i] >= n-i for i in range(0, len(degrees)))
 add_to_lists(chvatals_condition, efficiently_computable_properties, all_properties)
+
 
 def is_matching(g):
     """
@@ -3124,6 +2144,7 @@ def has_odd_order(g):
     return g.order() % 2 == 1
 add_to_lists(has_odd_order, efficiently_computable_properties, all_properties)
 
+
 def has_even_order(g):
     """
     True if the number of vertices in g is even
@@ -3135,6 +2156,7 @@ def has_even_order(g):
     """
     return g.order() % 2 == 0
 add_to_lists(has_even_order, efficiently_computable_properties, all_properties)
+
 
 def is_maximal_triangle_free(g):
     """
@@ -3193,8 +2215,9 @@ def is_maximal_triangle_free(g):
     return True
 add_to_lists(is_maximal_triangle_free, efficiently_computable_properties, all_properties)
 
+
 def is_locally_two_connected(g):
-    for v in g.vertices(sort=True):
+    for v in g.vertices(sort=true):
         S=g.neighbors(v)
         if len(S)>2: #not defined unless there are at least 3 neighbors
             h=g.subgraph(S)
@@ -3203,59 +2226,6 @@ def is_locally_two_connected(g):
     return True #all neighborhoods are too small or are connected
 add_to_lists(is_locally_two_connected, efficiently_computable_properties, all_properties)
 
-#NOT a graph property (for any fixed k, this IS a graph property)
-def is_k_bootstrap_good(G,k):
-    """
-    Return whether or not there exists a set of k vertices such that G is fully infected.
-
-    Assumes G has at least k vertices.
-
-    If G has more than k vertices, it must be connected to be k_bootstrap_good.
-
-    INPUT:
-
-    -``g``--Sage Graph
-
-    -``k``-- Integer
-
-    OUTPUT:
-
-    -Boolean
-    """
-    G.relabel()
-    for s in itertools.combinations(G.vertices(sort=True), k):
-        if k_percolate(G,set(s),k):
-            return True
-    return False
-
-#NOT a graph property (requires other parameters)
-def k_percolate(G,infected,k):
-    """
-    Return True if the set 'infected' fully k-infects the graph G
-
-    INPUT:
-
-    -``G``--Sage Graph
-
-    -``infected``--List
-
-    -``k``--Integer
-
-    OUTPUT:
-
-    -Boolean
-    """
-    uninfected = set(G.vertices(sort=True)) - set(infected)
-    newInfections = True
-    while newInfections:
-        newInfections = False
-        for v in uninfected:
-            if len(set(G.neighbors(v)).intersection(infected)) >= k:
-                infected.add(v)
-                uninfected-=set([v])
-                newInfections = True
-                break
-    return len(uninfected) == 0
 
 def is_2_bootstrap_good(G):
     """
@@ -3290,6 +2260,7 @@ def is_2_bootstrap_good(G):
     return is_k_bootstrap_good(G,2)
 add_to_lists(is_2_bootstrap_good, efficiently_computable_properties,all_properties)
 
+
 def is_3_bootstrap_good(G):
     """
     Return whether or not G contains a subset of 3 vertices which 3-infect the whole graph.
@@ -3323,287 +2294,10 @@ def is_3_bootstrap_good(G):
     return is_k_bootstrap_good(G,3)
 add_to_lists(is_3_bootstrap_good,efficiently_computable_properties,all_properties)
 
-######################################################################################################################
-#Below are some factory methods which create properties based on invariants or other properties
 
-def has_equal_invariants(invar1, invar2, name=None):
-    """
-    This function takes two invariants as an argument and returns the property that these invariants are equal.
-    Optionally, a name for the new function can be provided as a third argument.
-
-    INPUT:
-
-    -``invar1, invar2``-- Two mathematical invariants.  Not strictly typed.
-    -``name``-- Optional.  String
-
-    OUTPUT:
-
-    -Boolean
-
-    """
-    def equality_checker(g):
-        return invar1(g) == invar2(g)
-
-    if name is not None:
-        equality_checker.__name__ = name
-    elif hasattr(invar1, '__name__') and hasattr(invar2, '__name__'):
-        equality_checker.__name__ = 'has_{}_equals_{}'.format(invar1.__name__, invar2.__name__)
-    else:
-        raise ValueError('Please provide a name for the new function')
-
-    return equality_checker
-
-
-def has_alpha_equals_clique_covering(g):
-    """
-    Return true if the independence number of graph g equals its clique covering
-
-    sage: has_alpha_equals_clique_covering(graphs.CycleGraph(5))
-        False
-    """
-    temp = has_equal_invariants(independence_number, clique_covering_number)
-    return temp(g)
-add_to_lists(has_alpha_equals_clique_covering, intractable_properties, all_properties)
-
-#NOT a graph property
-def has_invariant_equal_to(invar, value, name=None, documentation=None):
-    """
-    This function takes an invariant and a value as arguments and returns the property
-    that the invariant value for a graph is equal to the provided value.
-
-    Optionally a name and documentation for the new function can be provided.
-
-    INPUT:
-
-    -``invar``-- A mathematical invariants.  Not strictly typed.
-    -``value``-- Numerical value
-
-    -``name``-- Optional.  String
-    -``documentation``-- Optional.  String
-
-    OUTPUT:
-
-    -Boolean
-
-    EXAMPLES:
-    sage: order_is_five = has_invariant_equal_to(Graph.order, 5)
-    sage: order_is_five(graphs.CycleGraph(5))
-    True
-    sage: order_is_five(graphs.CycleGraph(6))
-    False
-    """
-    def equality_checker(g):
-        return invar(g) == value
-
-    if name is not None:
-        equality_checker.__name__ = name
-    elif hasattr(invar, '__name__'):
-        equality_checker.__name__ = 'has_{}_equal_to_{}'.format(invar.__name__, value)
-    else:
-        raise ValueError('Please provide a name for the new function')
-
-    equality_checker.__doc__ = documentation
-
-    return equality_checker
-
-#NOT a graph property
-def has_leq_invariants(invar1, invar2, name=None):
-    """
-     This function takes two invariants as an argument and returns the property that the first invariant is
-    less than or equal to the second invariant.
-    Optionally a name for the new function can be provided as a third argument.
-
-    INPUT:
-
-    -``invar1, invar2``-- Two mathematical invariants.  Not strictly typed.
-
-    -``name``-- Optional.  String
-
-    OUTPUT:
-
-    -Boolean
-    """
-    def comparator(g):
-        return invar1(g) <= invar2(g)
-
-    if name is not None:
-        comparator.__name__ = name
-    elif hasattr(invar1, '__name__') and hasattr(invar2, '__name__'):
-        comparator.__name__ = 'has_{}_leq_{}'.format(invar1.__name__, invar2.__name__)
-    else:
-        raise ValueError('Please provide a name for the new function')
-
-    return comparator
-
-#add all properties derived from pairs of invariants
-invariant_relation_properties = [has_leq_invariants(f,g) for f in all_invariants for g in all_invariants if f != g]
-
-#NOT a graph property
-def localise(f, name=None, documentation=None):
-    """
-    This function takes a property (i.e., a function taking only a graph as an argument) and
-    returns the local variant of that property. The local variant is True if the property is
-    True for the neighbourhood of each vertex and False otherwise.
-    """
-    #create a local version of f
-    def localised_function(g):
-        return all((f(g.subgraph(g.neighbors(v))) if g.neighbors(v) else True) for v in g.vertices(sort=True))
-
-    #we set a nice name for the new function
-    if name is not None:
-        localised_function.__name__ = name
-    elif hasattr(f, '__name__'):
-        if f.__name__.startswith('is_'):
-            localised_function.__name__ = 'is_locally' + f.__name__[2:]
-        elif f.__name__.startswith('has_'):
-            localised_function.__name__ = 'has_locally' + f.__name__[2:]
-        else:
-            localised_function.__name__ = 'localised_' + f.__name__
-    else:
-        raise ValueError('Please provide a name for the new function')
-
-    localised_function.__doc__ = documentation
-
-    return localised_function
-
-#any localized property for an efficient property is itself efficient
+# any localized property for an efficient property is itself efficient
 def is_locally_dirac(g):
     f=localise(is_dirac)
     return f(g)
 add_to_lists(is_locally_dirac,efficiently_computable_properties,all_properties)
 
-
-is_locally_bipartite = localise(Graph.is_bipartite)
-is_locally_planar = localise(Graph.is_planar, documentation="True if the open neighborhood of each vertex v is planar")
-"""
-Tests:
-    sage: is_locally_unicyclic(graphs.OctahedralGraph())
-    True
-    sage: is_locally_unicyclic(graphs.BullGraph())
-    False
-"""
-is_locally_unicyclic = localise(is_unicyclic, documentation="""A graph is locally unicyclic if all its local subgraphs are unicyclic.
-
-Tests:
-    sage: is_locally_unicyclic(graphs.OctahedralGraph())
-    True
-    sage: is_locally_unicyclic(graphs.BullGraph())
-    False
-""")
-is_locally_connected = localise(Graph.is_connected, documentation="True if the neighborhood of every vertex is connected (stronger than claw-free)")
-"""
-sage: is_local_matching(graphs.CompleteGraph(3))
-True
-sage: is_local_matching(graphs.CompleteGraph(4))
-False
-sage: is_local_matching(graphs.FriendshipGraph(5))
-True
-"""
-is_local_matching = localise(is_matching, name="is_local_matching", documentation="""True if the neighborhood of each vertex consists of independent edges.
-
-Tests:
-    sage: is_local_matching(graphs.CompleteGraph(3))
-    True
-    sage: is_local_matching(graphs.CompleteGraph(4))
-    False
-    sage: is_local_matching(graphs.FriendshipGraph(5))
-    True
-""")
-
-######################################################################################################################
-#PROPERTY LISTS
-
-#TO-DO: add every property above to one of the following lists (or more if appropriate):
-# efficiently_computable_properties
-# efficiently_computable_sage_properties
-# intractable_properties
-# intractable_sage_properties
-
-# Syntax: after each defined property, we need:
-# add_to_lists(just_defined_property_name, list1, list2, etc)
-
-#have any new Sage properties been defined?
-efficiently_computable_sage_properties = [Graph.is_regular, Graph.is_planar,
-Graph.is_forest, Graph.is_eulerian, Graph.is_connected, Graph.is_clique,
-Graph.is_circular_planar, Graph.is_chordal, Graph.is_bipartite,
-Graph.is_cartesian_product,Graph.is_distance_regular,  Graph.is_even_hole_free,
-Graph.is_gallai_tree, Graph.is_line_graph, Graph.is_overfull, Graph.is_perfect,
-Graph.is_split, Graph.is_strongly_regular, Graph.is_triangle_free,
-Graph.is_weakly_chordal, Graph.is_circulant, Graph.has_loops,
-Graph.is_asteroidal_triple_free, Graph.is_block_graph, Graph.is_cactus,
-Graph.is_cograph, Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_partial_cube,
-Graph.is_polyhedral, Graph.is_prime, Graph.is_tree, Graph.is_apex, Graph.is_arc_transitive,
-Graph.is_self_complementary]
-
-efficiently_computable_properties = efficiently_computable_properties + efficiently_computable_sage_properties
-
-intractable_properties = []
-
-intractable_sage_properties = []
-
-#have any new Sage intractable properties been defined?
-intractable_properties = intractable_properties + intractable_sage_properties
-
-#to add to lists, then this list should be deleted
-efficiently_computable_properties = [is_dirac, is_ore,
-is_generalized_dirac, is_van_den_heuvel, is_two_connected, is_three_connected,
-is_lindquester, is_claw_free, Graph.has_perfect_matching, has_radius_equal_diameter,
-is_not_forest, is_genghua_fan, is_cubic, diameter_equals_twice_radius,
-is_locally_connected, matching_covered, is_locally_dirac,
-is_locally_bipartite, is_locally_two_connected, Graph.is_interval, has_paw,
-is_paw_free, has_p4, is_p4_free, has_dart, is_dart_free, has_kite, is_kite_free,
-has_H, is_H_free, has_residue_equals_two, order_leq_twice_max_degree,
-alpha_leq_order_over_two, is_factor_critical, is_independence_irreducible,
-has_twin, is_twin_free, diameter_equals_two, girth_greater_than_2log, Graph.is_cycle,
-pairs_have_unique_common_neighbor, has_star_center, is_complement_of_chordal,
-has_c4, is_c4_free, is_subcubic, is_quasi_regular, is_bad, has_k4, is_k4_free,
-is_distance_transitive, is_unicyclic, is_locally_unicyclic, has_simplicial_vertex,
-has_exactly_two_simplicial_vertices, is_two_tree, is_locally_planar,
-is_four_connected, is_claw_free_paw_free, has_bull, is_bull_free,
-is_claw_free_bull_free, has_F, is_F_free, is_oberly_sumner, is_oberly_sumner_bull,
-is_oberly_sumner_p4, is_matthews_sumner, chvatals_condition, is_matching, is_local_matching,
-has_odd_order, has_even_order, is_double_clique, has_fork, is_fork_free,
-has_empty_KE_part]
-
-intractable_properties = [Graph.is_hamiltonian, Graph.is_vertex_transitive,
-Graph.is_edge_transitive, has_residue_equals_alpha, Graph.is_odd_hole_free,
-Graph.is_semi_symmetric, is_planar_transitive, is_class1,
-is_class2, is_anti_tutte, is_anti_tutte2, has_lovasz_theta_equals_cc,
-has_lovasz_theta_equals_alpha, is_chvatal_erdos, is_heliotropic_plant,
-is_geotropic_plant, is_traceable, is_chordal_or_not_perfect,
-has_alpha_residue_equal_two, is_complement_hamiltonian, is_1_tough, is_2_tough,
-has_two_ham_cycles, is_two_path, is_prism_hamiltonian, is_bauer, is_jung,
-is_weakly_pancyclic, is_pancyclic, has_two_walk, has_alpha_equals_clique_covering,
-Graph.is_transitively_reduced, Graph.is_half_transitive, Graph.is_line_graph,
-is_haggkvist_nicoghossian, is_chromatic_index_critical]
-
-removed_properties = [is_pebbling_class0]
-
-#are all of these already in one of the Sage lists above?
-sage_properties = [Graph.is_hamiltonian, Graph.is_eulerian, Graph.is_planar,
-Graph.is_circular_planar, Graph.is_regular, Graph.is_chordal, Graph.is_circulant,
-Graph.is_interval, Graph.is_gallai_tree, Graph.is_clique, Graph.is_cycle,
-Graph.is_transitively_reduced, Graph.is_self_complementary, Graph.is_connected,
-Graph.has_loops, Graph.is_asteroidal_triple_free, Graph.is_bipartite,
-Graph.is_block_graph, Graph.is_cactus, Graph.is_cartesian_product,
-Graph.is_cograph, Graph.is_distance_regular, Graph.is_edge_transitive, Graph.is_even_hole_free,
-Graph.is_forest, Graph.is_half_transitive, Graph.is_line_graph,
-Graph.is_long_antihole_free, Graph.is_long_hole_free, Graph.is_odd_hole_free,
-Graph.is_overfull, Graph.is_partial_cube, Graph.is_polyhedral, Graph.is_prime,
-Graph.is_semi_symmetric, Graph.is_split, Graph.is_strongly_regular, Graph.is_tree,
-Graph.is_triangle_free, Graph.is_weakly_chordal, Graph.has_perfect_matching, Graph.is_apex,
-Graph.is_arc_transitive]
-
-#speed notes
-#FAST ENOUGH (tested for graphs on 140921): is_hamiltonian, is_vertex_transitive,
-#    is_edge_transitive, has_residue_equals_alpha, is_odd_hole_free, is_semi_symmetric,
-#    is_line_graph, is_line_graph, is_anti_tutte, is_planar_transitive
-#SLOW but FIXED for SpecialGraphs: is_class1, is_class2
-
-properties = efficiently_computable_properties + intractable_properties
-properties_plus = efficiently_computable_properties + intractable_properties + invariant_relation_properties
-
-invariants_from_properties = [make_invariant_from_property(property) for property in properties]
-invariants_plus = all_invariants + invariants_from_properties
-
-# weakly_chordal = weakly chordal, i.e., the graph and its complement have no induced cycle of length at least 5

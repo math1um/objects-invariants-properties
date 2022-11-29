@@ -194,7 +194,7 @@ def alpha_seklow_bound(g):
     Selkow, Stanley M. "A probabilistic lower bound on the independence number of graphs." Discrete Mathematics 132.1-3 (1994): 363-365.
     """
     v_sum = 0
-    for v in g.vertices():
+    for v in g.vertices(sort=true):
         d = g.degree(v)
         v_sum += ((1/(d + 1)) * (1 + max(0, (d/(d + 1) - sum([(1/(g.degree(w) + 1)) for w in g.neighbors(v)])))))
     return v_sum
@@ -206,7 +206,7 @@ def alpha_harant_bound(g):
     A lower bound on the independence number of a graph
     Jochen Harant
     """
-    return (caro_wei(g)**2) / (caro_wei(g) - sum([(g.degree(e[0]) - g.degree(e[1]))**2 * (1/g.degree(e[0]))**2 * (1/g.degree(e[1]))**2 for e in g.edges()]))
+    return (caro_wei(g)**2) / (caro_wei(g) - sum([(g.degree(e[0]) - g.degree(e[1]))**2 * (1/g.degree(e[0]))**2 * (1/g.degree(e[1]))**2 for e in g.edges(sort=true)]))
 add_to_lists(alpha_harant_bound, alpha_lower_bounds, all_invariant_theorems)
 
 def alpha_harant_schiermeyer_bound(g):
@@ -233,7 +233,7 @@ def alpha_shearer_bound(g):
         return 1.0
 
     k = ((girth - 1) / 2.0)
-    v_sum = sum([g.degree(v)**(1/(k - 1.0)) for v in g.vertices()])
+    v_sum = sum([g.degree(v)**(1/(k - 1.0)) for v in g.vertices(sort=true)])
     return 2**(-((k - 1.0)/k)) * v_sum**((k - 1.0)/k)
 add_to_lists(alpha_shearer_bound, alpha_lower_bounds, all_invariant_theorems)
 

@@ -25,8 +25,8 @@ def remove_low_anti_degree_vertices(g,Lbound):
     if bound is an upper bound for independence number, any vertex v in a
     maximum independent set must have at least lower bound-1 anti-neighbors
     """
-    V=g.vertices()
-    for v in g.vertices():
+    V=g.vertices(sort=true)
+    for v in g.vertices(sort=true):
         if anti_degree(g,v) < Lbound-1:
             V.remove(v)
     H=g.subgraph(V)
@@ -41,7 +41,7 @@ def non_neighbors(g, v ,w):
     Nv = Set(g.neighbors(v))
     Nw = Set(g.neighbors(w))
     U = Nv.union(Nw)
-    V = Set(g.vertices())
+    V = Set(g.vertices(sort=true))
 
     return list(V.difference(U))
 
@@ -53,7 +53,7 @@ def add_non_independent_edges(g, Lbound):
     #add v-w edge for each such pair
     """
     h=copy(g)
-    V=g.vertices()
+    V=g.vertices(sort=true)
     n=g.order()
     for i in srange(n):
         for j in srange(n):
@@ -73,7 +73,7 @@ def find_2_bicritical_part(g):
     """
     X = find_KE_part(g)
     SX = Set(X)
-    Vertices = Set(g.vertices())
+    Vertices = Set(g.vertices(sort=true))
 
     return g.subgraph(Vertices.difference(SX))
 
@@ -96,7 +96,7 @@ def independent_set_preprocesser(g, Lbound=1): #default initialization of 1<-alp
     I=find_max_critical_independent_set(h)
     X=closed_neighborhood(h,I) #the vertices I plus their neighbors (is a KE subgraph)
     SX = Set(X)
-    SV = Set(h.vertices())
+    SV = Set(h.vertices(sort=true))
     SXc = SV.difference(SX) #vertices in the complement Xc of X
     Sh = SXc.union(Set(I)) # critical independent set vertices I plus 2-bicritcal subgraph vertices Xc
     h=g.subgraph(list(Sh)) #this is the 2-bicritical part of g unioned with maximum critical independent set
@@ -135,7 +135,7 @@ def check_independence_extension(g,S):
         sage: check_independence_extension(graphs.CycleGraph(6), Set([0,3]))
         False
     """
-    V = g.vertices()
+    V = g.vertices(sort=true)
     alpha = g.independent_set(value_only=True)
     #print alpha
 
@@ -239,7 +239,7 @@ def find_lower_bound_sets(g, i):
      {1, 2, 3, 4, 5},
      {0, 2, 3, 4, 5}]
     """
-    V = g.vertices()
+    V = g.vertices(sort=true)
     lowersets = []
 
     for S in Subsets(Set(V),i):
@@ -455,7 +455,7 @@ def is_alpha_critical(g):
     #if not g.is_connected():
         #return False
     alpha = g.independent_set(value_only=True)
-    for e in g.edges():
+    for e in g.edges(sort=true):
         gc = copy(g)
         gc.delete_edge(e)
         alpha_prime = gc.independent_set(value_only=True)
@@ -479,13 +479,13 @@ def MAXINE_independence_heuristic(g):
 
     -Integer, length of independent set
     """
-    V = g.vertices()
+    V = g.vertices(sort=true)
     h = g.subgraph(V)
     delta = max(h.degree())
 
     while delta > 0:
         #print "V is {}".format(V)
-        #print "h vertices = {}, h.degree = {}".format(h.vertices(),h.degree())
+        #print "h vertices = {}, h.degree = {}".format(h.vertices(sort=true),h.degree())
 
         max_degree_vertex = V[h.degree().index(delta)]
         #print "max_degree_vertex = {}".format(max_degree_vertex)
@@ -499,12 +499,12 @@ def MAXINE_independence_heuristic(g):
 
 #takes vertex of min degree, adds it to max ind set until no vertices left
 def MIN_independence_heuristic(g):
-    V = g.vertices()
+    V = g.vertices(sort=true)
     I = []
     while V != []:
         #print "V is {}".format(V)
         h = g.subgraph(V)
-        #print "h vertices = {}, h.degree = {}".format(h.vertices(),h.degree())
+        #print "h vertices = {}, h.degree = {}".format(h.vertices(sort=true),h.degree())
         delta = min(h.degree())
         #print "delta = {}".format(delta)
         min_degree_vertex = V[h.degree().index(delta)]
@@ -584,7 +584,7 @@ def find_all_max_ind_sets(g):
 
     """
     final_list = []
-    V = Set(g.vertices())
+    V = Set(g.vertices(sort=true))
     alpha = independence_number(g)
 
     for s in V.subsets(alpha):
@@ -624,7 +624,7 @@ def MIR(n):
         g = graphs.PathGraph(3)
     while g.order() < n:
         new_v = g.add_vertex()
-        for v in g.vertices():
+        for v in g.vertices(sort=true):
             if v != new_v:
                 g.add_edge(v, new_v)
         g.add_edge(new_v, g.add_vertex())
@@ -640,7 +640,7 @@ def Ciliate(q, r):
     if q == r:
         return graphs.CycleGraph(2*q)
     g = graphs.CycleGraph(2*q)
-    for v in g.vertices():
+    for v in g.vertices(sort=true):
         g.add_path([v]+[g.add_vertex() for _ in range(r-q)])
     return g
 
@@ -657,23 +657,23 @@ def Caro_Roditty(n):
     g = graphs.CycleGraph(4)
     iters = 1
     while iters < n:
-        len_v = len(g.vertices())
+        len_v = len(g.vertices(sort=true))
         g.add_cycle(range(len_v, len_v + 4))
-        last_cycle = g.vertices()[-4:]
+        last_cycle = g.vertices(sort=true)[-4:]
         for v in last_cycle:
             g.add_edge(v, v-4)
         iters += 1
     return g
 
 def find_all_triangles(g):
-    E = g.edges()
+    E = g.edges(sort=true)
     A = g.adjacency_matrix()
-    pos = {v:p for (p,v) in enumerate(g.vertices())}
+    pos = {v:p for (p,v) in enumerate(g.vertices(sort=true))}
     triangles = []
 
     for e in E:
         v,w = (e[0], e[1]) if pos[e[0]] < pos[e[1]] else (e[1], e[0])
-        S = [u for u in g.vertices() if g.has_edge(u,v) and g.has_edge(u,v) and pos[u] > pos[w]]
+        S = [u for u in g.vertices(sort=true) if g.has_edge(u,v) and g.has_edge(u,v) and pos[u] > pos[w]]
         for u in S:
             s = Set([u,v,w])
             triangles.append(s)
@@ -732,7 +732,7 @@ def closure(graph):
     while(True):
         flag = False
         deg = g.degree()
-        for (v,w) in combinations(g.vertices(), 2):
+        for (v,w) in combinations(g.vertices(sort=true), 2):
             if (not g.has_edge(v,w)) and deg[v] + deg[w] >= g.order():
                 g.add_edge(v,w)
                 flag = True
@@ -799,7 +799,7 @@ def extremal_triangle_free_extension(g):
 
     g2 = g.copy()
     from itertools import combinations
-    for (v,w) in combinations(sample(g2.vertices(), k = g2.order()), 2): # Sample so output not deterministic
+    for (v,w) in combinations(sample(g2.vertices(sort=true), k = g2.order()), 2): # Sample so output not deterministic
         if not g2.has_edge(v, w) and all(u not in g2.neighbors(v) for u in g2.neighbors(w)):
             g2.add_edge(v, w)
     return g2
@@ -821,7 +821,7 @@ def pyramid_encapsulation(g):
 
     pe = pyramid.disjoint_union(g)
     for v in [0, 1, 2]:
-        for w in g.vertices():
+        for w in g.vertices(sort=true):
             pe.add_edge((0, v), (1,w))
     return pe
 
@@ -833,7 +833,7 @@ def cycle_lengths(g):
     Performs depth-first search of all possible cycles.
     """
     lengths = set()
-    for init_vertex in g.vertices():
+    for init_vertex in g.vertices(sort=true):
         path_stack = [[init_vertex]]
         while path_stack:
             path = path_stack.pop()
@@ -855,7 +855,7 @@ def max_induced_tree(g):
 
     from itertools import combinations
     for j in range(g.order()):
-        for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
+        for subset in combinations(sample(g.vertices(sort=true), k = g.order()), j): # randomize so avg.-case time, not worst-case
             sub_g = g.copy()
             sub_g.delete_vertices(subset)
             if sub_g.is_tree():
@@ -869,7 +869,7 @@ def max_induced_forest(g):
     """
     from itertools import combinations
     for j in range(g.order()):
-        for subset in combinations(sample(g.vertices(), k = g.order()), j): # randomize so avg.-case time, not worst-case
+        for subset in combinations(sample(g.vertices(sort=true), k = g.order()), j): # randomize so avg.-case time, not worst-case
             sub_g = g.copy()
             sub_g.delete_vertices(subset)
             if sub_g.is_forest():
@@ -1039,16 +1039,16 @@ def make_alpha_critical(g):
 # P. Mark Kayll, C. E. Larson
 
 def make_deming_subgraph(H,Blossom1,Blossom2): #don't want induced edges - just blossom edges
-    V1 = Blossom1.vertices()
+    V1 = Blossom1.vertices(sort=true)
     S1 = Set(V1)
-    V2 = Blossom2.vertices()
+    V2 = Blossom2.vertices(sort=true)
     S2 = Set(V2)
     S = S1.union(S2)
 
-    E1 = Blossom1.edges()
+    E1 = Blossom1.edges(sort=true)
     E1 = [(e[0],e[1]) for e in E1]
     SE1 = Set(E1)
-    E2 = Blossom2.edges()
+    E2 = Blossom2.edges(sort=true)
     E2 = [(e[0],e[1]) for e in E2]
     SE2 = Set(E2)
     SE = SE1.union(SE2)
@@ -1058,9 +1058,9 @@ def make_deming_subgraph(H,Blossom1,Blossom2): #don't want induced edges - just 
     return H.subgraph(vertices=V, edges=E)
 
 def make_deming_subgraph_induced(H,Blossom1,Blossom2): #want induced edges - just blossom edges
-    V1 = Blossom1.vertices()
+    V1 = Blossom1.vertices(sort=true)
     S1 = Set(V1)
-    V2 = Blossom2.vertices()
+    V2 = Blossom2.vertices(sort=true)
     S2 = Set(V2)
     S = S1.union(S2)
     V = list(S)
@@ -1086,13 +1086,13 @@ def deming_decomposition(g,M):
     #if Blossom1 = empty, or |S|=n/2 then g must be KE
 
     while Blossom1.order() != 0: #so there IS a deming subgraph
-        V = h.vertices()
+        V = h.vertices(sort=true)
         D = make_deming_subgraph_induced(g,Blossom1,Blossom2) #should have perfect matching with M edges
 
         minD = get_min_deming_subgraph(D)
         Deming_subgraphs.append(minD)
 
-        newV = [v for v in V if v not in minD.vertices()] #remove the vertices in just-found deming subgraph
+        newV = [v for v in V if v not in minD.vertices(sort=true)] #remove the vertices in just-found deming subgraph
         #print("in deming_decomposition main loop: newV = {}".format(newV))
 
         h = g.subgraph(newV) #h may be empty graph here
@@ -1101,7 +1101,7 @@ def deming_decomposition(g,M):
         #print("in deming_decomposition main loop: got to end of loop")
 
     #done with while loop, remaining graph must be KE
-    K = g.subgraph(h.vertices()) #the h from the last loop, should be KE with perfect matching
+    K = g.subgraph(h.vertices(sort=true)) #the h from the last loop, should be KE with perfect matching
     return Deming_subgraphs, K
 
 def demings_algorithm(g,M):
@@ -1150,12 +1150,12 @@ def demings_algorithm(g,M):
 
     def find_blossom_tip(Blossom): #must be degree 1 vertices - or there is a problem
 
-        #print("In Find_BlossomTip: Blossom vertices = {}".format(Blossom.vertices()))
+        #print("In Find_BlossomTip: Blossom vertices = {}".format(Blossom.vertices(sort=true)))
 
-        E = [(v,w) for (v,w,u) in Blossom.edges()]
+        E = [(v,w) for (v,w,u) in Blossom.edges(sort=true)]
 
         g = copy(Blossom)
-        gV = g.vertices()
+        gV = g.vertices(sort=true)
 
         #print("in find_blossom_tip: min(g.degree())={}".format(min(g.degree())))
         while min(g.degree())<2: #there must be one or PROBLEM
@@ -1172,9 +1172,9 @@ def demings_algorithm(g,M):
     def step1(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2): #finished, or pick heavy edge and extend coloring
 
         #print("in Step 1")
-        #print(H.vertices())
+        #print(H.vertices(sort=true))
 
-        if len(H.vertices())==0: #no vertices left, S is a maximum independent set
+        if len(H.vertices(sort=true))==0: #no vertices left, S is a maximum independent set
             #print("done!, S = {}".format(S))
             return M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2
 
@@ -1201,10 +1201,10 @@ def demings_algorithm(g,M):
     def step2(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2): #look at current coloring
 
         #print("in Step 2")
-        #print(H.vertices())
+        #print(H.vertices(sort=true))
         #print("Step2: Colors = {}".format(Colors))
 
-        VH = H.vertices() #v/
+        VH = H.vertices(sort=true) #v/
         Red = [u for u in VH if Colors[u]=="red"] #v/
         Uncolored = [v for v in VH if Colors[v]=="uncolored"] #what happens if Uncolored is empty??
         #print("Step2: Uncolored = {}".format(Uncolored))
@@ -1269,9 +1269,9 @@ def demings_algorithm(g,M):
 
     def step3(M,H,S,FLAG,Colors,Pred,BlossomTip1, Blossom1, Blossom2): #is there a blossom?
 
-        #print("in Step 3: H.vertices = {}".format(H.vertices()))
+        #print("in Step 3: H.vertices = {}".format(H.vertices(sort=true)))
 
-        VH = H.vertices()
+        VH = H.vertices(sort=true)
         EH = H.edges(labels=False)
         Red = [v for v in VH if Colors[v]=="red"]
         Uncolored = [v for v in VH if Colors[v]=="uncolored"]
@@ -1349,7 +1349,7 @@ def demings_algorithm(g,M):
     if g.order() == 0:
         return [],-1,Graph(0),Graph(0)
 
-    V = g.vertices()
+    V = g.vertices(sort=true)
     E = g.edges(labels=False)
     M = [(e[0],e[1]) for e in M]
     #print(M)
@@ -1357,7 +1357,7 @@ def demings_algorithm(g,M):
 
     S = [] #initialize
     H = g.subgraph(V) #H = G at beginning
-    VH = H.vertices()
+    VH = H.vertices(sort=true)
     EH = H.edges(labels=False)
 
     heavy_H = [e for e in EH if ((e[0],e[1]) in M or (e[1],e[0]) in M)]
@@ -1397,7 +1397,7 @@ def deming_subgraph_min_test(g): #if g is a deming or blossom block, must have f
 
         x = e[0] # xy in perfect matching iff G-{x,y} has perfect matching
         y = e[1]
-        V = g.vertices()
+        V = g.vertices(sort=true)
         V.remove(x)
         V.remove(y)
         h = g.subgraph(V)
@@ -1418,7 +1418,7 @@ def get_min_deming_subgraph(g): #takes deming subgraph as input, keeps reducing
     while xy != None:
         #print("in get_min_deming_subgraph: xy = {}".format(xy))
 
-        V = h.vertices()
+        V = h.vertices(sort=true)
         x = xy[0]
         y = xy[1]
         V.remove(x)
@@ -1431,7 +1431,7 @@ def get_min_deming_subgraph(g): #takes deming subgraph as input, keeps reducing
         h = make_deming_subgraph_induced(g,Blossom1,Blossom2)
         xy = deming_subgraph_min_test(h)
 
-    #print("in get_min_deming_subgraph: h.vertices = {}".format(h.vertices()))
+    #print("in get_min_deming_subgraph: h.vertices = {}".format(h.vertices(sort=true)))
 
     return h
 
@@ -1488,7 +1488,7 @@ def is_deming_K4_graph(g): #has perfect matching, spanning but not spanning blos
 def perfect_matching_edges(g): #if g has a perfect matching, output a list of all edges in *some* perfect matching
 
     pm_edges = [] #perfect matching edges
-    test_edges = [(e[0],e[1]) for e in g.edges()]
+    test_edges = [(e[0],e[1]) for e in g.edges(sort=true)]
 
     M = g.matching()
     nu = len(M)
@@ -1503,7 +1503,7 @@ def perfect_matching_edges(g): #if g has a perfect matching, output a list of al
     for e in test_edges:
         x = e[0] # xy in perfect matching iff G-{x,y} has perfect matching
         y = e[1]
-        V = g.vertices()
+        V = g.vertices(sort=true)
         V.remove(x)
         V.remove(y)
         h = g.subgraph(V)
