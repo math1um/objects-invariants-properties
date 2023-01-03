@@ -47,7 +47,7 @@ def bae_morton(g):
 add_to_lists(bae_morton, intractable_invariants, all_invariants)
 
 
-def number_of_large_degree_vertices(g): # "large" means at least floor(n/2)
+def dirac_number(g): # "large" means at least floor(n/2)
 
     count = 0
     n = g.order()
@@ -55,7 +55,7 @@ def number_of_large_degree_vertices(g): # "large" means at least floor(n/2)
         if d >= floor(n/2):
             count += 1
     return count
-add_to_lists(number_of_large_degree_vertices, efficient_invariants, all_invariants)
+add_to_lists(dirac_number, efficient_invariants, all_invariants)
 
 
 def distinct_degrees(g):
