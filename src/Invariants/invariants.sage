@@ -719,7 +719,7 @@ def randic(g):
     if min(D) == 0:
          return oo
     sum = 0
-    for e in g.edges(sort=true):
+    for e in g.edges(sort=True):
         v = e[0]
         i = V.index(v)
         w = e[1]
@@ -764,7 +764,7 @@ def max_even_minus_even_horizontal_component(g):
                 Even.append(w)
 
         #print len(Even), len(g.subgraph(Even).edges(sort=true))
-        l=len(Even)-len(g.subgraph(Even).edges(sort=true))
+        l=len(Even)-len(g.subgraph(Even).edges(sort=True))
         if l>mx:
             mx=l
     return mx
@@ -877,7 +877,7 @@ add_to_lists(order_automorphism_group, efficient_invariants, all_invariants)
 
 #in sufficient condition for graphs where vizing's independence theorem holds
 def brinkmann_steffen(g):
-    E = g.edges(sort=true)
+    E = g.edges(sort=True)
     if len(E) == 0:
         return 0
     Dist = g.distance_all_pairs()
@@ -1409,7 +1409,7 @@ def randic_irregularity(g):
 add_to_lists(randic_irregularity, efficient_invariants, all_invariants)
 
 def sum_edges_degree_difference(g):
-    return sum([abs(g.degree(e[0]) - g.degree(e[1])) for e in g.edges(sort=true)])
+    return sum([abs(g.degree(e[0]) - g.degree(e[1])) for e in g.edges(sort=True)])
 add_to_lists(sum_edges_degree_difference, efficient_invariants, all_invariants)
 
 def one_over_size_sedd(g):
@@ -1914,13 +1914,13 @@ def minimum_maximal_matching_size(g):
         return 0
 
     matchings_old = []
-    matchings = [[e] for e in g.edges(sort=true)]
+    matchings = [[e] for e in g.edges(sort=True)]
     while True:
         matchings_old = matchings
         matchings = []
         for matching in matchings_old:
             extendable = False
-            for e in (edge for edge in g.edges(sort=true) if edge not in matching):
+            for e in (edge for edge in g.edges(sort=True) if edge not in matching):
                 possible_matching = matching + [e]
                 if is_matching(possible_matching):
                     matchings.append(possible_matching)
