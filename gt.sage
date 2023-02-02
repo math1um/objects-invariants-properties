@@ -3332,7 +3332,7 @@ def cheeger_constant(g):
     return best
 add_to_lists(cheeger_constant, intractable_invariants, all_invariants)
 
-def tr(g):
+def triangles(g):
     """
     Returns the maximum number of vertex disjoint triangles of the graph
 
@@ -3341,7 +3341,7 @@ def tr(g):
     if is_subcubic(g):
         return subcubic_tr(g)
     return independence_number(form_triangles_graph(g))
-add_to_lists(tr, intractable_invariants, all_invariants)
+add_to_lists(triangles, intractable_invariants, all_invariants)
 
 def total_domination_number(g):
     return g.dominating_set(total=True, value_only=True)
