@@ -7562,13 +7562,14 @@ mathon_strongly_regular1.name(new = "Mathon Strongly Regular Graph 1")
 mathon_strongly_regular2 = graphs.MathonStronglyRegularGraph(2)
 mathon_strongly_regular2.name(new = "Mathon Strongly Regular Graph 2")
 
-janko_kharaghani936 = graphs.JankoKharaghaniGraph(936)
-janko_kharaghani936.name(new = "Janko-Kharaghani 936")
+#janko_kharaghani936 = graphs.JankoKharaghaniGraph(936)
+#janko_kharaghani936.name(new = "Janko-Kharaghani 936") #NEED TO add this to a large graphs list
 
 # janko_kharaghani1800 = graphs.JankoKharaghaniGraph(1800) # Causes memory error when doctesting. Waiting for fix in Sage.
 # janko_kharaghani1800.name(new = "Janko-Kharagani 1800")
+# NEED to add janko_kharaghani936 to lists...
 
-for graph in sage_graphs + [mathon_strongly_regular0, mathon_strongly_regular1, mathon_strongly_regular2, janko_kharaghani936]:
+for graph in sage_graphs + [mathon_strongly_regular0, mathon_strongly_regular1, mathon_strongly_regular2]:
     add_to_lists(graph, graph_objects, all_graphs)
 
 # Meredith graph is 4-reg, class2, non-hamiltonian: http://en.wikipedia.org/wiki/Meredith_graph
@@ -7729,9 +7730,10 @@ add_to_lists(brouwer_haemers_diameter_critical_subgraph_string, large_graph_stri
 
 #a subgraph of the Higman-Sims graph is diameter-2-critical: alpha=22, lovasz_theta=26.666667
 #https://en.wikipedia.org/wiki/Higman–Sims_graph
-higman_sims_diameter_critical_subgraph=Graph("~?@chc?GC@@G??@?@??_@G????C??G??G??c??????G???_??@???H`ACGGO`A@ACGQCGO`WGO`AsCCCCAAAB??__oOACEAA?oWGGGBOGD?_?OI@?_?GD?g?@A_OI??oSA_O?E_H?Q??@?QOC??@GAOC??Oc@H???WHGAO??E_CPC???AG@CO???CP?G_??ACPC?_??EAGaG???BHIhPWCCGdHDJH?_`DSeSccBA?SlChgIACOKdSggIACPIXQQgcAACAaSsIH?_`@TQah@GEC?HTIIe?gGO?qIUTC@OO_HQe`YAH?__?hPSd@C_OO?iSTHW@GE??HQqhHC@OO?@dHIccOD@??dLAsQGPGC??DDQTOGPGC??IahIiC?cA??CkiQI`C@O??@cdQXCG_I??@ITHdG_`C_???SJPIP@AH???@THTI@`?H???@IcidOOa?_???qhGhSCG_G??@KC@A_ouKF?_`COQCABaWsSAACO_cGDF?pwGEC?o_cGFBGpWIACOoWAD@`kWKD@AGXCC@AWsPpACQ@?G_cGBFaMGOAOG?aAOaKUWW`C@O@@CC`KWKopAGA_E_E?`KWKopAH?_EAaA?eWZEC@OO_?OG_c@eEp`GCCG?A@CCaGweKH?_`?AGCOQWb_WocBA??WS?oCrBGp_IAC??oOg__uKEW_`C@??CGCOOZEBKOOaO??@A@CDCpgbCCGc??AGOG_wENCOo_C_??o`OB@cWkp@AGA??BGADCBPFCoPGCC???HA@CBpF?w@GE????C`?aPX`cSOD@???@@GOGkEWZ@C@OO???s@A_D_rBWGcAA???E")
-higman_sims_diameter_critical_subgraph.name(new = "higman_sims_diameter_critical_subgraph")
-add_to_lists(higman_sims_diameter_critical_subgraph, diameter_2_critical, all_graphs)
+higman_sims_diameter_critical_subgraph_string = "~?@chc?GC@@G??@?@??_@G????C??G??G??c??????G???_??@???H`ACGGO`A@ACGQCGO`WGO`AsCCCCAAAB??__oOACEAA?oWGGGBOGD?_?OI@?_?GD?g?@A_OI??oSA_O?E_H?Q??@?QOC??@GAOC??Oc@H???WHGAO??E_CPC???AG@CO???CP?G_??ACPC?_??EAGaG???BHIhPWCCGdHDJH?_`DSeSccBA?SlChgIACOKdSggIACPIXQQgcAACAaSsIH?_`@TQah@GEC?HTIIe?gGO?qIUTC@OO_HQe`YAH?__?hPSd@C_OO?iSTHW@GE??HQqhHC@OO?@dHIccOD@??dLAsQGPGC??DDQTOGPGC??IahIiC?cA??CkiQI`C@O??@cdQXCG_I??@ITHdG_`C_???SJPIP@AH???@THTI@`?H???@IcidOOa?_???qhGhSCG_G??@KC@A_ouKF?_`COQCABaWsSAACO_cGDF?pwGEC?o_cGFBGpWIACOoWAD@`kWKD@AGXCC@AWsPpACQ@?G_cGBFaMGOAOG?aAOaKUWW`C@O@@CC`KWKopAGA_E_E?`KWKopAH?_EAaA?eWZEC@OO_?OG_c@eEp`GCCG?A@CCaGweKH?_`?AGCOQWb_WocBA??WS?oCrBGp_IAC??oOg__uKEW_`C@??CGCOOZEBKOOaO??@A@CDCpgbCCGc??AGOG_wENCOo_C_??o`OB@cWkp@AGA??BGADCBPFCoPGCC???HA@CBpF?w@GE????C`?aPX`cSOD@???@@GOGkEWZ@C@OO???s@A_D_rBWGcAA???E"
+add_to_lists(higman_sims_diameter_critical_subgraph_string , large_graph_strings)
+#higman_sims_diameter_critical_subgraph.name(new = "higman_sims_diameter_critical_subgraph")
+#add_to_lists(higman_sims_diameter_critical_subgraph, diameter_2_critical, all_graphs)
 
 
 #a subgraph of the Cameron graph is diameter-2-critical: it has order=231, size=2787, alpha=44, lovasz_theta=45.982001
