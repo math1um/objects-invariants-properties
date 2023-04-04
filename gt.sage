@@ -1595,6 +1595,23 @@ def dirac_number(g): # "large" means at least floor(n/2)
     return count
 add_to_lists(dirac_number, efficient_invariants, all_invariants)
 
+def harary_alpha_two_bound(g): #returns lower bound for the size of a alpha=2 graph
+    n = g.order()
+    m = g.size()
+    gc = g.complement() #must be triangle-tree
+    if not gc.is_bipartite(): #g is not alpha=2 graph, just return size
+         return m
+    mc = gc.size()
+    if gc.is_bipartite():
+        partite_sets = gc.bipartite_sets()
+        a = partite_sets[0]
+        b = partite_sets[1]
+        if a*b == mc: #gc is complete bipartite
+            return m #g is 2 cliques
+    harary_complement = binomial(n,2) - floor((n-1)^2/4) - 1
+    return harary_complement
+add_to_lists(harary_alpha_two_bound, efficient_invariants, all_invariants)
+
 
 def distinct_degrees(g):
     """
