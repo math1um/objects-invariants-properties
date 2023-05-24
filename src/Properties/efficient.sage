@@ -1,5 +1,14 @@
 efficiently_computable_properties = []
 
+def has_zero_eigenvalue(g): #true if adjacency matrix has a 0 eigenvalue
+
+    A = g.adjacency_matrix()
+    eigs = A.eigenvalues()
+    if 0 in eigs:
+        return True
+    else:
+        return False
+add_to_lists(has_zero_eigenvalue, efficiently_computable_properties,all_properties)
 
 def is_ramanujan(g):
     """
